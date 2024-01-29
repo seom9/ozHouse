@@ -1,0 +1,376 @@
+/* blogContents_style */
+.contents_box {
+	width: 100%;
+}
+
+.head {
+	margin: 22px 0px;
+	position: relative;
+	width: 720px;
+	text-align: center;
+	font-size: 25px;
+	display: flex;
+}
+
+.room_type {
+	margin: 22px 0px;
+	position: relative;
+	width: 720px;
+	font-size: 14px;
+}
+
+.all {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.left_box {
+	box-sizing: border-box;
+	height: 100%;
+	width: 720px;
+}
+
+.right_box {
+	margin: 10px 15px;
+}
+
+.photo_box {
+	overflow: hidden;
+}
+
+.img_box {
+	width: 720px;
+	border-radius: 15px;
+}
+
+.img_button {
+	position: relative;
+	z-index: 0;
+}
+
+.img_button2 {
+	display: flex;
+	margin: 0px;
+	padding: 0px;
+	overflow: hidden;
+}
+
+.img_button2::after {
+	content: "";
+	position: absolute;
+	top: 0px;
+	right: -1px;
+	width: 100px;
+	height: 100%;
+	background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%,
+		rgb(255, 255, 255) 100%);
+	pointer-events: none;
+	padding: 0px;
+	margin: 0px;
+}
+
+.img_button3 {
+	margin: 0px 8px 0px 0px;
+	padding: 0px;
+	flex-shrink: 0;
+	scroll-snap-align: start;
+}
+
+.img_button4 {
+	position: relative;
+}
+
+.img_button5 {
+	display: flex;
+	flex-direction: column;
+	margin-top: 12px;
+	max-width: 100px;
+}
+
+.img_button6 {
+	overflow: hidden;
+	position: relative;
+	box-sizing: border-box;
+	width: 100px;
+	height: 100px;
+	border-radius: 32px;
+}
+
+.img_button7 {
+	display: inline-block;
+	background:
+		url(https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/169814263982655850.jpg?w=100)
+		50% center/cover no-repeat;
+	box-sizing: border-box;
+	border-radius: inherit;
+	width: 100px;
+	height: 100px;
+}
+
+.img {
+	height: 0px;
+	display: block;
+	visibility: hidden;
+	padding-top: 100%;
+}
+
+.write {
+	position: relative;
+}
+
+.write_2 {
+	position: absolute;
+	z-index: -1;
+	top: 0px;
+	width: 100%;
+	height: 62px;
+	opacity: 0.4;
+}
+
+.write_3 {
+	margin: 24px 0px;
+	padding: 0px 16px;
+	font-size: 16px;
+	line-height: 24px;
+	color: rgb(47, 52, 56);
+	white-space: pre-line;
+}
+
+.hr_style {
+	margin: 0px;
+	padding: 0px;
+	height: 1px;
+	border: none;
+	background-color: rgb(234, 237, 239);
+}
+
+.a {
+	margin: 10px 0px;
+}
+
+.b {
+	margin: 40px 0px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.b2 {
+	display: flex;
+	align-items: center;
+	padding: 0px;
+	border: 0px;
+	font-size: 0px;
+	text-align: left;
+	background: none;
+}
+
+.b3 {
+	display: inline-block;
+	background:
+		url(https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/169222886696255609.jpg?w=50)
+		50% center/cover no-repeat;
+	border-radius: 50%;
+	width: 40px;
+	flex-shrink: 0;
+	margin: 0px;
+}
+
+.b_img {
+	height: 0px;
+	display: block;
+	visibility: hidden;
+	padding-top: 100%;
+}
+
+.b4 {
+	margin-left: 8px;
+}
+
+.b5 {
+	display: flex;
+	align-items: center;
+	font-size: 14px;
+	line-height: 20px;
+	font-weight: 700;
+	color: rgb(47, 52, 56);
+}
+
+.b6 {
+	display: block;
+	font-size: 13px;
+	line-height: 18px;
+	color: rgb(130, 140, 148);
+	font-weight: 500;
+	letter-spacing: -0.3px;
+}
+
+.heart_box {
+	position: relative;
+	left: 35%;
+	border: none;
+	background: none;
+	fill: #ddd;
+}
+
+.heart_box.active {
+	fill: red;
+}
+
+.scrap_box {
+	border: none;
+	background: none;
+	fill: #ddd;
+}
+
+.scrap_box.active {
+	fill: #50E5B4;
+}
+
+.c {
+	margin: 40px 0px;
+	padding: 0px;
+}
+
+.c2 {
+	font-size: 20px;
+	line-height: 28px;
+	color: rgb(47, 52, 56);
+	margin: 20px 0px;
+	font-weight: 700;
+}
+
+.c2_1 {
+	margin-left: 6px;
+	color: rgb(47, 52, 56);
+}
+
+.c3 {
+	margin-bottom: 40px;
+	margin-top: 8px;
+}
+
+.c3_1 {
+	position: relative;
+	display: flex;
+	align-items: center;
+}
+
+.c3_2 {
+	display: inline-block;
+	background:
+		url(https://bucketplace-v2-development.s3.amazonaws.com/uploads/default_images/avatar.png)
+		50% center/cover no-repeat;
+	border-radius: 50%;
+	width: 30px;
+	margin-right: 12px;
+	flex-shrink: 0;
+	border: 0.5px solid rgba(0, 0, 0, 0.08);
+}
+
+.c3_3 {
+	height: 0px;
+	display: block;
+	visibility: hidden;
+	padding-top: 100%;
+}
+
+.c3_4 {
+	flex-grow: 1;
+}
+
+.c3_5 {
+	line-height: 0;
+	box-sizing: border-box;
+	border: 1px solid rgb(218, 221, 224);
+	border-radius: 4px;
+	display: flex;
+	padding: 0px 16px;
+	cursor: text;
+}
+
+.c3_6 {
+	display: inline-flex;
+	line-height: 0;
+	box-sizing: border-box;
+	border-radius: 4px;
+	align-items: flex-start;
+	width: 100%;
+	padding: 0px;
+	border: 0px;
+}
+
+.c3_7 {
+	word-break: break-word;
+	cursor: text;
+	display: inline-block;
+	padding: 0px;
+	border: none;
+	background: none;
+	font-style: inherit;
+	font-variant: inherit;
+	font-weight: inherit;
+	font-stretch: inherit;
+	font-family: inherit;
+	font-optical-sizing: inherit;
+	font-kerning: inherit;
+	font-feature-settings: inherit;
+	font-variation-settings: inherit;
+	color: rgb(47, 52, 56);
+	outline: none;
+	font-size: 16px;
+	line-height: 24px;
+	overflow-y: auto;
+	flex: 1 0 0%;
+	min-height: 24px;
+	margin: 9px 0px;
+	box-sizing: border-box;
+	resize: none;
+	vertical-align: top;
+	height: 0px;
+	min-width: 100px;
+}
+
+.c4 {
+	box-sizing: border-box;
+	display: flex;
+	align-items: center;
+	height: 42px;
+	padding: 9px 0px;
+}
+
+.c4_1:enabled {
+	color: #50E5B4; /* 활성화 상태일 때의 배경색 */
+	cursor: pointer; /* 커서 모양 변경 (예: 손가락 모양) */
+}
+
+.c4_1 {
+	display: inline-block;
+	margin: 0px 0px 0px 12px;
+	border: none;
+	background: none transparent;
+	font-style: inherit;
+	font-variant: inherit;
+	font-weight: inherit;
+	font-stretch: inherit;
+	font-family: inherit;
+	font-optical-sizing: inherit;
+	font-kerning: inherit;
+	font-feature-settings: inherit;
+	font-variation-settings: inherit;
+	height: 30px;
+	border-radius: 4px;
+	font-size: 16px;
+	line-height: 20px;
+	color: rgb(194, 200, 204);
+	flex-shrink: 0;
+	padding: 0px;
+}
+
+.c4_1:first-of-type {
+	margin-left: 0px;
+}

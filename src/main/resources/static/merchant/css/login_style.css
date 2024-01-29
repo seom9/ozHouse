@@ -1,0 +1,282 @@
+@charset "UTF-8";
+<style>
+.custom-alert {
+    display: none;
+    position: fixed; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4); 
+    z-index: 1000; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    z-index: 1000; 
+}
+
+header .partner-center {
+	font-family: 'Montserrat', sans-serif;
+	font-size: 28px;
+}
+
+.custom-alert-content {
+	display: flex; 
+    align-items: center;
+    background-color: #fefefe;
+    margin: 15% auto; 
+    padding: 20px;
+    border: 1px solid #888;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 80%; 
+}
+
+.custom-alert-text {
+    color: #333;
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+.custom-alert button {
+    color: white;
+    padding: 10px 20px;
+    background-color: #50E5B4;
+    border: none;
+    cursor: pointer;
+}
+
+.custom-alert button:hover {
+    background-color: #50E5B4;
+}
+
+@media (max-width: 768px) {
+    .custom-alert-content {
+        width: 95%;
+    }
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f7f6;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-wrapper {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    text-align: center;
+    width: 340px;
+}
+
+.join {
+position: relative; 				    
+margin: 10; 
+padding: 10;
+font-size: 14px;
+}
+.join1 {
+position: relative;  				    
+margin: 0; 
+padding: 30;
+font-size: 14px;
+}					
+.join2 {
+position: relative;  				    
+margin: 30; 
+padding: 30;
+line-height: 50px;
+font-size: 11px;
+}
+.join3 {
+position: relative;  				    
+margin: 30; 
+padding: 30;
+line-height: 70px;
+font-size: 12px;
+}				
+
+h2 img {
+    width: 60%;  
+}
+
+input[type=text], input[type=password] {
+    width: 80%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+}
+
+input[type=button] {
+    width: 85%;
+    padding: 10px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #50E5B4;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.site-login {
+    font-size: 20px;
+    margin-top: -20px;
+    margin-bottom: -55px;
+}
+
+input[type=button]:hover {
+    background-color: #45cda8;
+}
+
+#login-form input[type="button"] {
+	margin-bottom: 20px;	
+}
+
+.join a, .join1 a {
+    text-decoration: none;
+    color: black;
+}
+
+hr {
+    border: 0.5px solid #50E5B4;
+    width: 90%;
+}
+
+label {
+    font-size: 14px;
+    color: #666;
+}
+
+html, body {
+    height: 100%; 
+    margin: 0; 
+}
+
+body {
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    font-family: 'Roboto', sans-serif; 
+    background-color: #F4F4F4;
+}
+
+.login-wrapper {
+    width: 340px; 
+    padding: 40px; 
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1); 
+    background-color: #ffffff; 
+    text-align: center; 
+    border-radius: 10px; 
+}
+
+input[type=text], input[type=password] {
+    width: calc(100% - 20px); 
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #a2c4c9; 
+    border-radius: 5px; 
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.1); 
+    font-family: 'Roboto', sans-serif; 
+    font-size: 16px; 
+    outline: none; 
+}
+
+input[type=text]:focus, input[type=password]:focus {
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.2); 
+}
+
+input[type=button] {
+    width: 100%; 
+    padding: 12px; 
+    margin-top: 30px; 
+    border: none; 
+    border-radius: 5px;
+    background-color: #50E5B4; 
+    color: white; 
+    font-family: 'Roboto', sans-serif; 
+    font-size: 18px; 
+    cursor: pointer; 
+    outline: none; 
+}
+
+.join, .join1, .join2, .join3 {
+    font-family: 'Roboto', sans-serif; 
+}
+
+.join, .join1 {
+    margin: 0 10px; 
+    font-size: 14px; 
+}
+
+.join a, .join1 a {
+    text-decoration: none;
+    color: black;
+}
+
+body, h2, a, label {
+    font-family: 'Roboto', sans-serif;
+}
+
+@media (max-width: 768px) {
+    input[type=text], input[type=password], input[type=button] {
+        width: 90%; 
+    }
+}
+
+.login-options {
+    text-align: center; 
+    margin-top: 20px; 
+}
+
+.container {
+	justify-content: center;
+	align-items: center;
+	height: 80vh;
+	display: flex;
+}
+
+#login-form {
+	border: 1px solid #ddd;
+    padding: 60px 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background: #fff;
+    text-align: center;
+    width: 50%; 
+    max-width: 500px; 
+    margin: auto; 
+}
+
+.remember-me {
+	margin-top: 10px;
+}
+
+#login-form input[type="text"], #login-form input[type="password"],
+#login-form input[type="button"] {
+    margin: 10px 0;
+    padding: 10px;
+    width: 80%; 
+    box-sizing: border-box;
+    margin-top: 30px;
+}
+
+</style>

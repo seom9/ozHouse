@@ -1,0 +1,21 @@
+
+
+.css-15t02j8 {
+    margin: 0px 0px 10px;
+    padding: 10px 20px;
+    border: 1px solid rgb(219, 219, 219);
+    font-size: 15px;
+    line-height: 21px;
+    color: rgb(66, 66, 66);
+    border-radius: 4px;
+}
+.box{
+	padding: 5%;
+}
+
+#delete-form > input[type="submit"]{
+    color: #fff;
+    font-size: 16px;
+    background-color: #6A24FE;
+    margin-top: 20px;
+}

@@ -1,0 +1,561 @@
+
+aside {
+	width: 30%; /* 원하는 너비로 조절하세요 */ 
+	position: fixed;
+	float: right;
+	right: 5%;
+	top: 60%;
+	transform: translateY(-50%);
+	border-radius: 10px; /* 추가된 부분 */
+	padding: 10px;
+}
+
+.carted-product {
+    padding: 20px 15px 20px 54px;
+    margin-right: 30%;
+}
+
+.css-i2qw7n1 {
+    width: 137px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 7px 6px;
+    background: #FFFFFF;
+    color: #2F3438;
+    border: 1px solid #DADDE0;
+    border-radius: 4px;
+    margin-top: 12px;
+}
+.commerce-cart__header {
+    margin-right: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding: 8px 15px;
+    margin-right: 30%;
+    background-color: #fff;
+    border-bottom: 1px solid #ededed;
+    z-index: 100;
+}
+.custom-aside {
+    width: 30%; /* 원하는 너비로 조절하세요 */ 
+    position: fixed;
+    float: right;
+    right: 5%;
+    top: 60%;
+    transform: translateY(-50%);
+    border-radius: 10px; /* 추가된 부분 */
+    padding: 10px;
+}
+
+.order-font {
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 600;
+    margin: 40px 0;
+    color: rgb(47, 52, 56);
+    position: relative;
+    left: 5%;
+}
+
+.wairano {
+    font-size: 32px;
+    line-height: 32px;
+    font-weight: 600;
+    margin: 40px 0;
+    color: rgb(47, 52, 56);
+    margin-left: 9%;
+}
+.wairano2 {
+    font-size: 23px;
+    line-height: 32px;
+    font-weight: 600;
+    margin: 40px 0;
+    color: rgb(47, 52, 56);
+}
+.wairano3 {
+    font-size: 32px;
+    line-height: 32px;
+    font-weight: 600;
+    margin: 40px 0;
+    color: rgb(47, 52, 56);
+    margin-left: 0%;
+}
+.order-block {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline; /* 기준선을 맞추어 텍스트를 수직 정렬합니다. */
+}
+
+.left-fond {
+  font-weight: bold;
+}
+
+.final-order-font {
+    font-size: 30px;
+    font-color: #58E6B7;
+    line-height: 32px;
+    font-weight: 600;
+    margin: 40px 0;
+    color: rgb(47, 52, 56);
+    position: relative;
+    left: 0%;
+}
+
+.order-font1 {
+    font-size: 10px;
+    line-height: 32px;
+    font-weight: 600;
+    margin: 40px 0;
+    color: rgb(47, 52, 56);
+    position: relative;
+    left: 0%;
+}
+
+
+.login-wrapper{
+    width: 85%;
+    height: 350px;
+    padding: 40px;
+    box-sizing: border-box;
+   	margin-left: 6%;
+}
+
+.login-wrapper2{
+    width: 100%;
+    height: 350px;
+    padding: 40px;
+    box-sizing: border-box;
+   	margin-left: 6%;
+}
+
+
+.login-wrapper > h2{
+    font-size: 24px;
+    color: #50E5B4;
+    margin-bottom: 20px;
+    
+}
+
+
+#login-form > input{
+    width: 40%;
+    height: 48px;
+    padding: 0 10px;
+    box-sizing: border-box;
+    margin-bottom: 16px;
+    border-radius: 6px;
+    background-color: #F8F8F8;
+}
+#login-form > input::placeholder{
+    color: #D2D2D2;
+}
+#login-form > input[type="submit"]{
+    color: #fff;
+    font-size: 16px;
+    background-color: #6A24FE;
+    margin-top: 20px;
+}
+#login-form > input[type="button"]{
+    color: #fff;
+    font-size: 16px;
+    background-color: #50E5B4;
+    margin-top: 20px;
+}
+#login-form > input[type="checkbox"]{
+    display: none;
+}
+#login-form > label{
+    color: #999999;
+}
+#login-form input[type="checkbox"] + label{
+    cursor: pointer;
+    padding-left: 26px;
+    background-image: url("checkbox.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+#login-form input[type="checkbox"]:checked + label{
+    background-image: url("checkbox-active.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+#login-form input[type="button"]{
+	width: 10%
+	background-color: #50E5B4; /* 버튼 배경색 */
+	color: white; /* 글자색 */
+	padding: 10px 20px; /* 패딩 설정 */
+	border: none; /* 테두리 없음 */
+	border-radius: 5px; /* 테두리 둥글게 설정 */
+	cursor: pointer; /* 포인터 커서로 변경 */
+	font-size: 16px; /* 글자 크기 */
+}
+.nURjsmqFThhQ8zwabX4L .G7QZ1shWGosDZ1csHsNt .rgXn596odaKr6yWd5rqA .RIoMlTrYhkb4oTjsJRdO {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+@use './fonts.scss';
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  color: inherit;
+  font: inherit;
+}
+
+body1 {
+  font-family: 'Inter', 'Noto Sans KR', sans-serif;
+}
+
+button {
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+a {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.box {
+	margin-top: 10px;
+} 
+
+#login-form input[name^="member_hp1"],
+#login-form input[name^="member_hp2"],
+#login-form input[name^="member_hp3"],
+#login-form input[name^="member_postcode1"] {
+    width: 15%;
+    height: 48px;
+    padding: 0 10px;
+    box-sizing: border-box;
+    margin-bottom: 16px;
+    border-radius: 6px;
+    background-color: #F8F8F8;
+}
+
+#login-form input[name^="sample6_address"],
+#login-form input[name^="sample6_detailAddress"],
+#login-form input[name^="member_use_point"],
+#login-form input[name^="sample6_extraAddress"] {
+	width: 30%;
+    height: 48px;
+    padding: 0 10px;
+    box-sizing: border-box;
+    margin-bottom: 16px;
+    border-radius: 6px;
+    background-color: #F8F8F8;
+}
+
+#login-form input[name^="use_all_point"]{
+	width: 20%
+}
+
+      	.join {
+			position: relative; 				    
+			margin: 10; 
+			padding: 10;
+			font-size: 14px;
+		}
+		.join1 {
+			position: relative;  				    
+			margin: 0; 
+			padding: 30;
+			font-size: 14px;
+		}
+		.join:hover, .join1:hover {
+	    	color: #58E6B7; /* Change 'YourDesiredColor' to the color you want on hover */
+		}
+
+			
+		.join2 {
+			position: relative;  				    
+			margin: 30; 
+			padding: 30;
+			line-height: 50px;
+			font-size: 11px;
+		}
+		.join3 {
+			position: relative;  				    
+			margin: 30; 
+			padding: 30;
+			line-height: 70px;
+			font-size: 12px;
+		}  
+		.error-message {
+		    font-family: 'Roboto', sans-serif;
+		    color: red;
+	 	}
+	    .title {
+	        font-family: 'Roboto', sans-serif;
+	        color: black; /* 검정색으로 변경 */
+	        font-size: 13px; /* 글꼴 크기를 15픽셀로 지정 */
+	    }   
+   
+.css-mwa60y {
+    display: flex;
+    margin-bottom: 20px;
+}
+blockquote, body, code, dd, div, dl, dt, fieldset, form, h1, h2, h3, h4, h5, h6, input, legend, li, ol, p, pre, td, textarea, th, ul {
+    margin: 0;
+    padding: 0;
+}
+* {
+    -webkit-tap-highlight-color: rgba(255,255,255,0);
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+user agent stylesheet
+li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+ol, ul {
+    list-style: none;
+}
+user agent stylesheet
+ul {
+    list-style-type: disc;
+}
+<style>
+.css-b8peps {
+    display: flex;
+    position: relative;
+    color: rgb(47, 52, 56);
+    margin-bottom: 50px;
+}
+.layout {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-direction: normal;
+    -webkit-box-orient: vertical;
+    -webkit-flex-direction: column;
+    -moz-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-height: 100vh;
+}
+@media (min-width: 768px)
+body, html {
+    font-size: 15px;
+}
+body, html {
+    line-height: 1;
+    font-family: Pretendard Variable,Noto Sans KR,Apple SD Gothic Neo,맑은 고딕,Malgun Gothic,sans-serif;
+    font-size: 13px;
+}
+:root {
+    --sendbird-light-primary-500: #491389;
+    --sendbird-light-primary-400: #6211c8;
+    --sendbird-light-primary-300: #742ddd;
+    --sendbird-light-primary-200: #c2a9fa;
+    --sendbird-light-primary-100: #dbd1ff;
+    --sendbird-light-secondary-500: #066858;
+    --sendbird-light-secondary-400: #027d69;
+    --sendbird-light-secondary-300: #259c72;
+    --sendbird-light-secondary-200: #69c085;
+    --sendbird-light-secondary-100: #a8e2ab;
+    --sendbird-light-information-100: #adc9ff;
+    --sendbird-light-error-500: #9d091e;
+    --sendbird-light-error-400: #bf0711;
+    --sendbird-light-error-300: #de360b;
+    --sendbird-light-error-200: #f66161;
+    --sendbird-light-error-100: #fdaaaa;
+    --sendbird-light-background-700: #000;
+    --sendbird-light-background-600: #161616;
+    --sendbird-light-background-500: #2c2c2c;
+    --sendbird-light-background-400: #393939;
+    --sendbird-light-background-300: #bdbdbd;
+    --sendbird-light-background-200: #e0e0e0;
+    --sendbird-light-background-100: #eee;
+    --sendbird-light-background-50: #fff;
+    --sendbird-light-overlay-01: rgba(0,0,0,0.55);
+    --sendbird-light-overlay-02: rgba(0,0,0,0.32);
+    --sendbird-light-onlight-01: rgba(0,0,0,0.88);
+    --sendbird-light-onlight-02: rgba(0,0,0,0.5);
+    --sendbird-light-onlight-03: rgba(0,0,0,0.38);
+    --sendbird-light-onlight-04: rgba(0,0,0,0.12);
+    --sendbird-light-ondark-01: hsla(0,0%,100%,0.88);
+    --sendbird-light-ondark-02: hsla(0,0%,100%,0.5);
+    --sendbird-light-ondark-03: hsla(0,0%,100%,0.38);
+    --sendbird-light-ondark-04: hsla(0,0%,100%,0.12);
+    --sendbird-light-shadow-01: 0 1px 5px 0 rgba(33,34,66,0.04),0 0 3px 0 rgba(0,0,0,0.08),0 2px 1px 0 rgba(0,0,0,0.12);
+    --sendbird-light-shadow-02: 0 3px 5px -3px rgba(33,34,66,0.04),0 3px 14px 2px rgba(0,0,0,0.08),0 8px 10px 1px rgba(0,0,0,0.12);
+    --sendbird-light-shadow-03: 0 6px 10px -5px rgba(0,0,0,0.04),0 6px 30px 5px rgba(0,0,0,0.08),0 16px 24px 2px rgba(0,0,0,0.12);
+    --sendbird-light-shadow-04: 0 9px 15px -7px rgba(0,0,0,0.04),0 9px 46px 8px rgba(0,0,0,0.08),0 24px 38px 3px rgba(0,0,0,0.12);
+    --sendbird-light-shadow-message-input: 0 1px 5px 0 rgba(33,34,66,0.12),0 0 1px 0 rgba(33,34,66,0.16),0 2px 1px 0 rgba(33,34,66,0.08),0 1px 5px 0 rgba(0,0,0,0.12);
+    --sendbird-dark-primary-500: #491389;
+    --sendbird-dark-primary-400: #6211c8;
+    --sendbird-dark-primary-300: #742ddd;
+    --sendbird-dark-primary-200: #c2a9fa;
+    --sendbird-dark-primary-100: #dbd1ff;
+    --sendbird-dark-secondary-500: #066858;
+    --sendbird-dark-secondary-400: #027d69;
+    --sendbird-dark-secondary-300: #259c72;
+    --sendbird-dark-secondary-200: #69c085;
+    --sendbird-dark-secondary-100: #a8e2ab;
+    --sendbird-dark-information-100: #adc9ff;
+Show All Properties (40 more)
+}
+html {
+    font-family: 'Pretendard Variable',sans-serif;
+    letter-spacing: -0.3px;
+    -webkit-font-smoothing: antialiased;
+}
+html {
+    color: #424242;
+    background: #fff;
+}
+
+.css-1nbb7s0 {
+    margin-bottom: 50px;
+}
+* {
+    -webkit-tap-highlight-color: rgba(255,255,255,0);
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+user agent stylesheet
+section {
+    display: block;
+}
+<style>
+.css-b8peps {
+    display: flex;
+    position: relative;
+    color: rgb(47, 52, 56);
+    margin-bottom: 50px;
+}
+.layout {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-direction: normal;
+    -webkit-box-orient: vertical;
+    -webkit-flex-direction: column;
+    -moz-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-height: 100vh;
+}
+@media (min-width: 768px)
+body, html {
+    font-size: 15px;
+}
+body, html {
+    line-height: 1;
+    font-family: Pretendard Variable,Noto Sans KR,Apple SD Gothic Neo,맑은 고딕,Malgun Gothic,sans-serif;
+    font-size: 13px;
+}
+:root {
+    --sendbird-light-primary-500: #491389;
+    --sendbird-light-primary-400: #6211c8;
+    --sendbird-light-primary-300: #742ddd;
+    --sendbird-light-primary-200: #c2a9fa;
+    --sendbird-light-primary-100: #dbd1ff;
+    --sendbird-light-secondary-500: #066858;
+    --sendbird-light-secondary-400: #027d69;
+    --sendbird-light-secondary-300: #259c72;
+    --sendbird-light-secondary-200: #69c085;
+    --sendbird-light-secondary-100: #a8e2ab;
+    --sendbird-light-information-100: #adc9ff;
+    --sendbird-light-error-500: #9d091e;
+    --sendbird-light-error-400: #bf0711;
+    --sendbird-light-error-300: #de360b;
+    --sendbird-light-error-200: #f66161;
+    --sendbird-light-error-100: #fdaaaa;
+    --sendbird-light-background-700: #000;
+    --sendbird-light-background-600: #161616;
+    --sendbird-light-background-500: #2c2c2c;
+    --sendbird-light-background-400: #393939;
+    --sendbird-light-background-300: #bdbdbd;
+    --sendbird-light-background-200: #e0e0e0;
+    --sendbird-light-background-100: #eee;
+    --sendbird-light-background-50: #fff;
+    --sendbird-light-overlay-01: rgba(0,0,0,0.55);
+    --sendbird-light-overlay-02: rgba(0,0,0,0.32);
+    --sendbird-light-onlight-01: rgba(0,0,0,0.88);
+    --sendbird-light-onlight-02: rgba(0,0,0,0.5);
+    --sendbird-light-onlight-03: rgba(0,0,0,0.38);
+    --sendbird-light-onlight-04: rgba(0,0,0,0.12);
+    --sendbird-light-ondark-01: hsla(0,0%,100%,0.88);
+    --sendbird-light-ondark-02: hsla(0,0%,100%,0.5);
+    --sendbird-light-ondark-03: hsla(0,0%,100%,0.38);
+    --sendbird-light-ondark-04: hsla(0,0%,100%,0.12);
+    --sendbird-light-shadow-01: 0 1px 5px 0 rgba(33,34,66,0.04),0 0 3px 0 rgba(0,0,0,0.08),0 2px 1px 0 rgba(0,0,0,0.12);
+    --sendbird-light-shadow-02: 0 3px 5px -3px rgba(33,34,66,0.04),0 3px 14px 2px rgba(0,0,0,0.08),0 8px 10px 1px rgba(0,0,0,0.12);
+    --sendbird-light-shadow-03: 0 6px 10px -5px rgba(0,0,0,0.04),0 6px 30px 5px rgba(0,0,0,0.08),0 16px 24px 2px rgba(0,0,0,0.12);
+    --sendbird-light-shadow-04: 0 9px 15px -7px rgba(0,0,0,0.04),0 9px 46px 8px rgba(0,0,0,0.08),0 24px 38px 3px rgba(0,0,0,0.12);
+    --sendbird-light-shadow-message-input: 0 1px 5px 0 rgba(33,34,66,0.12),0 0 1px 0 rgba(33,34,66,0.16),0 2px 1px 0 rgba(33,34,66,0.08),0 1px 5px 0 rgba(0,0,0,0.12);
+    --sendbird-dark-primary-500: #491389;
+    --sendbird-dark-primary-400: #6211c8;
+    --sendbird-dark-primary-300: #742ddd;
+    --sendbird-dark-primary-200: #c2a9fa;
+    --sendbird-dark-primary-100: #dbd1ff;
+    --sendbird-dark-secondary-500: #066858;
+    --sendbird-dark-secondary-400: #027d69;
+    --sendbird-dark-secondary-300: #259c72;
+    --sendbird-dark-secondary-200: #69c085;
+    --sendbird-dark-secondary-100: #a8e2ab;
+    --sendbird-dark-information-100: #adc9ff;
+Show All Properties (40 more)
+}
+html {
+    font-family: 'Pretendard Variable',sans-serif;
+    letter-spacing: -0.3px;
+    -webkit-font-smoothing: antialiased;
+}
+html {
+    color: #424242;
+    background: #fff;
+}
+   .css-2kgyr3 {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    font-size: 16px;
+    line-height: 20px;
+    color: rgb(47, 52, 56);
+    font-weight: 600;
+}
+
+   .css-1wu05q6 {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    font-size: 10px;
+    line-height: 20px;
+    color: rgb(47, 52, 56);
+    font-weight: 600;
+}
+
+.discount_price{
+    font-size: 16px;
+    line-height: 0;
+    color: #50E5B4;
+}
+
+.discount_price{
+    font-size: 16px;
+    line-height: 0;
+}
+
+.css-1wu05q7 {
+   margin-left: auto;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    font-size: 10px;
+    line-height: 20px;
+    color: rgb(47, 52, 56);
+    font-weight: 600;
+}
+
