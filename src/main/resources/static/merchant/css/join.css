@@ -1,0 +1,285 @@
+@charset "UTF-8";
+<style>
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: #f4f7f6;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 90px; 
+    background-color: #F4F4F4;
+}
+
+.header-left, .header-right {
+    display: flex;
+    align-items: center;
+}
+
+.header-right nav {
+    display: flex;
+}
+
+.header-right nav a {
+    margin-left: 20px; 
+    color: #fff; 
+    text-decoration: none;
+    font-size: 18px;
+}
+
+header a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #fff;
+}
+
+header img {
+    margin-right: 10px;
+}
+
+header span {
+    font-size: 24px;
+    color: balck;
+}
+
+header span b {
+    font-size: 24px;
+    color: balck;
+}
+
+.registration-form-container {
+    background: #fff;
+    width: 50%;
+    margin: 50px auto;
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 10px;
+    color: #666;
+    font-size: 16px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="password"],
+.form-group input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #e1e1e1;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.business-num-container {
+    display: flex;
+    align-items: center;
+    gap: 10px; 
+}
+
+.business-num {
+    flex: 1; 
+    padding: 10px;
+    border: 1px solid #e1e1e1;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.business-num-container span {
+    font-size: 14px;
+}
+
+.business-num-container button {
+    padding: 10px 20px;
+    background-color: #50E5B4;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.form-group button {
+    padding: 10px 20px;
+    background-color: #50E5B4;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+textarea[name="mer_comintro"], textarea[name="mer_prodintro"] {
+    width: 100%; 
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    resize: vertical; 
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label.title {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #333;
+}
+
+.form-group span#comnum {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #666;
+}
+
+.form-group input[type="text"],
+.form-group input[type="password"],
+.form-group input[type="file"],
+.form-group input[type="button"],
+.form-group input[type="reset"],
+.form-group button,
+.form-group textarea.box {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 5px; 
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.form-group button {
+    width: 150px; 
+    padding: 10px;
+    background-color: #50E5B4;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    white-space: nowrap; 
+}
+
+.input-group {
+    display: flex;
+    gap: 8px;
+}
+
+.button-group {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+}
+
+.button-group input[type="button"],
+.button-group input[type="reset"] {
+    padding: 10px 70px; 
+    flex: 0 0 auto; 
+    width: auto;
+}
+
+.postcode-group {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px; 
+}
+
+#sample6_address,
+#sample6_detailAddress,
+#sample6_extraAddress {
+    width: 100%;
+    margin-bottom: 8px;
+}
+
+.postcode-group input[type="text"] {
+    width: 50%; 
+}
+
+.postcode-group button {
+    white-space: nowrap; 
+}
+
+.form-group .input-group input[type="text"] {
+    flex: 1; 
+}
+
+.form-group textarea.box {
+    height: 120px; 
+    resize: vertical; 
+}
+
+.form-group .error-message {
+    display: block;
+    color: #ff6b6b;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+input[type="reset"] {
+    padding: 10px 0;
+    width: 100%;
+    background-color: #c0c0c0;
+    border: none;
+    border-radius: 4px;
+    color: black;
+    margin-top: 20px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+input[type="button"], input[type="submit"] {
+    padding: 10px 0;
+    width: 100%;
+    background-color: #50E5B4;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    margin-top: 20px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.join a, .join1 a {
+    text-decoration: none;
+    color: #50E5B4;
+}
+
+.id-check-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.id-input-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.id-input-container input[type="text"] {
+    flex-grow: 1;
+    margin-right: 10px; 
+}
+
+.id-input-container button {
+    padding: 10px 20px;
+    background-color: #50E5B4;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    white-space: nowrap; 
+}
+</style>

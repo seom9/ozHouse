@@ -1,0 +1,917 @@
+
+ol, ul {
+    list-style-image: initial;
+}
+ol, ul {
+    list-style: none;
+}
+element.style {
+    transform: translateX(0px);
+}
+.page-navigation>ul {
+    text-align: center;
+    white-space: nowrap;
+}
+blockquote, body, code, dd, div, dl, dt, fieldset, form, h1, h2, h3, h4, h5, h6, input, legend, li, ol, p, pre, td, textarea, th, ul {
+    margin: 0;
+    padding: 0;
+}
+<style>
+* {
+    -webkit-tap-highlight-color: rgba(232, 230, 227, 0);
+}
+* {
+    -webkit-tap-highlight-color: rgba(255,255,255,0);
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+user agent stylesheet
+ul {
+    display: block;
+    list-style-type: disc;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+}
+
+.layout {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-direction: normal;
+    -webkit-box-orient: vertical;
+    -webkit-flex-direction: column;
+    -moz-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-height: 100vh;
+}
+<style>
+body, html {
+    line-height: 1;
+    font-family: "Pretendard Variable", "Noto Sans KR", "Apple SD Gothic Neo", "맑은 고딕", "Malgun Gothic", sans-serif;
+    font-size: 13px;
+}
+<style>
+html, body {
+    border-color: #736b5e;
+    color: #e8e6e3;
+}
+<style>
+:root {
+    --darkreader-bg--sendbird-light-primary-500: #3a0f6e;
+    --darkreader-bg--sendbird-light-primary-400: #4e0ea0;
+    --darkreader-border--sendbird-light-primary-400: #560faf;
+    --darkreader-bg--sendbird-light-primary-300: #551caa;
+    --darkreader-text--sendbird-light-primary-300: #8140e0;
+    --darkreader-border--sendbird-light-primary-300: #4b1897;
+    --sendbird-light-primary-200: #c2a9fa;
+    --darkreader-bg--sendbird-light-primary-100: #25282a;
+    --darkreader-border--sendbird-light-primary-100: #190074;
+    --sendbird-light-secondary-500: #066858;
+    --sendbird-light-secondary-400: #027d69;
+    --darkreader-bg--sendbird-light-secondary-300: #1e7d5b;
+    --darkreader-text--sendbird-light-secondary-300: #69dbb3;
+    --sendbird-light-secondary-200: #69c085;
+    --sendbird-light-secondary-100: #a8e2ab;
+    --darkreader-bg--sendbird-light-information-100: #2f3335;
+    --darkreader-bg--sendbird-light-error-500: #7e0718;
+    --darkreader-bg--sendbird-light-error-400: #99060e;
+    --darkreader-border--sendbird-light-error-400: #bd0711;
+    --darkreader-bg--sendbird-light-error-300: #b22b09;
+    --darkreader-text--sendbird-light-error-300: #f55b33;
+    --darkreader-border--sendbird-light-error-300: #b02b09;
+    --sendbird-light-error-200: #f66161;
+    --sendbird-light-error-100: #fdaaaa;
+    --darkreader-bg--sendbird-light-background-700: #000000;
+    --sendbird-light-background-600: #161616;
+    --sendbird-light-background-500: #2c2c2c;
+    --darkreader-border--sendbird-light-background-400: #797164;
+    --darkreader-bg--sendbird-light-background-300: #3d4245;
+    --darkreader-bg--sendbird-light-background-200: #2a2d2f;
+    --darkreader-bg--sendbird-light-background-100: #222426;
+    --darkreader-border--sendbird-light-background-100: #35393b;
+    --darkreader-bg--sendbird-light-background-50: #181a1b;
+    --darkreader-bg--sendbird-light-overlay-01: rgba(0, 0, 0, 0.55);
+    --darkreader-bg--sendbird-light-overlay-02: rgba(0, 0, 0, 0.32);
+    --darkreader-bg--sendbird-light-onlight-01: rgba(0, 0, 0, 0.88);
+    --darkreader-text--sendbird-light-onlight-01: rgba(232, 230, 227, 0.88);
+    --darkreader-bg--sendbird-light-onlight-02: rgba(0, 0, 0, 0.5);
+    --darkreader-text--sendbird-light-onlight-02: rgba(232, 230, 227, 0.5);
+    --darkreader-bg--sendbird-light-onlight-03: rgba(0, 0, 0, 0.38);
+    --darkreader-text--sendbird-light-onlight-03: rgba(232, 230, 227, 0.38);
+    --darkreader-border--sendbird-light-onlight-03: rgba(140, 130, 115, 0.38);
+    --darkreader-bg--sendbird-light-onlight-04: rgba(0, 0, 0, 0.12);
+    --darkreader-text--sendbird-light-onlight-04: rgba(232, 230, 227, 0.12);
+    --darkreader-border--sendbird-light-onlight-04: rgba(140, 130, 115, 0.12);
+    --darkreader-bg--sendbird-light-ondark-01: rgba(24, 26, 27, 0.88);
+    --darkreader-text--sendbird-light-ondark-01: rgba(232, 230, 227, 0.88);
+    --darkreader-text--sendbird-light-ondark-02: rgba(232, 230, 227, 0.5);
+    --sendbird-light-ondark-03: hsla(0,0%,100%,0.38);
+    --sendbird-light-ondark-04: hsla(0,0%,100%,0.12);
+Show All Properties (75 more)
+}
+:root {
+    --sendbird-light-primary-500: #491389;
+    --sendbird-light-primary-400: #6211c8;
+    --sendbird-light-primary-300: #742ddd;
+    --sendbird-light-primary-200: #c2a9fa;
+    --sendbird-light-primary-100: #dbd1ff;
+    --sendbird-light-secondary-500: #066858;
+    --sendbird-light-secondary-400: #027d69;
+    --sendbird-light-secondary-300: #259c72;
+    --sendbird-light-secondary-200: #69c085;
+    --sendbird-light-secondary-100: #a8e2ab;
+    --sendbird-light-information-100: #adc9ff;
+    --sendbird-light-error-500: #9d091e;
+    --sendbird-light-error-400: #bf0711;
+    --sendbird-light-error-300: #de360b;
+    --sendbird-light-error-200: #f66161;
+    --sendbird-light-error-100: #fdaaaa;
+    --sendbird-light-background-700: #000;
+    --sendbird-light-background-600: #161616;
+    --sendbird-light-background-500: #2c2c2c;
+    --sendbird-light-background-400: #393939;
+    --sendbird-light-background-300: #bdbdbd;
+    --sendbird-light-background-200: #e0e0e0;
+    --sendbird-light-background-100: #eee;
+    --sendbird-light-background-50: #fff;
+    --sendbird-light-overlay-01: rgba(0,0,0,0.55);
+    --sendbird-light-overlay-02: rgba(0,0,0,0.32);
+    --sendbird-light-onlight-01: rgba(0,0,0,0.88);
+    --sendbird-light-onlight-02: rgba(0,0,0,0.5);
+    --sendbird-light-onlight-03: rgba(0,0,0,0.38);
+    --sendbird-light-onlight-04: rgba(0,0,0,0.12);
+    --sendbird-light-ondark-01: hsla(0,0%,100%,0.88);
+    --sendbird-light-ondark-02: hsla(0,0%,100%,0.5);
+    --sendbird-light-ondark-03: hsla(0,0%,100%,0.38);
+    --sendbird-light-ondark-04: hsla(0,0%,100%,0.12);
+    --sendbird-light-shadow-01: 0 1px 5px 0 rgba(33,34,66,0.04),0 0 3px 0 rgba(0,0,0,0.08),0 2px 1px 0 rgba(0,0,0,0.12);
+    --sendbird-light-shadow-02: 0 3px 5px -3px rgba(33,34,66,0.04),0 3px 14px 2px rgba(0,0,0,0.08),0 8px 10px 1px rgba(0,0,0,0.12);
+    --sendbird-light-shadow-03: 0 6px 10px -5px rgba(0,0,0,0.04),0 6px 30px 5px rgba(0,0,0,0.08),0 16px 24px 2px rgba(0,0,0,0.12);
+    --sendbird-light-shadow-04: 0 9px 15px -7px rgba(0,0,0,0.04),0 9px 46px 8px rgba(0,0,0,0.08),0 24px 38px 3px rgba(0,0,0,0.12);
+    --sendbird-light-shadow-message-input: 0 1px 5px 0 rgba(33,34,66,0.12),0 0 1px 0 rgba(33,34,66,0.16),0 2px 1px 0 rgba(33,34,66,0.08),0 1px 5px 0 rgba(0,0,0,0.12);
+    --sendbird-dark-primary-500: #491389;
+    --sendbird-dark-primary-400: #6211c8;
+    --sendbird-dark-primary-300: #742ddd;
+    --sendbird-dark-primary-200: #c2a9fa;
+    --sendbird-dark-primary-100: #dbd1ff;
+    --sendbird-dark-secondary-500: #066858;
+    --sendbird-dark-secondary-400: #027d69;
+    --sendbird-dark-secondary-300: #259c72;
+    --sendbird-dark-secondary-200: #69c085;
+    --sendbird-dark-secondary-100: #a8e2ab;
+    --sendbird-dark-information-100: #adc9ff;
+Show All Properties (40 more)
+}
+<style>
+:root {
+    --darkreader-neutral-background: #131516;
+    --darkreader-neutral-text: #d8d4cf;
+    --darkreader-selection-background: #004daa;
+    --darkreader-selection-text: #e8e6e3;
+}
+<style>
+html {
+    font-family: 'Pretendard Variable',sans-serif;
+    letter-spacing: -0.3px;
+    -webkit-font-smoothing: antialiased;
+}
+html {
+    font-family: 'Pretendard Variable',sans-serif;
+    letter-spacing: -0.3px;
+    -webkit-font-smoothing: antialiased;
+}
+<style>
+html {
+    color: rgb(190, 185, 176);
+    background-image: initial;
+    background-color: rgb(24, 26, 27);
+}
+<style>
+body, html {
+    line-height: 1;
+    font-family: "Pretendard Variable", "Noto Sans KR", "Apple SD Gothic Neo", "맑은 고딕", "Malgun Gothic", sans-serif;
+    font-size: 13px;
+}
+html {
+    color: #424242;
+    background: #fff;
+}
+<style>
+html {
+    color-scheme: dark !important;
+}
+<style>
+::-webkit-scrollbar {
+    background-color: #202324;
+    color: #aba499;
+}
+<style>
+::-webkit-scrollbar-corner {
+    background-color: #181a1b;
+}
+<style>
+::-webkit-scrollbar-thumb {
+    background-color: #454a4d;
+}
+<style>
+::selection {
+    background-color: #004daa !important;
+    color: #e8e6e3 !important;
+}
+
+
+blockquote, body, code, dd, div, dl, dt, fieldset, form, h1, h2, h3, h4, h5, h6, input, legend, li, ol, p, pre, td, textarea, th, ul {
+    margin: 0;
+    padding: 0;
+}
+
+    -webkit-tap-highlight-color: rgba(232, 230, 227, 0);
+}
+* {
+    -webkit-tap-highlight-color: rgba(255,255,255,0);
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+user agent stylesheet
+li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+
+
+    .page-navigation__sub-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        
+        flex-direction: row; /* 수정된 부분: 세로에서 가로로 변경 */
+        
+    }
+
+    .page-navigation__sub-menu.active {
+        display: flex; /* 클래스가 존재하면 표시 */
+        
+        
+    }
+
+    .page-navigation__sub-menu-item {
+        display: none;
+        padding: 20px;
+        
+        border-bottom: 1px solid #ddd;
+        
+        align-items: center; /* 가로로 정렬을 위해 설정 */
+        text-align: center; /* 텍스트도 가로로 정렬을 위해 설정 */
+    }
+    
+.page-navigation__sub-menu-item:active {
+    color: #58E6B7;
+}
+
+.page-navigation__sub-menu-item:hover {
+    color: #58E6B7;
+}
+
+page-navigation__item:active{
+	color: #58E6B7;
+	
+}
+
+.page-navigation__sub-menu.active .page-navigation__sub-menu-item {
+    display: flex; /* 부모 요소에 active 클래스가 있을 때만 표시 */
+
+}
+
+
+
+
+<!-- 여기부터 아님 -->
+
+element.style {
+}
+@media (min-width: 768px)
+<style>
+.css-1x6h9tu {
+    padding: 0px 40px;
+}
+@media (min-width: 375px)
+<style>
+.css-1x6h9tu {
+    padding: 0px 15px;
+}
+<style>
+.css-1x6h9tu {
+    padding: 0px 15px;
+}
+<style>
+.css-1x6h9tu {
+    width: 100%;
+    max-width: 1256px;
+    margin: 0px auto;
+    box-sizing: border-box;
+}
+blockquote, body, code, dd, div, dl, dt, fieldset, form, h1, h2, h3, h4, h5, h6, input, legend, li, ol, p, pre, td, textarea, th, ul {
+    margin: 0;
+    padding: 0;
+}
+<style>
+* {
+    -webkit-tap-highlight-color: rgba(232, 230, 227, 0);
+}
+* {
+    -webkit-tap-highlight-color: rgba(255,255,255,0);
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+user agent stylesheet
+div {
+    display: block;
+}
+.layout {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-direction: normal;
+    -webkit-box-orient: vertical;
+    -webkit-flex-direction: column;
+    -moz-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-height: 100vh;
+}
+@media (min-width: 768px)
+body, html {
+    font-size: 15px;
+}
+<style>
+body, html {
+    line-height: 1;
+    font-family: "Pretendard Variable", "Noto Sans KR", "Apple SD Gothic Neo", "맑은 고딕", "Malgun Gothic", sans-serif;
+    font-size: 13px;
+}
+<style>
+html, body {
+    border-color: #736b5e;
+    color: #e8e6e3;
+}
+<style>
+:root {
+    --darkreader-bg--sendbird-light-primary-500: #3a0f6e;
+    --darkreader-bg--sendbird-light-primary-400: #4e0ea0;
+    --darkreader-border--sendbird-light-primary-400: #560faf;
+    --darkreader-bg--sendbird-light-primary-300: #551caa;
+    --darkreader-text--sendbird-light-primary-300: #8140e0;
+    --darkreader-border--sendbird-light-primary-300: #4b1897;
+    --sendbird-light-primary-200: #c2a9fa;
+    --darkreader-bg--sendbird-light-primary-100: #25282a;
+    --darkreader-border--sendbird-light-primary-100: #190074;
+    --sendbird-light-secondary-500: #066858;
+    --sendbird-light-secondary-400: #027d69;
+    --darkreader-bg--sendbird-light-secondary-300: #1e7d5b;
+    --darkreader-text--sendbird-light-secondary-300: #69dbb3;
+    --sendbird-light-secondary-200: #69c085;
+    --sendbird-light-secondary-100: #a8e2ab;
+    --darkreader-bg--sendbird-light-information-100: #2f3335;
+    --darkreader-bg--sendbird-light-error-500: #7e0718;
+    --darkreader-bg--sendbird-light-error-400: #99060e;
+    --darkreader-border--sendbird-light-error-400: #bd0711;
+    --darkreader-bg--sendbird-light-error-300: #b22b09;
+    --darkreader-text--sendbird-light-error-300: #f55b33;
+    --darkreader-border--sendbird-light-error-300: #b02b09;
+    --sendbird-light-error-200: #f66161;
+    --sendbird-light-error-100: #fdaaaa;
+    --darkreader-bg--sendbird-light-background-700: #000000;
+    --sendbird-light-background-600: #161616;
+    --sendbird-light-background-500: #2c2c2c;
+    --darkreader-border--sendbird-light-background-400: #797164;
+    --darkreader-bg--sendbird-light-background-300: #3d4245;
+    --darkreader-bg--sendbird-light-background-200: #2a2d2f;
+    --darkreader-bg--sendbird-light-background-100: #222426;
+    --darkreader-border--sendbird-light-background-100: #35393b;
+    --darkreader-bg--sendbird-light-background-50: #181a1b;
+    --darkreader-bg--sendbird-light-overlay-01: rgba(0, 0, 0, 0.55);
+    --darkreader-bg--sendbird-light-overlay-02: rgba(0, 0, 0, 0.32);
+    --darkreader-bg--sendbird-light-onlight-01: rgba(0, 0, 0, 0.88);
+    --darkreader-text--sendbird-light-onlight-01: rgba(232, 230, 227, 0.88);
+    --darkreader-bg--sendbird-light-onlight-02: rgba(0, 0, 0, 0.5);
+    --darkreader-text--sendbird-light-onlight-02: rgba(232, 230, 227, 0.5);
+    --darkreader-bg--sendbird-light-onlight-03: rgba(0, 0, 0, 0.38);
+    --darkreader-text--sendbird-light-onlight-03: rgba(232, 230, 227, 0.38);
+    --darkreader-border--sendbird-light-onlight-03: rgba(140, 130, 115, 0.38);
+    --darkreader-bg--sendbird-light-onlight-04: rgba(0, 0, 0, 0.12);
+    --darkreader-text--sendbird-light-onlight-04: rgba(232, 230, 227, 0.12);
+    --darkreader-border--sendbird-light-onlight-04: rgba(140, 130, 115, 0.12);
+    --darkreader-bg--sendbird-light-ondark-01: rgba(24, 26, 27, 0.88);
+    --darkreader-text--sendbird-light-ondark-01: rgba(232, 230, 227, 0.88);
+    --darkreader-text--sendbird-light-ondark-02: rgba(232, 230, 227, 0.5);
+    --sendbird-light-ondark-03: hsla(0,0%,100%,0.38);
+    --sendbird-light-ondark-04: hsla(0,0%,100%,0.12);
+Show All Properties (75 more)
+}
+:root {
+    --sendbird-light-primary-500: #491389;
+    --sendbird-light-primary-400: #6211c8;
+    --sendbird-light-primary-300: #742ddd;
+    --sendbird-light-primary-200: #c2a9fa;
+    --sendbird-light-primary-100: #dbd1ff;
+    --sendbird-light-secondary-500: #066858;
+    --sendbird-light-secondary-400: #027d69;
+    --sendbird-light-secondary-300: #259c72;
+    --sendbird-light-secondary-200: #69c085;
+    --sendbird-light-secondary-100: #a8e2ab;
+    --sendbird-light-information-100: #adc9ff;
+    --sendbird-light-error-500: #9d091e;
+    --sendbird-light-error-400: #bf0711;
+    --sendbird-light-error-300: #de360b;
+    --sendbird-light-error-200: #f66161;
+    --sendbird-light-error-100: #fdaaaa;
+    --sendbird-light-background-700: #000;
+    --sendbird-light-background-600: #161616;
+    --sendbird-light-background-500: #2c2c2c;
+    --sendbird-light-background-400: #393939;
+    --sendbird-light-background-300: #bdbdbd;
+    --sendbird-light-background-200: #e0e0e0;
+    --sendbird-light-background-100: #eee;
+    --sendbird-light-background-50: #fff;
+    --sendbird-light-overlay-01: rgba(0,0,0,0.55);
+    --sendbird-light-overlay-02: rgba(0,0,0,0.32);
+    --sendbird-light-onlight-01: rgba(0,0,0,0.88);
+    --sendbird-light-onlight-02: rgba(0,0,0,0.5);
+    --sendbird-light-onlight-03: rgba(0,0,0,0.38);
+    --sendbird-light-onlight-04: rgba(0,0,0,0.12);
+    --sendbird-light-ondark-01: hsla(0,0%,100%,0.88);
+    --sendbird-light-ondark-02: hsla(0,0%,100%,0.5);
+    --sendbird-light-ondark-03: hsla(0,0%,100%,0.38);
+    --sendbird-light-ondark-04: hsla(0,0%,100%,0.12);
+    --sendbird-light-shadow-01: 0 1px 5px 0 rgba(33,34,66,0.04),0 0 3px 0 rgba(0,0,0,0.08),0 2px 1px 0 rgba(0,0,0,0.12);
+    --sendbird-light-shadow-02: 0 3px 5px -3px rgba(33,34,66,0.04),0 3px 14px 2px rgba(0,0,0,0.08),0 8px 10px 1px rgba(0,0,0,0.12);
+    --sendbird-light-shadow-03: 0 6px 10px -5px rgba(0,0,0,0.04),0 6px 30px 5px rgba(0,0,0,0.08),0 16px 24px 2px rgba(0,0,0,0.12);
+    --sendbird-light-shadow-04: 0 9px 15px -7px rgba(0,0,0,0.04),0 9px 46px 8px rgba(0,0,0,0.08),0 24px 38px 3px rgba(0,0,0,0.12);
+    --sendbird-light-shadow-message-input: 0 1px 5px 0 rgba(33,34,66,0.12),0 0 1px 0 rgba(33,34,66,0.16),0 2px 1px 0 rgba(33,34,66,0.08),0 1px 5px 0 rgba(0,0,0,0.12);
+    --sendbird-dark-primary-500: #491389;
+    --sendbird-dark-primary-400: #6211c8;
+    --sendbird-dark-primary-300: #742ddd;
+    --sendbird-dark-primary-200: #c2a9fa;
+    --sendbird-dark-primary-100: #dbd1ff;
+    --sendbird-dark-secondary-500: #066858;
+    --sendbird-dark-secondary-400: #027d69;
+    --sendbird-dark-secondary-300: #259c72;
+    --sendbird-dark-secondary-200: #69c085;
+    --sendbird-dark-secondary-100: #a8e2ab;
+    --sendbird-dark-information-100: #adc9ff;
+Show All Properties (40 more)
+}
+<style>
+:root {
+    --darkreader-neutral-background: #131516;
+    --darkreader-neutral-text: #d8d4cf;
+    --darkreader-selection-background: #004daa;
+    --darkreader-selection-text: #e8e6e3;
+}
+<style>
+html {
+    font-family: 'Pretendard Variable',sans-serif;
+    letter-spacing: -0.3px;
+    -webkit-font-smoothing: antialiased;
+}
+html {
+    font-family: 'Pretendard Variable',sans-serif;
+    letter-spacing: -0.3px;
+    -webkit-font-smoothing: antialiased;
+}
+<style>
+html {
+    color: rgb(190, 185, 176);
+    background-image: initial;
+    background-color: rgb(24, 26, 27);
+}
+<style>
+body, html {
+    line-height: 1;
+    font-family: "Pretendard Variable", "Noto Sans KR", "Apple SD Gothic Neo", "맑은 고딕", "Malgun Gothic", sans-serif;
+    font-size: 13px;
+}
+html {
+    color: #424242;
+    background: #fff;
+}
+<style>
+html {
+    color-scheme: dark !important;
+}
+<style>
+::-webkit-scrollbar {
+    background-color: #202324;
+    color: #aba499;
+}
+<style>
+::-webkit-scrollbar-corner {
+    background-color: #181a1b;
+}
+<style>
+::-webkit-scrollbar-thumb {
+    background-color: #454a4d;
+}
+<style>
+::selection {
+    background-color: #004daa !important;
+    color: #e8e6e3 !important;
+}
+
+
+.profile-box {
+	float: left;
+margin: 20px auto; /* 가로 중앙 정렬을 위한 스타일 */
+  width: 25%;
+  border: 1px solid #ddd; /* 테두리 스타일 지정 */
+  padding: 20px; /* 안쪽 여백 지정 */
+  margin: 20px; /* 바깥 여백 지정 */
+  border-radius: 10px; /* 네모 칸의 모서리를 둥글게 만듦 */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
+}
+
+
+.username,
+.follow-info,
+.user-details,
+.follow,
+.edit-profile {
+  text-align: center;
+}
+
+.profile-actions {
+	text-align: right;
+}
+
+.username {
+  font-size: 20pt;
+  font-weight: bold;
+  line-height: 1.5;
+}
+
+.follow {
+  font-size: 13pt;
+  font-weight: bold;
+  line-height: 3;
+}
+
+.edit-profile {
+  border: 1px solid #ddd;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: border-color 0.3s;
+}
+
+/* 마우스 호버 시 테두리 색상 변경 */
+.edit-profile:hover {
+  border-color: #2980b9;
+}
+
+/* 클릭 시 테두리 색상 변경 */
+.edit-profile:active {
+  border-color: #2c3e50;
+}
+
+.profile-image-section {
+  width: 70%;
+}
+
+
+.profile-box1 {
+    margin: 20px auto; /* 가로 중앙 정렬을 위한 스타일 */
+    width: 80%;
+    border: 1px solid #ddd; /* 테두리 스타일 지정 */
+    padding: 20px; /* 안쪽 여백 지정 */
+    border-radius: 10px; /* 네모 칸의 모서리를 둥글게 만듦 */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
+	text-align: center; 
+	display: flex;
+}
+
+.order-list__info__wrap {
+    display: flex;
+    justify-content: space-around; /* 가로 공간 동일하게 배분 */
+}
+.test {
+	margin: 20px 94px 0px 0px;
+}
+
+.test2 {
+	display: flex;
+    margin: auto;
+}
+
+.order-list__info__wrap__content {
+    display: inline-block;
+    text-align: center;
+    width: 33%; /* 요소의 너비를 조절하여 일정한 간격을 유지 */
+}
+
+.order-list__info__wrap__content__text {
+    display: block;
+    margin-top: 5px; /* 텍스트와 아이콘 사이의 간격 조절 */
+}
+
+.order-list__info__wrap__content__icon--coupon,
+.order-list__info__wrap__content__icon--point,
+.order-list__info__wrap__content__icon--rating {
+    vertical-align: middle; /* 텍스트와 아이콘 세로 가운데 정렬 */
+}
+
+.order-list__info__wrap--placeholder__content__value, .order-list__info__wrap--placeholder__content__value--placeholder, .order-list__info__wrap__content__value, .order-list__info__wrap__content__value--placeholder {
+    color: #58E6B7;
+    font-weight: 700;
+    margin-left: 5px;
+    display: inline-block;
+    min-width: 30px;
+}
+
+
+
+.test3 {
+	margin: 20px 20px 20px 10%;
+}
+
+    .drop-down {
+      position: relative;
+      display: inline-block;
+    }
+
+    .drop-down__button {
+      padding: 8px;
+      border: 1px solid #ddd;
+      background-color: #fff;
+      cursor: pointer;
+    }
+
+    .drop-down__content {
+	    display: none;
+	    position: absolute;
+	    background-color: #50E5B4;
+	    min-width: 160px;
+	    border-radius: 4px;
+	    z-index: 1;
+	    top: 45px;
+	    left: -66px;
+    }
+
+    .drop-down__content a {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+    
+.page-navigation__sub-menu-items {
+    display: flex;
+        justify-content: center;
+    
+}
+
+.logoProfile {
+	text-align: center;
+}
+
+.logoProfile1 {
+  display: flex;
+  justify-content: space-between; /* 자식 요소들을 가로로 균등하게 배치합니다. */
+  align-items: center; /* 세로 가운데 정렬을 수행합니다. */
+  text-align: center;
+  margin: 3%;
+}
+
+@media (min-width: 1024px)
+.coupon-item {
+    margin: 30px 10 10px;
+    padding: 60px 20px 20px;
+    
+    align-items: center;
+    justify-content: center;
+    flex-direction: column; /* 내용물이 세로 방향으로 정렬되도록 합니다. */
+}
+.coupon-item {
+    position: relative;
+    width: 300px; /* 원하는 너비로 조절 */
+    height: 270px; /* 원하는 높이로 조절 */
+    box-sizing: border-box;
+    padding: 31px 20px 20px;
+    margin-top: 10px;
+    background-color: #fff;
+    border: 1px solid #ededed;
+    box-shadow: 0 2px 12px 0 #ededed;
+    border-radius: 10px;
+    
+
+}
+blockquote, body, code, dd, div, dl, dt, fieldset, form, h1, h2, h3, h4, h5, h6, input, legend, li, ol, p, pre, td, textarea, th, ul {
+    margin: 0;
+    padding: 0;
+}
+* {
+    -webkit-tap-highlight-color: rgba(255,255,255,0);
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+user agent stylesheet
+div {
+    display: block;
+}
+.layout {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-direction: normal;
+    -webkit-box-orient: vertical;
+    -webkit-flex-direction: column;
+    -moz-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-height: 100vh;
+}
+@media (min-width: 768px)
+body, html {
+    font-size: 15px;
+}
+<style>
+body, html {
+    line-height: 1;
+    font-family: "Pretendard Variable", "Noto Sans KR", "Apple SD Gothic Neo", "맑은 고딕", "Malgun Gothic", sans-serif;
+    font-size: 13px;
+}
+:root {
+    --sendbird-light-primary-500: #491389;
+    --sendbird-light-primary-400: #6211c8;
+    --sendbird-light-primary-300: #742ddd;
+    --sendbird-light-primary-200: #c2a9fa;
+    --sendbird-light-primary-100: #dbd1ff;
+    --sendbird-light-secondary-500: #066858;
+    --sendbird-light-secondary-400: #027d69;
+    --sendbird-light-secondary-300: #259c72;
+    --sendbird-light-secondary-200: #69c085;
+    --sendbird-light-secondary-100: #a8e2ab;
+    --sendbird-light-information-100: #adc9ff;
+    --sendbird-light-error-500: #9d091e;
+    --sendbird-light-error-400: #bf0711;
+    --sendbird-light-error-300: #de360b;
+    --sendbird-light-error-200: #f66161;
+    --sendbird-light-error-100: #fdaaaa;
+    --sendbird-light-background-700: #000;
+    --sendbird-light-background-600: #161616;
+    --sendbird-light-background-500: #2c2c2c;
+    --sendbird-light-background-400: #393939;
+    --sendbird-light-background-300: #bdbdbd;
+    --sendbird-light-background-200: #e0e0e0;
+    --sendbird-light-background-100: #eee;
+    --sendbird-light-background-50: #fff;
+    --sendbird-light-overlay-01: rgba(0,0,0,0.55);
+    --sendbird-light-overlay-02: rgba(0,0,0,0.32);
+    --sendbird-light-onlight-01: rgba(0,0,0,0.88);
+    --sendbird-light-onlight-02: rgba(0,0,0,0.5);
+    --sendbird-light-onlight-03: rgba(0,0,0,0.38);
+    --sendbird-light-onlight-04: rgba(0,0,0,0.12);
+    --sendbird-light-ondark-01: hsla(0,0%,100%,0.88);
+    --sendbird-light-ondark-02: hsla(0,0%,100%,0.5);
+    --sendbird-light-ondark-03: hsla(0,0%,100%,0.38);
+    --sendbird-light-ondark-04: hsla(0,0%,100%,0.12);
+    --sendbird-light-shadow-01: 0 1px 5px 0 rgba(33,34,66,0.04),0 0 3px 0 rgba(0,0,0,0.08),0 2px 1px 0 rgba(0,0,0,0.12);
+    --sendbird-light-shadow-02: 0 3px 5px -3px rgba(33,34,66,0.04),0 3px 14px 2px rgba(0,0,0,0.08),0 8px 10px 1px rgba(0,0,0,0.12);
+    --sendbird-light-shadow-03: 0 6px 10px -5px rgba(0,0,0,0.04),0 6px 30px 5px rgba(0,0,0,0.08),0 16px 24px 2px rgba(0,0,0,0.12);
+    --sendbird-light-shadow-04: 0 9px 15px -7px rgba(0,0,0,0.04),0 9px 46px 8px rgba(0,0,0,0.08),0 24px 38px 3px rgba(0,0,0,0.12);
+    --sendbird-light-shadow-message-input: 0 1px 5px 0 rgba(33,34,66,0.12),0 0 1px 0 rgba(33,34,66,0.16),0 2px 1px 0 rgba(33,34,66,0.08),0 1px 5px 0 rgba(0,0,0,0.12);
+    --sendbird-dark-primary-500: #491389;
+    --sendbird-dark-primary-400: #6211c8;
+    --sendbird-dark-primary-300: #742ddd;
+    --sendbird-dark-primary-200: #c2a9fa;
+    --sendbird-dark-primary-100: #dbd1ff;
+    --sendbird-dark-secondary-500: #066858;
+    --sendbird-dark-secondary-400: #027d69;
+    --sendbird-dark-secondary-300: #259c72;
+    --sendbird-dark-secondary-200: #69c085;
+    --sendbird-dark-secondary-100: #a8e2ab;
+    --sendbird-dark-information-100: #adc9ff;
+Show All Properties (40 more)
+}
+html {
+    font-family: 'Pretendard Variable',sans-serif;
+    letter-spacing: -0.3px;
+    -webkit-font-smoothing: antialiased;
+}
+<style>
+body, html {
+    line-height: 1;
+    font-family: "Pretendard Variable", "Noto Sans KR", "Apple SD Gothic Neo", "맑은 고딕", "Malgun Gothic", sans-serif;
+    font-size: 13px;
+}
+html {
+    color: #424242;
+    background: #fff;
+}
+
+
+@media (min-width: 1024px)
+.coupon-item__title {
+    font-size: 24px;
+    height: 56px;
+    line-height: 28px;
+}
+@media (min-width: 375px)
+.coupon-item__title {
+    font-size: 15px;
+    height: 36px;
+    line-height: 18px;
+}
+.coupon-item__title {
+    font-size: 20px;
+    margin-bottom: 2px;
+    cursor: pointer;
+    font-weight: 700;
+    color: #000;
+    display: -webkit-box;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+    word-wrap: break-word;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+a * {
+    border: none;
+}
+
+@media (min-width: 1024px)
+.coupon-item__valuation {
+	
+    margin: 16px 0;
+}
+.coupon-item__valuation {
+	font-size: 40px;
+	cursor: pointer;
+    font-weight: 700;
+    color: #000;
+    margin: 10px 0;
+    
+}
+
+.coupon-item__info>span, .coupon-item__due-date>span, .coupon-item__explain>span, .coupon-item__minimum-payment>span, .coupon-item__publish-limit>span {
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 1 auto;
+    -moz-box-flex: 0;
+    -moz-flex: 0 1 auto;
+    -ms-flex: 0 1 auto;
+    flex: 0 1 auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+     margin: 10px 0;
+}
+.button--size-50 {
+    width: 100%;
+}
+
+.mer_coupon {
+  display: flex;
+  justify-content: center; /* 화면 정중앙 정렬 */
+}
+
+.coupon-item {
+  margin-right: 30px; /* 각 쿠폰 아이템 사이의 간격 */
+}
+
+/* 마지막 쿠폰 아이템에는 오른쪽 마진을 주지 않음 */
+.coupon-item:last-child {
+  margin-right: 0;
+}
+
+.mypage-scrap {
+	display: flex;
+	align-items: center;
+    justify-content: center;
+    margin: 30px;
+}
+
+
+.css-ylurzg {
+    display: block;
+    border: 0;
+    margin: 40px;
+}
+
+.hidden {
+    display: none;
+}
+
+
+
+
+

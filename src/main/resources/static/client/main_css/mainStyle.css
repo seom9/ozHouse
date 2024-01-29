@@ -1,0 +1,509 @@
+/*mainStyle.css*/
+
+.css-14td677 {
+	margin-top: 30px;
+}
+
+.css-139mcwb {
+    max-width: 1256px;
+    margin: 0 auto;
+    padding: 0 60px;
+}
+
+.css-1obbfpy {
+	max-width: 1256px;
+	padding: 0px 60px;
+	margin: 40px auto;
+}
+
+.css-14vj981 {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    width: 100%;
+    padding: 20px 0px;
+    font-size: 0px;
+    line-height: 1;
+}
+
+.css-dlv2hg {
+    flex: 1 1 0%;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    min-width: 0px;
+}
+
+.css-147wp72 {
+    display: inline-flex;
+    -webkit-box-align: center;
+    align-items: center;
+    max-width: 100%;
+    cursor: pointer;
+}
+
+.css-1b0htg7 {
+    display: inline-flex;
+    -webkit-box-align: center;
+    align-items: center;
+    max-width: 100%;
+    margin-top: 4px;
+}
+
+.css-1384ga9 {
+    overflow: hidden;
+    display: inline-block;
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 400;
+    color: rgb(47, 52, 56);
+    letter-spacing: -0.3px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.css-1d0kvw3 {
+    overflow: hidden;
+    display: inline-block;
+    font-weight: 700;
+    color: rgb(47, 52, 56);
+    letter-spacing: -0.3px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 20px;
+    line-height: 28px;
+}
+
+.css-7z0c8w {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    height: 0px;
+    margin-left: 10px;
+}
+
+..css-dlv2hg {
+    flex: 1 1 0%;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    min-width: 0px;
+}
+
+.css-av2k9l {
+    display: inline-block;
+    margin: 0px;
+    padding: 0px;
+    border: none;
+    background: none;
+    font-style: inherit;
+    font-variant: inherit;
+    font-stretch: inherit;
+    font-family: inherit;
+    font-optical-sizing: inherit;
+    font-kerning: inherit;
+    font-feature-settings: inherit;
+    font-variation-settings: inherit;
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 700;
+    color: rgb(53, 197, 240);
+    cursor: pointer;
+}
+
+.css-bjn8wh {
+    position: relative;
+}
+
+.css-3q4ecs {
+    position: relative;
+    z-index: 0;
+}
+
+.css-5n3mug {
+    display: flex;
+    margin: 0px;
+    padding: 0px;
+    overflow: hidden;
+}
+
+.css-3qi6pg {
+    margin: 0px 20px 0px 0px;
+    padding: 0px;
+    flex-shrink: 0;
+    scroll-snap-align: start;
+    width: calc(16.6667% - 16.6667px);
+}
+
+.css-fyyvpx {
+    position: relative;
+    display: flex;
+    width: 100%;
+    min-width: 0px;
+    flex-flow: column;
+}
+
+.css-v414oq {
+    overflow: hidden;
+    position: relative;
+    border-radius: 4px;
+}
+
+.css-gnpvt2 {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    transition: transform 0.2s ease 0s;
+}
+
+.css-bkonhm {
+    position: absolute;
+    padding: 8px;
+    font-size: 0px;
+    z-index: 1;
+    left: 0px;
+    bottom: 0px;
+}
+
+.css-s5xdrg {
+    display: flex;
+    align-items: center;
+}
+
+.css-7nmw3w {
+    position: relative;
+    width: 24px;
+    height: 24px;
+    border-radius: 100%;
+    overflow: hidden;
+    display: inline-block;
+    margin-right: 4px;
+}
+
+.css-ihb3jd {
+    overflow: hidden;
+    display: inline-block;
+    max-width: 100px;
+    font-size: 12px;
+    line-height: 20px;
+    font-weight: 700;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.css-1auwp8u {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.css-10pwgp9 {
+    position: absolute;
+    padding: 8px;
+    font-size: 0px;
+    z-index: 1;
+    right: 0px;
+    bottom: 0px;
+}
+
+.css-pyrw9g {
+    margin: 0px -6px -6px 0px;
+    padding: 0px;
+    border: none;
+    background: none;
+    font: inherit;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    width: 36px;
+    height: 36px;
+    position: relative;
+}
+
+.css-5dnyrm {
+    display: inline-block;
+    font-size: 24px;
+    line-height: 1;
+    transform: translateZ(0px);
+}
+
+.css-5dnyrm > svg {
+    filter: drop-shadow(rgba(63, 71, 77, 0.25) 0px 2px 5px);
+	position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.css-q7lffx {
+    opacity: 0;
+}
+
+.css-whh5e5 {
+    opacity: 1;
+}
+
+.css-v414oq::after {
+    content: "";
+    display: block;
+    padding-top: 133.333%;
+}
+
+.css-11ab5xd {
+    position: absolute;
+    inset: 0px;
+    cursor: pointer;
+}
+
+.css-1113i1f {
+    position: absolute;
+    top: 42%;
+    transform: translate(-50%, -50%);
+    left: 0%;
+    display: none;
+}
+
+.css-h72v4d {
+    position: absolute;
+    top: 42%;
+    transform: translate(-50%, -50%);
+    left: 100%;
+}
+
+.css-3kqc0z {
+    margin: 0px 20px 0px 0px;
+    padding: 0px;
+    flex-shrink: 0;
+    scroll-snap-align: start;
+    width: calc(25% - 15px);
+}
+
+.css-g9s5pw .today-deal-item {
+    padding-left: 0px;
+    padding-right: 0px;
+	padding-bottom: 0px;
+	display: block;
+    padding: 0 10px 15px;
+    position: relative;
+}
+
+.today-deal-item__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+}
+
+.css-g9s5pw .today-deal-item__image {
+    margin: 0px;
+    width: auto;
+    position: relative;
+}
+
+.production-item-image {
+    position: relative;
+    background-color: #f5f5f5;
+    padding-bottom: 100%;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.production-item-image>.image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    transform: translate(-50%,-50%);
+    transition: transform .2s;
+}
+
+.today-deal-item .production-item-image__scrap-badge {
+    bottom: 12px;
+    right: 12px;
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    margin: 0;
+    padding: 0;
+    background: none;
+    border: none;
+    z-index: 2;
+    transition: opacity .1s;
+}
+
+.production-item-scrap-badge>.active-icon, .production-item-scrap-badge>.inactive-icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: opacity .1s;
+}
+
+.production-item-image__dark-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: background-color .2s;
+}
+
+.today-deal-item__timer {
+    position: absolute;
+    z-index: 3;
+    top: 12px;
+    left: 12px;
+    background-color: #f77;
+    color: #fff;
+    font-weight: 700;
+    padding: 4px 7px;
+    text-align: center;
+    border-radius: 4px;
+    font-size: 13px;
+    line-height: 15px;
+}
+
+.today-deal-item__content {
+    display: flex;
+    flex: 1 0 0px;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.today-deal-item__header {
+    margin-top: 9px;
+}
+
+.today-deal-item__header__brand {
+    display: block;
+    font-size: 11px;
+    color: #828c94;
+}
+
+.today-deal-item__header__name {
+    margin-top: 5px;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 17px;
+    max-height: 34px;
+    -webkit-line-clamp: 2;
+    color: #424242;
+    transition: opacity .1s;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    word-wrap: break-word;
+}
+
+.production-item-price {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    font-size: 17px;
+    line-height: 23px;
+    font-weight: 700;
+    margin: 2px 0 0;
+}
+
+.production-item-price__rate {
+    color: #35c5f0;
+    margin-right: 4px;
+}
+
+.production-item-price__price {
+    color: #000;
+    margin-right: 4px;
+}
+
+.production-item-stats {
+    font-size: 12px;
+    color: #9e9e9e;
+    line-height: 16px;
+    font-weight: 700;
+    margin-top: 5px;
+}
+
+.production-item-stats--review>.icon {
+    width: 1.1em;
+    height: 1.1em;
+    margin-right: 1px;
+    color: #35c5f0;
+    vertical-align: -2px;
+}
+
+.production-item-stats--review>.avg {
+    margin-right: 2px;
+    color: #424242;
+    font-weight: 700;
+}
+
+.css-xbyp8 {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: none;
+    font: inherit;
+    font-size: 16px;
+    line-height: 20px;
+    display: -webkit-inline-box;
+    display: -webkit-inline-flex;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    width: auto;
+    height: 50px;
+    border-radius: 4px;
+    padding: 0 16px;
+    font-weight: 700;
+    box-sizing: border-box;
+    text-align: center;
+    color: #FFFFFF;
+    background-color: #35C5F0;
+    width: 50px;
+    padding: 0;
+    width: 48px;
+    height: 48px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    border-radius: 24px;
+    background-color: #FFFFFF;
+    box-shadow: 0 2px 5px rgba(63, 71, 77, 0.15);
+}
+
+.css-kz9ng2 {
+    display: inline-block;
+    font-size: 24px;
+    line-height: 1;
+    color: #2F3438;
+}

@@ -1,0 +1,78 @@
+@charset "UTF-8";
+<style>
+.container {
+    width: 80%;
+    margin: 20px auto;
+    font-family: 'Arial', sans-serif;
+    font-size: 14px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.content-container {
+    margin-bottom: 20px;
+    padding: 15px;
+}
+
+.board-header {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.flex-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-row {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    margin-bottom: 5px;
+}
+
+.flex-cell {
+    flex: 1;
+    padding: 10px;
+    text-align: left;
+    font-size: 20px;
+}
+
+.flex-cell-sub {
+    flex: 3;
+    text-align: left;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+input[type="button"] {
+    background-color: #50E5B4;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    border: none;
+}
+
+.button-group {
+	text-align: center;
+	margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+    .flex-row, .flex-container {
+        flex-direction: column;
+    }
+
+    .flex-cell {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+}
+</style>

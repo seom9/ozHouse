@@ -1,0 +1,308 @@
+@charset "UTF-8";
+
+body {
+	font-family: 'Roboto', sans-serif;
+	background-color: #f4f4f4;
+	margin: 0;
+	padding: 0;
+}
+
+h1, h3, h4, p {
+	margin: 0;
+	padding: 0;
+}
+
+h3 {
+	cmargin: 7px;
+	font-weight: normal;
+	color: black;
+	padding: 7px 7px;
+	font-size: 30px;
+}
+
+h2 {
+	margin: 7px;
+	font-weight: normal;
+	color: black;
+	padding: 7px 2px;
+}
+
+h4 {
+	color: black;
+	font-weight: normal;
+	color: black;
+	padding: 12px 18px;
+	font-size: 20px;
+}
+
+/* h4 font {
+	display: inline;
+} */
+
+hr {
+	border: 0;
+	height: 1px;
+	background-color: #ccc;
+	margin: 20px 0;
+}
+
+.form-content {
+	display: block;
+	padding: 60px;
+	background-color: #fff;
+	border-radius: 4px;
+	text-align: left;
+	width: 90%;
+}
+
+.flex-content {
+	flex-grow: 1;
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+.flex-header {
+	width: 15%;
+	padding: 8px;
+	font-weight: bold;
+	border-right: 1px solid #ccc;
+	margin-right: 20px;
+}
+
+.top-bar {
+	padding: 10px 0;
+	background-color: #f8f8f8;
+	border-bottom: 1px solid #e1e1e1;
+}
+
+.main-container {
+	padding: 20px;
+	background-color: #FFFFFF;
+}
+
+.header {
+	width: 100%;
+	display: flex;
+	margin: 0 auto;
+	justify-content: space-between;
+	align-items: left;
+}
+
+.main-title {
+	font-size: 15px;
+	color: #333;
+	padding: 0px 18px;
+}
+
+.partner-center {
+	text-align: right;
+	margin: 0;
+	font-weight: bold;
+	color: #50E5B4;
+	font-size: 15px;
+}
+
+.partner-center a {
+	font-size: 1rem;
+	color: #50E5B4;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+.flex-content input[type="checkbox"] {
+	margin: 5px;
+}
+
+.flex-container {
+	display: flex;
+	flex-direction: column;
+	padding: 100px;
+	border: 1px solid #ccc;
+	width: 90%;
+	margin: 0 auto;
+	gap: 20px;
+	line-height: 1.6;
+	flex-wrap: wrap;
+}
+
+.flex-row {
+	display: flex;
+	align-items: center;
+	margin-bottom: 10px;
+	width: 100%;
+}
+
+.flex-label {
+	font-size: 30px;
+	width: 40%;
+	padding-right: 50px;
+}
+
+.flex-input-group {
+	flex-grow: 1;
+	display: flex;
+	gap: 40px;
+	align-items: center;
+}
+
+.red-text {
+	color: red;
+}
+
+.notice-link {
+	color: #50E5B4;
+}
+
+input[type="text"], input[type="file"], input[type="checkbox"] {
+	margin-right: 5px;
+	margin-left: 30px;
+}
+
+button {
+	padding: 15px 40px;
+	background-color: #50E5B4;
+	color: white;
+	border: none;
+	cursor: pointer;
+	font-size: 26px;
+	border-radius: 5px;
+}
+
+.business-num-section {
+	margin-top: 20px;
+}
+
+.business-num-label {
+	font-size: 24px;
+	position: relative;
+	top: 20px;
+	left: 40px;
+}
+
+.business-num-inquiry input[type="button"] {
+	margin-top: 50px;
+	background-color: #50E5B4;
+	color: white;
+	border: none;
+	padding: 10px 20px;
+	border-radius: 5px;
+	cursor: pointer;
+	margin-left: 50px;
+	font-size: 18px;
+}
+
+.business-num-label, .business-num-result {
+	display: inline-block;
+	vertical-align: middle;
+	margin-right: 50px;
+}
+
+.business-num-result {
+	font-size: 15px;
+	margin-top: 38px;
+}
+
+.business-num-flex-container {
+	display: flex;
+	align-items: center;
+}
+
+.business-num-inputs {
+	display: flex;
+	align-items: center;
+	margin-right: 10px;
+	margin-top: 50px;
+	margin-left: 80px;
+}
+
+.button-container {
+	text-align: center;
+	margin-top: 70px;
+}
+
+input[type="text"] {
+	padding: 20px;
+	margin-right: 20px;
+	margin-left: 30px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
+
+input[type="checkbox"] {
+	padding: 20px;
+	margin-right: 20px;
+	margin-left: 30px;
+	border: 1px solid #ccc;
+}
+
+h2 {
+	margin: 0;
+	font-weight: normal;
+	color: #333;
+	font-size: 30px;
+}
+
+.main-container {
+	padding: 20px;
+	background-color: #FFFFFF;
+}
+
+.main-title {
+	font-size: 15px;
+	color: #333;
+}
+
+@media ( max-width : 768px) {
+	.top-bar {
+		padding: 10px 0;
+		background-color: #f8f8f8;
+		border-bottom: 1px solid #e1e1e1;
+	}
+	.form-content, table {
+		width: 95%;
+		max-width: none;
+	}
+	.form-content {
+		padding: 10px;
+		width: 95%;
+		max-width: none;
+		font-size: 20px;
+	}
+	.header {
+		flex-direction: column;
+		align-items: flex-start;
+		width: auto;
+		padding: 0 10px;
+	}
+	.partner-center {
+		margin-top: 10px;
+		align-self: flex-end;
+	}
+	form {
+		display: flex;
+		justify-content: center;
+	}
+	.button-container {
+		margin-top: 20px;
+	}
+	button {
+		padding: 10px 20px;
+	}
+}
+
+.centered-form-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.con {
+	width: 80%;
+	background-color: white;
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
