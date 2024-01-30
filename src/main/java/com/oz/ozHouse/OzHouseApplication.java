@@ -8,6 +8,7 @@ public class OzHouseApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(OzHouseApplication.class, args);
+		System.out.println("ozHouse 실행 완료!");
 	}
 
 }
