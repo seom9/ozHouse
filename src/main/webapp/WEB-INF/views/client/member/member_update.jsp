@@ -63,7 +63,7 @@
 	        }).open();
 	    }
 	</script>
-	<link rel="stylesheet" href="${path}/resources/client/login.css"/>
+	<link rel="stylesheet" href="${path}/client/login.css"/>
 	<style>
       	.join {
 			position: relative; 				    
