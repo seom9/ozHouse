@@ -14,13 +14,13 @@
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 	<c:set var="path" value="${pageContext.request.contextPath}"/>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-	<link rel="stylesheet" href="${path}/resources/login.css"/>
+	<link rel="stylesheet" href="${path}client/member_css/login.css"/>
 </head>  
 
 <body onload="f.member_email.focus()">
 	<div  align="center" class="login-wrapper" >
 		<br><br><br>
-		<h2><img src="${path}/resources/client/ozHouseLogo.png" style="width: 20%"></h2>
+		<h2><img src="${path}/client/image/ozHouseLogo.png" style="width: 20%"></h2>
 		<font face="Roboto, sans-serif">아이디 / 비밀번호 찾기</font>
 		<p>
 		<form name="f" method="post" id="login-form" action="send_find_email.do">

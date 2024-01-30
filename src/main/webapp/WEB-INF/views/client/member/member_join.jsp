@@ -118,24 +118,24 @@
         $("#checkPasswd").hide();
     });
 </script>
-   <link rel="stylesheet" href="${path}/resources/client/login.css"/>
+   <link rel="stylesheet" href="${path}/client/member_css/login.css"/>
 </head>  
 <body onload="f.member_id.focus()">
    <div  align="center" class="login-wrapper" style="top: 70px; position: relative;">
    <form name="f" method="post" id="login-form" action="member_send_email.do">
-             <h2><img src="${path}/resources/client/image/ozHouseLogo.png" style="width: 20%"></h2>
+             <h2><img src="${path}/client/image/ozHouseLogo.png" style="width: 20%"></h2>
             <font face="Roboto, sans-serif">회원 가입</font>
             <p>
               <section>
               <span class="join2">sns계정으로 간편하게 회원가입</span> <br>
               <a class="css-l0qndx e1ufx3to0" href="/users/auth/github">
-              <img src="${path}/resources/client/image/github.png">
+              <img src="${path}/client/image/github.png">
               </a>
               <a class="css-l0qndx e1ufx3to0" href="https://kauth.kakao.com/oauth/authorize?client_id=e5b283df9616f7c21f3e15db5f9b0df2&redirect_uri=http://localhost:8080/ozHouse/kakao_login.do&response_type=code">
-              <img src="${path}/resources/client/image/kakao.png">
+              <img src="${path}/client/image/kakao.png">
               </a>
               <a class="css-l0qndx e1ufx3to0" href="naverLogin.do">
-              <img src="${path}/resources/client/image/naver.png">
+              <img src="${path}/client/image/naver.png">
               </a>
               </section>
             <br><br><br>

@@ -5,7 +5,7 @@
 <head>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
-<link rel="stylesheet" href="${path}/resources/client/login.css"/>
+<link rel="stylesheet" href="${path}/client/member_css/login.css"/>
 <title>이메일 인증</title>
 	<script type="text/javascript">
 		function check(){
