@@ -33,7 +33,7 @@
 </head>
 <body> 
     <div align="center" class="login-wrapper" style="top: 70px; position: relative;">
-        <h2><img src="${path}/resources/client/image/ozHouseLogo.png" style="width: 30%"></h2>
+        <h2><img src="${path}/client/image/ozHouseLogo.png" style="width: 30%"></h2>
         <form method="post" action="member_login.do" id="login-form" name="f">
          
 			<c:if test="${not empty cookie.saveId}">
@@ -83,13 +83,13 @@
         <section>
         
         <a datatype="github" class="css-l0qndx e1ufx3to0" href="/users/auth/github">
-        <img src="${path}/resources/client/image/github.png">
+        <img src="${path}/client/image/github.png">
         </a>
         <a datatype="kakao" class="css-l0qndx e1ufx3to0" href="https://kauth.kakao.com/oauth/authorize?client_id=e5b283df9616f7c21f3e15db5f9b0df2&redirect_uri=http://localhost:8080/ozHouse/kakao_login.do&response_type=code">
-        <img src="${path}/resources/client/image/kakao.png">
+        <img src="${path}/client/image/kakao.png">
         </a>
         <a datatype="naver" class="css-l0qndx e1ufx3to0" href="naverLogin.do">
-        <img src="${path}/resources/client/image/naver.png">
+        <img src="${path}/client/image/naver.png">
         </a><br>
      	<span class="join3">로그인에 문제가 있으신가요?</span>
      	<style>
