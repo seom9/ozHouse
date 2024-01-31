@@ -14,7 +14,6 @@ public class Category {
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int categoryNum;
-	int numnum;
 	private String categoryCode;
 	private String categoryName;
 }
