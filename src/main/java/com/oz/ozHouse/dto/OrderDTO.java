@@ -2,7 +2,7 @@ package com.oz.ozHouse.dto;
 
 import java.sql.Date;
 
-import com.oz.ozHouse.domain.Order;
+import com.oz.ozHouse.domain.OrderTb;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -36,8 +36,8 @@ public class OrderDTO {
     private String oHp3;
     private String oPostcode;
 
-    public Order toEntity() {
-        Order order = new Order();
+    public OrderTb toEntity() {
+        OrderTb order = new OrderTb();
 
         // Set the properties of the new Order instance based on the values of the current object
         order.setOCode(this.oCode);
