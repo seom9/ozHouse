@@ -19,14 +19,14 @@ import lombok.Setter;
 public class Blog {
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int blog_num;
-	private String member_id;
-	private String blog_subject;
-	private String blog_content;
-	private String blog_image;
+	private int blogNum;
+	private String memberId;
+	private String blogSubject;
+	private String blogContent;
+	private String blogImage;
 	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "yy/MM/dd")
-	private String blog_date;
-	private String blog_room_type;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private String blogDate;
+	private String blogRoomType;
 	private int readcount;
 }
