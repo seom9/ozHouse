@@ -1,5 +1,9 @@
 package com.oz.ozHouse.dto;
 
+import java.sql.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.oz.ozHouse.domain.Member;
 
 import lombok.Getter;
@@ -28,7 +32,7 @@ public class MemberDTO {
 	private String memberHp3;
 	private int memberPoint;
 	private String memberLevel;
-	private String memberJoindate;
+	private Date memberJoindate;
 	private String memberDeletedate;
 	
    public Member toEntity() {
