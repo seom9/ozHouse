@@ -38,7 +38,9 @@ public class Member {
 	private int memberPoint;
 	private String memberLevel;
 	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "yy/MM/dd")
 	private Date memberJoindate;
-	private String memberDeletedate;
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yy/MM/dd")
+	private Date memberDeletedate;
 }
