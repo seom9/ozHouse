@@ -1,13 +1,11 @@
-package com.oz.ozHouse.client;
+package com.oz.ozHouse.client.controller;
 
-import java.util.Map;
 import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -16,7 +14,6 @@ import com.oz.ozHouse.client.service.MemberService;
 import com.oz.ozHouse.dto.MemberDTO;
 
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 
@@ -42,13 +39,13 @@ public class MemberController {
     @PostMapping("/member_send_email.do")
     public String emailAuth(HttpServletRequest req, MemberDTO dto) {
         String email = req.getParameter("email");
-        /*
-        if (memberMapper.checkEmail(email) != null) {
+
+        if (memberService.checkEmail(email) > 0) {
 			req.setAttribute("msg", "이미 가입되어 있습니다");
 			req.setAttribute("url", "member_join.do");
 			return "message";
         }
-        */
+
         // 메일 전송
         int num = 1;
         // TSL.sendEmailCheck(email);

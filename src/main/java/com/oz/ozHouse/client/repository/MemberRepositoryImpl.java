@@ -16,5 +16,4 @@ public class MemberRepositoryImpl {
         em.persist(member);
         return member;
     }
-
 }

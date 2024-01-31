@@ -21,9 +21,14 @@ public class MemberServiceImpl implements MemberService {
     }
 
 	@Override
-	public int checkId(String member_id) {
-		int answer = memberRepository.countByMemberId(member_id);
+	public int checkId(String memberId) {
+		int answer = memberRepository.countByMemberId(memberId);
 		return answer;
+	}
+
+	@Override
+	public int checkEmail(String memberEmail) {
+		return memberRepository.countByMemberEmail(memberEmail);
 	}
     
 }
