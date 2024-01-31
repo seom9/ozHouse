@@ -4,5 +4,6 @@ import com.oz.ozHouse.domain.Member;
 
 public interface MemberService {
 	int insertMember(Member member);
-	int checkId(String member_id);
+	int checkId(String memberId);
+	int checkEmail(String memberEmail);
 }

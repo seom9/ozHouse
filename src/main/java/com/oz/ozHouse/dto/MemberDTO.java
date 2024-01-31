@@ -30,4 +30,29 @@ public class MemberDTO {
 	private String memberLevel;
 	private String memberJoindate;
 	private String memberDeletedate;
+	
+   public Member toEntity() {
+        Member member = new Member();
+        member.setMemberNum(this.memberNum);
+        member.setMemberName(this.memberName);
+        member.setMemberId(this.memberId);
+        member.setMemberPasswd(this.memberPasswd);
+        member.setMemberNickname(this.memberNickname);
+        member.setMemberEmail(this.memberEmail);
+        member.setMemberImage(this.memberImage);
+        member.setMemberAddress1(this.memberAddress1);
+        member.setMemberAddress2(this.memberAddress2);
+        member.setMemberAddress3(this.memberAddress3);
+        member.setMemberPostcode1(this.memberPostcode1);
+        member.setMemberPostcode2(this.memberPostcode2);
+        member.setMemberPostcode3(this.memberPostcode3);
+        member.setMemberHp1(this.memberHp1);
+        member.setMemberHp2(this.memberHp2);
+        member.setMemberHp3(this.memberHp3);
+        member.setMemberPoint(this.memberPoint);
+        member.setMemberLevel(this.memberLevel);
+        member.setMemberJoindate(this.memberJoindate);
+        member.setMemberDeletedate(this.memberDeletedate);
+        return member;
+    }
 }
