@@ -14,14 +14,15 @@ import lombok.Setter;
 @Entity
 @Setter
 @Getter
-public class OrderReQA {
+public class ProductReQA {
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int orderReQANum ;
+	private int productReQANum;
+	private int productNum;
 	private String memberId;
-	private String orderReQAContent;
+	private String productReQAContent;
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private String orderReQADate;
+	private String productReQADate;
 
 }
