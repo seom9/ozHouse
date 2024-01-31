@@ -18,6 +18,8 @@ public class BlogDTO {
 	private String blogDate;
 	private String blogRoomType;
 	private int readcount;
+	private int numnum;
+	
 	
 	public Blog toEntity() {
 	    Blog blog = new Blog();
