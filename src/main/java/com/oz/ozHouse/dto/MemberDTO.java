@@ -33,7 +33,7 @@ public class MemberDTO {
 	private int memberPoint;
 	private String memberLevel;
 	private Date memberJoindate;
-	private String memberDeletedate;
+	private Date memberDeletedate;
 	
    public Member toEntity() {
         Member member = new Member();
