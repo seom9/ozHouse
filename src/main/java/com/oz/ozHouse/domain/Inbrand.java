@@ -34,7 +34,7 @@ public class Inbrand {
 	private String inManemail;
 	private String inCategory;
 	private String inOthershop;
-	private String inFile;
+	private String inSaleFile;
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yy/MM/dd")
 	private Date inAppliDate;
@@ -42,4 +42,5 @@ public class Inbrand {
 	@DateTimeFormat(pattern = "yy/MM/dd")
 	private Date inCancelDate;
 	
+	int num = 0;
 }
