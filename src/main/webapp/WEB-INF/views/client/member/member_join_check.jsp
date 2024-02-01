@@ -28,10 +28,10 @@
 		<span class="title">${email}</span>
 		<input type="text" id="member_id" placeholder="받으신 인증번호 8자리를 입력해 주세요" name="checkNumCheck" class="box">
 			<input type="hidden" name="checkNum" value="${checkNum}">
-			<input type="hidden" name="member_id" value="${member.member_id}"/>
-			<input type="hidden" name="member_passwd" value="${member.member_passwd}"/>
-			<input type="hidden" name="member_email" value="${email}"/>
-			<input type="hidden" name="member_nickname" value="${member.member_nickname}"/>
+			<input type="hidden" name="memberId" value="${member.memberId}"/>
+			<input type="hidden" name="memberPasswd" value="${member.memberPasswd}"/>
+			<input type="hidden" name="memberEmail" value="${email}"/>
+			<input type="hidden" name="memberNickname" value="${member.memberNickname}"/>
 			<input type="button" value="인증번호 확인" onclick="check()">
 	</form>
 </div>

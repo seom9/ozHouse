@@ -13,10 +13,10 @@ build/
 .settings
 .springBeans
 .sts4-cache
+/src/main/resources/email.properties
 bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
-!**/src/main/resources/email.properties
 
 ### IntelliJ IDEA ###
 .idea
