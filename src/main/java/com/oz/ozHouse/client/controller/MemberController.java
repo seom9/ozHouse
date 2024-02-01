@@ -1,19 +1,23 @@
 package com.oz.ozHouse.client.controller;
 
+import java.util.Map;
 import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.oz.ozHouse.client.service.EmailService;
 import com.oz.ozHouse.client.service.MemberService;
 import com.oz.ozHouse.dto.MemberDTO;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 
@@ -21,6 +25,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class MemberController {
 	private final MemberService memberService;
+	private final EmailService emailService;
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
@@ -37,7 +42,7 @@ public class MemberController {
     
     // 가입 인증 이메일
     @PostMapping("/member_send_email.do")
-    public String emailAuth(HttpServletRequest req, MemberDTO dto) {
+    public String emailAuth(HttpServletRequest req, MemberDTO dto) throws Exception{
         String email = req.getParameter("email");
 
         if (memberService.checkEmail(email) > 0) {
@@ -47,26 +52,22 @@ public class MemberController {
         }
 
         // 메일 전송
-        int num = 1;
-        // TSL.sendEmailCheck(email);
-        String checkNum = Integer.toString(num);
+        String checkNum = emailService.sendOauthMessage(email);
         req.setAttribute("checkNum", checkNum);
         req.setAttribute("email", email);
         req.setAttribute("member", dto);
         return "client/member/member_join_check";
     }
     
-    /*
-    // 회원 가입
     @PostMapping("/email_join_check.do")
     public String emailAuthCheck(HttpServletRequest req, @ModelAttribute MemberDTO dto, @RequestParam Map<String, String> params) {
     	if (params.get("checkNum").equals(params.get("checkNumCheck"))) {
         	
         	HttpSession session = req.getSession();
         	MemberDTO insert = (MemberDTO)session.getAttribute("insertMember");
-        	if (insert != null) dto.setMember_image(insert.getMember_image()); 
-        	String passwd = dto.getMember_passwd();
-        	dto.setMember_passwd(passwordEncoder.encode(passwd));
+        	if (insert != null) dto.setMemberImage(insert.getMemberImage()); 
+        	String passwd = dto.getMemberPasswd();
+        	dto.setMemberPasswd(passwordEncoder.encode(passwd));
         	
         	int res = memberService.insertMember(dto.toEntity());
     		if (res>0) {
@@ -83,7 +84,7 @@ public class MemberController {
         	return "message";
         }
     }
-    */
+
     public boolean isValid(String str) {
         return Pattern.matches("^[a-zA-Z0-9-_]*$", str);
     }
