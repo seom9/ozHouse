@@ -27,17 +27,18 @@ public class EmailServiceImpl implements EmailService{
         MimeMessage  message = emailSender.createMimeMessage();
  
         message.addRecipients(RecipientType.TO, to);//보내는 대상
-        message.setSubject("이메일 인증 테스트");//제목
+        message.setSubject("[ozHouse] 회원 가입 인증메일입니다");//제목
  
         String msgg="";
         msgg+= "<div style='margin:20px;'>";
-        msgg+= "<h1> 안녕하세요 임준호입니다. </h1>";
+        msgg+= "<h1> 편리한 쇼핑, ozHouse 입니다! </h1>";
         msgg+= "<br>";
-        msgg+= "<p>아래 코드를 복사해 입력해주세요<p>";
+        msgg+= "<p>아래 코드를 복사해 입력해 주세요.<p>";
         msgg+= "<br>";
-        msgg+= "<p>감사합니다.<p>";
+        msgg+= "<p>환영합니다.<p>";
         msgg+= "<br>";
         msgg+= "<div align='center' style='border:1px solid black; font-family:verdana';>";
+        msgg+= "<br>";
         msgg+= "<h3 style='color:blue;'>회원가입 인증 코드입니다.</h3>";
         msgg+= "<div style='font-size:130%'>";
         msgg+= "CODE : <strong>";
@@ -83,7 +84,6 @@ public class EmailServiceImpl implements EmailService{
             es.printStackTrace();
             throw new IllegalArgumentException();
         }
-        System.out.println("이메일 인증 난수 : " + ePw);
         return ePw;
     }
 }
