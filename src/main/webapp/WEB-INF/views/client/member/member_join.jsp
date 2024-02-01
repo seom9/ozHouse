@@ -11,26 +11,21 @@
    <script type="text/javascript">
       var idChecked = false;
       function check(){
-         if (f.id.value == ""){
-            alert("아이디를 입력해 주세요")
-            f.id.focus()
-            return
-         }
          if (!idChecked) { // 중복 검사가 실행되지 않았으면
             alert("아이디 유효성을 확인해 주세요");
             return;
          }
-         if (!f.member_passwd.value){
+         if (!f.memberPasswd.value){
             alert("비밀번호를 입력해 주세요")
             f.passwd.focus()
             return
          }
-         if (!f.member_passwd2.value) {
+         if (!f.memberPasswd2.value) {
             alert("비밀번호 중복 확인을 해 주세요");
             f.member_passwd2.focus();
             return;
          }
-         if (f.member_passwd.value !== f.member_passwd2.value) {
+         if (f.memberPasswd.value !== f.memberPasswd2.value) {
             alert("비밀번호가 일치하지 않습니다.");
             f.member_passwd2.focus();
             return;
@@ -140,18 +135,18 @@
               </section>
             <br><br><br>
             <span class="title">아이디</span>
-               <input type="text" tabindex="1" value="${member_id}" placeholder="아이디를 입력해 주세요." id="member_id" name="member_id" class="box" oninput="checkIdFalse()"><br>
+               <input type="text" tabindex="1" value="${member_id}" placeholder="아이디를 입력해 주세요." id="member_id" name="memberId" class="box" oninput="checkIdFalse()"><br>
                <div><span id="result_checkId" style="font-size:12px;"></span></div>
                <div style="margin-top: 10px;"><span id="checkId"><input type="button" id="checkId" value="중복검사"></span></div>
                
             <br><br>
             <span class="title">닉네임</span>
-               <input type="text" tabindex="2" value="${member_nickname}" placeholder="닉네임을 입력해 주세요." name="member_nickname" class="box">
+               <input type="text" tabindex="2" value="${member_nickname}" placeholder="닉네임을 입력해 주세요." name="memberNickname" class="box">
 
             <span class="title">비밀번호</span>
-               <input type="password" tabindex="3" name="member_passwd" placeholder="비밀번호를 입력해 주세요." class="box" placeholder="Enter password" id="password" oninput="checkPasswd2()">
+               <input type="password" tabindex="3" name="memberPasswd" placeholder="비밀번호를 입력해 주세요." class="box" placeholder="Enter password" id="password" oninput="checkPasswd2()">
             <span class="title">비밀번호 확인</span>
-            <input type="password" tabindex="4" placeholder="비밀번호를 정확하게 입력해 주세요." name="member_passwd2" class="box" placeholder="Enter passwordCheck" id="passwordCheck" oninput="checkPasswd()">
+            <input type="password" tabindex="4" placeholder="비밀번호를 정확하게 입력해 주세요." name="memberPasswd2" class="box" placeholder="Enter passwordCheck" id="passwordCheck" oninput="checkPasswd()">
                     <div id="checkPasswd" class="error-message">
                     PASSWORD 가 동일하지 않습니다
                </div>
@@ -168,7 +163,7 @@
                <input type="text" tabindex="5" value="${member_email}" placeholder="이메일을 입력해주세요." name="email" class="box">
             </c:if>   
                
-               <input type="hidden" name="member_image" value="${member_image}">
+               <input type="hidden" name="memberImage" value="${member_image}">
                <input type="button" value="회원가입" onclick="javascript:check()">
                <input type="reset" value="reset">
    </form>
