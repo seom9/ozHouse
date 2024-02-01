@@ -40,7 +40,5 @@ public class Member {
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yy/MM/dd")
 	private Date memberJoindate;
-	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "yy/MM/dd")
 	private Date memberDeletedate;
 }
