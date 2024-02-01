@@ -1,10 +1,10 @@
-package com.oz.ozHouse.client.repository;
+package com.oz.ozHouse.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.oz.ozHouse.domain.Member;
 
 public interface MemberRepository extends JpaRepository<Member, Integer> {
-	int countByMemberId(String memberId);
-	int countByMemberEmail(String memberEmail);
+	int countByMemberId(String memberId);		// 멤버 찾기
+	int countByMemberEmail(String memberEmail);	// email 찾기
 }
