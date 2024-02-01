@@ -28,4 +28,5 @@ public class AdminQA {
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yy/MM/dd")	
 	private Date adminQADate;
+	
 }
