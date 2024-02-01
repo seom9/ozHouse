@@ -1,4 +1,4 @@
-package com.oz.ozHouse.client.configuration;
+package com.oz.ozHouse.client.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

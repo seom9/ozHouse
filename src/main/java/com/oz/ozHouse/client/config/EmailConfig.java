@@ -1,4 +1,4 @@
-package com.oz.ozHouse.client.configuration;
+package com.oz.ozHouse.client.config;
 
 import java.util.Properties;
 
@@ -13,7 +13,6 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 @Configuration
 @PropertySource("classpath:email.properties")
 public class EmailConfig {
- 
     @Value("${mail.smtp.port}")
     private int port;
     @Value("${mail.smtp.socketFactory.port}")
@@ -52,4 +51,5 @@ public class EmailConfig {
         pt.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
         return pt;
     }
+
 }

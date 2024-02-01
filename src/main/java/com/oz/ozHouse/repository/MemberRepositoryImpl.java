@@ -1,4 +1,4 @@
-package com.oz.ozHouse.client.repository;
+package com.oz.ozHouse.repository;
 
 import org.springframework.stereotype.Repository;
 
