@@ -16,6 +16,7 @@ build/
 bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
+C:\nam\SpringBoot\ozHouse\src\main\resources\email.properties
 
 ### IntelliJ IDEA ###
 .idea
