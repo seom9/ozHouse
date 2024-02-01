@@ -6,9 +6,11 @@ import java.util.regex.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -40,11 +42,12 @@ public class MemberController {
         return "client/member/member_join";
     }
     
-    // 가입 인증 이메일
     @PostMapping("/member_send_email.do")
-    public String emailAuth(HttpServletRequest req, MemberDTO dto) throws Exception{
+    public String emailAuth(@ModelAttribute MemberDTO dto, BindingResult result, HttpServletRequest req) throws Exception {
+    	
         String email = req.getParameter("email");
-
+        System.out.println(email);
+        
         if (memberService.checkEmail(email) > 0) {
 			req.setAttribute("msg", "이미 가입되어 있습니다");
 			req.setAttribute("url", "member_join.do");
@@ -60,7 +63,7 @@ public class MemberController {
     }
     
     @PostMapping("/email_join_check.do")
-    public String emailAuthCheck(HttpServletRequest req, @ModelAttribute MemberDTO dto, @RequestParam Map<String, String> params) {
+    public String emailAuthCheck(@ModelAttribute MemberDTO dto, HttpServletRequest req, @RequestParam Map<String, String> params) {
     	if (params.get("checkNum").equals(params.get("checkNumCheck"))) {
         	
         	HttpSession session = req.getSession();
@@ -85,6 +88,7 @@ public class MemberController {
         }
     }
 
+    
     public boolean isValid(String str) {
         return Pattern.matches("^[a-zA-Z0-9-_]*$", str);
     }
