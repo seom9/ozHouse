@@ -29,6 +29,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int checkEmail(String memberEmail) {
 		return memberRepository.countByMemberEmail(memberEmail);
+		
 	}
     
 }
