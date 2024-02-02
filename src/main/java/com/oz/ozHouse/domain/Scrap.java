@@ -1,28 +1,34 @@
 package com.oz.ozHouse.domain;
 
-import java.sql.Date;
-
-import org.springframework.format.annotation.DateTimeFormat;
+import com.oz.ozHouse.domain.common.BaseEntity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
 
 @Entity
-@Setter
 @Getter
-public class Scrap {
+public class Scrap extends BaseEntity {
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int scrapNum;
-	private int memberNum;
+	
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="memberNum")
+	private Member memberNum;
+    
 	private int proNum;
-	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "yy/MM/dd")
-	private Date scarpDate;
+	
+    @Builder
+    public Scrap(int scrapNum, Member memberNum, int proNum) {
+        this.scrapNum = scrapNum;
+        this.memberNum = memberNum;
+        this.proNum = proNum;
+    }
 }

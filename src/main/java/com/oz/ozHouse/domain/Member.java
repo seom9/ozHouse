@@ -11,6 +11,7 @@ import com.oz.ozHouse.domain.common.BaseEntity;
 import com.oz.ozHouse.domain.common.MemberLevel;
 import com.oz.ozHouse.domain.common.PhoneNumber;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -49,7 +50,7 @@ public class Member extends BaseEntity{
 	@Embedded
 	private PhoneNumber memberHp;
 	
-    @OneToMany(mappedBy = "memberId")
+    @OneToMany(mappedBy = "memberId", cascade = CascadeType.REMOVE)
     private List<OrderTb> orderList = new ArrayList<>();
 	
 	private int memberPoint;

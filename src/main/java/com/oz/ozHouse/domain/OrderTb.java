@@ -7,6 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.oz.ozHouse.domain.OrderTb;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -25,7 +26,7 @@ public class OrderTb {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private long oCode;
 	
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="memberId")
     private Member memberId;
     
