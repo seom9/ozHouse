@@ -4,7 +4,7 @@ import java.sql.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.oz.ozHouse.domain.member.Member;
+import com.oz.ozHouse.domain.Member;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,9 +27,9 @@ public class MemberDTO {
 	private String memberPostcode1;
 	private String memberPostcode2;
 	private String memberPostcode3;
-	private String memberHp1;
-	private String memberHp2;
-	private String memberHp3;
+	private String phoneNumber1;
+	private String phoneNumber2;
+	private String phoneNumber3;
 	private int memberPoint;
 	private String memberLevel;
 	private Date memberJoindate;
