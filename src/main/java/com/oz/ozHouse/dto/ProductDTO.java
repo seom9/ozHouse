@@ -31,28 +31,4 @@ public class ProductDTO {
 	private String encodedImage;
 	private String inbrandCompany;
 	private String proToday;
-	
-   public Product toEntity() {
-        Product product = new Product();
-        product.setProNum(this.proNum);
-        product.setProName(this.proName);
-        product.setCateNum(this.cateNum);
-        product.setMerNum(this.merNum);
-        product.setProImg(this.proImg);
-        product.setProImgPro(this.proImgPro);
-        product.setProQuantity(this.proQuantity);
-        product.setProPrice(this.proPrice);
-        product.setProModifier(this.proModifier);
-        product.setProPoint(this.proPoint);
-        product.setProInDate(this.proInDate);
-        product.setProSpec(this.proSpec);
-        product.setProPurchasesCount(this.proPurchasesCount);
-        product.setProApprovalStatus(this.proApprovalStatus);
-        product.setProAssemblyCost(this.proAssemblyCost);
-        product.setProDiscountRate(this.proDiscountRate);
-        product.setProDiscountPrice(this.proDiscountPrice);
-        product.setInbrandCompany(this.inbrandCompany);
-        product.setProToday(this.proToday);
-        return product;
-    }
 }
