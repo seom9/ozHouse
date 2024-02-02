@@ -28,7 +28,7 @@ public class InbrandDTO {
 	private String inManemail;
 	private String inCategory;
 	private String inOthershop;
-	private String inFile;
+	private String inSaleFile;
 	private Date inAppliDate;
 	private Date inCancelDate;
 	
@@ -48,7 +48,7 @@ public class InbrandDTO {
 		inbrand.setInManemail(this.inManemail);
 		inbrand.setInCategory(this.inCategory);
 		inbrand.setInOthershop(this.inOthershop);
-		inbrand.setInFile(this.inFile);
+		inbrand.setInSaleFile(this.inSaleFile);
 		inbrand.setInAppliDate(this.inAppliDate);
 		inbrand.setInCancelDate(this.inCancelDate);
 
