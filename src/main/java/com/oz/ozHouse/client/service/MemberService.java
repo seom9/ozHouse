@@ -1,6 +1,6 @@
 package com.oz.ozHouse.client.service;
 
-import com.oz.ozHouse.domain.Member;
+import com.oz.ozHouse.domain.member.Member;
 
 public interface MemberService {
 	int insertMember(Member member);
