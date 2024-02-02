@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.oz.ozHouse.domain.common.Address;
+import com.oz.ozHouse.domain.common.BaseEntity;
 import com.oz.ozHouse.domain.common.MemberLevel;
 import com.oz.ozHouse.domain.common.PhoneNumber;
 
@@ -48,7 +49,7 @@ public class Member extends BaseEntity{
 	@Embedded
 	private PhoneNumber memberHp;
 	
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "memberId")
     private List<OrderTb> orderList = new ArrayList<>();
 	
 	private int memberPoint;
@@ -61,7 +62,10 @@ public class Member extends BaseEntity{
 	private Date memberDeletedate;
 	
     @Builder
-    public Member(int memberNum, String memberName, String memberId, String memberPasswd, String memberNickname, String memberEmail, String memberImage, Address memberAddress, PhoneNumber memberHp, List<OrderTb> orderList, int memberPoint, MemberLevel memberLevel, Date memberDeletedate) {
+    public Member(int memberNum, String memberName, String memberId, String memberPasswd, 
+    				String memberNickname, String memberEmail, String memberImage, 
+    				Address memberAddress, PhoneNumber memberHp, List<OrderTb> orderList, 
+    				int memberPoint, MemberLevel memberLevel, Date memberDeletedate) {
         this.memberNum = memberNum;
         this.memberName = memberName;
         this.memberId = memberId;
