@@ -1,22 +1,20 @@
 package com.oz.ozHouse.domain;
 
-import java.sql.Date;
+import com.oz.ozHouse.domain.common.Image;
+import com.oz.ozHouse.domain.common.ProPrice;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
 import lombok.Getter;
-import lombok.Setter;
 
 @Entity
-@Setter
 @Getter
 public class Product {
 	@Id 
@@ -28,40 +26,31 @@ public class Product {
 	@ManyToMany
 	private Category cateNum;
 	
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="merId")
 	private int merNum;
+    
+    @Embedded
+	private Image proImage;
 	
-	private String proImg;
-	
-	private String proImgPro;
-	
+    @Embedded
 	private int proQuantity;
 	
-	private int proPrice;
+    @Embedded
+	private ProPrice proPrice;
 	
 	private String proModifier;
-	
-	private int proPoint;
-	
+
 	private String proSpec;
 	
 	private int proPurchasesCount;
 	
 	private String proApprovalStatus;
 	
-	private int proAssemblyCost;
-	
-	private int proDiscountRate;
-	
-	private int proDiscountPrice;
-	
 	private String cateName;
-	
-	private String proImageChange;
-	
-	private String proImageProChange;
-	
-	private String encodedImage;
-	
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="inManname")
 	private String inbrandCompany;
 	
 	private String proToday;

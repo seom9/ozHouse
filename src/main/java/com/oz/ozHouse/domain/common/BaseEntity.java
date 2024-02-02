@@ -20,13 +20,13 @@ import lombok.Getter;
 public abstract class BaseEntity {
 	@CreatedDate
 	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(pattern = "yy/MM/dd")
 	@Column(name = "regdate", updatable = false)
+	@DateTimeFormat(pattern = "yy/MM/dd")
 	private LocalDateTime regDate;
 	
 	@LastModifiedDate
 	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(pattern = "yy/MM/dd")
 	@Column(name = "moddate")
+	@DateTimeFormat(pattern = "yy/MM/dd")
 	private LocalDateTime modDate;
 }
