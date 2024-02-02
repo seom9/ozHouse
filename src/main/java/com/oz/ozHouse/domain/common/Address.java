@@ -1,4 +1,4 @@
-package com.oz.ozHouse.domain.member;
+package com.oz.ozHouse.domain.common;
 
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-public class PhoneNumber {
-	private String memberHp1;
-	private String memberHp2;
-	private String memberHp3;
+public class Address {
+    private String city;
+    private String street;
+    private String zipcode;
 }
