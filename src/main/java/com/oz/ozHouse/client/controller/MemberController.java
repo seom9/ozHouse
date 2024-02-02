@@ -70,14 +70,14 @@ public class MemberController {
         	if (insert != null) dto.setMemberImage(insert.getMemberImage()); 
         	String passwd = dto.getMemberPasswd();
         	dto.setMemberPasswd(passwordEncoder.encode(passwd));
-        	
-        	int res = memberService.insertMember(dto);
-    		if (res>0) {
-    			
-    			return "forward:member_login.do";
-    			//req.setAttribute("msg", "회원 가입 성공 : 안녕하세요!");
-    			//req.setAttribute("url", "main.do");
-    		}else if (res<0){
+        	System.out.println("아니 나 이해할 수가 없어");
+
+        	String res = memberService.insertMember(dto);
+        	System.out.println("데이터는 왜 추가되는 거임");
+    		if (res != null) {
+    			req.setAttribute("msg", "회원 가입 성공 : 안녕하세요!");
+    			req.setAttribute("url", "main.do");
+    		}else if (res == null){
     			req.setAttribute("msg", "회원 가입 실패 : 다시 시도해 주세요");
     			req.setAttribute("url", "member_join.do");
     		}
