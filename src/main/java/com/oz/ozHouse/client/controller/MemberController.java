@@ -72,7 +72,7 @@ public class MemberController {
         	String passwd = dto.getMemberPasswd();
         	dto.setMemberPasswd(passwordEncoder.encode(passwd));
         	
-        	int res = memberService.insertMember(dto.toEntity());
+        	int res = memberService.insertMember(dto);
     		if (res>0) {
     			req.setAttribute("msg", "회원 가입 성공 : 안녕하세요!");
     			req.setAttribute("url", "main.do");
