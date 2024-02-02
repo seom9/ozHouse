@@ -42,4 +42,5 @@ public class Inbrand {
 	@DateTimeFormat(pattern = "yy/MM/dd")
 	private Date inCancelDate;
 	
+	int num = 0;
 }

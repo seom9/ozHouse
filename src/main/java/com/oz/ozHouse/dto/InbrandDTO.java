@@ -54,4 +54,5 @@ public class InbrandDTO {
 
 		return inbrand;
 	}
+	int num = 0;
 }
