@@ -10,6 +10,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import lombok.Getter;
@@ -22,7 +24,11 @@ public class OrderTb {
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private long oCode;
-    private String memberId;
+	
+    @ManyToOne
+    @JoinColumn(name="memberId")
+    private Member memberId;
+    
     private int productNum;
     private int oPrice;
     private int oDiscoupon;
