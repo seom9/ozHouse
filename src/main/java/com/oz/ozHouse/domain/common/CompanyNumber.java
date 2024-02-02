@@ -1,4 +1,4 @@
-package com.oz.ozHouse.domain.member;
+package com.oz.ozHouse.domain.common;
 
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
