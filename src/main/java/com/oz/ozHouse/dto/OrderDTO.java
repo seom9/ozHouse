@@ -12,7 +12,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class OrderDTO {
-
     private long oCode;
     private String memberId;
     private int productNum;
@@ -35,37 +34,4 @@ public class OrderDTO {
     private String oHp2;
     private String oHp3;
     private String oPostcode;
-
-    public OrderTb toEntity() {
-        OrderTb order = new OrderTb();
-
-        // Set the properties of the new Order instance based on the values of the current object
-        order.setOCode(this.oCode);
-        order.setMemberId(this.memberId);
-        order.setProductNum(this.productNum);
-        order.setOPrice(this.oPrice);
-        order.setODiscoupon(this.oDiscoupon);
-        order.setODiscount(this.oDiscount);
-        order.setODispoint(this.oDispoint);
-        order.setOComment(this.oComment);
-        order.setOCount(this.oCount);
-        order.setODate(this.oDate);
-        order.setOPlace(this.oPlace);
-        order.setODelnow(this.oDelnow);
-        order.setOCanceldate(this.oCanceldate);
-        order.setOLike(this.oLike);
-        order.setORefund(this.oRefund);
-        order.setOAssemblycost(this.oAssemblycost);
-        order.setONum(this.oNum);
-        order.setOName(this.oName);
-        order.setOHp1(this.oHp1);
-        order.setOHp2(this.oHp2);
-        order.setOHp3(this.oHp3);
-        order.setOPostcode(this.oPostcode);
-
-        // Return the new Order instance with its properties set
-        return order;
-    }
-
-    // Getters and setters go here
 }
