@@ -54,8 +54,4 @@ public class InbrandDTO {
 
 		return inbrand;
 	}
-	
-	public void hi() {
-		System.out.println("hi");
-	}
 }
