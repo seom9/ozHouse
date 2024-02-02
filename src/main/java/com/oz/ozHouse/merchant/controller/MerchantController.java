@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class MerchantController {
-	@GetMapping("merchant_main.do")
+	@GetMapping("merchant-main.do")
 	public String merchantMain() {
 		return "merchant/main/main";
 	}
