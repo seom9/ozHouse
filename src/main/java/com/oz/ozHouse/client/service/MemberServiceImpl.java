@@ -2,7 +2,10 @@ package com.oz.ozHouse.client.service;
 
 import org.springframework.stereotype.Service;
 
-import com.oz.ozHouse.domain.member.Member;
+import com.oz.ozHouse.domain.Member;
+import com.oz.ozHouse.domain.common.MemberLevel;
+import com.oz.ozHouse.domain.common.PhoneNumber;
+import com.oz.ozHouse.dto.MemberDTO;
 import com.oz.ozHouse.repository.MemberRepository;
 
 import jakarta.transaction.Transactional;
@@ -14,11 +17,28 @@ import lombok.RequiredArgsConstructor;
 public class MemberServiceImpl implements MemberService {
 	private final MemberRepository memberRepository;
 
-    @Override
-    public int insertMember(Member member) {
+    public int insertMember(MemberDTO memberDTO) {
+    	PhoneNumber phoneNumber = new PhoneNumber(
+    	        memberDTO.getPhoneNumber1(),
+    	        memberDTO.getPhoneNumber2(),
+    	        memberDTO.getPhoneNumber3()
+    	);
+    	
+        Member member = Member.builder()
+                .memberNum(memberDTO.getMemberNum())
+                .memberId(memberDTO.getMemberId())
+                .memberPasswd(memberDTO.getMemberPasswd())
+                .memberNickname(memberDTO.getMemberNickname())
+                .memberEmail(memberDTO.getMemberEmail())
+                .memberImage(memberDTO.getMemberImage())
+                .memberHp(phoneNumber)
+                .memberPoint(0)
+                .memberLevel(MemberLevel.NORMAL)
+                .memberDeletedate(memberDTO.getMemberDeletedate())
+                .build();
+
         memberRepository.save(member);
-        int mem = member.getMemberNum();
-        return mem;
+        return memberDTO.getMemberNum();
     }
 
 	@Override
