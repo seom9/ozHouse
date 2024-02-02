@@ -11,7 +11,7 @@
 <div class="slider">
 	<div class="slides" id="slide">
 		<div class="slide">
-			<a href="merchant_main.do"> <img src="/merchant/img/welcome.png"
+			<a href="merchant-main.do"> <img src="/merchant/img/welcome.png"
 				alt="Image 1" height="80">
 			</a>
 		</div>
