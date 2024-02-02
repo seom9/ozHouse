@@ -50,7 +50,7 @@ public class Member extends BaseEntity{
 	@Embedded
 	private PhoneNumber memberHp;
 	
-    @OneToMany(mappedBy = "memberId", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
     private List<OrderTb> orderList = new ArrayList<>();
 	
 	private int memberPoint;
