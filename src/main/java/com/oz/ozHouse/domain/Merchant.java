@@ -5,20 +5,17 @@ import java.sql.Date;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.oz.ozHouse.domain.Merchant;
+import com.oz.ozHouse.domain.common.PhoneNumber;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Setter
 @Getter
-public class Merchant {
+@AttributeOverride(name = "regDate", column = @Column(name = "merJoindate"))
+public class Merchant extends BaseEntity{
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private int merNum;
@@ -26,35 +23,48 @@ public class Merchant {
     private String merPw;
     private String merIsbrand;
     private String merCompany;
-    private String merComnum1;
-    private String merComnum2;
-    private String merComnum3;
-    private String merHp1;
-    private String merHp2;
-    private String merHp3;
+    
+    @Embedded
+    private String merComnum;
+    
+    @Embedded
+    @AttributeOverrides({
+    		@AttributeOverride(name = "memberHp1", column = @Column(name = "merHp1")),
+    		@AttributeOverride(name = "memberHp2", column = @Column(name = "merHp2")),
+    		@AttributeOverride(name = "memberHp3", column = @Column(name = "merHp3"))
+    })
+    private PhoneNumber merHp;
+    
     private String merComintro;
     private String merHomepage;
     private String merManname;
-    private String merManhp1;
-    private String merManhp2;
-    private String merManhp3;
+    
+    @Embedded
+    @AttributeOverrides({
+    		@AttributeOverride(name = "memberHp1", column = @Column(name = "merManhp1")),
+    		@AttributeOverride(name = "memberHp2", column = @Column(name = "merManhp2")),
+    		@AttributeOverride(name = "memberHp3", column = @Column(name = "merManhp3"))
+    })
+    private PhoneNumber merManhp;
+    
     private String merManemail;
     private String merCategory;
     private String merProdintro;
     private String merOthershop;
     private String merFile;
-    @Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "yy/MM/dd")
-    private Date merJoindate;
+    
     @Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yy/MM/dd")
     private Date merInbranddate;
+    
     @Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yy/MM/dd")
     private Date merDeletedate;
+    
     @Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yy/MM/dd")
     private Date merOutDate;
+    
     private String merDelete;
     private String merAdress;
     private String merRegistration;
