@@ -3,7 +3,7 @@ package com.oz.ozHouse.dto;
 import java.sql.Date;
 
 import com.oz.ozHouse.domain.Inbrand;
-import com.oz.ozHouse.domain.Member;
+import com.oz.ozHouse.domain.member.Member;
 
 import jakarta.persistence.Entity;
 import lombok.Getter;
