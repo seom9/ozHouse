@@ -73,8 +73,10 @@ public class MemberController {
         	
         	int res = memberService.insertMember(dto);
     		if (res>0) {
-    			req.setAttribute("msg", "회원 가입 성공 : 안녕하세요!");
-    			req.setAttribute("url", "main.do");
+    			
+    			return "forward:member_login.do";
+    			//req.setAttribute("msg", "회원 가입 성공 : 안녕하세요!");
+    			//req.setAttribute("url", "main.do");
     		}else if (res<0){
     			req.setAttribute("msg", "회원 가입 실패 : 다시 시도해 주세요");
     			req.setAttribute("url", "member_join.do");
