@@ -17,7 +17,7 @@ import lombok.RequiredArgsConstructor;
 public class MemberServiceImpl implements MemberService {
 	private final MemberRepository memberRepository;
 
-    public int insertMember(MemberDTO memberDTO) {
+    public String insertMember(MemberDTO memberDTO) {
     	PhoneNumber phoneNumber = new PhoneNumber(
     	        memberDTO.getPhoneNumber1(),
     	        memberDTO.getPhoneNumber2(),
@@ -25,7 +25,6 @@ public class MemberServiceImpl implements MemberService {
     	);
     	
         Member member = Member.builder()
-                .memberNum(memberDTO.getMemberNum())
                 .memberId(memberDTO.getMemberId())
                 .memberPasswd(memberDTO.getMemberPasswd())
                 .memberNickname(memberDTO.getMemberNickname())
@@ -38,7 +37,7 @@ public class MemberServiceImpl implements MemberService {
                 .build();
 
         memberRepository.save(member);
-        return memberDTO.getMemberNum();
+        return memberDTO.getMemberId();
     }
 
 	@Override
