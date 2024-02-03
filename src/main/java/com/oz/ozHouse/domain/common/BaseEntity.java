@@ -1,4 +1,4 @@
-package com.oz.ozHouse.domain;
+package com.oz.ozHouse.domain.common;
 
 import java.time.LocalDateTime;
 
@@ -17,15 +17,15 @@ import lombok.Getter;
 @MappedSuperclass
 @EntityListeners(value = {AuditingEntityListener.class})
 @Getter
-abstract class BaseEntity {
+public abstract class BaseEntity {
 	@CreatedDate
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "yy/MM/dd")
 	@Column(name = "regdate", updatable = false)
 	private LocalDateTime regDate;
 	
 	@LastModifiedDate
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "yy/MM/dd")
 	@Column(name = "moddate")
 	private LocalDateTime modDate;
