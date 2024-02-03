@@ -32,26 +32,5 @@ public class InbrandDTO {
 	private Date inAppliDate;
 	private Date inCancelDate;
 	
-	public Inbrand toEntity() {
-		Inbrand inbrand = new Inbrand();
-		inbrand.setInNum(this.inNum);
-		inbrand.setMerNum(this.merNum);
-		inbrand.setInCompany(this.inCompany);
-		inbrand.setInComnum1(this.inComnum1);
-		inbrand.setInComnum2(this.inComnum2);
-		inbrand.setInComnum3(this.inComnum3);
-		inbrand.setInHomepage(this.inHomepage);
-		inbrand.setInManname(this.inManname);
-		inbrand.setInManhp1(this.inManhp1);
-		inbrand.setInManhp2(this.inManhp2);
-		inbrand.setInManhp3(this.inManhp3);
-		inbrand.setInManemail(this.inManemail);
-		inbrand.setInCategory(this.inCategory);
-		inbrand.setInOthershop(this.inOthershop);
-		inbrand.setInSaleFile(this.inSaleFile);
-		inbrand.setInAppliDate(this.inAppliDate);
-		inbrand.setInCancelDate(this.inCancelDate);
-
-		return inbrand;
-	}
+	
 }

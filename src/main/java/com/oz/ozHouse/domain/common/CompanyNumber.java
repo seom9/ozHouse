@@ -1,4 +1,8 @@
+<<<<<<< HEAD:src/main/java/com/oz/ozHouse/domain/common/CompanyNumber.java
 package com.oz.ozHouse.domain.common;
+=======
+package com.oz.ozHouse.domain.member;
+>>>>>>> ee6a3d10e33b74da7f6a650f5f3d0378ae56172a:src/main/java/com/oz/ozHouse/domain/member/CompanyNumber.java
 
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
