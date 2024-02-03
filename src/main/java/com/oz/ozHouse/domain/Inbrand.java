@@ -4,6 +4,8 @@ import java.sql.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.oz.ozHouse.domain.common.BaseEntity;
+
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Column;
