@@ -30,11 +30,11 @@ public class Merchant extends BaseEntity{
     private CompanyNumber merComnum;
     
     @Embedded
-//    @AttributeOverrides({
-//    		@AttributeOverride(name = "memberHp1", column = @Column(name = "merHp1")),
-//    		@AttributeOverride(name = "memberHp2", column = @Column(name = "merHp2")),
-//    		@AttributeOverride(name = "memberHp3", column = @Column(name = "merHp3"))
-//    })
+    @AttributeOverrides({
+    		@AttributeOverride(name = "phoneNumber1", column = @Column(name = "merHp1")),
+    		@AttributeOverride(name = "phoneNumber2", column = @Column(name = "merHp2")),
+    		@AttributeOverride(name = "PhoneNumber3", column = @Column(name = "merHp3"))
+    })
     private PhoneNumber merHp;
     
     private String merComintro;
@@ -43,9 +43,9 @@ public class Merchant extends BaseEntity{
     
     @Embedded
     @AttributeOverrides({
-    		@AttributeOverride(name = "memberHp1", column = @Column(name = "merManhp1")),
-    		@AttributeOverride(name = "memberHp2", column = @Column(name = "merManhp2")),
-    		@AttributeOverride(name = "memberHp3", column = @Column(name = "merManhp3"))
+    		@AttributeOverride(name = "phoneNumber1", column = @Column(name = "merManhp1")),
+    		@AttributeOverride(name = "phoneNumber2", column = @Column(name = "merManhp2")),
+    		@AttributeOverride(name = "PhoneNumber3", column = @Column(name = "merManhp3"))
     })
     private PhoneNumber merManhp;
     

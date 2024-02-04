@@ -5,6 +5,8 @@ import java.sql.Date;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.oz.ozHouse.domain.common.BaseEntity;
+import com.oz.ozHouse.domain.common.CompanyNumber;
+import com.oz.ozHouse.domain.common.PhoneNumber;
 
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
@@ -37,18 +39,18 @@ public class Inbrand extends BaseEntity{
     		@AttributeOverride(name = "merComnum2", column = @Column(name = "inComnum2")),
     		@AttributeOverride(name = "merComnum3", column = @Column(name = "inComnum3"))
     })
-	private String inComnum;
+	private CompanyNumber inComnum;
 	
 	private String inHomepage;
 	private String inManname;
 	
 	@Embedded
     @AttributeOverrides({
-    		@AttributeOverride(name = "memberHp1", column = @Column(name = "inManhp1")),
-    		@AttributeOverride(name = "memberHp2", column = @Column(name = "inManhp2")),
-    		@AttributeOverride(name = "memberHp3", column = @Column(name = "inManhp3"))
+    		@AttributeOverride(name = "phoneNumber1", column = @Column(name = "inManhp1")),
+    		@AttributeOverride(name = "phoneNumber2", column = @Column(name = "inManhp2")),
+    		@AttributeOverride(name = "PhoneNumber3", column = @Column(name = "inManhp3"))
     })
-	private String inManhp;
+	private PhoneNumber inManhp;
 	
 	private String inManemail;
 	private String inCategory;
