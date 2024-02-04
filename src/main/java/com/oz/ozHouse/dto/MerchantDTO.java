@@ -4,13 +4,16 @@ import java.sql.Date;
 
 import com.oz.ozHouse.domain.Merchant;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
-@Setter
-@NoArgsConstructor
+@Builder			 //builder 패턴 적용(필요한 필드만 생성자로 초기화 가능)
+@NoArgsConstructor   //기본생성자 자동으로 생성
+@AllArgsConstructor  //모든 필드의 생성자를 자동으로 생성
 public class MerchantDTO {
 
     private int merNum;
@@ -45,5 +48,5 @@ public class MerchantDTO {
     private String merName;
     private String merEmail;
     private String merBusinessPost;
-
+    
 }

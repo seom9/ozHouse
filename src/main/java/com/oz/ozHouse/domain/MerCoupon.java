@@ -25,7 +25,13 @@ public class MerCoupon {
 	private String merIsok;
 	private int merCoupondiscount;
 	private int merNum;
+	
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yy/MM/dd")
 	private Date merCouponusedate;
+	
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yy/MM/dd")
 	private Date merCouponenddate;
 	
 }
