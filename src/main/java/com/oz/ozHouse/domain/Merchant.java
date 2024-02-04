@@ -6,10 +6,12 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.oz.ozHouse.domain.Merchant;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import lombok.Getter;
@@ -21,6 +23,7 @@ import lombok.Setter;
 public class Merchant {
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@OneToMany(mappedBy = "merchant", cascade = CascadeType.REMOVE)
     private int merNum;
     private String merId;
     private String merPw;

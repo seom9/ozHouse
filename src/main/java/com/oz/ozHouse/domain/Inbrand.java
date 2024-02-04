@@ -63,6 +63,4 @@ public class Inbrand {
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yy/MM/dd")
 	private Date inCancelDate;
-	
-	int num = 0;
 }
