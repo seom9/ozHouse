@@ -1,23 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <html>
 <head>
-	<title>회원 가입</title>
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/merchant/css/styleMain.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/merchant/css/join.css">
-	<c:set var="path" value="${pageContext.request.contextPath}"/>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-	<script type="text/javascript">
+<title>회원 가입</title>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/merchant/css/styleMain.css">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/merchant/css/join.css">
+<c:set var="path" value="${pageContext.request.contextPath}" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script
+	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script type="text/javascript">
 	
 		var idMerChecked = false;
 		var comNumChecked = false;
 		var postChecked = false;
 		
 		function check(business){
-			if (f.mer_id.value == ""){
+			if (f.merId.value == ""){
 				alert("아이디를 입력해 주세요")
 				f.id.focus()
 				return
@@ -26,33 +30,33 @@
 				alert("아이디 유효성을 확인해 주세요");
 				return;
 			}
-			if (!f.mer_pw.value){
+			if (!f.merPw.value){
 				alert("비밀번호를 입력해 주세요")
-				f.mer_pw.focus()
+				f.merPw.focus()
 				return
 			}
-			if (!f.mer_pw2.value) {
+			if (!f.merPw2.value) {
 				alert("비밀번호 확인을 해 주세요");
-				f.mer_pw2.focus();
+				f.merPw2.focus();
 				return;
 			}
-			if (!f.mer_name.value) {
+			if (!f.merName.value) {
 				alert("담당자 이름을 입력해주세요");
-				f.mer_name.focus();
+				f.merName.focus();
 				return;
 			}
-			var email = f.mer_email.value;
+			var email = f.merEmail.value;
 			var exptext = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
 
 			if(exptext.test(email)==false){
 			//이메일 형식이 알파벳+숫자@알파벳+숫자.알파벳+숫자 형식이 아닐경우	
 				alert("이메일형식이 올바르지 않습니다.");
-				f.mer_email.focus();
+				f.merEmail.focus();
 				return;
 			}
-			if (f.mer_pw.value !== f.mer_pw2.value) {
+			if (f.merPw.value !== f.merPw2.value) {
 				alert("비밀번호가 일치하지 않습니다.");
-				f.mer_pw.focus();
+				f.merPw.focus();
 				return;
 			}
 	        if (!isValidPassword($("#password").val())) {
@@ -62,7 +66,7 @@
 	        }
 	        if (!comNumChecked){
 	        	alert("유효한 사업자등록번호를 입력해 주세요");
-				f.mer_comnum1.focus();
+				f.merComnum1.focus();
 				return;
 	        }
 	        if(!business.files || business.files.length == 0){
@@ -74,25 +78,6 @@
 		    if(businessSize > businessMaxSize) { 
 		        alert("사업자등록증이 용량을 초과하였습니다. 업로드 가능한 최대크기는 1GB입니다.");
 		        return;
-		    }
-			
-		    //파일 이름 확인
-		    var businessName = business.files[0].name; //files[0] : 업로드 된 파일 중 첫번째 파일  name : 파일의 이름
-		    const regex = /\d{10}\.[a-zA-Z]{1,}/g; 
-		    if (!regex.test(businessName)) {
-		        alert("사업자등록증 파일 이름의 형식은 '-'를 제외한 사업자등록번호 입니다.");
-		        return;
-		    }
-		    
-		    var cNum1 = businessName.substr(0,3);
-		    var cNum2 = businessName.substr(3,2);
-		    var cNum3 = businessName.substr(5,5);
-		    
-		    if(cNum1 != f.mer_comnum1.value || 
-		    		cNum2 != f.mer_comnum2.value  || 
-		    		cNum3 != f.mer_comnum3.value ){
-		    	alert("사업자등록증 파일의 사업자등록번호를 확인하여 주세요.");
-		    	return;
 		    }
 		    
 		    if (!postChecked) { // 중복 검사가 실행되지 않았으면
@@ -108,36 +93,36 @@
 
 		$(function(){ 
 		    $("#checkMerId").click(function(){
-		        let mer_id = $("#mer_id").val();
+		        let merId = $("#merId").val();
 		        $.ajax({
 		            type:'post', //post 형식으로 controller 에 보내기위함!!
 		            url:"mer_checkId.do", // 컨트롤러로 가는 mapping 입력
-		            data: {"mer_id":mer_id}, // 원하는 값을 중복확인하기위해서  JSON 형태로 DATA 전송
+		            data: {"merId":merId}, // 원하는 값을 중복확인하기위해서  JSON 형태로 DATA 전송
 		            success: function(data){ 
 		             if (data == "N" ){ // 만약 성공할시
 		                    result = "사용 가능한 아이디입니다.";
 		                    $("#result_checkMerId").html(result).css("color", "green");
-		                    $("#mer_pw").trigger("focus");
+		                    $("#merPw").trigger("focus");
 		                    idMerChecked = true; // 중복 검사를 실행했음을 기록
 		             }else if(data == "E" ){
 		                    result = "아이디를 입력해 주세요.";
 		                    $("#result_checkMerId").html(result).css("color", "red");
-		                    $("#mer_pw").trigger("focus");
+		                    $("#merPw").trigger("focus");
 		                    idMerChecked = false; // 중복 검사를 실행했음을 기록
 		             }else if(data == "L" ){
 		                    result = "아이디는 6-12자의 영문, 숫자, 기호( - _ )만 사용이 가능합니다";
 		                    $("#result_checkMerId").html(result).css("color", "red");
-		                    $("#mer_pw").trigger("focus");
+		                    $("#merPw").trigger("focus");
 		                    idMerChecked = false; // 중복 검사를 실행했음을 기록
 		             }else if(data == "V" ){
 		                    result = "아이디는 영문, 숫자, 기호( - _ )만 사용이 가능합니다";
 		                    $("#result_checkMerId").html(result).css("color", "red");
-		                    $("#mer_pw").trigger("focus");
+		                    $("#merPw").trigger("focus");
 		                    idMerChecked = false; // 중복 검사를 실행했음을 기록
 		             }else{ // 만약 실패할시
 		                 result="이미 사용중인 아이디입니다.";
 		                     $("#result_checkMerId").html(result).css("color","red");
-		                     $("#mer_id").val("").trigger("focus");
+		                     $("#merId").val("").trigger("focus");
 		                     idMerChecked = false; // 중복 검사를 실행하지 않았음을 기록
 		             }
 		         },
@@ -149,9 +134,9 @@
 		//사업자 등록번호 조회
 		$(function(){ 
 		    $("#checkMer").click (function(){
-		    	var reg1 = document.f.mer_comnum1.value;
-	            var reg2 = document.f.mer_comnum2.value;
-	            var reg3 = document.f.mer_comnum3.value;
+		    	var reg1 = document.f.merComnum1.value;
+	            var reg2 = document.f.merComnum2.value;
+	            var reg3 = document.f.merComnum3.value;
 	            
 
 	            var bs_num = reg1 + "" + reg2 + "" + reg3;
@@ -172,22 +157,22 @@
 			    	        if(apiCode == "01"){
 			    	        	var text = "현재 계속 사업자입니다.";
 			    	        	$("#bs_result").html(text).css("color", "green");
-			                    $("#mer_comnum1").trigger("focus");
+			                    $("#merComnum1").trigger("focus");
 			                    comNumChecked = true; // 중복 검사를 실행했음을 기록
 			    	        }else if(apiCode == "02"){
 			    	        	var text = "현재 휴업자입니다.";
 			    	        	$("#bs_result").html(text).css("color","red");
-			                    $("#mer_comnum1").trigger("focus");
+			                    $("#merComnum1").trigger("focus");
 			                    comNumChecked = false; // 중복 검사를 실행했음을 기록
 			    	        }else if(apiCode == "03"){
 			    	        	var text = "현재 폐업자입니다.";
 			    	        	$("#bs_result").html(text).css("color","red");
-			                    $("#mer_comnum1").trigger("focus");
+			                    $("#merComnum1").trigger("focus");
 			                    comNumChecked = false; // 중복 검사를 실행했음을 기록
 			    	        }else {
 			    	        	var text = "국세청에 등록되지 않은 사업자입니다.";
 			    	        	$("#bs_result").html(text).css("color","red");
-			                    $("#mer_comnum1").trigger("focus");
+			                    $("#merComnum1").trigger("focus");
 			                    comNumChecked = false; // 중복 검사를 실행했음을 기록
 			    	        }
 			    	    },
@@ -279,117 +264,131 @@
 	        }).open();
 	    }
 	</script>
-</head> 
+</head>
 
-<body onload="f.mer_id.focus()">
-<header>
-<div class="header-left">
-		    <a href="merchant_main.do">
-		        <img src="resources/merchant/img/ozlogo2.png" width="60" height="60">
-		        <img src="resources/merchant/img/oz2.png" width="90" height="50">
-		        <span class="partner-center" style="color:black"><b>파트너센터</b></span>
-		    </a>
-	    </div>
-	    <div class="header-right">
-	    </div>
-	    </header>
-    <main>
-        <div class="registration-form-container">
-            <form name="f" method="post" action="merchant_send_email.do" enctype="multipart/form-data">
-                <h1>판매자 회원가입</h1>
-<div class="form-group id-check-group">
-                    <label for="mer_id">아이디</label>
-                        <div class="id-input-container">
-                    <input type="text" id="mer_id" name="mer_id" placeholder="아이디를 입력해 주세요." oninput="checkMerIdFalse()">
-                    <button type="button" id="checkMerId">중복검사</button>
-                    </div>
-                    <span id="result_checkMerId"></span>
-                </div>
-                
-				<div class="form-group">
-                    <label for="password">비밀번호</label>
-                    <input type="password" id="password" name="mer_pw" placeholder="비밀번호를 입력해 주세요." oninput="checkPasswd2()">
-                </div>
-
-                <div class="form-group">
-                    <label for="passwordCheck">비밀번호 확인</label>
-                    <input type="password" id="passwordCheck" name="mer_pw2" placeholder="비밀번호를 정확하게 입력해 주세요." oninput="checkPasswd()">
-                    <div id="checkPasswd" class="error-message">PASSWORD가 동일하지 않습니다</div>
-                    <div id="checkPasswd2" class="error-message">비밀번호는 8자리 이상 영문 대소문자, 숫자, 특수문자가 각각 1개 이상이어야 합니다</div>
-                </div>
+<body onload="f.merId.focus()">
+	<header>
+		<div class="header-left">
+			<a href="merchant_main.do"> <img
+				src="resources/merchant/img/ozlogo2.png" width="60" height="60">
+				<img src="resources/merchant/img/oz2.png" width="90" height="50">
+				<span class="partner-center" style="color: black"><b>파트너센터</b></span>
+			</a>
+		</div>
+		<div class="header-right"></div>
+	</header>
+	<main>
+		<div class="registration-form-container">
+			<form name="f" method="post" action="merchant_send_email.do"
+				enctype="multipart/form-data">
+				<h1>판매자 회원가입</h1>
+				<div class="form-group id-check-group">
+					<label for="merId">아이디</label>
+					<div class="id-input-container">
+						<input type="text" id="merId" name="merId"
+							placeholder="아이디를 입력해 주세요." oninput="checkMerIdFalse()">
+						<button type="button" id="checkMerId">중복검사</button>
+					</div>
+					<span id="result_checkMerId"></span>
+				</div>
 
 				<div class="form-group">
-                    <label for="mer_company">회사 이름</label>
-                    <input type="text" id="mer_company" name="mer_company" placeholder="회사 이름을 입력해 주세요.">
-                </div>
-                
-<div class="form-group">
-    <label for="mer_comnum1">사업자 번호</label>
-    <div class="business-num-container">
-        <input type="text" id="mer_comnum1" name="mer_comnum1" class="business-num" placeholder="123" maxlength="3">
-        <span>-</span>
-        <input type="text" id="mer_comnum2" name="mer_comnum2" class="business-num" placeholder="45" maxlength="2">
-        <span>-</span>
-        <input type="text" id="mer_comnum3" name="mer_comnum3" class="business-num" placeholder="67890" maxlength="5">
-        <button type="button" id="checkMer">사업자 등록번호 조회</button>
-    </div>
-    <span id="bs_result"></span>
-</div>
+					<label for="password">비밀번호</label> <input type="password"
+						id="password" name="merPw" placeholder="비밀번호를 입력해 주세요."
+						oninput="checkPasswd2()">
+				</div>
 
 				<div class="form-group">
-    <label class="title" for="mer_business_registration">사업자 등록증</label>
-    <span id="comnum">파일형식은 '(사업자번호 10자)입니다. (사업자등록번호의 '-' 제외)</span>
-    <input type="file" id="mer_business_registration" name="mer_business_registration">
-</div>
+					<label for="passwordCheck">비밀번호 확인</label> <input type="password"
+						id="passwordCheck" name="merPw2"
+						placeholder="비밀번호를 정확하게 입력해 주세요." oninput="checkPasswd()">
+					<div id="checkPasswd" class="error-message">PASSWORD가 동일하지
+						않습니다</div>
+					<div id="checkPasswd2" class="error-message">비밀번호는 8자리 이상 영문
+						대소문자, 숫자, 특수문자가 각각 1개 이상이어야 합니다</div>
+				</div>
 
-<div class="form-group">
-    <label for="postcode1">사업장 주소지</label>
-    <div class="postcode-group">
-        <input type="text" id="postcode1" name="member_postcode1" placeholder="우편번호" readOnly>
-        <button type="button" onclick="sample6_execDaumPostcode()">우편번호 찾기</button>
-    </div>
-    <input type="text" id="sample6_address" name="sample6_address" placeholder="주소" readOnly>
-    <input type="text" id="sample6_detailAddress" name="sample6_detailAddress" placeholder="상세주소">
-    <input type="text" id="sample6_extraAddress" name="sample6_extraAddress" placeholder="참고항목" readOnly>
-</div>
+				<div class="form-group">
+					<label for="merCompany">회사 이름</label> <input type="text"
+						id="merCompany" name="merCompany" placeholder="회사 이름을 입력해 주세요.">
+				</div>
 
-<div class="form-group">
-    <label class="title" for="mer_name">판매자 이름</label>
-    <input type="text" id="mer_name" name="mer_name" maxlength="20">
-</div>
+				<div class="form-group">
+					<label for="merComnum1">사업자 번호</label>
+					<div class="business-num-container">
+						<input type="text" id="merComnum1" name="merComnum1"
+							class="business-num" placeholder="123" maxlength="3"> <span>-</span>
+						<input type="text" id="merComnum2" name="merComnum2"
+							class="business-num" placeholder="45" maxlength="2"> <span>-</span>
+						<input type="text" id="merComnum3" name="merComnum3"
+							class="business-num" placeholder="67890" maxlength="5">
+						<button type="button" id="checkMer">사업자 등록번호 조회</button>
+					</div>
+					<span id="bs_result"></span>
+				</div>
 
-<div class="form-group">
-    <label for="mer_hp1">판매자 전화 번호</label>
-    <div class="input-group">
-        <input type="text" id="mer_hp1" name="mer_hp1" maxlength="3">-
-        <input type="text" id="mer_hp2" name="mer_hp2" maxlength="4">-
-        <input type="text" id="mer_hp3" name="mer_hp3" maxlength="4">
-    </div>
-</div>
+				<div class="form-group">
+					<label class="title" for="merRegistration">사업자
+						등록증</label> <span id="comnum">
+						</span> <input type="file" id="merRegistration"
+						name="merRegistration">
+				</div>
 
-<div class="form-group">
-    <label class="title" for="mer_email">판매자 E-mail</label>
-    <input type="text" id="mer_email" name="mer_email">
-</div>
+				<div class="form-group">
+					<label for="postcode1">사업장 주소지</label>
+					<div class="postcode-group">
+						<input type="text" id="postcode1" name="merBusinessPost"
+							placeholder="우편번호" readOnly>
+						<button type="button" onclick="sample6_execDaumPostcode()">우편번호
+							찾기</button>
+					</div>
+					<input type="text" id="sample6_address" name="sample6_address"
+						placeholder="주소" readOnly> <input type="text"
+						id="sample6_detailAddress" name="sample6_detailAddress"
+						placeholder="상세주소"> <input type="text"
+						id="sample6_extraAddress" name="sample6_extraAddress"
+						placeholder="참고항목" readOnly>
+				</div>
 
-<div class="form-group">
-    <label class="title" for="mer_comintro">회사 소개</label>
-    <textarea id="mer_comintro" name="mer_comintro" placeholder="회사 소개를 가독성 있게 작성해 주세요." class="box"></textarea>
-</div>
+				<div class="form-group">
+					<label class="title" for="merName">판매자 이름</label> <input
+						type="text" id="merName" name="merName" maxlength="20">
+				</div>
 
-<div class="form-group">
-    <label class="title" for="mer_prodintro">상품 소개</label>
-    <textarea id="mer_prodintro" name="mer_prodintro" class="box"></textarea>
-</div>
+				<div class="form-group">
+					<label for="merManhp1">판매자 전화 번호</label>
+					<div class="input-group">
+						<input type="text" id="merManhp1" name="merManhp1" maxlength="3">-
+						<input type="text" id="merManhp2" name="merManhp2" maxlength="4">-
+						<input type="text" id="merManhp3" name="merManhp3" maxlength="4">
+					</div>
+				</div>
 
-<div class="button-group">
-    <input type="button" value="다음" onclick="javascript:check(f.mer_business_registration)">
-    <input type="reset" value="reset">
-</div>
+				<div class="form-group">
+					<label class="title" for="merEmail">판매자 E-mail</label> <input
+						type="text" id="merEmail" name="merEmail">
+				</div>
+<!-- 
+				<div class="form-group">
+					<label class="title" for="mer_comintro">회사 소개</label>
+					<textarea id="mer_comintro" name="mer_comintro"
+						placeholder="회사 소개를 가독성 있게 작성해 주세요." class="box"></textarea>
+				</div>
 
-	</form>
-	</div>
-	</div> 
+				<div class="form-group">
+					<label class="title" for="mer_prodintro">상품 소개</label>
+					<textarea id="mer_prodintro" name="mer_prodintro" class="box"></textarea>
+				</div> -->
+
+				<div class="button-group">
+					<input type="button" value="다음"
+						onclick="javascript:check(f.merRegistration)"> <input
+						type="reset" value="reset">
+				</div>
+
+			</form>
+		</div>
+		</div>
 	</main>
 </body>
 </html>
