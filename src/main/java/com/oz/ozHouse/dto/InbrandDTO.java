@@ -1,6 +1,6 @@
 package com.oz.ozHouse.dto;
 
-import java.sql.Date;
+import java.time.LocalDateTime;
 
 import com.oz.ozHouse.domain.Inbrand;
 import com.oz.ozHouse.domain.Member;
@@ -29,8 +29,8 @@ public class InbrandDTO {
 	private String inCategory;
 	private String inOthershop;
 	private String inSaleFile;
-	private Date inAppliDate;
-	private Date inCancelDate;
+	private LocalDateTime inAppliDate;
+	private LocalDateTime inCancelDate;
 	
 	
 }
