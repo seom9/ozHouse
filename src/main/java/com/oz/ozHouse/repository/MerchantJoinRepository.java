@@ -1,4 +1,4 @@
-package com.oz.ozHouse.merchant.repository;
+package com.oz.ozHouse.repository;
 
 import java.util.Map;
 
