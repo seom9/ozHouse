@@ -6,6 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.oz.ozHouse.domain.common.BaseEntity;
 import com.oz.ozHouse.domain.common.CompanyNumber;
+import com.oz.ozHouse.domain.common.InbrandInfo;
 import com.oz.ozHouse.domain.common.PhoneNumber;
 
 import jakarta.persistence.AttributeOverride;
@@ -41,21 +42,19 @@ public class Inbrand extends BaseEntity{
     })
 	private CompanyNumber inComnum;
 	
-	private String inHomepage;
-	private String inManname;
-	
 	@Embedded
-    @AttributeOverrides({
-    		@AttributeOverride(name = "phoneNumber1", column = @Column(name = "inManhp1")),
-    		@AttributeOverride(name = "phoneNumber2", column = @Column(name = "inManhp2")),
-    		@AttributeOverride(name = "PhoneNumber3", column = @Column(name = "inManhp3"))
+	@AttributeOverrides({
+    	@AttributeOverride(name = "homepage", column = @Column(name = "inHomepage")),
+    	@AttributeOverride(name = "ManagerName", column = @Column(name = "inManname")),
+    	@AttributeOverride(name = "ManagerEmail", column = @Column(name = "inManemail")),
+    	@AttributeOverride(name = "category", column = @Column(name = "inCategory")),
+    	@AttributeOverride(name = "otherShop", column = @Column(name = "inOthershop")),
+    	@AttributeOverride(name = "brandFile", column = @Column(name = "inSaleFile")),
+		@AttributeOverride(name = "PhoneNumber.phoneNumber1", column = @Column(name = "inManhp1")),
+		@AttributeOverride(name = "PhoneNumber.phoneNumber2", column = @Column(name = "inManhp2")),
+		@AttributeOverride(name = "PhoneNumber.PhoneNumber3", column = @Column(name = "inManhp3"))
     })
-	private PhoneNumber inManhp;
-	
-	private String inManemail;
-	private String inCategory;
-	private String inOthershop;
-	private String inSaleFile;
+	private InbrandInfo inbrandInfo;
 	
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yy/MM/dd")
