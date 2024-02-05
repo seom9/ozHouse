@@ -29,7 +29,6 @@ public class MerchantJoinRepositoryImpl implements MerchantJoinRepository{
 		//결과 조회
 		Merchant m = jpql.getSingleResult();
 		
-<<<<<<< HEAD:src/main/java/com/oz/ozHouse/merchant/repository/MerchantJoinRepositoryImpl.java
 		MerchantDTO dto = new MerchantDTO();
 		dto = dto.toDto(m);
 		return dto;
@@ -58,19 +57,6 @@ public class MerchantJoinRepositoryImpl implements MerchantJoinRepository{
 		MerchantDTO dto = new MerchantDTO();
 		dto = dto.toDto(m);
 		return dto;
-=======
-/*		Merchant jpql = em.createQuery(query, Merchant.class)
- *		        .setParameter("value1", comNum.get("merComnum1"))
- *		        .setParameter("value2", comNum.get("merComnum2"))
- *		        .setParameter("value3", comNum.get("merComnum3"))
- *		        .getSingleResult();
- *
- *		위의 코드도 같은 결과를 가져오지만 TypedQuery로 쿼리를 생성하는 것이 코드를 안정적으로 유지할 수 있으며,
- *		유지보수에도 용이하다 => 타입 안전성이 보장되기 때문이다(지정 Entity 이외의 다른 클래스캐스팅 시 오류 발생)
- */
-		
-		return null;
->>>>>>> parent of e18f280 (2/5 complete  merchant comNum, Email check):src/main/java/com/oz/ozHouse/repository/MerchantJoinRepositoryImpl.java
 	}
 
 }
