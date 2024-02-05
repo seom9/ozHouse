@@ -25,7 +25,7 @@
 <body>
 
 <header>
-    <a href="${pageContext.request.contextPath}/merchant-main.do">
+    <a href="${pageContext.request.contextPath}/merchant/main">
         <img src="/merchant/img/ozlogo3.png" width="100" height="100">
         <img src="/merchant/img/oz3.png" class="oz-logo">
     </a>

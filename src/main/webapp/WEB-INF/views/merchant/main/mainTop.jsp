@@ -20,7 +20,7 @@
 <body>
 	<header>
 		<div class="header-left">
-			<a href="${pageContext.request.contextPath}/merchant-main.do"> <img src="/merchant/img/ozlogo2.png"
+			<a href="${pageContext.request.contextPath}/merchant/main"> <img src="/merchant/img/ozlogo2.png"
 				width="60" height="60"> <img src="/merchant/img/oz2.png"
 				width="90" height="50"> <span class="partner-center"><b>파트너센터</b></span>
 			</a>
@@ -37,16 +37,16 @@
 			</nav>
 		</div>
 	</header>
-	<c:set var="mer_num" value="${merchantLoginMember.mer_num}" />
+	<c:set var="merNum" value="${merchantLoginMember.merNum}" />
 	<div class="container">
 		<div class="link-section">
 			<div class="left-section">
-				<a href="${pageContext.request.contextPath}/mainStoreManagement.do?merNum=${mer_num }"
+				<a href="${pageContext.request.contextPath}/mainStoreManagement/${merNum}"
 					class="main-button">스토어관리 돌아가기</a>
 			</div>
 			<div class="right-section">
 				<a href="${pageContext.request.contextPath}/brand_application.do?mer_num=${mer_num }">입점하기</a> <a
-					href="${pageContext.request.contextPath}/notice.do">공지사항</a>
+					href="${pageContext.request.contextPath}/notices">공지사항</a>
 				<c:if test="${not empty merchantLoginMember.mer_num}">
 					<a href="${pageContext.request.contextPath}/myInform_view.do?mer_num=${mer_num}">나의정보</a>
 				</c:if>

@@ -11,7 +11,7 @@
 <div class="slider">
 	<div class="slides" id="slide">
 		<div class="slide">
-			<a href="${pageContext.request.contextPath}/merchant-main.do"> <img src="/merchant/img/welcome.png"
+			<a href="${pageContext.request.contextPath}/merchant/main"> <img src="/merchant/img/welcome.png"
 				alt="Image 1" height="80">
 			</a>
 		</div>

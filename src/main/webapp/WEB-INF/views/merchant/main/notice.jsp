@@ -9,7 +9,7 @@
 <%@ include file="mainTop.jsp"%>
 <div class="main-notice">
 	<div class="search-container">
-		<form action="${pageContext.request.contextPath}/notice.do" method="post" class="search-form">
+		<form action="${pageContext.request.contextPath}/notices/search" method="get" class="search-form">
 			<input type="text" placeholder="검색" name="search"
 				class="search-input">
 		</form>
