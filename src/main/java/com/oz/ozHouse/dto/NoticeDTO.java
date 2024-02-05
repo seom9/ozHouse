@@ -19,6 +19,7 @@ public class NoticeDTO {
     private String noticeContent;
     private LocalDate noticeDate;
 
+<<<<<<< HEAD
     public NoticeDTO toDTO(Notice notice) {
     	return NoticeDTO.builder()
     			.noticeNum(notice.getNoticeNum())
@@ -27,4 +28,6 @@ public class NoticeDTO {
     			.noticeDate(notice.getNoticeDate())
     			.build();
     }
+=======
+>>>>>>> branch 'main' of https://github.com/gahyunseoul/ozHouse.git
 }

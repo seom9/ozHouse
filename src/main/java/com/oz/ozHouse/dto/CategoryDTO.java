@@ -18,6 +18,7 @@ public class CategoryDTO {
     private String categoryCode;
     private String categoryName;
 
+<<<<<<< HEAD
     public CategoryDTO toDTO(Category category) {
     	return CategoryDTO.builder()
     			.categoryNum(category.getCategoryNum())
@@ -25,4 +26,6 @@ public class CategoryDTO {
     			.categoryName(category.getCategoryName())
     			.build();
     }
+=======
+>>>>>>> branch 'main' of https://github.com/gahyunseoul/ozHouse.git
 }

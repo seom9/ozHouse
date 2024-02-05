@@ -16,15 +16,6 @@ public class ProductReQADTO {
 	private String memberId;
 	private String productReQAContent;
 	private String productReQADate;
-	
-	public ProductReQA toEntity() {
-	    ProductReQA productReQA = new ProductReQA();
-	    productReQA.setProductReQANum(this.productReQANum);
-	    productReQA.setProductNum(this.productNum);
-	    productReQA.setMemberId(this.memberId);
-	    productReQA.setProductReQAContent(this.productReQAContent);
-	    productReQA.setProductReQADate(this.productReQADate);
-	    return productReQA;
-	}
+
 
 }
