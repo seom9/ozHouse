@@ -1,11 +1,7 @@
 package com.oz.ozHouse.dto;
 
-import java.time.LocalDateTime;
+import java.sql.Date;
 
-import com.oz.ozHouse.domain.Inbrand;
-import com.oz.ozHouse.domain.Member;
-
-import jakarta.persistence.Entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -29,13 +25,8 @@ public class InbrandDTO {
 	private String inCategory;
 	private String inOthershop;
 	private String inSaleFile;
-<<<<<<< HEAD
 	private Date inAppliDate;
 	private Date inCancelDate;
-=======
-	private LocalDateTime inAppliDate;
-	private LocalDateTime inCancelDate;
+
 	
-	
->>>>>>> 9cf53a3acda31e05970035d8de8ccdc963c6fdfd
 }
