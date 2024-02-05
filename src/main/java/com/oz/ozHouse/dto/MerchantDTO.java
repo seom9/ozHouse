@@ -48,9 +48,6 @@ public class MerchantDTO {
     private String merName;
     private String merEmail;
     private String merBusinessPost;
-<<<<<<< HEAD
-
-=======
     
     public void setMer_business_adress(String merAdress) {
 		this.merAdress = merAdress;
@@ -75,10 +72,10 @@ public class MerchantDTO {
                 .merManhp2(merchant.getInbrandInfo().getPhoneNum().getPhoneNumber2())
                 .merManhp3(merchant.getInbrandInfo().getPhoneNum().getPhoneNumber3())
                 .merManemail(merchant.getInbrandInfo().getManagerEmail())
-                .merCategory(merchant.getInbrandInfo().getCategory())
+                //.merCategory(merchant.getInbrandInfo().getCategory())
                 .merOthershop(merchant.getInbrandInfo().getOtherShop())
                 .merFile(merchant.getInbrandInfo().getBrandFile())
-                .merJoindate(merchant.getRegDate())
+                //.merJoindate(merchant.getRegDate())
                 .merInbranddate(merchant.getMerInbranddate())
                 .merDeletedate(merchant.getMerDeletedate())
                 .merOutDate(merchant.getMerOutDate())
@@ -91,5 +88,4 @@ public class MerchantDTO {
                 .build();
     }
     
->>>>>>> 9cf53a3acda31e05970035d8de8ccdc963c6fdfd
 }
