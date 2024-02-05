@@ -1,29 +1,30 @@
 package com.oz.ozHouse.dto;
 
-import java.sql.Date;
-import org.springframework.format.annotation.DateTimeFormat;
+import java.time.LocalDate;
 
-import com.oz.ozHouse.domain.AdminReQA; // Assuming there is a corresponding domain class
+import com.oz.ozHouse.domain.AdminReQA;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Getter
-@Setter
-@NoArgsConstructor
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor  //기본생성자 자동으로 생성
 public class AdminReQADTO {
     private int adminReQANum;
     private String adminReQASubject;
     private String adminReQAContent;
-    private Date adminReQADate;
+    private LocalDate adminReQADate;
 
-    public AdminReQA toEntity() {
-        AdminReQA adminReQA = new AdminReQA();
-        adminReQA.setAdminReQANum(this.adminReQANum);
-        adminReQA.setAdminReQASubject(this.adminReQASubject);
-        adminReQA.setAdminReQAContent(this.adminReQAContent);
-        adminReQA.setAdminReQADate(this.adminReQADate);
-        return adminReQA;
-    }
+    public AdminReQADTO toDTO(AdminReQA adminReQA) {
+		return AdminReQADTO.builder()
+				.adminReQANum(adminReQA.getAdminReQANum())
+				.adminReQASubject(adminReQA.getAdminReQASubject())
+				.adminReQAContent(adminReQA.getAdminReQAContent())
+				.adminReQADate(adminReQA.getAdminReQADate())
+				.build();
+	}
 }
