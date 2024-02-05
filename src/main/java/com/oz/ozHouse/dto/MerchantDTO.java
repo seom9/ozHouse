@@ -1,6 +1,7 @@
 package com.oz.ozHouse.dto;
 
-import java.time.LocalDateTime;
+
+import java.sql.Date;
 
 import com.oz.ozHouse.domain.Merchant;
 
@@ -36,10 +37,10 @@ public class MerchantDTO {
     private String merProdintro;
     private String merOthershop;
     private String merFile;
-    private LocalDateTime merJoindate;
-    private LocalDateTime merInbranddate;
-    private LocalDateTime merDeletedate;
-    private LocalDateTime merOutDate;
+    private Date merJoindate;
+    private Date merInbranddate;
+    private Date merDeletedate;
+    private Date merOutDate;
     private String merDelete;
     private String merAdress;
     private String merRegistration;
