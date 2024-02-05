@@ -5,7 +5,7 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 
 import com.oz.ozHouse.dto.MerchantDTO;
-import com.oz.ozHouse.merchant.repository.MerchantJoinRepositoryImpl;
+import com.oz.ozHouse.repository.MerchantJoinRepositoryImpl;
 
 import lombok.RequiredArgsConstructor;
 
