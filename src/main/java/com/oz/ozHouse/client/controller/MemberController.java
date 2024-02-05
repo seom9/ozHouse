@@ -34,10 +34,10 @@ public class MemberController {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
-    @GetMapping("/member_login.do")
-    public String member_login() {
-        return "client/member/member_login";
-    }
+	@GetMapping("/member_login.do")
+	public String index() {
+		return "client/member/member_login";
+	}
 	
     @GetMapping(value = "/member_join.do")
     public String member_join() {
