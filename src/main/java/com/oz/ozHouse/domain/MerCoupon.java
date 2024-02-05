@@ -1,7 +1,6 @@
 package com.oz.ozHouse.domain;
 
 import java.sql.Date;
-import java.time.LocalDateTime;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -12,6 +11,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
@@ -28,10 +28,10 @@ public class MerCoupon {
 	
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yy/MM/dd")
-	private LocalDateTime merCouponusedate;
+	private Date merCouponusedate;
 	
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yy/MM/dd")
-	private LocalDateTime merCouponenddate;
+	private Date merCouponenddate;
 	
 }
