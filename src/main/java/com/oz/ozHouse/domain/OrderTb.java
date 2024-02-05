@@ -1,6 +1,7 @@
 package com.oz.ozHouse.domain;
 
-import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -39,9 +40,8 @@ public class OrderTb {
     private String oDate;
     private String oPlace;
     private String oDelnow;
-    @Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yy/MM/dd")
-    private Date oCanceldate;
+    private LocalDate oCanceldate;
     private String oLike;
     private String oRefund;
     private int oAssemblycost;

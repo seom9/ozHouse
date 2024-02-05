@@ -1,6 +1,6 @@
 package com.oz.ozHouse.domain;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -61,17 +61,14 @@ public class Merchant extends BaseEntity{
    
     private String merProdintro;
     
-    @Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yy/MM/dd")
-    private Date merInbranddate;
+    private LocalDate merInbranddate;
     
-    @Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yy/MM/dd")
-    private Date merDeletedate;
+    private LocalDate merDeletedate;
     
-    @Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yy/MM/dd")
-    private Date merOutDate;
+    private LocalDate merOutDate;
     
     private String merDelete;
     
