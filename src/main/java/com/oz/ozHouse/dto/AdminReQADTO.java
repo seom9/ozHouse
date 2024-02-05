@@ -19,7 +19,6 @@ public class AdminReQADTO {
     private String adminReQAContent;
     private LocalDate adminReQADate;
 
-<<<<<<< HEAD
     public AdminReQADTO toDTO(AdminReQA adminReQA) {
 		return AdminReQADTO.builder()
 				.adminReQANum(adminReQA.getAdminReQANum())
@@ -28,6 +27,4 @@ public class AdminReQADTO {
 				.adminReQADate(adminReQA.getAdminReQADate())
 				.build();
 	}
-=======
->>>>>>> branch 'main' of https://github.com/gahyunseoul/ozHouse.git
 }
