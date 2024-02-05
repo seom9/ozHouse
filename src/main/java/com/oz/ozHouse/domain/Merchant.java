@@ -1,6 +1,6 @@
 package com.oz.ozHouse.domain;
 
-import java.sql.Date;
+import java.time.LocalDateTime;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -13,7 +13,6 @@ import com.oz.ozHouse.domain.common.PhoneNumber;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 @Entity
@@ -64,15 +63,15 @@ public class Merchant extends BaseEntity{
     
     @Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yy/MM/dd")
-    private Date merInbranddate;
+    private LocalDateTime merInbranddate;
     
     @Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yy/MM/dd")
-    private Date merDeletedate;
+    private LocalDateTime merDeletedate;
     
     @Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yy/MM/dd")
-    private Date merOutDate;
+    private LocalDateTime merOutDate;
     
     private String merDelete;
     
