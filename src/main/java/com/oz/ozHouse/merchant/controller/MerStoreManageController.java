@@ -2,6 +2,7 @@ package com.oz.ozHouse.merchant.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.oz.ozHouse.merchant.service.NoticeService;
 import com.oz.ozHouse.merchant.service.StoreManageService;
@@ -16,8 +17,8 @@ public class MerStoreManageController {
 	private final StoreManageService storeManageService;
 	private final NoticeService noticeService;
 	
-	@GetMapping("mainStoreManagement.do")
-	public String storeManage(HttpServletRequest req) {
+	@GetMapping("/mainStoreManagement/{merNum}")
+	public String storeManage(HttpServletRequest req, @PathVariable("merNum") int merNum) {
 		req.setAttribute("allCount", storeManageService.allCount());
 //		req.setAttribute("waitCount", storeManageService.waitCount());
 //		req.setAttribute("requestCount", storeManageService.requestCount());
