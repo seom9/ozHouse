@@ -1,13 +1,12 @@
 package com.oz.ozHouse.domain;
 
-import java.sql.Date;
+import java.time.LocalDateTime;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.oz.ozHouse.domain.common.BaseEntity;
 import com.oz.ozHouse.domain.common.CompanyNumber;
 import com.oz.ozHouse.domain.common.InbrandInfo;
-import com.oz.ozHouse.domain.common.PhoneNumber;
 
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
@@ -58,6 +57,6 @@ public class Inbrand extends BaseEntity{
 	
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yy/MM/dd")
-	private Date inCancelDate;
+	private LocalDateTime inCancelDate;
 	
 }

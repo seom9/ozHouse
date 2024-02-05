@@ -1,6 +1,6 @@
 package com.oz.ozHouse.dto;
 
-import java.sql.Date;
+import java.time.LocalDateTime;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,8 +21,8 @@ public class ListDTO {
 	
 	private String oPlace;
 	private String oComment;
-	private Date oDate;
-	private Date oCanceldate;
+	private LocalDateTime oDate;
+	private LocalDateTime oCanceldate;
 	private int oCount;				//상품의 수량
 	private int oPrice;				//소비자 결제 금액
 	
