@@ -27,6 +27,8 @@ import lombok.RequiredArgsConstructor;
 public class MerchantJoinController {
 	private final MerchantJoinServiceImpl merJoinService;
 	
+	static final String BUSINESSFILEPATH = 
+			"C:\\Users\\moonj\\Desktop\\ozHouse\\ozHouse\\src\\main\\webapp\\resources\\merchant\\business";
 
 	@GetMapping("merchant_join.do")
 	public String merchantJoin() {
@@ -36,20 +38,25 @@ public class MerchantJoinController {
 	@RequestMapping(value="/merchant_send_email.do")
     public String merchantEmailAuth(HttpServletRequest req, @ModelAttribute MerchantDTO dto, 
     		BindingResult result) throws IllegalStateException, IOException {  //dto 뿉 MultipertFile 쓣 諛쏅뒗 怨쇱젙 뿉 꽌 BindingException 諛쒖깮, BindingResult濡   옟 쓬
+		//사업자등록번호 중복 확인
 		Map<String, String> comNum = new HashMap<String, String>();
 		comNum.put("merComnum1", dto.getMerComnum1());
     	comNum.put("merComnum2", dto.getMerComnum2());
     	comNum.put("merComnum3", dto.getMerComnum3());
-    	boolean check  = merJoinService.merchant_checkBsNum(comNum);
-    	if(!check) {
+    	boolean comNumcheck  = merJoinService.merchant_checkBsNum(comNum);
+    	if(!comNumcheck) {
     		String msg = "이미 가입된 사업자등록번호 입니다.";
     		String url = "merchant_login.do";
     		req.setAttribute("msg", msg);
 			req.setAttribute("url", url);
     		return "message";
     	}
-		String email = req.getParameter("mer_email");
-        if (merchantMapper.merchant_checkEmail(email) != null) {
+    	
+    	//이메일 중복 확인
+    	String email = req.getParameter("mer_email");
+    	boolean emailCheck = merJoinService.merchant_checkEmail(email);
+		
+        if (!emailCheck) {
 			req.setAttribute("msg", "이미 가입되어있는 이메일주소입니다.");
 			req.setAttribute("url", "merchant_join.do");
 			return "message";
