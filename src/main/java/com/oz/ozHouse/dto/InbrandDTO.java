@@ -1,17 +1,17 @@
 package com.oz.ozHouse.dto;
 
-import java.sql.Date;
+import java.time.LocalDateTime;
 
 import com.oz.ozHouse.domain.Inbrand;
-import com.oz.ozHouse.domain.Member;
 
-import jakarta.persistence.Entity;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Getter
-@Setter
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
 public class InbrandDTO {
 	private int inNum;
@@ -29,8 +29,28 @@ public class InbrandDTO {
 	private String inCategory;
 	private String inOthershop;
 	private String inSaleFile;
-	private Date inAppliDate;
-	private Date inCancelDate;
+	private LocalDateTime inAppliDate;
+	private LocalDateTime inCancelDate;
 	
-	
+	public InbrandDTO toDto(Inbrand i) {
+	    return InbrandDTO.builder()
+	            .inNum(i.getInNum())
+	            .merNum(i.getMerNum())
+	            .inCompany(i.getInCompany())
+	            .inComnum1(i.getInComnum().getMerComnum1())
+	            .inComnum2(i.getInComnum().getMerComnum2())
+	            .inComnum3(i.getInComnum().getMerComnum3())
+	            .inHomepage(i.getInbrandInfo().getHomepage())
+	            .inManname(i.getInbrandInfo().getManagerName())
+	            .inManhp1(i.getInbrandInfo().getPhoneNum().getPhoneNumber1())
+	            .inManhp2(i.getInbrandInfo().getPhoneNum().getPhoneNumber2())
+	            .inManhp3(i.getInbrandInfo().getPhoneNum().getPhoneNumber3())
+	            .inManemail(i.getInbrandInfo().getManagerEmail())
+	            .inCategory(i.getInbrandInfo().getCategory())
+	            .inOthershop(i.getInbrandInfo().getOtherShop())
+	            .inSaleFile(i.getInbrandInfo().getBrandFile())
+	            .inAppliDate(i.getRegDate())
+	            .inCancelDate(i.getInCancelDate())
+	            .build();
+	}
 }

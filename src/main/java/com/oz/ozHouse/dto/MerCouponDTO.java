@@ -1,15 +1,17 @@
 package com.oz.ozHouse.dto;
 
-import java.sql.Date;
+import java.time.LocalDateTime;
 
 import com.oz.ozHouse.domain.MerCoupon;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Getter
-@Setter
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
 public class MerCouponDTO {
 	
@@ -18,22 +20,18 @@ public class MerCouponDTO {
 	private String merIsok;
 	private int merCoupondiscount;
 	private int merNum;
-	private Date merCouponusedate;
-	private Date merCouponenddate;
+	private LocalDateTime merCouponusedate;
+	private LocalDateTime merCouponenddate;
 	
-	public MerCoupon toEntity() {
-		MerCoupon merCoupon = new MerCoupon();
-
-		// Set the properties of the new Mer_Coupon instance based on the values of the current object
-		merCoupon.setMerCouponnum(this.merCouponnum);
-		merCoupon.setMerCouponname(this.merCouponname);
-		merCoupon.setMerIsok(this.merIsok);
-		merCoupon.setMerCoupondiscount(this.merCoupondiscount);
-		merCoupon.setMerNum(this.merNum);
-		merCoupon.setMerCouponusedate(this.merCouponusedate);
-		merCoupon.setMerCouponenddate(this.merCouponenddate);
-
-		// Return the new Mer_Coupon instance with its properties set
-		return merCoupon;
+	public MerCouponDTO toDto(MerCoupon m) {
+	    return MerCouponDTO.builder()
+	            .merCouponnum(m.getMerCouponnum())
+	            .merCouponname(m.getMerCouponname())
+	            .merIsok(m.getMerIsok())
+	            .merCoupondiscount(m.getMerCoupondiscount())
+	            .merNum(m.getMerNum())
+	            .merCouponusedate(m.getMerCouponusedate())
+	            .merCouponenddate(m.getMerCouponenddate())
+	            .build();
 	}
 }

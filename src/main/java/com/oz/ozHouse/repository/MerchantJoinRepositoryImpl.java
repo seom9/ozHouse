@@ -12,7 +12,7 @@ import jakarta.persistence.TypedQuery;
 import lombok.RequiredArgsConstructor;
 
 @Repository
-@RequiredArgsConstructor
+@RequiredArgsConstructor //final field, Not Null field에 대해 생성자 생성
 public class MerchantJoinRepositoryImpl implements MerchantJoinRepository{
 	private final EntityManager em;
 
