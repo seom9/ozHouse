@@ -1,6 +1,6 @@
 package com.oz.ozHouse.dto;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 import com.oz.ozHouse.domain.MerCoupon;
 
@@ -18,7 +18,7 @@ public class MerCouponDTO {
 	private String merIsok;
 	private int merCoupondiscount;
 	private int merNum;
-	private Date merCouponusedate;
-	private Date merCouponenddate;
+	private LocalDate merCouponusedate;
+	private LocalDate merCouponenddate;
 	
 }
