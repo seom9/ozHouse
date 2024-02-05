@@ -1,6 +1,6 @@
 package com.oz.ozHouse.domain;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -8,10 +8,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
@@ -24,8 +23,15 @@ public class MerCoupon {
 	private String merCouponname;
 	private String merIsok;
 	private int merCoupondiscount;
+	
+	@ManyToOne
+	@JoinColumn(name = "merNum")
 	private int merNum;
-	private Date merCouponusedate;
-	private Date merCouponenddate;
+	
+	@DateTimeFormat(pattern = "yy/MM/dd")
+	private LocalDate merCouponusedate;
+	
+	@DateTimeFormat(pattern = "yy/MM/dd")
+	private LocalDate merCouponenddate;
 	
 }
