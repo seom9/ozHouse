@@ -17,7 +17,6 @@ public class MsgDTO {
     private String reason;
     private String approvalStatus;
 
-<<<<<<< HEAD
     public MsgDTO toDTO(Msg msg) {
     	return MsgDTO.builder()
     			.num(msg.getNum())
@@ -25,7 +24,4 @@ public class MsgDTO {
     			.approvalStatus(msg.getApprovalStatus())
     			.build();
     }
-=======
-
->>>>>>> branch 'main' of https://github.com/gahyunseoul/ozHouse.git
 }

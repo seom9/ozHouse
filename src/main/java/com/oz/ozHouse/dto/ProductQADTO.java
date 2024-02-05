@@ -22,7 +22,6 @@ public class ProductQADTO {
 	private LocalDate productQADate;
 	private String productInquiryType;
 	private String productQAState;
-<<<<<<< HEAD
 	
 	public ProductQADTO toDTO(ProductQA productQA) {
 		return ProductQADTO.builder()
@@ -33,9 +32,4 @@ public class ProductQADTO {
 				.productQAState(productQA.getProductQAState())
 				.build();
 	}
-=======
-
-
-
->>>>>>> branch 'main' of https://github.com/gahyunseoul/ozHouse.git
 }
