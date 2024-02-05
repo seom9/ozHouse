@@ -13,7 +13,6 @@ import com.oz.ozHouse.domain.common.PhoneNumber;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 @Entity
@@ -85,6 +84,5 @@ public class Merchant extends BaseEntity{
     private String merEmail;
     
     private String merBusinessPost;
-    
 
 }
