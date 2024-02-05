@@ -1,30 +1,33 @@
 package com.oz.ozHouse.domain;
 
 import java.sql.Date;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.oz.ozHouse.domain.Merchant;
+import com.oz.ozHouse.domain.common.BaseEntity;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Setter
 @Getter
-public class Merchant {
+public class Merchant extends BaseEntity {
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@OneToMany(mappedBy = "merchant", cascade = CascadeType.REMOVE)
     private int merNum;
+	
     private String merId;
     private String merPw;
     private String merIsbrand;
@@ -46,18 +49,22 @@ public class Merchant {
     private String merProdintro;
     private String merOthershop;
     private String merFile;
-    @Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "yy/MM/dd")
-    private Date merJoindate;
-    @Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "yy/MM/dd")
-    private Date merInbranddate;
-    @Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "yy/MM/dd")
-    private Date merDeletedate;
-    @Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "yy/MM/dd")
-    private Date merOutDate;
+    
+    @OneToMany(mappedBy = "merchant", cascade = CascadeType.ALL)
+    private List<UserCoupon> userCoupons = new ArrayList<>();
+
+    @Column(columnDefinition = "DATE")
+    @DateTimeFormat(pattern = "yy/MM/dd")
+    private LocalDate merInbranddate;
+
+    @Column(columnDefinition = "DATE")
+    @DateTimeFormat(pattern = "yy/MM/dd")
+    private LocalDate merDeletedate;
+
+    @Column(columnDefinition = "DATE")
+    @DateTimeFormat(pattern = "yy/MM/dd")
+    private LocalDate merOutDate;
+    
     private String merDelete;
     private String merAdress;
     private String merRegistration;

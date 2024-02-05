@@ -14,11 +14,5 @@ public class MsgDTO {
     private String reason;
     private String approvalStatus;
 
-    public Msg toEntity() {
-        Msg msg = new Msg();
-        msg.setNum(this.num);
-        msg.setReason(this.reason);
-        msg.setApprovalStatus(this.approvalStatus);
-        return msg;
-    }
+
 }

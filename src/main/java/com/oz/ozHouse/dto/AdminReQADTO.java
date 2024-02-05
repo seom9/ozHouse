@@ -18,12 +18,4 @@ public class AdminReQADTO {
     private String adminReQAContent;
     private Date adminReQADate;
 
-    public AdminReQA toEntity() {
-        AdminReQA adminReQA = new AdminReQA();
-        adminReQA.setAdminReQANum(this.adminReQANum);
-        adminReQA.setAdminReQASubject(this.adminReQASubject);
-        adminReQA.setAdminReQAContent(this.adminReQAContent);
-        adminReQA.setAdminReQADate(this.adminReQADate);
-        return adminReQA;
-    }
 }

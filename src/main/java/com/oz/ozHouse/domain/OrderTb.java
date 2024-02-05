@@ -26,12 +26,11 @@ import lombok.Setter;
 public class OrderTb {
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@OneToMany(mappedBy = "ordertb", cascade = CascadeType.REMOVE)
-    private long oCode;
+    private Long oCode;
 	
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="memberId")
-    private Member memberId;
+    private Member member;
     
     private int productNum;
     private int oPrice;

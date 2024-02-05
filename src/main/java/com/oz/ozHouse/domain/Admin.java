@@ -24,5 +24,5 @@ public class Admin extends BaseEntity{
 	private String adminEmail;
 	
 	@Embedded
-	private PhoneNumber adminHp1;
+	private PhoneNumber adminHp;
 }
