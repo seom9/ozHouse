@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<link rel="stylesheet" type="text/css" href="resources/merchant/css/style.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/merchant/css/style.css">
 <link href="https://fonts.googleapis.com/css?family=Roboto:400,700|Montserrat:400,700&display=swap" rel="stylesheet">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- 관리홈-->
@@ -17,14 +17,14 @@
                 <div class="title no-box-style" align="left">상품등록</div>
                 <hr>
                 <div class="button-container">
-				    <a href="productManagement_input.do?mer_num=${merchantLoginMember.mer_num}" class="button">신규 상품 등록</a>
+				    <a href="${pageContext.request.contextPath}/productManagement-input.do?merNum=${merchantLoginMember.mer_num}" class="button">신규 상품 등록</a>
 				</div>
                 <br>
 				<div class="title no-box-style" align="left">상품현황</div>
                 <hr>
                <div class="content">
 				    <span>전체</span>
-				    <a href="productManagement_requestList.do?mer_num=${merchantLoginMember.mer_num}">
+				    <a href="${pageContext.request.contextPath}/productManagement-requestList.do?merNum=${merchantLoginMember.mer_num}">
 				    <span class="number">
 				    	${allCount }건
 			    	</span>
@@ -32,7 +32,7 @@
 				</div>
 				<div class="content">
 				    <span>승인대기(검수중)</span>
-				    <a href="productManagement_requestList.do?mer_num=${merchantLoginMember.mer_num}">
+				    <a href="${pageContext.request.contextPath}/productManagement-requestList.do?merNum=${merchantLoginMember.mer_num}">
 				    <span class="number">
 				    	${waitCount }건
 				    </span>
@@ -40,7 +40,7 @@
 				</div>
 				<div class="content">
 				    <span>승인보류(수정요청)</span>
-				    <a href="productManagement_requestList.do?mer_num=${merchantLoginMember.mer_num}">
+				    <a href="${pageContext.request.contextPath}/productManagement-requestList.do?merNum=${merchantLoginMember.mer_num}">
 				    <span class="number">
 				    	${requestCount }건
 				    </span>
@@ -48,7 +48,7 @@
 				</div>
 				<div class="content">
 				    <span>승인반려(등록불가)</span>
-				    <a href="productManagement_requestList.do?mer_num=${merchantLoginMember.mer_num}">
+				    <a href="${pageContext.request.contextPath}/productManagement-requestList.do?merNum=${merchantLoginMember.mer_num}">
 				    <span class="number">
 				    	${cancleCount }건
 				    </span>
@@ -56,7 +56,7 @@
 				</div>
 				<div class="content">
 				    <span>요청취소</span>
-				    <a href="productManagement_requestList.do?mer_num=${merchantLoginMember.mer_num}">
+				    <a href="${pageContext.request.contextPath}/productManagement-requestList.do?merNum=${merchantLoginMember.mer_num}">
 				    <span class="number">
 				    	${requestCancle }건
 				    </span>
@@ -64,7 +64,7 @@
 				</div>
 				<div class="content">
 				    <span>판매중</span>
-				    <a href="productManagement_requestList.do?mer_num=${merchantLoginMember.mer_num}">
+				    <a href="${pageContext.request.contextPath}/productManagement-requestList.do?merNum=${merchantLoginMember.mer_num}">
 				    <span class="number">
 				    	${saleOk }건
 				    </span>
@@ -82,21 +82,21 @@
 			    <div class="sales-progress">
 			        <div class="progress-item">
 			            <span class="stage">배송 준비</span>
-			            <a href="deliveryList.do?mer_num=${merchantLoginMember.mer_num}&mode=ready">
+			            <a href="${pageContext.request.contextPath}/deliveryList.do?merNum=${merchantLoginMember.mer_num}&mode=ready">
 			            <span class="count">${readyCount }건</span>
 			            </a>
 			        </div>
 			        <div class="separator">></div>
 			        <div class="progress-item">
 			            <span class="stage">배송중</span>
-			            <a href="deliveryList.do?mer_num=${merchantLoginMember.mer_num}&mode=delivery">
+			            <a href="${pageContext.request.contextPath}/deliveryList.do?merNum=${merchantLoginMember.mer_num}&mode=delivery">
 			            <span class="count">${deliveryCount }건</span>
 			            </a>
 			        </div>
 			        <div class="separator">></div>
 			        <div class="progress-item">
 			            <span class="stage">배송 완료</span>
-			            <a href="deliveryList.do?mer_num=${merchantLoginMember.mer_num}&mode=complete">
+			            <a href="${pageContext.request.contextPath}/deliveryList.do?merNum=${merchantLoginMember.mer_num}&mode=complete">
 			            <span class="count">${completeCount }건</span>
 			            </a>
 			        </div>
@@ -109,21 +109,21 @@
 			    <div class="content-box">
 			        <span  style="font-size: 20px; color: #FFFFFF;">처리해야 할 교환건</span>
 			        <hr class="underline-style">
-			        <a href="returnCancle_returnList.do?mer_num=${merchantLoginMember.mer_num}&order_orderlike=exchange">
+			        <a href="${pageContext.request.contextPath}/returnCancle-returnList.do?merNum=${merchantLoginMember.mer_num}&order_orderlike=exchange">
 			        <span class="number" style="font-size: 20px;">
 			       ${exchangeCount }건</span></a>
 			    </div>
 			    <div class="content-box">
 			        <span style="font-size: 20px; color: #FFFFFF;">처리해야 할 환불건</span>
 			        <hr class="underline-style">
-			        <a href="returnCancle_returnList.do?mer_num=${merchantLoginMember.mer_num}&order_orderlike=return">
+			        <a href="${pageContext.request.contextPath}/returnCancle-returnList.do?merNum=${merchantLoginMember.mer_num}&order_orderlike=return">
 			        <span class="number" style="font-size: 20px;">
 			        ${returnCount }건</span></a>
 			    </div>
 			    <div class="content-box">
 			        <span style="font-size: 20px; color: #FFFFFF;">응답해야 할 Q&A</span>
 			        <hr class="underline-style">
-			        <a href="board_board.do?mer_num=${merchantLoginMember.mer_num}">
+			        <a href="${pageContext.request.contextPath}/board-board.do?merNum=${merchantLoginMember.mer_num}">
 			        <span class="number" style="font-size: 20px;">
 			        ${boardCount}건</span></a>
 			    </div>
@@ -134,22 +134,22 @@
                 <div class="notice-section">
 			    <div class="notice-header">
 			        <div class="title no-box-style" align="left">공지사항</div>
-			        <a href="notice.do" class="subtitle">더보기 ></a>
+			        <a href="${pageContext.request.contextPath}/notice.do" class="subtitle">더보기 ></a>
 			    </div>
 			    <hr>
 				    <div class="notice-content">
 				    <ul class="notice-list">
 				        <c:forEach var="dto" items="${noticeTitleList }">
 				        <li>
-				        	<a href="notice_title.do?notice_num=${dto.notice_num }">
-				        		${dto.notice_title }
+				        	<a href="${pageContext.request.contextPath}/notice-title/${dto.noticeNum }">
+				        		${dto.noticeTitle }
 			        		</a>
 			        		</li>
 				        </c:forEach>
 			        </ul>
 				    </div>
 				    <div class="button-container">
-				    <a href="merchant_main.do" class="button">HOME</a>
+				    <a href="${pageContext.request.contextPath}/merchant-main.do" class="button">HOME</a>
 				</div>
 				</div>
             </td>
