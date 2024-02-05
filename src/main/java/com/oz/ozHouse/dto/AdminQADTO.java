@@ -21,6 +21,7 @@ public class AdminQADTO {
 	private LocalDate adminQADate;
 	private String admininquiryType;
 	private String adminQAState;
+<<<<<<< HEAD
 	
 	public AdminQADTO toDTO(AdminQA adminQA) {
 		return AdminQADTO.builder()
@@ -33,3 +34,7 @@ public class AdminQADTO {
 				.build();
 	}
 }
+=======
+
+}
+>>>>>>> branch 'main' of https://github.com/gahyunseoul/ozHouse.git

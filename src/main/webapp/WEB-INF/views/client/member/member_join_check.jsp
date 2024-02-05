@@ -14,7 +14,7 @@
 				f.checkNum.focus()
 				return
 			}
-			document.f.submit();
+			f.submit();
 		}
 	</script>	
 </head>
@@ -32,9 +32,9 @@
 			<input type="hidden" name="memberPasswd" value="${member.memberPasswd}"/>
 			<input type="hidden" name="memberEmail" value="${email}"/>
 			<input type="hidden" name="memberNickname" value="${member.memberNickname}"/>
-			<input type="button" value="인증번호 확인" onclick="check()">
+			<input type="button" value="인증번호 확인" onclick="check()">			
 	</form>
-</div>
+</div>a
 
 
 </body>

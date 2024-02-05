@@ -34,6 +34,10 @@ public class AdminQA {
 	private String adminQAState;	
 	
 	@DateTimeFormat(pattern = "yy/MM/dd")	
+<<<<<<< HEAD
 	private LocalDate adminQADate;
 	
+=======
+	private Date adminQADate;
+>>>>>>> branch 'main' of https://github.com/gahyunseoul/ozHouse.git
 }

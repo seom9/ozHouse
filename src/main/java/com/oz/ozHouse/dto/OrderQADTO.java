@@ -23,6 +23,7 @@ public class OrderQADTO {
     private LocalDate orderQADate;
     private int orderNum;
 
+<<<<<<< HEAD
     public OrderQADTO toDTO(OrderQA orderQA) {
 		return OrderQADTO.builder()
 				.orderQANum(orderQA.getOrderQANum())
@@ -32,4 +33,6 @@ public class OrderQADTO {
 				.orderQAState(orderQA.getOrderQAState())
 				.build();
 	}
+=======
+>>>>>>> branch 'main' of https://github.com/gahyunseoul/ozHouse.git
 }
