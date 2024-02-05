@@ -34,7 +34,6 @@
         <link rel="stylesheet" href="https://assets.ohou.se/web/dist/css/94-7181da44.chunk.css">
         <link rel="stylesheet" href="https://assets.ohou.se/web/dist/css/91-236397d7.chunk.css">
        	<link rel="stylesheet" href="${pageContext.request.contextPath}/client/main_css/topStyle.css"/>
-       	
        
         <style data-emotion="css-global ala7f8">
 			@import "https://assets.ohou.se/design-system/bbf3fca1e650ee6d.css";
