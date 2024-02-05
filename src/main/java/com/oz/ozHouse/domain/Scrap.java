@@ -19,16 +19,16 @@ public class Scrap extends BaseEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int scrapNum;
 	
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="memberNum")
-	private Member memberNum;
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="member")
+	private Member member;
     
 	private int proNum;
 	
     @Builder
-    public Scrap(int scrapNum, Member memberNum, int proNum) {
+    public Scrap(int scrapNum, Member member, int proNum) {
         this.scrapNum = scrapNum;
-        this.memberNum = memberNum;
+        this.member = member;
         this.proNum = proNum;
     }
 }

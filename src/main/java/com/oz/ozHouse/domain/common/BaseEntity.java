@@ -1,5 +1,6 @@
 package com.oz.ozHouse.domain.common;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import org.springframework.data.annotation.CreatedDate;
@@ -19,14 +20,12 @@ import lombok.Getter;
 @Getter
 public abstract class BaseEntity {
 	@CreatedDate
-	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "regdate", updatable = false)
 	@DateTimeFormat(pattern = "yy/MM/dd")
-	private LocalDateTime regDate;
+	private LocalDate regDate;
 	
 	@LastModifiedDate
-	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "moddate")
 	@DateTimeFormat(pattern = "yy/MM/dd")
-	private LocalDateTime modDate;
+	private LocalDate modDate;
 }

@@ -19,14 +19,4 @@ public class OrderQADTO {
     private String orderQAState;
     private Date orderQADate;
 
-    public OrderQA toEntity() {
-        OrderQA orderQA = new OrderQA();
-        orderQA.setOrderQANum(this.orderQANum);
-        orderQA.setMemberId(this.memberId);
-        orderQA.setOrderQAContent(this.orderQAContent);
-        orderQA.setOrderInquiryType(this.orderInquiryType);
-        orderQA.setOrderQAState(this.orderQAState);
-        orderQA.setOrderQADate(this.orderQADate);
-        return orderQA;
-    }
 }

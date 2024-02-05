@@ -23,17 +23,15 @@ public class Product {
 	
 	private String proName;
 	
-	@ManyToMany
-	private Category cateNum;
+	private int cateNum;
 	
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="merId")
-	private int merNum;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "merNum")
+	private Merchant merchant;
     
     @Embedded
 	private Image proImage;
 	
-    @Embedded
 	private int proQuantity;
 	
     @Embedded
@@ -49,7 +47,6 @@ public class Product {
 	
 	private String cateName;
 
-    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="inManname")
 	private String inbrandCompany;
 	
