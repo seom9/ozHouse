@@ -11,13 +11,13 @@
 <div class="slider">
 	<div class="slides" id="slide">
 		<div class="slide">
-			<a href="merchant-main.do"> <img src="/merchant/img/welcome.png"
+			<a href="${pageContext.request.contextPath}/merchant-main.do"> <img src="/merchant/img/welcome.png"
 				alt="Image 1" height="80">
 			</a>
 		</div>
 		<div class="slide">
 			<c:set var="mer_num" value="${merchantLoginMember.mer_num}" />
-			<a href="brand_application.do?mer_num=${mer_num }"> <img
+			<a href="${pageContext.request.contextPath}/brand_application.do?mer_num=${mer_num }"> <img
 				src="/merchant/img/오늘 입점하세요.png" alt="Image 2">
 			</a>
 		</div>
