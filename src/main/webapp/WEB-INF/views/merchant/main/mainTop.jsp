@@ -12,7 +12,7 @@
 		function logout(){
 			if(window.confirm("로그아웃 하시겠습니까?")){
 				location.href = 
-					"merchant_logout.do";
+					"${pageContext.request.contextPath}/merchant_logout.do";
 			}
 		}
 	</script>
@@ -20,7 +20,7 @@
 <body>
 	<header>
 		<div class="header-left">
-			<a href="merchant_main.do"> <img src="/merchant/img/ozlogo2.png"
+			<a href="${pageContext.request.contextPath}/merchant-main.do"> <img src="/merchant/img/ozlogo2.png"
 				width="60" height="60"> <img src="/merchant/img/oz2.png"
 				width="90" height="50"> <span class="partner-center"><b>파트너센터</b></span>
 			</a>
@@ -41,14 +41,14 @@
 	<div class="container">
 		<div class="link-section">
 			<div class="left-section">
-				<a href="main_storeManagement.do?mer_num=${mer_num }"
+				<a href="${pageContext.request.contextPath}/mainStoreManagement.do?merNum=${mer_num }"
 					class="main-button">스토어관리 돌아가기</a>
 			</div>
 			<div class="right-section">
-				<a href="brand_application.do?mer_num=${mer_num }">입점하기</a> <a
-					href="notice.do">공지사항</a>
+				<a href="${pageContext.request.contextPath}/brand_application.do?mer_num=${mer_num }">입점하기</a> <a
+					href="${pageContext.request.contextPath}/notice.do">공지사항</a>
 				<c:if test="${not empty merchantLoginMember.mer_num}">
-					<a href="myInform_view.do?mer_num=${mer_num}">나의정보</a>
+					<a href="${pageContext.request.contextPath}/myInform_view.do?mer_num=${mer_num}">나의정보</a>
 				</c:if>
 			</div>
 		</div>
