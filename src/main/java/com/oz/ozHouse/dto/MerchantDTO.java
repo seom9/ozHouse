@@ -1,8 +1,6 @@
 package com.oz.ozHouse.dto;
 
 import java.sql.Date;
-import java.time.LocalDateTime;
-import java.util.List;
 
 import com.oz.ozHouse.domain.Merchant;
 
@@ -10,11 +8,12 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
-@Builder
-@AllArgsConstructor
+@Builder			 //builder 패턴 적용(필요한 필드만 생성자로 초기화 가능)
 @NoArgsConstructor   //기본생성자 자동으로 생성
+@AllArgsConstructor  //모든 필드의 생성자를 자동으로 생성
 public class MerchantDTO {
 
     private int merNum;
@@ -39,7 +38,7 @@ public class MerchantDTO {
     private String merProdintro;
     private String merOthershop;
     private String merFile;
-    private LocalDateTime merJoindate;
+    private Date merJoindate;
     private Date merInbranddate;
     private Date merDeletedate;
     private Date merOutDate;
@@ -49,46 +48,5 @@ public class MerchantDTO {
     private String merName;
     private String merEmail;
     private String merBusinessPost;
-    
-    public void setMer_business_adress(String merAdress) {
-		this.merAdress = merAdress;
-	}
-    
-    public MerchantDTO toDto(Merchant merchant) {
-        return MerchantDTO.builder()
-                .merNum(merchant.getMerNum())
-                .merId(merchant.getMerId())
-                .merPw(merchant.getMerPw())
-                .merIsbrand(merchant.getMerIsbrand())
-                .merCompany(merchant.getMerCompany())
-                .merComnum1(merchant.getMerComnum().getMerComnum1())
-                .merComnum2(merchant.getMerComnum().getMerComnum2())
-                .merComnum3(merchant.getMerComnum().getMerComnum3())
-                .merHp1(merchant.getMerHp().getPhoneNumber1())
-                .merHp2(merchant.getMerHp().getPhoneNumber2())
-                .merHp3(merchant.getMerHp().getPhoneNumber3())
-                //.merComintro(merchant.getMerComintro())
-                .merHomepage(merchant.getInbrandInfo().getHomepage())
-                .merManname(merchant.getInbrandInfo().getManagerName())
-                .merManhp1(merchant.getInbrandInfo().getPhoneNum().getPhoneNumber1())
-                .merManhp2(merchant.getInbrandInfo().getPhoneNum().getPhoneNumber2())
-                .merManhp3(merchant.getInbrandInfo().getPhoneNum().getPhoneNumber3())
-                .merManemail(merchant.getInbrandInfo().getManagerEmail())
-                .merCategory(merchant.getInbrandInfo().getCategory())
-                .merProdintro(merchant.getMerProdintro())
-                .merOthershop(merchant.getInbrandInfo().getOtherShop())
-                .merFile(merchant.getInbrandInfo().getBrandFile())
-                .merJoindate(merchant.getRegDate())
-                .merInbranddate(merchant.getMerInbranddate())
-                .merDeletedate(merchant.getMerDeletedate())
-                .merOutDate(merchant.getMerOutDate())
-                .merDelete(merchant.getMerDelete())
-                .merAdress(merchant.getMerAdress())
-                .merRegistration(merchant.getMerRegistration())
-                .merName(merchant.getMerName())
-                .merEmail(merchant.getMerEmail())
-                .merBusinessPost(merchant.getMerBusinessPost())
-                .build();
-    }
     
 }

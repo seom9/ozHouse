@@ -1,6 +1,5 @@
 package com.oz.ozHouse.domain.common;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.oz.ozHouse.domain.Category;
@@ -24,9 +23,8 @@ public class InbrandInfo {
 	
 	private String ManagerEmail;
 	
-//	@ElementCollection
-//	private List<Category> category = new ArrayList<Category>();
-	private String category;
+	@ElementCollection
+	private List<Category> category;
 	 
 	private String otherShop;
 	
