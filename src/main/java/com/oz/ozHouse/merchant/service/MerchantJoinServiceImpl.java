@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.oz.ozHouse.domain.Merchant;
 import com.oz.ozHouse.dto.MerchantDTO;
-import com.oz.ozHouse.repository.MerchantJoinRepositoryImpl;
+import com.oz.ozHouse.merchant.repository.MerchantJoinRepositoryImpl;
 
 import lombok.RequiredArgsConstructor;
 
