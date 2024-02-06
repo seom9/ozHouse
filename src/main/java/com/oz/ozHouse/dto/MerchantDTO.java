@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.oz.ozHouse.domain.Merchant;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -62,9 +63,9 @@ public class MerchantDTO {
                 .merComnum1(merchant.getMerComnum().getMerComnum1())
                 .merComnum2(merchant.getMerComnum().getMerComnum2())
                 .merComnum3(merchant.getMerComnum().getMerComnum3())
-//                .merHp1(merchant.getMerHp().getPhoneNumber1())
-//                .merHp2(merchant.getMerHp().getPhoneNumber2())
-//                .merHp3(merchant.getMerHp().getPhoneNumber3())
+                .merHp1(merchant.getMerHp().getPhoneNumber1())
+                .merHp2(merchant.getMerHp().getPhoneNumber2())
+                .merHp3(merchant.getMerHp().getPhoneNumber3())
                 .merHomepage(merchant.getInbrandInfo().getHomepage())
                 .merManname(merchant.getInbrandInfo().getManagerName())
                 .merManhp1(merchant.getInbrandInfo().getPhoneNum().getPhoneNumber1())
@@ -87,4 +88,20 @@ public class MerchantDTO {
                 .build();
     }
     
+    public MerchantDTO(HttpServletRequest req) {
+    	this.merNum = Integer.parseInt(req.getParameter("merNum"));
+    	this.merId = req.getParameter("merId");
+    	this.merPw = req.getParameter("merPw");
+    	this.merCompany = req.getParameter("merCompany");
+    	this.merComnum1 = req.getParameter("merComnum1");
+    	this.merComnum2 = req.getParameter("merComnum2");
+    	this.merComnum3 = req.getParameter("merComnum3");
+    	this.merHp1 = req.getParameter("merHp1");
+    	this.merHp2 = req.getParameter("merHp2");
+    	this.merHp3 = req.getParameter("merHp3");
+    	this.merRegistration = req.getParameter("merRegistration");
+    	this.merName = req.getParameter("merName");
+    	this.merEmail = req.getParameter("merEmail");
+    	this.merBusinessPost = req.getParameter("merBusinessPost");
+    }
 }

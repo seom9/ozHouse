@@ -11,14 +11,20 @@ import com.oz.ozHouse.domain.common.BaseEntity;
 import com.oz.ozHouse.domain.common.CompanyNumber;
 import com.oz.ozHouse.domain.common.InbrandInfo;
 import com.oz.ozHouse.domain.common.PhoneNumber;
+import com.oz.ozHouse.dto.CategoryDTO;
 
 import jakarta.persistence.*;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
+@Builder
+@AllArgsConstructor
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AttributeOverride(name = "regDate", column = @Column(name = "merJoindate", nullable = false))
@@ -67,7 +73,7 @@ public class Merchant extends BaseEntity{
     	@AttributeOverride(name = "brandFile", column = @Column(name = "merFile")),
 		@AttributeOverride(name = "phoneNum.phoneNumber1", column = @Column(name = "merManhp1")),
 		@AttributeOverride(name = "phoneNum.phoneNumber2", column = @Column(name = "merManhp2")),
-		@AttributeOverride(name = "phoneNum.PhoneNumber3", column = @Column(name = "merManhp3"))
+		@AttributeOverride(name = "phoneNum.phoneNumber3", column = @Column(name = "merManhp3"))
     })
     private InbrandInfo inbrandInfo;
     
@@ -96,5 +102,7 @@ public class Merchant extends BaseEntity{
     
     @NotNull
     private String merBusinessPost;
+    
+    
 
 }

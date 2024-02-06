@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Getter
 public class PhoneNumber {
-	private String phoneNumber1;
-	private String phoneNumber2;
-	private String PhoneNumber3;
+	public String phoneNumber1;
+	public String phoneNumber2;
+	public String phoneNumber3;
 }

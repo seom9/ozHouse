@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor  //필드의 모든 값을 초기화하는 생성자 자동 생성
 @Getter
 public class CompanyNumber {
-    private String merComnum1;
-    private String merComnum2;
-    private String merComnum3;
+	public String merComnum1;
+	public String merComnum2;
+	public String merComnum3;
 }
