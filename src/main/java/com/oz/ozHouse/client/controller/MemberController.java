@@ -10,12 +10,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.oz.ozHouse.client.config.LoginOkBean;
 import com.oz.ozHouse.client.service.EmailService;
 import com.oz.ozHouse.client.service.MemberService;
+import com.oz.ozHouse.domain.common.Address;
 import com.oz.ozHouse.dto.MemberDTO;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -104,6 +107,53 @@ public class MemberController {
         
         return result;
     }
+
+
+    
+//    @RequestMapping(value = "/member_update.do", method = RequestMethod.POST)
+//    public String updateMember(HttpServletRequest req, 
+//			@ModelAttribute MemberDTO dto, BindingResult result) {
+//		if (result.hasErrors()) {
+//			dto.setMember_image("");
+//		}
+//		MultipartHttpServletRequest mr = (MultipartHttpServletRequest)req;
+//		MultipartFile mf = mr.getFile("member_image");
+//		String filename = mf.getOriginalFilename();
+//		String path = req.getServletContext().getRealPath("/resources/image");
+//		System.out.println(path);
+//		File file = new File(path, filename);
+//		
+//		if (filename == null || filename.trim().equals("")) {
+//			dto.setMember_image(req.getParameter("member_image2"));
+//			System.out.println(req.getParameter("member_image2"));
+//		}else {
+//			try {
+//				mf.transferTo(file);
+//			}catch(IOException e) {
+//				req.setAttribute("msg", "이미지 업로드 실패 : 다시 확인해 주세요");
+//				req.setAttribute("url", "");
+//				return "message";
+//			}
+//			dto.setMember_image(filename);
+//		}
+//		
+//		HttpSession session = req.getSession();
+//		String ad1 = req.getParameter("sample6_address");
+//		String ad2 = req.getParameter("sample6_detailAddress");
+//		String ad3 = req.getParameter("sample6_extraAddress");
+//		session.setAttribute("member_image", filename);
+//		dto.setMember_address1(ad1 + "/" + ad2 + "/" + ad3);
+//		dto.setMember_image(filename);
+//		int res = memberMapper.updateMember(dto);
+//		if (res>0) {
+//			req.setAttribute("msg", "회원 정보가 수정되었습니다");
+//			req.setAttribute("url", "");
+//		}else if (res<0){
+//			req.setAttribute("msg", "회원 정보 수정 실패");
+//			req.setAttribute("url", "redirect:member_update.do");
+//		}
+//    	return "message";
+//    }
     
     /* SNS 회원 가입 메서드
     @PostMapping("/member_oauth.do")
@@ -118,97 +168,9 @@ public class MemberController {
 			}
 	    	return "message";
     }
-   
-    
-    @GetMapping("/member_update.do")
-    public String memberUpdate(HttpServletRequest req){
-		HttpSession session = req.getSession();
-    	LoginOkBean login = (LoginOkBean)session.getAttribute("loginMember");
-    	MemberDTO dto = memberMapper.getMember(login.getMember_id());
-    	
-        req.setAttribute("upPath", req.getServletContext().getRealPath("/resources/image"));
-
-    	if (dto.getMember_address1() != null) { 
-    		String address1 = dto.getMember_address1();
-    		String[] address = address1.split("/");
-            if (address.length >= 3) {  // Ensure there are at least 3 components
-                req.setAttribute("address1_ad1", address[0]);
-                req.setAttribute("address1_ad2", address[1]);
-                req.setAttribute("address1_ad3", address[2]);
-                System.out.println(address[0]);
-            }
-    	}
-        req.setAttribute("member", dto);
-    	return "client/member/member_update";
-    }
+  
     
 
-    @RequestMapping(value = "/member_update.do", method = RequestMethod.GET )
-    public String memberUpdate(HttpServletRequest req){
-		HttpSession session = req.getSession();
-    	LoginOkBean login = (LoginOkBean)session.getAttribute("loginMember");
-    	MemberDTO dto = memberMapper.getMember(login.getMember_id());
-    	
-        req.setAttribute("upPath", req.getServletContext().getRealPath("/resources/image"));
-
-    	if (dto.getMember_address1() != null) { 
-    		String address1 = dto.getMember_address1();
-    		String[] address = address1.split("/");
-            if (address.length >= 3) {  // Ensure there are at least 3 components
-                req.setAttribute("address1_ad1", address[0]);
-                req.setAttribute("address1_ad2", address[1]);
-                req.setAttribute("address1_ad3", address[2]);
-                System.out.println(address[0]);
-            }
-    	}
-        req.setAttribute("member", dto);
-    	return "client/member/member_update";
-    }
-    
-    @RequestMapping(value = "/member_update.do", method = RequestMethod.POST)
-    public String updateMember(HttpServletRequest req, 
-			@ModelAttribute MemberDTO dto, BindingResult result) {
-		if (result.hasErrors()) {
-			dto.setMember_image("");
-		}
-		MultipartHttpServletRequest mr = (MultipartHttpServletRequest)req;
-		MultipartFile mf = mr.getFile("member_image");
-		String filename = mf.getOriginalFilename();
-		String path = req.getServletContext().getRealPath("/resources/image");
-		System.out.println(path);
-		File file = new File(path, filename);
-		
-		if (filename == null || filename.trim().equals("")) {
-			dto.setMember_image(req.getParameter("member_image2"));
-			System.out.println(req.getParameter("member_image2"));
-		}else {
-			try {
-				mf.transferTo(file);
-			}catch(IOException e) {
-				req.setAttribute("msg", "이미지 업로드 실패 : 다시 확인해 주세요");
-				req.setAttribute("url", "");
-				return "message";
-			}
-			dto.setMember_image(filename);
-		}
-		
-		HttpSession session = req.getSession();
-		String ad1 = req.getParameter("sample6_address");
-		String ad2 = req.getParameter("sample6_detailAddress");
-		String ad3 = req.getParameter("sample6_extraAddress");
-		session.setAttribute("member_image", filename);
-		dto.setMember_address1(ad1 + "/" + ad2 + "/" + ad3);
-		dto.setMember_image(filename);
-		int res = memberMapper.updateMember(dto);
-		if (res>0) {
-			req.setAttribute("msg", "회원 정보가 수정되었습니다");
-			req.setAttribute("url", "");
-		}else if (res<0){
-			req.setAttribute("msg", "회원 정보 수정 실패");
-			req.setAttribute("url", "redirect:member_update.do");
-		}
-    	return "message";
-    }
     
     public boolean isValid(String str) {
         return Pattern.matches("^[a-zA-Z0-9-_]*$", str);

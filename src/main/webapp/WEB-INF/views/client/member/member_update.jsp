@@ -10,6 +10,8 @@
 	<title>회원 정보 수정</title>
 	<script type="text/javascript">
 		function check(){
+	        var memberId = document.getElementById("memberId").value;
+	        document.getElementById("login-form").action = "/member/" + memberId;
 			document.f.submit()
 		}
 	</script>	
@@ -113,43 +115,46 @@
 	
 </head>  
 <body onload="f.member_id.focus()">
-	<div  align="center" class="login-wrapper" >
-		<form name="f" method="post" id="login-form" action="member_update.do" enctype="multipart/form-data">
+	<div  align="center" class="login-wrapper">
+		<form name="f" method="post" id="login-form" enctype="multipart/form-data">
  			<br><br><br>
 			<span class="title2">프로필 수정</span>
 			<br><br><br><br>
 			<span class="title">프로필 사진</span><br>
 			<c:if test="${fn:startsWith(member.member_image, 'http')}">
-		        <img src="${member.member_image}" width="40%" height="60%">
-		        <input type="file" name="member_image" class="box">
-		        <input type="hidden" name="member_image2" value="${member.member_image}"/>
+		        <img src="${member.memberImage}" width="40%" height="60%">
+		        <input type="file" name="memberImage" class="box">
+		        <input type="hidden" name="memberImage2" value="${member.memberImage}"/>
 			</c:if>
-			<c:if test="${not fn:startsWith(member.member_image, 'http')}">
-		        <img src="${path}/resources/image/${member.member_image}" width="30%" height="40%">
+			<c:if test="${not fn:startsWith(member.memberImage, 'http')}">
+		        <img src="${path}/resources/image/${member.memberImage}" width="30%" height="40%">
 		        
-		        <input type="file" name="member_image" class="box">
-		        <input type="hidden" name="member_image2" value="${member.member_image}"/>
+		        <input type="file" name="memberImage" class="box">
+		        <input type="hidden" name="memberImage2"/>
 			</c:if>
 				<span class="title">아이디</span>
-					<input type="text" name="member_id" value="${member.member_id}" class="box" ReadOnly>
+					<input type="text" name="memberId" id="memberId" value="${member.memberId}" class="box" ReadOnly>
 				<span class="title">이메일</span>
-					<input type="text" value="${member.member_email}" class="box" ReadOnly>
+					<input type="text" value="${member.memberEmail}" class="box" ReadOnly>
 				<span class="title">닉네임</span>
 					<input type="text" placeholder="닉네임을 입력해 주세요." name="member_nickname" value="${member.member_nickname}" class="box">
 				<span class="title">연락처</span><br>
-					<input type="text" name="member_hp1" value="${member.member_hp1}" class="member_hp" size="3" maxlength="3"> -
-					<input type="text" name="member_hp2" value="${member.member_hp2}" class="member_hp" size="4" maxlength="4"> -
-					<input type="text" name="member_hp3" value="${member.member_hp3}" class="member_hp" size="4" maxlength="4">
+					<input type="text" name="PhoneNumber1" value="${member.PhoneNumber1}" class="member_hp" size="3" maxlength="3"> -
+					<input type="text" name="PhoneNumber2" value="${member.PhoneNumber2}" class="member_hp" size="4" maxlength="4"> -
+					<input type="text" name="PhoneNumber3" value="${member.PhoneNumber3}" class="member_hp" size="4" maxlength="4">
 				<br>
 				<span class="title">집 주소 설정</span>
 					<span class="title">주소 1</span>
-					<input type="text" id="postcode1" name="member_postcode1" value="${member.member_postcode1}" placeholder="우편번호">
+					<input type="text" id="postcode1" name="postcode" value="${member.Address.postcode}" placeholder="우편번호">
 					<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-					<input type="text" id="sample6_address" name="sample6_address" value="${address1_ad1}" placeholder="주소"><br>
-					<input type="text" id="sample6_detailAddress" name="sample6_detailAddress" value="${address1_ad2}" placeholder="상세주소">
-					<input type="text" id="sample6_extraAddress" name="sample6_extraAddress" value="${address1_ad3}" placeholder="참고항목">
+					<input type="text" id="sample6_address" name="city" value="${member.Address.city}" placeholder="주소"><br>
+					<input type="text" id="sample6_detailAddress" name="street" value="${member.Address.street}" placeholder="상세주소">
+					<input type="text" id="sample6_extraAddress" name="zipcode" value="${member.Address.zipcode}" placeholder="참고항목">
 					<input type="submit" value="정보 수정">
 					<input type="reset" value="reset">
+					
+					<input type="hidden" name="_method" value="PUT"/>
+					
 		</form>
 	</div>
 </body>

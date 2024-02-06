@@ -1,6 +1,5 @@
 package com.oz.ozHouse.client.config;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.oz.ozHouse.client.service.MemberService;
@@ -14,6 +13,7 @@ public class LoginOkBean {
 	public static final int OK = 0;
 	public static final int NOT_ID = 1;
 	public static final int NOT_PW = 2;
+	public static final int WITH_DRAW = 3;
 	public static final int ERROR = -1;
 	
 	public void setMember_id(String member_id) {
@@ -31,6 +31,7 @@ public class LoginOkBean {
 
 			if (dto != null) {
 				if (passwordEncoder.matches(member_passwd, dto.getMemberPasswd())) {
+					if (dto.getMemberDeletedate() != null) return WITH_DRAW;
 					return OK;
 				}else {
 					return NOT_PW;
