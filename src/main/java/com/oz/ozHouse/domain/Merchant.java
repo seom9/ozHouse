@@ -1,6 +1,8 @@
 package com.oz.ozHouse.domain;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -34,6 +36,9 @@ public class Merchant extends BaseEntity{
     
     @Embedded
     private CompanyNumber merComnum;
+    
+    @OneToMany(mappedBy = "merchant", cascade = CascadeType.ALL)
+    private List<UserCoupon> userCoupons = new ArrayList<>();
     
     @Embedded
     @AttributeOverrides({

@@ -23,16 +23,5 @@ public class AdminQADTO {
 	private Date adminQADate;
 	private String admininquiryType;
 	private String adminQAState;
-	
-	public AdminQA toEntity() {
-		AdminQA adminQa = new AdminQA();
-		adminQa.setAdminQANum(this.adminQANum);
-		adminQa.setMemberId(this.memberId);
-		adminQa.setAdminQASubject(this.adminQASubject);
-		adminQa.setAdminQAContent(this.adminQAContent);
-		adminQa.setAdmininquiryType(this.admininquiryType);
-		adminQa.setAdminQAState(this.adminQAState);
-		adminQa.setAdminQADate(this.adminQADate);
-		return adminQa;
-	}
+
 }

@@ -14,11 +14,4 @@ public class CategoryDTO {
     private String categoryCode;
     private String categoryName;
 
-    public Category toEntity() {
-        Category category = new Category();
-        category.setCategoryNum(this.categoryNum);
-        category.setCategoryCode(this.categoryCode);
-        category.setCategoryName(this.categoryName);
-        return category;
-    }
 }
