@@ -54,7 +54,6 @@ public class MerJoinRepositoryImpl implements MerJoinRepository{
 
 	@Override
 	public MerchantDTO findMerchantId(String id) {
-		System.out.println("Repository -> id : " + id);
 		String query = "SELECT m FROM Merchant m where m.merId = :value";
 		TypedQuery<Merchant> jpql = em.createQuery(query, Merchant.class)
 				.setParameter("value", id);

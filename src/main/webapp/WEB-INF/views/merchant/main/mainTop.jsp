@@ -28,7 +28,7 @@
 		<div class="header-right">
 			<nav>
 				<c:if test="${empty merchantLoginMember.mer_num}">
-					<a href="merchant_login.do">로그인</a>
+					<a href="merchant-login">로그인</a>
 					<a href="merchant_join.do">회원가입</a>
 				</c:if>
 				<c:if test="${not empty merchantLoginMember.mer_num}">

@@ -4,8 +4,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/merchant/css/login_style.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/merchant/css/styleMain.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/merchant/css/login_style.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/merchant/css/styleMain.css">
 
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <script type="text/javascript">
@@ -27,14 +27,14 @@
 		window.open("searchMember.do?mode="+mode, "search", "width=640, height=400")
 	}
 	function loginCheck(){
-		if (f.mer_id.value == ""){
+		if (f.merId.value == ""){
 	        customAlert("아이디를 입력해 주세요!!");
-	        f.mer_id.focus();
+	        f.merId.focus();
 	        return;
 	    }
-	    if (f.mer_passwd.value == ""){
+	    if (f.merPw.value == ""){
 	        customAlert("비밀번호를 입력해 주세요!!");
-	        f.mer_passwd.focus();
+	        f.merPw.focus();
 	        return;
 	    }
 	    document.f.submit();
@@ -51,8 +51,8 @@
 <header>
 <div class="header-left">
 		    <a href="merchant_main.do">
-		        <img src="resources/merchant/img/ozlogo2.png" width="60" height="60">
-		        <img src="resources/merchant/img/oz2.png" width="90" height="50">
+		        <img src="merchant/img/ozlogo2.png" width="60" height="60">
+		        <img src="merchant/img/oz2.png" width="90" height="50">
 		        <span class="partner-center"><b>파트너센터</b></span>
 		    </a>
 	    </div>
@@ -61,16 +61,16 @@
 	    </header>
 	    <br><br><br>
 	    <div class="container">
-        <form method="post" action="merchant_login.do" id="login-form" name="f">
+        <form method="post" action="merchant-loginOk" id="login-form" name="f">
          	 <div class="site-login">판매자 사이트 로그인</div>
          	 <br><br><br>
 			<c:if test="${not empty cookie.saveId}">
-            	<input type="text" name="mer_id" tabindex="1"  value="${cookie['saveId'].value}">
+            	<input type="text" name="merId" tabindex="1"  value="${cookie['saveId'].value}">
 			</c:if>	
 			<c:if test="${empty cookie.saveId}">
-            	<input type="text" name="mer_id" tabindex="1" placeholder="아이디 입력">
+            	<input type="text" name="merId" tabindex="1" placeholder="아이디 입력">
             </c:if>	
-            <input type="password" name="mer_passwd" placeholder="비밀번호 입력" onkeypress="return pressEnter(event)">
+            <input type="password" name="merPw" placeholder="비밀번호 입력" onkeypress="return pressEnter(event)">
             <div class="remember-me">
     <c:if test="${not empty cookie.saveId}">
         <input type="checkbox" name="saveId" checked id="remember-check">
