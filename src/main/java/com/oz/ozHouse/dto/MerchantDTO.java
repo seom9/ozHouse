@@ -38,7 +38,7 @@ public class MerchantDTO {
     private List<CategoryDTO> merCategory;
     private String merOthershop;
     private String merFile;
-    private LocalDateTime merJoindate;
+    private LocalDate merJoindate;
     private LocalDate merInbranddate;
     private LocalDate merDeletedate;
     private LocalDate merOutDate;
@@ -72,10 +72,10 @@ public class MerchantDTO {
                 .merManhp2(merchant.getInbrandInfo().getPhoneNum().getPhoneNumber2())
                 .merManhp3(merchant.getInbrandInfo().getPhoneNum().getPhoneNumber3())
                 .merManemail(merchant.getInbrandInfo().getManagerEmail())
-                //.merCategory(merchant.getInbrandInfo().getCategory())
+                .merCategory(merchant.getInbrandInfo().getCategoryDto())
                 .merOthershop(merchant.getInbrandInfo().getOtherShop())
                 .merFile(merchant.getInbrandInfo().getBrandFile())
-                //.merJoindate(merchant.getRegDate())
+                .merJoindate(merchant.getRegDate())
                 .merInbranddate(merchant.getMerInbranddate())
                 .merDeletedate(merchant.getMerDeletedate())
                 .merOutDate(merchant.getMerOutDate())
