@@ -17,6 +17,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import lombok.Getter;
 import lombok.Setter;
@@ -33,7 +34,8 @@ public class Inbrand extends BaseEntity{
 	
 	@OneToOne
 	@JoinColumn(name = "merNum")
-	private int merNum;
+	private Merchant merNum;
+	
 	private String inCompany;
 	
 	@Embedded

@@ -21,19 +21,4 @@ public class MerCouponDTO {
 	private LocalDate merCouponusedate;
 	private LocalDate merCouponenddate;
 	
-	public MerCoupon toEntity() {
-		MerCoupon merCoupon = new MerCoupon();
-
-		// Set the properties of the new Mer_Coupon instance based on the values of the current object
-		merCoupon.setMerCouponnum(this.merCouponnum);
-		merCoupon.setMerCouponname(this.merCouponname);
-		merCoupon.setMerIsok(this.merIsok);
-		merCoupon.setMerCoupondiscount(this.merCoupondiscount);
-		merCoupon.setMerNum(this.merNum);
-		merCoupon.setMerCouponusedate(this.merCouponusedate);
-		merCoupon.setMerCouponenddate(this.merCouponenddate);
-
-		// Return the new Mer_Coupon instance with its properties set
-		return merCoupon;
-	}
 }

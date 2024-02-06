@@ -19,17 +19,4 @@ public class UserCouponDTO {
 	private String userCouponActive;
 	private Date merCouponEndDate;
 	private long orderCode;
-	
-    public UserCoupon toEntity() {
-        UserCoupon userCoupon = new UserCoupon();
-        userCoupon.setUserCouponNum(this.userCouponNum);
-        userCoupon.setMerCouponNum(this.merCouponNum);
-        userCoupon.setMemberNum(this.memberNum);
-        userCoupon.setMerNum(this.merNum);
-        userCoupon.setUserCouponActive(this.userCouponActive);
-        userCoupon.setMerCouponEndDate(this.merCouponEndDate);
-        userCoupon.setOrderCode(this.orderCode);
-
-        return userCoupon;
-    }
 }

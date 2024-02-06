@@ -17,12 +17,4 @@ public class NoticeDTO {
     private String noticeContent;
     private Date noticeDate;
 
-    public Notice toEntity() {
-        Notice notice = new Notice();
-        notice.setNoticeNum(this.noticeNum);
-        notice.setNoticeTitle(this.noticeTitle);
-        notice.setNoticeContent(this.noticeContent);
-        notice.setNoticeDate(this.noticeDate);
-        return notice;
-    }
 }

@@ -75,7 +75,7 @@ public class MerchantDTO {
                 //.merCategory(merchant.getInbrandInfo().getCategory())
                 .merOthershop(merchant.getInbrandInfo().getOtherShop())
                 .merFile(merchant.getInbrandInfo().getBrandFile())
-                .merJoindate(merchant.getRegDate())
+                //.merJoindate(merchant.getRegDate())
                 .merInbranddate(merchant.getMerInbranddate())
                 .merDeletedate(merchant.getMerDeletedate())
                 .merOutDate(merchant.getMerOutDate())

@@ -11,9 +11,4 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class MemberRepositoryImpl {
     private final EntityManager em;
-    
-    public Member save(Member member) {
-        em.persist(member);
-        return member;
-    }
 }
