@@ -10,7 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -102,18 +104,20 @@ public class MerchantJoinController {
         return Pattern.matches("^[a-zA-Z0-9-_]*$", str);
     }
 
-	@PostMapping("/mer_checkId.do")
+	@PostMapping("mer-checkId.do")
 	@ResponseBody
-	public String checkId(@RequestParam("mer_id") String id) {
+	public String checkId(@RequestBody Map<String, String> map) {
+		String id = map.get("merId");
+		System.out.println("Controller -> id : " + id);
 		String result = "N";
 		if (merJoinService.merchant_checkMerId(id) != null)
-			result = "Y"; // 占쎈툡占쎌뵠占쎈탵 占쎄텢占쎌뒠 겫 뜃占쏙옙 뮟
+			result = "Y";
 		if (id.trim().equals(""))
-			result = "E"; // 占쎈툡占쎌뵠占쎈탵 뜮袁⑸선 占쎌뿳占쎌뱽 占쎈르
+			result = "E"; 
 		if (id.length() < 5 || id.length() > 12)
-			result = "L"; // length 占쎌궎 몴占
+			result = "L";
 		if (isValid(id) == false)
-			result = "V"; // 눧紐꾩쁽占쎈였 野껓옙占쎄텢
+			result = "V";
 		return result;
 	}
 }
