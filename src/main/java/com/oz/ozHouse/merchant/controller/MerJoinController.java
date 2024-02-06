@@ -3,10 +3,12 @@ package com.oz.ozHouse.merchant.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.util.MultiValueMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -54,6 +56,8 @@ public class MerJoinController {
 		comNum.put("merComnum1", dto.getMerComnum1());
     	comNum.put("merComnum2", dto.getMerComnum2());
     	comNum.put("merComnum3", dto.getMerComnum3());
+    	System.out.println("Controller -> merComnum : " 
+    	+ comNum.get("merComnum1") + "-"+ comNum.get("merComnum2") + "-"+ comNum.get("merComnum3"));
     	boolean comNumcheck  = merJoinService.merchant_checkBsNum(comNum);
     	if(!comNumcheck) {
     		goToMessege(req, "merchant_login.do", 
@@ -106,9 +110,8 @@ public class MerJoinController {
 
 	@PostMapping("mer-checkId.do")
 	@ResponseBody
-	public String checkId(@RequestBody Map<String, String> map) {
-		String id = map.get("merId");
-		System.out.println("Controller -> id : " + id);
+	public String checkId(@RequestBody MultiValueMap<String, String> map) {
+		String id = map.get("merId").get(0);
 		String result = "N";
 		if (merJoinService.merchant_checkMerId(id) != null)
 			result = "Y";
