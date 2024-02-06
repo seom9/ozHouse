@@ -27,14 +27,18 @@ public class InbrandInfo {
 	
 	@ElementCollection
 	private List<Category> category = new ArrayList<Category>();
-//	private String category;
 	 
 	private String otherShop;
 	
 	private String brandFile;
 	
-//	public List<CategoryDTO> toDto(){
-//		List<CategoryDTO> list = 
-//		return list;
-//	}
+	public List<CategoryDTO> getCategoryDto(){
+		List<CategoryDTO> list = new ArrayList<CategoryDTO>();
+		for(Category c : this.category) {
+			CategoryDTO dto = new CategoryDTO();
+			dto.toDto(c);
+			list.add(dto);
+		}
+		return list;
+	}
 }
