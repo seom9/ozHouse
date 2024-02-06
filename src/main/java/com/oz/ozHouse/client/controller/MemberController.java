@@ -107,53 +107,6 @@ public class MemberController {
         
         return result;
     }
-
-
-    
-//    @RequestMapping(value = "/member_update.do", method = RequestMethod.POST)
-//    public String updateMember(HttpServletRequest req, 
-//			@ModelAttribute MemberDTO dto, BindingResult result) {
-//		if (result.hasErrors()) {
-//			dto.setMember_image("");
-//		}
-//		MultipartHttpServletRequest mr = (MultipartHttpServletRequest)req;
-//		MultipartFile mf = mr.getFile("member_image");
-//		String filename = mf.getOriginalFilename();
-//		String path = req.getServletContext().getRealPath("/resources/image");
-//		System.out.println(path);
-//		File file = new File(path, filename);
-//		
-//		if (filename == null || filename.trim().equals("")) {
-//			dto.setMember_image(req.getParameter("member_image2"));
-//			System.out.println(req.getParameter("member_image2"));
-//		}else {
-//			try {
-//				mf.transferTo(file);
-//			}catch(IOException e) {
-//				req.setAttribute("msg", "이미지 업로드 실패 : 다시 확인해 주세요");
-//				req.setAttribute("url", "");
-//				return "message";
-//			}
-//			dto.setMember_image(filename);
-//		}
-//		
-//		HttpSession session = req.getSession();
-//		String ad1 = req.getParameter("sample6_address");
-//		String ad2 = req.getParameter("sample6_detailAddress");
-//		String ad3 = req.getParameter("sample6_extraAddress");
-//		session.setAttribute("member_image", filename);
-//		dto.setMember_address1(ad1 + "/" + ad2 + "/" + ad3);
-//		dto.setMember_image(filename);
-//		int res = memberMapper.updateMember(dto);
-//		if (res>0) {
-//			req.setAttribute("msg", "회원 정보가 수정되었습니다");
-//			req.setAttribute("url", "");
-//		}else if (res<0){
-//			req.setAttribute("msg", "회원 정보 수정 실패");
-//			req.setAttribute("url", "redirect:member_update.do");
-//		}
-//    	return "message";
-//    }
     
     /* SNS 회원 가입 메서드
     @PostMapping("/member_oauth.do")

@@ -7,4 +7,5 @@ public interface MemberService {
 	int checkId(String memberId);
 	int checkEmail(String memberEmail);
 	MemberDTO getMember(String memberId);
+	int updateMember(MemberDTO dto);
 }

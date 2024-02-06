@@ -65,7 +65,7 @@
 	        }).open();
 	    }
 	</script>
-	<link rel="stylesheet" href="${path}/client/login.css"/>
+	<link rel="stylesheet" href="${path}/client/member_css/login.css"/>
 	<style>
       	.join {
 			position: relative; 				    
@@ -121,7 +121,7 @@
 			<span class="title2">프로필 수정</span>
 			<br><br><br><br>
 			<span class="title">프로필 사진</span><br>
-			<c:if test="${fn:startsWith(member.member_image, 'http')}">
+			<c:if test="${fn:startsWith(member.memberImage, 'http')}">
 		        <img src="${member.memberImage}" width="40%" height="60%">
 		        <input type="file" name="memberImage" class="box">
 		        <input type="hidden" name="memberImage2" value="${member.memberImage}"/>
@@ -137,19 +137,19 @@
 				<span class="title">이메일</span>
 					<input type="text" value="${member.memberEmail}" class="box" ReadOnly>
 				<span class="title">닉네임</span>
-					<input type="text" placeholder="닉네임을 입력해 주세요." name="member_nickname" value="${member.member_nickname}" class="box">
+					<input type="text" placeholder="닉네임을 입력해 주세요." name="member_nickname" value="${member.memberNickname}" class="box">
 				<span class="title">연락처</span><br>
-					<input type="text" name="PhoneNumber1" value="${member.PhoneNumber1}" class="member_hp" size="3" maxlength="3"> -
-					<input type="text" name="PhoneNumber2" value="${member.PhoneNumber2}" class="member_hp" size="4" maxlength="4"> -
-					<input type="text" name="PhoneNumber3" value="${member.PhoneNumber3}" class="member_hp" size="4" maxlength="4">
+					<input type="text" name="PhoneNumber1" value="${member.memberHp.PhoneNumber1}" class="member_hp" size="3" maxlength="3"> -
+					<input type="text" name="PhoneNumber2" value="${member.memberHp.PhoneNumber2}" class="member_hp" size="4" maxlength="4"> -
+					<input type="text" name="PhoneNumber3" value="${member.memberHp.PhoneNumber3}" class="member_hp" size="4" maxlength="4">
 				<br>
 				<span class="title">집 주소 설정</span>
 					<span class="title">주소 1</span>
-					<input type="text" id="postcode1" name="postcode" value="${member.Address.postcode}" placeholder="우편번호">
+					<input type="text" id="postcode1" name="postcode" value="${member.memberAddress.postcode}" placeholder="우편번호">
 					<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-					<input type="text" id="sample6_address" name="city" value="${member.Address.city}" placeholder="주소"><br>
-					<input type="text" id="sample6_detailAddress" name="street" value="${member.Address.street}" placeholder="상세주소">
-					<input type="text" id="sample6_extraAddress" name="zipcode" value="${member.Address.zipcode}" placeholder="참고항목">
+					<input type="text" id="sample6_address" name="city" value="${member.memberAddress.city}" placeholder="주소"><br>
+					<input type="text" id="sample6_detailAddress" name="street" value="${member.memberAddress.street}" placeholder="상세주소">
+					<input type="text" id="sample6_extraAddress" name="zipcode" value="${member.memberAddress.zipcode}" placeholder="참고항목">
 					<input type="submit" value="정보 수정">
 					<input type="reset" value="reset">
 					
