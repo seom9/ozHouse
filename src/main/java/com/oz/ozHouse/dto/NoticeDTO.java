@@ -1,28 +1,30 @@
 package com.oz.ozHouse.dto;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 import com.oz.ozHouse.domain.Notice;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Getter
-@Setter
-@NoArgsConstructor
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor   //기본생성자 자동으로 생성
 public class NoticeDTO {
     private int noticeNum;
     private String noticeTitle;
     private String noticeContent;
-    private Date noticeDate;
+    private LocalDate noticeDate;
 
-    public Notice toEntity() {
-        Notice notice = new Notice();
-        notice.setNoticeNum(this.noticeNum);
-        notice.setNoticeTitle(this.noticeTitle);
-        notice.setNoticeContent(this.noticeContent);
-        notice.setNoticeDate(this.noticeDate);
-        return notice;
+    public NoticeDTO toDTO(Notice notice) {
+    	return NoticeDTO.builder()
+    			.noticeNum(notice.getNoticeNum())
+    			.noticeTitle(notice.getNoticeTitle())
+    			.noticeContent(notice.getNoticeContent())
+    			.noticeDate(notice.getNoticeDate())
+    			.build();
     }
 }

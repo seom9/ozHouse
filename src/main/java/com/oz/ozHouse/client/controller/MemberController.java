@@ -4,14 +4,17 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.oz.ozHouse.client.service.EmailService;
 import com.oz.ozHouse.client.service.MemberService;
@@ -70,12 +73,14 @@ public class MemberController {
         	if (insert != null) dto.setMemberImage(insert.getMemberImage()); 
         	String passwd = dto.getMemberPasswd();
         	dto.setMemberPasswd(passwordEncoder.encode(passwd));
-        	
-        	int res = memberService.insertMember(dto);
-    		if (res>0) {
+        	System.out.println("아니 나 이해할 수가 없어");
+
+        	String res = memberService.insertMember(dto);
+        	System.out.println("데이터는 왜 추가되는 거임");
+    		if (res != null) {
     			req.setAttribute("msg", "회원 가입 성공 : 안녕하세요!");
     			req.setAttribute("url", "main.do");
-    		}else if (res<0){
+    		}else if (res == null){
     			req.setAttribute("msg", "회원 가입 실패 : 다시 시도해 주세요");
     			req.setAttribute("url", "member_join.do");
     		}
