@@ -2,8 +2,6 @@ package com.oz.ozHouse.dto;
 
 import java.sql.Date;
 
-import com.oz.ozHouse.domain.OrderQA;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -18,5 +16,4 @@ public class OrderQADTO {
     private String orderInquiryType;
     private String orderQAState;
     private Date orderQADate;
-
 }
