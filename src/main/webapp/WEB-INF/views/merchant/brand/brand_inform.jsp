@@ -199,7 +199,7 @@ button {
 		<h3>상점 정보 입력</h3>
 		<div align="center">
 			<form name="f"
-				action="${pageContext.request.contextPath}/api/brands/applications"
+				action="${pageContext.request.contextPath}/brands/applications"
 				method="post" enctype="multipart/form-data">
 				<div class="flex-container">
 					<div class="flex-row">

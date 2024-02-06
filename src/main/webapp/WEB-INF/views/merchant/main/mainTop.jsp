@@ -41,7 +41,7 @@
 	<div class="container">
 		<div class="link-section">
 			<div class="left-section">
-				<a href="${pageContext.request.contextPath}/stores/${merNum}"
+				<a href="${pageContext.request.contextPath}/merchants/stores"
 					class="main-button">스토어관리 돌아가기</a>
 			</div>
 			<div class="right-section">

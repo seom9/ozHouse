@@ -9,7 +9,7 @@
 <script type="text/javascript">
 	function check() {
 		if (window.confirm("입점신청을 취소하실시 3개월간 재신청이 불가합니다. 취소하시겠습니까?")) {
-			location.href = "${pageContext.request.contextPath}/api/brands/applications/${applicationList.inbrand_num}/cancel";
+			location.href = "${pageContext.request.contextPath}/brands/applications/${applicationList.inbrand_num}/cancel";
 		}
 	}
 </script>
@@ -158,7 +158,7 @@ h2 {
 						<div class="flex-cell-header">첨부된 파일</div>
 						<div class="flex-cell-content">
 							<a
-								href="${pageContext.request.contextPath}/api/brands/applications/files/${applicationList.inbrand_file}/download">
+								href="${pageContext.request.contextPath}/brands/applications/files/${applicationList.inbrand_file}/download">
 								${applicationList.inbrand_file} </a>
 						</div>
 					</div>

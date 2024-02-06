@@ -34,7 +34,7 @@
 	<div class="container">
 		<div class="find-id">아이디 / 비밀번호 찾기</div>
 		<form name="f" method="post" id="login-form"
-			action="${pageContext.request.contextPath}/api/merchants/find-info-by-email">
+			action="${pageContext.request.contextPath}/merchants/find-info-by-email">
 			<span class="title">가입한 이메일 주소를 입력해 주세요</span> <input type="text"
 				tabindex="2" class="box" id="member_email" name="mer_email">
 			<input type="button" value="인증 이메일 보내기"

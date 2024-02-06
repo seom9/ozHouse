@@ -26,7 +26,7 @@
 	    document.getElementById('customAlert').style.display = 'none';
 	}
 	function searchMember(mode){
-	    window.open("${pageContext.request.contextPath}/api/members/search?mode=" + mode, "search", "width=640, height=400")
+	    window.open("${pageContext.request.contextPath}/members/search?mode=" + mode, "search", "width=640, height=400")
 	}
 	function loginCheck(){
 		if (f.merId.value == ""){
@@ -94,7 +94,7 @@
 			</div>
 			<input type="button" value="로그인" onclick="javascript:loginCheck()">
 			<div class="login-options">
-				<span class="join"><a href="${pageContext.request.contextPath}/api/merchants/reset-password">비밀번호 재설정</a></span> <span
+				<span class="join"><a href="${pageContext.request.contextPath}/merchants/reset-password">비밀번호 재설정</a></span> <span
 					class="join1"><a href="${pageContext.request.contextPath}/merchant/join">회원가입</a></span>
 			</div>
 		</form>

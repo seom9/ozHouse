@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!-- 상품조회 -->
-<link rel="stylesheet" type="text/css" href="resources/merchant/css/product_style2.css">
-<link rel="stylesheet" type="text/css" href="resources/merchant/css/delivery_style2.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/merchant/css/product_style2.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/merchant/css/delivery_style2.css">
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>

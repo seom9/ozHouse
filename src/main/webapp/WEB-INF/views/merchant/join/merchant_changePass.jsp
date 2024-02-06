@@ -61,7 +61,7 @@
 	<div class="container">
 		<div class="find-id">비밀번호 변경</div>
 		<form name="f" method="post" id="login-form"
-			action="${pageContext.request.contextPath}/api/merchants/password">
+			action="${pageContext.request.contextPath}/merchants/password">
 
 
 			<c:if test="${not empty mode}">

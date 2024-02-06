@@ -44,7 +44,7 @@
 	<div class="container">
 		<div class="find-id">아이디 / 비밀번호 찾기</div>
 		<form name="f" method="post" id="login-form"
-			action="${pageContext.request.contextPath}/api/merchants/find">
+			action="${pageContext.request.contextPath}/merchants/find">
 			<span class="title">입력하신 이메일 주소</span> <input type="text"
 				tabindex="2" class="box" value="${member_email}" id="member_email"
 				name="mer_email" ReadOnly> <br> <br> <span
