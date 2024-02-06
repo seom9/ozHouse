@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ include file="../storeMain/storeManagementTop.jsp" %>
-<%@ include file="productManagementTop.jsp" %>
+<%@ include file="productManagement_top.jsp" %>
 <form name="f" action="main_storeManagement.do" 
 						method="post">
 <div align="left">

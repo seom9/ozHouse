@@ -20,24 +20,15 @@ public class MemberServiceImpl implements MemberService {
 	private final MemberRepository memberRepository;
 
     public String insertMember(MemberDTO memberDTO) {
-    	PhoneNumber phoneNumber = new PhoneNumber(
-    			memberDTO.getMemberHp().getPhoneNumber1(),
-    			memberDTO.getMemberHp().getPhoneNumber2(),
-    			memberDTO.getMemberHp().getPhoneNumber3()
-    	);
     	
         Member member = Member.builder()
                 .memberId(memberDTO.getMemberId())
                 .memberPasswd(memberDTO.getMemberPasswd())
                 .memberNickname(memberDTO.getMemberNickname())
                 .memberEmail(memberDTO.getMemberEmail())
-                .memberImage(memberDTO.getMemberImage())
-                .memberHp(phoneNumber)
                 .memberPoint(0)
                 .memberLevel(MemberLevel.NORMAL)
-                .memberDeletedate(memberDTO.getMemberDeletedate())
                 .build();
-
         memberRepository.save(member);
         return memberDTO.getMemberId();
     }

@@ -29,12 +29,6 @@ public class LoginController {
 	public String loginOk(HttpServletRequest req, HttpServletResponse resp, 
 			@ModelAttribute LoginOkBean loginOk, @PathVariable("member_id") String saveId) {
 		
-//		if (memberMapper.confirmDelete(loginOk.getMember_id()) != null) {
-//			req.setAttribute("msg", "탈퇴한 아이디입니다");
-//			req.setAttribute("url", "main.do");
-//			return "message";
-//		}
-		
 		int res = loginOk.loginOk(memberService, passwordEncoder);
 		
 		String msg = null, url = null;
@@ -51,6 +45,10 @@ public class LoginController {
 			HttpSession session = req.getSession();
 			session.setAttribute("loginMember", loginOk);
 			msg = loginOk.getMember_id() + "님, 방문해 주셔서 감사합니다";
+			url = "/main";
+			break;
+		case LoginOkBean.WITH_DRAW :
+			msg = "탈퇴한 회원입니다";
 			url = "/main";
 			break;
 		case LoginOkBean.NOT_ID :
@@ -137,50 +135,6 @@ public class LoginController {
 		req.setAttribute("url", "main.do");
 		return "message";
 	}
-	
-	@RequestMapping(value="/member_login.do", method=RequestMethod.POST)
-	public String loginOk(HttpServletRequest req, HttpServletResponse resp, 
-			@ModelAttribute LoginOkBean loginOk, @RequestParam(required=false) String saveId) {
-		if (memberMapper.confirmDelete(loginOk.getMember_id()) != null) {
-			req.setAttribute("msg", "탈퇴한 아이디입니다");
-			req.setAttribute("url", "main.do");
-			return "message";
-		}
-		int res = loginOk.loginOk(memberMapper, passwordEncoder);
-		String msg = null, url = null;
-		switch(res){
-		case LoginOkBean.OK :
-			Cookie ck = new Cookie("saveId", loginOk.getMember_id());
-			if (saveId != null) {
-				ck.setMaxAge(7*24*60*60);
-			}else {
-				ck.setMaxAge(0);
-			}
-			resp.addCookie(ck);
-			HttpSession session = req.getSession();
-			session.setAttribute("loginMember", loginOk);
-			msg = loginOk.getMember_id() + "님, 방문해 주셔서 감사합니다";
-			url = "main.do";
-			break;
-		case LoginOkBean.NOT_ID :
-			msg = "아이디를 확인해 주세요";
-			url = "main.do";
-			break;
-		case LoginOkBean.NOT_PW :
-			msg = "비밀번호를 확인해 주세요";
-			url = "main.do";
-			break;
-		case LoginOkBean.ERROR : 
-			msg = "서버 오류입니다 관리자에게 문의해 주세요";
-			url = "main.do";
-			break;
-		}
-		
-		req.setAttribute("msg", msg);
-		req.setAttribute("url", url);
-		return "message";
-	}
-	
 	
 	//카카오 로그인 api
 	@RequestMapping(value="/kakao_login.do", method=RequestMethod.GET)
