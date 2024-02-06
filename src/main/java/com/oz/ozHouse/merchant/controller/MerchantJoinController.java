@@ -44,7 +44,7 @@ public class MerchantJoinController {
 		return "message";
 	}
 	
-	@PostMapping(value="/api/merchants/send-email")
+	@PostMapping(value="/merchants/send-email")
     public String merchantEmailAuth(HttpServletRequest req, @ModelAttribute MerchantDTO dto, 
     		BindingResult result) throws IllegalStateException, IOException {  //dto 뿉 MultipertFile 쓣 諛쏅뒗 怨쇱젙 뿉 꽌 BindingException 諛쒖깮, BindingResult濡   옟 쓬
 		//사업자등록번호 중복 확인
@@ -102,7 +102,7 @@ public class MerchantJoinController {
         return Pattern.matches("^[a-zA-Z0-9-_]*$", str);
     }
 
-	@PostMapping("/api/merchants/check-id")
+	@PostMapping("/merchants/check-id")
 	@ResponseBody
 	public String checkId(@RequestParam("mer_id") String id) {
 		String result = "N";

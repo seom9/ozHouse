@@ -3,6 +3,7 @@ package com.oz.ozHouse.merchant.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.oz.ozHouse.merchant.service.NoticeService;
 import com.oz.ozHouse.merchant.service.StoreManageService;
@@ -12,13 +13,14 @@ import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
+@RequestMapping("/merchants")
 public class MerStoreManageController {
 
 	private final StoreManageService storeManageService;
 	private final NoticeService noticeService;
 	
-	@GetMapping("/mainStoreManagement/{merNum}")
-	public String storeManage(HttpServletRequest req, @PathVariable("merNum") int merNum) {
+	@GetMapping("/stores")
+	public String storeManage(HttpServletRequest req) {
 		req.setAttribute("allCount", storeManageService.allCount());
 //		req.setAttribute("waitCount", storeManageService.waitCount());
 //		req.setAttribute("requestCount", storeManageService.requestCount());
@@ -33,5 +35,10 @@ public class MerStoreManageController {
 //		req.setAttribute("boardCount", storeManageService.boardCount());
 		req.setAttribute("noticeTitleList", noticeService.storeNotice());
 		return "merchant/store/storeMain/storeManagementMain";
+	}
+	
+	@GetMapping("/product-input")
+	public String proInput(HttpServletRequest req) {
+		return "merchant/store/productManagement/productManagement_input";
 	}
 }

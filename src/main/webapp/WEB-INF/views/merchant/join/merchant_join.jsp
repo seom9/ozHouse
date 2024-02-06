@@ -96,7 +96,7 @@
 		        let merId = $("#merId").val();
 		        $.ajax({
 		            type:'post', //post 형식으로 controller 에 보내기위함!!
-		            url: "${pageContext.request.contextPath}/api/merchants/check-id", // 컨트롤러로 가는 mapping 입력
+		            url: "${pageContext.request.contextPath}/merchants/check-id", // 컨트롤러로 가는 mapping 입력
 		            data: {"merId":merId}, // 원하는 값을 중복확인하기위해서  JSON 형태로 DATA 전송
 		            success: function(data){ 
 		             if (data == "N" ){ // 만약 성공할시
@@ -280,7 +280,7 @@
 	<main>
 		<div class="registration-form-container">
 			<form name="f" method="post"
-				action="${pageContext.request.contextPath}/api/merchants/send-email"
+				action="${pageContext.request.contextPath}/merchants/send-email"
 				enctype="multipart/form-data">
 				<h1>판매자 회원가입</h1>
 				<div class="form-group id-check-group">

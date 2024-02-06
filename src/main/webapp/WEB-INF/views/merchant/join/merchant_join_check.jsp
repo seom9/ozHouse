@@ -39,7 +39,7 @@
 	<div class="container">
 		<div class="find-id">회원가입</div>
 		<form name="f" method="post" id="login-form"
-			action="${pageContext.request.contextPath}/api/merchants/email-verification">
+			action="${pageContext.request.contextPath}/merchants/email-verification">
 
 			<div class="email-verification-instruction">
 				<span class="title">이메일 인증 번호를 입력하세요</span>
