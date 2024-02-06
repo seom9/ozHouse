@@ -32,11 +32,12 @@ public class InbrandInfo {
 	
 	private String brandFile;
 	
+	//List Collection Entity -> DTO로 변환 메소드
 	public List<CategoryDTO> getCategoryDto(){
 		List<CategoryDTO> list = new ArrayList<CategoryDTO>();
 		for(Category c : this.category) {
 			CategoryDTO dto = new CategoryDTO();
-			dto.toDto(c);
+			dto.toDTO(c);
 			list.add(dto);
 		}
 		return list;

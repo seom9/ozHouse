@@ -15,7 +15,7 @@ import lombok.RequiredArgsConstructor;
 
 @Repository
 @RequiredArgsConstructor
-public class MerchantJoinRepositoryImpl implements MerchantJoinRepository{
+public class MerJoinRepositoryImpl implements MerJoinRepository{
 	private final EntityManager em;
 
 	@Override

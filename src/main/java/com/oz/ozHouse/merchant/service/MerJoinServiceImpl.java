@@ -5,14 +5,14 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 
 import com.oz.ozHouse.dto.MerchantDTO;
-import com.oz.ozHouse.merchant.repository.MerchantJoinRepositoryImpl;
+import com.oz.ozHouse.merchant.repository.MerJoinRepositoryImpl;
 
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class MerchantJoinServiceImpl implements MerchantJoinService{
-	private final MerchantJoinRepositoryImpl repository;
+public class MerJoinServiceImpl implements MerJoinService{
+	private final MerJoinRepositoryImpl repository;
 	
 	public boolean merchant_checkBsNum(Map<String, String> comNum) {
 		MerchantDTO mer = repository.findMerchantComnum(comNum);
