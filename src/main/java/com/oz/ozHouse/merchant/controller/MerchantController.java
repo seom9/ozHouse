@@ -19,25 +19,25 @@ public class MerchantController {
 	
 	private final NoticeService noticeService;
 	
-	@GetMapping("merchant-main.do")
+	@GetMapping("/merchant/main")
 	public String merchantMain(HttpServletRequest req) {
 		req.setAttribute("noticeMainList", noticeService.simpleNotice());
 		return "merchant/main/main";
 	}
 	
-	@GetMapping("notice-title/{noticeNum}")
+	@GetMapping("/notice-title/{noticeNum}")
 	public String noticeTitle(HttpServletRequest req, @PathVariable("noticeNum") int noticeNum) {
 		req.setAttribute("noticeDetail", noticeService.detailNotice(noticeNum));
 		return "merchant/main/notice_detail";
 	}
 	
-	@GetMapping("notice.do")
+	@GetMapping("/notices")
 	public String notice(HttpServletRequest req) {
 		req.setAttribute("noticeList", noticeService.listNotice());
 		return "merchant/main/notice";
 	}
 	
-	@PostMapping("/notice.do")
+	@GetMapping("/notices/search")
     public ModelAndView findNotice(@RequestParam("search") String search, HttpServletRequest req) {
         ModelAndView modelAndView = new ModelAndView("merchant/main/notice");
         modelAndView.addObject("noticeList", noticeService.findNotice(search));
