@@ -1,8 +1,6 @@
 package com.oz.ozHouse.dto;
 
-import java.time.LocalDate;
-
-import com.oz.ozHouse.domain.Category; // Assuming there is a corresponding domain class
+import com.oz.ozHouse.domain.Category; 
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,11 +16,11 @@ public class CategoryDTO {
     private String categoryCode;
     private String categoryName;
 
-    public CategoryDTO toDTO(Category category) {
-    	return CategoryDTO.builder()
-    			.categoryNum(category.getCategoryNum())
-    			.categoryCode(category.getCategoryCode())
-    			.categoryName(category.getCategoryName())
-    			.build();
+    public static CategoryDTO toDTO(Category category) {
+        return CategoryDTO.builder()
+        		.categoryNum(category.getCategoryNum())
+                .categoryCode(category.getCategoryCode())
+                .categoryName(category.getCategoryName())
+                .build();
     }
 }
