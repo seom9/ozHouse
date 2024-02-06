@@ -8,32 +8,48 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.oz.ozHouse.domain.Notice;
+import com.oz.ozHouse.dto.NoticeDTO;
 import com.oz.ozHouse.merchant.repository.MerNoticeRepository;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class NoticeServiceImpl implements NoticeService{
 	
-	@Autowired
-	private MerNoticeRepository noticeRepository;
+	private final MerNoticeRepository noticeRepository;
 
+	//공지사항 6개 출력
 	@Override
-	public List<Notice> getSimpleNotice() {
-		Pageable firstSix = PageRequest.of(0, 6);
-		return noticeRepository.findAll(firstSix).getContent();
+	public List<Notice> simpleNotice() {
+		Pageable mainNotice = PageRequest.of(0, 6);
+		return noticeRepository.simpleNotice(mainNotice);
 	}
 
+	//공지사항 상세보기
 	@Override
-	public List<Notice> getNotice(int noticeNum) {
-		return noticeRepository.findByNoticeNum(noticeNum);
+	public NoticeDTO detailNotice(int noticeNum) {
+		return noticeRepository.detailNotice(noticeNum);
 	}
+
+	//공지사항 목록 출력
+	@Override
+	public List<Notice> listNotice() {
+		return noticeRepository.listNotice();
+	}
+
+	//공지사항 검색
+	@Override
+	public List<Notice> findNotice(String noticeTitle) {
+		return noticeRepository.findNotice(noticeTitle);
+	}
+
+	//스토어관리 홈 공지사항
+	@Override
+	public List<Notice> storeNotice() {
+		Pageable storeNotice = PageRequest.of(0, 5);
+		return noticeRepository.storeNotice(storeNotice);
+	}
+
 	
-	@Override
-	public List<Notice> getAllNotice() {
-		return noticeRepository.findAll();
-	}
-
-	@Override
-	public List<Notice> findNoticesByTitle(String title) {
-		return noticeRepository.findByNoticeTitleContaining(title);
-	}
 }
