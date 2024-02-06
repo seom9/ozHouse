@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!-- 재고관리 -->
-<link rel="stylesheet" type="text/css" href="resources/merchant/css/product_style.css">
-<link rel="stylesheet" type="text/css" href="resources/merchant/css/delivery_style.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/merchant/css/product_style.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/merchant/css/delivery_style.css">
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -125,7 +125,7 @@ function resetForm() {	// 폼 초기화
 	            	<div class="flex-cell division">
 				        <c:if test="${dto.product_today != '0' }">
 				        <div class="deal-container">
-				        	<img src="resources/merchant/img/todays.png" width="500" height="500"> <br>
+				        	<img src="/merchant/img/todays.png" width="500" height="500"> <br>
 				        	<span style="font-size: 18px; color: #FF0000;">${dto.product_today}</span><span>의 딜</span>
 						</div>
 				        </c:if>
