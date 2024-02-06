@@ -21,7 +21,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.oz.ozHouse.client.service.EmailServiceImpl;
 import com.oz.ozHouse.dto.MerchantDTO;
-import com.oz.ozHouse.merchant.service.MerchantJoinServiceImpl;
+import com.oz.ozHouse.merchant.service.MerJoinServiceImpl;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -29,8 +29,8 @@ import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
-public class MerchantJoinController {
-	private final MerchantJoinServiceImpl merJoinService;
+public class MerJoinController {
+	private final MerJoinServiceImpl merJoinService;
 	
 	static final String BUSINESSFILEPATH = 
 			"C:\\Users\\moonj\\Desktop\\ozHouse\\ozHouse\\src\\main\\webapp\\resources\\merchant\\business";
