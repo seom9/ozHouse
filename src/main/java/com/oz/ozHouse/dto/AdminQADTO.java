@@ -1,27 +1,33 @@
 package com.oz.ozHouse.dto;
 
-import java.sql.Date;
-
+import java.time.LocalDate;
 import com.oz.ozHouse.domain.AdminQA;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Getter
-@Setter
-@NoArgsConstructor
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor  // 기본 생성자 자동으로 생성
 public class AdminQADTO {
-	private int adminQANum;
-	private String memberId;
-	private String adminQASubject;
-	private String adminQAContent;
-	private Date adminQADate;
-	private String admininquiryType;
-	private String adminQAState;
-
+    private int adminQANum;
+    private String memberId;
+    private String adminQASubject;
+    private String adminQAContent;
+    private LocalDate adminQADate;
+    private String admininquiryType;
+    private String adminQAState;
+    
+    public AdminQADTO toDTO(AdminQA adminQA) {
+        return AdminQADTO.builder()
+                .adminQANum(adminQA.getAdminQANum())
+                .adminQASubject(adminQA.getAdminQASubject())
+                .adminQAContent(adminQA.getAdminQAContent())
+                .admininquiryType(adminQA.getAdmininquiryType())
+                .adminQAState(adminQA.getAdminQAState())
+                .adminQADate(adminQA.getAdminQADate())
+                .build();
+    }
 }
