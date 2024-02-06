@@ -73,8 +73,6 @@ public class LoginController {
 	}
 	
 	/*
-
-	
 	@RequestMapping(value="/member_find.do", method=RequestMethod.GET)
 	public String searchMember() {
 		return "client/member/member_find";

@@ -1,6 +1,7 @@
 package com.oz.ozHouse.domain;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,9 +25,11 @@ import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
+@NoArgsConstructor
 public class Member extends BaseEntity{
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -60,13 +63,13 @@ public class Member extends BaseEntity{
 	
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yy/MM/dd")
-	private Date memberDeletedate;
+	private LocalDate memberDeletedate;
 	
     @Builder
     public Member(int memberNum, String memberName, String memberId, String memberPasswd, 
     				String memberNickname, String memberEmail, String memberImage, 
     				Address memberAddress, PhoneNumber memberHp, List<OrderTb> orderList, 
-    				int memberPoint, MemberLevel memberLevel, Date memberDeletedate) {
+    				int memberPoint, MemberLevel memberLevel, LocalDate memberDeletedate) {
         this.memberNum = memberNum;
         this.memberName = memberName;
         this.memberId = memberId;

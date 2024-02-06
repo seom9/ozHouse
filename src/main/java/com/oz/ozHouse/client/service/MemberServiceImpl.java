@@ -1,5 +1,7 @@
 package com.oz.ozHouse.client.service;
 
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
 import com.oz.ozHouse.domain.Member;
@@ -19,9 +21,9 @@ public class MemberServiceImpl implements MemberService {
 
     public String insertMember(MemberDTO memberDTO) {
     	PhoneNumber phoneNumber = new PhoneNumber(
-    	        memberDTO.getPhoneNumber1(),
-    	        memberDTO.getPhoneNumber2(),
-    	        memberDTO.getPhoneNumber3()
+    			memberDTO.getMemberHp().getPhoneNumber1(),
+    			memberDTO.getMemberHp().getPhoneNumber2(),
+    			memberDTO.getMemberHp().getPhoneNumber3()
     	);
     	
         Member member = Member.builder()
@@ -53,7 +55,8 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public MemberDTO getMember(String memberId) {
-		return memberRepository.findByMemberId(memberId);
+		Member member = memberRepository.findByMemberId(memberId);
+	    return MemberDTO.fromEntity(member);
 	}
 }
 
