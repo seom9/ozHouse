@@ -8,14 +8,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="mainTop.jsp"%>
 <div class="main-notice">
-	<ul class="notice-list">
-		<c:forEach var="dto" items="${noticeDetail}">
-			<li class="notice-item">
-				<h2 class="notice-title">${dto.noticeTitle}</h2> <span
-				class="notice-date-modify">${dto.noticeDate}</span>
-				<p class="notice-content">${dto.noticeContent}</p>
-			</li>
-		</c:forEach>
-	</ul>
+    <ul class="notice-list">
+        <li class="notice-item">
+            <h2 class="notice-title">${noticeDetail.noticeTitle}</h2>
+            <span class="notice-date-modify">${noticeDetail.noticeDate}</span>
+            <p class="notice-content">${noticeDetail.noticeContent}</p>
+        </li>
+    </ul>
 </div>
 <%@ include file="mainBottom.jsp"%>

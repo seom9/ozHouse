@@ -1,47 +1,55 @@
 package com.oz.ozHouse.domain;
 
-import java.sql.Date;
+import com.oz.ozHouse.domain.common.Image;
+import com.oz.ozHouse.domain.common.ProPrice;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import lombok.Getter;
-import lombok.Setter;
 
 @Entity
-@Setter
 @Getter
 public class Product {
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int proNum;
+	
 	private String proName;
+	
 	private int cateNum;
-	private int merNum;
-	private String proImg;
-	private String proImgPro;
+	
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "merNum")
+	private Merchant merchant;
+    
+    @Embedded
+	private Image proImage;
+	
 	private int proQuantity;
-	private int proPrice;
+	
+    @Embedded
+	private ProPrice proPrice;
+	
 	private String proModifier;
-	private int proPoint;
-	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "yy/MM/dd")
-	private String proInDate;
+
 	private String proSpec;
+	
 	private int proPurchasesCount;
+	
 	private String proApprovalStatus;
-	private int proAssemblyCost;
-	private int proDiscountRate;
-	private int proDiscountPrice;
+	
 	private String cateName;
-	private String proImageChange;
-	private String proImageProChange;
-	private String encodedImage;
+
+    @JoinColumn(name="inManname")
 	private String inbrandCompany;
+	
 	private String proToday;
 }

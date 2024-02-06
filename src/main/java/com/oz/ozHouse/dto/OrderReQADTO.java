@@ -17,15 +17,7 @@ public class OrderReQADTO {
 	private String memberId;
 	private String orderReQAContent;
 	private String orderReQADate;
-	
-	public OrderReQA toEntity() {
-	    OrderReQA orderReQA = new OrderReQA();
-	    orderReQA.setOrderReQANum(this.orderReQANum);
-	    orderReQA.setMemberId(this.memberId);
-	    orderReQA.setOrderReQAContent(this.orderReQAContent);
-	    orderReQA.setOrderReQADate(this.orderReQADate);
-	    return orderReQA;
-	}
+
 
 
 }

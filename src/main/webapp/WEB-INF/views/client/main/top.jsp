@@ -5,6 +5,8 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<c:set var="path" value="${pageContext.request.contextPath}"/>
+	
 		<link rel="preload" href="https://assets.ohou.se/store/_next/static/css/6be64f3fe2ed3d98.css" as="style"/>
         <link rel="stylesheet" href="https://assets.ohou.se/store/_next/static/css/6be64f3fe2ed3d98.css" data-n-p=""/>
         <noscript data-n-css=""></noscript>
