@@ -75,8 +75,8 @@
     				font-size: 11px;
 }					
             	  </style>
-           	<span class="join"><a href="member_find.do">비밀번호 재설정</a></span>              
-            <span class="join1"><a href="member_join.do">회원가입</a></span>   <br>
+           	<span class="join"><a href="/member/find">비밀번호 재설정</a></span>              
+            <span class="join1"><a href="/member/join">회원가입</a></span>   <br>
             <span class="join2">sns계정으로 간편 로그인/회원가입</span>  
             
         </form>

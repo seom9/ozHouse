@@ -74,7 +74,7 @@ public class MemberController {
         	String res = memberService.insertMember(dto);
     		if (res != null) {
     			req.setAttribute("msg", "회원 가입 성공 : 안녕하세요!");
-    			req.setAttribute("url", "main");
+    			req.setAttribute("url", "/main");
     		}else if (res == null){
     			req.setAttribute("msg", "회원 가입 실패 : 다시 시도해 주세요");
     			req.setAttribute("url", "member/join");

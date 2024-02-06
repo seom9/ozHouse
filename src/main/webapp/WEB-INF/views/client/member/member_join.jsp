@@ -47,7 +47,7 @@
               let member_id = $("#member_id").val();
               $.ajax({
                   type:'post', //post 형식으로 controller 에 보내기위함!!
-                  url: "member/id-verification/" + member_id, // 컨트롤러로 가는 mapping 입력
+                  url: "/member/id-verification/" + member_id, // 컨트롤러로 가는 mapping 입력
                   data: {"member_id":member_id}, // 원하는 값을 중복확인하기위해서  JSON 형태로 DATA 전송
                   success: function(data){ 
                    if (data == "N" ){ // 만약 성공할시
@@ -117,7 +117,7 @@
 </head>  
 <body onload="f.member_id.focus()">
    <div  align="center" class="login-wrapper" style="top: 70px; position: relative;">
-   <form name="f" method="post" id="login-form" action="member_send_email.do">
+   <form name="f" method="post" id="login-form" action="email-verification">
              <h2><img src="${path}/client/image/ozHouseLogo.png" style="width: 20%"></h2>
             <font face="Roboto, sans-serif">회원 가입</font>
             <p>

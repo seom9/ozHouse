@@ -50,6 +50,10 @@ public class MemberServiceImpl implements MemberService {
 	public int checkEmail(String memberEmail) {
 		return memberRepository.countByMemberEmail(memberEmail);
 	}
-    
+
+	@Override
+	public MemberDTO getMember(String memberId) {
+		return memberRepository.findByMemberId(memberId);
+	}
 }
 
