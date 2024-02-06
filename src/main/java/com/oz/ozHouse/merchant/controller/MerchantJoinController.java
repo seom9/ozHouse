@@ -33,7 +33,7 @@ public class MerchantJoinController {
 	static final String BUSINESSFILEPATH = 
 			"C:\\Users\\moonj\\Desktop\\ozHouse\\ozHouse\\src\\main\\webapp\\resources\\merchant\\business";
 
-	@GetMapping("merchant_join.do")
+	@GetMapping("/merchant/join")
 	public String merchantJoin() {
 		return "merchant/join/merchant_join";
 	}
@@ -44,7 +44,7 @@ public class MerchantJoinController {
 		return "message";
 	}
 	
-	@PostMapping(value="/merchant_send_email.do")
+	@PostMapping(value="/api/merchants/send-email")
     public String merchantEmailAuth(HttpServletRequest req, @ModelAttribute MerchantDTO dto, 
     		BindingResult result) throws IllegalStateException, IOException {  //dto 뿉 MultipertFile 쓣 諛쏅뒗 怨쇱젙 뿉 꽌 BindingException 諛쒖깮, BindingResult濡   옟 쓬
 		//사업자등록번호 중복 확인
@@ -54,7 +54,7 @@ public class MerchantJoinController {
     	comNum.put("merComnum3", dto.getMerComnum3());
     	boolean comNumcheck  = merJoinService.merchant_checkBsNum(comNum);
     	if(!comNumcheck) {
-    		goToMessege(req, "merchant_login.do", 
+    		goToMessege(req, "/merchant/login", 
     				"이미 가입된 사업자등록번호 입니다.");
     	}
     	
@@ -62,7 +62,7 @@ public class MerchantJoinController {
     	String email = req.getParameter("mer_email");
     	boolean emailCheck = merJoinService.merchant_checkEmail(email);
         if (!emailCheck) {
-        	goToMessege(req, "merchant_join.do", 
+        	goToMessege(req, "/merchant/join", 
         			"이미 가입되어있는 이메일주소입니다.");
         }
         
@@ -75,7 +75,7 @@ public class MerchantJoinController {
     		mFile.transferTo(file); //             
 	        session.setAttribute("saveName", saveName);
     	}else {
-    		goToMessege(req, "merchant_main.do", 
+    		goToMessege(req, "/merchant/main", 
     				"회원가입 실패 : 사업자등록증 전송 중 오류가 발생하였습니다.");
         }
         
@@ -102,7 +102,7 @@ public class MerchantJoinController {
         return Pattern.matches("^[a-zA-Z0-9-_]*$", str);
     }
 
-	@PostMapping("/mer_checkId.do")
+	@PostMapping("/api/merchants/check-id")
 	@ResponseBody
 	public String checkId(@RequestParam("mer_id") String id) {
 		String result = "N";
