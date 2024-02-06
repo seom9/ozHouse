@@ -1,8 +1,16 @@
 package com.oz.ozHouse.client.controller;
 
+import java.io.File;
+import java.io.IOException;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.oz.ozHouse.client.config.LoginOkBean;
 import com.oz.ozHouse.client.service.MemberService;
@@ -48,4 +56,42 @@ public class MypageController {
         req.setAttribute("member", dto);
     	return "client/member/member_update";
     }
+
+	@PutMapping("/{memberId}/update")
+	public String updateMember(HttpServletRequest req, @ModelAttribute MemberDTO dto, BindingResult result) {
+		if (result.hasErrors()) {
+			dto.setMemberImage("");
+		}
+		MultipartHttpServletRequest mr = (MultipartHttpServletRequest) req;
+		MultipartFile mf = mr.getFile("member_image");
+		String filename = mf.getOriginalFilename();
+		String path = req.getServletContext().getRealPath("client/image");
+		System.out.println(path);
+		File file = new File(path, filename);
+
+		if (filename == null || filename.trim().equals("")) {
+			dto.setMemberImage(req.getParameter("member_image2"));
+			System.out.println(req.getParameter("member_image2"));
+		} else {
+			try {
+				mf.transferTo(file);
+			} catch (IOException e) {
+				req.setAttribute("msg", "이미지 업로드 실패 : 다시 확인해 주세요");
+				req.setAttribute("url", "");
+				return "message";
+			}
+			dto.setMemberImage(path);
+		}
+
+		int res = memberService.updateMember(dto);
+		if (res > 0) {
+			req.setAttribute("msg", "회원 정보가 수정되었습니다");
+			req.setAttribute("url", "");
+		} else if (res < 0) {
+			req.setAttribute("msg", "회원 정보 수정 실패");
+			req.setAttribute("url", "redirect:member_update.do");
+		}
+		return "message";
+	}
+    
 }

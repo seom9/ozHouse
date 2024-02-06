@@ -128,20 +128,14 @@
 							<div class="css-1f624s9">
 								<div class="css-1kpxvh4">
 									<c:if test="${empty sessionScope.loginMember}">
-<<<<<<< HEAD
-									<a class="css-1g5o6hv" href="/member/login">로그인</a>
-									<a class="css-1g5o6hv" href="/member/join">회원가입</a>
-								    <a class="css-1tlac5g" href="merchant-main.do">판매자센터</a>
-=======
-									<a class="css-1g5o6hv" href="member_login.do">로그인</a>
-									<a class="css-1g5o6hv" href="member_join.do">회원가입</a>
-								    <a class="css-1tlac5g" href="${pageContext.request.contextPath}/merchant/main">판매자센터</a>
->>>>>>> 9040ffe47b8e609ce688875cd3c8d6e29afab773
+										<a class="css-1g5o6hv" href="/member/login">로그인</a>
+										<a class="css-1g5o6hv" href="/member/join">회원가입</a>
+									    <a class="css-1tlac5g" href="${pageContext.request.contextPath}/merchant/main">판매자센터</a>
 								    </c:if>
 								    <c:if test="${not empty sessionScope.loginMember}">
-									<a class="css-1g5o6hv" href="/member/logout">로그아웃</a>
-									<a class="css-1g5o6hv" href="/mypage/profile">마이페이지</a>
-								    <a class="css-1tlac5g" href="merchant-main.do">판매자센터</a>
+										<a class="css-1g5o6hv" href="/member/logout">로그아웃</a>
+										<a class="css-1g5o6hv" href="/mypage/profile">마이페이지</a>
+									    <a class="css-1tlac5g" href="merchant-main.do">판매자센터</a>
 								    </c:if>
 								</div>
 		             			<span class="css-1amee4m">
