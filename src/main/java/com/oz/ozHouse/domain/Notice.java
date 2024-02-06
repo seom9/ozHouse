@@ -1,6 +1,6 @@
 package com.oz.ozHouse.domain;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -8,22 +8,22 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
+import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.Setter;
+import lombok.NoArgsConstructor;
 
 @Entity
-@Setter
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Notice {
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int noticeNum;
+	
 	private String noticeTitle;
+	
 	private String noticeContent;
-	@Temporal(TemporalType.DATE)
+	
 	@DateTimeFormat(pattern = "yy/MM/dd")	
-	private Date noticeDate;
-
+	private LocalDate noticeDate;
 }
