@@ -27,4 +27,4 @@
 		</c:forEach>
 	</ul>
 </div>
-<%@ include file="mainBottom.jsp"%>
+<%@ include file="../../client/main/bottom.jsp"%>

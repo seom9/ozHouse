@@ -9,20 +9,20 @@
 <head>
 <title>OZ의 집 : 파트너 센터</title>
 <script type="text/javascript">
-		function logout(){
-			if(window.confirm("로그아웃 하시겠습니까?")){
-				location.href = 
-					"${pageContext.request.contextPath}/merchant/logout";
-			}
+	function logout() {
+		if (window.confirm("로그아웃 하시겠습니까?")) {
+			location.href = "${pageContext.request.contextPath}/merchant/logout";
 		}
-	</script>
+	}
+</script>
 </head>
 <body>
 	<header>
 		<div class="header-left">
-			<a href="${pageContext.request.contextPath}/merchant/main"> <img src="/merchant/img/ozlogo2.png"
-				width="60" height="60"> <img src="/merchant/img/oz2.png"
-				width="90" height="50"> <span class="partner-center"><b>파트너센터</b></span>
+			<a href="${pageContext.request.contextPath}/merchant/main"> <img
+				src="/merchant/img/ozlogo2.png" width="60" height="60"> <img
+				src="/merchant/img/oz2.png" width="90" height="50"> <span
+				class="partner-center"><b>파트너센터</b></span>
 			</a>
 		</div>
 		<div class="header-right">
@@ -45,10 +45,12 @@
 					class="main-button">스토어관리 돌아가기</a>
 			</div>
 			<div class="right-section">
-				<a href="${pageContext.request.contextPath}/brands/${merNum}/applications">입점하기</a> <a
-					href="${pageContext.request.contextPath}/notices">공지사항</a>
+				<a
+					href="${pageContext.request.contextPath}/brands/${merNum}/applications">입점하기</a>
+				<a href="${pageContext.request.contextPath}/notices">공지사항</a>
 				<c:if test="${not empty merchantLoginMember.merNum}">
-					<a href="${pageContext.request.contextPath}/merchants/${merNum}/info">나의정보</a>
+					<a
+						href="${pageContext.request.contextPath}/merchants/${merNum}/info">나의정보</a>
 				</c:if>
 			</div>
 		</div>

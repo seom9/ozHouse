@@ -26,12 +26,12 @@
 	    document.getElementById('customAlert').style.display = 'none';
 	}
 	function searchMember(mode){
-		window.open("searchMember/mode="+mode, "search", "width=640, height=400")
+	    window.open("${pageContext.request.contextPath}/api/members/search?mode=" + mode, "search", "width=640, height=400")
 	}
 	function loginCheck(){
-		if (f.mer_id.value == ""){
+		if (f.merId.value == ""){
 	        customAlert("아이디를 입력해 주세요!!");
-	        f.mer_id.focus();
+	        f.merId.focus();
 	        return;
 	    }
 	    if (f.mer_passwd.value == ""){
@@ -55,7 +55,7 @@
 <body>
 	<header>
 		<div class="header-left">
-			<a href="merchant/main"> <img
+			<a href="${pageContext.request.contextPath}/merchant/main"> <img
 				src="/merchant/img/ozlogo2.png" width="60" height="60">
 				<img src="/merchant/img/oz2.png" width="90" height="50">
 				<span class="partner-center"><b>파트너센터</b></span>
@@ -67,18 +67,18 @@
 	<br>
 	<br>
 	<div class="container">
-		<form method="post" action="merchant/login" id="login-form"
+		<form method="post" action="${pageContext.request.contextPath}/merchant/login" id="login-form"
 			name="f">
 			<div class="site-login">판매자 사이트 로그인</div>
 			<br>
 			<br>
 			<br>
 			<c:if test="${not empty cookie.saveId}">
-				<input type="text" name="mer_id" tabindex="1"
+				<input type="text" name="merId" tabindex="1"
 					value="${cookie['saveId'].value}">
 			</c:if>
 			<c:if test="${empty cookie.saveId}">
-				<input type="text" name="mer_id" tabindex="1" placeholder="아이디 입력">
+				<input type="text" name="merId" tabindex="1" placeholder="아이디 입력">
 			</c:if>
 			<input type="password" name="mer_passwd" placeholder="비밀번호 입력"
 				onkeypress="return pressEnter(event)">
@@ -94,8 +94,8 @@
 			</div>
 			<input type="button" value="로그인" onclick="javascript:loginCheck()">
 			<div class="login-options">
-				<span class="join"><a href="merchant/find">비밀번호 재설정</a></span> <span
-					class="join1"><a href="merchant/join">회원가입</a></span>
+				<span class="join"><a href="${pageContext.request.contextPath}/api/merchants/reset-password">비밀번호 재설정</a></span> <span
+					class="join1"><a href="${pageContext.request.contextPath}/merchant/join">회원가입</a></span>
 			</div>
 		</form>
 	</div>
