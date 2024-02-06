@@ -368,17 +368,6 @@
 					<label class="title" for="merEmail">판매자 E-mail</label> <input
 						type="text" id="merEmail" name="merEmail">
 				</div>
-<!-- 
-				<div class="form-group">
-					<label class="title" for="mer_comintro">회사 소개</label>
-					<textarea id="mer_comintro" name="mer_comintro"
-						placeholder="회사 소개를 가독성 있게 작성해 주세요." class="box"></textarea>
-				</div>
-
-				<div class="form-group">
-					<label class="title" for="mer_prodintro">상품 소개</label>
-					<textarea id="mer_prodintro" name="mer_prodintro" class="box"></textarea>
-				</div> -->
 
 				<div class="button-group">
 					<input type="button" value="다음"
