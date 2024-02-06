@@ -1,8 +1,7 @@
 package com.oz.ozHouse.dto;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
-import com.oz.ozHouse.domain.OrderTb;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +12,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class OrderDTO {
     private long oCode;
-    private String memberId;
+    private MemberDTO memberId;
     private int productNum;
     private int oPrice;
     private int oDiscoupon;
@@ -21,10 +20,10 @@ public class OrderDTO {
     private int oDispoint;
     private String oComment;
     private int oCount;
-    private String oDate;
+    private LocalDate oDate;
     private String oPlace;
     private String oDelnow;
-    private Date oCanceldate;
+    private LocalDate oCanceldate;
     private String oLike;
     private String oRefund;
     private int oAssemblycost;

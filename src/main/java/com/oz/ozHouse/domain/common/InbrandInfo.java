@@ -24,9 +24,9 @@ public class InbrandInfo {
 	
 	private String ManagerEmail;
 	
-//	@ElementCollection
-//	private List<Category> category = new ArrayList<Category>();
-	private String category;
+	@ElementCollection
+	private List<Category> category = new ArrayList<Category>();
+//	private String category;
 	 
 	private String otherShop;
 	

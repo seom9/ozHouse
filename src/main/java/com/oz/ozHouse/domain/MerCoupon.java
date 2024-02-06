@@ -8,6 +8,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,6 +23,9 @@ public class MerCoupon {
 	private String merCouponname;
 	private String merIsok;
 	private int merCoupondiscount;
+	
+	@ManyToOne
+	@JoinColumn(name = "merNum")
 	private int merNum;
 	
 	@DateTimeFormat(pattern = "yy/MM/dd")

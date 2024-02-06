@@ -43,8 +43,6 @@ public class Merchant extends BaseEntity{
     })
     private PhoneNumber merHp;
     
-    //private String merComintro;
-   
     @Embedded
     @AttributeOverrides({
     	@AttributeOverride(name = "homepage", column = @Column(name = "merHomepage")),
@@ -58,8 +56,6 @@ public class Merchant extends BaseEntity{
 		@AttributeOverride(name = "PhoneNumber.PhoneNumber3", column = @Column(name = "merManhp3"))
     })
     private InbrandInfo inbrandInfo;
-   
-    private String merProdintro;
     
 	@DateTimeFormat(pattern = "yy/MM/dd")
     private LocalDate merInbranddate;
