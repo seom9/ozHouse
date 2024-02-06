@@ -23,7 +23,7 @@
 	<h1>회원 가입</h1>
 	<br><br>
 	<font face="Roboto, sans-serif">이메일 인증 번호를 입력하세요</font>
-	<form name="f" method="post" id="login-form" action="email_join_check.do">	
+	<form name="f" method="post" id="login-form" action="member/members">	
 		<span class="title">이메일 주소 : </span>
 		<span class="title">${email}</span>
 		<input type="text" id="member_id" placeholder="받으신 인증번호 8자리를 입력해 주세요" name="checkNumCheck" class="box">

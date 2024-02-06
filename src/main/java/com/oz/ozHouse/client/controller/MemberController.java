@@ -3,12 +3,12 @@ package com.oz.ozHouse.client.controller;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,7 +24,7 @@ import lombok.RequiredArgsConstructor;
 
 
 @Controller
-@RequestMapping("member")
+@RequestMapping("/member")
 @RequiredArgsConstructor
 public class MemberController {
 	private final MemberService memberService;
@@ -36,19 +36,19 @@ public class MemberController {
 		return "client/member/member_login";
 	}
 	
-    @GetMapping(value = "/member_join.do")
+    @GetMapping("/join")
     public String member_join() {
         return "client/member/member_join";
     }
     
-    @PostMapping("/member_send_email.do")
+    @PostMapping("/email-verification")
     public String emailAuth(@RequestParam("email") String email, 
     							@ModelAttribute MemberDTO dto, BindingResult result, 
     							HttpServletRequest req) throws Exception {
     	
         if (memberService.checkEmail(email) > 0) {
 			req.setAttribute("msg", "이미 가입되어 있습니다");
-			req.setAttribute("url", "member_join.do");
+			req.setAttribute("url", "member/join");
 			return "message";
         }
 
@@ -61,7 +61,7 @@ public class MemberController {
         return "client/member/member_join_check";
     }
     
-    @PostMapping("/email_join_check.do")
+    @PostMapping("/members")
     public String emailAuthCheck(@ModelAttribute MemberDTO dto, HttpServletRequest req, @RequestParam Map<String, String> params) {
     	if (params.get("checkNum").equals(params.get("checkNumCheck"))) {
         	
@@ -74,15 +74,15 @@ public class MemberController {
         	String res = memberService.insertMember(dto);
     		if (res != null) {
     			req.setAttribute("msg", "회원 가입 성공 : 안녕하세요!");
-    			req.setAttribute("url", "main.do");
+    			req.setAttribute("url", "main");
     		}else if (res == null){
     			req.setAttribute("msg", "회원 가입 실패 : 다시 시도해 주세요");
-    			req.setAttribute("url", "member_join.do");
+    			req.setAttribute("url", "member/join");
     		}
         	return "message";
         }else {
 			req.setAttribute("msg", "회원 가입 실패 : 다시 시도해 주세요");
-			req.setAttribute("url", "member_join.do");
+			req.setAttribute("url", "member/join");
         	return "message";
         }
     }
@@ -93,9 +93,9 @@ public class MemberController {
     }
     
 
-    @PostMapping("/member_checkId.do")
+    @PostMapping("/id-verification/{member_id}")
     @ResponseBody
-    public String checkId(@RequestParam("member_id") String id) {
+    public String checkId(@PathVariable("member_id") String id) {
         String result="N";
         if (memberService.checkId(id) > 0) result = "Y"; 	
         if (id.trim().equals("")) result = "E";					
