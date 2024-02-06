@@ -72,7 +72,7 @@ public class MerchantDTO {
                 .merManhp2(merchant.getInbrandInfo().getPhoneNum().getPhoneNumber2())
                 .merManhp3(merchant.getInbrandInfo().getPhoneNum().getPhoneNumber3())
                 .merManemail(merchant.getInbrandInfo().getManagerEmail())
-                .merCategory(merchant.getInbrandInfo().getCategory())
+                //.merCategory(merchant.getInbrandInfo().getCategory())
                 .merOthershop(merchant.getInbrandInfo().getOtherShop())
                 .merFile(merchant.getInbrandInfo().getBrandFile())
                 .merJoindate(merchant.getRegDate())

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.oz.ozHouse.domain.Category;
+import com.oz.ozHouse.dto.CategoryDTO;
 
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Embeddable;
@@ -32,5 +33,8 @@ public class InbrandInfo {
 	
 	private String brandFile;
 	
-	
+//	public List<CategoryDTO> toDto(){
+//		List<CategoryDTO> list = 
+//		return list;
+//	}
 }
