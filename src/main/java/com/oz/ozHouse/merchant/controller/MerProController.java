@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.oz.ozHouse.merchant.service.MerProService;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -14,6 +15,12 @@ import lombok.RequiredArgsConstructor;
 public class MerProController {
 
 	private final MerProService proService;
+	
+	//상품 등록
+	@GetMapping("/product-input")
+	public String proInput(HttpServletRequest req) {
+		return "merchant/store/productManagement/productManagement_input";
+	}
 	
 	//상품 조회
 	@GetMapping("/products")

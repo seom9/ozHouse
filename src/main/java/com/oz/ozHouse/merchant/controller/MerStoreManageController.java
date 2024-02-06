@@ -36,9 +36,4 @@ public class MerStoreManageController {
 		req.setAttribute("noticeTitleList", noticeService.storeNotice());
 		return "merchant/store/storeMain/storeManagementMain";
 	}
-	
-	@GetMapping("/product-input")
-	public String proInput(HttpServletRequest req) {
-		return "merchant/store/productManagement/productManagement_input";
-	}
 }
