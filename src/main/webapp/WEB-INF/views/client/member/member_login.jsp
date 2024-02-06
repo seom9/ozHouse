@@ -34,7 +34,7 @@
 <body> 
     <div align="center" class="login-wrapper" style="top: 70px; position: relative;">
         <h2><img src="${path}/client/image/ozHouseLogo.png" style="width: 30%"></h2>
-        <form method="post" action="member_login.do" id="login-form" name="f">
+        <form method="post" action="member/login" id="login-form" name="f">
          
 			<c:if test="${not empty cookie.saveId}">
             	<input type="text" name="member_id" tabindex="1"  value="${cookie['saveId'].value}">

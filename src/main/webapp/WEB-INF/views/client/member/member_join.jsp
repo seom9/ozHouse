@@ -47,7 +47,7 @@
               let member_id = $("#member_id").val();
               $.ajax({
                   type:'post', //post 형식으로 controller 에 보내기위함!!
-                  url:"member_checkId.do", // 컨트롤러로 가는 mapping 입력
+                  url: "member/id-verification/" + member_id, // 컨트롤러로 가는 mapping 입력
                   data: {"member_id":member_id}, // 원하는 값을 중복확인하기위해서  JSON 형태로 DATA 전송
                   success: function(data){ 
                    if (data == "N" ){ // 만약 성공할시

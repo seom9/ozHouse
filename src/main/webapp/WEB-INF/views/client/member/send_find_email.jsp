@@ -30,7 +30,7 @@
 		<h2><img src="${path}/client/ozHouseLogo.png" style="width: 20%"></h2>
 		<font face="Roboto, sans-serif">아이디 / 비밀번호 찾기</font>
 		<p>
-		<form name="f" method="post" id="login-form" action="member_find.do">
+		<form name="f" method="post" id="login-form" action="member/find">
 			<br><br>
 			<span class="title">입력하신 이메일 주소</span>
 			<input type="text" tabindex="2" class="box" value="${member_email}" id="member_email" name="member_email" ReadOnly>
