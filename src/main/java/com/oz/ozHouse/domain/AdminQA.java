@@ -1,31 +1,39 @@
 package com.oz.ozHouse.domain;
 
-import java.sql.Date;
+
+import java.time.LocalDate;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.Setter;
+import lombok.NoArgsConstructor;
 
 @Entity
-@Setter
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class AdminQA {
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int adminQANum;
-	private String memberId;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "memberId")
+	private Member member;
+	
 	private String adminQASubject;
 	private String adminQAContent;
 	private String admininquiryType;
 	private String adminQAState;	
-	@Temporal(TemporalType.DATE)
+	
 	@DateTimeFormat(pattern = "yy/MM/dd")	
-	private Date adminQADate;
+	private LocalDate adminQADate;
+	
 }
