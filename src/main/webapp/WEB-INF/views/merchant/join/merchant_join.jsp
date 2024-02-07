@@ -96,11 +96,7 @@
 		        let merId = $("#merId").val();
 		        $.ajax({
 		            type:'post', //post 형식으로 controller 에 보내기위함!!
-<<<<<<< HEAD
-		            url:"mer-checkId.do", // 컨트롤러로 가는 mapping 입력
-=======
-		            url: "${pageContext.request.contextPath}/merchants/check-id", // 컨트롤러로 가는 mapping 입력
->>>>>>> main
+		            url: "${pageContext.request.contextPath}/merchant/check-id", // 컨트롤러로 가는 mapping 입력
 		            data: {"merId":merId}, // 원하는 값을 중복확인하기위해서  JSON 형태로 DATA 전송
 		            success: function(data){ 
 		             if (data == "N" ){ // 만약 성공할시
@@ -273,17 +269,10 @@
 <body onload="f.merId.focus()">
 	<header>
 		<div class="header-left">
-<<<<<<< HEAD
-			<a href="merchant_main.do"> <img
-				src="merchant/img/ozlogo2.png" width="60" height="60">
-				<img src="merchant/img/oz2.png" width="90" height="50">
-				<span class="partner-center" style="color: black"><b>파트너센터</b></span>
-=======
 			<a href="${pageContext.request.contextPath}/merchant/main"> <img
 				src="/merchant/img/ozlogo2.png" width="60" height="60"> <img
 				src="/merchant/img/oz2.png" width="90" height="50"> <span
 				class="partner-center" style="color: black"><b>파트너센터</b></span>
->>>>>>> main
 			</a>
 		</div>
 		<div class="header-right"></div>
@@ -291,7 +280,7 @@
 	<main>
 		<div class="registration-form-container">
 			<form name="f" method="post"
-				action="${pageContext.request.contextPath}/merchants/send-email"
+				action="${pageContext.request.contextPath}/merchant/send-email"
 				enctype="multipart/form-data">
 				<h1>판매자 회원가입</h1>
 				<div class="form-group id-check-group">

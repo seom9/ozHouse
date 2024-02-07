@@ -11,4 +11,6 @@ public interface MerJoinService {
 	public boolean merchant_checkEmail(String email);
 	//ID 중복 조회
 	public MerchantDTO merchant_checkMerId(String id);
+	//판매자 추가
+	public int insertMerchant(MerchantDTO dto);
 }
