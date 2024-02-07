@@ -5,9 +5,9 @@
 <title>회원 가입</title>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/merchant/css/styleMain.css">
+	href="${pageContext.request.contextPath}/merchant/css/styleMain.css">
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/merchant/css/join.css">
+	href="${pageContext.request.contextPath}/merchant/css/join.css">
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -270,8 +270,8 @@
 	<header>
 		<div class="header-left">
 			<a href="merchant_main.do"> <img
-				src="resources/merchant/img/ozlogo2.png" width="60" height="60">
-				<img src="resources/merchant/img/oz2.png" width="90" height="50">
+				src="merchant/img/ozlogo2.png" width="60" height="60">
+				<img src="merchant/img/oz2.png" width="90" height="50">
 				<span class="partner-center" style="color: black"><b>파트너센터</b></span>
 			</a>
 		</div>

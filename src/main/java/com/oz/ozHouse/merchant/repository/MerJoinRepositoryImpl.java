@@ -21,7 +21,10 @@ public class MerJoinRepositoryImpl implements MerJoinRepository{
 	@Override
 	public MerchantDTO findMerchantComnum(Map<String, String> comNum) {
 		//Query 작성
-		String query = "SELECT m FROM Merchant m where m.merComnum1 = :value1 AND m.merComnum2 = :value2 AND m.merComnum3 = :value3";
+		String query = 
+				"SELECT m FROM Merchant m where m.merComnum.merComnum1 = :value1 "
+				+ "AND m.merComnum.merComnum2 = :value2 "
+				+ "AND m.merComnum.merComnum3 = :value3";
 		//Query 생성
 		TypedQuery<Merchant> jpql = em.createQuery(query, Merchant.class)
 		        .setParameter("value1", comNum.get("merComnum1"))
@@ -29,10 +32,14 @@ public class MerJoinRepositoryImpl implements MerJoinRepository{
 		        .setParameter("value3", comNum.get("merComnum3"));
 		
 		//결과 조회
-		Merchant m = jpql.getSingleResult();
-		
 		MerchantDTO dto = new MerchantDTO();
-		dto = dto.toDto(m);
+		try {
+			Merchant m = jpql.getSingleResult();
+			dto = dto.toDto(m);
+		}catch(NoResultException e) {
+			dto = null;
+			return dto;
+		}
 		return dto;
 	}
 
@@ -45,10 +52,14 @@ public class MerJoinRepositoryImpl implements MerJoinRepository{
 				.setParameter("value1", email);
 
 		// 결과 조회
-		Merchant m = jpql.getSingleResult();
-
 		MerchantDTO dto = new MerchantDTO();
-		dto = dto.toDto(m);
+		try {
+			Merchant m = jpql.getSingleResult();
+			dto = dto.toDto(m);
+		}catch(NoResultException e) {
+			dto = null;
+			return dto;
+		}
 		return dto;
 	}
 
