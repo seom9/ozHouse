@@ -13,14 +13,14 @@
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script>
 $(document).ready(function() {
-	$('#product_price, #product_discount_rate').on('input', calculateDiscount);
+	$('#proPrice, #proDiscountRate').on('input', calculateDiscount);
 
 	function calculateDiscount() {
-	    var productPrice = parseFloat($('#product_price').val()) || 0;
-	    var discountRate = parseFloat($('#product_discount_rate').val()) || 0;
+	    var productPrice = parseFloat($('#proPrice').val()) || 0;
+	    var discountRate = parseFloat($('#proDiscountRate').val()) || 0;
 
 	    var discountPrice = Math.round(productPrice * (discountRate / 100));
-	    $('#product_discount_price').val(discountPrice);
+	    $('#proDiscountPrice').val(discountPrice);
 	}
     
 	 function isNumeric(value) {
@@ -29,12 +29,12 @@ $(document).ready(function() {
 
 	    function validateNumericFields() {
 	        var fields = [
-	            {selector: 'input[name="product_price"]', name: '대표가'},
-	            {selector: 'input[name="product_discount_rate"]', name: '할인율'},
-	            {selector: 'input[name="product_discount_price"]', name: '할인가'},
-	            {selector: 'input[name="product_quantity"]', name: '수량'},
-	            {selector: 'input[name="product_point"]', name: '포인트'},
-	            {selector: 'input[name="product_assembly_cost"]', name: '조립비(설치비)'}
+	            {selector: 'input[name="proPrice"]', name: '대표가'},
+	            {selector: 'input[name="proDiscountRate"]', name: '할인율'},
+	            {selector: 'input[name="proDiscountPrice"]', name: '할인가'},
+	            {selector: 'input[name="proQuantity"]', name: '수량'},
+	            {selector: 'input[name="proPoint"]', name: '포인트'},
+	            {selector: 'input[name="proAssemblyCost"]', name: '조립비(설치비)'}
 	        ];
 	        for (var i = 0; i < fields.length; i++) {
 	            var field = $(fields[i].selector);
@@ -116,19 +116,19 @@ $(document).ready(function() {
         });
     }
 
-    $('#product_image').change(function() {
+    $('#proImg').change(function() {
         previewImage(this, 'product-image-preview', true);
     });
 
-    $('#product_image_pro').change(function() {
+    $('#proImgPro').change(function() {
         previewImage(this, 'additional-image-previews');
     });
 
     $('input[type="reset"]').click(function() {
         $('#additional-image-previews').empty();
-        $('#product_image_pro').val(''); 
+        $('#proImgPro').val(''); 
         $('#product-image-preview').empty();
-        $('#product_image').val(''); 
+        $('#proImg').val(''); 
     });
 });
 </script>
@@ -145,7 +145,7 @@ input[type='number']::-webkit-inner-spin-button, input[type='number']::-webkit-o
 		<div class="content-container">
 			<c:set var="merNum" value="${merchantLoginMember.merNum}" />
 			<form method="post"
-				action="productManagement_input.do?merNum=${merchantLoginMember.merNum }"
+				action="${pageContext.request.contextPath}/merchants/product-input"
 				enctype="multipart/form-data">
 				<input type="hidden" name="merNum"
 					value="${merchantLoginMember.merNum}">
@@ -155,8 +155,8 @@ input[type='number']::-webkit-inner-spin-button, input[type='number']::-webkit-o
 					</div>
 					<div class="form-section">
 						<div class="form-group">
-							<label for="product_name">상품명</label> <input type="text"
-								id="product_name" name="product_name" required>
+							<label for="proName">상품명</label> <input type="text" id="proName"
+								name="proName" required>
 						</div>
 						<!-- JSP -->
 						<div class="form-group">
@@ -174,40 +174,39 @@ input[type='number']::-webkit-inner-spin-button, input[type='number']::-webkit-o
 							<label>상품금액</label>
 							<div class="price-inputs" style="display: flex;">
 								<div class="input-flex" style="flex-grow: 1;">
-									<input type="number" id="product_price" name="product_price"
+									<input type="number" id="proPrice" name="proPrice"
 										placeholder="대표가" required
 										style="appearance: none; -moz-appearance: textfield; -webkit-appearance: none;"><span>원</span>
 								</div>
 								<div class="input-flex" style="flex-grow: 1;">
-									<input type="number" id="product_discount_rate"
-										name="product_discount_rate" placeholder="할인율" required
-										min="0" max="100" value="0"
+									<input type="number" id="proDiscountRate"
+										name="proDiscountRate" placeholder="할인율" required min="0"
+										max="100" value="0"
 										style="appearance: none; -moz-appearance: textfield; -webkit-appearance: none;"><span>%</span>
 								</div>
 								<div class="input-flex" style="flex-grow: 1;">
-									<input type="text" id="product_discount_price"
-										name="product_discount_price" placeholder="할인가" required
-										readonly><span>원</span>
+									<input type="text" id="proDiscountPrice"
+										name="proDiscountPrice" placeholder="할인가" required readonly><span>원</span>
 								</div>
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="product_quantity">수량</label>
+							<label for="proQuantity">수량</label>
 							<div class="input-flex">
-								<input type="text" id="product_quantity" name="product_quantity"
-									required> <span>개</span>
+								<input type="text" id="proQuantity" name="proQuantity" required>
+								<span>개</span>
 							</div>
 							<div class="form-group">
-								<label for="product_point">포인트</label>
+								<label for="proPoint">포인트</label>
 								<div class="input-flex">
-									<input type="text" id="product_point" name="product_point"
-										required> <span>point</span>
+									<input type="text" id="proPoint" name="proPoint" required>
+									<span>point</span>
 
 								</div>
 								<div class="form-group">
-									<label for="product_modifier">상품소개 <span>10글자
-											이내로 작성하세요.</span></label> <input type="text" id="product_modifier"
-										name="product_modifier" maxlength="10" required>
+									<label for="proModifier">상품소개 <span>10글자 이내로
+											작성하세요.</span></label> <input type="text" id="proModifier" name="proModifier"
+										maxlength="10" required>
 								</div>
 							</div>
 							<div class="section-header">
@@ -215,15 +214,14 @@ input[type='number']::-webkit-inner-spin-button, input[type='number']::-webkit-o
 							</div>
 							<div class="form-section image-upload-section">
 								<div class="form-group image-group">
-									<label for="product_image">대표이미지</label> <input type="file"
-										id="product_image" name="product_image" accept="image/*"
-										required>
+									<label for="proImg">대표이미지</label> <input type="file"
+										id="proImg" name="proImg" accept="image/*" required>
 									<div id="product-image-preview" class="image-preview"></div>
 								</div>
 								<div class="form-group image-group" id="fileUploadContainer">
-									<label for="product_image_pro">상세설명 <span>최대 10장
-											추가 가능합니다.</span></label> <input type="file" name="product_image_pro"
-										id="product_image_pro" multiple accept="image/*" required>
+									<label for="proImgPro">상세설명 <span>최대 10장 추가
+											가능합니다.</span></label> <input type="file" name="proImgPro" id="proImgPro"
+										multiple accept="image/*" required>
 									<div id="additional-image-previews" class="image-preview"></div>
 								</div>
 							</div>
@@ -235,10 +233,10 @@ input[type='number']::-webkit-inner-spin-button, input[type='number']::-webkit-o
 					</div>
 					<div class="form-section">
 						<div class="form-group">
-							<label for="product_assembly_cost">조립비(설치비)</label>
+							<label for="proAssemblyCost">조립비(설치비)</label>
 							<div class="input-flex">
-								<input type="text" id="product_assembly_cost"
-									name="product_assembly_cost" required> <span>원</span>
+								<input type="text" id="proAssemblyCost" name="proAssemblyCost"
+									required> <span>원</span>
 							</div>
 						</div>
 					</div>
