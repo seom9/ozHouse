@@ -103,5 +103,8 @@ public class MerchantDTO {
     	this.merName = req.getParameter("merName");
     	this.merEmail = req.getParameter("merEmail");
     	this.merBusinessPost = req.getParameter("merBusinessPost");
+    	this.merAdress = req.getParameter("sample6_address")
+    			 + "/" + req.getParameter("sample6_detailAddress")
+    			 + "/" + req.getParameter("sample6_extraAddress");
     }
 }

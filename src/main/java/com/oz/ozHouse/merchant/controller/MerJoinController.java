@@ -48,31 +48,26 @@ public class MerJoinController {
 		return "message";
 	}
 	
-	@PostMapping(value="/merchant_send_email.do")
-    public String merchantEmailAuth(HttpServletRequest req, @ModelAttribute MerchantDTO dto, 
-    		BindingResult result) throws IllegalStateException, IOException {  //dto 뿉 MultipertFile 쓣 諛쏅뒗 怨쇱젙 뿉 꽌 BindingException 諛쒖깮, BindingResult濡   옟 쓬
-		//사업자등록번호 중복 확인
+	// 사업자등록번호 중복 확인
+	private boolean checkComNum(HttpServletRequest req) {
 		Map<String, String> comNum = new HashMap<String, String>();
-		comNum.put("merComnum1", dto.getMerComnum1());
-    	comNum.put("merComnum2", dto.getMerComnum2());
-    	comNum.put("merComnum3", dto.getMerComnum3());
-    	System.out.println("Controller -> merComnum : " 
-    	+ comNum.get("merComnum1") + "-"+ comNum.get("merComnum2") + "-"+ comNum.get("merComnum3"));
-    	boolean comNumcheck  = merJoinService.merchant_checkBsNum(comNum);
-    	if(!comNumcheck) {
-    		goToMessege(req, "merchant_login.do", 
-    				"이미 가입된 사업자등록번호 입니다.");
-    	}
-    	
-    	//이메일 중복 확인
-    	String email = req.getParameter("mer_email");
+		comNum.put("merComnum1",req.getParameter("merComnum1"));
+		comNum.put("merComnum2",req.getParameter("merComnum2"));
+		comNum.put("merComnum3",req.getParameter("merComnum3"));
+		System.out.println("Controller -> merComnum : " + comNum.get("merComnum1") + "-" + comNum.get("merComnum2")
+				+ "-" + comNum.get("merComnum3"));
+		boolean comNumcheck = merJoinService.merchant_checkBsNum(comNum);
+		return comNumcheck;
+	}
+	
+	//이메일 중복 확인
+	private boolean checkEmail(String email) {
     	boolean emailCheck = merJoinService.merchant_checkEmail(email);
-        if (!emailCheck) {
-        	goToMessege(req, "merchant_join.do", 
-        			"이미 가입되어있는 이메일주소입니다.");
-        }
-        
-        HttpSession session = req.getSession();
+    	return emailCheck;
+	}
+	
+	//사업자등록증 저장
+	private boolean saveReg(HttpServletRequest req, HttpSession session) throws IllegalStateException, IOException{
 		MultipartHttpServletRequest mr = (MultipartHttpServletRequest)req;
         MultipartFile mFile = mr.getFile("mer_business_registration");
     	if (mFile != null && mFile.getSize() > 0) {
@@ -80,16 +75,29 @@ public class MerJoinController {
     		File file = new File(BUSINESSFILEPATH + saveName);
     		mFile.transferTo(file); //             
 	        session.setAttribute("saveName", saveName);
+	        return true;
     	}else {
-    		goToMessege(req, "merchant_main.do", 
-    				"회원가입 실패 : 사업자등록증 전송 중 오류가 발생하였습니다.");
+    		return false;
+    		
         }
-        
-        String ad1 = req.getParameter("sample6_address");
-		String ad2 = req.getParameter("sample6_detailAddress");
-		String ad3 = req.getParameter("sample6_extraAddress");
-		dto.setMer_business_adress(ad1 + "/" + ad2 + "/" + ad3);
-        
+	}
+	
+	@PostMapping(value="/merchant_send_email.do")
+    public String merchantEmailAuth(HttpServletRequest req) throws IllegalStateException, IOException  {  //dto 뿉 MultipertFile 쓣 諛쏅뒗 怨쇱젙 뿉 꽌 BindingException 諛쒖깮, BindingResult濡   옟 쓬
+		boolean checkNum = checkComNum(req);
+    	if(!checkNum) {
+    		goToMessege(req, "merchant_login.do", "이미 가입된 사업자등록번호 입니다.");
+    	}
+    	String email = req.getParameter("mer_email");
+    	boolean emailCheck = checkEmail(email);
+        if (!emailCheck) {
+        	goToMessege(req, "merchant_join.do", "이미 가입되어있는 이메일주소입니다.");
+        }
+        HttpSession session = req.getSession();
+        boolean checkSaveFile = saveReg(req, session);
+        if (!checkSaveFile) {
+        	goToMessege(req, "merchant_main.do", "회원가입 실패 : 사업자등록증 전송 중 오류가 발생하였습니다.");
+        }
 		EmailServiceImpl emailService = new EmailServiceImpl();
         String num = null;
 		try {
@@ -98,6 +106,7 @@ public class MerJoinController {
 			e.printStackTrace();
 		}
 		// String checkNum = Integer.toString(num);
+		MerchantDTO dto = new MerchantDTO(req);
 		req.setAttribute("checkNum", num);
 		req.setAttribute("email", email);
 		session.setAttribute("insertMerchant", dto);
