@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 
 import com.oz.ozHouse.domain.Member;
 import com.oz.ozHouse.domain.common.MemberLevel;
-import com.oz.ozHouse.domain.common.PhoneNumber;
 import com.oz.ozHouse.dto.MemberDTO;
 import com.oz.ozHouse.repository.MemberRepository;
 
@@ -47,13 +46,13 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public MemberDTO getMember(String memberId) {
 		Member member = memberRepository.findByMemberId(memberId);
-	    return MemberDTO.fromEntity(member);
+	    return new MemberDTO(member);
 	}
 
 	@Override
 	public int updateMember(MemberDTO dto) {
-		// Member member = dto.b
-		// memberRepository.save(member);
+		Member member = new Member(dto);
+		memberRepository.save();
 		return 0;
 	}
 	
