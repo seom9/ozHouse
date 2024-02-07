@@ -9,7 +9,6 @@ import com.oz.ozHouse.dto.MerchantDTO;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
-import jakarta.persistence.NonUniqueResultException;
 import jakarta.persistence.TypedQuery;
 import lombok.RequiredArgsConstructor;
 

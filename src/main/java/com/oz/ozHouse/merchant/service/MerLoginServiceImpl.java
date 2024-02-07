@@ -3,7 +3,7 @@ package com.oz.ozHouse.merchant.service;
 import org.springframework.stereotype.Service;
 
 import com.oz.ozHouse.dto.MerchantDTO;
-import com.oz.ozHouse.merchant.repository.MerJoinRepositoryImpl;
+import com.oz.ozHouse.merchant.repository.MerJoinRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -11,7 +11,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class MerLoginServiceImpl implements MerLoginService {
 
-	private final MerJoinRepositoryImpl joinRepository;
+	private final MerJoinRepository joinRepository;
 	
 	@Override
 	public MerchantDTO merchant_getMember(String mer_id) {
