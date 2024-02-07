@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
@@ -58,38 +59,36 @@ public class MypageController {
     }
 
 	@PutMapping("/{memberId}/update")
-	public String updateMember(HttpServletRequest req, @ModelAttribute MemberDTO dto, BindingResult result) {
-		if (result.hasErrors()) {
-			dto.setMemberImage("");
-		}
+	public String updateMember(HttpServletRequest req, @PathVariable String memberId,
+								@ModelAttribute MemberDTO dto, BindingResult result) {
 		MultipartHttpServletRequest mr = (MultipartHttpServletRequest) req;
-		MultipartFile mf = mr.getFile("member_image");
+		MultipartFile mf = mr.getFile("memberImage");
 		String filename = mf.getOriginalFilename();
 		String path = req.getServletContext().getRealPath("client/image");
 		System.out.println(path);
 		File file = new File(path, filename);
-
-		if (filename == null || filename.trim().equals("")) {
-			dto.setMemberImage(req.getParameter("member_image2"));
-			System.out.println(req.getParameter("member_image2"));
-		} else {
-			try {
-				mf.transferTo(file);
-			} catch (IOException e) {
-				req.setAttribute("msg", "이미지 업로드 실패 : 다시 확인해 주세요");
-				req.setAttribute("url", "");
-				return "message";
-			}
-			dto.setMemberImage(path);
-		}
-
+		
+//		if (filename == null || filename.trim().equals("")) {
+//			dto.setMemberImage(req.getParameter("member_image2"));
+//			System.out.println(req.getParameter("member_image2"));
+//		} else {
+//			try {
+//				mf.transferTo(file);
+//			} catch (IOException e) {
+//				req.setAttribute("msg", "이미지 업로드 실패 : 다시 확인해 주세요");
+//				req.setAttribute("url", "");
+//				return "message";
+//			}
+//			dto.setMemberImage(path);
+//		}
+		
 		int res = memberService.updateMember(dto);
 		if (res > 0) {
 			req.setAttribute("msg", "회원 정보가 수정되었습니다");
 			req.setAttribute("url", "");
 		} else if (res < 0) {
 			req.setAttribute("msg", "회원 정보 수정 실패");
-			req.setAttribute("url", "redirect:member_update.do");
+			req.setAttribute("url", "redirect:/mypage/" + memberId + "/update");
 		}
 		return "message";
 	}

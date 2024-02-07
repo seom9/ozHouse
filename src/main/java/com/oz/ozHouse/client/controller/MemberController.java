@@ -70,9 +70,9 @@ public class MemberController {
         	
         	HttpSession session = req.getSession();
         	MemberDTO insert = (MemberDTO)session.getAttribute("insertMember");
-        	if (insert != null) dto.setMemberImage(insert.getMemberImage()); 
+        	if (insert != null) dto.withMemberImage(insert.getMemberImage()); 
         	String passwd = dto.getMemberPasswd();
-        	dto.setMemberPasswd(passwordEncoder.encode(passwd));
+        	dto.withMemberPasswd(passwordEncoder.encode(passwd));
 
         	String res = memberService.insertMember(dto);
     		if (res != null) {
