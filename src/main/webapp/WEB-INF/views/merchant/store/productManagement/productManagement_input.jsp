@@ -143,12 +143,12 @@ input[type='number']::-webkit-inner-spin-button, input[type='number']::-webkit-o
 <body>
 	<div class="container">
 		<div class="content-container">
-			<c:set var="mer_num" value="${merchantLoginMember.mer_num}" />
+			<c:set var="merNum" value="${merchantLoginMember.merNum}" />
 			<form method="post"
-				action="productManagement_input.do?mer_num=${merchantLoginMember.mer_num }"
+				action="productManagement_input.do?merNum=${merchantLoginMember.merNum }"
 				enctype="multipart/form-data">
-				<input type="hidden" name="mer_num"
-					value="${merchantLoginMember.mer_num}">
+				<input type="hidden" name="merNum"
+					value="${merchantLoginMember.merNum}">
 				<div class="form-container">
 					<div class="section-header">
 						<h2>기본 정보</h2>
@@ -158,15 +158,18 @@ input[type='number']::-webkit-inner-spin-button, input[type='number']::-webkit-o
 							<label for="product_name">상품명</label> <input type="text"
 								id="product_name" name="product_name" required>
 						</div>
+						<!-- JSP -->
 						<div class="form-group">
 							<label for="categorySelect">카테고리</label> <select
 								name="category_num" id="categorySelect" required>
-								<c:forEach var="dto" items="${listCate}">
-									<option value="${dto.category_num}">
-										${dto.category_code}[${dto.category_name}]</option>
+								<c:forEach var="category" items="${categories}">
+									<option value="${category.ordinal()}">
+										[${category.getCategoryCode()}]&nbsp;${category.getCategoryName()}
+									</option>
 								</c:forEach>
 							</select>
 						</div>
+
 						<div class="form-group">
 							<label>상품금액</label>
 							<div class="price-inputs" style="display: flex;">
@@ -242,8 +245,8 @@ input[type='number']::-webkit-inner-spin-button, input[type='number']::-webkit-o
 				</div>
 				<div class="button-container">
 					<input type="submit" value="등록"> <input type="reset"
-						value="초기화"> <input type="hidden" name="mer_num"
-						value="${merchantLoginMember.mer_num }" />
+						value="초기화"> <input type="hidden" name="merNum"
+						value="${merchantLoginMember.merNum }" />
 				</div>
 		</div>
 	</div>
