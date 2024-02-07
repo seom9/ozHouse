@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.oz.ozHouse.merchant.bean.MerchantLoginBean;
-import com.oz.ozHouse.merchant.service.MerLoginServiceImpl;
+import com.oz.ozHouse.merchant.service.MerLoginService;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -18,7 +18,7 @@ import lombok.RequiredArgsConstructor;
 @Controller
 @RequiredArgsConstructor
 public class MerLoginController {
-	private final MerLoginServiceImpl loginService;
+	private final MerLoginService loginService;
 
 	@GetMapping("/merchant-login")
 	public String login() {
