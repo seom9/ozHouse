@@ -9,11 +9,9 @@
 	<c:set var="path" value="${pageContext.request.contextPath}"/>
 	<title>회원 정보 수정</title>
 	<script type="text/javascript">
-		function check(){
-	        var memberId = document.getElementById("memberId").value;
-	        document.getElementById("login-form").action = "/member/" + memberId;
-			document.f.submit()
-		}
+	    var memberId = document.getElementById("memberId").value;
+	    document.getElementById("login-form").action = "/member/" + memberId;
+	    document.getElementById("login-form").submit();
 	</script>	
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script>
@@ -112,15 +110,25 @@
 	    }  	
 				
 	 </style>
-	
+
+	<script type="text/javascript">
+    	var mode = "${mode}";
+	    if (mode === "fail") {
+	        alert("회원 정보 수정에 실패하였습니다");
+	    } else if (mode === "success") {
+	        alert("회원 정보 수정에 성공하였습니다");
+	    }
+	</script>
+
 </head>  
 <body onload="f.member_id.focus()">
 	<div  align="center" class="login-wrapper">
-		<form name="f" method="post" id="login-form" enctype="multipart/form-data">
+		<form name="f" method="post" id="login-form">
  			<br><br><br>
 			<span class="title2">프로필 수정</span>
 			<br><br><br><br>
 			<span class="title">프로필 사진</span><br>
+			<!-- 
 			<c:if test="${fn:startsWith(member.memberImage, 'http')}">
 		        <img src="${member.memberImage}" width="40%" height="60%">
 		        <input type="file" name="memberImage" class="box">
@@ -132,16 +140,17 @@
 		        <input type="file" name="memberImage" class="box">
 		        <input type="hidden" name="memberImage2"/>
 			</c:if>
+			 -->
 				<span class="title">아이디</span>
 					<input type="text" name="memberId" id="memberId" value="${member.memberId}" class="box" ReadOnly>
 				<span class="title">이메일</span>
 					<input type="text" value="${member.memberEmail}" class="box" ReadOnly>
 				<span class="title">닉네임</span>
-					<input type="text" placeholder="닉네임을 입력해 주세요." name="member_nickname" value="${member.memberNickname}" class="box">
+					<input type="text" placeholder="닉네임을 입력해 주세요." name="memberNickname" value="${member.memberNickname}" class="box">
 				<span class="title">연락처</span><br>
-					<input type="text" name="PhoneNumber1" value="${member.memberHp.PhoneNumber1}" class="member_hp" size="3" maxlength="3"> -
-					<input type="text" name="PhoneNumber2" value="${member.memberHp.PhoneNumber2}" class="member_hp" size="4" maxlength="4"> -
-					<input type="text" name="PhoneNumber3" value="${member.memberHp.PhoneNumber3}" class="member_hp" size="4" maxlength="4">
+					<input type="text" name="phoneNumber1" value="${member.memberHp.PhoneNumber1}" class="member_hp" size="3" maxlength="3"> -
+					<input type="text" name="phoneNumber2" value="${member.memberHp.PhoneNumber2}" class="member_hp" size="4" maxlength="4"> -
+					<input type="text" name="phoneNumber3" value="${member.memberHp.PhoneNumber3}" class="member_hp" size="4" maxlength="4">
 				<br>
 				<span class="title">집 주소 설정</span>
 					<span class="title">주소 1</span>
@@ -152,9 +161,7 @@
 					<input type="text" id="sample6_extraAddress" name="zipcode" value="${member.memberAddress.zipcode}" placeholder="참고항목">
 					<input type="submit" value="정보 수정">
 					<input type="reset" value="reset">
-					
-					<input type="hidden" name="_method" value="PUT"/>
-					
+										
 		</form>
 	</div>
 </body>

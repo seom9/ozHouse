@@ -6,6 +6,7 @@ import java.util.List;
 import com.oz.ozHouse.domain.Member;
 import com.oz.ozHouse.domain.OrderTb;
 import com.oz.ozHouse.domain.common.Address;
+import com.oz.ozHouse.domain.common.Image;
 import com.oz.ozHouse.domain.common.MemberLevel;
 import com.oz.ozHouse.domain.common.PhoneNumber;
 
@@ -26,7 +27,7 @@ public class MemberDTO{
     private String memberPasswd;
     private String memberNickname;
     private String memberEmail;
-    private String memberImage;
+    private Image memberImage;
     private Address memberAddress;
     private PhoneNumber memberHp;
     private List<OrderTb> orderList;
@@ -41,12 +42,11 @@ public class MemberDTO{
         return this;
     }
     
-    public MemberDTO withMemberImage(String image) {
+    public MemberDTO withMemberImage(Image image) {
         this.memberImage = image;
         return this;
     }
    
-    
     // 엔티티를 DTO 로
     public MemberDTO(Member member) {
         this.memberNum = member.getMemberNum();
@@ -73,7 +73,8 @@ public class MemberDTO{
         this.memberPasswd = req.getParameter("memberPasswd");
         this.memberNickname = req.getParameter("memberNickname");
         this.memberEmail = req.getParameter("memberEmail");
-        this.memberImage = req.getParameter("memberImage");
+        this.memberImage = new Image(req.getParameter(memberName), req.getParameter("memberImage"),
+        		req.getParameter("memberImage"), req.getParameter("memberImage"), req.getParameter("memberImage"));
         this.memberAddress = new Address(req.getParameter("postcode"), req.getParameter("city"), 
         					req.getParameter("street"), req.getParameter("zipcode"));
         this.memberHp = new PhoneNumber(req.getParameter("hp1"), req.getParameter("hp2"), req.getParameter("hp3"));

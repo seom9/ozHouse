@@ -48,14 +48,24 @@ public class MemberServiceImpl implements MemberService {
 		Member member = memberRepository.findByMemberId(memberId);
 	    return new MemberDTO(member);
 	}
-
+	
 	@Override
-	public int updateMember(MemberDTO dto) {
-		Member member = new Member(dto);
-		memberRepository.save();
-		return 0;
+	public Member getMemberEntity(String memberId) {
+		Member member = memberRepository.findByMemberId(memberId);
+		return member;
 	}
 	
+	@Override
+	public int updateMember(Member member) {
+	    try {
+	        memberRepository.save(member);
+	        return 1; // 성공 시 반환할 값
+	    } catch (Exception e) {
+	        e.printStackTrace(); // 에러 로그 출력
+	        return -1; // 에러 시 반환할 값
+	    }
+	}
+
 	
 }
 
