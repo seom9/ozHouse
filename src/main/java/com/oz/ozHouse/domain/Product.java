@@ -1,8 +1,12 @@
 package com.oz.ozHouse.domain;
 
+import java.time.LocalDate;
+import java.util.List;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.oz.ozHouse.domain.common.Image;
 import com.oz.ozHouse.domain.common.ProPrice;
-import com.oz.ozHouse.dto.ProductDTO;
 
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
@@ -12,17 +16,18 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import java.time.LocalDate;
-import java.util.List;
-
-import org.springframework.format.annotation.DateTimeFormat;
-
-import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+@Data
 @Entity(name = "Product")
+@Builder(toBuilder = true)
 @Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -63,6 +68,56 @@ public class Product {
         this.img = new Image();
     }
 
-//	public Product(ProductDTO productDTO) {
-//	}
+//    public static Product fromDTO(ProductDTO dto) {
+//        return Product.builder()
+//                .proNum(dto.getProNum())
+//                .proName(dto.getProName())
+//                .categoryNum(dto.getCategoryNum())
+////                .merNum(dto.getMerchant().getMerNum())
+////                .proImg(dto.getImg().getProImg())
+////                .proImgPro(dto.getImg().getProImgPro())
+//                .proQuantity(dto.getProQuantity())
+////                .proPrice(dto.getMerPrice().getProPrice())
+//                .proModifier(dto.getProModifier())
+////                .proPoint(dto.getMerPrice().getProPoint())
+//                .proInDate(dto.getProInDate())
+//                .proSpec(dto.getProSpec())
+//                .proPurchasesCount(dto.getProPurchasesCount())
+//                .proApprovalStatus(dto.getProApprovalStatus())
+////                .proAssemblyCost(dto.getMerPrice().getProAssemblyCost())
+////                .proDiscountRate(dto.getMerPrice().getProDiscountRate())
+////                .proDiscountPrice(dto.getMerPrice().getProDiscountPrice())
+//                .categoryName(dto.getCategoryName())
+////                .proImageChange(dto.getImg().getProImageChange())
+////                .proImageProChange(dto.getImg().getProImageProChange())
+////                .encodedImage(dto.getImg().getEncodedImage())
+//                .proToday(dto.getProToday())
+//                .build();
+//    }
+//    public ProductDTO toDTO(Product product) {
+//        return ProductDTO.builder()
+//                .proNum(product.getProNum())
+//                .proName(product.getProName())
+//                .categoryNum(product.getCategoryNum())
+//                .merNum(product.getMerchant().getMerNum())
+//                .proImg(product.getImg().getProImg())
+//                .proImgPro(product.getImg().getProImgPro())
+//                .proQuantity(product.getProQuantity())
+//                .proPrice(product.getMerPrice().getProPrice())
+//                .proModifier(product.getProModifier())
+//                .proPoint(product.getMerPrice().getProPoint())
+//                .proInDate(product.getProInDate())
+//                .proSpec(product.getProSpec())
+//                .proPurchasesCount(product.getProPurchasesCount())
+//                .proApprovalStatus(product.getProApprovalStatus())
+//                .proAssemblyCost(product.getMerPrice().getProAssemblyCost())
+//                .proDiscountRate(product.getMerPrice().getProDiscountRate())
+//                .proDiscountPrice(product.getMerPrice().getProDiscountPrice())
+//                .categoryName(product.getCategoryName())
+//                .proImageChange(product.getImg().getProImageChange())
+//                .proImageProChange(product.getImg().getProImageProChange())
+//                .encodedImage(product.getImg().getEncodedImage())
+//                .proToday(product.getProToday())
+//                .build();
+//    }
 }
