@@ -2,6 +2,7 @@ package com.oz.ozHouse.merchant.repository;
 
 import java.util.Map;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.data.repository.Repository;
 
@@ -9,7 +10,7 @@ import com.oz.ozHouse.domain.Merchant;
 import com.oz.ozHouse.dto.MerchantDTO;
 
 @NoRepositoryBean
-public interface MerJoinRepository extends Repository<Merchant, Integer>{  //Repository<Entity 클래스, PK 타입>
+public interface MerJoinRepository extends JpaRepository<Merchant, Integer>{  //Repository<Entity 클래스, PK 타입>
 
 	//사업자등록번호로 판매자 조회
 	MerchantDTO findMerchantComnum(Map<String, String> comNum); 
@@ -17,4 +18,5 @@ public interface MerJoinRepository extends Repository<Merchant, Integer>{  //Rep
 	public MerchantDTO findMerchantEmail(String email);
 	//ID로 판매자 조회
 	public MerchantDTO findMerchantId(String id);
+	
 }

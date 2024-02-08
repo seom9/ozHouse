@@ -12,6 +12,7 @@ import com.oz.ozHouse.domain.common.CompanyNumber;
 import com.oz.ozHouse.domain.common.InbrandInfo;
 import com.oz.ozHouse.domain.common.PhoneNumber;
 import com.oz.ozHouse.dto.CategoryDTO;
+import com.oz.ozHouse.dto.MerchantDTO;
 
 import jakarta.persistence.*;
 import jakarta.servlet.http.HttpServletRequest;
@@ -103,6 +104,40 @@ public class Merchant extends BaseEntity{
     @NotNull
     private String merBusinessPost;
     
+    public Merchant(MerchantDTO dto) {
+    	CompanyNumber merComnum = new CompanyNumber(dto.getMerComnum1(), dto.getMerComnum2(), dto.getMerComnum3());
+    	PhoneNumber merHp = new PhoneNumber(dto.getMerHp1(), dto.getMerHp2(), dto.getMerHp3());
+    	
+    	this.merNum = dto.getMerNum();
+    	this.merId = dto.getMerId();
+    	this.merPw = dto.getMerPw();
+    	this.merCompany = dto.getMerCompany();
+    	this.merComnum = merComnum;
+    	this.merHp = merHp;
+    	this.merAdress = dto.getMerAdress();
+    	this.merRegistration = dto.getMerRegistration();
+    	this.merName = dto.getMerName();
+    	this.merEmail = dto.getMerEmail();
+    	this.merBusinessPost = dto.getMerBusinessPost();
+    }
     
-
+//    public Merchant toEntity (MerchantDTO dto) {
+//    	CompanyNumber merComnum = new CompanyNumber(dto.getMerComnum1(), dto.getMerComnum2(), dto.getMerComnum3());
+//    	PhoneNumber merHp = new PhoneNumber(dto.getMerHp1(), dto.getMerHp2(), dto.getMerHp3());
+//    	
+//    	return Merchant.builder()
+//    			.merNum(dto.getMerNum())
+//    			.merId(dto.getMerId())
+//    			.merPw(dto.getMerPw())
+//    			.merCompany(dto.getMerCompany())
+//    			.merComnum(merComnum)
+//    			.merHp(merHp)
+//    			.merAdress(dto.getMerAdress())
+//    			.merRegistration(dto.getMerRegistration())
+//    			.merName(dto.getMerName())
+//    			.merEmail(dto.getMerEmail())
+//    			.merBusinessPost(dto.getMerBusinessPost())
+//    			.build();
+//    			
+//    }
 }
