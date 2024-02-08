@@ -27,7 +27,6 @@ public class MemberUpdateDTO {
 	private Address memberAddress;
 	
 	public Member updateEntity(Member member, MemberUpdateDTO updateDTO) {
-		System.out.println("빌더까진 오는 거야?");
 		return member.toBuilder()
 	        .memberImage(updateDTO.getMemberImage())
 	        .memberNickname(updateDTO.getMemberNickname())
