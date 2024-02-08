@@ -195,7 +195,7 @@
 							onclick="window.location='product_update.do?product_num=${getProduct.product_num}&mer_num=${merchantLoginMember.mer_num}'">
 					</c:if>
 					<input type="button" class="list-button" value="목록보기"
-						onclick="window.location='${pageContext.request.contextPath}/merchants/products'">
+						onclick="window.location='${pageContext.request.contextPath}/merchant/products'">
 				</div>
 			</div>
 </body>

@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+//@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AttributeOverride(name = "regDate", column = @Column(name = "merJoindate"))
 public class Merchant extends BaseEntity{
 	@Id 

@@ -1,19 +1,23 @@
 package com.oz.ozHouse.merchant.repository;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.function.Function;
 
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.repository.query.FluentQuery.FetchableFluentQuery;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.oz.ozHouse.domain.Product;
-import com.oz.ozHouse.dto.ProductDTO;
 
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.Query;
 import lombok.RequiredArgsConstructor;
 
 @Repository
-@RequiredArgsConstructor 
+@RequiredArgsConstructor
 public class MerProductRepositoryImpl implements MerProductRepository{
 
 	private final EntityManager em;
@@ -26,13 +30,91 @@ public class MerProductRepositoryImpl implements MerProductRepository{
 	}
 
 	@Override
-	public <S extends Product> S save(S entity) {
+	public void flush() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public <S extends Product> S saveAndFlush(S entity) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public <S extends Product> Iterable<S> saveAll(Iterable<S> entities) {
+	public <S extends Product> List<S> saveAllAndFlush(Iterable<S> entities) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void deleteAllInBatch(Iterable<Product> entities) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteAllByIdInBatch(Iterable<Integer> ids) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteAllInBatch() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Product getOne(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Product getById(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Product getReferenceById(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <S extends Product> List<S> findAll(Example<S> example) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <S extends Product> List<S> findAll(Example<S> example, Sort sort) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <S extends Product> List<S> saveAll(Iterable<S> entities) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Product> findAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Product> findAllById(Iterable<Integer> ids) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <S extends Product> S save(S entity) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -47,18 +129,6 @@ public class MerProductRepositoryImpl implements MerProductRepository{
 	public boolean existsById(Integer id) {
 		// TODO Auto-generated method stub
 		return false;
-	}
-
-	@Override
-	public Iterable<Product> findAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Iterable<Product> findAllById(Iterable<Integer> ids) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
@@ -98,88 +168,44 @@ public class MerProductRepositoryImpl implements MerProductRepository{
 	}
 
 	@Override
-	public void save(ProductDTO productDTO) {
+	public List<Product> findAll(Sort sort) {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
 
-//	//승인 대기
-//	@Override
-//	public int waitCount() {
-//		// TODO Auto-generated method stub
-//		return 0;
-//	}
-//
-//	//승인 보류
-//	@Override
-//	public int requestCount() {
-//		// TODO Auto-generated method stub
-//		return 0;
-//	}
-//	
-//	//승인 반려
-//	@Override
-//	public int cancleCount() {
-//		// TODO Auto-generated method stub
-//		return 0;
-//	}
-//
-//	//요청 취소
-//	@Override
-//	public int requestCancle() {
-//		// TODO Auto-generated method stub
-//		return 0;
-//	}
-//
-//	//판매중
-//	@Override
-//	public int saleOk() {
-//		// TODO Auto-generated method stub
-//		return 0;
-//	}
-//	
+	@Override
+	public Page<Product> findAll(Pageable pageable) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-	//상품 등록
-//	@Transactional
-//	@Override
-//	public int insertProduct(Product product) {
-//	    String sql = "INSERT INTO Product (categoryName, categoryNum, encodedImage, merNum, "
-//	    		+ "proAssemblyCost, proDiscountPrice, "
-//	    		+ "proDiscountRate, proImageChange, proImageProChange, "
-//	    		+ "proImg, proImgPro, proInDate, proModifier, proName, "
-//	    		+ "proPoint, proPrice, proQuantity, proApprovalStatus, "
-//	    		+ "proSpec, proToday, "
-//	    		+ "proPurchasesCount) "
-//	    		+ "VALUES (:categoryName, :categoryNum, 'encodedImage', 1, "
-//	    		+ ":proAssemblyCost, :proDiscountPrice, :proDiscountRate, "
-//	    		+ "'ImageChange', 'ProChange', :proImg, :proImgPro, "
-//	    		+ "CURRENT_DATE, :proModifier, :proName, :proPoint, :proPrice, "
-//	    		+ ":proQuantity, 'f', 'normal', 'today', 0,)";
-//
-//	    Query query = em.createQuery(sql, Integer.class);
-//	    // 파라미터 설정 예시
-//	    query.setParameter("categoryName", product.getCategoryName());
-//	    // 나머지 파라미터 설정...
-//
-//	    return query.executeUpdate(); // executeUpdate는 영향 받은 행의 수를 반환합니다.
-//	}
-	
-//	@Transactional
-//	@Override
-//	public void insertProduct(ProductDTO productDTO) {
-//	    em.persist(productDTO);
-////	    em.flush();
-//	}
-	
-//	@Override
-//    @Transactional
-//    public void saveProduct(Product product) {
-//		em.persist(product);
-//    }
-//
-//	@Override
-//	public void save(Product product) {
-//		em.persist(product);
-//	}
+	@Override
+	public <S extends Product> Optional<S> findOne(Example<S> example) {
+		// TODO Auto-generated method stub
+		return Optional.empty();
+	}
 
+	@Override
+	public <S extends Product> Page<S> findAll(Example<S> example, Pageable pageable) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <S extends Product> long count(Example<S> example) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public <S extends Product> boolean exists(Example<S> example) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public <S extends Product, R> R findBy(Example<S> example, Function<FetchableFluentQuery<S>, R> queryFunction) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
