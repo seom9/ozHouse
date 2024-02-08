@@ -107,4 +107,8 @@ public class MerchantDTO {
     			 + "/" + req.getParameter("sample6_extraAddress");
     }
 
+	public void setMerRegistration(String merRegistration) {
+		this.merRegistration = merRegistration;
+	}
+
 }
