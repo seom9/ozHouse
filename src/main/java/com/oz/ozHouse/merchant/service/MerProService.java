@@ -18,9 +18,13 @@ import jakarta.servlet.http.HttpServletRequest;
 public interface MerProService {
 	
 	
-	public String saveProduct(@RequestParam("proImg") List<MultipartFile> proImg, 
-    		@RequestParam("proImgPro") List<MultipartFile> proImgPro,
-    		MultipartHttpServletRequest multipartRequest, HttpServletRequest req, @ModelAttribute ProductDTO dto, 
-    		BindingResult result, @RequestParam Map<String, String> params) throws IOException;
+//	public String saveProduct(@RequestParam("proImg") List<MultipartFile> proImg, 
+//    		@RequestParam("proImgPro") List<MultipartFile> proImgPro,
+//    		MultipartHttpServletRequest multipartRequest, HttpServletRequest req, @ModelAttribute ProductDTO dto, 
+//    		BindingResult result, @RequestParam Map<String, String> params) throws IOException;
+//	
 	
+//	int saveProduct(ProductDTO productDTO);
+	
+	void insertProduct(ProductDTO productDTO);
 }
