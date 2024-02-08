@@ -12,5 +12,5 @@ import lombok.NoArgsConstructor;
 public class PhoneNumber {
 	private String phoneNumber1;
 	private String phoneNumber2;
-	private String PhoneNumber3;
+	private String phoneNumber3;
 }

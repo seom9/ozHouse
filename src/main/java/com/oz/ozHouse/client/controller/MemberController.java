@@ -3,21 +3,22 @@ package com.oz.ozHouse.client.controller;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
+import com.oz.ozHouse.client.config.LoginOkBean;
 import com.oz.ozHouse.client.service.EmailService;
 import com.oz.ozHouse.client.service.MemberService;
+import com.oz.ozHouse.domain.common.Address;
 import com.oz.ozHouse.dto.MemberDTO;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -26,68 +27,65 @@ import lombok.RequiredArgsConstructor;
 
 
 @Controller
+@RequestMapping("/member")
 @RequiredArgsConstructor
 public class MemberController {
 	private final MemberService memberService;
 	private final EmailService emailService;
+	private final PasswordEncoder passwordEncoder;
 	
-	@Autowired
-	private PasswordEncoder passwordEncoder;
-	
-	@GetMapping("/member_login.do")
+	@GetMapping("/login")
 	public String index() {
 		return "client/member/member_login";
 	}
 	
-    @GetMapping(value = "/member_join.do")
+    @GetMapping("/join")
     public String member_join() {
         return "client/member/member_join";
     }
     
-    @PostMapping("/member_send_email.do")
-    public String emailAuth(@ModelAttribute MemberDTO dto, BindingResult result, HttpServletRequest req) throws Exception {
+    @PostMapping("/email-verification")
+    public String emailAuth(@RequestParam("email") String email, 
+    							@ModelAttribute MemberDTO dto, BindingResult result, 
+    							HttpServletRequest req) throws Exception {
     	
-        String email = req.getParameter("email");
-        System.out.println(email);
-        
         if (memberService.checkEmail(email) > 0) {
 			req.setAttribute("msg", "이미 가입되어 있습니다");
-			req.setAttribute("url", "member_join.do");
+			req.setAttribute("url", "member/join");
 			return "message";
         }
 
-        // 메일 전송
         String checkNum = emailService.sendOauthMessage(email);
+
         req.setAttribute("checkNum", checkNum);
         req.setAttribute("email", email);
         req.setAttribute("member", dto);
+
         return "client/member/member_join_check";
     }
     
-    @PostMapping("/email_join_check.do")
+    @PostMapping("/members")
     public String emailAuthCheck(@ModelAttribute MemberDTO dto, HttpServletRequest req, @RequestParam Map<String, String> params) {
     	if (params.get("checkNum").equals(params.get("checkNumCheck"))) {
         	
         	HttpSession session = req.getSession();
         	MemberDTO insert = (MemberDTO)session.getAttribute("insertMember");
-        	if (insert != null) dto.setMemberImage(insert.getMemberImage()); 
+        	if (insert != null) dto.withMemberImage(insert.getMemberImage()); 
         	String passwd = dto.getMemberPasswd();
-        	dto.setMemberPasswd(passwordEncoder.encode(passwd));
-        	System.out.println("아니 나 이해할 수가 없어");
+        	dto.withMemberPasswd(passwordEncoder.encode(passwd));
 
         	String res = memberService.insertMember(dto);
-        	System.out.println("데이터는 왜 추가되는 거임");
     		if (res != null) {
     			req.setAttribute("msg", "회원 가입 성공 : 안녕하세요!");
-    			req.setAttribute("url", "main.do");
+    			req.setAttribute("url", "/main");
     		}else if (res == null){
     			req.setAttribute("msg", "회원 가입 실패 : 다시 시도해 주세요");
-    			req.setAttribute("url", "member_join.do");
+    			req.setAttribute("url", "member/join");
     		}
         	return "message";
         }else {
 			req.setAttribute("msg", "회원 가입 실패 : 다시 시도해 주세요");
-			req.setAttribute("url", "member_join.do");
+			req.setAttribute("url", "member/join");
         	return "message";
         }
     }
@@ -98,9 +96,9 @@ public class MemberController {
     }
     
 
-    @PostMapping("/member_checkId.do")
+    @PostMapping("/id-verification/{member_id}")
     @ResponseBody
-    public String checkId(@RequestParam("member_id") String id) {
+    public String checkId(@PathVariable("member_id") String id) {
         String result="N";
         if (memberService.checkId(id) > 0) result = "Y"; 	
         if (id.trim().equals("")) result = "E";					
@@ -109,5 +107,66 @@ public class MemberController {
         
         return result;
     }
+    
+    /* SNS 회원 가입 메서드
+    @PostMapping("/member_oauth.do")
+    public String member_oauth(HttpServletRequest req, @ModelAttribute MemberDTO dto) {
+	    int res = memberMapper.insertMember(dto);
+		if (res>0) {
+				req.setAttribute("msg", "sns 계정으로 회원 가입 성공 : 안녕하세요!");
+				req.setAttribute("url", "main.do");
+			}else if (res<0){
+				req.setAttribute("msg", "회원 가입 실패 : 다시 시도해 주세요");
+				req.setAttribute("url", "member_join.do");
+			}
+	    	return "message";
+    }
+  
+    
 
+    
+    public boolean isValid(String str) {
+        return Pattern.matches("^[a-zA-Z0-9-_]*$", str);
+    }
+    
+    @RequestMapping("/member_checkId.do")
+    @ResponseBody
+    public String checkId(@RequestParam("member_id") String id) {
+        String result="N";
+        if (memberMapper.checkId(id) != null) result = "Y"; 	
+        if (id.trim().equals("")) result = "E";					
+        if (id.length() < 6 || id.length() > 12) result = "L";
+        if (isValid(id) == false) result = "V";				
+        
+        return result;
+    }
+    
+    @RequestMapping(value="/member_delete.do", method = RequestMethod.GET)
+    public String memberDelete(HttpServletRequest req) {
+    	return "client/member/member_delete";
+    }
+    
+    @RequestMapping(value="/member_delete.do", method = RequestMethod.POST)
+    public String memberdelete(HttpServletRequest req) {
+    	String con = req.getParameter("confirmed");
+    	MemberDTO dto = getMember(req);
+    	int res = 0;
+    	
+    	if (con.equals("on")) {
+    		res = memberMapper.deleteMember(dto);
+    	}
+    	
+    	if (res >= 1){
+    		HttpSession session = req.getSession();
+    		session.invalidate();
+        	req.setAttribute("msg", "회원 탈퇴 : 완료되었습니다");
+        	req.setAttribute("url", "main.do");
+    	}else {
+        	req.setAttribute("msg", "회원 탈퇴 : 실패하였습니다");
+        	req.setAttribute("url", "main.do");
+    	}
+
+    	return "message";
+    }
+     */
 }

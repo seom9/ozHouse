@@ -4,8 +4,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <%@ include file="mypage_top.jsp" %>
-<link rel="stylesheet" href="${path}/resources/mypage.css"/>
-<link rel="stylesheet" href="${path}/resources/login.css"/>
+<link rel="stylesheet" href="${path}/mypage.css"/>
+<link rel="stylesheet" href="${path}/login.css"/>
 <br><br><br>
 <div class="user-profile"><div class="profile-box">
   <div class="profile-header">
@@ -20,28 +20,28 @@
         </div>
         <div class="profile-info">
           <div class="username">
-			<c:if test="${empty member.member_image}">
+			<c:if test="${empty member.memberImage}">
 			    <img src="https://image.ohou.se/i/bucketplace-v2-development/uploads/default_images/avatar.png?gif=1&w=144&h=144&c=c&webp=1" alt="User Avatar">
 			</c:if>
-			<c:if test="${not empty member.member_image}">
-				<c:if test="${fn:startsWith(member.member_image, 'http')}">
-		        	<img src="${member.member_image}" width="100%" height="100%">
+			<c:if test="${not empty member.memberImage}">
+				<c:if test="${fn:startsWith(member.memberImage, 'http')}">
+		        	<img src="${member.memberImage}" width="100%" height="100%">
 				</c:if>
-				<c:if test="${not fn:startsWith(member.member_image, 'http')}">
-		        	<img src="${path}/resources/image/${member.member_image}" width="100%" height="100%">
+				<c:if test="${not fn:startsWith(member.memberImage, 'http')}">
+		        	<img src="${path}/image/${member.memberImage}" width="100%" height="100%">
 				</c:if>
 			</c:if>
 
           </div>
           <div class="user-details">
-            <div class="username">${member.member_nickname}</div>
+            <div class="username">${member.memberNickname}</div>
             <div class="follower-info">
               <dl>
                 <dt>팔로워 <a class="follow" href="/users/7228692/follower">0</a> 팔로잉 <a class="follow" href="/users/7228692/followee">0</a></dt>
               </dl>
             </div>
             <div class="profile">
-              <button onclick="location.href='member_update.do'" class="edit-profile">설정</button>
+              <button onclick="location.href='/mypage/${member.memberId}/update'" class="edit-profile">설정</button>
               <div class="reward-section">
               </div>
             </div>
