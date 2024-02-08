@@ -1,5 +1,6 @@
 package com.oz.ozHouse.client.service;
 
+import com.oz.ozHouse.domain.Member;
 import com.oz.ozHouse.dto.MemberDTO;
 
 public interface MemberService {
@@ -7,5 +8,6 @@ public interface MemberService {
 	int checkId(String memberId);
 	int checkEmail(String memberEmail);
 	MemberDTO getMember(String memberId);
-	int updateMember(MemberDTO dto);
+	int updateMember(Member member);
+	Member getMemberEntity(String memberId);
 }
