@@ -41,7 +41,7 @@
 	<div class="container">
 		<div class="link-section">
 			<div class="left-section">
-				<a href="${pageContext.request.contextPath}/merchants/stores"
+				<a href="${pageContext.request.contextPath}/merchant/stores"
 					class="main-button">스토어관리 돌아가기</a>
 			</div>
 			<div class="right-section">
@@ -50,7 +50,7 @@
 				<a href="${pageContext.request.contextPath}/notices">공지사항</a>
 				<c:if test="${not empty merchantLoginMember.merNum}">
 					<a
-						href="${pageContext.request.contextPath}/merchants/${merNum}/info">나의정보</a>
+						href="${pageContext.request.contextPath}/merchant/${merNum}/info">나의정보</a>
 				</c:if>
 			</div>
 		</div>

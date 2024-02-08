@@ -12,7 +12,7 @@ import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/merchants")
+@RequestMapping("/merchant")
 public class MerStoreManageController {
 
 	private final StoreManageService storeManageService;
