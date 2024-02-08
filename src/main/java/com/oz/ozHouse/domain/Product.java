@@ -2,6 +2,7 @@ package com.oz.ozHouse.domain;
 
 import com.oz.ozHouse.domain.common.Image;
 import com.oz.ozHouse.domain.common.ProPrice;
+import com.oz.ozHouse.dto.ProductDTO;
 
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
@@ -12,6 +13,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -19,9 +21,8 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Entity
+@Entity(name = "Product")
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,7 +30,7 @@ public class Product {
     
     private String proName;
     
-    private int cateNum;
+    private int categoryNum;
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "merNum")
@@ -41,21 +42,9 @@ public class Product {
     @Embedded
     private ProPrice merPrice;
 
-//    @Embedded
-//    private Image proImage;
-//    
-//    @Embedded
-//    private Image proImgPro;
-    
     private int proQuantity;
     
-//    @Embedded
-//    private ProPrice proPrice;
-    
     private String proModifier;
-    
-//    @Embedded
-//    private ProPrice proPoint;
     
     @DateTimeFormat(pattern = "yy/MM/dd")
     private LocalDate proInDate;
@@ -66,28 +55,14 @@ public class Product {
     
     private String proApprovalStatus;
     
-//    @Embedded
-//    private ProPrice proAssemblyCost;
-//    
-//    @Embedded
-//    private ProPrice proDiscountRate;
-//    
-//    @Embedded
-//    private ProPrice proDiscountPrice;
-    
-    private String cateName;
-    
-//    @Embedded
-//    private Image proImageChange;
-//    
-//    @Embedded
-//    private Image proImageProChange;
-//    
-//    @Embedded
-//    private Image encodedImage;
+    private String categoryName;
 
-    @JoinColumn(name = "inManName")
-    private String inbrandCompany;
-    
     private String proToday;
+    
+    public void addImages(String primaryImageFileName, List<String> additionalImageFileNames) {
+        this.img = new Image();
+    }
+
+//	public Product(ProductDTO productDTO) {
+//	}
 }

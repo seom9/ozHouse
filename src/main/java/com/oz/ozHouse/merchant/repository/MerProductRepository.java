@@ -5,13 +5,14 @@ import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.data.repository.Repository;
 
 import com.oz.ozHouse.domain.Product;
+import com.oz.ozHouse.dto.ProductDTO;
 
 @NoRepositoryBean
 public interface MerProductRepository extends Repository<Product, Integer> {
 	
-//	//전체 상품 현황
-//	Long allCount();
-//	
+	//전체 상품 현황
+	Long allCount();
+	
 //	//승인대기
 //	int waitCount();
 //	
@@ -30,6 +31,8 @@ public interface MerProductRepository extends Repository<Product, Integer> {
 //	int boardCount();
 	
 //	//상품 등록
-//	int save(Product product);
-	
+//	int insertProduct(Product product);
+
+//	public void insertProduct(ProductDTO productDTO);
+	void saveProduct(Product product);
 }
