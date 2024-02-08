@@ -41,14 +41,15 @@ public class MerProController {
 
 	// 상품 등록
 	@PostMapping("/product-input")
-	public String proInput(@ModelAttribute ProductDTO productDTO, @RequestParam("proImg") MultipartFile proImg,
-			@RequestParam("proImgPro") List<MultipartFile> proImgPro, HttpServletRequest req)
+	public String proInput(@RequestParam("proImg") List<MultipartFile> proImg, 
+    		@RequestParam("proImgPro") List<MultipartFile> proImgPro, 
+    		MultipartHttpServletRequest multipartRequest, HttpServletRequest req, @ModelAttribute ProductDTO dto, 
+    		BindingResult result, @RequestParam Map<String, String> params)
 			throws IOException {
-//		proService.saveProduct(productDTO, proImg, proImgPro);
-//		req.setAttribute("message", "Product successfully added.");
+		proService.saveProduct(proImg, proImgPro, multipartRequest, req, dto, result, params);
 		req.setAttribute("msg", "상품 수정 요청 성공했습니다.");
 		req.setAttribute("url", "/merchant/product");
-		return "forward:message.jsp";
+		return "merchant/store/productManagement/productManagement_list";
 	}
 	
 	//상품 상세보기

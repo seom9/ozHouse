@@ -161,7 +161,7 @@ input[type='number']::-webkit-inner-spin-button, input[type='number']::-webkit-o
 						<!-- JSP -->
 						<div class="form-group">
 							<label for="categorySelect">카테고리</label> <select
-								name="category_num" id="categorySelect" required>
+								name="categoryNum" id="categorySelect" required>
 								<c:forEach var="category" items="${categories}">
 									<option value="${category.ordinal()}">
 										[${category.getCategoryCode()}]&nbsp;${category.getCategoryName()}

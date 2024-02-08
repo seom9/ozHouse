@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 public class ProductDTO {
     private int proNum;
     private String proName;
-    private int cateNum;
+    private int categoryNum;
     private int merNum;
     private String proImg;
     private String proImgPro;
@@ -31,18 +31,17 @@ public class ProductDTO {
     private int proAssemblyCost;
     private int proDiscountRate;
     private int proDiscountPrice;
-    private String cateName;
+    private String categoryName;
     private String proImageChange;
     private String proImageProChange;
     private String encodedImage;
-    private String inbrandCompany;
     private String proToday;
 
     public ProductDTO toDTO(Product product) {
         return ProductDTO.builder()
                 .proNum(product.getProNum())
                 .proName(product.getProName())
-                .cateNum(product.getCateNum())
+                .categoryNum(product.getCategoryNum())
                 .merNum(product.getMerchant().getMerNum())
                 .proImg(product.getImg().getProImg())
                 .proImgPro(product.getImg().getProImgPro())
@@ -57,11 +56,10 @@ public class ProductDTO {
                 .proAssemblyCost(product.getMerPrice().getProAssemblyCost())
                 .proDiscountRate(product.getMerPrice().getProDiscountRate())
                 .proDiscountPrice(product.getMerPrice().getProDiscountPrice())
-                .cateName(product.getCateName())
+                .categoryName(product.getCategoryName())
                 .proImageChange(product.getImg().getProImageChange())
                 .proImageProChange(product.getImg().getProImageProChange())
                 .encodedImage(product.getImg().getEncodedImage())
-                .inbrandCompany(product.getInbrandCompany())
                 .proToday(product.getProToday())
                 .build();
     }

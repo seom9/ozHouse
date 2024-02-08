@@ -20,7 +20,7 @@ public class MerStoreManageController {
 	
 	@GetMapping("/stores")
 	public String storeManage(HttpServletRequest req) {
-//		req.setAttribute("allCount", storeManageService.allCount());
+		req.setAttribute("allCount", storeManageService.allCount());
 //		req.setAttribute("waitCount", storeManageService.waitCount());
 //		req.setAttribute("requestCount", storeManageService.requestCount());
 //		req.setAttribute("cancleCount", storeManageService.cancleCount());
@@ -32,7 +32,7 @@ public class MerStoreManageController {
 //		req.setAttribute("exchangeCount", storeManageService.exchangeCount());
 //		req.setAttribute("returnCount", storeManageService.returnCount());
 //		req.setAttribute("boardCount", storeManageService.boardCount());
-//		req.setAttribute("noticeTitleList", noticeService.storeNotice());
+		req.setAttribute("noticeTitleList", noticeService.storeNotice());
 		return "merchant/store/storeMain/storeManagementMain";
 	}
 }
