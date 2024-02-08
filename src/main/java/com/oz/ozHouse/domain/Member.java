@@ -1,6 +1,7 @@
 package com.oz.ozHouse.domain;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,8 +9,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.oz.ozHouse.domain.common.Address;
 import com.oz.ozHouse.domain.common.BaseEntity;
+import com.oz.ozHouse.domain.common.Image;
 import com.oz.ozHouse.domain.common.MemberLevel;
 import com.oz.ozHouse.domain.common.PhoneNumber;
+import com.oz.ozHouse.dto.MemberDTO;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Embedded;
@@ -22,11 +25,16 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Builder(toBuilder = true)
 @Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Member extends BaseEntity{
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,7 +50,7 @@ public class Member extends BaseEntity{
 	
 	private String memberEmail;
 	
-	private String memberImage;
+	private Image memberImage;
 	
 	@Embedded
 	private Address memberAddress;
@@ -60,26 +68,25 @@ public class Member extends BaseEntity{
 	
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yy/MM/dd")
-	private Date memberDeletedate;
+	private LocalDate memberDeletedate;
 	
-    @Builder
-    public Member(int memberNum, String memberName, String memberId, String memberPasswd, 
-    				String memberNickname, String memberEmail, String memberImage, 
-    				Address memberAddress, PhoneNumber memberHp, List<OrderTb> orderList, 
-    				int memberPoint, MemberLevel memberLevel, Date memberDeletedate) {
-        this.memberNum = memberNum;
-        this.memberName = memberName;
-        this.memberId = memberId;
-        this.memberPasswd = memberPasswd;
-        this.memberNickname = memberNickname;
-        this.memberEmail = memberEmail;
-        this.memberImage = memberImage;
-        this.memberAddress = memberAddress;
-        this.memberHp = memberHp;
-        this.orderList = orderList;
-        this.memberPoint = memberPoint;
-        this.memberLevel = memberLevel;
-        this.memberDeletedate = memberDeletedate;
+
+    public static Member fromDTO(MemberDTO dto) {
+        return Member.builder()
+                .memberNum(dto.getMemberNum())
+                .memberName(dto.getMemberName())
+                .memberId(dto.getMemberId())
+                .memberPasswd(dto.getMemberPasswd())
+                .memberNickname(dto.getMemberNickname())
+                .memberEmail(dto.getMemberEmail())
+                .memberImage(dto.getMemberImage())
+                .memberAddress(dto.getMemberAddress())
+                .memberHp(dto.getMemberHp())
+                .orderList(dto.getOrderList())
+                .memberPoint(dto.getMemberPoint())
+                .memberLevel(dto.getMemberLevel())
+                .memberDeletedate(dto.getMemberDeletedate())
+                .build();
     }
 }
 	

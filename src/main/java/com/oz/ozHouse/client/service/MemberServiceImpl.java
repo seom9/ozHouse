@@ -1,10 +1,11 @@
 package com.oz.ozHouse.client.service;
 
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
 import com.oz.ozHouse.domain.Member;
 import com.oz.ozHouse.domain.common.MemberLevel;
-import com.oz.ozHouse.domain.common.PhoneNumber;
 import com.oz.ozHouse.dto.MemberDTO;
 import com.oz.ozHouse.repository.MemberRepository;
 
@@ -18,24 +19,15 @@ public class MemberServiceImpl implements MemberService {
 	private final MemberRepository memberRepository;
 
     public String insertMember(MemberDTO memberDTO) {
-    	PhoneNumber phoneNumber = new PhoneNumber(
-    	        memberDTO.getPhoneNumber1(),
-    	        memberDTO.getPhoneNumber2(),
-    	        memberDTO.getPhoneNumber3()
-    	);
     	
         Member member = Member.builder()
                 .memberId(memberDTO.getMemberId())
                 .memberPasswd(memberDTO.getMemberPasswd())
                 .memberNickname(memberDTO.getMemberNickname())
                 .memberEmail(memberDTO.getMemberEmail())
-                .memberImage(memberDTO.getMemberImage())
-                .memberHp(phoneNumber)
                 .memberPoint(0)
                 .memberLevel(MemberLevel.NORMAL)
-                .memberDeletedate(memberDTO.getMemberDeletedate())
                 .build();
-
         memberRepository.save(member);
         return memberDTO.getMemberId();
     }
@@ -50,6 +42,30 @@ public class MemberServiceImpl implements MemberService {
 	public int checkEmail(String memberEmail) {
 		return memberRepository.countByMemberEmail(memberEmail);
 	}
-    
+
+	@Override
+	public MemberDTO getMember(String memberId) {
+		Member member = memberRepository.findByMemberId(memberId);
+	    return new MemberDTO(member);
+	}
+	
+	@Override
+	public Member getMemberEntity(String memberId) {
+		Member member = memberRepository.findByMemberId(memberId);
+		return member;
+	}
+	
+	@Override
+	public int updateMember(Member member) {
+	    try {
+	        memberRepository.save(member);
+	        return 1; // 성공 시 반환할 값
+	    } catch (Exception e) {
+	        e.printStackTrace(); // 에러 로그 출력
+	        return -1; // 에러 시 반환할 값
+	    }
+	}
+
+	
 }
 
