@@ -3,6 +3,7 @@ package com.oz.ozHouse.dto;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.oz.ozHouse.domain.Member;
 import com.oz.ozHouse.domain.OrderTb;
 import com.oz.ozHouse.domain.common.Address;
@@ -13,9 +14,11 @@ import com.oz.ozHouse.domain.common.PhoneNumber;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+@Data
 @Getter
 @Builder
 @AllArgsConstructor

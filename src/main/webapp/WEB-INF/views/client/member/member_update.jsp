@@ -8,11 +8,63 @@
 <head>
 	<c:set var="path" value="${pageContext.request.contextPath}"/>
 	<title>회원 정보 수정</title>
+	
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	
 	<script type="text/javascript">
-	    var memberId = document.getElementById("memberId").value;
-	    document.getElementById("login-form").action = "/member/" + memberId;
-	    document.getElementById("login-form").submit();
-	</script>	
+	    function update() {	    	
+	        var memberId = document.getElementById("memberId").value;	
+	        var memberNickname = document.getElementsByName("memberNickname")[0].value;			
+	        var phoneNumber1 = document.getElementsByName("phoneNumber1")[0].value;
+	        var phoneNumber2 = document.getElementsByName("phoneNumber2")[0].value;
+	        var phoneNumber3 = document.getElementsByName("phoneNumber3")[0].value;
+	        var postcode = document.getElementById("postcode1").value;	        
+	        var city = document.getElementsByName("city")[0].value;	
+	        var street = document.getElementsByName("street")[0].value;
+	        var zipcode = document.getElementsByName("zipcode")[0].value;
+
+	        fetch('/mypage/' + memberId + "/update", {
+	            method: 'PATCH', // PUT 메소드를 지정합니다.
+	            headers: {
+	                'Content-Type': 'application/json'
+	            },
+	            body: JSON.stringify({
+	                memberNickname: memberNickname,
+	                memberHp: {
+	                	phoneNumber1: phoneNumber1,
+	                	phoneNumber2: phoneNumber2,
+	                	phoneNumber3: phoneNumber3
+	                },
+	                memberAddress: {
+	                	postcode: postcode,
+	                	city: city,
+	                	street: street,
+	                	zipcode: zipcode
+	                }
+	            }),
+	        })
+	        .then(response => {
+	            if (!response.ok) {
+	                throw new Error('Network response was not ok');
+	            }
+	            return response.text(); 
+	        })
+	        .then(data => {
+	        	// 상태 알림 return 받아와서 alert 로 출력
+	            alert(data)
+	        })
+	        .catch(error => {
+	        	alert("회원 정보 수정이 실패되었습니다")
+	        });
+	    }
+	</script>
+	
+	<script type="text/javascript">
+	    document.getElementById("login-form").addEventListener("submit", function(event) {
+	        event.preventDefault(); // 기본 동작인 폼의 submit을 막습니다.
+	
+	</script>
+	
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script>
 	    function sample6_execDaumPostcode() {
@@ -159,9 +211,8 @@
 					<input type="text" id="sample6_address" name="city" value="${member.memberAddress.city}" placeholder="주소"><br>
 					<input type="text" id="sample6_detailAddress" name="street" value="${member.memberAddress.street}" placeholder="상세주소">
 					<input type="text" id="sample6_extraAddress" name="zipcode" value="${member.memberAddress.zipcode}" placeholder="참고항목">
-					<input type="submit" value="정보 수정">
+					<input type="button" value="정보 수정" onclick="javascript:update()">
 					<input type="reset" value="reset">
-										
 		</form>
 	</div>
 </body>
