@@ -25,7 +25,7 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 @Controller
-@RequestMapping("/merchant")
+@RequestMapping("/merchant/login")
 @RequiredArgsConstructor
 public class MerJoinController {
 	private final MerJoinService merJoinService;
@@ -34,15 +34,15 @@ public class MerJoinController {
 	static final String BUSINESSFILEPATH = 
 			"/Users/choejiyeong/git/ozHouse/src/main/resources/static/merchant/business";
 
-	@GetMapping("join")
+	@GetMapping("/join")
 	public String merchantJoin() {
 		return "merchant/join/merchant_join";
 	}
 	
-	private String goToMessage(HttpServletRequest req, String url, String msg) {
+	private HttpServletRequest goToMessage(HttpServletRequest req, String url, String msg) {
 		req.setAttribute("msg", msg);
 		req.setAttribute("url", url);
-		return "message";
+		return req;
 	}
 	
 	// 사업자등록번호 중복 확인
@@ -52,6 +52,7 @@ public class MerJoinController {
 		comNum.put("merComnum2",req.getParameter("merComnum2"));
 		comNum.put("merComnum3",req.getParameter("merComnum3"));
 		boolean comNumcheck = merJoinService.merchant_checkBsNum(comNum);
+		System.out.println("Controller -> comNumCheck : " + comNumcheck);
 		return comNumcheck;
 	}
 	
@@ -77,21 +78,24 @@ public class MerJoinController {
         }
 	}
 	
-	@PostMapping(value="send-email")
+	@PostMapping("/join/send-email")
     public String merchantEmailAuth(HttpServletRequest req) throws Exception  {  
 		boolean comNumCheck = checkComNum(req);
-    	if(!comNumCheck) {
-    		goToMessage(req, "merchant_login.do", "이미 가입된 사업자등록번호 입니다.");
+    	if(comNumCheck) {
+    		req = goToMessage(req, "/merchant/login", "이미 가입된 사업자등록번호 입니다.");
+    		return "message";
     	}
     	String email = req.getParameter("merEmail");
     	boolean emailCheck = checkEmail(email);
-        if (!emailCheck) {
-        	goToMessage(req, "merchant_join.do", "이미 가입되어있는 이메일주소입니다.");
+        if (emailCheck) {
+        	req = goToMessage(req, "/merchant/login/join", "이미 가입되어있는 이메일주소입니다.");
+        	return "message";
         }
         HttpSession session = req.getSession();
         boolean checkSaveFile = saveReg(req, session);
         if (!checkSaveFile) {
-        	goToMessage(req, "merchant_main.do", "회원가입 실패 : 사업자등록증 전송 중 오류가 발생하였습니다.");
+        	req = goToMessage(req, "/merchant/login/join", "회원가입 실패 : 사업자등록증 전송 중 오류가 발생하였습니다.");
+        	return "message";
         }
 		String checkNum = emailService.sendOauthMessage(email);
 		MerchantDTO dto = new MerchantDTO(req);
@@ -101,8 +105,8 @@ public class MerJoinController {
 		return "merchant/join/merchant_join_check";
 	}
 
-	@PostMapping("email_join_check")
-	public void emailAuthCheck(HttpServletRequest req)
+	@PostMapping("/join/email-verification")
+	public String emailAuthCheck(HttpServletRequest req)
 			throws IllegalStateException, IOException {
 		HttpSession session = req.getSession();
 		String saveName = (String) session.getAttribute("saveName");
@@ -114,29 +118,31 @@ public class MerJoinController {
 
 			MerchantDTO.builder()
 			.merRegistration(saveName);
+			System.out.println("saveName : " + saveName);
 			System.out.println("JoinController -> dto사업자등록증" + dto.getMerRegistration());
-			int res = merJoinService.insertMerchant(dto);
-			if (res > 0) {
-				goToMessage(req, "merchant_main.do", "회원가입 성공 : 로그인해 주시기 바랍니다.");
-			} else if (res < 0) {
+			String id = merJoinService.insertMerchant(dto);
+			if (id != null) {
+				req = goToMessage(req, "/merchant/main", "회원가입 성공 : " + id + "님, 로그인해 주시기 바랍니다.");
+			} else if (id == null) {
 				if (deleteFile.exists()) {
 					deleteFile.delete();
 				}
-				goToMessage(req, "merchant_main.do", "회원가입 실패 : 회원가입시 오류가 발생하였습니다. 관리자에게 문의하여주세요");
+				req = goToMessage(req, "/merchant/main", "회원가입 실패 : 회원가입시 오류가 발생하였습니다. 관리자에게 문의하여주세요");
 			}
 		} else {
 			if (deleteFile.exists()) {
 				deleteFile.delete();
-				goToMessage(req, "merchant_join.do", "인증번호가 올바르지 않습니다.");
+				req = goToMessage(req, "/merchant/login/join", "인증번호가 올바르지 않습니다.");
 			}
 		}
+		return "message";
 	}
 
 	public boolean isValid(String str) {
         return Pattern.matches("^[a-zA-Z0-9-_]*$", str);
     }
 
-	@PostMapping("check-id")
+	@PostMapping("/join/check-id")
 	@ResponseBody
 	public String checkId(@RequestBody MultiValueMap<String, String> map) {
 		String id = map.get("merId").get(0);

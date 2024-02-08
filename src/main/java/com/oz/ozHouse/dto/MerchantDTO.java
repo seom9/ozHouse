@@ -89,7 +89,6 @@ public class MerchantDTO {
     }
     
     public MerchantDTO(HttpServletRequest req) {
-    	this.merNum = Integer.parseInt(req.getParameter("merNum"));
     	this.merId = req.getParameter("merId");
     	this.merPw = req.getParameter("merPw");
     	this.merCompany = req.getParameter("merCompany");
@@ -107,4 +106,5 @@ public class MerchantDTO {
     			 + "/" + req.getParameter("sample6_detailAddress")
     			 + "/" + req.getParameter("sample6_extraAddress");
     }
+
 }
