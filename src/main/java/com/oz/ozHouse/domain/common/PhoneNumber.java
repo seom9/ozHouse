@@ -1,7 +1,5 @@
 package com.oz.ozHouse.domain.common;
 
-import com.oz.ozHouse.dto.MerchantDTO;
-
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
