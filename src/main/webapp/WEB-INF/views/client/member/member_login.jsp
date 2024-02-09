@@ -22,7 +22,9 @@
 			f.passwd.focus()
 			return
 		}
-		document.f.submit()
+        var memberId = document.getElementById("memberId").value;
+        document.getElementById("login-form").action = "/login/" + memberId;
+        document.getElementById("login-form").submit();
 	}
 </script>
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.2.js" charset="utf-8"></script>
@@ -34,13 +36,12 @@
 <body> 
     <div align="center" class="login-wrapper" style="top: 70px; position: relative;">
         <h2><img src="${path}/client/image/ozHouseLogo.png" style="width: 30%"></h2>
-        <form method="post" action="member_login.do" id="login-form" name="f">
-         
+        <form method="post" id="login-form" name="f">
 			<c:if test="${not empty cookie.saveId}">
-            	<input type="text" name="member_id" tabindex="1"  value="${cookie['saveId'].value}">
+            	<input type="text" name="member_id" tabindex="1" id="memberId" value="${cookie['saveId'].value}">
 			</c:if>	
 			<c:if test="${empty cookie.saveId}">
-            	<input type="text" name="member_id" tabindex="2" placeholder="아이디 입력">
+            	<input type="text" name="member_id" id="memberId" tabindex="2" placeholder="아이디 입력">
             </c:if>	
             <input type="password" name="member_passwd" placeholder="비밀번호 입력">
             <label for="remember-check">
@@ -75,8 +76,8 @@
     				font-size: 11px;
 }					
             	  </style>
-           	<span class="join"><a href="member_find.do">비밀번호 재설정</a></span>              
-            <span class="join1"><a href="member_join.do">회원가입</a></span>   <br>
+           	<span class="join"><a href="/member/find">비밀번호 재설정</a></span>              
+            <span class="join1"><a href="/member/join">회원가입</a></span>   <br>
             <span class="join2">sns계정으로 간편 로그인/회원가입</span>  
             
         </form>

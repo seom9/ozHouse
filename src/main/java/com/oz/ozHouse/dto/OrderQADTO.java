@@ -3,7 +3,6 @@ package com.oz.ozHouse.dto;
 import java.time.LocalDate;
 
 import com.oz.ozHouse.domain.OrderQA;
-import com.oz.ozHouse.domain.OrderTb;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
