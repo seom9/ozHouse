@@ -4,6 +4,8 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -14,6 +16,8 @@ import lombok.extern.log4j.Log4j2;
 @Service
 @RequiredArgsConstructor
 public class CustomUserDetailsService implements UserDetailsService{
+	private final PasswordEncoder passwordEncoder;
+
 	/*
 	[UserDetailService]
 	스프링 시큐리티에서 가장 중요한 객체는 실제로 인증을 처리하는 : UserDetailService 라는 인터페이스의 구현체 
@@ -36,17 +40,23 @@ public class CustomUserDetailsService implements UserDetailsService{
 	이를 CustomUserDetailsService 에서 반환하는 일이 필요하다.	
 	*/
 	
+	/*
+	스프링 시큐리티는 기본적으로 Password Encoder 라는 존재를 필요로 하며, 
+	BcryptPasswordEncoder 는 해시 알고리즘으로 암호화 처리되는데 같은 문자열이라도 매번
+	해시 처리된 결과가 다르므로 패스워드 암호화에 많이 사용된다
+
+	 */
+	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException{
-		log.info("loadUserByUsername : " + username);
 		
+		// UserDetails 의 인터페이스를 구현한 user 객체로 유저의 객체를 만들 수 있다
 		UserDetails userDetails = User.builder()
 				.username("user1")
-				.password("1111")
+				.password(passwordEncoder.encode("1111"))
 				.authorities("ROLE_USER")
 				.build();
 		
-		
-		return null;
+		return userDetails;
 	}
 }

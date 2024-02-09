@@ -6,6 +6,7 @@
 <html>
 	<head>
 		<c:set var="path" value="${pageContext.request.contextPath}"/>
+		<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 	
 		<link rel="preload" href="https://assets.ohou.se/store/_next/static/css/6be64f3fe2ed3d98.css" as="style"/>
         <link rel="stylesheet" href="https://assets.ohou.se/store/_next/static/css/6be64f3fe2ed3d98.css" data-n-p=""/>
@@ -127,16 +128,19 @@
 								</a>
 							<div class="css-1f624s9">
 								<div class="css-1kpxvh4">
-									<c:if test="${empty sessionScope.loginMember}">
+									<sec:authorize access="hasAnyRole('ROLE_USER')">
+										<a class="css-1g5o6hv" href="/logout">로그아웃</a>
+										<a class="css-1g5o6hv" href="/mypage/profile">마이페이지</a>
+									    <a class="css-1tlac5g" href="merchant-main.do">판매자센터</a>
+									</sec:authorize>
+									<sec:authorize access="!hasAnyRole('ROLE_USER')">
 										<a class="css-1g5o6hv" href="/member/login">로그인</a>
 										<a class="css-1g5o6hv" href="/member/join">회원가입</a>
 									    <a class="css-1tlac5g" href="${pageContext.request.contextPath}/merchant/main">판매자센터</a>
+									</sec:authorize>
+									<c:if test="${empty sessionScope.loginMember}">
 								    </c:if>
-								    <c:if test="${not empty sessionScope.loginMember}">
-										<a class="css-1g5o6hv" href="/member/logout">로그아웃</a>
-										<a class="css-1g5o6hv" href="/mypage/profile">마이페이지</a>
-									    <a class="css-1tlac5g" href="merchant-main.do">판매자센터</a>
-								    </c:if>
+
 								</div>
 		             			<span class="css-1amee4m">
 		             				<button class="css-qnc3fr" onclick="toggleDropdown()">

@@ -3,6 +3,7 @@ package com.oz.ozHouse.client.controller;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -24,6 +25,7 @@ import com.oz.ozHouse.dto.MemberDTO;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 
 
 @Controller
@@ -33,11 +35,7 @@ public class MemberController {
 	private final MemberService memberService;
 	private final EmailService emailService;
 	private final PasswordEncoder passwordEncoder;
-	
-	@GetMapping("/login")
-	public String index() {
-		return "client/member/member_login";
-	}
+
 	
     @GetMapping("/join")
     public String member_join() {
