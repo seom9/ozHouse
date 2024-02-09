@@ -15,5 +15,4 @@ public class PhoneNumber {
 	public String phoneNumber1;
 	public String phoneNumber2;
 	public String phoneNumber3;
-	
 }
