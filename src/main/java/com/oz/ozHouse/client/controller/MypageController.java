@@ -85,7 +85,6 @@ public class MypageController {
         } else {
             return "회원 정보 수정 실패되었습니다 : 서버에 문의해 주세요";
         }
-
     }
 	
 	
