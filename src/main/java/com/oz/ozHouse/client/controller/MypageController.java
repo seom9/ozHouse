@@ -6,6 +6,7 @@ import java.net.BindException;
 import java.util.Enumeration;
 import java.util.Map;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -48,6 +49,8 @@ public class MypageController {
     	return dto;
     }
 	
+    // get 방식에는 @PreAuthorize 어노테이션
+    @PreAuthorize("hasRole('User')")
 	@GetMapping("/profile")
 	public String index(HttpServletRequest req) {
     	MemberDTO dto = getMember(req);
