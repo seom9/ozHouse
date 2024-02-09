@@ -356,11 +356,11 @@
 				</div>
 
 				<div class="form-group">
-					<label for="merManhp1">판매자 전화 번호</label>
+					<label for="merhp1">판매자 전화 번호</label>
 					<div class="input-group">
-						<input type="text" id="merManhp1" name="merManhp1" maxlength="3">-
-						<input type="text" id="merManhp2" name="merManhp2" maxlength="4">-
-						<input type="text" id="merManhp3" name="merManhp3" maxlength="4">
+						<input type="text" id="merHp1" name="merHp1" maxlength="3">-
+						<input type="text" id="merHp2" name="merHp2" maxlength="4">-
+						<input type="text" id="merHp3" name="merHp3" maxlength="4">
 					</div>
 				</div>
 

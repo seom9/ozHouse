@@ -60,7 +60,7 @@ public class Merchant extends BaseEntity{
     @AttributeOverrides({
     		@AttributeOverride(name = "phoneNumber1", column = @Column(name = "merHp1")),
     		@AttributeOverride(name = "phoneNumber2", column = @Column(name = "merHp2")),
-    		@AttributeOverride(name = "PhoneNumber3", column = @Column(name = "merHp3"))
+    		@AttributeOverride(name = "phoneNumber3", column = @Column(name = "merHp3"))
     })
     private PhoneNumber merHp;
     
@@ -120,24 +120,4 @@ public class Merchant extends BaseEntity{
     	this.merEmail = dto.getMerEmail();
     	this.merBusinessPost = dto.getMerBusinessPost();
     }
-    
-//    public Merchant toEntity (MerchantDTO dto) {
-//    	CompanyNumber merComnum = new CompanyNumber(dto.getMerComnum1(), dto.getMerComnum2(), dto.getMerComnum3());
-//    	PhoneNumber merHp = new PhoneNumber(dto.getMerHp1(), dto.getMerHp2(), dto.getMerHp3());
-//    	
-//    	return Merchant.builder()
-//    			.merNum(dto.getMerNum())
-//    			.merId(dto.getMerId())
-//    			.merPw(dto.getMerPw())
-//    			.merCompany(dto.getMerCompany())
-//    			.merComnum(merComnum)
-//    			.merHp(merHp)
-//    			.merAdress(dto.getMerAdress())
-//    			.merRegistration(dto.getMerRegistration())
-//    			.merName(dto.getMerName())
-//    			.merEmail(dto.getMerEmail())
-//    			.merBusinessPost(dto.getMerBusinessPost())
-//    			.build();
-//    			
-//    }
 }

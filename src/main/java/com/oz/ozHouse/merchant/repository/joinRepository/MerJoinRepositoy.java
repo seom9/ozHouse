@@ -16,5 +16,6 @@ extends JpaRepository<Merchant, Integer>, MerJoinRepositoryCustom{
 	public Merchant findMerchantByMerEmail(String email);
 	
 	//판매자의 id조회
-	public Merchant findMerchantByMerId(String id);
+	//public Merchant findMerchantByMerId(String id);
+	
 }

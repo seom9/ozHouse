@@ -31,13 +31,15 @@ public class MerJoinServiceImpl implements MerJoinService{
 	
 	@Override
 	public MerchantDTO merchant_checkMerId(String id) {
-		Merchant mer = repository.findMerchantByMerId(id);
-		MerchantDTO dto= new MerchantDTO();
-		if(mer == null) {
-			dto = null;
-		}else{
-			dto.toDto(mer);
-		}
+		//Merchant mer = repository.findMerchantId(id);
+		MerchantDTO dto = repository.findMerchantId(id);
+//		MerchantDTO dto= new MerchantDTO();
+//		try {
+//			dto = dto.toDto(mer);
+//		}catch(NullPointerException e) {
+//			dto = null;
+//		}
+		//System.out.println("dto.getId() : " + dto.getMerId());
 		return dto;
     }
 
