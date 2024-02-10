@@ -1,5 +1,6 @@
 package com.oz.ozHouse.merchant.service;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.oz.ozHouse.domain.Merchant;
@@ -12,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class MerJoinServiceImpl implements MerJoinService{
 	private final MerJoinRepositoy repository;
+	private final PasswordEncoder bCryptPasswordEncoder;
 	
 	@Override
 	public boolean merchant_checkBsNum(String comnum1, String comnum2, String comnum3) {
@@ -31,21 +33,14 @@ public class MerJoinServiceImpl implements MerJoinService{
 	
 	@Override
 	public MerchantDTO merchant_checkMerId(String id) {
-		//Merchant mer = repository.findMerchantId(id);
 		MerchantDTO dto = repository.findMerchantId(id);
-//		MerchantDTO dto= new MerchantDTO();
-//		try {
-//			dto = dto.toDto(mer);
-//		}catch(NullPointerException e) {
-//			dto = null;
-//		}
-		//System.out.println("dto.getId() : " + dto.getMerId());
 		return dto;
     }
 
 	@Override
 	public String insertMerchant(MerchantDTO dto) {
 		Merchant mer = new Merchant(dto);
+		mer.hashPassword(bCryptPasswordEncoder);
 		repository.save(mer);
 		return dto.getMerId();
 	}
