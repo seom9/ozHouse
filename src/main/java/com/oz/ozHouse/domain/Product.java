@@ -68,6 +68,7 @@ public class Product {
 //    public void addImages(String primaryImageFileName, List<String> additionalImageFileNames) {
 //        this.img = new Image();
 //    }
+	
 	public Product(ProductDTO dto) {
 		this.proNum = dto.getProNum();
 		this.proName = dto.getProName();
@@ -80,14 +81,11 @@ public class Product {
 				dto.getProDiscountRate(), dto.getProDiscountPrice());
 		this.proQuantity = dto.getProQuantity();
 		this.proModifier = dto.getProModifier();
-		if (dto.getProInDate() != null) {
-			this.proInDate = dto.getProInDate();
-		}
+		this.proInDate = dto.getProInDate();
 		this.proSpec = dto.getProSpec();
 		this.proPurchasesCount = dto.getProPurchasesCount();
 		this.proApprovalStatus = dto.getProApprovalStatus();
 		this.categoryName = dto.getCategoryName();
 		this.proToday = dto.getProToday();
 	}
-
 }
