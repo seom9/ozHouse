@@ -1,5 +1,9 @@
 package com.oz.ozHouse.security;
 
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -7,6 +11,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import com.oz.ozHouse.client.repository.MemberRepository;
+import com.oz.ozHouse.domain.Member;
+import com.oz.ozHouse.dto.client.member.MemberSecurityDTO;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -16,7 +24,7 @@ import lombok.extern.log4j.Log4j2;
 @Service
 @RequiredArgsConstructor
 public class CustomUserDetailsService implements UserDetailsService{
-	private final PasswordEncoder passwordEncoder;
+	private final MemberRepository memberRepository;
 
 	/*
 	[UserDetailService]
@@ -51,12 +59,28 @@ public class CustomUserDetailsService implements UserDetailsService{
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException{
 		
 		// UserDetails 의 인터페이스를 구현한 user 객체로 유저의 객체를 만들 수 있다
-		UserDetails userDetails = User.builder()
-				.username("user1")
-				.password(passwordEncoder.encode("1111"))
-				.authorities("ROLE_USER")
-				.build();
+		Optional<Member> result = memberRepository.getWithRole(username);
 		
-		return userDetails;
+		if (result.isEmpty()) {	// 해당 아이디를 가진 사람이 없다면?
+			throw new UsernameNotFoundException("username no found....");
+		}
+		
+		Member member = result.get();
+		
+		MemberSecurityDTO memberSecurityDTO = 
+				new MemberSecurityDTO (
+						member.getMemberNum(),
+						member.getMemberId(),
+						member.getMemberPasswd(),
+						member.getMemberNickname(),
+						member.getMemberEmail(),
+						member.getMemberDeletedate(),
+						false,
+						member.getRoleSet()
+								.stream().map(memberRole -> new SimpleGrantedAuthority("ROLE_"+memberRole.name()))
+								.collect(Collectors.toList())
+						);
+		
+		return memberSecurityDTO;
 	}
 }
