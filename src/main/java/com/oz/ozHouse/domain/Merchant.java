@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.oz.ozHouse.domain.Merchant;
 import com.oz.ozHouse.domain.common.BaseEntity;
@@ -103,6 +104,11 @@ public class Merchant extends BaseEntity{
     
     @NotNull
     private String merBusinessPost;
+    
+    public Merchant hashPassword(PasswordEncoder passwordEncoder) {
+        this.merPw = passwordEncoder.encode(this.merPw);
+        return this;
+      }
     
     public Merchant(MerchantDTO dto) {
     	CompanyNumber merComnum = new CompanyNumber(dto.getMerComnum1(), dto.getMerComnum2(), dto.getMerComnum3());

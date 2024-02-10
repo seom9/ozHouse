@@ -109,8 +109,6 @@ public class MerJoinController {
 		File deleteFile = new File(BUSINESSFILEPATH + saveName);
 		if (req.getParameter("checkNum").equals(req.getParameter("checkNumCheck"))) {
 			MerchantDTO dto = (MerchantDTO) session.getAttribute("insertMerchant");
-//        	String passwd = dto.getMer_pw();
-//        	dto.setMer_pw(passwordEncoder.encode(passwd));
 
 			dto.setMerRegistration(saveName);
 			System.out.println("saveName : " + saveName);
