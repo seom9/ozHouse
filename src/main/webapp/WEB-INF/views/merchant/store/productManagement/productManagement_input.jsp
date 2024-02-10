@@ -148,7 +148,7 @@ input[type='number']::-webkit-inner-spin-button, input[type='number']::-webkit-o
 				action="${pageContext.request.contextPath}/merchant/product-input"
 				enctype="multipart/form-data">
 				<input type="hidden" name="merNum"
-					value="${merchantLoginMember.merNum}">
+					value= 1>
 				<div class="form-container">
 					<div class="section-header">
 						<h2>기본 정보</h2>

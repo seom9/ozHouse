@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.query.FluentQuery.FetchableFluentQuery;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.oz.ozHouse.domain.Product;
 
@@ -113,11 +114,16 @@ public class MerProductRepositoryImpl implements MerProductRepository{
 		return null;
 	}
 
+	@Transactional
 	@Override
 	public <S extends Product> S save(S entity) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+        if (entity.getProName() == null) {
+            em.persist(entity);
+        } else {
+            em.merge(entity);
+        }
+        return entity;
+    }
 
 	@Override
 	public Optional<Product> findById(Integer id) {

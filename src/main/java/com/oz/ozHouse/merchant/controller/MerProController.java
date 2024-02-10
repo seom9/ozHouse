@@ -50,7 +50,9 @@ public class MerProController {
 	List<MultipartFile> proImgPro, 
 	MultipartHttpServletRequest multipartRequest, 
 	HttpServletRequest req, 
-	@RequestParam Map<String, String> params) throws Exception {
+	@RequestParam Map<String, String> params
+//	@ModelAttribute ProductDTO dto
+	) throws Exception {
 		ProductDTO dto = new ProductDTO(req);
 		String root = PATH + "\\" + "img";
 		
@@ -155,7 +157,7 @@ public class MerProController {
 		System.out.println(dto.getProName());
 		if (res != null) {
 			req.setAttribute("msg", "상품 등록 요청 성공했습니다.");
-			req.setAttribute("url", "/merchant/product");
+			req.setAttribute("url", "/merchant/products");
 		}else {
 			req.setAttribute("msg", "상품 등록 요청 실패했습니다. 다시 시도하세요.");
 			req.setAttribute("url", "/merchant/product-input");

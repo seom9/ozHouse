@@ -37,10 +37,11 @@ public class Product {
 
 	private int categoryNum;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "merNum")
-	private Merchant merchant;
+//	@ManyToOne(fetch = FetchType.LAZY)
+//	@JoinColumn(name = "merNum")
+//	private Merchant merchant;
 
+	private int merNum;
 	@Embedded
 	private Image img;
 
@@ -71,7 +72,8 @@ public class Product {
 		this.proNum = dto.getProNum();
 		this.proName = dto.getProName();
 		this.categoryNum = dto.getCategoryNum();
-		this.merchant = new Merchant(); 
+//		this.merchant = new Merchant(); 
+		this.merNum = dto.getMerNum();
 		this.img = new Image(dto.getProImg(), dto.getProImgPro(), dto.getProImageChange(), dto.getProImageProChange(),
 				dto.getEncodedImage());
 		this.merPrice = new ProPrice(dto.getProPrice(), dto.getProPoint(), dto.getProAssemblyCost(),
