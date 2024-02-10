@@ -84,9 +84,13 @@ public class ProductDTO {
 //                .proToday(this.proToday)
 //                .build();
 //    }
+    
+    public String getFormattedProInDate() {
+        return proInDate.format(DateTimeFormatter.ofPattern("yy/MM/dd"));
+    }
     	
     public ProductDTO(HttpServletRequest req) {
-        this.proNum = 5;
+//        this.proNum = 5;
         this.proName = req.getParameter("proName");
         this.categoryNum = Integer.parseInt(req.getParameter("categoryNum"));
         this.merNum = 1;
@@ -96,9 +100,10 @@ public class ProductDTO {
         this.proPrice = Integer.parseInt(req.getParameter("proPrice"));
         this.proModifier = req.getParameter("proModifier");
         this.proPoint = Integer.parseInt(req.getParameter("proPoint"));
-        if (req.getParameter("proInDate") != null && !req.getParameter("proInDate").isEmpty()) {
-            this.proInDate = LocalDate.parse(req.getParameter("proInDate"), DateTimeFormatter.ofPattern("yy/MM/dd"));
-        }
+        this.proInDate = LocalDate.now();
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy/MM/dd");
+//        this.proInDate = LocalDate.now().format(formatter); // 현재 날짜를 "yy/MM/dd" 형식으로 포맷하여 저장
+
         this.proSpec = "normal";
         this.proPurchasesCount = 0;
         this.proApprovalStatus = "f";
@@ -111,6 +116,4 @@ public class ProductDTO {
         this.encodedImage = "encodedImage";
         this.proToday = "0";
     }
-    
-
 }
