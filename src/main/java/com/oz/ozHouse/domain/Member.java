@@ -3,7 +3,9 @@ package com.oz.ozHouse.domain;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -11,14 +13,17 @@ import com.oz.ozHouse.domain.common.Address;
 import com.oz.ozHouse.domain.common.BaseEntity;
 import com.oz.ozHouse.domain.common.Image;
 import com.oz.ozHouse.domain.common.MemberLevel;
+import com.oz.ozHouse.domain.common.MemberRole;
 import com.oz.ozHouse.domain.common.PhoneNumber;
 import com.oz.ozHouse.dto.MemberDTO;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -29,12 +34,14 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Builder(toBuilder = true)
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString(exclude = "roleSet")
 public class Member extends BaseEntity{
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -52,6 +59,12 @@ public class Member extends BaseEntity{
 	
 	private Image memberImage;
 	
+	@ElementCollection(fetch = FetchType.LAZY)
+	@Builder.Default
+	private Set<MemberRole> roleSet = new HashSet<>();
+	
+	private boolean social;
+	
 	@Embedded
 	private Address memberAddress;
 	
@@ -60,7 +73,7 @@ public class Member extends BaseEntity{
 	
     @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
     private List<OrderTb> orderList = new ArrayList<>();
-	
+    
 	private int memberPoint;
 	
     @Enumerated(EnumType.STRING)

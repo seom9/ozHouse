@@ -4,10 +4,10 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.oz.ozHouse.client.repository.MemberRepository;
 import com.oz.ozHouse.domain.Member;
 import com.oz.ozHouse.domain.common.MemberLevel;
 import com.oz.ozHouse.dto.MemberDTO;
-import com.oz.ozHouse.repository.MemberRepository;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
