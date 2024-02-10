@@ -83,6 +83,21 @@ public class Member extends BaseEntity{
 	@DateTimeFormat(pattern = "yy/MM/dd")
 	private LocalDate memberDeletedate;
 	
+	public void changeMemberPassword(String memberPasswd) {
+		this.memberPasswd = memberPasswd;
+	}
+	
+	public void addRole(MemberRole memberRole) {
+		this.roleSet.add(memberRole);
+	}
+	
+	public void setMemberPoint (int memberPoint) {
+		this.memberPoint = memberPoint;
+	}
+	
+	public void setMemberLevel (MemberLevel memberLevel) {
+		this.memberLevel = memberLevel;
+	}
 
     public static Member fromDTO(MemberDTO dto) {
         return Member.builder()
