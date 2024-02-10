@@ -47,10 +47,6 @@ public class MerJoinController {
 	
 	// 사업자등록번호 중복 확인
 	private boolean checkComNum(HttpServletRequest req) {
-//		Map<String, String> comNum = new HashMap<String, String>();
-//		comNum.put("merComnum1",req.getParameter("merComnum1"));
-//		comNum.put("merComnum2",req.getParameter("merComnum2"));
-//		comNum.put("merComnum3",req.getParameter("merComnum3"));
 		boolean comNumcheck = merJoinService.merchant_checkBsNum(req.getParameter("merComnum1"),
 				req.getParameter("merComnum2"), req.getParameter("merComnum3"));
 		return comNumcheck;
