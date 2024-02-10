@@ -1,4 +1,4 @@
-package com.oz.ozHouse.merchant.bean;
+package com.oz.ozHouse.merchant.config;
 
 import com.oz.ozHouse.dto.MerchantDTO;
 import com.oz.ozHouse.merchant.service.MerLoginService;

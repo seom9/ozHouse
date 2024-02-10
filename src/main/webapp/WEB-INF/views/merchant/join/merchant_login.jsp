@@ -67,7 +67,7 @@
 	<br>
 	<br>
 	<div class="container">
-		<form method="post" action="${pageContext.request.contextPath}/merchant/login" id="login-form"
+		<form method="post" action="${pageContext.request.contextPath}/merchant/loginOk" id="login-form"
 			name="f">
 			<div class="site-login">판매자 사이트 로그인</div>
 			<br>
