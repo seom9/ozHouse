@@ -15,12 +15,14 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.oz.ozHouse.client.config.LoginOkBean;
 import com.oz.ozHouse.client.service.EmailService;
 import com.oz.ozHouse.client.service.MemberService;
 import com.oz.ozHouse.domain.common.Address;
 import com.oz.ozHouse.dto.MemberDTO;
+import com.oz.ozHouse.dto.client.member.MemberJoinDTO;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -63,20 +65,20 @@ public class MemberController {
     }
     
     @PostMapping("/members")
-    public String emailAuthCheck(@ModelAttribute MemberDTO dto, HttpServletRequest req, @RequestParam Map<String, String> params) {
-    	if (params.get("checkNum").equals(params.get("checkNumCheck"))) {
-        	
-        	HttpSession session = req.getSession();
-        	MemberDTO insert = (MemberDTO)session.getAttribute("insertMember");
-        	if (insert != null) dto.withMemberImage(insert.getMemberImage()); 
-        	String passwd = dto.getMemberPasswd();
-        	dto.withMemberPasswd(passwordEncoder.encode(passwd));
+    public String emailAuthCheck(@ModelAttribute MemberJoinDTO dto, HttpServletRequest req, 
+    								@RequestParam Map<String, String> params,
+    								RedirectAttributes redirectAttribute) {
+    	String res = "";
 
-        	String res = memberService.insertMember(dto);
-    		if (res != null) {
-    			req.setAttribute("msg", "회원 가입 성공 : 안녕하세요!");
-    			req.setAttribute("url", "/main");
-    		}else if (res == null){
+    	if (params.get("checkNum").equals(params.get("checkNumCheck"))) {
+    		try {
+    			res = memberService.join(dto);
+    		} catch (MemberService.IdExistException e) {
+    			redirectAttribute.addFlashAttribute("error", "id");
+    			return "redirect:/member/join";
+    		}
+
+    		if (res.equals("")) {
     			req.setAttribute("msg", "회원 가입 실패 : 다시 시도해 주세요");
     			req.setAttribute("url", "member/join");
     		}
