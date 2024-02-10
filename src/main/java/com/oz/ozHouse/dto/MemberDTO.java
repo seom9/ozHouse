@@ -9,6 +9,7 @@ import com.oz.ozHouse.domain.OrderTb;
 import com.oz.ozHouse.domain.common.Address;
 import com.oz.ozHouse.domain.common.Image;
 import com.oz.ozHouse.domain.common.MemberLevel;
+import com.oz.ozHouse.domain.common.MemberRole;
 import com.oz.ozHouse.domain.common.PhoneNumber;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -30,6 +31,7 @@ public class MemberDTO{
     private String memberPasswd;
     private String memberNickname;
     private String memberEmail;
+    private MemberRole memberRole;
     private Image memberImage;
     private Address memberAddress;
     private PhoneNumber memberHp;
