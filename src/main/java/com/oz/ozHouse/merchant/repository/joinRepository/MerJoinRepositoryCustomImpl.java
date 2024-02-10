@@ -8,6 +8,7 @@ import com.oz.ozHouse.dto.MerchantDTO;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Repository
@@ -15,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 public class MerJoinRepositoryCustomImpl implements MerJoinRepositoryCustom{
 	private final EntityManager em;
 
+	@Transactional
 	public MerchantDTO findMerchantId(String id) {
 	String query = "SELECT m FROM Merchant m where m.merId = :value";
 		TypedQuery<Merchant> jpql = em.createQuery(query, Merchant.class)
