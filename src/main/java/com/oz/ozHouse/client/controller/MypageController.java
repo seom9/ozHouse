@@ -29,7 +29,7 @@ import com.oz.ozHouse.domain.Member;
 import com.oz.ozHouse.domain.common.Address;
 import com.oz.ozHouse.dto.DTO;
 import com.oz.ozHouse.dto.MemberDTO;
-import com.oz.ozHouse.dto.client.MemberUpdateDTO;
+import com.oz.ozHouse.dto.client.member.MemberUpdateDTO;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
