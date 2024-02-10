@@ -44,7 +44,8 @@ public class ProductDTO {
                 .proNum(product.getProNum())
                 .proName(product.getProName())
                 .categoryNum(product.getCategoryNum())
-                .merNum(product.getMerchant().getMerNum())
+//                .merNum(product.getMerchant().getMerNum())
+                .merNum(product.getMerNum())
                 .proImg(product.getImg().getProImg())
                 .proImgPro(product.getImg().getProImgPro())
                 .proQuantity(product.getProQuantity())
@@ -85,30 +86,30 @@ public class ProductDTO {
 //    }
     	
     public ProductDTO(HttpServletRequest req) {
-//        this.proNum = Integer.parseInt(req.getParameter("proNum"));
+        this.proNum = 5;
         this.proName = req.getParameter("proName");
-//        this.categoryNum = Integer.parseInt(req.getParameter("categoryNum"));
-//        this.merNum = Integer.parseInt(req.getParameter("merNum"));
-//        this.proImg = req.getParameter("proImg");
-//        this.proImgPro = req.getParameter("proImgPro");
-//        this.proQuantity = Integer.parseInt(req.getParameter("proQuantity"));
-//        this.proPrice = Integer.parseInt(req.getParameter("proPrice"));
-//        this.proModifier = req.getParameter("proModifier");
-//        this.proPoint = Integer.parseInt(req.getParameter("proPoint"));
-//        if (req.getParameter("proInDate") != null && !req.getParameter("proInDate").isEmpty()) {
-//            this.proInDate = LocalDate.parse(req.getParameter("proInDate"), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-//        }
-//        this.proSpec = req.getParameter("proSpec");
-//        this.proPurchasesCount = Integer.parseInt(req.getParameter("proPurchasesCount"));
-//        this.proApprovalStatus = req.getParameter("proApprovalStatus");
-//        this.proAssemblyCost = Integer.parseInt(req.getParameter("proAssemblyCost"));
-//        this.proDiscountRate = Integer.parseInt(req.getParameter("proDiscountRate"));
-//        this.proDiscountPrice = Integer.parseInt(req.getParameter("proDiscountPrice"));
-//        this.categoryName = req.getParameter("categoryName");
-//        this.proImageChange = req.getParameter("proImageChange");
-//        this.proImageProChange = req.getParameter("proImageProChange");
-//        this.encodedImage = req.getParameter("encodedImage");
-//        this.proToday = req.getParameter("proToday");
+        this.categoryNum = Integer.parseInt(req.getParameter("categoryNum"));
+        this.merNum = 1;
+        this.proImg = req.getParameter("proImg");
+        this.proImgPro = req.getParameter("proImgPro");
+        this.proQuantity = Integer.parseInt(req.getParameter("proQuantity"));
+        this.proPrice = Integer.parseInt(req.getParameter("proPrice"));
+        this.proModifier = req.getParameter("proModifier");
+        this.proPoint = Integer.parseInt(req.getParameter("proPoint"));
+        if (req.getParameter("proInDate") != null && !req.getParameter("proInDate").isEmpty()) {
+            this.proInDate = LocalDate.parse(req.getParameter("proInDate"), DateTimeFormatter.ofPattern("yy/MM/dd"));
+        }
+        this.proSpec = "normal";
+        this.proPurchasesCount = 0;
+        this.proApprovalStatus = "f";
+        this.proAssemblyCost = Integer.parseInt(req.getParameter("proAssemblyCost"));
+        this.proDiscountRate = Integer.parseInt(req.getParameter("proDiscountRate"));
+        this.proDiscountPrice = Integer.parseInt(req.getParameter("proDiscountPrice"));
+        this.categoryName = req.getParameter("categoryName");
+        this.proImageChange = "proImageChange";
+        this.proImageProChange = "proImageProChange";
+        this.encodedImage = "encodedImage";
+        this.proToday = "0";
     }
     
 
