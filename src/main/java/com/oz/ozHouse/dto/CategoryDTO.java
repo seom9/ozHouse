@@ -15,7 +15,6 @@ public class CategoryDTO {
     private int categoryNum;
     private String categoryCode;
     private String categoryName;
-
     public static CategoryDTO toDTO(Category category) {
         return CategoryDTO.builder()
         		.categoryNum(category.getCategoryNum())
