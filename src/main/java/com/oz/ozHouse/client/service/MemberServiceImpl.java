@@ -22,7 +22,7 @@ import lombok.RequiredArgsConstructor;
 public class MemberServiceImpl implements MemberService {
 	private final ModelMapper modelMapper;
 	private final MemberRepository memberRepository;
-	private PasswordEncoder passwordEncoder;
+	private final PasswordEncoder passwordEncoder;
 	
     public String insertMember(MemberDTO memberDTO) {
     	
@@ -86,6 +86,7 @@ public class MemberServiceImpl implements MemberService {
 		member.addRole(MemberRole.CLIENT);
 		member.setMemberPoint(0);
         member.setMemberLevel(MemberLevel.NORMAL);
+        memberRepository.save(member);
         
         return member.getMemberId();
 	}
