@@ -85,7 +85,7 @@
         <a datatype="github" class="css-l0qndx e1ufx3to0" href="/users/auth/github">
         <img src="${path}/client/image/github.png">
         </a>
-        <a datatype="kakao" class="css-l0qndx e1ufx3to0" href="https://kauth.kakao.com/oauth/authorize?client_id=e5b283df9616f7c21f3e15db5f9b0df2&redirect_uri=http://localhost:8080/ozHouse/kakao_login.do&response_type=code">
+        <a datatype="kakao" class="css-l0qndx e1ufx3to0" href="/oauth2/authorization/kakao">
         <img src="${path}/client/image/kakao.png">
         </a>
         <a datatype="naver" class="css-l0qndx e1ufx3to0" href="naverLogin.do">

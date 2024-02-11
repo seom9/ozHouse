@@ -42,14 +42,13 @@ public class SecurityConfig {
 			        .usernameParameter("memberId")	// [C] submit할 아이디
 			        .passwordParameter("memberPasswd")	// [D] submit할 비밀번호
     				.defaultSuccessUrl("/main", true)
-    				.failureUrl("/member/login?error=true") // 로그인 실패 시 이동할 URL
 	        )
-	        .logout(withDefaults());
-        
+	        .logout(withDefaults()); 
         
         http
-        	.oauth2Login().loginPage("member/login");
-        
+	        .oauth2Login().loginPage("/member/login"); 
+
+
         return http.build();
     }
     
