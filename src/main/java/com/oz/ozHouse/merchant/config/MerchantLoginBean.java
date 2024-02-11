@@ -1,5 +1,7 @@
 package com.oz.ozHouse.merchant.config;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 import com.oz.ozHouse.dto.MerchantDTO;
 import com.oz.ozHouse.merchant.service.MerLoginService;
 
@@ -21,11 +23,12 @@ public class MerchantLoginBean {
 	public static final int ERROR = -1;
 	public static final int DELETE_ID = -2;
 	
-	public int loginOk(MerLoginService loginService) {
+	public int loginOk(MerLoginService loginService, PasswordEncoder passwordEncoder) {
 		try {
 			MerchantDTO dto = loginService.merchant_getMember(merId);
 			if (dto != null) {
-				if(dto.getMerDelete() == null && dto.getMerPw().trim().equals(merPw)) {
+				if(dto.getMerDelete() == null 
+						&& passwordEncoder.matches(merPw, dto.getMerPw())) {
 					merNum = dto.getMerNum();
 					merIsbrand = dto.getMerIsbrand();
 					merCompany = dto.getMerCompany();

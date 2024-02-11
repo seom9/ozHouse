@@ -16,15 +16,7 @@ public class MerLoginServiceImpl implements MerLoginService {
 	
 	@Override
 	public MerchantDTO merchant_getMember(String mer_id) {
-		
 		MerchantDTO dto = joinRepository.findMerchantId(mer_id);
-//		Merchant mer = joinRepository.findMerchantId(mer_id);
-//		MerchantDTO dto= new MerchantDTO();
-//		if(mer == null) {
-//			dto = null;
-//		}else{
-//			dto.toDto(mer);
-//		}
 		return dto;
 	}
 
