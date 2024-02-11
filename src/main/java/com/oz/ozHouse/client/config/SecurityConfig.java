@@ -3,6 +3,8 @@ package com.oz.ozHouse.client.config;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.PropertySources;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -16,9 +18,12 @@ import static org.springframework.security.config.Customizer.withDefaults;
 import jakarta.servlet.DispatcherType;
 import lombok.extern.log4j.Log4j2;
  
-@Log4j2
 @Configuration
 @EnableWebSecurity
+@PropertySources({
+    @PropertySource("classpath:kakao.properties"),
+    @PropertySource("classpath:application.properties")
+})
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {    
     @Bean
@@ -28,6 +33,8 @@ public class SecurityConfig {
 	        .csrf().disable() // csrf 토큰 사용 X
 	        .cors().disable() // cors 방지
 	        .headers().frameOptions().disable();
+        
+        
         http
 	        .formLogin(login -> login	// form 방식 로그인 사용
 	        		.loginPage("/member/login")
@@ -35,8 +42,14 @@ public class SecurityConfig {
 			        .usernameParameter("memberId")	// [C] submit할 아이디
 			        .passwordParameter("memberPasswd")	// [D] submit할 비밀번호
     				.defaultSuccessUrl("/main", true)
+    				.failureUrl("/member/login?error=true") // 로그인 실패 시 이동할 URL
 	        )
 	        .logout(withDefaults());
+        
+        
+        http
+        	.oauth2Login().loginPage("member/login");
+        
         return http.build();
     }
     

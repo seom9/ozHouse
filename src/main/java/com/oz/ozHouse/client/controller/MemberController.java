@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -36,8 +37,6 @@ import lombok.extern.log4j.Log4j2;
 public class MemberController {
 	private final MemberService memberService;
 	private final EmailService emailService;
-	private final PasswordEncoder passwordEncoder;
-
 	
     @GetMapping("/join")
     public String member_join() {
@@ -46,12 +45,12 @@ public class MemberController {
     
     @PostMapping("/email-verification")
     public String emailAuth(@RequestParam("email") String email, 
-    							@ModelAttribute MemberDTO dto, BindingResult result, 
+    							@ModelAttribute final MemberJoinDTO dto, BindingResult result, 
     							HttpServletRequest req) throws Exception {
     	
         if (memberService.checkEmail(email) > 0) {
 			req.setAttribute("msg", "이미 가입되어 있습니다");
-			req.setAttribute("url", "member/join");
+			req.setAttribute("url", "/member/join");
 			return "message";
         }
 
@@ -69,7 +68,8 @@ public class MemberController {
     								@RequestParam Map<String, String> params,
     								RedirectAttributes redirectAttribute) {
     	String res = "";
-
+    	System.out.println("여긴 왔어?");
+    	System.out.println("========아이디 : " + dto.getMemberId());
     	if (params.get("checkNum").equals(params.get("checkNumCheck"))) {
     		try {
     			res = memberService.join(dto);
@@ -77,15 +77,18 @@ public class MemberController {
     			redirectAttribute.addFlashAttribute("error", "id");
     			return "redirect:/member/join";
     		}
-
+    		
+    		req.setAttribute("msg", dto.getMemberId() + "님, 환영합니다!");
+			req.setAttribute("url", "/main");
+    		
     		if (res.equals("")) {
     			req.setAttribute("msg", "회원 가입 실패 : 다시 시도해 주세요");
-    			req.setAttribute("url", "member/join");
+    			req.setAttribute("url", "redirect:/member/join");
     		}
         	return "message";
         }else {
 			req.setAttribute("msg", "회원 가입 실패 : 다시 시도해 주세요");
-			req.setAttribute("url", "member/join");
+			req.setAttribute("url", "redirect:/member/join");
         	return "message";
         }
     }
@@ -100,8 +103,7 @@ public class MemberController {
     @ResponseBody
     public String checkId(@PathVariable("member_id") String id) {
         String result="N";
-        if (memberService.checkId(id) > 0) result = "Y"; 	
-        if (id.trim().equals("")) result = "E";					
+        if (memberService.checkId(id) > 0) result = "Y"; 				
         if (id.length() < 6 || id.length() > 12) result = "L";
         if (isValid(id) == false) result = "V";				
         
