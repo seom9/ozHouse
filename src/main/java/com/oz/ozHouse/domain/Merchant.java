@@ -12,11 +12,9 @@ import com.oz.ozHouse.domain.common.BaseEntity;
 import com.oz.ozHouse.domain.common.CompanyNumber;
 import com.oz.ozHouse.domain.common.InbrandInfo;
 import com.oz.ozHouse.domain.common.PhoneNumber;
-import com.oz.ozHouse.dto.CategoryDTO;
 import com.oz.ozHouse.dto.MerchantDTO;
 
 import jakarta.persistence.*;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -43,6 +41,7 @@ public class Merchant extends BaseEntity{
 	@NotNull
     private String merPw;
     
+	@NotNull
     private String merIsbrand;
     
     @NotNull
@@ -125,5 +124,6 @@ public class Merchant extends BaseEntity{
     	this.merName = dto.getMerName();
     	this.merEmail = dto.getMerEmail();
     	this.merBusinessPost = dto.getMerBusinessPost();
+    	this.merIsbrand = "f";
     }
 }

@@ -1,5 +1,6 @@
 package com.oz.ozHouse.merchant.controller;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -21,17 +22,18 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/merchant")
 public class MerLoginController {
 	private final MerLoginService loginService;
+	private final PasswordEncoder passwordEncoder;
 
 	@GetMapping("/login")
 	public String login() {
 		return "merchant/join/merchant_login";
 	}
 	
-	@PostMapping(value="/loginOk")
+	@PostMapping("/login/loginOk")
 	public String loginOk(HttpServletRequest req, HttpServletResponse resp, 
 			@ModelAttribute MerchantLoginBean loginOk, 
 			@RequestParam(name = "saveId", required=false) String saveId) {
-		int res = loginOk.loginOk(loginService);
+		int res = loginOk.loginOk(loginService, passwordEncoder);
 		String msg = null, url = null;
 		switch(res){
 		case MerchantLoginBean.OK :
@@ -66,6 +68,17 @@ public class MerLoginController {
 		}
 		req.setAttribute("msg", msg);
 		req.setAttribute("url", url);
-    	return "forward:message.jsp";
+    	return "message";
 	}
+	
+	@GetMapping(value="/login/logout")
+    public String logout(HttpServletRequest req) {
+    	HttpSession session = req.getSession();
+    	session.invalidate();
+    	String msg = "로그아웃 되었습니다.";
+    	String url = "/merchant/main";
+    	req.setAttribute("msg", msg);
+    	req.setAttribute("url", url);
+    	return "message";
+    }
 }

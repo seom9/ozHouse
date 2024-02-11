@@ -11,7 +11,7 @@
 <script type="text/javascript">
 	function logout() {
 		if (window.confirm("로그아웃 하시겠습니까?")) {
-			location.href = "${pageContext.request.contextPath}/merchant/logout";
+			location.href = "${pageContext.request.contextPath}/merchant/login/logout";
 		}
 	}
 </script>
