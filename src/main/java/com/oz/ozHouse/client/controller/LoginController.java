@@ -6,17 +6,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
-@Log4j2
 @Controller
 @RequiredArgsConstructor
 public class LoginController {
 	@GetMapping("/member/login")
 	public String loginGet() {
-		log.info("login get...............");
 		return "client/member/member_login";
 	}
 
-	
 	/*
 	@RequestMapping(value="/member_find.do", method=RequestMethod.GET)
 	public String searchMember() {
