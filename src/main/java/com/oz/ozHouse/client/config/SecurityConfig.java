@@ -12,6 +12,10 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+
+import com.oz.ozHouse.client.security.CustomSocialLoginSuccessHandler;
+
 import static org.springframework.security.config.Customizer.withDefaults;
 
 
@@ -26,6 +30,11 @@ import lombok.extern.log4j.Log4j2;
 })
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {    
+	@Bean
+	public AuthenticationSuccessHandler authenticationSuccessHandler() {
+		return new CustomSocialLoginSuccessHandler();
+	}
+	
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     	
@@ -46,7 +55,10 @@ public class SecurityConfig {
 	        .logout(withDefaults()); 
         
         http
-	        .oauth2Login().loginPage("/member/login"); 
+	        .oauth2Login()
+	        		.loginPage("/member/login")
+	        		.successHandler(authenticationSuccessHandler()); 
+        			
 
 
         return http.build();

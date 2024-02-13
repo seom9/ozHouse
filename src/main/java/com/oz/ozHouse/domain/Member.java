@@ -5,10 +5,12 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.oz.ozHouse.client.security.MemberSecurityDTO;
 import com.oz.ozHouse.domain.common.Address;
 import com.oz.ozHouse.domain.common.BaseEntity;
 import com.oz.ozHouse.domain.common.Image;
@@ -94,6 +96,11 @@ public class Member extends BaseEntity{
 	public void setMemberPoint (int memberPoint) {
 		this.memberPoint = memberPoint;
 	}
+	
+    public Member social(boolean social) {
+        this.social = social;
+        return this;
+    }
 	
 	public void setMemberLevel (MemberLevel memberLevel) {
 		this.memberLevel = memberLevel;

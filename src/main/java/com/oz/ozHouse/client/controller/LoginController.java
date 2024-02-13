@@ -3,6 +3,7 @@ package com.oz.ozHouse.client.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
@@ -12,6 +13,13 @@ public class LoginController {
 	@GetMapping("/member/login")
 	public String loginGet() {
 		return "client/member/member_login";
+	}
+	
+	@GetMapping("/login/message")
+	public String loginSuccess(HttpServletRequest req) {
+		req.setAttribute("msg", "오즈 하우스에 오신 것을 환영합니다!");
+		req.setAttribute("url", "/main");
+		return "message";
 	}
 
 	/*

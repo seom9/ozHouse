@@ -1,4 +1,4 @@
-package com.oz.ozHouse.security;
+package com.oz.ozHouse.client.security;
 
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import com.oz.ozHouse.client.repository.MemberRepository;
 import com.oz.ozHouse.domain.Member;
-import com.oz.ozHouse.dto.client.member.MemberSecurityDTO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -51,7 +50,6 @@ public class CustomUserDetailsService implements UserDetailsService{
 	
 	@Override
 	public UserDetails loadUserByUsername(String memberId) throws UsernameNotFoundException{
-		System.out.println("여기 들어온 거임");
 		// UserDetails 의 인터페이스를 구현한 user 객체로 유저의 객체를 만들 수 있다
 		Optional<Member> result = memberRepository.getWithRole(memberId);
 		
@@ -63,7 +61,6 @@ public class CustomUserDetailsService implements UserDetailsService{
 		
 		MemberSecurityDTO memberSecurityDTO = 
 				new MemberSecurityDTO (
-						member.getMemberNum(),
 						member.getMemberId(),
 						member.getMemberPasswd(),
 						member.getMemberNickname(),
