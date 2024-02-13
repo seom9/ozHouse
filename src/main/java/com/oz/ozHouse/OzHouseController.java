@@ -8,6 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class OzHouseController {
 	@GetMapping(value = {"/", "/index.do", "/main.do"})
 	public String index() {
-		return "client/main/Main";
+		return "test2";
 	}
 }
