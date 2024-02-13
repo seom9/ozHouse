@@ -14,5 +14,5 @@ public class Image {
     private String proImgPro;
     private String proImageChange;
     private String proImageProChange;
-    private String encodedImage;
+//    private String encodedImage;
 }

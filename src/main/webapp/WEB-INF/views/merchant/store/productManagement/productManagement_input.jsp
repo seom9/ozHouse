@@ -145,7 +145,7 @@ input[type='number']::-webkit-inner-spin-button, input[type='number']::-webkit-o
 		<div class="content-container">
 			<c:set var="merNum" value="${merchantLoginMember.merNum}" />
 			<form method="post"
-				action="${pageContext.request.contextPath}/merchant/product-input"
+				action="${pageContext.request.contextPath}/merchant/store/product-input"
 				enctype="multipart/form-data">
 				<input type="hidden" name="merNum"
 					value= 1>

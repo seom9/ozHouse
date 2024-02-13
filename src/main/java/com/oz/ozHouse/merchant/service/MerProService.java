@@ -19,4 +19,6 @@ public interface MerProService {
 	//재고리스트 건수
 	public Long stockListCount();
 
+	public void updateProductStock(Integer proNum, Integer newQuantity);
+
 }

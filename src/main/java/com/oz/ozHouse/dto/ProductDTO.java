@@ -46,7 +46,7 @@ public class ProductDTO {
         String proImgPro = img != null ? img.getProImgPro() : "";
         String proImageChange = img != null ? img.getProImageChange() : "";
         String proImageProChange = img != null ? img.getProImageProChange() : "";
-        String encodedImage = img != null ? img.getEncodedImage() : "";
+//        String encodedImage = img != null ? img.getEncodedImage() : "";
         
         return ProductDTO.builder()
                 .proNum(product.getProNum())
@@ -54,8 +54,8 @@ public class ProductDTO {
                 .categoryNum(product.getCategoryNum())
                 .merNum(product.getMerNum())
 //                .merNum(product.getMerchant().getMerNum())
-                .proImg(proImg)
-                .proImgPro(proImgPro)
+                .proImg(product.getImg().getProImg())
+                .proImgPro(product.getImg().getProImgPro())
                 .proQuantity(product.getProQuantity())
                 .proPrice(product.getMerPrice() != null ? product.getMerPrice().getProPrice() : 0)
                 .proModifier(product.getProModifier())
@@ -68,9 +68,9 @@ public class ProductDTO {
                 .proDiscountRate(product.getMerPrice() != null ? product.getMerPrice().getProDiscountRate() : 0)
                 .proDiscountPrice(product.getMerPrice() != null ? product.getMerPrice().getProDiscountPrice() : 0)
                 .categoryName(product.getCategoryName())
-                .proImageChange(proImageChange)
-                .proImageProChange(proImageProChange)
-                .encodedImage(encodedImage)
+                .proImageChange(product.getImg().getProImageChange())
+                .proImageProChange(product.getImg().getProImageProChange())
+//                .encodedImage(encodedImage)
                 .proToday(product.getProToday())
                 .build();
     }
@@ -100,7 +100,7 @@ public class ProductDTO {
     public ProductDTO(HttpServletRequest req) {
         this.proName = req.getParameter("proName");
         this.categoryNum = Integer.parseInt(req.getParameter("categoryNum"));
-        this.merNum = 1;
+//        this.merNum = 1;
         this.proImg = req.getParameter("proImg");
         this.proImgPro = req.getParameter("proImgPro");
         this.proQuantity = Integer.parseInt(req.getParameter("proQuantity"));
@@ -115,9 +115,9 @@ public class ProductDTO {
         this.proDiscountRate = Integer.parseInt(req.getParameter("proDiscountRate"));
         this.proDiscountPrice = Integer.parseInt(req.getParameter("proDiscountPrice"));
         this.categoryName = req.getParameter("categoryName");
-        this.proImageChange = "proImageChange";
-        this.proImageProChange = "proImageProChange";
-        this.encodedImage = "encodedImage";
+        this.proImageChange = req.getParameter("proImageChange");
+        this.proImageProChange = req.getParameter("proImageProChange");
+//        this.encodedImage = "encodedImage";
 //        this.proToday = "0";
     }
 }
