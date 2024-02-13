@@ -108,20 +108,5 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService{
 		return email;
 	}
 	
-//	loadUser() 메서드는 OAuth2UserRequest 객체를 매개변수로 받아들이고, 
-//	이를 처리하여 OAuth2User 객체를 반환합니다. 
-	
-//	먼저, userRequest 객체에서 OAuth2 클라이언트 등록 정보(ClientRegistration)를 가져옵니다. 
-//	이 정보를 사용하여 클라이언트의 이름을 얻을 수 있습니다.
 
-//	이 메서드는 부모 클래스인 DefaultOAuth2UserService의 loadUser() 메서드를 호출하여 
-//	실제로 OAuth2 사용자 정보를 가져옵니다. 
-//	필요에 따라 이 메서드를 오버라이드하여 사용자 정보를 커스터마이징할 수 있습니다.
-	
-// 	LickedHashMap
-//	삽입 순서 또는 액세스 순서를 기반으로 요소들을 유지
-//	내부적으로 해시 테이블과 연결 리스트를 사용하여 요소들을 저장하며, 이 때 연결 리스트는 요소들의 삽입 순서나 액세스 순서를 기억
-//	순서 유지: 요소들을 삽입한 순서대로 유지합니다.
-//	액세스 순서 유지: 요소들에 대한 액세스 순서를 유지할 수 있습니다. 액세스 순서를 유지하도록 생성자를 호출할 수 있으며, 
-//	이 때 가장 최근에 액세스한 요소가 가장 뒤쪽으로 이동합니다.
 }
