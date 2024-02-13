@@ -62,7 +62,7 @@
 		<div class="find-id">비밀번호 변경</div>
 		<form name="f" method="post" id="login-form"
 			action="${pageContext.request.contextPath}/merchant/login/putPassword/${memberId}">
-			<input type="hidden" name="_method" value="PATCH"/>
+			<!-- <input type="hidden" name="_method" value="PATCH"/> -->
 
 				<span class="title">아이디</span>
 				${memberId}

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.oz.ozHouse.client.service.EmailService;
@@ -132,14 +133,7 @@ public class MerLoginController {
 		return "merchant/join/merchant_changePass";
 	}
 
-//	private MerchantDTO getMember(HttpServletRequest req) {
-//		HttpSession session = req.getSession();
-//		MerchantLoginBean merchantLoginMember = (MerchantLoginBean) session.getAttribute("merchantLoginMember");
-//		MerchantDTO dto = loginService.merchant_getMember(merchantLoginMember.getMerId());
-//		return dto;
-//	}
-
-	@PatchMapping(value = "/login/putPassword/{member_id}")
+	@PostMapping(value = "/login/putPassword/{member_id}")
 	public String mypage_updatePasswdPro(HttpServletRequest req, @PathVariable("member_id") String member_id,
 			@RequestParam(name = "new_member_passwd") String new_member_passwd) {
 		new_member_passwd = passwordEncoder.encode(new_member_passwd);
