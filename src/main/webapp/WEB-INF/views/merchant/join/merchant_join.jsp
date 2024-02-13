@@ -96,7 +96,7 @@
 		        let merId = $("#merId").val();
 		        $.ajax({
 		            type:'post', //post 형식으로 controller 에 보내기위함!!
-		            url: "${pageContext.request.contextPath}/merchants/check-id", // 컨트롤러로 가는 mapping 입력
+		            url: "${pageContext.request.contextPath}/merchant/login/join/check-id", // 컨트롤러로 가는 mapping 입력
 		            data: {"merId":merId}, // 원하는 값을 중복확인하기위해서  JSON 형태로 DATA 전송
 		            success: function(data){ 
 		             if (data == "N" ){ // 만약 성공할시
@@ -280,7 +280,7 @@
 	<main>
 		<div class="registration-form-container">
 			<form name="f" method="post"
-				action="${pageContext.request.contextPath}/merchants/send-email"
+				action="${pageContext.request.contextPath}/merchant/login/join/send-email"
 				enctype="multipart/form-data">
 				<h1>판매자 회원가입</h1>
 				<div class="form-group id-check-group">
@@ -356,11 +356,11 @@
 				</div>
 
 				<div class="form-group">
-					<label for="merManhp1">판매자 전화 번호</label>
+					<label for="merhp1">판매자 전화 번호</label>
 					<div class="input-group">
-						<input type="text" id="merManhp1" name="merManhp1" maxlength="3">-
-						<input type="text" id="merManhp2" name="merManhp2" maxlength="4">-
-						<input type="text" id="merManhp3" name="merManhp3" maxlength="4">
+						<input type="text" id="merHp1" name="merHp1" maxlength="3">-
+						<input type="text" id="merHp2" name="merHp2" maxlength="4">-
+						<input type="text" id="merHp3" name="merHp3" maxlength="4">
 					</div>
 				</div>
 

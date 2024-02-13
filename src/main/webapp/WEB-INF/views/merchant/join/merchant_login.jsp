@@ -30,13 +30,13 @@
 	}
 	function loginCheck(){
 		if (f.merId.value == ""){
-	        customAlert("아이디를 입력해 주세요!!");
+	        alert("아이디를 입력해 주세요!!");
 	        f.merId.focus();
 	        return;
 	    }
-	    if (f.mer_passwd.value == ""){
-	        customAlert("비밀번호를 입력해 주세요!!");
-	        f.mer_passwd.focus();
+	    if (f.merPw.value == ""){
+	        alert("비밀번호를 입력해 주세요!!");
+	        f.merPw.focus();
 	        return;
 	    }
 	    document.f.submit();
@@ -67,7 +67,7 @@
 	<br>
 	<br>
 	<div class="container">
-		<form method="post" action="${pageContext.request.contextPath}/merchant/login" id="login-form"
+		<form method="post" action="${pageContext.request.contextPath}/merchant/login/loginOk" id="login-form"
 			name="f">
 			<div class="site-login">판매자 사이트 로그인</div>
 			<br>
@@ -80,7 +80,7 @@
 			<c:if test="${empty cookie.saveId}">
 				<input type="text" name="merId" tabindex="1" placeholder="아이디 입력">
 			</c:if>
-			<input type="password" name="mer_passwd" placeholder="비밀번호 입력"
+			<input type="password" name="merPw" placeholder="비밀번호 입력"
 				onkeypress="return pressEnter(event)">
 			<div class="remember-me">
 				<c:if test="${not empty cookie.saveId}">

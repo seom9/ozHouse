@@ -8,7 +8,6 @@ import com.oz.ozHouse.domain.Merchant;
 import com.oz.ozHouse.domain.Product;
 import com.oz.ozHouse.dto.ProductDTO;
 import com.oz.ozHouse.merchant.repository.MerProductRepository;
-import com.oz.ozHouse.merchant.repository.MerchantJoinRepository;
 
 import lombok.RequiredArgsConstructor;
 
