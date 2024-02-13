@@ -1,7 +1,5 @@
 package com.oz.ozHouse.merchant.service;
 
-import java.util.Map;
-
 import com.oz.ozHouse.dto.MerchantDTO;
 
 public interface MerLoginService {
@@ -10,5 +8,5 @@ public interface MerLoginService {
 	
 	public String checkMerchantIdEmail(String mer_email);
 	
-	public boolean updatePass(String merPw, String merId);
+	public int updatePass(String merPw, String merId);
 }

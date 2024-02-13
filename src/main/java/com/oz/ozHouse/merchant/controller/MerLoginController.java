@@ -132,37 +132,25 @@ public class MerLoginController {
 		return "merchant/join/merchant_changePass";
 	}
 
-	private MerchantDTO getMember(HttpServletRequest req) {
-		HttpSession session = req.getSession();
-		MerchantLoginBean merchantLoginMember = (MerchantLoginBean) session.getAttribute("merchantLoginMember");
-		MerchantDTO dto = loginService.merchant_getMember(merchantLoginMember.getMerId());
-		return dto;
-	}
+//	private MerchantDTO getMember(HttpServletRequest req) {
+//		HttpSession session = req.getSession();
+//		MerchantLoginBean merchantLoginMember = (MerchantLoginBean) session.getAttribute("merchantLoginMember");
+//		MerchantDTO dto = loginService.merchant_getMember(merchantLoginMember.getMerId());
+//		return dto;
+//	}
 
 	@PatchMapping(value = "/login/putPassword/{member_id}")
-	public String mypage_updatePasswdPro(HttpServletRequest req, @PathVariable("member_id}") String id, @RequestBody String new_member_passwd) {
-		MerchantDTO dto = new MerchantDTO();
-		boolean passwd = false;
-
-		dto = getMember(req);
-		String old_pass = req.getParameter("member_passwd");
-		passwd = passwordEncoder.matches(old_pass, dto.getMerPw());
-
-		if (passwd) {
-			dto.setMerPw(new_member_passwd);
-			boolean res = loginService.updatePass(dto.getMerPw(), dto.getMerId());
-			if (res) {
-				req.setAttribute("msg", "비밀번호가 업데이트 되었습니다");
-				req.setAttribute("url", "merchant_login.do");
-			} else {
-				req.setAttribute("msg", "비밀번호 업데이트 실패 : 수정하실 비밀번호를 확인해 주세요");
-				req.setAttribute("url", "merchant_login.do");
-			}
+	public String mypage_updatePasswdPro(HttpServletRequest req, @PathVariable("member_id") String member_id,
+			@RequestParam(name = "new_member_passwd") String new_member_passwd) {
+		new_member_passwd = passwordEncoder.encode(new_member_passwd);
+		int res = loginService.updatePass(new_member_passwd, member_id);
+		if (res > 0) {
+			req.setAttribute("msg", "비밀번호가 업데이트 되었습니다");
+			req.setAttribute("url", "/merchant/login");
 		} else {
-			req.setAttribute("msg", "비밀번호 업데이트 실패 : 다시 확인해 주세요");
-			req.setAttribute("url", "merchant_login.do");
+			req.setAttribute("msg", "비밀번호 업데이트 실패 : 수정하실 비밀번호를 확인해 주세요");
+			req.setAttribute("url", "/merchant/login");
 		}
-
 		return "message";
 	}
 

@@ -31,9 +31,8 @@ public class MerLoginServiceImpl implements MerLoginService {
 	}
 
 	@Override
-	public boolean updatePass(String merPw, String merId) {
-		boolean result = loginRepository.updateMerchantPw(merPw, merId);
-		
+	public int updatePass(String merPw, String merId) {
+		int result = loginRepository.updateMerchantPw(merPw, merId);
 		return result;
 	}
 
