@@ -27,7 +27,7 @@ public class ProductDTO {
     private int proPrice; 
     private String proModifier;
     private int proPoint;
-    private LocalDate proInDate; 
+    private String proInDate;
     private String proSpec;
     private int proPurchasesCount;
     private String proApprovalStatus;
@@ -41,12 +41,6 @@ public class ProductDTO {
     private String proToday;
 
     public static ProductDTO toDTO(Product product) {
-    	Image img = product.getImg();
-        String proImg = img != null ? img.getProImg() : "";
-        String proImgPro = img != null ? img.getProImgPro() : "";
-        String proImageChange = img != null ? img.getProImageChange() : "";
-        String proImageProChange = img != null ? img.getProImageProChange() : "";
-//        String encodedImage = img != null ? img.getEncodedImage() : "";
         
         return ProductDTO.builder()
                 .proNum(product.getProNum())
@@ -93,11 +87,9 @@ public class ProductDTO {
 //                .build();
 //    }
     
-//    public String getFormattedProInDate() {
-//        return proInDate.format(DateTimeFormatter.ofPattern("yy/MM/dd"));
-//    }
-    	
     public ProductDTO(HttpServletRequest req) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy/MM/dd");
+
         this.proName = req.getParameter("proName");
         this.categoryNum = Integer.parseInt(req.getParameter("categoryNum"));
 //        this.merNum = 1;
@@ -107,7 +99,8 @@ public class ProductDTO {
         this.proPrice = Integer.parseInt(req.getParameter("proPrice"));
         this.proModifier = req.getParameter("proModifier");
         this.proPoint = Integer.parseInt(req.getParameter("proPoint"));
-        this.proInDate = LocalDate.now();
+//        this.proInDate = LocalDate.now();
+        this.proInDate = LocalDate.now().format(formatter);
 //        this.proSpec = "normal";
 //        this.proPurchasesCount = 0;
 //        this.proApprovalStatus = "f";
@@ -120,4 +113,28 @@ public class ProductDTO {
 //        this.encodedImage = "encodedImage";
 //        this.proToday = "0";
     }
+
+	public void setProImg(String proImg) {
+		this.proImg = proImg;
+	}
+
+	public void setProImageChange(String proImageChange) {
+		this.proImageChange = proImageChange;
+	}
+	
+	public void setProImageProChange(String proImageProChange) {
+		this.proImageProChange = proImageProChange;
+	}
+
+	public void setProImgPro(String proImgPro) {
+		this.proImgPro = proImgPro;
+	}
+	
+	public void setEncodedImage(String encodedImage) {
+		this.encodedImage = encodedImage;
+	}
+	
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
 }

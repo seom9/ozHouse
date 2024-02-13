@@ -163,7 +163,7 @@ input[type='number']::-webkit-inner-spin-button, input[type='number']::-webkit-o
 							<label for="categorySelect">카테고리</label> <select
 								name="categoryNum" id="categorySelect" required>
 								<c:forEach var="category" items="${categories}">
-									<option value="${category.ordinal()}">
+									<option value="${category.getCategoryNum()}">
 										[${category.getCategoryCode()}]&nbsp;${category.getCategoryName()}
 									</option>
 								</c:forEach>

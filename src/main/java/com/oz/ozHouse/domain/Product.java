@@ -1,6 +1,7 @@
 package com.oz.ozHouse.domain;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -53,8 +54,7 @@ public class Product {
 
 	private String proModifier;
 
-	@DateTimeFormat(pattern = "yy/MM/dd")
-	private LocalDate proInDate;
+	private String proInDate;
 
 	private String proSpec;
 
@@ -67,6 +67,8 @@ public class Product {
 	private String proToday;
 
 	public Product(ProductDTO dto) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy/MM/dd");
+		
 		this.proNum = dto.getProNum();
 		this.proName = dto.getProName();
 		this.categoryNum = dto.getCategoryNum();
@@ -79,7 +81,7 @@ public class Product {
 				dto.getProDiscountRate(), dto.getProDiscountPrice());
 		this.proQuantity = dto.getProQuantity();
 		this.proModifier = dto.getProModifier();
-		this.proInDate = dto.getProInDate();
+		this.proInDate = dto.getProInDate().formatted(formatter);
 		this.proSpec = "normal";
 		this.proPurchasesCount = 0;
 		this.proApprovalStatus = "f";

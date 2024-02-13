@@ -151,7 +151,15 @@ function resetForm() {	// 폼 초기화
 						<div class="sub-content">${dto.proName}</div>
 					</div>
 					<div class="flex-cell">${dto.categoryName}</div>
-					<div class="flex-cell">이미지</div>
+					<div class="flex-cell">
+						<c:if test="${not empty dto.encodedImage}">
+							<img src="data:image/jpeg;base64,${dto.encodedImage}" width="40"
+								height="40">
+						</c:if>
+						<c:if test="${empty dto.encodedImage}">
+							<span>이미지 준비중</span>
+						</c:if>
+					</div>
 					<div class="flex-cell">
 						<fmt:formatNumber value="${dto.proPrice}" pattern="###,###" />
 						원
@@ -170,7 +178,7 @@ function resetForm() {	// 폼 초기화
 							<input type="hidden" name="proNum" value="${dto.proNum}" /> <input
 								type="text" name="proQuantity" value="${dto.proQuantity }"
 								size="5">개 <input type="submit" value="수정"
-								class="submit2 edit-button"> 
+								class="submit2 edit-button">
 						</form>
 					</div>
 					<div class="flex-cell">${dto.proInDate }</div>
