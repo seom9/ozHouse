@@ -53,6 +53,7 @@ public class MerchantDTO {
 		this.merAdress = merAdress;
 	}
     
+    
     public MerchantDTO toDto(Merchant merchant) {
         return MerchantDTO.builder()
                 .merNum(merchant.getMerNum())
@@ -109,6 +110,14 @@ public class MerchantDTO {
 
 	public void setMerRegistration(String merRegistration) {
 		this.merRegistration = merRegistration;
+	}
+
+	public void setMerId(String merId) {
+		this.merId = merId;
+	}
+
+	public void setMerPw(String merPw) {
+		this.merPw = merPw;
 	}
 
 }
