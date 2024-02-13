@@ -57,7 +57,7 @@ public class MypageController {
     @GetMapping("/hi")
     public String index(@AuthenticationPrincipal MemberSecurityDTO member) {
         System.out.println("이렇게 받아 올 수 있음 = " + member.getUsername());
-        System.out.println("이렇게 받아 올 수 있음 = " + member.isSocial());
+        System.out.println("이렇게 받아 올 수 있음 1= " + member.isSocial());
         return "client/member/member_join";
     }
     
