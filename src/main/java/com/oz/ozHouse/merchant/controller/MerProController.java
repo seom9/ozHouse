@@ -98,30 +98,16 @@ public class MerProController {
 		String ext1 = filename.substring(filename.lastIndexOf("."));
 		String changeFile1 = UUID.randomUUID().toString() + ext1;
 		
-//		String path = req.getServletContext().getRealPath("/resources/files");
-		
-//		File file = new File(path, changeFile1);
 		File file = new File(root, changeFile1);
 
-		
-//		dto.setproImg(filename);
-//		dto.setproImg_change(changeFile1);
-		
-//		dto.builder()
-//		.proImg(filename)
-//		.proImageChange(changeFile1)
-//		.build();
-		
-		System.out.println("root : " + root);
-		System.out.println("filename : " + filename);
-		System.out.println("changeFile1 : " + changeFile1);
-		System.out.println("file : " + file);
+		dto.setProImg(filename);
+		dto.setProImageChange(changeFile1);
 		
 		try {
 			mf.transferTo(file);
 		}catch(IOException e) {
 			req.setAttribute("msg", "대표이미지 등록에 실패했습니다.");
-			req.setAttribute("url", "/merchant/product-input");
+			req.setAttribute("url", "/merchant/store/product-input");
 			return "message";
 		}
 		
@@ -142,7 +128,6 @@ public class MerProController {
 			System.out.println("changeFile : " + changeFile);
 			fileList.add(map);
 		}
-		System.out.println("root1 : " + root1);
 		String filepro = "";
 		
 		try {
@@ -158,39 +143,34 @@ public class MerProController {
 				System.out.println(filepro);
 			}
 			
-			System.out.println("다중 파일 업로드 성공!");
+			System.out.println("다중 파일 업로드 성공");
 			
 		} catch (IllegalStateException | IOException e) {
 			System.out.println("다중 파일 업로드 실패");
 			for(int i = 0; i < proImgPro.size(); i++) {
-//				new File(path + "\\" + fileList.get(i).get("changeFile")).delete();
-
 				new File(root1 + "\\" + fileList.get(i).get("changeFile")).delete();
 			}
 			e.printStackTrace();
 		}
-		System.out.println("filepro : " + filepro);
-		System.out.println("fileproOri : " + fileproOri);
 		
-//		dto.setproImageProChange(filepro);
-//		dto.setProImgPro(fileproOri);
+		dto.setProImageProChange(filepro);
+		dto.setProImgPro(fileproOri);
 		
-//		dto.builder()
-//		.proImageProChange(fileproOri)
-//		.proImgPro(filepro)
-//		.build();
-		
-		System.out.println("대표이미지 : " + proImg);
-		System.out.println("상세 이미지 : " + proImgPro);
-		HttpSession session = req.getSession();
-		session.setAttribute("proImg", root);
-		session.setAttribute("proImgPro", root1);
-		System.out.println("root : " + session.getAttribute("proImg"));
-		System.out.println("root1 : " + session.getAttribute("proImgPro"));
+//		HttpSession session = req.getSession();
+//		session.setAttribute("proImg", root);
+//		session.setAttribute("proImgPro", root1);
+//		System.out.println("root : " + session.getAttribute("proImg"));
+//		System.out.println("root1 : " + session.getAttribute("proImgPro"));
 //		dto.setmerNum(merNum);
+		System.out.println(dto.getProName());
+		// 카테고리 번호를 기반으로 카테고리 이름을 조회
+		int categoryNum = Integer.parseInt(req.getParameter("categoryNum")); // 또는 다른 방식으로 categoryNum을 얻습니다.
+		String categoryName = Category.getNameByNum(categoryNum);
+		dto.setCategoryName(categoryName);
+		System.out.println("카테고리 Num : " + dto.getCategoryNum());
+		System.out.println("카테고리명 : " + dto.getCategoryName());
 		String res = proService.insertProduct(dto);
 		System.out.println("insertProduct실행?");
-		System.out.println(dto.getProName());
 		if (res != null) {
 			req.setAttribute("msg", "상품 등록 요청 성공했습니다.");
 			req.setAttribute("url", "/merchant/store/products");
@@ -223,22 +203,22 @@ public class MerProController {
 	@GetMapping("/product/stock")
 	public String productStock(HttpServletRequest req, @RequestParam Map<String, Object> params) throws IOException {
 		System.out.println("재고관리");
-//	    String root = PATH + "\\" + "img";
-//	    req.setAttribute("proImg", root);
+	    String root = PATH + "\\" + "img";
+	    req.setAttribute("proImg", root);
 //	    
 //	    String[] specArray = req.getParameterValues("spec");
 //	    List<String> spec = (specArray != null) ? Arrays.asList(specArray) : new ArrayList<String>();
 //	    params.put("spec", spec);
 
-	    // 재고 관리 리스트
-//	    List<Product> list = proService.stockList();
-//	    for (Product product : list) {
-//	        File imageFile = new File(root, product.getProImageChange());
-//	        if (imageFile.exists()) {
-//	            String encodedImage = encodeImageToBase64(imageFile);
-//	            product.setEncodedImage(encodedImage); 
-//	        }
-//	    }
+	    //재고 관리 리스트
+	    List<ProductDTO> list = proService.stockList();
+	    for (ProductDTO dto : list) {
+	        File imageFile = new File(root, dto.getProImageChange());
+	        if (imageFile.exists()) {
+	            String encodedImage = encodeImageToBase64(imageFile);
+	            dto.setEncodedImage(encodedImage); 
+	        }
+	    }
 	    req.setAttribute("stockListProduct", proService.stockList());
 	    
 //	    int stockListCount = proService.merchant_stockListCount(params);
