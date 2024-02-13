@@ -19,10 +19,13 @@ public interface MemberRepository extends JpaRepository<Member, Integer> {
 	
 	boolean existsByMemberId(String memberId);
 	
-	// member 로그인 시 memberRole 같이 로딩
+	// Security : member 로그인 시 memberRole 같이 로딩
 	@EntityGraph(attributePaths = "roleSet")
 	@Query("select m from Member m where m.memberId = :memberId and m.social = false")
 	Optional<Member> getWithRole(@Param("memberId") String memberId);
 	
+	// Security(OAuth2) : email 로 회원 정보 찾기
+	@EntityGraph(attributePaths = "roleSet")
+	Optional<Member> findByMemberEmail(String memberEmail);
 
 }

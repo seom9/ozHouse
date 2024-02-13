@@ -6,7 +6,10 @@ import java.net.BindException;
 import java.util.Enumeration;
 import java.util.Map;
 
+import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -24,6 +27,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.oz.ozHouse.client.config.LoginOkBean;
+import com.oz.ozHouse.client.security.CustomUserDetailsService;
+import com.oz.ozHouse.client.security.MemberSecurityDTO;
 import com.oz.ozHouse.client.service.MemberService;
 import com.oz.ozHouse.domain.Member;
 import com.oz.ozHouse.domain.common.Address;
@@ -49,8 +54,15 @@ public class MypageController {
     	return dto;
     }
 	
+    @GetMapping("/hi")
+    public String index(@AuthenticationPrincipal MemberSecurityDTO member) {
+        System.out.println("이렇게 받아 올 수 있음 = " + member.getUsername());
+        System.out.println("이렇게 받아 올 수 있음 = " + member.isSocial());
+        return "client/member/member_join";
+    }
+    
     // get 방식에는 @PreAuthorize 어노테이션
-    @PreAuthorize("hasRole('User')")
+    @PreAuthorize("hasAnyRole('ROLE_CLIENT')")
 	@GetMapping("/profile")
 	public String index(HttpServletRequest req) {
     	MemberDTO dto = getMember(req);
