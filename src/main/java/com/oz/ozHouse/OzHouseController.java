@@ -5,8 +5,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping("/")
 public class OzHouseController {
-	@GetMapping(value = {"/", "/index.do", "/main.do"})
+	@GetMapping(value = {"/", "/index", "/main"})
 	public String index() {
 		return "test2";
 	}
