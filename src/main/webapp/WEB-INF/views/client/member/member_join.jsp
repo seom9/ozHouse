@@ -45,9 +45,15 @@
       $(function(){ 
           $("#checkId").click(function(){
               let member_id = $("#member_id").val();
+              
+              // 아이디에 아무것도 작성하지 않았을 때
+              if (member_id === "") {
+                  member_id = "1";
+              }
+              
               $.ajax({
                   type:'post', //post 형식으로 controller 에 보내기위함!!
-                  url:"member_checkId.do", // 컨트롤러로 가는 mapping 입력
+                  url: "/member/id-verification/" + member_id, // 컨트롤러로 가는 mapping 입력
                   data: {"member_id":member_id}, // 원하는 값을 중복확인하기위해서  JSON 형태로 DATA 전송
                   success: function(data){ 
                    if (data == "N" ){ // 만약 성공할시
@@ -55,11 +61,6 @@
                           $("#result_checkId").html(result).css("color", "green");
                           $("#member_pw").trigger("focus");
                           idChecked = true; // 중복 검사를 실행했음을 기록
-                   }else if(data == "E" ){
-                          result = "아이디를 입력해 주세요.";
-                          $("#result_checkId").html(result).css("color", "red");
-                          $("#member_pw").trigger("focus");
-                          idChecked = false; // 중복 검사를 실행했음을 기록
                    }else if(data == "L" ){
                           result = "아이디는 6-12자의 영문, 숫자, 기호( - _ )만 사용이 가능합니다";
                           $("#result_checkId").html(result).css("color", "red");
@@ -117,7 +118,7 @@
 </head>  
 <body onload="f.member_id.focus()">
    <div  align="center" class="login-wrapper" style="top: 70px; position: relative;">
-   <form name="f" method="post" id="login-form" action="member_send_email.do">
+   <form name="f" method="post" id="login-form" action="/member/email-verification">
              <h2><img src="${path}/client/image/ozHouseLogo.png" style="width: 20%"></h2>
             <font face="Roboto, sans-serif">회원 가입</font>
             <p>

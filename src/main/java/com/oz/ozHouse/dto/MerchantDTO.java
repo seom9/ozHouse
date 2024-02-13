@@ -2,11 +2,11 @@ package com.oz.ozHouse.dto;
 
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 import com.oz.ozHouse.domain.Merchant;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -38,7 +38,7 @@ public class MerchantDTO {
     private List<CategoryDTO> merCategory;
     private String merOthershop;
     private String merFile;
-    private LocalDateTime merJoindate;
+    private LocalDate merJoindate;
     private LocalDate merInbranddate;
     private LocalDate merDeletedate;
     private LocalDate merOutDate;
@@ -52,6 +52,7 @@ public class MerchantDTO {
     public void setMer_business_adress(String merAdress) {
 		this.merAdress = merAdress;
 	}
+    
     
     public MerchantDTO toDto(Merchant merchant) {
         return MerchantDTO.builder()
@@ -72,10 +73,10 @@ public class MerchantDTO {
                 .merManhp2(merchant.getInbrandInfo().getPhoneNum().getPhoneNumber2())
                 .merManhp3(merchant.getInbrandInfo().getPhoneNum().getPhoneNumber3())
                 .merManemail(merchant.getInbrandInfo().getManagerEmail())
-                //.merCategory(merchant.getInbrandInfo().getCategory())
+                .merCategory(merchant.getInbrandInfo().getCategoryDto())
                 .merOthershop(merchant.getInbrandInfo().getOtherShop())
                 .merFile(merchant.getInbrandInfo().getBrandFile())
-                //.merJoindate(merchant.getRegDate())
+                .merJoindate(merchant.getRegDate())
                 .merInbranddate(merchant.getMerInbranddate())
                 .merDeletedate(merchant.getMerDeletedate())
                 .merOutDate(merchant.getMerOutDate())
@@ -88,4 +89,35 @@ public class MerchantDTO {
                 .build();
     }
     
+    public MerchantDTO(HttpServletRequest req) {
+    	this.merId = req.getParameter("merId");
+    	this.merPw = req.getParameter("merPw");
+    	this.merCompany = req.getParameter("merCompany");
+    	this.merComnum1 = req.getParameter("merComnum1");
+    	this.merComnum2 = req.getParameter("merComnum2");
+    	this.merComnum3 = req.getParameter("merComnum3");
+    	this.merHp1 = req.getParameter("merHp1");
+    	this.merHp2 = req.getParameter("merHp2");
+    	this.merHp3 = req.getParameter("merHp3");
+    	this.merRegistration = req.getParameter("merRegistration");
+    	this.merName = req.getParameter("merName");
+    	this.merEmail = req.getParameter("merEmail");
+    	this.merBusinessPost = req.getParameter("merBusinessPost");
+    	this.merAdress = req.getParameter("sample6_address")
+    			 + "/" + req.getParameter("sample6_detailAddress")
+    			 + "/" + req.getParameter("sample6_extraAddress");
+    }
+
+	public void setMerRegistration(String merRegistration) {
+		this.merRegistration = merRegistration;
+	}
+
+	public void setMerId(String merId) {
+		this.merId = merId;
+	}
+
+	public void setMerPw(String merPw) {
+		this.merPw = merPw;
+	}
+
 }

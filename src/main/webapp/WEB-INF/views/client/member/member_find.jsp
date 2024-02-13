@@ -23,7 +23,7 @@
 		<h2><img src="${path}/client/image/ozHouseLogo.png" style="width: 20%"></h2>
 		<font face="Roboto, sans-serif">아이디 / 비밀번호 찾기</font>
 		<p>
-		<form name="f" method="post" id="login-form" action="send_find_email.do">
+		<form name="f" method="post" id="login-form" action="member/email-verification">
 			<br><br>
 			<span class="title">가입한 이메일 주소를 입력해 주세요</span>
 			<input type="text" tabindex="2" class="box" id="member_email" name="member_email">

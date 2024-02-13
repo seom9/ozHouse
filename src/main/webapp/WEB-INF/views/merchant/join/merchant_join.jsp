@@ -5,9 +5,9 @@
 <title>회원 가입</title>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/merchant/css/styleMain.css">
+	href="${pageContext.request.contextPath}/merchant/css/styleMain.css">
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/merchant/css/join.css">
+	href="${pageContext.request.contextPath}/merchant/css/join.css">
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -96,7 +96,7 @@
 		        let merId = $("#merId").val();
 		        $.ajax({
 		            type:'post', //post 형식으로 controller 에 보내기위함!!
-		            url:"mer_checkId.do", // 컨트롤러로 가는 mapping 입력
+		            url: "${pageContext.request.contextPath}/merchant/login/join/check-id", // 컨트롤러로 가는 mapping 입력
 		            data: {"merId":merId}, // 원하는 값을 중복확인하기위해서  JSON 형태로 DATA 전송
 		            success: function(data){ 
 		             if (data == "N" ){ // 만약 성공할시
@@ -269,17 +269,18 @@
 <body onload="f.merId.focus()">
 	<header>
 		<div class="header-left">
-			<a href="merchant_main.do"> <img
-				src="resources/merchant/img/ozlogo2.png" width="60" height="60">
-				<img src="resources/merchant/img/oz2.png" width="90" height="50">
-				<span class="partner-center" style="color: black"><b>파트너센터</b></span>
+			<a href="${pageContext.request.contextPath}/merchant/main"> <img
+				src="/merchant/img/ozlogo2.png" width="60" height="60"> <img
+				src="/merchant/img/oz2.png" width="90" height="50"> <span
+				class="partner-center" style="color: black"><b>파트너센터</b></span>
 			</a>
 		</div>
 		<div class="header-right"></div>
 	</header>
 	<main>
 		<div class="registration-form-container">
-			<form name="f" method="post" action="merchant_send_email.do"
+			<form name="f" method="post"
+				action="${pageContext.request.contextPath}/merchant/login/join/send-email"
 				enctype="multipart/form-data">
 				<h1>판매자 회원가입</h1>
 				<div class="form-group id-check-group">
@@ -300,8 +301,8 @@
 
 				<div class="form-group">
 					<label for="passwordCheck">비밀번호 확인</label> <input type="password"
-						id="passwordCheck" name="merPw2"
-						placeholder="비밀번호를 정확하게 입력해 주세요." oninput="checkPasswd()">
+						id="passwordCheck" name="merPw2" placeholder="비밀번호를 정확하게 입력해 주세요."
+						oninput="checkPasswd()">
 					<div id="checkPasswd" class="error-message">PASSWORD가 동일하지
 						않습니다</div>
 					<div id="checkPasswd2" class="error-message">비밀번호는 8자리 이상 영문
@@ -328,9 +329,8 @@
 				</div>
 
 				<div class="form-group">
-					<label class="title" for="merRegistration">사업자
-						등록증</label> <span id="comnum">
-						</span> <input type="file" id="merRegistration"
+					<label class="title" for="merRegistration">사업자 등록증</label> <span
+						id="comnum"> </span> <input type="file" id="merRegistration"
 						name="merRegistration">
 				</div>
 
@@ -356,11 +356,11 @@
 				</div>
 
 				<div class="form-group">
-					<label for="merManhp1">판매자 전화 번호</label>
+					<label for="merhp1">판매자 전화 번호</label>
 					<div class="input-group">
-						<input type="text" id="merManhp1" name="merManhp1" maxlength="3">-
-						<input type="text" id="merManhp2" name="merManhp2" maxlength="4">-
-						<input type="text" id="merManhp3" name="merManhp3" maxlength="4">
+						<input type="text" id="merHp1" name="merHp1" maxlength="3">-
+						<input type="text" id="merHp2" name="merHp2" maxlength="4">-
+						<input type="text" id="merHp3" name="merHp3" maxlength="4">
 					</div>
 				</div>
 

@@ -8,11 +8,63 @@
 <head>
 	<c:set var="path" value="${pageContext.request.contextPath}"/>
 	<title>회원 정보 수정</title>
+	
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	
 	<script type="text/javascript">
-		function check(){
-			document.f.submit()
-		}
-	</script>	
+	    function update() {	    	
+	        var memberId = document.getElementById("memberId").value;	
+	        var memberNickname = document.getElementsByName("memberNickname")[0].value;			
+	        var phoneNumber1 = document.getElementsByName("phoneNumber1")[0].value;
+	        var phoneNumber2 = document.getElementsByName("phoneNumber2")[0].value;
+	        var phoneNumber3 = document.getElementsByName("phoneNumber3")[0].value;
+	        var postcode = document.getElementById("postcode1").value;	        
+	        var city = document.getElementsByName("city")[0].value;	
+	        var street = document.getElementsByName("street")[0].value;
+	        var zipcode = document.getElementsByName("zipcode")[0].value;
+
+	        fetch('/mypage/' + memberId + "/update", {
+	            method: 'PATCH', // PUT 메소드를 지정합니다.
+	            headers: {
+	                'Content-Type': 'application/json'
+	            },
+	            body: JSON.stringify({
+	                memberNickname: memberNickname,
+	                memberHp: {
+	                	phoneNumber1: phoneNumber1,
+	                	phoneNumber2: phoneNumber2,
+	                	phoneNumber3: phoneNumber3
+	                },
+	                memberAddress: {
+	                	postcode: postcode,
+	                	city: city,
+	                	street: street,
+	                	zipcode: zipcode
+	                }
+	            }),
+	        })
+	        .then(response => {
+	            if (!response.ok) {
+	                throw new Error('Network response was not ok');
+	            }
+	            return response.text(); 
+	        })
+	        .then(data => {
+	        	// 상태 알림 return 받아와서 alert 로 출력
+	            alert(data)
+	        })
+	        .catch(error => {
+	        	alert("회원 정보 수정이 실패되었습니다")
+	        });
+	    }
+	</script>
+	
+	<script type="text/javascript">
+	    document.getElementById("login-form").addEventListener("submit", function(event) {
+	        event.preventDefault(); // 기본 동작인 폼의 submit을 막습니다.
+	
+	</script>
+	
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script>
 	    function sample6_execDaumPostcode() {
@@ -63,7 +115,7 @@
 	        }).open();
 	    }
 	</script>
-	<link rel="stylesheet" href="${path}/client/login.css"/>
+	<link rel="stylesheet" href="${path}/client/member_css/login.css"/>
 	<style>
       	.join {
 			position: relative; 				    
@@ -110,45 +162,56 @@
 	    }  	
 				
 	 </style>
-	
+
+	<script type="text/javascript">
+    	var mode = "${mode}";
+	    if (mode === "fail") {
+	        alert("회원 정보 수정에 실패하였습니다");
+	    } else if (mode === "success") {
+	        alert("회원 정보 수정에 성공하였습니다");
+	    }
+	</script>
+
 </head>  
 <body onload="f.member_id.focus()">
-	<div  align="center" class="login-wrapper" >
-		<form name="f" method="post" id="login-form" action="member_update.do" enctype="multipart/form-data">
+	<div  align="center" class="login-wrapper">
+		<form name="f" method="post" id="login-form">
  			<br><br><br>
 			<span class="title2">프로필 수정</span>
 			<br><br><br><br>
 			<span class="title">프로필 사진</span><br>
-			<c:if test="${fn:startsWith(member.member_image, 'http')}">
-		        <img src="${member.member_image}" width="40%" height="60%">
-		        <input type="file" name="member_image" class="box">
-		        <input type="hidden" name="member_image2" value="${member.member_image}"/>
+			<!-- 
+			<c:if test="${fn:startsWith(member.memberImage, 'http')}">
+		        <img src="${member.memberImage}" width="40%" height="60%">
+		        <input type="file" name="memberImage" class="box">
+		        <input type="hidden" name="memberImage2" value="${member.memberImage}"/>
 			</c:if>
-			<c:if test="${not fn:startsWith(member.member_image, 'http')}">
-		        <img src="${path}/resources/image/${member.member_image}" width="30%" height="40%">
+			<c:if test="${not fn:startsWith(member.memberImage, 'http')}">
+		        <img src="${path}/resources/image/${member.memberImage}" width="30%" height="40%">
 		        
-		        <input type="file" name="member_image" class="box">
-		        <input type="hidden" name="member_image2" value="${member.member_image}"/>
+		        <input type="file" name="memberImage" class="box">
+		        <input type="hidden" name="memberImage2"/>
 			</c:if>
+			 -->
 				<span class="title">아이디</span>
-					<input type="text" name="member_id" value="${member.member_id}" class="box" ReadOnly>
+					<input type="text" name="memberId" id="memberId" value="${member.memberId}" class="box" ReadOnly>
 				<span class="title">이메일</span>
-					<input type="text" value="${member.member_email}" class="box" ReadOnly>
+					<input type="text" value="${member.memberEmail}" class="box" ReadOnly>
 				<span class="title">닉네임</span>
-					<input type="text" placeholder="닉네임을 입력해 주세요." name="member_nickname" value="${member.member_nickname}" class="box">
+					<input type="text" placeholder="닉네임을 입력해 주세요." name="memberNickname" value="${member.memberNickname}" class="box">
 				<span class="title">연락처</span><br>
-					<input type="text" name="member_hp1" value="${member.member_hp1}" class="member_hp" size="3" maxlength="3"> -
-					<input type="text" name="member_hp2" value="${member.member_hp2}" class="member_hp" size="4" maxlength="4"> -
-					<input type="text" name="member_hp3" value="${member.member_hp3}" class="member_hp" size="4" maxlength="4">
+					<input type="text" name="phoneNumber1" value="${member.memberHp.PhoneNumber1}" class="member_hp" size="3" maxlength="3"> -
+					<input type="text" name="phoneNumber2" value="${member.memberHp.PhoneNumber2}" class="member_hp" size="4" maxlength="4"> -
+					<input type="text" name="phoneNumber3" value="${member.memberHp.PhoneNumber3}" class="member_hp" size="4" maxlength="4">
 				<br>
 				<span class="title">집 주소 설정</span>
 					<span class="title">주소 1</span>
-					<input type="text" id="postcode1" name="member_postcode1" value="${member.member_postcode1}" placeholder="우편번호">
+					<input type="text" id="postcode1" name="postcode" value="${member.memberAddress.postcode}" placeholder="우편번호">
 					<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-					<input type="text" id="sample6_address" name="sample6_address" value="${address1_ad1}" placeholder="주소"><br>
-					<input type="text" id="sample6_detailAddress" name="sample6_detailAddress" value="${address1_ad2}" placeholder="상세주소">
-					<input type="text" id="sample6_extraAddress" name="sample6_extraAddress" value="${address1_ad3}" placeholder="참고항목">
-					<input type="submit" value="정보 수정">
+					<input type="text" id="sample6_address" name="city" value="${member.memberAddress.city}" placeholder="주소"><br>
+					<input type="text" id="sample6_detailAddress" name="street" value="${member.memberAddress.street}" placeholder="상세주소">
+					<input type="text" id="sample6_extraAddress" name="zipcode" value="${member.memberAddress.zipcode}" placeholder="참고항목">
+					<input type="button" value="정보 수정" onclick="javascript:update()">
 					<input type="reset" value="reset">
 		</form>
 	</div>
