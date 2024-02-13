@@ -72,9 +72,10 @@ public class Merchant extends BaseEntity{
     	@AttributeOverride(name = "category", column = @Column(name = "merCategory")),
     	@AttributeOverride(name = "otherShop", column = @Column(name = "merOthershop")),
     	@AttributeOverride(name = "brandFile", column = @Column(name = "merFile")),
-		@AttributeOverride(name = "phoneNum.phoneNumber1", column = @Column(name = "merManhp1")),
-		@AttributeOverride(name = "phoneNum.phoneNumber2", column = @Column(name = "merManhp2")),
-		@AttributeOverride(name = "phoneNum.phoneNumber3", column = @Column(name = "merManhp3"))
+		@AttributeOverride(name = "PhoneNumber.phoneNumber1", column = @Column(name = "merManhp1")),
+		@AttributeOverride(name = "PhoneNumber.phoneNumber2", column = @Column(name = "merManhp2")),
+		@AttributeOverride(name = "PhoneNumber.phoneNumber3", column = @Column(name = "merManhp3"))
+
     })
     private InbrandInfo inbrandInfo;
     

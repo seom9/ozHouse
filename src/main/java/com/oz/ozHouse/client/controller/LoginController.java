@@ -1,115 +1,33 @@
 package com.oz.ozHouse.client.controller;
 
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.GetMapping;
 
-import com.oz.ozHouse.client.config.LoginOkBean;
-import com.oz.ozHouse.client.service.EmailService;
-import com.oz.ozHouse.client.service.MemberService;
-
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 
 @Controller
-@RequestMapping("/login")
 @RequiredArgsConstructor
 public class LoginController {
-	private final MemberService memberService;
-	private final PasswordEncoder passwordEncoder;
-	
-	@PostMapping("/{member_id}")
-	public String loginOk(HttpServletRequest req, HttpServletResponse resp, 
-			@ModelAttribute LoginOkBean loginOk, @PathVariable("member_id") String saveId) {
-		
-		int res = loginOk.loginOk(memberService, passwordEncoder);
-		
-		String msg = null, url = null;
-		
-		switch(res){
-		case LoginOkBean.OK :
-			Cookie ck = new Cookie("saveId", loginOk.getMember_id());
-			if (saveId != null) {
-				ck.setMaxAge(7*24*60*60);
-			}else {
-				ck.setMaxAge(0);
-			}
-			resp.addCookie(ck);
-			HttpSession session = req.getSession();
-			session.setAttribute("loginMember", loginOk);
-			msg = loginOk.getMember_id() + "님, 방문해 주셔서 감사합니다";
-			url = "/main";
-			break;
-		case LoginOkBean.WITH_DRAW :
-			msg = "탈퇴한 회원입니다";
-			url = "/main";
-			break;
-		case LoginOkBean.NOT_ID :
-			msg = "아이디를 확인해 주세요";
-			url = "/main";
-			break;
-		case LoginOkBean.NOT_PW :
-			msg = "비밀번호를 확인해 주세요";
-			url = "/main";
-			break;
-		case LoginOkBean.ERROR : 
-			msg = "서버 오류입니다 관리자에게 문의해 주세요";
-			url = "/main";
-			break;
-		}
-		
-		req.setAttribute("msg", msg);
-		req.setAttribute("url", url);
-		return "message";
+	@GetMapping("/member/login")
+	public String loginGet() {
+		return "client/member/member_login";
 	}
 	
+	@GetMapping("/login/message")
+	public String loginSuccess(HttpServletRequest req) {
+		req.setAttribute("msg", "오즈 하우스에 오신 것을 환영합니다!");
+		req.setAttribute("url", "/main");
+		return "message";
+	}
+
 	/*
 	@RequestMapping(value="/member_find.do", method=RequestMethod.GET)
 	public String searchMember() {
 		return "client/member/member_find";
 	}
-	
-	// 이메일 형식 검증
-    private static final String EMAIL_REGEX =
-            "^[a-zA-Z0-9_+&*-]+(?:\\." +
-            "[a-zA-Z0-9_+&*-]+)*@" +
-            "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
-            "A-Z]{2,7}$";
 
-    public static boolean isValidEmail(String email) {
-        Pattern pattern = Pattern.compile(EMAIL_REGEX);
-        Matcher matcher = pattern.matcher(email);
-        return matcher.matches();
-    }
-    
-    @RequestMapping(value="/send_find_email.do", method=RequestMethod.POST)
-	public String sendEmail1(HttpServletRequest req, String member_email) {
-    	String member_id = memberMapper.checkMemberIdEmail(member_email);
-		if (member_id == null) {
-			req.setAttribute("msg", "가입되어 있지 않은 아이디입니다");
-			req.setAttribute("url", "member_find.do");
-			return "message";
-		}
-		if (isValidEmail(member_id)) {
-			req.setAttribute("msg", "간편 가입으로 가입한 계정입니다 : 간편 로그인을 이용해 주세요");
-			req.setAttribute("url", "member_login.do");
-			return "message";
-		}
-    	int oauthNum = MemberFind.sendEmailCheck(member_email, member_id);
-    	req.setAttribute("oauthNum", oauthNum);
-    	req.setAttribute("member_email", member_email);
-		return "client/member/send_find_email";
-		
-    }
-    
-    
 	@RequestMapping(value="/member_find.do", method=RequestMethod.POST)
 	public String searchMember(HttpServletRequest req, String member_email) {
 		String member_id = memberMapper.checkMemberIdEmail(member_email);
