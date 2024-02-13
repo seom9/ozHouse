@@ -94,8 +94,8 @@
 			</div>
 			<input type="button" value="로그인" onclick="javascript:loginCheck()">
 			<div class="login-options">
-				<span class="join"><a href="${pageContext.request.contextPath}/merchants/reset-password">비밀번호 재설정</a></span> <span
-					class="join1"><a href="${pageContext.request.contextPath}/merchant/join">회원가입</a></span>
+				<span class="join"><a href="${pageContext.request.contextPath}/merchant/login/findMerchant">비밀번호 재설정</a></span> <span
+					class="join1"><a href="${pageContext.request.contextPath}/merchant/login/join">회원가입</a></span>
 			</div>
 		</form>
 	</div>
