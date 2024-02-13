@@ -1,12 +1,10 @@
 package com.oz.ozHouse.merchant.controller;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -113,28 +111,27 @@ public class MerLoginController {
 	@PostMapping(value="/login/find")
 	public String searchMember(HttpServletRequest req, 
 			@RequestParam(name = "merEmail")String mer_email) {
-		String member_id = loginService.checkMerchantIdEmail(mer_email);
+		String memberId = loginService.checkMerchantIdEmail(mer_email);
 		
 		String oauthNum = req.getParameter("oauthNum");
 		String userSendNum = req.getParameter("userSendNum");
 		
 		if (oauthNum.equals(userSendNum)) {
 			req.setAttribute("msg", "비밀번호를 재설정해 주세요");
-			req.setAttribute("url", "merchant/login/changePass/" + member_id);
+			req.setAttribute("url", "changePass/" + memberId);
 		}else {
 			req.setAttribute("msg", "인증 번호가 다릅니다 : 다시 시도해 주세요");
-			req.setAttribute("url", "merchant/login/find");
+			req.setAttribute("url", "find");
 		}
 		return "message";
 	}
 	
-	@GetMapping(value = "/login/changePass/{member_id}")
+	@GetMapping(value = "/login/changePass/{memberId}")
     public String mypage_updatePasswd(HttpServletRequest req,
-    		@PathVariable("member_id") String memberId) {
+    		@PathVariable("memberId") String memberId) {
     	String mode = req.getParameter("mode");
     	
     	if (mode != null) {
-    		req.setAttribute("mode", "find");
     		req.setAttribute("member_id", memberId);
     	}
         return "merchant/join/merchant_changePass";
@@ -147,23 +144,17 @@ public class MerLoginController {
     	return dto;
     }
 	
-	@PutMapping(value = "/login/putPassword")
+	@PatchMapping(value = "/login/putPassword")
     public String mypage_updatePasswdPro(HttpServletRequest req) {
     	MerchantDTO dto = new MerchantDTO();
-    	String mode = req.getParameter("mode");
     	String id = req.getParameter("member_id");
     	String new_pass = req.getParameter("new_member_passwd");
     	
         boolean passwd = false;
         
-        if (!mode.equals("find")) {
         	dto = getMember(req);
             String old_pass = req.getParameter("member_passwd");
         	passwd = passwordEncoder.matches(old_pass, dto.getMerPw());
-        }else if(mode.equals("find")) {
-        	passwd = true;
-        	dto.setMerId(id);
-        }
     	
     	if (passwd) {
     		dto.setMerPw(new_pass);

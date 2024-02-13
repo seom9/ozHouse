@@ -64,24 +64,16 @@
 			action="${pageContext.request.contextPath}/merchant/login/putPassword">
 
 
-			<c:if test="${not empty mode}">
 				<span class="title">아이디</span>
-				${member_id}
-			</c:if>
+				${memberId}
 
-			<c:if test="${empty mode}">
-				<span class="title">현재 비밀번호</span>
-				<input type="password" tabindex="3" name="member_passwd"
-					placeholder="비밀번호를 입력해 주세요." class="box"
-					placeholder="Enter password">
-			</c:if>
 
 			<br> <br> <span class="title3">비밀번호</span> <input
 				type="password" tabindex="3" name="new_member_passwd"
 				placeholder="비밀번호를 입력해 주세요." class="box" id="password"
-				oninput="checkPasswd2()"> <span class="title3">비밀번호
-				확인</span> <input type="password" tabindex="4"
-				placeholder="비밀번호를 정확하게 입력해 주세요." name="new_member_passwd2"
+				oninput="checkPasswd2()"> 
+				<span class="title3">비밀번호확인</span> 
+				<input type="password" tabindex="4" placeholder="비밀번호를 정확하게 입력해 주세요." name="new_member_passwd2"
 				class="box" id="passwordCheck" oninput="checkPasswd()">
 			<div id="checkPasswd" class="error-message">PASSWORD 가 동일하지
 				않습니다</div>
