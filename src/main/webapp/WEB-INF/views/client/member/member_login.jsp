@@ -12,18 +12,17 @@
 		window.open("searchMember.do?mode="+mode, "search", "width=640, height=400")
 	}
 	function loginCheck(){
-		if (f.member_id.value == ""){
+		if (f.memberId.value == ""){
 			alert("아이디를 입력해 주세요!!")
 			f.id.focus()
 			return
 		}
-		if (f.member_passwd.value == ""){
+		if (f.memberPasswd.value == ""){
 			alert("비밀번호를 입력해 주세요!!")
 			f.passwd.focus()
 			return
 		}
-        var memberId = document.getElementById("memberId").value;
-        document.getElementById("login-form").action = "/login/" + memberId;
+        document.getElementById("login-form").action = "/member/login";
         document.getElementById("login-form").submit();
 	}
 </script>
@@ -38,12 +37,12 @@
         <h2><img src="${path}/client/image/ozHouseLogo.png" style="width: 30%"></h2>
         <form method="post" id="login-form" name="f">
 			<c:if test="${not empty cookie.saveId}">
-            	<input type="text" name="member_id" tabindex="1" id="memberId" value="${cookie['saveId'].value}">
+            	<input type="text" name="memberId" tabindex="1" id="memberId" value="${cookie['saveId'].value}">
 			</c:if>	
 			<c:if test="${empty cookie.saveId}">
-            	<input type="text" name="member_id" id="memberId" tabindex="2" placeholder="아이디 입력">
+            	<input type="text" name="memberId" id="memberId" tabindex="2" placeholder="아이디 입력">
             </c:if>	
-            <input type="password" name="member_passwd" placeholder="비밀번호 입력">
+            <input type="password" name="memberPasswd" placeholder="비밀번호 입력">
             <label for="remember-check">
 		<c:if test="${not empty cookie.saveId}">
             <input type="checkbox" name="saveId" checked>
@@ -86,7 +85,7 @@
         <a datatype="github" class="css-l0qndx e1ufx3to0" href="/users/auth/github">
         <img src="${path}/client/image/github.png">
         </a>
-        <a datatype="kakao" class="css-l0qndx e1ufx3to0" href="https://kauth.kakao.com/oauth/authorize?client_id=e5b283df9616f7c21f3e15db5f9b0df2&redirect_uri=http://localhost:8080/ozHouse/kakao_login.do&response_type=code">
+        <a datatype="kakao" class="css-l0qndx e1ufx3to0" href="/oauth2/authorization/kakao">
         <img src="${path}/client/image/kakao.png">
         </a>
         <a datatype="naver" class="css-l0qndx e1ufx3to0" href="naverLogin.do">

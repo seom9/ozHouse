@@ -2,22 +2,28 @@ package com.oz.ozHouse.client.service;
 
 import java.util.Optional;
 
+import org.modelmapper.ModelMapper;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.oz.ozHouse.client.repository.MemberRepository;
 import com.oz.ozHouse.domain.Member;
 import com.oz.ozHouse.domain.common.MemberLevel;
+import com.oz.ozHouse.domain.common.MemberRole;
 import com.oz.ozHouse.dto.MemberDTO;
-import com.oz.ozHouse.repository.MemberRepository;
+import com.oz.ozHouse.dto.client.member.MemberJoinDTO;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-@Transactional
+@Transactional // 해당 객체를 감싸는 별도의 클래스를 생성
 public class MemberServiceImpl implements MemberService {
+	private final ModelMapper modelMapper;
 	private final MemberRepository memberRepository;
-
+	private final PasswordEncoder passwordEncoder;
+	
     public String insertMember(MemberDTO memberDTO) {
     	
         Member member = Member.builder()
@@ -64,6 +70,25 @@ public class MemberServiceImpl implements MemberService {
 	        e.printStackTrace(); // 에러 로그 출력
 	        return -1; // 에러 시 반환할 값
 	    }
+	}
+
+	@Override
+	public String join(MemberJoinDTO memberJoinDTO) throws IdExistException {
+		String memberId = memberJoinDTO.getMemberId();
+		boolean exist = memberRepository.existsByMemberId(memberId);
+		
+		if(exist) {
+			throw new IdExistException();
+		}
+		
+		Member member = modelMapper.map(memberJoinDTO, Member.class);
+		member.changeMemberPassword(passwordEncoder.encode(memberJoinDTO.getMemberPasswd()));
+		member.addRole(MemberRole.CLIENT);
+		member.setMemberPoint(0);
+        member.setMemberLevel(MemberLevel.NORMAL);
+        memberRepository.save(member);
+        
+        return member.getMemberId();
 	}
 
 	
