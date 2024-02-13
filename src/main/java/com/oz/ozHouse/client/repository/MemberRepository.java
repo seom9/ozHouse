@@ -4,10 +4,13 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.oz.ozHouse.domain.Member;
+
+import jakarta.transaction.Transactional;
 
 public interface MemberRepository extends JpaRepository<Member, Integer> {
 	
@@ -27,5 +30,10 @@ public interface MemberRepository extends JpaRepository<Member, Integer> {
 	// Security(OAuth2) : email 로 회원 정보 찾기
 	@EntityGraph(attributePaths = "roleSet")
 	Optional<Member> findByMemberEmail(String memberEmail);
+	
+    @Transactional
+    @Modifying
+    @Query("UPDATE Member m SET m.social = true WHERE m.memberId = :memberId")
+    void updateSocialStatusByMemberId(@Param("memberId") String memberId);
 
 }
