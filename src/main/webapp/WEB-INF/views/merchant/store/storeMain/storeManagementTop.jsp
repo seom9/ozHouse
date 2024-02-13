@@ -29,20 +29,20 @@ header img.oz-logo {
 <body>
 
 	<header>
-		<a href="${pageContext.request.contextPath}/merchant/main"> <img
+		<a href="${pageContext.request.contextPath}/merchant/home"> <img
 			src="/merchant/img/ozlogo3.png" width="100" height="100"> <img
 			src="/merchant/img/oz3.png" class="oz-logo">
 		</a> <a href="#"> <span class="partner-center">스토어관리</span>
 		</a>
 		<div class="logout-container">
-			<a href="${pageContext.request.contextPath}/main.do"
-				class="main-button">OZ의집 가기</a> <a href="javascript:logout()"
-				class="logout-button">로그아웃</a>
+			<a href="${pageContext.request.contextPath}/main" class="main-button">OZ의집
+				가기</a> <a href="javascript:logout()" class="logout-button">로그아웃</a>
 		</div>
 	</header>
 	<div class="tab-navigation">
-		<a href="${pageContext.request.contextPath}/merchant/stores" class="tab-link">관리홈</a>
-		<a href="${pageContext.request.contextPath}/merchant/products"
+		<a href="${pageContext.request.contextPath}/merchant/store/storeHome"
+			class="tab-link">관리홈</a> <a
+			href="${pageContext.request.contextPath}/merchant/store/products"
 			class="tab-link">상품관리</a> <a
 			href="${pageContext.request.contextPath}/merchant/orders?mode=all"
 			class="tab-link">주문배송</a> <a

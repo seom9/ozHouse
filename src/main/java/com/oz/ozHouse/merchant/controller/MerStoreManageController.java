@@ -12,15 +12,15 @@ import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/merchant")
+@RequestMapping("/merchant/store")
 public class MerStoreManageController {
 
 	private final StoreManageService storeManageService;
 	private final NoticeService noticeService;
 	
-	@GetMapping("/stores")
+	@GetMapping("/storeHome")
 	public String storeManage(HttpServletRequest req) {
-		req.setAttribute("allCount", storeManageService.allCount());
+//		req.setAttribute("allCount", storeManageService.allCount());
 //		req.setAttribute("waitCount", storeManageService.waitCount());
 //		req.setAttribute("requestCount", storeManageService.requestCount());
 //		req.setAttribute("cancleCount", storeManageService.cancleCount());

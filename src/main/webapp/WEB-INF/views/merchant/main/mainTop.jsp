@@ -19,7 +19,7 @@
 <body>
 	<header>
 		<div class="header-left">
-			<a href="${pageContext.request.contextPath}/merchant/main"> <img
+			<a href="${pageContext.request.contextPath}/merchant/home"> <img
 				src="/merchant/img/ozlogo2.png" width="60" height="60"> <img
 				src="/merchant/img/oz2.png" width="90" height="50"> <span
 				class="partner-center"><b>파트너센터</b></span>
@@ -41,13 +41,13 @@
 	<div class="container">
 		<div class="link-section">
 			<div class="left-section">
-				<a href="${pageContext.request.contextPath}/merchant/stores"
+				<a href="${pageContext.request.contextPath}/merchant/store/storeHome"
 					class="main-button">스토어관리 돌아가기</a>
 			</div>
 			<div class="right-section">
 				<a
 					href="${pageContext.request.contextPath}/brands/${merNum}/applications">입점하기</a>
-				<a href="${pageContext.request.contextPath}/notices">공지사항</a>
+				<a href="${pageContext.request.contextPath}/merchant/home/notices">공지사항</a>
 				<c:if test="${not empty merchantLoginMember.merNum}">
 					<a
 						href="${pageContext.request.contextPath}/merchant/${merNum}/info">나의정보</a>

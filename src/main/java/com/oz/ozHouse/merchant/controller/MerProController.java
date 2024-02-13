@@ -9,9 +9,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,17 +26,23 @@ import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/merchant")
+@RequestMapping("/merchant/store")
 public class MerProController {
 
 	private final MerProService proService;
 
 	private static final String PATH = "C:\\proImgs\\";
 
+	//base64 인코딩
+//	private String encodeImageToBase64(File file) throws IOException {
+//	    byte[] fileContent = FileUtils.readFileToByteArray(file);
+//	    return Base64.getEncoder().encodeToString(fileContent);
+//	}
 
 	// 상품 등록
 	@GetMapping("/product-input")
 	public String proInput(HttpServletRequest req) {
+		// 입점 신청시 등록한 카테고리 연동하기
 		req.setAttribute("categories", Category.values());
 		System.out.println("등록 폼");
 		return "merchant/store/productManagement/productManagement_input";
@@ -157,10 +161,10 @@ public class MerProController {
 		System.out.println(dto.getProName());
 		if (res != null) {
 			req.setAttribute("msg", "상품 등록 요청 성공했습니다.");
-			req.setAttribute("url", "/merchant/products");
+			req.setAttribute("url", "/merchant/store/products");
 		}else {
 			req.setAttribute("msg", "상품 등록 요청 실패했습니다. 다시 시도하세요.");
-			req.setAttribute("url", "/merchant/product-input");
+			req.setAttribute("url", "/merchant/store/product-input");
 		}
 		return "message";
 	}
@@ -185,7 +189,42 @@ public class MerProController {
 
 	// 재고 관리
 	@GetMapping("/product/stock")
-	public String productStock() {
+	public String productStock(HttpServletRequest req, @RequestParam Map<String, Object> params) throws IOException {
+		System.out.println("재고관리");
+//	    String root = PATH + "\\" + "img";
+//	    req.setAttribute("proImg", root);
+//	    
+//	    String[] specArray = req.getParameterValues("spec");
+//	    List<String> spec = (specArray != null) ? Arrays.asList(specArray) : new ArrayList<String>();
+//	    params.put("spec", spec);
+
+	    // 재고 관리 리스트
+//	    List<Product> list = proService.stockList();
+//	    for (Product product : list) {
+//	        File imageFile = new File(root, product.getProImageChange());
+//	        if (imageFile.exists()) {
+//	            String encodedImage = encodeImageToBase64(imageFile);
+//	            product.setEncodedImage(encodedImage); 
+//	        }
+//	    }
+	    req.setAttribute("stockListProduct", proService.stockList());
+	    
+//	    int stockListCount = proService.merchant_stockListCount(params);
+	    req.setAttribute("stockListCount", proService.stockListCount());
+
 		return "merchant/store/productManagement/productManagement_stock";
+	}
+	
+	@PostMapping("/product/stock")
+	public String productStockUpdate(HttpServletRequest req, @RequestParam Map<String, String> params) {
+//		req.setAttribute("merNum", params.get("merNum"));
+//	    int res = proService.merchant_updateStock(params);
+//	    if (res > 0) {
+//	        req.setAttribute("msg", "재고 수정에 성공했습니다.");
+//	    } else {
+//	        req.setAttribute("msg", "재고 수정에 실패했습니다.");
+//	    }
+        req.setAttribute("url", "merchant/store/product/stock");
+		return "message";
 	}
 }

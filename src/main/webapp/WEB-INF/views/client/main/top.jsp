@@ -130,12 +130,12 @@
 									<c:if test="${empty sessionScope.loginMember}">
 										<a class="css-1g5o6hv" href="/member/login">로그인</a>
 										<a class="css-1g5o6hv" href="/member/join">회원가입</a>
-									    <a class="css-1tlac5g" href="${pageContext.request.contextPath}/merchant/main">판매자센터</a>
+									    <a class="css-1tlac5g" href="${pageContext.request.contextPath}/merchant/home">판매자센터</a>
 								    </c:if>
 								    <c:if test="${not empty sessionScope.loginMember}">
 										<a class="css-1g5o6hv" href="/member/logout">로그아웃</a>
 										<a class="css-1g5o6hv" href="/mypage/profile">마이페이지</a>
-									    <a class="css-1tlac5g" href="merchant-main.do">판매자센터</a>
+									    <a class="css-1tlac5g" href="${pageContext.request.contextPath}/merchant/home">판매자센터</a>
 								    </c:if>
 								</div>
 		             			<span class="css-1amee4m">
