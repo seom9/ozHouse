@@ -1,4 +1,4 @@
-package com.oz.ozHouse.dto.client;
+package com.oz.ozHouse.dto.client.member;
 
 import java.time.LocalDate;
 import java.util.List;

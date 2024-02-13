@@ -27,13 +27,23 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'jakarta.servlet:jakarta.servlet-api'
     implementation 'jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api'
+    implementation 'org.springframework.security:spring-security-taglibs'
     implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl'
     implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
     implementation 'javax.servlet:jstl:1.2'
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'javax.servlet:javax.servlet-api:3.1.0'
     implementation 'org.springframework.boot:spring-boot-starter-mail'
-    implementation 'org.hibernate:hibernate-validator:7.0.5.Final' //@NotNull 어노테이션 사용을 위하여 추가
+    
+    //@NotNull 어노테이션 사용을 위하여 추가
+    implementation 'org.hibernate:hibernate-validator:7.0.5.Final' 
+    
+    // modelMapper 엔티티와 클래스 간의 변환
+    implementation 'org.modelmapper:modelmapper:3.1.0'	
+    
+    // OAuth2
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+    
     
     compileOnly 'javax.servlet.jsp:javax.servlet.jsp-api:2.3.1'
     compileOnly 'org.projectlombok:lombok:1.18.30'

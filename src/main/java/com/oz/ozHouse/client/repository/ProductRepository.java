@@ -1,4 +1,4 @@
-package com.oz.ozHouse.repository;
+package com.oz.ozHouse.client.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
