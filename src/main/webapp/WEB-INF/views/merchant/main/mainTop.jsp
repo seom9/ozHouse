@@ -11,7 +11,7 @@
 <script type="text/javascript">
 	function logout() {
 		if (window.confirm("로그아웃 하시겠습니까?")) {
-			location.href = "${pageContext.request.contextPath}/merchant/logout";
+			location.href = "${pageContext.request.contextPath}/merchant/login/logout";
 		}
 	}
 </script>
@@ -29,7 +29,7 @@
 			<nav>
 				<c:if test="${empty merchantLoginMember.merNum}">
 					<a href="${pageContext.request.contextPath}/merchant/login">로그인</a>
-					<a href="${pageContext.request.contextPath}/merchant/join">회원가입</a>
+					<a href="${pageContext.request.contextPath}/merchant/login/join">회원가입</a>
 				</c:if>
 				<c:if test="${not empty merchantLoginMember.merNum}">
 					<a href="javascript:logout()">로그아웃</a>
