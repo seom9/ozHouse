@@ -2,8 +2,6 @@ package com.oz.ozHouse.merchant.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.regex.Pattern;
 
 import org.springframework.stereotype.Controller;
@@ -111,8 +109,6 @@ public class MerJoinController {
 			MerchantDTO dto = (MerchantDTO) session.getAttribute("insertMerchant");
 
 			dto.setMerRegistration(saveName);
-			System.out.println("saveName : " + saveName);
-			System.out.println("JoinController -> dto사업자등록증" + dto.getMerRegistration());
 			String id = merJoinService.insertMerchant(dto);
 			if (id != null) {
 				req = goToMessage(req, "/merchant/main", "회원가입 성공 : " + id + "님, 로그인해 주시기 바랍니다.");
