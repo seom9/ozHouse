@@ -1,6 +1,7 @@
 package com.oz.ozHouse.merchant.repository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Repository;
@@ -23,8 +24,19 @@ public class MerProductRepositoryImpl implements MerProductRepository{
 		return em.createQuery("SELECT COUNT(p) FROM Product p", Long.class)
 	             .getSingleResult();
 	}
+	
+	//상품 등록
+	@Override
+	public Product save(Product product) {
+	    if (product.getProNum() == 0) { // 새로운 상품인 경우
+	        em.persist(product); // 상품 정보 저장
+	        return product;
+	    } else {
+	        return em.merge(product); // 기존 상품 정보 업데이트
+	    }
+	}
 
-
+	
 	//재고 리스트
 	@Override
 	public List<ProductDTO> stockList() {
@@ -44,4 +56,13 @@ public class MerProductRepositoryImpl implements MerProductRepository{
 		return em.createQuery("SELECT COUNT(p) FROM Product p", Long.class)
 	             .getSingleResult();
 	}
+
+	//재고 수정
+	@Override
+	public Optional<Product> findByProNum(Integer proNum) {
+		// TODO Auto-generated method stub
+		return Optional.empty();
+	}
+
+
 }

@@ -1,23 +1,32 @@
 package com.oz.ozHouse.merchant.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.oz.ozHouse.domain.Category;
+import com.oz.ozHouse.domain.Product;
 import com.oz.ozHouse.dto.ProductDTO;
+import com.oz.ozHouse.merchant.repository.MerProductRepository;
 import com.oz.ozHouse.merchant.service.MerProService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -34,10 +43,21 @@ public class MerProController {
 	private static final String PATH = "C:\\proImgs\\";
 
 	//base64 인코딩
-//	private String encodeImageToBase64(File file) throws IOException {
-//	    byte[] fileContent = FileUtils.readFileToByteArray(file);
-//	    return Base64.getEncoder().encodeToString(fileContent);
-//	}
+	private String encodeImageToBase64(File file) throws IOException {
+		
+	    // Java 7 이상에서 제공하는 try-with-resources 구문을 사용하여 자동으로 리소스를 해제합니다.
+	    try (FileInputStream imageInFile = new FileInputStream(file)) {
+	    	
+	        // 파일의 크기만큼 바이트 배열을 생성합니다.
+	        byte[] imageData = new byte[(int) file.length()];
+	        
+	        // 파일 내용을 읽어서 바이트 배열에 저장합니다.
+	        imageInFile.read(imageData);
+	        
+	        // 바이트 배열을 Base64 문자열로 인코딩합니다.
+	        return Base64.getEncoder().encodeToString(imageData);
+	    }
+	}
 
 	// 상품 등록
 	@GetMapping("/product-input")
@@ -58,20 +78,20 @@ public class MerProController {
 //	@ModelAttribute ProductDTO dto
 	) throws Exception {
 		ProductDTO dto = new ProductDTO(req);
+		
+		//대표 이미지 폴더 지정
 		String root = PATH + "\\" + "img";
 		
 		File fileCheck = new File(root);
 		if (!fileCheck.exists()) fileCheck.mkdir();
 		
+		//상세 이미지 폴더 지정
 		String root1 = PATH + "\\" + "imgpro";
 		
 		File fileCheck1 = new File(root1);
 		if (!fileCheck1.exists()) fileCheck1.mkdir();
 		
-//		if (result.hasErrors()) {
-//			dto.setproImg("");
-//			dto.setproImgPro("");
-//		}
+		//대표 이미지
 		MultipartHttpServletRequest mr = (MultipartHttpServletRequest)req;
 		MultipartFile mf = mr.getFile("proImg");
 		String filename = mf.getOriginalFilename();
@@ -87,6 +107,11 @@ public class MerProController {
 //		dto.setproImg(filename);
 //		dto.setproImg_change(changeFile1);
 		
+//		dto.builder()
+//		.proImg(filename)
+//		.proImageChange(changeFile1)
+//		.build();
+		
 		System.out.println("root : " + root);
 		System.out.println("filename : " + filename);
 		System.out.println("changeFile1 : " + changeFile1);
@@ -100,6 +125,7 @@ public class MerProController {
 			return "message";
 		}
 		
+		//상세 이미지
 		System.out.println("proImgPro : " + proImgPro);
 		
 		List<Map<String, String>> fileList = new ArrayList<>();
@@ -121,7 +147,6 @@ public class MerProController {
 		
 		try {
 			for(int i = 0; i < proImgPro.size(); i++) {
-//				File uploadFile = new File(path + "\\" + fileList.get(i).get("changeFile"));
 				File uploadFile = new File(root1 + "\\" + fileList.get(i).get("changeFile"));
 				System.out.println("fileList : " + fileList.get(i).get("changeFile"));
 				System.out.println("originFIle : " + fileList.get(i).get("originFIle"));
@@ -150,6 +175,13 @@ public class MerProController {
 //		dto.setproImageProChange(filepro);
 //		dto.setProImgPro(fileproOri);
 		
+//		dto.builder()
+//		.proImageProChange(fileproOri)
+//		.proImgPro(filepro)
+//		.build();
+		
+		System.out.println("대표이미지 : " + proImg);
+		System.out.println("상세 이미지 : " + proImgPro);
 		HttpSession session = req.getSession();
 		session.setAttribute("proImg", root);
 		session.setAttribute("proImgPro", root1);
@@ -215,16 +247,16 @@ public class MerProController {
 		return "merchant/store/productManagement/productManagement_stock";
 	}
 	
-	@PostMapping("/product/stock")
-	public String productStockUpdate(HttpServletRequest req, @RequestParam Map<String, String> params) {
-//		req.setAttribute("merNum", params.get("merNum"));
-//	    int res = proService.merchant_updateStock(params);
-//	    if (res > 0) {
-//	        req.setAttribute("msg", "재고 수정에 성공했습니다.");
-//	    } else {
-//	        req.setAttribute("msg", "재고 수정에 실패했습니다.");
-//	    }
-        req.setAttribute("url", "merchant/store/product/stock");
-		return "message";
-	}
+	@Transactional
+	@PutMapping("/product/stock/{proNum}")
+	public ResponseEntity<?> updateProductStock(@PathVariable Integer proNum, @RequestParam Integer newQuantity) {
+        try {
+            proService.updateProductStock(proNum, newQuantity);
+            return ResponseEntity.ok().body("재고가 성공적으로 업데이트되었습니다.");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body("재고 업데이트 중 오류가 발생했습니다.");
+        }
+    }
 }

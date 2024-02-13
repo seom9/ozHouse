@@ -165,13 +165,12 @@ function resetForm() {	// 폼 초기화
 		            </c:if>
 					</div>
 					<div class="flex-cell quantity">
-						<form name="f" method="post"
-							action="stock_update.do?merNum=${merchantLoginMember.merNum }">
+						<form name="f" method="put"
+							action="${pageContext.request.contextPath}/merchant/store/product/stock">
 							<input type="hidden" name="proNum" value="${dto.proNum}" /> <input
 								type="text" name="proQuantity" value="${dto.proQuantity }"
 								size="5">개 <input type="submit" value="수정"
-								class="submit2 edit-button"> <input type="hidden"
-								name="merNum" value="${merchantLoginMember.merNum }" />
+								class="submit2 edit-button"> 
 						</form>
 					</div>
 					<div class="flex-cell">${dto.proInDate }</div>

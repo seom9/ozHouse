@@ -23,12 +23,12 @@ public class MerProServiceImpl implements MerProService {
 
 	//상품 등록
 	@Override
-//	@Transactional
+	@Transactional
 	public String insertProduct(ProductDTO dto) {
 		Product pro = new Product(dto);
 		System.out.println("service : " + dto.getProName());
-		System.out.println(pro.getProName());
-//		proRepository.save(pro);
+		System.out.println("상품명 : " + pro.getProName());
+		proRepository.save(pro);
 		return dto.getProName();
 	}
 
@@ -43,5 +43,12 @@ public class MerProServiceImpl implements MerProService {
 	public Long stockListCount() {
 		return proRepository.stockListCount();
 	}
+	
+	@Transactional
+    public void updateProductStock(Integer proNum, Integer newQuantity) {
+        Product product = proRepository.findByProNum(proNum)
+            .orElseThrow(() -> new IllegalArgumentException("상품을 찾을 수 없습니다. 상품번호: " + proNum));
+        product.setProQuantity(newQuantity); // 여기서는 상품의 수량을 설정하는 메소드가 있다고 가정합니다.
+    }
 
 }

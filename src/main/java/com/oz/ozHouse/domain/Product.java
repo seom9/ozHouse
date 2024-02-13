@@ -66,18 +66,15 @@ public class Product {
 
 	private String proToday;
 
-//    public void addImages(String primaryImageFileName, List<String> additionalImageFileNames) {
-//        this.img = new Image();
-//    }
-	
 	public Product(ProductDTO dto) {
 		this.proNum = dto.getProNum();
 		this.proName = dto.getProName();
 		this.categoryNum = dto.getCategoryNum();
 //		this.merchant = new Merchant(); 
-		this.merNum = dto.getMerNum();
-		this.img = new Image(dto.getProImg(), dto.getProImgPro(), dto.getProImageChange(), dto.getProImageProChange(),
-				dto.getEncodedImage());
+		this.merNum = 1;
+		this.img = new Image(dto.getProImg(), dto.getProImgPro(), dto.getProImageChange(), dto.getProImageProChange()
+//				,dto.getEncodedImage());
+				);
 		this.merPrice = new ProPrice(dto.getProPrice(), dto.getProPoint(), dto.getProAssemblyCost(),
 				dto.getProDiscountRate(), dto.getProDiscountPrice());
 		this.proQuantity = dto.getProQuantity();
