@@ -1,5 +1,7 @@
 package com.oz.ozHouse.merchant.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,17 +21,27 @@ public class MerProServiceImpl implements MerProService {
 
 //	private final MerchantJoinRepository merRepository;
 
+	//상품 등록
 	@Override
-	@Transactional
+//	@Transactional
 	public String insertProduct(ProductDTO dto) {
-//		Integer merchant = merRepository.findMerchantById(dto.getMerNum());
-
 		Product pro = new Product(dto);
-//		pro.setMerchant(1);
 		System.out.println("service : " + dto.getProName());
 		System.out.println(pro.getProName());
-		proRepository.save(pro);
+//		proRepository.save(pro);
 		return dto.getProName();
+	}
+
+	//재고 리스트
+	@Override
+	public List<ProductDTO> stockList() {
+		return proRepository.stockList();
+	}
+
+	//재고 리스트 건수
+	@Override
+	public Long stockListCount() {
+		return proRepository.stockListCount();
 	}
 
 }

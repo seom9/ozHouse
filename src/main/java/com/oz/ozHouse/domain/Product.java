@@ -42,6 +42,7 @@ public class Product {
 //	private Merchant merchant;
 
 	private int merNum;
+	
 	@Embedded
 	private Image img;
 
@@ -82,10 +83,10 @@ public class Product {
 		this.proQuantity = dto.getProQuantity();
 		this.proModifier = dto.getProModifier();
 		this.proInDate = dto.getProInDate();
-		this.proSpec = dto.getProSpec();
-		this.proPurchasesCount = dto.getProPurchasesCount();
-		this.proApprovalStatus = dto.getProApprovalStatus();
+		this.proSpec = "normal";
+		this.proPurchasesCount = 0;
+		this.proApprovalStatus = "f";
 		this.categoryName = dto.getCategoryName();
-		this.proToday = dto.getProToday();
+		this.proToday = "0";
 	}
 }

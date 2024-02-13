@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -15,11 +16,12 @@ import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
+@RequestMapping("/merchant/home")
 public class MerController {
 	
 	private final NoticeService noticeService;
 	
-	@GetMapping("/merchant/main")
+	@GetMapping("")
 	public String merchantMain(HttpServletRequest req) {
 		req.setAttribute("noticeMainList", noticeService.simpleNotice());
 		return "merchant/main/main";

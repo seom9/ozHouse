@@ -20,7 +20,7 @@
 					<hr>
 					<div class="button-container">
 						<a
-							href="${pageContext.request.contextPath}/merchant/product-input"
+							href="${pageContext.request.contextPath}/merchant/store/product-input"
 							class="button">신규 상품 등록</a>
 						<!-- 
 						<a
@@ -32,38 +32,38 @@
 					<hr>
 					<div class="content">
 						<span>전체</span> <a
-							href="${pageContext.request.contextPath}/merchant/${merchantLoginMember.merNum}/products/request-list">
+							href="${pageContext.request.contextPath}/merchant/store/${merchantLoginMember.merNum}/products/request-list">
 							<span class="number"> ${allCount }건 </span>
 						</a>
 
 					</div>
 					<div class="content">
 						<span>승인대기(검수중)</span> <a
-							href="${pageContext.request.contextPath}/merchant/${merchantLoginMember.merNum}/products/request-list">
+							href="${pageContext.request.contextPath}/merchant/store/${merchantLoginMember.merNum}/products/request-list">
 							<span class="number"> ${waitCount }건 </span>
 						</a>
 					</div>
 					<div class="content">
 						<span>승인보류(수정요청)</span> <a
-							href="${pageContext.request.contextPath}/merchant/${merchantLoginMember.merNum}/products/request-list">
+							href="${pageContext.request.contextPath}/merchant/store/${merchantLoginMember.merNum}/products/request-list">
 							<span class="number"> ${requestCount }건 </span>
 						</a>
 					</div>
 					<div class="content">
 						<span>승인반려(등록불가)</span> <a
-							href="${pageContext.request.contextPath}/merchant/${merchantLoginMember.merNum}/products/request-list">
+							href="${pageContext.request.contextPath}/merchant/store/${merchantLoginMember.merNum}/products/request-list">
 							<span class="number"> ${cancleCount }건 </span>
 						</a>
 					</div>
 					<div class="content">
 						<span>요청취소</span> <a
-							href="${pageContext.request.contextPath}/merchant/${merchantLoginMember.merNum}/products/request-list">
+							href="${pageContext.request.contextPath}/merchant/store/${merchantLoginMember.merNum}/products/request-list">
 							<span class="number"> ${requestCancle }건 </span>
 						</a>
 					</div>
 					<div class="content">
 						<span>판매중</span> <a
-							href="${pageContext.request.contextPath}/merchant/${merchantLoginMember.merNum}/products/request-list">
+							href="${pageContext.request.contextPath}/merchant/store/${merchantLoginMember.merNum}/products/request-list">
 							<span class="number"> ${saleOk }건 </span>
 						</a>
 					</div></td>
@@ -135,7 +135,7 @@
 					<div class="notice-section">
 						<div class="notice-header">
 							<div class="title no-box-style" align="left">공지사항</div>
-							<a href="${pageContext.request.contextPath}/notices"
+							<a href="${pageContext.request.contextPath}/merchant/home/notices"
 								class="subtitle">더보기 ></a>
 						</div>
 						<hr>
@@ -143,13 +143,13 @@
 							<ul class="notice-list">
 								<c:forEach var="dto" items="${noticeTitleList }">
 									<li><a
-										href="${pageContext.request.contextPath}/notice-title/${dto.noticeNum }">
+										href="${pageContext.request.contextPath}/merchant/home/notice-title/${dto.noticeNum }">
 											${dto.noticeTitle } </a></li>
 								</c:forEach>
 							</ul>
 						</div>
 						<div class="button-container">
-							<a href="${pageContext.request.contextPath}/merchant/main"
+							<a href="${pageContext.request.contextPath}/merchant/home"
 								class="button">HOME</a>
 						</div>
 					</div></td>
