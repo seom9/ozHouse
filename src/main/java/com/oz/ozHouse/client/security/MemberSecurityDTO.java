@@ -12,6 +12,7 @@ import lombok.Getter;
 
 @Getter
 public class MemberSecurityDTO extends User implements OAuth2User {
+	private int memberNum;
 	private String memberId;
 	private String memberPasswd;
     private String memberNickname;
@@ -21,11 +22,12 @@ public class MemberSecurityDTO extends User implements OAuth2User {
     
     private Map<String, Object> props; 	// 소셜 로그인 정보
     
-    public MemberSecurityDTO(String username, String password, 
+    public MemberSecurityDTO(int memberNum, String username, String password, 
     						String memberNickname, String memberEmail, 
     						LocalDate memberDeleteDate, boolean social,
     						Collection<? extends GrantedAuthority> authorities) {
         super(username, password, authorities);
+        this.memberNum = memberNum;
         this.memberId = username;
         this.memberPasswd = password;
         this.memberNickname = memberNickname;

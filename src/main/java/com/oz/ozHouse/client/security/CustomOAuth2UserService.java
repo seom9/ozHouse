@@ -54,13 +54,12 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService{
 		
 		Optional<Member> result = memberRepository.findByMemberEmail(email);
 		
-		// 데이터 베이스에 해당 이메일 사용자가 없다면
-		if(result.isEmpty()) {
-			// 회원 추가 : memberId 는 이메일 주소
+		if(result.isEmpty()) { // new 이메일 ? 새 계정 생성
 			Member member = Member.builder()
 					.memberId(email)
 					.memberPasswd(passwordEncoder.encode("1111"))
 					.social(true)
+					.memberEmail(email)
 	                .memberPoint(0)
 	                .memberLevel(MemberLevel.NORMAL)
 					.build();
@@ -68,32 +67,38 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService{
 			memberRepository.save(member);
 			
 			//MemberSecurityDTO 구성 및 반환
-			MemberSecurityDTO memberSecurityDTO = 
-					new MemberSecurityDTO(email, "1111", email, email, null, true, Arrays.asList(new SimpleGrantedAuthority("ROLE_CLIENT")));
+			MemberSecurityDTO memberSecurityDTO = gernerateConsDTO(member);
+			// builder 로 props 따로 설정
 			memberSecurityDTO = memberSecurityDTO.props(params);
+			
 			return memberSecurityDTO;
-		}else {
+		}else {	// old 이메일 ? 소셜 회원인지 아닌지 확인
 			Member member = result.get();
-			System.out.println("첫 번째 :" + member.getMemberId());
-
-			member.social(true);
-			memberRepository.save(member); // 소셜 회원으로 업데이트
 			
-			System.out.println("두 번째 :" + member.getMemberId());
+			// 소셜 회원으로 되어 있지 않을 경우 social 회원으로 업데이트
+			if (member.isSocial() == false) 
+				memberRepository.updateSocialStatusByMemberId(member.getMemberId());
 			
-			MemberSecurityDTO memberSecurityDTO =
-					new MemberSecurityDTO(
-							member.getMemberId(),
-							member.getMemberPasswd(),
-							member.getMemberEmail(),
-							member.getMemberNickname(),
-							member.getMemberDeletedate(),
-							member.isSocial(),
-							member.getRoleSet()
-									.stream().map(memberRole -> new SimpleGrantedAuthority("ROLE_" + memberRole.name())).collect(Collectors.toList())
-									);
+			//MemberSecurityDTO 구성 및 반환
+			MemberSecurityDTO memberSecurityDTO = gernerateConsDTO(member);
 			return memberSecurityDTO;
 		}
+	}
+	
+	private MemberSecurityDTO gernerateConsDTO (Member member) {
+		MemberSecurityDTO memberSecurityDTO =
+				new MemberSecurityDTO(
+						member.getMemberNum(),
+						member.getMemberId(),
+						member.getMemberPasswd(),
+						member.getMemberEmail(),
+						member.getMemberNickname(),
+						member.getMemberDeletedate(),
+						member.isSocial(),
+						member.getRoleSet()
+								.stream().map(memberRole -> new SimpleGrantedAuthority("ROLE_" + memberRole.name())).collect(Collectors.toList())
+								);
+		return memberSecurityDTO;
 	}
 	
 	private String getKakaoEmail(Map<String, Object> paramMap) {
