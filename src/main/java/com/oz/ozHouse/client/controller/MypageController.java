@@ -1,45 +1,29 @@
 package com.oz.ozHouse.client.controller;
 
-import java.io.File;
-import java.io.IOException;
 import java.net.BindException;
-import java.util.Enumeration;
 import java.util.Map;
 
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.oz.ozHouse.client.config.LoginOkBean;
-import com.oz.ozHouse.client.security.CustomUserDetailsService;
 import com.oz.ozHouse.client.security.MemberSecurityDTO;
 import com.oz.ozHouse.client.service.MemberService;
 import com.oz.ozHouse.domain.Member;
 import com.oz.ozHouse.domain.common.Address;
-import com.oz.ozHouse.dto.DTO;
 import com.oz.ozHouse.dto.MemberDTO;
+import com.oz.ozHouse.dto.client.member.MemberPasswdUpdateDTO;
 import com.oz.ozHouse.dto.client.member.MemberUpdateDTO;
 
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -95,7 +79,6 @@ public class MypageController {
 
     }
 	
-    // 비밀번호 변경
 	@GetMapping(value = {"/{memberId}/updatepass/{mode}", "/{memberId}/updatepass"})
     public String mypage_updatePasswd(HttpServletRequest req, 
     					@PathVariable Map<String, String> pathVariables) {
@@ -111,20 +94,17 @@ public class MypageController {
     @PatchMapping("/{memberId}/updatepass/{mode}")
     @ResponseBody
     public String mypage_updatePasswdPro(HttpServletRequest req,
-				    					@RequestBody @Validated String new_pass,
+				    					@RequestBody @Validated MemberPasswdUpdateDTO dto,
 				    					@PathVariable Map<String, String> pathVariables,
 				    					BindingResult result)
 				    	    			throws BindException {
-        /*
+
         if (pathVariables.get("mode").equals("find")) {
-        	dto = getMember(req);
-            String old_pass = req.getParameter("member_passwd");
-        	passwd = passwordEncoder.matches(old_pass, dto.getMember_passwd());
-        }else if(mode.equals("find")) {
-        	passwd = true;
-        	dto.setMember_id(id);
+        	
+        }else if (pathVariables.get("mode").equals("up")){
+        	
         }
-    	*/
+        
         return "message";
     }
 
