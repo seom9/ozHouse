@@ -77,7 +77,7 @@ public class Merchant extends BaseEntity{
 		@AttributeOverride(name = "PhoneNumber.phoneNumber3", column = @Column(name = "merManhp3"))
 
     })
-    private InbrandInfo inbrandInfo;
+    	private InbrandInfo inbrandInfo;
     
 	@DateTimeFormat(pattern = "yy/MM/dd")
     private LocalDate merInbranddate;
