@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 public class StoreManageServiceImpl implements StoreManageService{
 
 	private final MerProductRepository productRepository;
+
 	
 	//전체 상품 현황
 	@Override
@@ -21,27 +22,57 @@ public class StoreManageServiceImpl implements StoreManageService{
 
 	@Override
 	public int waitCount() {
-		return productRepository.waitCount();
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	@Override
 	public int requestCount() {
-		return productRepository.requestCount();
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	@Override
 	public int cancleCount() {
-		return productRepository.cancleCount();
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	@Override
 	public int requestCancle() {
-		return productRepository.requestCancle();
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	@Override
 	public int saleOk() {
-		return productRepository.saleOk();
+		// TODO Auto-generated method stub
+		return 0;
 	}
+//
+//	@Override
+//	public int waitCount() {
+//		return productRepository.waitCount();
+//	}
+//
+//	@Override
+//	public int requestCount() {
+//		return productRepository.requestCount();
+//	}
+//
+//	@Override
+//	public int cancleCount() {
+//		return productRepository.cancleCount();
+//	}
+//
+//	@Override
+//	public int requestCancle() {
+//		return productRepository.requestCancle();
+//	}
+//
+//	@Override
+//	public int saleOk() {
+//		return productRepository.saleOk();
+//	}
 
 }
