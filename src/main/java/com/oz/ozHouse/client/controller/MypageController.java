@@ -36,46 +36,39 @@ import com.oz.ozHouse.dto.DTO;
 import com.oz.ozHouse.dto.MemberDTO;
 import com.oz.ozHouse.dto.client.member.MemberUpdateDTO;
 
+import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 @Controller
 @Validated
 @RequestMapping("/mypage")
+@PreAuthorize("hasAnyRole('ROLE_CLIENT')")
 @RequiredArgsConstructor
 public class MypageController {
 	private final MemberService memberService;
 	
-    private MemberDTO getMember(HttpServletRequest req) {
-    	HttpSession session = req.getSession();
-    	LoginOkBean loginMember = (LoginOkBean)session.getAttribute("loginMember");
-    	MemberDTO dto = memberService.getMember(loginMember.getMember_id());
-    	return dto;
-    }
-	
     @GetMapping("/hi")
     public String index(@AuthenticationPrincipal MemberSecurityDTO member) {
-        System.out.println("이렇게 받아 올 수 있음 = " + member.getUsername());
-        System.out.println("이렇게 받아 올 수 있음 = " + member.isSocial());
+        System.out.println("username : " + member.getUsername());
+        System.out.println("isSocial? : " + member.isSocial());
         return "client/member/member_join";
     }
     
-    // get 방식에는 @PreAuthorize 어노테이션
-    @PreAuthorize("hasAnyRole('ROLE_CLIENT')")
 	@GetMapping("/profile")
-	public String index(HttpServletRequest req) {
-    	MemberDTO dto = getMember(req);
-    	req.setAttribute("member", dto);
-        return "client/mypage/mypage_profile";
+	public String index(HttpServletRequest req, 
+						@AuthenticationPrincipal MemberSecurityDTO member) {
+    	req.setAttribute("member", memberService.getMember(member.getMemberId()));
+    	return "client/mypage/mypage_profile";
 	}
 	
     @GetMapping(value = {"/{memberId}/update", "/{memberId}/update/{mode}"})
     public String memberUpdate(HttpServletRequest req, 
-    							@PathVariable(value = "mode", required = false) String mode){
-		HttpSession session = req.getSession();
-    	LoginOkBean login = (LoginOkBean)session.getAttribute("loginMember");
-    	MemberDTO dto = memberService.getMember(login.getMember_id());
+    					@AuthenticationPrincipal MemberSecurityDTO member,
+    					@PathVariable(value = "mode", required = false) String mode){
+    	MemberDTO dto = memberService.getMember(member.getUsername());
     	
         req.setAttribute("upPath", req.getServletContext().getRealPath("/resources/image"));
 
@@ -87,21 +80,53 @@ public class MypageController {
     	return "client/member/member_update";
     }
 	
+    
     @PatchMapping("/{memberId}/update")
     @ResponseBody
     public String checkId(HttpServletRequest req, @PathVariable("memberId") String memberId,
-    		@RequestBody @Validated MemberUpdateDTO dto, BindingResult result) throws BindException {
+    					@RequestBody @Validated MemberUpdateDTO dto, BindingResult result) 
+    					throws BindException {
+    	
     	Member member = memberService.getMemberEntity(memberId);
     	member = dto.updateEntity(member, dto);
         int res = memberService.updateMember(member);
         
-        if (res > 0) {
-            return "회원 정보가 수정되었습니다";
-        } else {
-            return "회원 정보 수정 실패되었습니다 : 서버에 문의해 주세요";
-        }
+        return (res > 0) ? "회원 정보가 수정되었습니다" : "회원 정보 수정 실패 : 서버에 문의해 주세요";
+
     }
 	
-	
+    // 비밀번호 변경
+	@GetMapping(value = {"/{memberId}/updatepass/{mode}", "/{memberId}/updatepass"})
+    public String mypage_updatePasswd(HttpServletRequest req, 
+    					@PathVariable Map<String, String> pathVariables) {
+    	
+    	if (pathVariables.get("mode") != null) {
+    		req.setAttribute("mode", "find");
+    		req.setAttribute("member_id", pathVariables.get("memberId"));
+    	}
+    	
+        return "client/mypage/mypage_updatePasswd";
+    }
+    
+    @PatchMapping("/{memberId}/updatepass/{mode}")
+    @ResponseBody
+    public String mypage_updatePasswdPro(HttpServletRequest req,
+				    					@RequestBody @Validated String new_pass,
+				    					@PathVariable Map<String, String> pathVariables,
+				    					BindingResult result)
+				    	    			throws BindException {
+        /*
+        if (pathVariables.get("mode").equals("find")) {
+        	dto = getMember(req);
+            String old_pass = req.getParameter("member_passwd");
+        	passwd = passwordEncoder.matches(old_pass, dto.getMember_passwd());
+        }else if(mode.equals("find")) {
+        	passwd = true;
+        	dto.setMember_id(id);
+        }
+    	*/
+        return "message";
+    }
+
     
 }

@@ -3,6 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
+
 <%@ include file="../main/top.jsp" %>
 
 <html>
@@ -95,7 +97,7 @@
             <li class="page-navigation__item" onclick="toggleSubMenu(this)"><a target="_self">내 프로필</a>
             	<span class="page-navigation__sub-menu-items">
                 <ul class="page-navigation__sub-menu">
-                    <li class="page-navigation__sub-menu-item"><a href="mypage_profile.do" target="_self">모두 보기</a></li>
+                    <li class="page-navigation__sub-menu-item"><a href="/mypage/profile" target="_self">모두 보기</a></li>
                     <li class="page-navigation__sub-menu-item"><a href="#" target="_self">내 블로그</a></li>
                     <li class="page-navigation__sub-menu-item"><a href="#" target="_self">질문과 답변</a></li>
                     <li class="page-navigation__sub-menu-item"><a href="#" target="_self">나의 블로그</a></li>
@@ -125,9 +127,9 @@
             <li class="page-navigation__item" onclick="toggleSubMenu(this)"><a target="_self">설정</a>
             <span class="page-navigation__sub-menu-items">
                 <ul class="page-navigation__sub-menu">
-                    <li class="page-navigation__sub-menu-item"><a href="member_update.do" target="_self">회원정보수정</a></li>
+                    <li class="page-navigation__sub-menu-item"><a href="/mypage/${prc.username}/update" target="_self">회원정보수정</a></li>
                     <li class="page-navigation__sub-menu-item"><a href="#" target="_self">전문가 신청</a></li>
-                    <li class="page-navigation__sub-menu-item"><a href="mypage_upadatePasswd.do" target="_self">비밀번호 변경</a></li>
+                    <li class="page-navigation__sub-menu-item"><a href="/mypage/${prc.username}/updatepass" target="_self">비밀번호 변경</a></li>
                 </ul>
             </span>
             </li>

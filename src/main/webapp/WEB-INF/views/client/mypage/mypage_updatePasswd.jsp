@@ -7,7 +7,7 @@
  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<c:set var="path" value="${pageContext.request.contextPath}"/>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-	<link rel="stylesheet" href="${path}/resources/client/login.css"/>
+	<link rel="stylesheet" href="${path}/client/member_css/login.css"/>
 	
 <script>
     function isValidPassword(password) {
@@ -40,82 +40,84 @@
         $("#checkPasswd").hide();
     });
 </script>
- 	<style>
-      	.join {
-			position: relative; 				    
-			margin: 10; 
-			padding: 10;
-			font-size: 14px;
-		}
-		.join1 {
-			position: relative;  				    
-			margin: 0; 
-			padding: 30;
-			font-size: 14px;
-		}					
-		.join2 {
-			position: relative;  				    
-			margin: 30; 
-			padding: 30;
-			line-height: 50px;
-			font-size: 11px;
-		}
-		.join3 {
-			position: relative;  				    
-			margin: 30; 
-			padding: 30;
-			line-height: 70px;
-			font-size: 12px;
-		}  
-		.error-message {
-		    font-family: 'Roboto', sans-serif;
-		    color: red;
-	 	}
-	    .title {
-	        font-family: 'Roboto', sans-serif;
-	        color: black; /* 검정색으로 변경 */
-	        font-size: 15px; /* 글꼴 크기를 15픽셀로 지정 */
-	        margin: 30px 0; 
-	    }   
-	 		
-	 	.title2 {
-	        font-family: 'Roboto', sans-serif;
-	        color: #58E6B7; /* 검정색으로 변경 */
-	        font-size: 20px; /* 글꼴 크기를 15픽셀로 지정 */
-	        margin: 30px 0; 
-	    }  	
-	    .title3 {
-	        font-family: 'Roboto', sans-serif;
-	        color: #58E6B7; /* 검정색으로 변경 */
-	        font-size: 15px; /* 글꼴 크기를 15픽셀로 지정 */
-	        margin: 30px 0; 
-	    }  	    
-				
-	 </style>
+<style>
+    .join {
+		position: relative; 				    
+		margin: 10; 
+		padding: 10;
+		font-size: 14px;
+	}
+	.join1 {
+		position: relative;  				    
+		margin: 0; 
+		padding: 30;
+		font-size: 14px;
+	}					
+	.join2 {
+		position: relative;  				    
+		margin: 30; 
+		padding: 30;
+		line-height: 50px;
+		font-size: 11px;
+	}
+	.join3 {
+		position: relative;  				    
+		margin: 30; 
+		padding: 30;
+		line-height: 70px;
+		font-size: 12px;
+	}  
+	.error-message {
+	    font-family: 'Roboto', sans-serif;
+	    color: red;
+ 	}
+    .title {
+        font-family: 'Roboto', sans-serif;
+        color: black; /* 검정색으로 변경 */
+        font-size: 15px; /* 글꼴 크기를 15픽셀로 지정 */
+        margin: 30px 0; 
+    }   
+ 		
+ 	.title2 {
+        font-family: 'Roboto', sans-serif;
+        color: #58E6B7; /* 검정색으로 변경 */
+        font-size: 20px; /* 글꼴 크기를 15픽셀로 지정 */
+        margin: 30px 0; 
+    }  	
+    .title3 {
+        font-family: 'Roboto', sans-serif;
+        color: #58E6B7; /* 검정색으로 변경 */
+        font-size: 15px; /* 글꼴 크기를 15픽셀로 지정 */
+        margin: 30px 0; 
+    }  	    
+			
+</style>
+
+
 </head>
 
 <body onload="f.member_id.focus()">
 	<div  align="center" class="login-wrapper" >
-		<form name="f" method="post" id="login-form" action="mypage_upadatePasswd.do">
+		<form name="f" method="post" id="login-form" action="/${prc.username}/updatepass">
  			<br><br><br>
 			<span class="title2">비밀번호 변경</span>
 			<br><br><br><br>
 			
 			<c:if test="${not empty mode}">
 			<span class="title">아이디</span>
-				${member_id}
+				${memberId}
 			</c:if>
 			
 			<c:if test="${empty mode}">
 			<span class="title">현재 비밀번호</span>
-			<input type="password" tabindex="3" name="member_passwd" placeholder="비밀번호를 입력해 주세요." class="box" placeholder="Enter password">
+			<input type="password" tabindex="3" name="memberPasswd" placeholder="비밀번호를 입력해 주세요." class="box" placeholder="Enter password">
 			</c:if>
 			
 			<br><br>
 			<span class="title3">비밀번호</span>
-	        <input type="password" tabindex="3" name="new_member_passwd" placeholder="비밀번호를 입력해 주세요." class="box" id="password" oninput="checkPasswd2()">
+	        <input type="password" tabindex="3" name="newMemberPasswd" placeholder="비밀번호를 입력해 주세요." class="box" id="password" oninput="checkPasswd2()">
 			<span class="title3">비밀번호 확인</span>
-			<input type="password" tabindex="4" placeholder="비밀번호를 정확하게 입력해 주세요." name="new_member_passwd2" class="box" id="passwordCheck" oninput="checkPasswd()">
+			<input type="password" tabindex="4" placeholder="비밀번호를 정확하게 입력해 주세요." name="newMemberPasswd2" class="box" id="passwordCheck" oninput="checkPasswd()">
                     <div id="checkPasswd" class="error-message">
   						PASSWORD 가 동일하지 않습니다
 					</div>

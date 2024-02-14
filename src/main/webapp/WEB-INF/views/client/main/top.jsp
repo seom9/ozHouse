@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
+<sec:authentication property="principal" var="prc"/>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -72,10 +75,10 @@
 				
 			    if (!isLogin) {
 			    	alert("로그인이 필요합니다. 로그인 페이지로 이동합니다.");
-			        window.location.href = 'member/login';
+			        window.location.href = '/member/login';
 			        return;
 			    } else {
-			    	window.location.href = 'CartList/main';
+			    	window.location.href = '/CartList/main';
 			    }
 			}
 		</script>
@@ -131,7 +134,7 @@
 									<sec:authorize access="hasAnyRole('ROLE_CLIENT')">
 										<a class="css-1g5o6hv" href="/logout">로그아웃</a>
 										<a class="css-1g5o6hv" href="/mypage/profile">마이페이지</a>
-									    <a class="css-1tlac5g" href="merchant-main.do">판매자센터</a>
+									    <a class="css-1tlac5g" href="${pageContext.request.contextPath}/merchant/main">판매자센터</a>
 									</sec:authorize>
 									<sec:authorize access="!hasAnyRole('ROLE_CLIENT')">
 										<a class="css-1g5o6hv" href="/member/login">로그인</a>
