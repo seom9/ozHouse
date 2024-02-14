@@ -1,7 +1,7 @@
 package com.oz.ozHouse.merchant.repository;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.Map;
 
 import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.data.repository.Repository;
@@ -22,9 +22,8 @@ public interface MerProductRepository extends Repository<Product, Integer> {
 	List<ProductDTO> stockList();
 	
 	//재고 리스트 건수
-	Long stockListCount();
+	Long stockListCount(Map<String, Object> params);
 	
 	//재고 수정
-	Optional<Product> findByProNum(Integer proNum);
 	
 }
