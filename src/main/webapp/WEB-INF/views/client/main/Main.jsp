@@ -8,7 +8,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 
-
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/static/client/main_css/mainStyle.css"/>
 <script type="text/javascript" src="${pageContext.request.contextPath}/static/resources/js/main.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.4.min.js"></script>

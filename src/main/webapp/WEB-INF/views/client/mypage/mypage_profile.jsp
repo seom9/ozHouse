@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
+
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <%@ include file="mypage_top.jsp" %>
 <link rel="stylesheet" href="${path}/mypage.css"/>
@@ -41,7 +43,8 @@
               </dl>
             </div>
             <div class="profile">
-              <button onclick="location.href='/mypage/${member.memberId}/update'" class="edit-profile">설정</button>
+            
+              <button onclick="location.href='/mypage/${prc.username}/update'" class="edit-profile">설정</button>
               <div class="reward-section">
               </div>
             </div>
