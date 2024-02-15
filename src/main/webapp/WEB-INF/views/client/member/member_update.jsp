@@ -24,7 +24,7 @@
 	        var zipcode = document.getElementsByName("zipcode")[0].value;
 
 	        fetch('/mypage/' + memberId + "/update", {
-	            method: 'PATCH', // PUT 메소드를 지정합니다.
+	            method: 'PATCH', 
 	            headers: {
 	                'Content-Type': 'application/json'
 	            },

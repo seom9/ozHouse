@@ -35,5 +35,11 @@ public interface MemberRepository extends JpaRepository<Member, Integer> {
     @Modifying
     @Query("UPDATE Member m SET m.social = true WHERE m.memberId = :memberId")
     void updateSocialStatusByMemberId(@Param("memberId") String memberId);
+    
+    // passwd 수정
+    @Transactional
+    @Modifying
+    @Query("UPDATE Member m SET m.memberPasswd = :encodePass WHERE m.memberId = :memberId")
+    void updateMemberPasswdByMemberId(@Param("encodePass") String encodePass, @Param("memberId") String memberId);
 
 }
