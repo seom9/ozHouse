@@ -17,15 +17,21 @@ import lombok.RequiredArgsConstructor;
 @Transactional
 public class MypageServiceImpl implements MypageService{
 	
-	private final ModelMapper modelMapper;
+	// private final ModelMapper modelMapper;
 	private final MemberRepository memberRepository;
 	private final PasswordEncoder passwordEncoder;
 	
+	// 코드 수정 : 가독성
 	@Override
 	public boolean passUpdate(MemberPasswdUpdateDTO dto) {
-		if (!passwordEncoder.matches(dto.getMemberPasswd(), memberRepository.findByMemberId(dto.getMemberId()).getMemberId())) {
+		if (!passwordEncoder.matches(dto.getMemberPasswd(), 
+						memberRepository.findByMemberId(dto.getMemberId()).getMemberId())) {
+			// passwd 저장
+			memberRepository.updateMemberPasswdByMemberId(passwordEncoder.encode(dto.getNewMemberPasswd()), dto.getMemberId());
 			return false;
 		}
+		
+		
 		return true;
 	}
 

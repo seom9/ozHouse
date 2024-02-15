@@ -93,24 +93,58 @@
 			
 </style>
 
+<!-- Json Data 전송 -->
+<script type="text/javascript">
+    function passUpdate() {
+    	// ** json data 전송 시 jstl 태그 자바스크립트에 안 먹음 ** // 
+
+    	var memberId = document.getElementById("member_id").value
+		var memberPasswd = document.getElementById("memberPasswd").value
+		var newMemberPasswd = document.getElementById("password").value
+		
+        fetch('/mypage/' + memberId + "/updatepass/up", {
+            method: 'PATCH', 
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                memberId : memberId,
+                memberPasswd : memberPasswd,
+                newMemberPasswd : newMemberPasswd
+            }),
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.text(); 
+        })
+        .then(data => {
+            alert(data)
+        })
+        .catch(error => {
+        	alert("회원 정보 수정이 실패되었습니다")
+        });
+    }
+</script>
 
 </head>
 
 <body onload="f.member_id.focus()">
 	<div  align="center" class="login-wrapper" >
-		<form name="f" method="post" id="login-form" action="/${prc.username}/updatepass">
+		<form name="f" method="post" id="login-form">
  			<br><br><br>
 			<span class="title2">비밀번호 변경</span>
 			<br><br><br><br>
-			
+						
 			<c:if test="${not empty mode}">
 			<span class="title">아이디</span>
 				${memberId}
 			</c:if>
-			
+
 			<c:if test="${empty mode}">
 			<span class="title">현재 비밀번호</span>
-			<input type="password" tabindex="3" name="memberPasswd" placeholder="비밀번호를 입력해 주세요." class="box" placeholder="Enter password">
+			<input type="password" tabindex="3" name="memberPasswd" id="memberPasswd" placeholder="비밀번호를 입력해 주세요." class="box" placeholder="Enter password">
 			</c:if>
 			
 			<br><br>
@@ -124,9 +158,9 @@
 					<div id="checkPasswd2" class="error-message">
   						비밀번호는 8자리 이상 영문 대소문자, 숫자, 특수문자가 각각 1개 이상이어야 합니다
 					</div>
-			<input type="hidden" name="mode" value="${mode}">
-			<input type="hidden" name="member_id" value="${member_id}">
-			<input type="submit" value="비밀번호 수정">
+			<input type="hidden" value="${prc.username}" id="member_id">
+
+			<input type="button" value="비밀번호 수정" onclick="javascript:passUpdate()">
 			<input type="reset" value="reset">
 		</form>
 	</div>

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.oz.ozHouse.client.security.MemberSecurityDTO;
 import com.oz.ozHouse.client.service.MemberService;
+import com.oz.ozHouse.client.service.MypageService;
 import com.oz.ozHouse.domain.Member;
 import com.oz.ozHouse.domain.common.Address;
 import com.oz.ozHouse.dto.MemberDTO;
@@ -32,7 +33,17 @@ import lombok.RequiredArgsConstructor;
 @PreAuthorize("hasAnyRole('ROLE_CLIENT')")
 @RequiredArgsConstructor
 public class MypageController {
+	
 	private final MemberService memberService;
+	private final MypageService mypageService;
+	
+	// setMessage 메서드
+    private String setMessage (HttpServletRequest req, String url, String msg) {
+    	req.setAttribute("url", msg);
+    	req.setAttribute("msg", url);
+    	
+    	return "message";
+    }
 	
     @GetMapping("/hi")
     public String index(@AuthenticationPrincipal MemberSecurityDTO member) {
@@ -83,7 +94,7 @@ public class MypageController {
     public String mypage_updatePasswd(HttpServletRequest req, 
     					@PathVariable Map<String, String> pathVariables) {
     	
-    	if (pathVariables.get("mode") != null) {
+    	if (pathVariables.get("mode").equals("find")) {
     		req.setAttribute("mode", "find");
     		req.setAttribute("member_id", pathVariables.get("memberId"));
     	}
@@ -97,16 +108,17 @@ public class MypageController {
 				    					@RequestBody @Validated MemberPasswdUpdateDTO dto,
 				    					@PathVariable Map<String, String> pathVariables,
 				    					BindingResult result)
-				    	    			throws BindException {
-
+				    	    			throws BindException{
+    	
+    	boolean pass = false;
+    	
         if (pathVariables.get("mode").equals("find")) {
         	
         }else if (pathVariables.get("mode").equals("up")){
-        	
+        	pass = mypageService.passUpdate(dto);
         }
         
-        return "message";
+        return (pass) ? "회원 정보가 수정되었습니다" : "회원 정보 수정 실패 : 서버에 문의해 주세요";
     }
 
-    
 }
