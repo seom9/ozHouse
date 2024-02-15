@@ -19,7 +19,7 @@ public interface MerProductRepository extends Repository<Product, Integer> {
 	Product save(Product product);
 	
 	//재고 리스트
-	List<ProductDTO> stockList();
+	List<ProductDTO> stockList(Map<String, Object> params);
 	
 	//재고 리스트 건수
 	Long stockListCount(Map<String, Object> params);

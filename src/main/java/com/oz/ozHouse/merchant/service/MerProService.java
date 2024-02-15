@@ -14,7 +14,7 @@ public interface MerProService {
 	public String insertProduct(ProductDTO dto);
 	
 	//재고리스트
-	public List<ProductDTO> stockList();
+	public List<ProductDTO> stockList(Map<String, Object> params);
 	
 	//재고리스트 건수
 	public Long stockListCount(Map<String, Object> params);

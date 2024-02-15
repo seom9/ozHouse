@@ -9,8 +9,7 @@ group = 'com.ozHouse'
 version = '0.0.1-SNAPSHOT'
 
 java {
-	sourceCompatibility = JavaVersion.VERSION_21
-	targetCompatibility = JavaVersion.VERSION_21
+	sourceCompatibility = '21'
 }
 
 configurations {
@@ -54,8 +53,8 @@ dependencies {
 
 	implementation 'org.springframework.boot:spring-boot-devtools'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-
 }
+
 tasks.named('test') {
 	useJUnitPlatform()
 }

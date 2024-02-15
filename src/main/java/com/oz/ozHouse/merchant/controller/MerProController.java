@@ -235,7 +235,7 @@ public class MerProController {
 	    params.put("spec", spec);
 
 	    //재고 관리 리스트
-	    List<ProductDTO> list = proService.stockList();
+	    List<ProductDTO> list = proService.stockList(params);
 	    for (ProductDTO dto : list) {
 	        File imageFile = new File(root, dto.getProImageChange());
 	        if (imageFile.exists()) {
