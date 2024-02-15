@@ -38,10 +38,10 @@ public class MerchantDTO {
     private List<CategoryDTO> merCategory;
     private String merOthershop;
     private String merFile;
-    private LocalDate merJoindate;
-    private LocalDate merInbranddate;
-    private LocalDate merDeletedate;
-    private LocalDate merOutDate;
+    private String merJoindate;
+    private String merInbranddate;
+    private String merDeletedate;
+    private String merOutDate;
     private String merDelete;
     private String merAdress;
     private String merRegistration;

@@ -6,7 +6,7 @@ import org.springframework.data.repository.query.Param;
 
 import com.oz.ozHouse.domain.Merchant;
 
-public interface MerJoinRepositoy 
+public interface MerJoinRepository 
 extends JpaRepository<Merchant, Integer>, MerJoinRepositoryCustom{
 
 	//판매자의 사업자등록번호 조회

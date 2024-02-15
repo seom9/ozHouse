@@ -38,9 +38,9 @@ public class MemberDTO{
     private List<OrderTb> orderList;
     private int memberPoint;
     private MemberLevel memberLevel;
-    private LocalDate regDate;
-    private LocalDate modDate;
-    private LocalDate memberDeletedate;
+    private String regDate;
+    private String modDate;
+    private String memberDeletedate;
  
     public MemberDTO withMemberPasswd(String passwd) {
         this.memberPasswd = passwd;

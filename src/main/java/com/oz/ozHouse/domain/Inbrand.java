@@ -1,6 +1,5 @@
 package com.oz.ozHouse.domain;
 
-import java.time.LocalDate;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -17,7 +16,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import lombok.Getter;
 import lombok.Setter;
@@ -61,6 +59,6 @@ public class Inbrand extends BaseEntity{
 	private InbrandInfo inbrandInfo;
 	
 	@DateTimeFormat(pattern = "yy/MM/dd")
-	private LocalDate inCancelDate;
+	private String inCancelDate;
 	
 }

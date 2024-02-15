@@ -1,6 +1,5 @@
 package com.oz.ozHouse.domain;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -80,13 +79,13 @@ public class Merchant extends BaseEntity{
     private InbrandInfo inbrandInfo;
     
 	@DateTimeFormat(pattern = "yy/MM/dd")
-    private LocalDate merInbranddate;
+    private String merInbranddate;
     
 	@DateTimeFormat(pattern = "yy/MM/dd")
-    private LocalDate merDeletedate;
+    private String merDeletedate;
     
 	@DateTimeFormat(pattern = "yy/MM/dd")
-    private LocalDate merOutDate;
+    private String merOutDate;
     
     private String merDelete;
     
