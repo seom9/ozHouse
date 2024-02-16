@@ -227,7 +227,8 @@ public class MerProController {
 	// 재고 관리
 	@GetMapping("/product/stock")
 	public String productStock(HttpServletRequest req, @RequestParam Map<String, Object> params) throws IOException {
-	    String root = PATH + "\\" + "img";
+	    System.out.println("재고");
+		String root = PATH + "\\" + "img";
 	    req.setAttribute("proImg", root);
 	    
 	    String[] specArray = req.getParameterValues("spec");
