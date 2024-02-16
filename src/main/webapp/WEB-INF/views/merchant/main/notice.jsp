@@ -9,7 +9,7 @@
 <%@ include file="mainTop.jsp"%>
 <div class="main-notice">
 	<div class="search-container">
-		<form action="${pageContext.request.contextPath}/notices/search"
+		<form action="${pageContext.request.contextPath}/merchant/home/notices/search"
 			method="get" class="search-form">
 			<input type="text" placeholder="검색" name="search"
 				class="search-input">
@@ -21,7 +21,7 @@
 	<ul class="notice-list">
 		<c:forEach var="dto" items="${noticeList}">
 			<li class="notice-item"><span class="notice-title"> <a
-					href="${pageContext.request.contextPath}/notice-title/${dto.noticeNum }">
+					href="${pageContext.request.contextPath}/merchant/home/notice-title/${dto.noticeNum }">
 						${dto.noticeTitle} </a></span> <span class="notice-date">${dto.noticeDate}</span>
 			</li>
 		</c:forEach>
