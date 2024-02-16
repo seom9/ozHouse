@@ -11,11 +11,13 @@ import java.nio.file.Paths;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale.Category;
 import java.util.Map;
 import java.util.UUID;
 
@@ -41,6 +43,7 @@ import com.oz.ozHouse.dto.ApplicationDTO;
 import com.oz.ozHouse.dto.CategoryDTO;
 import com.oz.ozHouse.dto.InbrandDTO;
 import com.oz.ozHouse.dto.MerchantDTO;
+import com.oz.ozHouse.merchant.Exception.NotFoundMerNumException;
 import com.oz.ozHouse.merchant.config.MerchantLoginBean;
 import com.oz.ozHouse.merchant.service.MerInbrandService;
 
@@ -102,23 +105,30 @@ public class MerInbrandController {
 	
 	@PostMapping(value="/checkbusiness/{merNum}")
 	public String brandApplicationOk(HttpServletRequest req, 
-			@RequestParam Map<String, String> map, @PathVariable(name="merNum")String merNum) {
-		boolean result = inbrandService.searchComNum(merNum, map);
-		if(!map.get("inbrand_comnum1").equals(result.getMer_comnum1())||
-				!map.get("inbrand_comnum2").equals(result.getMer_comnum2())||
-				!map.get("inbrand_comnum3").equals(result.getMer_comnum3())) {
+			@RequestParam Map<String, String> map, 
+			@PathVariable(name="merNum")int merNum) {
+		boolean result = false;
+		try {
+			result = inbrandService.searchComNum(merNum, map);
+		}catch(NotFoundMerNumException e) {
+			String msg = "존재하지 않는 판매자입니다.";
+			String url = ("/merchant/main");
+			req.setAttribute("msg", msg);
+			req.setAttribute("url", url);
+			return "message";
+		}
+		if(!result) {
 			String msg = "회원가입시의 사업자등록번호와 일치하지 않습니다.";
 			String url = "brand_application.do?mer_num=" + map.get("mer_num");
 			req.setAttribute("msg", msg);
 			req.setAttribute("url", url);
 			return "forward:message.jsp";
 		}
-		
-		List<CategoryDTO> category = brandMapper.selectCate();
+		List<Category> category = Arrays.asList(Category.values());
 		req.setAttribute("category", category);
-		req.setAttribute("inbrand_comnum1", map.get("inbrand_comnum1"));
-		req.setAttribute("inbrand_comnum2", map.get("inbrand_comnum2"));
-		req.setAttribute("inbrand_comnum3", map.get("inbrand_comnum3"));
+		req.setAttribute("inbrand_comnum1", map.get("inComNum1"));
+		req.setAttribute("inbrand_comnum2", map.get("inComNum2"));
+		req.setAttribute("inbrand_comnum3", map.get("inComNum3"));
 		req.setAttribute("mer_num", merNum);
 		return "merchant/brand/brand_inform";
 	}
