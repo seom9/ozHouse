@@ -54,7 +54,7 @@ public class MerLoginController {
 			HttpSession session = req.getSession();
 			session.setAttribute("merchantLoginMember", loginOk);
 			msg = loginOk.getMerId() + "님, OZ의 집에 오신걸 환영합니다.";
-			url = "/merchant/main";
+			url = "/merchant/home";
 			break;
 		case MerchantLoginBean.NOT_ID:
 			msg = "아이디 확인 후 다시 시도해 주세요";
@@ -66,11 +66,11 @@ public class MerLoginController {
 			break;
 		case MerchantLoginBean.ERROR:
 			msg = "DB 접속 오류! 관리자에게 문의해 주세요";
-			url = "/merchant/main";
+			url = "/merchant/home";
 			break;
 		case MerchantLoginBean.DELETE_ID:
 			msg = "사용 중지된 ID입니다.";
-			url = "/merchant/main";
+			url = "/merchant/home";
 			break;
 		}
 		req.setAttribute("msg", msg);
@@ -83,7 +83,7 @@ public class MerLoginController {
 		HttpSession session = req.getSession();
 		session.invalidate();
 		String msg = "로그아웃 되었습니다.";
-		String url = "/merchant/main";
+		String url = "/merchant/home";
 		req.setAttribute("msg", msg);
 		req.setAttribute("url", url);
 		return "message";

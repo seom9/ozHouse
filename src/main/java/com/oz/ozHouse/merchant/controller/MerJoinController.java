@@ -30,7 +30,7 @@ public class MerJoinController {
 	private final EmailService emailService;
 	
 	static final String BUSINESSFILEPATH = 
-			"/Users/choejiyeong/git/ozHouse/src/main/resources/static/merchant/business";
+			"C:\\sts4\\ozHouse\\src\\main\\resources\\static\\merchant\\business";
 
 	@GetMapping("/join")
 	public String merchantJoin() {
@@ -111,12 +111,12 @@ public class MerJoinController {
 			dto.setMerRegistration(saveName);
 			String id = merJoinService.insertMerchant(dto);
 			if (id != null) {
-				req = goToMessage(req, "/merchant/main", "회원가입 성공 : " + id + "님, 로그인해 주시기 바랍니다.");
+				req = goToMessage(req, "/merchant/home", "회원가입 성공 : " + id + "님, 로그인해 주시기 바랍니다.");
 			} else if (id == null) {
 				if (deleteFile.exists()) {
 					deleteFile.delete();
 				}
-				req = goToMessage(req, "/merchant/main", "회원가입 실패 : 회원가입시 오류가 발생하였습니다. 관리자에게 문의하여주세요");
+				req = goToMessage(req, "/merchant/home", "회원가입 실패 : 회원가입시 오류가 발생하였습니다. 관리자에게 문의하여주세요");
 			}
 		} else {
 			if (deleteFile.exists()) {
