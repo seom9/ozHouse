@@ -11,7 +11,7 @@
 	<ul class="notice-list">
 		<c:forEach var="dto" items="${noticeMainList}">
 			<li class="notice-item"><span class="notice-title"> <a
-					href="${pageContext.request.contextPath}/notice-title/${dto.noticeNum }">
+					href="${pageContext.request.contextPath}/merchant/home/notice-title/${dto.noticeNum }">
 						${dto.noticeTitle} </a>
 			</span> <span class="notice-date">${dto.noticeDate}</span></li>
 		</c:forEach>
