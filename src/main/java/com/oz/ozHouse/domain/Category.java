@@ -20,4 +20,12 @@ public enum Category {
         this.categoryCode = categoryCode;
         this.categoryName = categoryName;
     }
+    public static String getNameByNum(int categoryNum) {
+        for (Category category : Category.values()) {
+            if (category.getCategoryNum() == categoryNum) {
+                return category.getCategoryName();
+            }
+        }
+        return null; 
+    }
 }
