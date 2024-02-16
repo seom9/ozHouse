@@ -20,46 +20,12 @@ ol, ul {
     line-height: 0;
 }
 
-@media (min-width: 768px) {
-    .css-1mfjm4o {
-        padding:0 40px;
-    }
-}
-
-@media (min-width: 1024px) {
-    .css-1mfjm4o {
-        padding:0 60px;
-    }
-}
-
-@media (min-width: 1256px) {
-    .css-1mfjm4o {
-        max-width:1256px;
-        margin: 0 auto;
-        padding: 0 60px;
-    }
-}
-
-@media (min-width: 768px) {
-    .css-1mfjm4o {
-        height:80px;
-        padding-top: 10px;
-        padding-bottom: 10px;
-    }
-}
-
 .css-1euxu4r {
     -webkit-flex: 1 1 0px;
     -ms-flex: 1 1 0px;
     flex: 1 1 0px;
     display: none;
     white-space: nowrap;
-}
-
-@media (min-width: 768px) {
-    .css-1euxu4r {
-        display:block;
-    }
 }
 
 .css-1qwerc {
@@ -84,12 +50,6 @@ ol, ul {
 
 .css-1qwerc.focus-visible:focus {
     color: #50E5B4;
-}
-
-@media (hover: hover) and (pointer: fine) {
-    .css-1qwerc:hover,.css-1qwerc:active {
-        color:#50E5B4;
-    }
 }
 
 .css-1qwerc::-moz-focus-inner {
@@ -121,7 +81,7 @@ ol, ul {
     position: relative;
     display: inline-block;
     margin: 0 10px;
-    padding: 21px 5px 15px;
+    padding: 21px 0px 15px;
     font-size: 16px;
     line-height: 1;
     font-weight: bold;
@@ -131,12 +91,6 @@ ol, ul {
 
 .css-53vhmk.focus-visible:focus {
     color: #50E5B4;
-}
-
-@media (hover: hover) and (pointer: fine) {
-    .css-53vhmk:hover,.css-53vhmk:active {
-        color:#50E5B4;
-    }
 }
 
 .css-53vhmk::-moz-focus-inner {
@@ -156,26 +110,6 @@ ol, ul {
     flex: 0 0 auto;
 }
 
-@media (min-width: 768px) {
-    .css-1i4309w {
-      
-        flex: 0 1 476px;
-    }
-}
-
-@media (min-width: 1256px) {
-    .css-1i4309w {
-     
-        flex: 0 1 650px;
-    }
-}
-
-@media (max-width: 767px) {
-    .css-1i4309w {
-        margin-right:-7px;
-    }
-}
-
 .css-10vibjk {
     display: flex;   
     align-items: center;
@@ -189,19 +123,7 @@ ol, ul {
     height: 100%;
     flex: 1 1 0px;
     min-width: 0;
-    margin-left: -70px;
-}
-
-@media (min-width: 1256px) {
-    .css-1o64euu {
-        margin-right:14px;
-    }
-}
-
-@media (max-width: 1023px) {
-    .css-1o64euu {
-        display:none;
-    }
+    margin-left: -10px;
 }
 
 .css-7whenc {
@@ -287,12 +209,6 @@ ol, ul {
     align-items: center;
 }
 
-@media (min-width: 1024px) {
-    .css-t6whf {
-        display:none;
-    }
-}
-
 .css-1bi2id {
     display: inline-block;
     margin: 0;
@@ -311,24 +227,12 @@ ol, ul {
     color: #50E5B4;
 }
 
-@media (hover: hover) and (pointer: fine) {
-    .css-1bi2id:hover,.css-1bi2id:active {
-        color:#50E5B4;
-    }
-}
-
 .css-1bi2id::-moz-focus-inner {
     border: 0;
 }
 
 .css-1bi2id.focus-visible:focus,.css-1bi2id:focus-visible {
     color: #50E5B4;
-}
-
-@media (max-width: 767px) {
-    .css-1qmvf9l {
-        display:none;
-    }
 }
 
 .css-ym6lm7 {
@@ -341,20 +245,8 @@ ol, ul {
     outline: none;
 }
 
-@media (min-width: 768px) {
-    .css-ym6lm7 {
-        margin:9px 1px;
-    }
-}
-
 .css-ym6lm7.focus-visible:focus {
     color: #50E5B4;
-}
-
-@media (hover: hover) and (pointer: fine) {
-    .css-ym6lm7:hover,.css-ym6lm7:active {
-        color:#50E5B4;
-    }
 }
 
 .css-ym6lm7::-moz-focus-inner {
@@ -377,21 +269,9 @@ ol, ul {
     vertical-align: top;
 }
 
-@media (max-width: 767px) {
-    .css-ff3m79 {
-        display:none;
-    }
-}
-
 .css-1f624s9 {
     display: flex;
     align-items: center;
-}
-
-@media (max-width: 767px) {
-    .css-1f624s9 {
-        display:none;
-    }
 }
 
 .css-1kpxvh4 {
@@ -424,12 +304,6 @@ ol, ul {
 
 .css-1tlac5g:first-of-type {
     border-left: none;
-}
-
-@media (max-width: 1255px) {
-    .css-1tlac5g {
-        display:none;
-    }
 }
 
 .dropDown {
@@ -466,12 +340,6 @@ ol, ul {
     background-color: #009FCE;
 }
 
-@media (hover: hover) and (pointer: fine) {
-    .dropDownButton:hover,.css-qnc3fr:active {
-        background-color:#009FCE;
-    }
-}
-
 .dropDownButton::-moz-focus-inner {
     border: 0;
 }
@@ -483,12 +351,6 @@ ol, ul {
 .css-cdruys {
     vertical-align: middle;
     white-space: nowrap;
-}
-
-@media (min-width: 1024px) {
-    .css-cdruys {
-        margin-right:6px;
-    }
 }
 
 .css-ae93ov {

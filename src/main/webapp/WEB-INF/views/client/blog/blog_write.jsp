@@ -6,20 +6,20 @@
 <head>
 <title>블로그 글쓰기</title>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/client/blog_css/blogWrite_style.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/client/blog_css/blogWrite_style.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/blogWrite.js"></script>
+<script type="text/javascript" src="/js/blogWrite.js"></script>
     <script>
         var contextPath = '${pageContext.request.contextPath}';
     </script>
 </head>
 <body>
-		<form name="f" method="POST" action="blog_write2.do" enctype="multipart/form-data">
+		<form name="f" method="POST" action="/blog/write" enctype="multipart/form-data">
 		<input type="hidden" name="mode" value="${mode}" />
 		<div class="all">
 			<div class="head">
 				<div>
-					<a href="main.do" class="banner">OZ의 집</a>
+					<a href="/main" class="banner">OZ의 집</a>
 				</div>
 				<div class="write">
 					<button type="submit" class="write_div">올리기</button>
@@ -30,24 +30,24 @@
 				<ul class="select">
 					<c:if test="${mode == 'photo'}">
 					<li>
-						<a href="blog_write.do?mode=photo" aria-pressed="true" class="toggle-button" data-target="photo" onclick="toggleButton(this)">
+						<a href="/blog/write?mode=photo" aria-pressed="true" class="toggle-button" data-target="photo" onclick="toggleButton(this)">
 						사진
 						</a>
 					</li>
 					<li>
-						<a href="blog_write.do?mode=video" aria-pressed="false" class="toggle-button" data-target="video" onclick="toggleButton(this)">
+						<a href="/blog/write?mode=video" aria-pressed="false" class="toggle-button" data-target="video" onclick="toggleButton(this)">
 						동영상
 						</a>
 					</li>
 					</c:if>
 					<c:if test="${mode == 'video'}">
 					<li>
-						<a href="blog_write.do?mode=photo" aria-pressed="false" class="toggle-button" data-target="photo" onclick="toggleButton(this)">
+						<a href="/blog/write?mode=photo" aria-pressed="false" class="toggle-button" data-target="photo" onclick="toggleButton(this)">
 						사진
 						</a>
 					</li>
 					<li>
-						<a href="blog_write.do?mode=video" aria-pressed="true" class="toggle-button" data-target="video" onclick="toggleButton(this)">
+						<a href="/blog/write?mode=video" aria-pressed="true" class="toggle-button" data-target="video" onclick="toggleButton(this)">
 						동영상
 						</a>
 					</li>
@@ -56,7 +56,7 @@
 			</div>
 			<c:if test="${mode == 'photo'}">
 				<div class="contents">
-				<input type="file" id="blog_image" name="blog_image" hidden>
+				<input type="file" id="blogImage" name="blogImage" hidden>
 					<div class="abcd">
 						<ol class="css-kjmyv4">
 						</ol>
@@ -81,18 +81,18 @@
 						<div class="contents_box2">
 							<div class="contents_box2_1">
 								<div class="explain">
-									<input type="text" name="blog_subject" class="explain2"
+									<input type="text" name="blogSubject" class="explain2"
 										placeholder="제목을 작성해주세요." onfocus="handleFocus(this)"
 										onblur="handleBlurr(this)">
 								</div>
 								<div class="explain_box1">
-									<textarea name="blog_content" rows="4" class="explain_box2"
+									<textarea name="blogContent" rows="4" class="explain_box2"
 										cols="50" placeholder="어떤 사진인지 짧은 소개로 시작해보세요."
 										onfocus="handleFocus(this)" onblur="handleBlur(this)"></textarea>
 								</div>
 							</div>
 							<div class="select_box1">
-								<select class="select_box2" name="blog_room_type" id="spaceSelect" onchange="hideDefaultOption()">
+								<select class="select_box2" name="blogRoomType" id="spaceSelect" onchange="hideDefaultOption()">
 									<option>공간정보</option>
 									<option>원룸</option>
 									<option>거실</option>
@@ -163,6 +163,7 @@
 							</div>
 						</div>
 					</div>
+				</div>
 			</c:if>
 		</div>
  	</form>
