@@ -61,7 +61,7 @@ function resetForm() {	// 폼 초기화
 				</p>
 			</div>
 		</div>
-		<c:set var="merNum" value="${merchantLoginMember.merNum}" />
+		<c:set var="merNum" value="${merLoginMember.merNum}" />
 		<form name="f1"
 			action="${pageContext.request.contextPath}/merchant/store/product/stock"
 			method="get" class="flex-container">
@@ -106,7 +106,7 @@ function resetForm() {	// 폼 초기화
 				<div class="button-container">
 					<input type="submit" value="검색"> <input type="button"
 						value="초기화" onclick="resetForm()"> <input type="hidden"
-						name="merNum" value="${merchantLoginMember.merNum }" />
+						name="merNum" value="${merLoginMember.merNum }" />
 				</div>
 			</div>
 		</form>

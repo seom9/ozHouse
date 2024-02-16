@@ -31,7 +31,7 @@ import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/merchant/store")
+@RequestMapping("/merchant")
 public class MerProController {
 
 	private final MerProService proService;
@@ -54,15 +54,15 @@ public class MerProController {
 	}
 
 	// 상품 등록
-	@GetMapping("/product-input")
-	public String proInput(HttpServletRequest req) {
+	@GetMapping("/{merNum}/store/product-input")
+	public String proInput(HttpServletRequest req, @PathVariable(value = "merNum") Integer merNum) {
 		// 입점 신청시 등록한 카테고리 연동하기
 		req.setAttribute("categories", Category.values());
 		System.out.println("등록 폼");
 		return "merchant/store/productManagement/productManagement_input";
 	}
 
-	@PostMapping("/product-input")
+	@PostMapping("/{merNum}/store/product-input")
 	public String proInput(@RequestParam("proImg") List<MultipartFile> proImg, @RequestParam("proImgPro") List<MultipartFile> proImgPro, 
 	HttpServletRequest req, @RequestParam Map<String, String> params) throws Exception {
 		
