@@ -1,9 +1,6 @@
 package com.oz.ozHouse.domain;
 
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
-import org.springframework.format.annotation.DateTimeFormat;
 
 import com.oz.ozHouse.domain.common.Image;
 import com.oz.ozHouse.domain.common.ProPrice;
@@ -38,11 +35,14 @@ public class Product {
 
 	private int categoryNum;
 
-//	@ManyToOne(fetch = FetchType.LAZY)
-//	@JoinColumn(name = "merNum")
-//	private Merchant merchant;
+//	@Enumerated(EnumType.STRING)
+//    private Category category;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "merNum")
+	private Merchant merchant;
 
-	private int merNum;
+//	private int merNum;
 	
 	@Embedded
 	private Image img;
@@ -72,8 +72,8 @@ public class Product {
 		this.proNum = dto.getProNum();
 		this.proName = dto.getProName();
 		this.categoryNum = dto.getCategoryNum();
-//		this.merchant = new Merchant(); 
-		this.merNum = 1;
+		this.merchant = new Merchant(); 
+//		this.merNum = 1;
 		this.img = new Image(dto.getProImg(), dto.getProImgPro(), dto.getProImageChange(), dto.getProImageProChange()
 //				,dto.getEncodedImage());
 				);
