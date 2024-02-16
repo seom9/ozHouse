@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <%@include file="blog_top.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/client/blog_css/blogMain_style.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/client/blog_css/blogMain_style.css" />
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <body>
 	<c:if test="${empty blog_list}">

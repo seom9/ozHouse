@@ -1,15 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.Date" %>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<<<<<<< HEAD
+<link rel="stylesheet" href="${pageContext.request.contextPath}/client/main_css/mainStyle.css"/>
+<script type="text/javascript" src="src/main/resources/static/js/main.js"></script>
+=======
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/static/client/main_css/mainStyle.css"/>
 <script type="text/javascript" src="${pageContext.request.contextPath}/static/resources/js/main.js"></script>
+>>>>>>> refs/heads/main
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <%@ include file="top.jsp" %>
    <script type="text/javascript">
@@ -75,7 +78,7 @@
 			<div class="css-bjn8wh">
 				<div class="css-3q4ecs">
 					<ul class="css-5n3mug">
-						<c:forEach var="blog_dto" items="${blog_list}" varStatus="loop">
+						<c:forEach var="blogDTO" items="${blogList}" varStatus="loop">
 						<li class="css-3qi6pg">
 							<div class="css-fyyvpx">
 								<div class="css-v414oq">
@@ -92,7 +95,7 @@
 										        </c:otherwise>
 										    </c:choose>
 											</div>
-											<span class="css-ihb3jd">${blog_dto.member_id}</span>
+											<span class="css-ihb3jd">${blogDTO.memberId}</span>
 										</div>
 									</div>
 									<div class="css-10pwgp9">
@@ -103,7 +106,7 @@
 										</button>
 									</div>
 								</div>
-								<a class="css-11ab5xd" href="blog_get.do?num=${blog_dto.blog_num}"></a>
+								<a class="css-11ab5xd" href="blog_get.do?num=${blogDTO.blogNum}"></a>
 							</div>
 						</li>
 						</c:forEach>
@@ -224,11 +227,11 @@
 				<div class="css-3q4ecs">
 					<ul class="css-5n3mug">
 						<c:set var="currentDate" value='<%= new SimpleDateFormat("yy/MM/dd").format(new Date())%>' />
-						<c:forEach var="dto" items="${listProduct}" varStatus="loop">
+						<c:forEach var="dto" items="${productList}" varStatus="loop">
 						<li class="css-3kqc0z">
 							<div class="css-g9s5pw">
 								<article class="today-deal-item">
-									<a class="today-deal-item__overlay" href="prodView_main.do?num=${dto.product_num}"></a>
+									<a class="today-deal-item__overlay" href="prodView_main.do?num=${dto.proNum}"></a>
 									<div class="today-deal-item__image">
 										<div class="today-deal-item__image__item">
 											<div class="production-item-image">
@@ -263,7 +266,7 @@
 												</button>
 												<div class="production-item-image__dark-overlay"></div>
 												
-												<c:if test="${dto.product_today eq currentDate}">
+												<c:if test="${dto.proToday eq currentDate}">
 													<span class="today-deal-item__timer"></span>
 												</c:if><!-- 타임나오는 곳 -->
 												
@@ -272,15 +275,15 @@
 												<div class="today-deal-item__content--wrap">
 													<h1 class="today-deal-item__header">
 														<span class="today-deal-item__header__brand">브랜드명</span>
-														<span class="today-deal-item__header__name">${dto.product_name}</span>
+														<span class="today-deal-item__header__name">${dto.proName}</span>
 													</h1>
 													<span class="production-item-price">
 														<span class="production-item-price__rate">
-															${dto.product_discount_rate}
+															${dto.proPrice.proDiscountRate}
 															<span class="percentage">% </span>
 														</span>
 														<span class="production-item-price__price">
-															${dto.product_price}
+															${dto.proPrice.proPrice}
 														</span>
 													</span>
 													<div class="today-deal-item__stats-pc">
