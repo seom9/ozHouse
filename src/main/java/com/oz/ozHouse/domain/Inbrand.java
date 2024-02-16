@@ -21,7 +21,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Setter
 @Getter
 @AttributeOverride(name = "regDate", column = @Column(name = "inAppliDate"))
 public class Inbrand extends BaseEntity{

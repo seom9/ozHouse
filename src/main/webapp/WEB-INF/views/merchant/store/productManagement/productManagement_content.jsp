@@ -21,40 +21,40 @@
 				</div>
 				<div class="form-section">
 					<div class="form-group">
-						<label for="product_name">상품명</label>
-						<div>[${getProduct.product_modifier}]${getProduct.product_name}</div>
+						<label for="proName">상품명</label>
+						<div>[${getProduct.proModifier}]${getProduct.proName}</div>
 					</div>
 					<div class="form-group">
 						<label for="categorySelect">카테고리</label>
-						<div>${getProduct.category_name}</div>
+						<div>${getProduct.categoryName}</div>
 					</div>
 					<div class="form-group">
 						<label>상품금액</label>
 						<div class="price-inputs">
 							<div>
 								대표가 :
-								<fmt:formatNumber value="${getProduct.product_price}"
+								<fmt:formatNumber value="${getProduct.proPrice}"
 									pattern="###,###" />
 								원
 							</div>
 							<div>
 								할인율 :
-								<fmt:formatNumber value="${getProduct.product_discount_rate}"
+								<fmt:formatNumber value="${getProduct.proDiscountRate}"
 									pattern="###,###" />
 								%
 							</div>
 							<div>
 								할인가 :
-								<fmt:formatNumber value="${getProduct.product_discount_price}"
+								<fmt:formatNumber value="${getProduct.proDiscountPrice}"
 									pattern="###,###" />
 								원
 							</div>
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="product_point">포인트</label>
+						<label for="proPoint">포인트</label>
 						<div class="input-flex">
-							<div>${getProduct.product_point}</div>
+							<div>${getProduct.proPoint}</div>
 							<span>point</span>
 						</div>
 					</div>
@@ -87,9 +87,9 @@
 				</div>
 				<div class="form-section">
 					<div class="form-group">
-						<label for="product_assembly_cost">조립비(설치비)</label>
+						<label for="proAssemblyCost">조립비(설치비)</label>
 						<div class="input-flex">
-							<div>${getProduct.product_assembly_cost}</div>
+							<div>${getProduct.proAssemblyCost}</div>
 							<span>원</span>
 						</div>
 					</div>
@@ -101,7 +101,7 @@
 
 
 				<c:if
-					test="${getProduct.product_approval_status == 'ur' || getProduct.product_approval_status == 're'}">
+					test="${getProduct.proApprovalStatus == 'ur' || getProduct.proApprovalStatus == 're'}">
 
 					<h1 class="stock-header">상품 수정 상세보기</h1>
 					<div class="form-container">
@@ -110,42 +110,40 @@
 						</div>
 						<div class="form-section">
 							<div class="form-group">
-								<label for="product_name">상품명</label>
-								<div>[${getreProduct.product_modifier}]${getreProduct.product_name}</div>
+								<label for="proName">상품명</label>
+								<div>[${getreProduct.proModifier}]${getreProduct.proName}</div>
 							</div>
 							<div class="form-group">
 								<label for="categorySelect">카테고리</label>
-								<div>${getreProduct.category_name}</div>
+								<div>${getreProduct.categoryName}</div>
 							</div>
 							<div class="form-group">
 								<label>상품금액</label>
 								<div class="price-inputs">
 									<div>
 										대표가 :
-										<fmt:formatNumber value="${getreProduct.product_price}"
+										<fmt:formatNumber value="${getreProduct.proPrice}"
 											pattern="###,###" />
 										원
 									</div>
 									<div>
 										할인율 :
-										<fmt:formatNumber
-											value="${getreProduct.product_discount_rate}"
+										<fmt:formatNumber value="${getreProduct.proDiscountRate}"
 											pattern="###,###" />
 										%
 									</div>
 									<div>
 										할인가 :
-										<fmt:formatNumber
-											value="${getreProduct.product_discount_price}"
+										<fmt:formatNumber value="${getreProduct.proDiscountPrice}"
 											pattern="###,###" />
 										원
 									</div>
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="product_point">포인트</label>
+								<label for="proPoint">포인트</label>
 								<div class="input-flex">
-									<div>${getreProduct.product_point}</div>
+									<div>${getreProduct.proPoint}</div>
 									<span>point</span>
 								</div>
 							</div>
@@ -178,9 +176,9 @@
 						</div>
 						<div class="form-section">
 							<div class="form-group">
-								<label for="product_assembly_cost">조립비(설치비)</label>
+								<label for="proAssemblyCost">조립비(설치비)</label>
 								<div class="input-flex">
-									<div>${getreProduct.product_assembly_cost}</div>
+									<div>${getreProduct.proAssemblyCost}</div>
 									<span>원</span>
 								</div>
 							</div>
@@ -189,13 +187,13 @@
 					<div>
 				</c:if>
 				<div class="button-container">
-					<c:if test="${getProduct.product_approval_status=='ok'}">
-						<c:set var="mer_num" value="${merchantLoginMember.mer_num}" />
+					<c:if test="${getProduct.proApprovalStatus=='ok'}">
+						<c:set var="merNum" value="${merchantLoginMember.merNum}" />
 						<input type="button" class="update-button" value="수정"
-							onclick="window.location='product_update.do?product_num=${getProduct.product_num}&mer_num=${merchantLoginMember.mer_num}'">
+							onclick="window.location='product_update.do?proNum=${getProduct.proNum}&merNum=${merchantLoginMember.merNum}'">
 					</c:if>
 					<input type="button" class="list-button" value="목록보기"
-						onclick="window.location='${pageContext.request.contextPath}/merchants/products'">
+						onclick="window.location='${pageContext.request.contextPath}/merchant/store/products'">
 				</div>
 			</div>
 </body>
