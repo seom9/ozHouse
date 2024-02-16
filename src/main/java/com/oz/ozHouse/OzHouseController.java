@@ -20,13 +20,9 @@ import com.oz.ozHouse.domain.Product;
 import lombok.RequiredArgsConstructor;
 
 @Controller
-<<<<<<< HEAD
 @RequiredArgsConstructor
-=======
->>>>>>> refs/heads/main
 @RequestMapping("/")
 public class OzHouseController {
-<<<<<<< HEAD
 	
 	private final CliProductServiceImpl ps;
 	private final BlogServiceImpl bs;
@@ -39,11 +35,6 @@ public class OzHouseController {
 		model.addAttribute("productList", cliProductList);
 		model.addAttribute("blogList", blogList);
 		return "client/main/Main";
-=======
-	@GetMapping(value = {"/", "/index", "/main"})
-	public String index() {
-		return "test2";
->>>>>>> refs/heads/main
 	}
 	
 	@GetMapping("/ozMarket")
