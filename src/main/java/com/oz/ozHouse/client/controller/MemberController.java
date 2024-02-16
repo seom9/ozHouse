@@ -35,6 +35,7 @@ import lombok.extern.log4j.Log4j2;
 @RequestMapping("/member")
 @RequiredArgsConstructor
 public class MemberController {
+	
 	private final MemberService memberService;
 	private final EmailService emailService;
 	
@@ -54,7 +55,7 @@ public class MemberController {
 			return "message";
         }
 
-        String checkNum = emailService.sendOauthMessage(email);
+        String checkNum = emailService.sendOauthMessage(email, "회원가입");
 
         req.setAttribute("checkNum", checkNum);
         req.setAttribute("email", email);
@@ -68,8 +69,6 @@ public class MemberController {
     								@RequestParam Map<String, String> params,
     								RedirectAttributes redirectAttribute) {
     	String res = "";
-    	System.out.println("여긴 왔어?");
-    	System.out.println("========아이디 : " + dto.getMemberId());
     	if (params.get("checkNum").equals(params.get("checkNumCheck"))) {
     		try {
     			res = memberService.join(dto);
@@ -110,37 +109,9 @@ public class MemberController {
         return result;
     }
     
-    /* SNS 회원 가입 메서드
-    @PostMapping("/member_oauth.do")
-    public String member_oauth(HttpServletRequest req, @ModelAttribute MemberDTO dto) {
-	    int res = memberMapper.insertMember(dto);
-		if (res>0) {
-				req.setAttribute("msg", "sns 계정으로 회원 가입 성공 : 안녕하세요!");
-				req.setAttribute("url", "main.do");
-			}else if (res<0){
-				req.setAttribute("msg", "회원 가입 실패 : 다시 시도해 주세요");
-				req.setAttribute("url", "member_join.do");
-			}
-	    	return "message";
-    }
-  
-    
-
-    
+    /*
     public boolean isValid(String str) {
         return Pattern.matches("^[a-zA-Z0-9-_]*$", str);
-    }
-    
-    @RequestMapping("/member_checkId.do")
-    @ResponseBody
-    public String checkId(@RequestParam("member_id") String id) {
-        String result="N";
-        if (memberMapper.checkId(id) != null) result = "Y"; 	
-        if (id.trim().equals("")) result = "E";					
-        if (id.length() < 6 || id.length() > 12) result = "L";
-        if (isValid(id) == false) result = "V";				
-        
-        return result;
     }
     
     @RequestMapping(value="/member_delete.do", method = RequestMethod.GET)

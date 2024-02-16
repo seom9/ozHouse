@@ -21,13 +21,25 @@ public class EmailServiceImpl implements EmailService{
  
     public static final String ePw = createKey();
  
-    private MimeMessage createMessage(String to)throws Exception{
+    @Override
+    public String sendOauthMessage(String to, String purpose)throws Exception {
+        MimeMessage message = createMessage(to, purpose);
+        try{
+            emailSender.send(message);
+        }catch(MailException es){
+            es.printStackTrace();
+            throw new IllegalArgumentException();
+        }
+        return ePw;
+    }
+    
+    private MimeMessage createMessage(String to, String purpose)throws Exception{
         System.out.println("보내는 대상 : "+ to);
         System.out.println("인증 번호 : "+ePw);
         MimeMessage  message = emailSender.createMimeMessage();
  
         message.addRecipients(RecipientType.TO, to);//보내는 대상
-        message.setSubject("[ozHouse] 회원 가입 인증메일입니다");//제목
+        message.setSubject("[ozHouse] " + purpose + " 인증메일입니다");//제목
  
         String msgg="";
         msgg+= "<div style='margin:20px;'>";
@@ -39,7 +51,7 @@ public class EmailServiceImpl implements EmailService{
         msgg+= "<br>";
         msgg+= "<div align='center' style='border:1px solid black; font-family:verdana';>";
         msgg+= "<br>";
-        msgg+= "<h3 style='color:blue;'>회원가입 인증 코드입니다.</h3>";
+        msgg+= "<h3 style='color:blue;'>" + purpose + " 인증 코드입니다.</h3>";
         msgg+= "<div style='font-size:130%'>";
         msgg+= "CODE : <strong>";
         msgg+= ePw+"</strong><div><br/> ";
@@ -75,15 +87,5 @@ public class EmailServiceImpl implements EmailService{
         return key.toString();
     }
     
-    @Override
-    public String sendOauthMessage(String to)throws Exception {
-        MimeMessage message = createMessage(to);
-        try{
-            emailSender.send(message);
-        }catch(MailException es){
-            es.printStackTrace();
-            throw new IllegalArgumentException();
-        }
-        return ePw;
-    }
+
 }

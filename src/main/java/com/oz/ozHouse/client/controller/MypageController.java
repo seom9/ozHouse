@@ -113,12 +113,14 @@ public class MypageController {
     	boolean pass = false;
     	
         if (pathVariables.get("mode").equals("find")) {
-        	
+        	pass = mypageService.renewPass(dto);
         }else if (pathVariables.get("mode").equals("up")){
         	pass = mypageService.passUpdate(dto);
         }
         
         return (pass) ? "회원 정보가 수정되었습니다" : "회원 정보 수정 실패 : 서버에 문의해 주세요";
     }
+    
+    
 
 }

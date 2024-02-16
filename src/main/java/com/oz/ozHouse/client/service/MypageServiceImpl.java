@@ -25,14 +25,18 @@ public class MypageServiceImpl implements MypageService{
 	@Override
 	public boolean passUpdate(MemberPasswdUpdateDTO dto) {
 		if (!passwordEncoder.matches(dto.getMemberPasswd(), 
-						memberRepository.findByMemberId(dto.getMemberId()).getMemberId())) {
-			// passwd 저장
-			memberRepository.updateMemberPasswdByMemberId(passwordEncoder.encode(dto.getNewMemberPasswd()), dto.getMemberId());
+						memberRepository.findByMemberId(dto.getMemberId()).getMemberPasswd())) {
+			System.out.println("비밀번호 인증 실패");
 			return false;
 		}
-		
-		
+		memberRepository.updateMemberPasswdByMemberId(passwordEncoder.encode(dto.getNewMemberPasswd()), dto.getMemberId());
 		return true;
 	}
 
+	@Override
+	public boolean renewPass(MemberPasswdUpdateDTO dto) {
+		memberRepository.updateMemberPasswdByMemberId(passwordEncoder.encode(dto.getNewMemberPasswd()), dto.getMemberId());
+		return true;
+	}
+	
 }
