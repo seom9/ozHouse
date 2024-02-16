@@ -121,6 +121,7 @@
         })
         .then(data => {
             alert(data)
+            location.reload()
         })
         .catch(error => {
         	alert("회원 정보 수정이 실패되었습니다")

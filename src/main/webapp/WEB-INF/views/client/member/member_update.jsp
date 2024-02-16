@@ -52,6 +52,7 @@
 	        .then(data => {
 	        	// 상태 알림 return 받아와서 alert 로 출력
 	            alert(data)
+	            location.reload()
 	        })
 	        .catch(error => {
 	        	alert("회원 정보 수정이 실패되었습니다")

@@ -6,5 +6,7 @@ public interface MypageService {
 	
 	// 비밀번호 업데이트
 	boolean passUpdate(MemberPasswdUpdateDTO dto);
+	
+	boolean renewPass(MemberPasswdUpdateDTO dto);
 
 }
