@@ -8,7 +8,6 @@ import com.oz.ozHouse.domain.Product;
 import com.oz.ozHouse.dto.ProductDTO;
 import com.oz.ozHouse.repository.CliProductRepository;
 import com.oz.ozHouse.repository.CliProductRepositoryImpl;
-import com.oz.ozHouse.repository.MemberRepository;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
