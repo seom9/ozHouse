@@ -64,7 +64,7 @@ function resetForm() {	// 폼 초기화
 		<c:set var="merNum" value="${merchantLoginMember.merNum}" />
 		<form name="f1"
 			action="${pageContext.request.contextPath}/merchant/store/product/stock"
-			method="post" class="flex-container">
+			method="get" class="flex-container">
 			<div class="flex-row">
 				<div class="flex-cell header-cell custom-label">품절&nbsp;&nbsp;&nbsp;&nbsp;</div>
 				<div class="flex-cell input-cell">
