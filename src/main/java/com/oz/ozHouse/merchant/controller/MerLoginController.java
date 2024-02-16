@@ -41,6 +41,7 @@ public class MerLoginController {
 	public String loginOk(HttpServletRequest req, HttpServletResponse resp, @ModelAttribute MerchantLoginBean loginOk,
 			@RequestParam(name = "saveId", required = false) String saveId) {
 		int res = loginOk.loginOk(loginService, passwordEncoder);
+		System.out.println("id : " + loginOk.getMerId());
 		String msg = null, url = null;
 		switch (res) {
 		case MerchantLoginBean.OK:
@@ -52,7 +53,7 @@ public class MerLoginController {
 			}
 			resp.addCookie(ck);
 			HttpSession session = req.getSession();
-			session.setAttribute("merchantLoginMember", loginOk);
+			session.setAttribute("merLoginMember", loginOk);
 			msg = loginOk.getMerId() + "님, OZ의 집에 오신걸 환영합니다.";
 			url = "/merchant/home";
 			break;

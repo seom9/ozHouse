@@ -16,15 +16,16 @@
 		<table border="0" height="70%">
 			<tr>
 				<td colspan="2" width="25%" align="left"><br>
+				<c:set var="merNum" value="${merLoginMember.merNum}" />
 					<div class="title no-box-style" align="left">상품등록</div>
 					<hr>
 					<div class="button-container">
 						<a
-							href="${pageContext.request.contextPath}/merchant/store/product-input"
+							href="${pageContext.request.contextPath}/merchant/${merNum}/store/product-input"
 							class="button">신규 상품 등록</a>
 						<!-- 
 						<a
-							href="${pageContext.request.contextPath}/merchant/${merchantLoginMember.merNum}/product-input"
+							href="${pageContext.request.contextPath}/merchant/${merLoginMember.merNum}/product-input"
 							class="button">신규 상품 등록</a>
  -->
 					</div> <br>
@@ -32,38 +33,38 @@
 					<hr>
 					<div class="content">
 						<span>전체</span> <a
-							href="${pageContext.request.contextPath}/merchant/store/${merchantLoginMember.merNum}/products/request-list">
+							href="${pageContext.request.contextPath}/merchant/${merLoginMember.merNum}/store/products/request-list">
 							<span class="number"> ${allCount }건 </span>
 						</a>
 
 					</div>
 					<div class="content">
 						<span>승인대기(검수중)</span> <a
-							href="${pageContext.request.contextPath}/merchant/store/${merchantLoginMember.merNum}/products/request-list">
+							href="${pageContext.request.contextPath}/merchant/${merLoginMember.merNum}/store/products/request-list">
 							<span class="number"> ${waitCount }건 </span>
 						</a>
 					</div>
 					<div class="content">
 						<span>승인보류(수정요청)</span> <a
-							href="${pageContext.request.contextPath}/merchant/store/${merchantLoginMember.merNum}/products/request-list">
+							href="${pageContext.request.contextPath}/merchant/${merLoginMember.merNum}/store/products/request-list">
 							<span class="number"> ${requestCount }건 </span>
 						</a>
 					</div>
 					<div class="content">
 						<span>승인반려(등록불가)</span> <a
-							href="${pageContext.request.contextPath}/merchant/store/${merchantLoginMember.merNum}/products/request-list">
+							href="${pageContext.request.contextPath}/merchant/${merLoginMember.merNum}/store/products/request-list">
 							<span class="number"> ${cancleCount }건 </span>
 						</a>
 					</div>
 					<div class="content">
 						<span>요청취소</span> <a
-							href="${pageContext.request.contextPath}/merchant/store/${merchantLoginMember.merNum}/products/request-list">
+							href="${pageContext.request.contextPath}/merchant/${merLoginMember.merNum}/store/products/request-list">
 							<span class="number"> ${requestCancle }건 </span>
 						</a>
 					</div>
 					<div class="content">
 						<span>판매중</span> <a
-							href="${pageContext.request.contextPath}/merchant/store/${merchantLoginMember.merNum}/products/request-list">
+							href="${pageContext.request.contextPath}/merchant/${merLoginMember.merNum}/store/products/request-list">
 							<span class="number"> ${saleOk }건 </span>
 						</a>
 					</div></td>
@@ -77,7 +78,7 @@
 						<div class="sales-progress">
 							<div class="progress-item">
 								<span class="stage">배송 준비</span> <a
-									href="${pageContext.request.contextPath}/merchant/${merchantLoginMember.merNum}/delivery/ready">
+									href="${pageContext.request.contextPath}/merchant/${merLoginMember.merNum}/delivery/ready">
 									<span class="count">${readyCount }건</span>
 								</a>
 
@@ -85,7 +86,7 @@
 							<div class="separator">></div>
 							<div class="progress-item">
 								<span class="stage">배송중</span> <a
-									href="${pageContext.request.contextPath}/merchant/${merchantLoginMember.merNum}/delivery/in-progress">
+									href="${pageContext.request.contextPath}/merchant/${merLoginMember.merNum}/delivery/in-progress">
 									<span class="count">${deliveryCount }건</span>
 								</a>
 
@@ -93,7 +94,7 @@
 							<div class="separator">></div>
 							<div class="progress-item">
 								<span class="stage">배송 완료</span> <a
-									href="${pageContext.request.contextPath}/merchant/${merchantLoginMember.merNum}/delivery/complete">
+									href="${pageContext.request.contextPath}/merchant/${merLoginMember.merNum}/delivery/complete">
 									<span class="count">${completeCount }건</span>
 								</a>
 
@@ -107,7 +108,7 @@
 							<span style="font-size: 20px; color: #FFFFFF;">처리해야 할 교환건</span>
 							<hr class="underline-style">
 							<a
-								href="${pageContext.request.contextPath}/merchant/${merchantLoginMember.merNum}/returns/exchange">
+								href="${pageContext.request.contextPath}/merchant/${merLoginMember.merNum}/returns/exchange">
 								<span class="number">${exchangeCount }건</span>
 							</a>
 
@@ -116,7 +117,7 @@
 							<span style="font-size: 20px; color: #FFFFFF;">처리해야 할 환불건</span>
 							<hr class="underline-style">
 							<a
-								href="${pageContext.request.contextPath}/merchant/${merchantLoginMember.merNum}/returns/refund">
+								href="${pageContext.request.contextPath}/merchant/${merLoginMember.merNum}/returns/refund">
 								<span class="number">${returnCount }건</span>
 							</a>
 
@@ -125,7 +126,7 @@
 							<span style="font-size: 20px; color: #FFFFFF;">응답해야 할 Q&A</span>
 							<hr class="underline-style">
 							<a
-								href="${pageContext.request.contextPath}/merchant/${merchantLoginMember.merNum}/proQAs">
+								href="${pageContext.request.contextPath}/merchant/${merLoginMember.merNum}/proQAs">
 								<span class="number" style="font-size: 20px;">
 									${boardCount}건</span>
 							</a>
@@ -167,7 +168,7 @@
 					<hr>
 					<div class="button-container">
 						<a
-							href="${pageContext.request.contextPath}/merchant/${merchantLoginMember.merNum}/product-input"
+							href="${pageContext.request.contextPath}/merchant/${merLoginMember.merNum}/product-input"
 							class="button">신규 상품 등록</a>
 
 					</div> <br>
@@ -175,38 +176,38 @@
 					<hr>
 					<div class="content">
 						<span>전체</span> <a
-							href="${pageContext.request.contextPath}/merchant/${merchantLoginMember.merNum}/products/request-list">
+							href="${pageContext.request.contextPath}/merchant/${merLoginMember.merNum}/products/request-list">
 							<span class="number"> ${allCount }건 </span>
 						</a>
 
 					</div>
 					<div class="content">
 						<span>승인대기(검수중)</span> <a
-							href="${pageContext.request.contextPath}/merchant/${merchantLoginMember.merNum}/products/request-list">
+							href="${pageContext.request.contextPath}/merchant/${merLoginMember.merNum}/products/request-list">
 							<span class="number"> ${waitCount }건 </span>
 						</a>
 					</div>
 					<div class="content">
 						<span>승인보류(수정요청)</span> <a
-							href="${pageContext.request.contextPath}/merchant/${merchantLoginMember.merNum}/products/request-list">
+							href="${pageContext.request.contextPath}/merchant/${merLoginMember.merNum}/products/request-list">
 							<span class="number"> ${requestCount }건 </span>
 						</a>
 					</div>
 					<div class="content">
 						<span>승인반려(등록불가)</span> <a
-							href="${pageContext.request.contextPath}/merchant/${merchantLoginMember.merNum}/products/request-list">
+							href="${pageContext.request.contextPath}/merchant/${merLoginMember.merNum}/products/request-list">
 							<span class="number"> ${cancleCount }건 </span>
 						</a>
 					</div>
 					<div class="content">
 						<span>요청취소</span> <a
-							href="${pageContext.request.contextPath}/merchant/${merchantLoginMember.merNum}/products/request-list">
+							href="${pageContext.request.contextPath}/merchant/${merLoginMember.merNum}/products/request-list">
 							<span class="number"> ${requestCancle }건 </span>
 						</a>
 					</div>
 					<div class="content">
 						<span>판매중</span> <a
-							href="${pageContext.request.contextPath}/merchant/${merchantLoginMember.merNum}/products/request-list">
+							href="${pageContext.request.contextPath}/merchant/${merLoginMember.merNum}/products/request-list">
 							<span class="number"> ${saleOk }건 </span>
 						</a>
 					</div></td>
@@ -220,7 +221,7 @@
 						<div class="sales-progress">
 							<div class="progress-item">
 								<span class="stage">배송 준비</span> <a
-									href="${pageContext.request.contextPath}/merchant/${merchantLoginMember.merNum}/delivery/ready">
+									href="${pageContext.request.contextPath}/merchant/${merLoginMember.merNum}/delivery/ready">
 									<span class="count">${readyCount }건</span>
 								</a>
 
@@ -228,7 +229,7 @@
 							<div class="separator">></div>
 							<div class="progress-item">
 								<span class="stage">배송중</span> <a
-									href="${pageContext.request.contextPath}/merchant/${merchantLoginMember.merNum}/delivery/in-progress">
+									href="${pageContext.request.contextPath}/merchant/${merLoginMember.merNum}/delivery/in-progress">
 									<span class="count">${deliveryCount }건</span>
 								</a>
 
@@ -236,7 +237,7 @@
 							<div class="separator">></div>
 							<div class="progress-item">
 								<span class="stage">배송 완료</span> <a
-									href="${pageContext.request.contextPath}/merchant/${merchantLoginMember.merNum}/delivery/complete">
+									href="${pageContext.request.contextPath}/merchant/${merLoginMember.merNum}/delivery/complete">
 									<span class="count">${completeCount }건</span>
 								</a>
 
@@ -250,7 +251,7 @@
 							<span style="font-size: 20px; color: #FFFFFF;">처리해야 할 교환건</span>
 							<hr class="underline-style">
 							<a
-								href="${pageContext.request.contextPath}/merchant/${merchantLoginMember.merNum}/returns/exchange">
+								href="${pageContext.request.contextPath}/merchant/${merLoginMember.merNum}/returns/exchange">
 								<span class="number">${exchangeCount }건</span>
 							</a>
 
@@ -259,7 +260,7 @@
 							<span style="font-size: 20px; color: #FFFFFF;">처리해야 할 환불건</span>
 							<hr class="underline-style">
 							<a
-								href="${pageContext.request.contextPath}/merchant/${merchantLoginMember.merNum}/returns/refund">
+								href="${pageContext.request.contextPath}/merchant/${merLoginMember.merNum}/returns/refund">
 								<span class="number">${returnCount }건</span>
 							</a>
 
@@ -268,7 +269,7 @@
 							<span style="font-size: 20px; color: #FFFFFF;">응답해야 할 Q&A</span>
 							<hr class="underline-style">
 							<a
-								href="${pageContext.request.contextPath}/merchant/${merchantLoginMember.merNum}/proQAs">
+								href="${pageContext.request.contextPath}/merchant/${merLoginMember.merNum}/proQAs">
 								<span class="number" style="font-size: 20px;">
 									${boardCount}건</span>
 							</a>
