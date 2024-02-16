@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -36,8 +36,8 @@
         <link rel="stylesheet" href="https://assets.ohou.se/web/dist/css/72-975b0143.chunk.css">
         <link rel="stylesheet" href="https://assets.ohou.se/web/dist/css/94-7181da44.chunk.css">
         <link rel="stylesheet" href="https://assets.ohou.se/web/dist/css/91-236397d7.chunk.css">
-       	<link rel="stylesheet" href="${pageContext.request.contextPath}/client/main_css/topStyle.css"/>
-       	
+       	<link rel="stylesheet" href="${pageContext.request.contextPath}/client/main_css/top.css"/>
+       	<link rel="stylesheet" href="${pageContext.request.contextPath}/topStyle_a.css"/>
        
         <style data-emotion="css-global ala7f8">
 			@import "https://assets.ohou.se/design-system/bbf3fca1e650ee6d.css";
@@ -48,6 +48,7 @@
                 src: url(https://assets.ohou.se/design-system/3298ed52addbc709.eot#iefix) format("embedded-opentype"),url(https://assets.ohou.se/design-system/d8923b386a66fd50.woff2) format("woff2"),url(https://assets.ohou.se/design-system/9e79341d6a2fe0d2.woff) format("woff"),url(https://assets.ohou.se/design-system/5355f736e6a7bc5b.ttf) format("truetype"),url(https://assets.ohou.se/design-system/3ba7913eab100858.svg#OhouseIcon) format("svg");
             }
 		</style>
+		
 		<script>
 		    function toggleDropdown() {
 		        var dropdown = document.querySelector('.placement-bottom');
@@ -101,6 +102,9 @@
 					    <a class="css-53vhmk" href="/shop/today">
 					        <span class="css-18nk785">오늘의 딜</span>
 					    </a>
+					    <a class="css-53vhmk" href="/ozMarket">
+					        <span class="css-18nk785">오즈마켓</span>
+					    </a>
 					</div>
 					<div class="css-1i4309w">
 						<div class="css-10vibjk">
@@ -152,7 +156,7 @@
 		             					<span class="css-cdruys">글쓰기</span>
  		             					<div class="placement-bottom css-kqp0ar open open-active" style="display: none; position: absolute; inset: 0px auto auto 0px; transform: translate3d(986.4px, 70.4px, 0px);">
 		             						<div class="popper-item css-y2j1wi">
-		             							<a class="css-1abjig3" href="blog_write.do?mode=photo">
+		             							<a class="css-1abjig3" href="/blog/write?mode=photo">
 		             								<div class="css-bjn8wh">
 		             									<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="none">
 		             										<rect width="27" height="29" x="6.54" y="3.59" fill="#DBDBDB" stroke="#000" stroke-linejoin="round" rx="2.5" transform="rotate(4 6.54 3.6)"></rect>

@@ -31,11 +31,11 @@ $(document).ready(function() {
 	
 	// 처음 버튼을 눌렀을 때 실행
 	$(".button_box").on("click", function(){
-		$("#blog_image").click();
+		$("#blogImage").click();
 		console.log("버튼이 눌러졌습니다.");
 	})
 	
-	$("#blog_image").on("change", function(e){		
+	$("#blogImage").on("change", function(e){		
 		previewImage(e);
 	})
 	
@@ -44,14 +44,14 @@ $(document).ready(function() {
 		
 		var reader = new FileReader();
 		var str = "";
-        var fileInput = document.getElementById('blog_image');
+        var fileInput = document.getElementById('blogImage');
         var fileName = (fileInput.files.length > 0) ? fileInput.files[0].name : null;
 		
 		reader.onload = function(){
 			console.log("미리보기 실행중");
 			
             str += "<div class='img_box'>";
-            str += "<img src='" + reader.result + "' name='blog_image' id='" + fileName + "'class='bbb'>";
+            str += "<img src='" + reader.result + "' name='blogImage' id='" + fileName + "'class='bbb'>";
             str += "<div class='overlay'>";
             str += "<button class='reinput_image' title='사진 다시 올리기'>";
             str += "<svg xmlns='http://www.w3.org/2000/svg' height='20' width='20' viewBox='0 0 512 512'><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d='M125.7 160H176c17.7 0 32 14.3 32 32s-14.3 32-32 32H48c-17.7 0-32-14.3-32-32V64c0-17.7 14.3-32 32-32s32 14.3 32 32v51.2L97.6 97.6c87.5-87.5 229.3-87.5 316.8 0s87.5 229.3 0 316.8s-229.3 87.5-316.8 0c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0c62.5 62.5 163.8 62.5 226.3 0s62.5-163.8 0-226.3s-163.8-62.5-226.3 0L125.7 160z'/></svg>";
@@ -110,7 +110,7 @@ $(document).ready(function() {
 	    var buttonStr = "";
 
 	    buttonStr += "<div class='abc'>";
-	    buttonStr += "<input type='file' id='aa' name='blog_image' hidden>";
+	    buttonStr += "<input type='file' id='aa' name='blogImage' hidden>";
 	    buttonStr += "<button type='button' class='add_button'>";
 	    buttonStr += "<span class='add_button2'> + </span>";
 	    buttonStr += "</button>";
@@ -130,11 +130,11 @@ $(document).ready(function() {
         console.log("두번째 미리보기 function 진행");
         previewImage2(e);
         
-        var blogImages = $("input[name='blog_image']");
-        var test = $("input[name='blog_subject'");
+        var blogImages = $("input[name='blogImage']");
+        var test = $("input[name='blogSubject'");
         blogImages.each(function(index) {
             var value = $(this).val(); // 현재 반복되고 있는 input 요소의 값 읽기
-            console.log("Value of blog_image #" + (index + 1) + ": " + value);
+            console.log("Value of blogImage #" + (index + 1) + ": " + value);
             console.log("test #" + (index + 1) + ": " + value)
         });
         
