@@ -17,7 +17,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Locale.Category;
 import java.util.Map;
 import java.util.UUID;
 
@@ -39,6 +38,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.oz.ozHouse.domain.Category;
 import com.oz.ozHouse.dto.ApplicationDTO;
 import com.oz.ozHouse.dto.CategoryDTO;
 import com.oz.ozHouse.dto.InbrandDTO;
@@ -55,15 +55,18 @@ import lombok.RequiredArgsConstructor;
 public class MerInbrandController {
 	private final MerInbrandService inbrandService;
 	
+	private HttpServletRequest goToMessage(HttpServletRequest req, String url, String msg) {
+		req.setAttribute("msg", msg);
+		req.setAttribute("url", url);
+		return req;
+	}
+	
 	@GetMapping("/applications")
 	public String applications(HttpServletRequest req) {
 		HttpSession session = req.getSession();
-		MerchantLoginBean loginOk = (MerchantLoginBean)session.getAttribute("merchantLoginMember");
+		MerchantLoginBean loginOk = (MerchantLoginBean)session.getAttribute("merLoginMember");
 		if (loginOk == null) {
-			String msg = "로그인 후 이용하시길 바랍니다.";
-			String url = "/merchant/login";
-			req.setAttribute("msg", msg);
-			req.setAttribute("url", url);
+			req = goToMessage(req, "/merchant/login", "로그인 후 이용하시길 바랍니다.");
 			return "message";
 		}
 		int num = loginOk.getMerNum();
@@ -78,11 +81,8 @@ public class MerInbrandController {
 					date = df.parse(dto.getInCancelDate());
 					calEnd.setTime(date);
 					calEnd.add(Calendar.MONTH, 3);
-					if(calNow.before(calEnd)) {			
-						String msg = "입점신청 취소, 또는 거절일로부터 3개월이 지나지 않아 신청이 불가합니다.";
-						String url = "/merchant/main";
-						req.setAttribute("msg", msg);
-						req.setAttribute("url", url);
+					if(calNow.before(calEnd)) {		
+						req = goToMessage(req, "/merchant/home", "입점신청 취소, 또는 거절일로부터 3개월이 지나지 않아 신청이 불가합니다.");
 						return "message";
 					}else {								
 						req.setAttribute("mer_num", num);
@@ -91,11 +91,8 @@ public class MerInbrandController {
 				} catch (ParseException e) {
 					e.printStackTrace();
 				}
-			}else {			
-				String msg = "현재 입점신청 승인중이거나 승인된 상점입니다.";
-				String url = "merchant/home/brand/appliresult/" + num;
-				req.setAttribute("msg", msg);
-				req.setAttribute("url", url);
+			}else {	
+				req = goToMessage(req,"merchant/home/brand/appliresult/" + num, "현재 입점신청 승인중이거나 승인된 상점입니다.");
 				return "message";
 			}
 		}
@@ -111,24 +108,18 @@ public class MerInbrandController {
 		try {
 			result = inbrandService.searchComNum(merNum, map);
 		}catch(NotFoundMerNumException e) {
-			String msg = "존재하지 않는 판매자입니다.";
-			String url = ("/merchant/main");
-			req.setAttribute("msg", msg);
-			req.setAttribute("url", url);
+			req = goToMessage(req, "/merchant/home", "존재하지 않는 판매자입니다.");
 			return "message";
 		}
 		if(!result) {
-			String msg = "회원가입시의 사업자등록번호와 일치하지 않습니다.";
-			String url = "brand_application.do?mer_num=" + map.get("mer_num");
-			req.setAttribute("msg", msg);
-			req.setAttribute("url", url);
-			return "forward:message.jsp";
+			req = goToMessage(req, "/merchant/home/brand/applications", 
+					"회원가입시의 사업자등록번호와 일치하지 않습니다.");
+			return "message";
 		}
-		List<Category> category = Arrays.asList(Category.values());
-		req.setAttribute("category", category);
-		req.setAttribute("inbrand_comnum1", map.get("inComNum1"));
-		req.setAttribute("inbrand_comnum2", map.get("inComNum2"));
-		req.setAttribute("inbrand_comnum3", map.get("inComNum3"));
+		req.setAttribute("category", Category.values());
+		req.setAttribute("inbrand_comnum1", map.get("inComnum1"));
+		req.setAttribute("inbrand_comnum2", map.get("inComnum2"));
+		req.setAttribute("inbrand_comnum3", map.get("inComnum3"));
 		req.setAttribute("mer_num", merNum);
 		return "merchant/brand/brand_inform";
 	}
