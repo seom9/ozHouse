@@ -109,7 +109,7 @@
 			</h4>
 			<h3>사업자 인증</h3>
 			<form name="f"
-				action="${pageContext.request.contextPath}/merchant/home/brand/checkbusiness/${merNum}"
+				action="${pageContext.request.contextPath}/merchant/home/brand/checkbusiness/${merLoginMember.merNum}"
 				method="post" onsubmit="return onSubmit();">
 				<%-- <input type="hidden" name="merNum" value="${merNum}" /> --%>
 				<div class="business-num-section">

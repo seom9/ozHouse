@@ -44,8 +44,8 @@ public class MerInbrandServiceImpl implements MerInbrandService {
 			String num1 = merchant.getMerComnum().merComnum1;
 			String num2 = merchant.getMerComnum().merComnum2;
 			String num3 = merchant.getMerComnum().merComnum3;
-			if(num1.equals(map.get("inComNum1"))&&num2.equals(map.get("inComNum2"))
-					&&num3.equals(map.get("inComNum3"))) {
+			if(num1.equals(map.get("inComnum1"))&&num2.equals(map.get("inComnum2"))
+					&&num3.equals(map.get("inComnum3"))) {
 				return true;
 			}else {
 				return false;
