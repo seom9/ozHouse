@@ -140,31 +140,44 @@ public class MerInbrandController {
         String msg = null;
 	    String url = null;
         if (mFile != null && mFile.getSize() > 0) { 
-            //UUID one = UUID.randomUUID(); //UUID          恝  ->    臼              화
-//        	Calendar cal = Calendar.getInstance();
-//        	SimpleDateFormat format = new SimpleDateFormat();
-//        	format.applyPattern("yyyy-MM-dd_HH:mm:ss");
-        	 //        見  ->  퓔      호_yyyy-MM-dd_HH:mm:ss_     見 
             String saveName = mFile.getOriginalFilename(); 
-//            String saveName = dto.getMer_num() + "_" + format.format(cal.getTime())+ "_" + mFile.getOriginalFilename(); 
-
-            mFile.transferTo(new File(FILEPATH + saveName)); //             
-            dto.setInSaleFile(saveName);			//dto         見  setting
-            
+            mFile.transferTo(new File(FILEPATH + saveName));             
+            dto.setInSaleFile(saveName);
             int res = inbrandService.application(dto);
     	    if(res>0) {
     	    	msg = "입점신청이 완료되었습니다.";
-    	    	url = "brand_applicationList.do?mer_num=" + dto.getMer_num();
+    	    	url = "merchant/brand/applicationList/" + dto.getMerNum();
     	    }else {
     	    	msg = "입점신청이 완료되지 않았습니다.";
-    	    	url = "brand_application.do?mer_num=" + dto.getMer_num();
+    	    	url = "merchant/brand/applications";
     	    }
         }else {
         	msg = "판매 관련 파일 업로드시 오류가 발생하였습니다.";
-        	url = "brand_application.do?mer_num=" + dto.getMer_num();
+        	url = "merchant/brand/applications";
         }
         req.setAttribute("msg", msg);
 		req.setAttribute("url", url);
-		return "forward:message.jsp";
+		return "message";
+	}
+	
+	@GetMapping(value="applicationList/{merNum}")
+	public String brandApplicationList(HttpServletRequest req, 
+			@PathVariable(name = "merNum") int merNum) {
+		ApplicationDTO dto = inbrandService.applicationList(merNum);
+		if(dto == null) {
+			String msg = "입점신청화면으로 이동합니다.";
+			String url = "merchant/brand/applications";
+			return "message";
+		}else {
+//			String cate[] = dto.getInbrand_category().split(",");
+//			String category[] = new String[cate.length];
+//			for(int i=0; i<category.length; ++i) {
+//				category[i] = brandMapper.selectCateName(Integer.valueOf(cate[i]));
+//			}
+//			String resultCate = String.join(",", category);
+			req.setAttribute("applicationList", dto);
+//			req.setAttribute("resultCate", resultCate);
+			return "merchant/brand/brand_applicationList";
+		}
 	}
 }

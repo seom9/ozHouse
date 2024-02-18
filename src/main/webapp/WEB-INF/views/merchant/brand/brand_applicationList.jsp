@@ -130,7 +130,9 @@ h2 {
 				<div class="flex-row">
 					<div class="flex-cell">
 						<div class="flex-cell-header">카테고리</div>
-						<div class="flex-cell-content">${resultCate}</div>
+						<c:forEach var="category" items="${dto.inCategory}">
+							<div class="flex-cell-content">${resultCate}</div>
+						</c:forEach>
 					</div>
 				</div>
 				<div class="flex-row">

@@ -11,6 +11,7 @@ import com.oz.ozHouse.domain.Merchant;
 import com.oz.ozHouse.domain.common.CompanyNumber;
 import com.oz.ozHouse.domain.common.InbrandInfo;
 import com.oz.ozHouse.domain.common.PhoneNumber;
+import com.oz.ozHouse.dto.ApplicationDTO;
 import com.oz.ozHouse.dto.InbrandDTO;
 import com.oz.ozHouse.dto.MerchantDTO;
 import com.oz.ozHouse.merchant.Exception.NotFoundMerNumException;
@@ -88,7 +89,7 @@ public class MerInbrandServiceImpl implements MerInbrandService {
 				.merComnum3(dto.getInComnum3())
 				.build();
 		Inbrand inbrand = Inbrand.builder()
-				.merNum(m)
+				.merchant(m)
 				.inCompany(dto.getInCompany())
 				.inComnum(comNum)
 				.inbrandInfo(i)
@@ -99,8 +100,38 @@ public class MerInbrandServiceImpl implements MerInbrandService {
 	@Override
 	public int application(InbrandDTO dto) {
 		Inbrand inbrand = setInbrandEntity(dto);
-		inbrandRepository.save(inbrand);
+		try {
+			inbrandRepository.save(inbrand);
+		}catch(IllegalArgumentException e) {
+			return -1;
+		}
 		return 0;
+	}
+
+	@Override
+	public ApplicationDTO applicationList(int merNum) {
+		Inbrand inbrand = inbrandRepository.findInbrandByMerNum(merNum);
+		ApplicationDTO dto = ApplicationDTO.builder()
+				.inNum(inbrand.getInNum())
+				.merNum(inbrand.getMerchant().getMerNum())
+				.merIsbrand(inbrand.getMerchant().getMerIsbrand())
+				.inCompany(inbrand.getInCompany())
+				.inComnum1(inbrand.getInComnum().getMerComnum1())
+				.inComnum2(inbrand.getInComnum().getMerComnum2())
+				.inComnum3(inbrand.getInComnum().getMerComnum3())
+				.inHomepage(inbrand.getInbrandInfo().getHomepage())
+				.inManname(inbrand.getInbrandInfo().getManagerName())
+				.inManhp1(inbrand.getInbrandInfo().getPhoneNum().getPhoneNumber1())
+				.inManhp2(inbrand.getInbrandInfo().getPhoneNum().getPhoneNumber2())
+				.inManhp3(inbrand.getInbrandInfo().getPhoneNum().getPhoneNumber3())
+				.inManemail(inbrand.getInbrandInfo().getManagerEmail())
+				.inCategory(inbrand.getInbrandInfo().getCategory())
+				.inOthershop(inbrand.getInbrandInfo().getOtherShop())
+				.inFile(inbrand.getInbrandInfo().getBrandFile())
+				.inAppliDate(inbrand.getRegDate())
+				.inCancelDate(inbrand.getInCancelDate())
+				.build();
+		return dto;
 	}
 	
 }
