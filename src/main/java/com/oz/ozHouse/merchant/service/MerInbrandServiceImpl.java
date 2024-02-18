@@ -3,10 +3,14 @@ package com.oz.ozHouse.merchant.service;
 import java.util.Map;
 import java.util.Optional;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.oz.ozHouse.domain.Inbrand;
 import com.oz.ozHouse.domain.Merchant;
+import com.oz.ozHouse.domain.common.CompanyNumber;
+import com.oz.ozHouse.domain.common.InbrandInfo;
+import com.oz.ozHouse.domain.common.PhoneNumber;
 import com.oz.ozHouse.dto.InbrandDTO;
 import com.oz.ozHouse.dto.MerchantDTO;
 import com.oz.ozHouse.merchant.Exception.NotFoundMerNumException;
@@ -53,6 +57,50 @@ public class MerInbrandServiceImpl implements MerInbrandService {
 		}else {
 			throw new NotFoundMerNumException("등록된 판매자 번호가 존재하지 않습니다.");
 		}
+	}
+
+	@Override
+	public void deleteInbrand(int inNum) {
+		inbrandRepository.deleteById(inNum);
+	}
+	
+	private Inbrand setInbrandEntity(InbrandDTO dto) {
+		PhoneNumber phone = PhoneNumber.builder()
+				.phoneNumber1(dto.getInManhp1())
+				.phoneNumber2(dto.getInManhp2())
+				.phoneNumber3(dto.getInManhp3())
+				.build();
+		InbrandInfo i = InbrandInfo.builder()
+				.homepage(dto.getInHomepage())
+				.ManagerName(dto.getInManname())
+				.phoneNum(phone)
+				.ManagerEmail(dto.getInManemail())
+				.category(dto.getInCategory())
+				.otherShop(dto.getInOthershop())
+				.brandFile(dto.getInSaleFile())
+				.build();
+				
+		Merchant m = Merchant.builder()
+				.merNum(dto.getMerNum()).build();
+		CompanyNumber comNum = CompanyNumber.builder()
+				.merComnum1(dto.getInComnum1())
+				.merComnum2(dto.getInComnum2())
+				.merComnum3(dto.getInComnum3())
+				.build();
+		Inbrand inbrand = Inbrand.builder()
+				.merNum(m)
+				.inCompany(dto.getInCompany())
+				.inComnum(comNum)
+				.inbrandInfo(i)
+				.build();
+		return inbrand;
+	}
+
+	@Override
+	public int application(InbrandDTO dto) {
+		Inbrand inbrand = setInbrandEntity(dto);
+		inbrandRepository.save(inbrand);
+		return 0;
 	}
 	
 }

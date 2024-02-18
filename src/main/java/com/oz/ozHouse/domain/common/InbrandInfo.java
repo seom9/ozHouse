@@ -9,12 +9,12 @@ import com.oz.ozHouse.dto.CategoryDTO;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.Embedded;
+import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
 
 @Embeddable
 @Getter
-@Setter
+@Builder
 public class InbrandInfo {
 
 	private String homepage;
@@ -33,13 +33,13 @@ public class InbrandInfo {
 	private String brandFile;
 	
 	//List Collection Entity -> DTO로 변환 메소드
-	public List<CategoryDTO> getCategoryDto(){
-		List<CategoryDTO> list = new ArrayList<CategoryDTO>();
-		for(Category c : this.category) {
-			CategoryDTO dto = new CategoryDTO();
-			dto.toDTO(c);
-			list.add(dto);
-		}
-		return list;
-	}
+//	public List<Category> getCategoryDto(){
+//		List<Category> list = new ArrayList<Category>();
+//		for(Category c : this.category) {
+//			CategoryDTO dto = new CategoryDTO();
+//			dto.toDTO(c);
+//			list.add(dto);
+//		}
+//		return list;
+//	}
 }

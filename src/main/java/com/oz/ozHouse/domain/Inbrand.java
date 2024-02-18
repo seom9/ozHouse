@@ -1,11 +1,15 @@
 package com.oz.ozHouse.domain;
 
 
+import java.util.List;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.oz.ozHouse.domain.common.BaseEntity;
 import com.oz.ozHouse.domain.common.CompanyNumber;
 import com.oz.ozHouse.domain.common.InbrandInfo;
+import com.oz.ozHouse.domain.common.PhoneNumber;
+import com.oz.ozHouse.dto.InbrandDTO;
 
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
@@ -17,11 +21,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Getter
+@Builder
 @AttributeOverride(name = "regDate", column = @Column(name = "inAppliDate"))
 public class Inbrand extends BaseEntity{
 
@@ -59,5 +65,6 @@ public class Inbrand extends BaseEntity{
 	
 	@DateTimeFormat(pattern = "yy/MM/dd")
 	private String inCancelDate;
+	
 	
 }

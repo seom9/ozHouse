@@ -55,6 +55,9 @@ import lombok.RequiredArgsConstructor;
 public class MerInbrandController {
 	private final MerInbrandService inbrandService;
 	
+	static final String FILEPATH = 
+			"/Users/choejiyeong/git/ozHouse/src/main/resources/static/merchant/inbrandInfo/";
+	
 	private HttpServletRequest goToMessage(HttpServletRequest req, String url, String msg) {
 		req.setAttribute("msg", msg);
 		req.setAttribute("url", url);
@@ -124,4 +127,44 @@ public class MerInbrandController {
 		return "merchant/brand/brand_inform";
 	}
 
+	@PostMapping(value="/submit")
+	public String brandInformOk( HttpServletRequest req, 
+			@ModelAttribute InbrandDTO dto, BindingResult result) 
+			throws IllegalStateException, IOException {
+		InbrandDTO befor = inbrandService.selectMer(dto.getMerNum());
+		if(befor != null) {
+			inbrandService.deleteInbrand(befor.getInNum());
+		}
+		MultipartHttpServletRequest mr = (MultipartHttpServletRequest)req;
+        MultipartFile mFile = mr.getFile("inbrand_file"); 
+        String msg = null;
+	    String url = null;
+        if (mFile != null && mFile.getSize() > 0) { 
+            //UUID one = UUID.randomUUID(); //UUID          恝  ->    臼              화
+//        	Calendar cal = Calendar.getInstance();
+//        	SimpleDateFormat format = new SimpleDateFormat();
+//        	format.applyPattern("yyyy-MM-dd_HH:mm:ss");
+        	 //        見  ->  퓔      호_yyyy-MM-dd_HH:mm:ss_     見 
+            String saveName = mFile.getOriginalFilename(); 
+//            String saveName = dto.getMer_num() + "_" + format.format(cal.getTime())+ "_" + mFile.getOriginalFilename(); 
+
+            mFile.transferTo(new File(FILEPATH + saveName)); //             
+            dto.setInSaleFile(saveName);			//dto         見  setting
+            
+            int res = inbrandService.application(dto);
+    	    if(res>0) {
+    	    	msg = "입점신청이 완료되었습니다.";
+    	    	url = "brand_applicationList.do?mer_num=" + dto.getMer_num();
+    	    }else {
+    	    	msg = "입점신청이 완료되지 않았습니다.";
+    	    	url = "brand_application.do?mer_num=" + dto.getMer_num();
+    	    }
+        }else {
+        	msg = "판매 관련 파일 업로드시 오류가 발생하였습니다.";
+        	url = "brand_application.do?mer_num=" + dto.getMer_num();
+        }
+        req.setAttribute("msg", msg);
+		req.setAttribute("url", url);
+		return "forward:message.jsp";
+	}
 }
