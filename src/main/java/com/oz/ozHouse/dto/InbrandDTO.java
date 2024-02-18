@@ -2,6 +2,7 @@ package com.oz.ozHouse.dto;
 
 import java.util.List;
 
+import com.oz.ozHouse.domain.Category;
 import com.oz.ozHouse.domain.Inbrand;
 import com.oz.ozHouse.domain.Merchant;
 
@@ -9,7 +10,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Getter
 @Builder
@@ -28,11 +28,12 @@ public class InbrandDTO {
 	private String inManhp2;
 	private String inManhp3;
 	private String inManemail;
-	private List<CategoryDTO> inCategory;
+	private List<Category> inCategory;
 	private String inOthershop;
 	private String inSaleFile;
 	private String inAppliDate;
 	private String inCancelDate;
+	
 	
 	public InbrandDTO toDto(Inbrand inbrand) {
 		Merchant merchant = inbrand.getMerNum(); // Merchant 객체 가져오기
@@ -50,11 +51,16 @@ public class InbrandDTO {
                 .inManhp2(inbrand.getInbrandInfo().getPhoneNum().getPhoneNumber2())
                 .inManhp3(inbrand.getInbrandInfo().getPhoneNum().getPhoneNumber3())
                 .inManemail(inbrand.getInbrandInfo().getManagerEmail())
-                .inCategory(inbrand.getInbrandInfo().getCategoryDto())
+                .inCategory(inbrand.getInbrandInfo().getCategory())
                 .inOthershop(inbrand.getInbrandInfo().getOtherShop())
                 .inSaleFile(inbrand.getInbrandInfo().getBrandFile())
                 .inAppliDate(inbrand.getRegDate())
                 .inCancelDate(inbrand.getInCancelDate())
                 .build();
     }
+
+
+	public void setInSaleFile(String inSaleFile) {
+		this.inSaleFile = inSaleFile;
+	}
 }
