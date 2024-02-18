@@ -143,9 +143,9 @@ input[type='number']::-webkit-inner-spin-button, input[type='number']::-webkit-o
 <body>
 	<div class="container">
 		<div class="content-container">
-			<c:set var="merNum" value="${merchantLoginMember.merNum}" />
+			<c:set var="merNum" value="${merLoginMember.merNum}" />
 			<form method="post"
-				action="${pageContext.request.contextPath}/merchant/{merNum}/store/product-input"
+				action="${pageContext.request.contextPath}/merchant/${merNum}/store/product-input"
 				enctype="multipart/form-data">
 				<input type="hidden" name="merNum" value=1>
 				<div class="form-container">
@@ -243,7 +243,7 @@ input[type='number']::-webkit-inner-spin-button, input[type='number']::-webkit-o
 				<div class="button-container">
 					<input type="submit" value="등록"> <input type="reset"
 						value="초기화"> <input type="hidden" name="merNum"
-						value="${merchantLoginMember.merNum }" />
+						value="${merLoginMember.merNum }" />
 				</div>
 		</div>
 	</div>

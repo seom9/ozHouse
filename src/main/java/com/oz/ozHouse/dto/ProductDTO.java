@@ -46,7 +46,6 @@ public class ProductDTO {
                 .proNum(product.getProNum())
                 .proName(product.getProName())
                 .categoryNum(product.getCategoryNum())
-//                .merNum(product.getMerNum())
                 .merNum(product.getMerchant().getMerNum())
                 .proImg(product.getImg().getProImg())
                 .proImgPro(product.getImg().getProImgPro())
@@ -64,7 +63,6 @@ public class ProductDTO {
                 .categoryName(product.getCategoryName())
                 .proImageChange(product.getImg().getProImageChange())
                 .proImageProChange(product.getImg().getProImageProChange())
-//                .encodedImage(encodedImage)
                 .proToday(product.getProToday())
                 .build();
     }
@@ -87,12 +85,12 @@ public class ProductDTO {
 //                .build();
 //    }
     
-    public ProductDTO(HttpServletRequest req) {
+    public ProductDTO(HttpServletRequest  req) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy/MM/dd");
 
         this.proName = req.getParameter("proName");
         this.categoryNum = Integer.parseInt(req.getParameter("categoryNum"));
-//        this.merNum = 1;
+        this.merNum = Integer.parseInt(req.getParameter("merNum"));
         this.proImg = req.getParameter("proImg");
         this.proImgPro = req.getParameter("proImgPro");
         this.proQuantity = Integer.parseInt(req.getParameter("proQuantity"));
@@ -136,5 +134,9 @@ public class ProductDTO {
 	
 	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
+	}
+	
+	public void setMerNum(int merNum) {
+		this.merNum = merNum;
 	}
 }

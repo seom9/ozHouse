@@ -9,10 +9,10 @@
 <body>
 <div class="tab-container">
 <c:set var="merNum" value="${merLoginMember.merNum}"/>
-        <a href="${pageContext.request.contextPath}/merchant/store/product-input" class="tab-link">상품등록</a>
-        <a href="${pageContext.request.contextPath}/merchant/store/products" class="tab-link">상품조회</a>
-        <a href="${pageContext.request.contextPath}/merchant/store/product/request" class="tab-link">요청리스트</a>
-        <a href="${pageContext.request.contextPath}/merchant/store/product/stock" class="tab-link">재고관리</a>
+        <a href="${pageContext.request.contextPath}/merchant/${merNum}/store/product-input" class="tab-link">상품등록</a>
+        <a href="${pageContext.request.contextPath}/merchant/${merNum}/store/products" class="tab-link">상품조회</a>
+        <a href="${pageContext.request.contextPath}/merchant/${merNum}/store/product/request" class="tab-link">요청리스트</a>
+        <a href="${pageContext.request.contextPath}/merchant/${merNum}/store/product/stock" class="tab-link">재고관리</a>
     </div>
 </body>
 </html>
