@@ -8,4 +8,6 @@ import com.oz.ozHouse.domain.Inbrand;
 @Repository
 public interface MerInbrandRepository extends JpaRepository<Inbrand, Integer>{
 
+	//판매자 번호로 입점내역 조회
+	public Inbrand findInbrandByMerNum(int merNum);
 }

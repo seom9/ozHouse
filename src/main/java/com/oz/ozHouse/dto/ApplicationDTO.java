@@ -1,19 +1,23 @@
 package com.oz.ozHouse.dto;
 
-import java.sql.Date;
+import java.util.List;
 
+import com.oz.ozHouse.domain.Category;
+
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Getter
-@Setter
-@NoArgsConstructor
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ApplicationDTO {
 
 	private int inNum;
 	private int merNum;
-	private String categoryNum;
 	private String merIsbrand;
 	private String inCompany;
 	private String inComnum1;
@@ -25,10 +29,10 @@ public class ApplicationDTO {
 	private String inManhp2;
 	private String inManhp3;
 	private String inManemail;
-	private String inCategory;
+	private List<Category> inCategory;
 	private String inOthershop;
 	private String inFile;
-	private Date inAppliDate;
-	private Date inCancelDate;
+	private String inAppliDate;
+	private String inCancelDate;
 	
 }

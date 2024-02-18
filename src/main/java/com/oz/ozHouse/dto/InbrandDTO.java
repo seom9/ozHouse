@@ -36,7 +36,7 @@ public class InbrandDTO {
 	
 	
 	public InbrandDTO toDto(Inbrand inbrand) {
-		Merchant merchant = inbrand.getMerNum(); // Merchant 객체 가져오기
+		Merchant merchant = inbrand.getMerchant(); // Merchant 객체 가져오기
         int merNum = merchant.getMerNum(); // Merchant 객체의 id 가져오기
         return InbrandDTO.builder()
         		.inNum(inbrand.getInNum())
