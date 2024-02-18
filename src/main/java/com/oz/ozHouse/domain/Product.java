@@ -72,7 +72,7 @@ public class Product {
 		this.proNum = dto.getProNum();
 		this.proName = dto.getProName();
 		this.categoryNum = dto.getCategoryNum();
-		this.merchant = new Merchant(); 
+//		this.merchant = new Merchant(); 
 		this.img = new Image(dto.getProImg(), dto.getProImgPro(), dto.getProImageChange(), dto.getProImageProChange()
 //				,dto.getEncodedImage());
 				);

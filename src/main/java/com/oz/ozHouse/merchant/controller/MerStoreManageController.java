@@ -55,12 +55,12 @@ public class MerStoreManageController {
 //			return "message";
 //		}
 		
-//		req.setAttribute("allCount", storeManageService.allCount());
-//		req.setAttribute("waitCount", storeManageService.waitCount());
-//		req.setAttribute("requestCount", storeManageService.requestCount());
-//		req.setAttribute("cancleCount", storeManageService.cancleCount());
-//		req.setAttribute("requestCancle", storeManageService.requestCancle());
-//		req.setAttribute("saleOk", storeManageService.saleOk());
+		req.setAttribute("allCount", storeManageService.allCount(merNum));
+		req.setAttribute("waitCount", storeManageService.waitCount(merNum));
+		req.setAttribute("requestCount", storeManageService.requestCount(merNum));
+		req.setAttribute("cancleCount", storeManageService.cancleCount(merNum));
+		req.setAttribute("requestCancle", storeManageService.requestCancle(merNum));
+		req.setAttribute("saleOk", storeManageService.saleOk(merNum));
 //		req.setAttribute("readyCount", storeManageService.readyCount());
 //		req.setAttribute("deliveryCount", storeManageService.deliveryCount());
 //		req.setAttribute("completeCount", storeManageService.completeCount());
