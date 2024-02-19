@@ -35,15 +35,10 @@ public class Product {
 
 	private int categoryNum;
 
-//	@Enumerated(EnumType.STRING)
-//    private Category category;
-	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "merNum")
 	private Merchant merchant;
 
-//	private int merNum;
-	
 	@Embedded
 	private Image img;
 
