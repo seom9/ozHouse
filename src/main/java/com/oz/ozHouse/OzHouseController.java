@@ -37,8 +37,4 @@ public class OzHouseController {
 		return "client/main/Main";
 	}
 	
-	@GetMapping("/ozMarket")
-	public String ozMarket() {
-		return "client/main/ozMarket";
-	}
 }
