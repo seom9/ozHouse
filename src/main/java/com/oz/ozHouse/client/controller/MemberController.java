@@ -3,32 +3,23 @@ package com.oz.ozHouse.client.controller;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.oz.ozHouse.client.config.LoginOkBean;
 import com.oz.ozHouse.client.service.EmailService;
 import com.oz.ozHouse.client.service.MemberService;
-import com.oz.ozHouse.domain.common.Address;
-import com.oz.ozHouse.dto.MemberDTO;
 import com.oz.ozHouse.dto.client.member.MemberJoinDTO;
 
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j2;
 
 
 @Controller

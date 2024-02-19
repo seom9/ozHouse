@@ -39,10 +39,8 @@ public class MerCoupon {
     @JoinColumn(name = "memberId")
     private Member member;
 
-	@DateTimeFormat(pattern = "yy/MM/dd")
-	private LocalDate merCouponusedate;
+	private String merCouponusedate;
 	
-	@DateTimeFormat(pattern = "yy/MM/dd")
-	private LocalDate merCouponenddate;
+	private String merCouponenddate;
 	
 }

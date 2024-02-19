@@ -80,6 +80,10 @@ public class Member extends BaseEntity{
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<MerCoupon> coupons = new ArrayList<>();
     
+    public void addCoupon(MerCoupon coupon) {
+        this.getCoupons().add(coupon);
+    }
+    
 	private int memberPoint;
 	
     @Enumerated(EnumType.STRING)
@@ -88,6 +92,8 @@ public class Member extends BaseEntity{
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yy/MM/dd")
 	private LocalDate memberDeletedate;
+	
+
 	
 	public void changeMemberPassword(String memberPasswd) {
 		this.memberPasswd = memberPasswd;

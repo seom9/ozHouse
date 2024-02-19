@@ -53,4 +53,6 @@ public interface MemberRepository extends JpaRepository<Member, Integer> {
     @Transactional
     @EntityGraph(attributePaths = "coupons")
     Optional<Member> findMemberWithCouponsByMemberId(String memberId);
+    
+    
 }

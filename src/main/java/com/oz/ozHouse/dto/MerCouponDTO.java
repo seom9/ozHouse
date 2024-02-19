@@ -21,7 +21,6 @@ public class MerCouponDTO {
 	private String merCouponname;
 	private String merIsok;
 	private int merCoupondiscount;
-	private int merNum;
 	private String merCouponusedate;
 	private String merCouponenddate;
 	
