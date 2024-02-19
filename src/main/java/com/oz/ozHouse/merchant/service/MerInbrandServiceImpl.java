@@ -14,7 +14,7 @@ import com.oz.ozHouse.domain.common.PhoneNumber;
 import com.oz.ozHouse.dto.ApplicationDTO;
 import com.oz.ozHouse.dto.InbrandDTO;
 import com.oz.ozHouse.dto.MerchantDTO;
-import com.oz.ozHouse.merchant.Exception.NotFoundMerNumException;
+import com.oz.ozHouse.merchant.exception.NotFoundMerNumException;
 import com.oz.ozHouse.merchant.repository.MerInbrandRepository;
 import com.oz.ozHouse.merchant.repository.joinRepository.MerJoinRepository;
 

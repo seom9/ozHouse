@@ -1,4 +1,4 @@
-package com.oz.ozHouse.merchant.Exception;
+package com.oz.ozHouse.merchant.exception;
 
 public class NotFoundMerNumException extends Exception {
 	public NotFoundMerNumException() {}

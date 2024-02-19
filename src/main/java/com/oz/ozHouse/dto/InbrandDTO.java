@@ -6,6 +6,7 @@ import com.oz.ozHouse.domain.Category;
 import com.oz.ozHouse.domain.Inbrand;
 import com.oz.ozHouse.domain.Merchant;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -35,6 +36,7 @@ public class InbrandDTO {
 	private String inCancelDate;
 	
 	
+	
 	public InbrandDTO toDto(Inbrand inbrand) {
 		Merchant merchant = inbrand.getMerchant(); // Merchant 객체 가져오기
         int merNum = merchant.getMerNum(); // Merchant 객체의 id 가져오기
@@ -59,6 +61,24 @@ public class InbrandDTO {
                 .build();
     }
 
+	public InbrandDTO (HttpServletRequest req, List<Category> category) {
+		this.merNum = Integer.parseInt(req.getParameter("merNum"));
+		this.inCompany = req.getParameter("inCompany");
+		this.inComnum1 = req.getParameter("inComnum1");
+		this.inComnum2 = req.getParameter("inComnum2");
+		this.inComnum3 = req.getParameter("inComnum3");
+		this.inComnum3 = req.getParameter("inComnum3");
+		this.inHomepage = req.getParameter("inHomepage");
+		this.inManname = req.getParameter("inManname");
+		this.inManhp1 = req.getParameter("inManhp1");
+		this.inManhp2 = req.getParameter("inManhp2");
+		this.inManhp3 = req.getParameter("inManhp3");
+		this.inManemail = req.getParameter("inManemail");
+		this.inCategory = category;
+		this.inOthershop = req.getParameter("inOthershop");
+		this.inSaleFile = req.getParameter("inSaleFile");
+		
+	}
 
 	public void setInSaleFile(String inSaleFile) {
 		this.inSaleFile = inSaleFile;
