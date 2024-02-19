@@ -56,7 +56,8 @@
 <div class="coupon-item__info"><div class="coupon-item__due-date">∙ <span>유효 기간 : ${dto.merCouponenddate}</span></div>
 <div class="coupon-item__minimum-payment">∙ <span>#원 이상 구매시</span></div>
 <br><br>
-	<button class="button button--color-blue button--size-50 button--shape-4" type="button" onclick="window.location.href = 'mypage_usercoupon.do?mer_couponnum=${dto.merCouponnum}&mer_num=${dto.merNum}&enddate=${dto.merCouponenddate}'">받기</button>
+	<button class="button button--color-blue button--size-50 button--shape-4" type="button" 
+			onclick="window.location.href = '/mypage/coupon/${dto.merCouponnum}'">받기</button>
 </div></div>
 <c:set var="co" value="${co + 1}" />
 

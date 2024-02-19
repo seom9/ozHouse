@@ -9,4 +9,6 @@ public interface CouponService {
 	List<MerCouponDTO> getAllCoupons();
 	
 	List<MerCouponDTO> getUserCoupons(String memberId);
+	
+	void addCoupon(String memberId, int merCouponnum);
 }

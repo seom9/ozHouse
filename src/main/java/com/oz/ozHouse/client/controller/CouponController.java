@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.oz.ozHouse.client.security.MemberSecurityDTO;
 import com.oz.ozHouse.client.service.CouponService;
-import com.oz.ozHouse.client.service.EmailService;
-import com.oz.ozHouse.client.service.MypageService;
 import com.oz.ozHouse.dto.MerCouponDTO;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -26,11 +24,12 @@ public class CouponController {
 	private final CouponService couponService;
 	
 	@PreAuthorize("hasAnyRole('ROLE_CLIENT')")
-    @GetMapping("mypage/{memberId}/coupon")
+    @GetMapping("/mypage/{memberId}/coupon")
     public String mypage_coupon(HttpServletRequest req,
-    								@PathVariable("memberId") String memberId) {
+    							@PathVariable("memberId") String memberId,
+    							@AuthenticationPrincipal MemberSecurityDTO member) {
     	
-    	List<MerCouponDTO> userCoupons = couponService.getUserCoupons(memberId);
+    	List<MerCouponDTO> userCoupons = couponService.getUserCoupons(member.getUsername());
     	List<MerCouponDTO> merCoupons = couponService.getAllCoupons();
     	
     	req.setAttribute("userCoupons", userCoupons);
@@ -39,25 +38,14 @@ public class CouponController {
         return "client/mypage/mypage_coupon";
     }
     
-//    @RequestMapping(value = "mypage_usercoupon.do", method = RequestMethod.GET)
-//    public String mypage_usercoupon(HttpServletRequest req) {
-//    	int mer_couponnum = Integer.parseInt(req.getParameter("mer_couponnum"));
-//    	int mer_num = Integer.parseInt(req.getParameter("mer_num"));
-//    	String end = req.getParameter("enddate");
-//    	User_CouponDTO dto = new User_CouponDTO();
-//    	dto.setMember_num(getMemberNum(req));
-//    	dto.setMer_coupon_num(mer_couponnum);
-//    	dto.setMer_num(mer_num);
-//    	dto.setUser_coupon_active("f");
-//    	dto.setMer_couponenddate(end);
-//    	int res = mypageMapper.insertUserCoupon(dto);
-//		if (res>0) {
-//			req.setAttribute("msg", "쿠폰 받기 성공");
-//			req.setAttribute("url", "mypage_coupon.do");
-//		}else if (res<0){
-//			req.setAttribute("msg", "쿠폰 받기 실패");
-//			req.setAttribute("url", "mypage_coupon.do");
-//		}
-//    	return "message";
-//    }
+	@PreAuthorize("hasAnyRole('ROLE_CLIENT')")
+    @GetMapping("/mypage/coupon/{merCouponNum}")
+    public String mypage_usercoupon(HttpServletRequest req,
+    								@PathVariable("merCouponNum") int merCouponNum,
+    								@AuthenticationPrincipal MemberSecurityDTO member) {
+		
+		couponService.addCoupon(member.getUsername(), merCouponNum);
+		
+		return "redirect:/mypage/" + member.getUsername() + "/coupon";
+    }
 }
