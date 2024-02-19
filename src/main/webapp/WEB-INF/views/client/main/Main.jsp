@@ -275,11 +275,11 @@
                                        </h1>
                                        <span class="production-item-price">
                                           <span class="production-item-price__rate">
-                                             ${dto.proPrice.proDiscountRate}
+                                             ${dto.merPrice.proDiscountRate}
                                              <span class="percentage">% </span>
                                           </span>
                                           <span class="production-item-price__price">
-                                             ${dto.proPrice.proPrice}
+                                             ${dto.merPrice.proPrice}
                                           </span>
                                        </span>
                                        <div class="today-deal-item__stats-pc">
