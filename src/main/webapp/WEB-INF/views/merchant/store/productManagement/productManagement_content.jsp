@@ -188,12 +188,12 @@
 				</c:if>
 				<div class="button-container">
 					<c:if test="${getProduct.proApprovalStatus=='ok'}">
-						<c:set var="merNum" value="${merchantLoginMember.merNum}" />
+						<c:set var="merNum" value="${merLoginMember.merNum}" />
 						<input type="button" class="update-button" value="수정"
-							onclick="window.location='product_update.do?proNum=${getProduct.proNum}&merNum=${merchantLoginMember.merNum}'">
+							onclick="window.location='product_update.do?proNum=${getProduct.proNum}&merNum=${merLoginMember.merNum}'">
 					</c:if>
 					<input type="button" class="list-button" value="목록보기"
-						onclick="window.location='${pageContext.request.contextPath}/merchant/store/products'">
+						onclick="window.location='${pageContext.request.contextPath}/merchant/${merNum}/store/products'">
 				</div>
 			</div>
 </body>

@@ -27,28 +27,28 @@
 		</div>
 		<div class="header-right">
 			<nav>
-				<c:if test="${empty merchantLoginMember.merNum}">
+				<c:if test="${empty merLoginMember.merNum}">
 					<a href="${pageContext.request.contextPath}/merchant/login">로그인</a>
 					<a href="${pageContext.request.contextPath}/merchant/login/join">회원가입</a>
 				</c:if>
-				<c:if test="${not empty merchantLoginMember.merNum}">
+				<c:if test="${not empty merLoginMember.merNum}">
 					<a href="javascript:logout()">로그아웃</a>
 				</c:if>
 			</nav>
 		</div>
 	</header>
-	<c:set var="merNum" value="${merchantLoginMember.merNum}" />
+	<c:set var="merNum" value="${merLoginMember.merNum}" />
 	<div class="container">
 		<div class="link-section">
 			<div class="left-section">
-				<a href="${pageContext.request.contextPath}/merchant/store/storeHome"
+				<a href="${pageContext.request.contextPath}/merchant/${merNum}/store/storeHome"
 					class="main-button">스토어관리 돌아가기</a>
 			</div>
 			<div class="right-section">
 				<a
 					href="${pageContext.request.contextPath}/brands/${merNum}/applications">입점하기</a>
 				<a href="${pageContext.request.contextPath}/merchant/home/notices">공지사항</a>
-				<c:if test="${not empty merchantLoginMember.merNum}">
+				<c:if test="${not empty merLoginMember.merNum}">
 					<a
 						href="${pageContext.request.contextPath}/merchant/${merNum}/info">나의정보</a>
 				</c:if>

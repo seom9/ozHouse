@@ -16,7 +16,7 @@
 			</a>
 		</div>
 		<div class="slide">
-			<c:set var="merNum" value="${merchantLoginMember.merNum}" />
+			<c:set var="merNum" value="${merLoginMember.merNum}" />
 			<a
 				href="${pageContext.request.contextPath}/brands/${merNum}/applications">
 				<img src="/merchant/img/오늘 입점하세요.png" alt="Image 2">

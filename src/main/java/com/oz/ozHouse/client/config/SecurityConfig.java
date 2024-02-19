@@ -1,5 +1,7 @@
 package com.oz.ozHouse.client.config;
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,14 +15,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.firewall.HttpFirewall;
+import org.springframework.security.web.firewall.StrictHttpFirewall;
 
 import com.oz.ozHouse.client.security.CustomSocialLoginSuccessHandler;
-
-import static org.springframework.security.config.Customizer.withDefaults;
-
-
-import jakarta.servlet.DispatcherType;
-import lombok.extern.log4j.Log4j2;
  
 @Configuration
 @EnableWebSecurity
@@ -83,4 +81,13 @@ public class SecurityConfig {
 	어노테이션을 이용하여!
 	@EnableGlobalMethodSecurity
 	*/
+    
+    //이중 슬래시
+    @Bean
+    public HttpFirewall allowUrlEncodedSlashHttpFirewall() {
+        StrictHttpFirewall firewall = new StrictHttpFirewall();
+        firewall.setAllowUrlEncodedDoubleSlash(true); // 이 부분을 true로 설정하여 URL 인코딩된 이중 슬래시를 허용하도록 변경
+        firewall.setAllowUrlEncodedSlash(true); // 필요한 경우 URL 인코딩된 슬래시도 허용하도록 설정
+        return firewall;
+    }
 }
