@@ -61,9 +61,9 @@ function resetForm() {	// 폼 초기화
 				</p>
 			</div>
 		</div>
-		<c:set var="merNum" value="${merchantLoginMember.merNum}" />
+		<c:set var="merNum" value="${merLoginMember.merNum}" />
 		<form name="f1"
-			action="${pageContext.request.contextPath}/merchant/store/product/stock"
+			action="${pageContext.request.contextPath}/merchant/${merNum }/store/product/stock"
 			method="get" class="flex-container">
 			<div class="flex-row">
 				<div class="flex-cell header-cell custom-label">품절&nbsp;&nbsp;&nbsp;&nbsp;</div>
@@ -106,7 +106,7 @@ function resetForm() {	// 폼 초기화
 				<div class="button-container">
 					<input type="submit" value="검색"> <input type="button"
 						value="초기화" onclick="resetForm()"> <input type="hidden"
-						name="merNum" value="${merchantLoginMember.merNum }" />
+						name="merNum" value="${merLoginMember.merNum }" />
 				</div>
 			</div>
 		</form>
@@ -173,8 +173,11 @@ function resetForm() {	// 폼 초기화
 		            </c:if>
 					</div>
 					<div class="flex-cell quantity">
-						<form name="f" method="put"
-							action="${pageContext.request.contextPath}/merchant/store/product/stock">
+						<form class="updateStockForm"
+							action="${pageContext.request.contextPath}/merchant/${merNum}/store/product/stock/${dto.proNum}"
+							method="post">
+							<input type="hidden" id="merNum" value="${merLoginMember.merNum}" />
+
 							<input type="hidden" name="proNum" value="${dto.proNum}" /> <input
 								type="text" name="proQuantity" value="${dto.proQuantity }"
 								size="5">개 <input type="submit" value="수정"

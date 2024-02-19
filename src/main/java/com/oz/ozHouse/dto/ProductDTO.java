@@ -46,7 +46,6 @@ public class ProductDTO {
                 .proNum(product.getProNum())
                 .proName(product.getProName())
                 .categoryNum(product.getCategoryNum())
-//                .merNum(product.getMerNum())
                 .merNum(product.getMerchant().getMerNum())
                 .proImg(product.getImg().getProImg())
                 .proImgPro(product.getImg().getProImgPro())
@@ -64,35 +63,16 @@ public class ProductDTO {
                 .categoryName(product.getCategoryName())
                 .proImageChange(product.getImg().getProImageChange())
                 .proImageProChange(product.getImg().getProImageProChange())
-//                .encodedImage(encodedImage)
                 .proToday(product.getProToday())
                 .build();
     }
     
-//    public Product toEntity() {
-//        return Product.builder()
-//                .proNum(this.proNum)
-//                .proName(this.proName)
-//                .categoryNum(this.categoryNum)
-//                .img(new Image(this.proImg, this.proImgPro, this.proImageChange, this.proImageProChange, this.encodedImage))
-//                .merPrice(new ProPrice(this.proPrice, this.proPoint, this.proAssemblyCost, this.proDiscountRate, this.proDiscountPrice))
-//                .proQuantity(this.proQuantity)
-//                .proModifier(this.proModifier)
-//                .proInDate(this.proInDate)
-//                .proSpec(this.proSpec)
-//                .proPurchasesCount(this.proPurchasesCount)
-//                .proApprovalStatus(this.proApprovalStatus)
-//                .categoryName(this.categoryName)
-//                .proToday(this.proToday)
-//                .build();
-//    }
-    
-    public ProductDTO(HttpServletRequest req) {
+    public ProductDTO(HttpServletRequest  req) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy/MM/dd");
 
         this.proName = req.getParameter("proName");
         this.categoryNum = Integer.parseInt(req.getParameter("categoryNum"));
-//        this.merNum = 1;
+        this.merNum = Integer.parseInt(req.getParameter("merNum"));
         this.proImg = req.getParameter("proImg");
         this.proImgPro = req.getParameter("proImgPro");
         this.proQuantity = Integer.parseInt(req.getParameter("proQuantity"));
@@ -136,5 +116,9 @@ public class ProductDTO {
 	
 	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
+	}
+	
+	public void setMerNum(int merNum) {
+		this.merNum = merNum;
 	}
 }
