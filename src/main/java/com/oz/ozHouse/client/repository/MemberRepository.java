@@ -1,5 +1,6 @@
 package com.oz.ozHouse.client.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.EntityGraph;
@@ -9,6 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.oz.ozHouse.domain.Member;
+import com.oz.ozHouse.domain.MerCoupon;
 
 import jakarta.transaction.Transactional;
 
@@ -19,7 +21,7 @@ public interface MemberRepository extends JpaRepository<Member, Integer> {
 	int countByMemberEmail(String memberEmail);	// email 찾기
 	
 	Member findByMemberId(String memberId);
-	
+
 	boolean existsByMemberId(String memberId);
 	
 	// Security : member 로그인 시 memberRole 같이 로딩
@@ -47,5 +49,8 @@ public interface MemberRepository extends JpaRepository<Member, Integer> {
     @Modifying
     @Query("UPDATE Member m SET m.memberPasswd = :encodePass WHERE m.memberEmail = :memberEmail")
     void updateMemberPasswdByMemberEmail(@Param("encodePass") String encodePass, @Param("memberEmail") String memberEmail);
-
+    
+    @Transactional
+    @EntityGraph(attributePaths = "coupons")
+    Optional<Member> findMemberWithCouponsByMemberId(String memberId);
 }
