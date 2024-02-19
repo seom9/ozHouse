@@ -3,13 +3,12 @@
 <%@ include file="../main/top.jsp" %>   
 
 <script type="text/javascript">
-	function sendFindEmail(){
-		var member_email = document.getElementById("member_email").value
-		document.f.action = "/member/" + member_email + "/find";
-		document.f.submit();
-	}
+    function sendFindEmail(){
+        var member_email = document.getElementById("member_email").value;
+        document.getElementById("login-form").action = "/member/" + member_email + "/find";
+        document.getElementById("login-form").submit(); // Form 제출
+    }
 </script>
-
 <html>
 <head>
 	<title>회원 정보 찾기</title>
@@ -19,13 +18,13 @@
 	<link rel="stylesheet" href="${path}/client/member_css/login.css"/>
 </head>  
 
-<body onload="f.member_email.focus()">
+<body onload="document.getElementById('member_email').focus()">
 	<div  align="center" class="login-wrapper" >
 		<br><br><br>
 		<h2><img src="${path}/client/image/ozHouseLogo.png" style="width: 20%"></h2>
 		<font face="Roboto, sans-serif">아이디 / 비밀번호 찾기</font>
 		<p>
-		<form name="f" method="post" id="login-form">
+		<form name="f" id="login-form">
 			<br><br>
 			<span class="title">가입한 이메일 주소를 입력해 주세요</span>
 			<input type="text" tabindex="2" class="box" id="member_email" name="memberEmail">

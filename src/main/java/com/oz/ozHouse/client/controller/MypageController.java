@@ -87,40 +87,17 @@ public class MypageController {
         int res = memberService.updateMember(member);
         
         return (res > 0) ? "회원 정보가 수정되었습니다" : "회원 정보 수정 실패 : 서버에 문의해 주세요";
-
     }
 	
-	@GetMapping(value = {"/{memberId}/updatepass/{mode}", "/{memberId}/updatepass"})
+    
+	@GetMapping(value = {"/{memberId}/updatepass/up", "/{memberId}/updatepass"})
     public String mypage_updatePasswd(HttpServletRequest req, 
     					@PathVariable Map<String, String> pathVariables) {
     	
-    	if (pathVariables.get("mode").equals("find")) {
-    		req.setAttribute("mode", "find");
-    		req.setAttribute("member_id", pathVariables.get("memberId"));
-    	}
-    	
+    	req.setAttribute("mode", "up");
+    	req.setAttribute("member", pathVariables.get("memberId"));
+
         return "client/mypage/mypage_updatePasswd";
     }
-    
-    @PatchMapping("/{memberId}/updatepass/{mode}")
-    @ResponseBody
-    public String mypage_updatePasswdPro(HttpServletRequest req,
-				    					@RequestBody @Validated MemberPasswdUpdateDTO dto,
-				    					@PathVariable Map<String, String> pathVariables,
-				    					BindingResult result)
-				    	    			throws BindException{
-    	
-    	boolean pass = false;
-    	
-        if (pathVariables.get("mode").equals("find")) {
-        	pass = mypageService.renewPass(dto);
-        }else if (pathVariables.get("mode").equals("up")){
-        	pass = mypageService.passUpdate(dto);
-        }
-        
-        return (pass) ? "회원 정보가 수정되었습니다" : "회원 정보 수정 실패 : 서버에 문의해 주세요";
-    }
-    
-    
 
 }

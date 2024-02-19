@@ -1,14 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<<<<<<< HEAD
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
 <sec:authentication property="principal" var="prc"/>
 
-=======
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
->>>>>>> 400e42805563d7ad1e403d53eeded90ba90d0a5d
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -142,7 +139,7 @@
 									<sec:authorize access="hasAnyRole('ROLE_CLIENT')">
 										<a class="css-1g5o6hv" href="/logout">로그아웃</a>
 										<a class="css-1g5o6hv" href="/mypage/profile">마이페이지</a>
-									    <a class="css-1tlac5g" href="${pageContext.request.contextPath}/merchant/main">판매자센터</a>
+									    <a class="css-1tlac5g" href="${pageContext.request.contextPath}/merchant/home">판매자센터</a>
 									</sec:authorize>
 									<sec:authorize access="!hasAnyRole('ROLE_CLIENT')">
 										<a class="css-1g5o6hv" href="/member/login">로그인</a>

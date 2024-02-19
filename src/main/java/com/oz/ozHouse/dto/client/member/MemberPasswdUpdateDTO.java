@@ -11,6 +11,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class MemberPasswdUpdateDTO {
 	String memberId;
+	String memberEmail;
 	String memberPasswd;
 	String newMemberPasswd;
+	String userSendNum;
+	String checkNum;
+	String member;
 }
