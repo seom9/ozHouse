@@ -21,7 +21,7 @@ header img.oz-logo {
 <script type="text/javascript">
 		function logout(){
 			if(window.confirm("로그아웃 하시겠습니까?")){
-				location.href = "${pageContext.request.contextPath}/merchant/logout";
+				location.href = "${pageContext.request.contextPath}/merchant/login/logout";
 			}
 		}
 	</script>
@@ -40,9 +40,10 @@ header img.oz-logo {
 		</div>
 	</header>
 	<div class="tab-navigation">
-		<a href="${pageContext.request.contextPath}/merchant/store/storeHome"
+	<c:set var="merNum" value="${merLoginMember.merNum}" />
+		<a href="${pageContext.request.contextPath}/merchant/${merNum}/store/storeHome"
 			class="tab-link">관리홈</a> <a
-			href="${pageContext.request.contextPath}/merchant/store/products"
+			href="${pageContext.request.contextPath}/merchant/${merNum}/store/products"
 			class="tab-link">상품관리</a> <a
 			href="${pageContext.request.contextPath}/merchant/orders?mode=all"
 			class="tab-link">주문배송</a> <a
