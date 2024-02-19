@@ -67,24 +67,6 @@ public class ProductDTO {
                 .build();
     }
     
-//    public Product toEntity() {
-//        return Product.builder()
-//                .proNum(this.proNum)
-//                .proName(this.proName)
-//                .categoryNum(this.categoryNum)
-//                .img(new Image(this.proImg, this.proImgPro, this.proImageChange, this.proImageProChange, this.encodedImage))
-//                .merPrice(new ProPrice(this.proPrice, this.proPoint, this.proAssemblyCost, this.proDiscountRate, this.proDiscountPrice))
-//                .proQuantity(this.proQuantity)
-//                .proModifier(this.proModifier)
-//                .proInDate(this.proInDate)
-//                .proSpec(this.proSpec)
-//                .proPurchasesCount(this.proPurchasesCount)
-//                .proApprovalStatus(this.proApprovalStatus)
-//                .categoryName(this.categoryName)
-//                .proToday(this.proToday)
-//                .build();
-//    }
-    
     public ProductDTO(HttpServletRequest  req) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy/MM/dd");
 

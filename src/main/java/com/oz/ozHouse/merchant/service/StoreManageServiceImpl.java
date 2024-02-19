@@ -48,30 +48,4 @@ public class StoreManageServiceImpl implements StoreManageService{
 	public Long saleOk(Integer merNum) {
 		return productRepository.saleOk(merNum);
 	}
-//
-//	@Override
-//	public int waitCount() {
-//		return productRepository.waitCount();
-//	}
-//
-//	@Override
-//	public int requestCount() {
-//		return productRepository.requestCount();
-//	}
-//
-//	@Override
-//	public int cancleCount() {
-//		return productRepository.cancleCount();
-//	}
-//
-//	@Override
-//	public int requestCancle() {
-//		return productRepository.requestCancle();
-//	}
-//
-//	@Override
-//	public int saleOk() {
-//		return productRepository.saleOk();
-//	}
-
 }
