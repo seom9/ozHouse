@@ -4,15 +4,11 @@
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.Date" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<<<<<<< HEAD
+
 <link rel="stylesheet" href="${pageContext.request.contextPath}/client/main_css/mainStyle.css"/>
 <script type="text/javascript" src="src/main/resources/static/js/main.js"></script>
-=======
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/static/client/main_css/mainStyle.css"/>
-<script type="text/javascript" src="${pageContext.request.contextPath}/static/resources/js/main.js"></script>
->>>>>>> refs/heads/main
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <%@ include file="top.jsp" %>
    <script type="text/javascript">

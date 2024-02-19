@@ -35,8 +35,10 @@ import lombok.RequiredArgsConstructor;
 public class MerProController {
 
 	private final MerProService proService;
+	static final String BUSINESSFILEPATH = 
+			"C:\\nam\\SpringBoot\\ozHouse\\src\\main\\resources\\static\\merchant\\business";
 
-	private static final String PATH = "C:\\proImgs\\";
+	private static final String PATH = "C:\\proImgs\\"; 
 
 	//base64 인코딩
 	private String encodeImageToBase64(File file) throws IOException {
