@@ -9,6 +9,7 @@ import java.time.LocalDate;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -33,7 +34,10 @@ public class MerCoupon {
 	
     @OneToMany(mappedBy = "merCoupon", cascade = CascadeType.ALL)
     private List<UserCoupon> userCoupons = new ArrayList<>();
-	
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "memberId")
+    private Member member;
 
 	@DateTimeFormat(pattern = "yy/MM/dd")
 	private LocalDate merCouponusedate;

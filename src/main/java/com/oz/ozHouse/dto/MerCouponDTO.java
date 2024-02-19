@@ -3,13 +3,17 @@ package com.oz.ozHouse.dto;
 import java.time.LocalDate;
 
 import com.oz.ozHouse.domain.MerCoupon;
+import com.oz.ozHouse.dto.client.member.MemberPasswdUpdateDTO;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
-@Setter
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
 public class MerCouponDTO {
 	
@@ -18,7 +22,7 @@ public class MerCouponDTO {
 	private String merIsok;
 	private int merCoupondiscount;
 	private int merNum;
-	private LocalDate merCouponusedate;
-	private LocalDate merCouponenddate;
+	private String merCouponusedate;
+	private String merCouponenddate;
 	
 }

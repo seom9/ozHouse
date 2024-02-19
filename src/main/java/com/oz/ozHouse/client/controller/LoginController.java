@@ -28,7 +28,6 @@ public class LoginController {
 	private final MypageService mypageService;
 	private final EmailService emailService;
 	
-	
 	// setMessage 메서드
     private String setMessage (HttpServletRequest req, String url, String msg) {
     	req.setAttribute("url", url);
