@@ -4,7 +4,7 @@ import java.util.Map;
 
 import com.oz.ozHouse.dto.ApplicationDTO;
 import com.oz.ozHouse.dto.InbrandDTO;
-import com.oz.ozHouse.merchant.Exception.NotFoundMerNumException;
+import com.oz.ozHouse.merchant.exception.NotFoundMerNumException;
 
 public interface MerInbrandService {
 

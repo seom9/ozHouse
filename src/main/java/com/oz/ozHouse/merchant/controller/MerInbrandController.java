@@ -43,8 +43,8 @@ import com.oz.ozHouse.dto.ApplicationDTO;
 import com.oz.ozHouse.dto.CategoryDTO;
 import com.oz.ozHouse.dto.InbrandDTO;
 import com.oz.ozHouse.dto.MerchantDTO;
-import com.oz.ozHouse.merchant.Exception.NotFoundMerNumException;
 import com.oz.ozHouse.merchant.config.MerchantLoginBean;
+import com.oz.ozHouse.merchant.exception.NotFoundMerNumException;
 import com.oz.ozHouse.merchant.service.MerInbrandService;
 
 import lombok.RequiredArgsConstructor;
@@ -64,16 +64,10 @@ public class MerInbrandController {
 		return req;
 	}
 	
-	@GetMapping("/applications")
-	public String applications(HttpServletRequest req) {
-		HttpSession session = req.getSession();
-		MerchantLoginBean loginOk = (MerchantLoginBean)session.getAttribute("merLoginMember");
-		if (loginOk == null) {
-			req = goToMessage(req, "/merchant/login", "로그인 후 이용하시길 바랍니다.");
-			return "message";
-		}
-		int num = loginOk.getMerNum();
-		InbrandDTO dto = inbrandService.selectMer(num);
+	@GetMapping("/{merNum}/applications")
+	public String applications(HttpServletRequest req,
+			@PathVariable(name = "merNum") int merNum) {
+		InbrandDTO dto = inbrandService.selectMer(merNum);
 		if(dto != null) {	
 			if(!dto.getInCancelDate().equals("0")) {	
 				Calendar calNow = Calendar.getInstance();		
@@ -85,21 +79,25 @@ public class MerInbrandController {
 					calEnd.setTime(date);
 					calEnd.add(Calendar.MONTH, 3);
 					if(calNow.before(calEnd)) {		
-						req = goToMessage(req, "/merchant/home", "입점신청 취소, 또는 거절일로부터 3개월이 지나지 않아 신청이 불가합니다.");
+						req = goToMessage(req, 
+								"/merchant/home", 
+								"입점신청 취소, 또는 거절일로부터 3개월이 지나지 않아 신청이 불가합니다.");
 						return "message";
 					}else {								
-						req.setAttribute("mer_num", num);
+						req.setAttribute("mer_num", merNum);
 						return "merchant/brand/brand_application";
 					}
 				} catch (ParseException e) {
 					e.printStackTrace();
 				}
 			}else {	
-				req = goToMessage(req,"merchant/home/brand/appliresult/" + num, "현재 입점신청 승인중이거나 승인된 상점입니다.");
+				req = goToMessage(req,
+						"merchant/home/brand/appliresult/" + merNum, 
+						"현재 입점신청 승인중이거나 승인된 상점입니다.");
 				return "message";
 			}
 		}
-		req.setAttribute("mer_num", num);
+		req.setAttribute("mer_num", merNum);
 		return "merchant/brand/brand_application";
 	}
 	
@@ -111,11 +109,14 @@ public class MerInbrandController {
 		try {
 			result = inbrandService.searchComNum(merNum, map);
 		}catch(NotFoundMerNumException e) {
-			req = goToMessage(req, "/merchant/home", "존재하지 않는 판매자입니다.");
+			req = goToMessage(req, 
+					"/merchant/home", 
+					"존재하지 않는 판매자입니다.");
 			return "message";
 		}
 		if(!result) {
-			req = goToMessage(req, "/merchant/home/brand/applications", 
+			req = goToMessage(req, 
+					"/merchant/home/brand/" + merNum + "/applications", 
 					"회원가입시의 사업자등록번호와 일치하지 않습니다.");
 			return "message";
 		}
@@ -128,9 +129,12 @@ public class MerInbrandController {
 	}
 
 	@PostMapping(value="/submit")
-	public String brandInformOk( HttpServletRequest req, 
-			@ModelAttribute InbrandDTO dto, BindingResult result) 
+	public String brandInformOk(HttpServletRequest req, 
+//			@ModelAttribute InbrandDTO dto, 
+			@RequestParam(value="inCategory", required=true) List<Category> category,
+			BindingResult result) 
 			throws IllegalStateException, IOException {
+		InbrandDTO dto = new InbrandDTO(req, category);
 		InbrandDTO befor = inbrandService.selectMer(dto.getMerNum());
 		if(befor != null) {
 			inbrandService.deleteInbrand(befor.getInNum());
@@ -145,18 +149,19 @@ public class MerInbrandController {
             dto.setInSaleFile(saveName);
             int res = inbrandService.application(dto);
     	    if(res>0) {
-    	    	msg = "입점신청이 완료되었습니다.";
-    	    	url = "merchant/brand/applicationList/" + dto.getMerNum();
+    	    	req = goToMessage(req, 
+    	    			"merchant/brand/applicationList/" + dto.getMerNum(), 
+    	    			"입점신청이 완료되었습니다.");
     	    }else {
-    	    	msg = "입점신청이 완료되지 않았습니다.";
-    	    	url = "merchant/brand/applications";
+    	    	req = goToMessage(req, 
+    	    			"/merchant/home/brand/" + dto.getMerNum() + "/applications", 
+    	    			"입점신청이 완료되지 않았습니다.");
     	    }
         }else {
-        	msg = "판매 관련 파일 업로드시 오류가 발생하였습니다.";
-        	url = "merchant/brand/applications";
+        	req = goToMessage(req, 
+        			"/merchant/home/brand/" + dto.getMerNum() + "/applications", 
+	    			"판매 관련 파일 업로드시 오류가 발생하였습니다.");
         }
-        req.setAttribute("msg", msg);
-		req.setAttribute("url", url);
 		return "message";
 	}
 	

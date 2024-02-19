@@ -1,7 +1,6 @@
 package com.oz.ozHouse.dto;
 
 
-import java.time.LocalDate;
 import java.util.List;
 
 import com.oz.ozHouse.domain.Merchant;

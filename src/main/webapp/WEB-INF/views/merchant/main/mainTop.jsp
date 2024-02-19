@@ -46,7 +46,7 @@
 			</div>
 			<div class="right-section">
 				<a
-					href="${pageContext.request.contextPath}/brands/${merNum}/applications">입점하기</a>
+					href="${pageContext.request.contextPath}/merchant/home/brand/${merNum}/applications">입점하기</a>
 				<a href="${pageContext.request.contextPath}/merchant/home/notices">공지사항</a>
 				<c:if test="${not empty merLoginMember.merNum}">
 					<a

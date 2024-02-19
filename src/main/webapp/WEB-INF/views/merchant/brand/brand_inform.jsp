@@ -220,9 +220,8 @@ button {
 						<div class="flex-header">담당자 전화번호</div>
 						<div class="business-num-inputs">
 							<input type="text" name="inManhp1" size="5" maxlength="3" />
-							<span>-</span> <input type="text" name="inManhp1" size="5"
-								maxlength="4" /> <span>-</span> <input type="text"
-								name="inManhp1" size="5" maxlength="4" />
+							<span>-</span> <input type="text" name="inManhp2" size="5" maxlength="4" /> 
+							<span>-</span> <input type="text" name="inManhp3" size="5" maxlength="4" />
 						</div>
 					</div>
 					<div class="flex-row">
@@ -256,7 +255,7 @@ button {
 					</div>
 				</div>
 				<div class="button-container">
-					<button type="button" onclick="check(f.inbrand_file)">다음</button>
+					<button type="button" onclick="check(f.inSaleFile)">다음</button>
 				</div>
 			</form>
 		</div>
