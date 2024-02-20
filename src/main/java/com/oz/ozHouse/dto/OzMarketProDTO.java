@@ -28,6 +28,7 @@ public class OzMarketProDTO {
     private String proApprovalStatus;
     private String proImageChange;
     private String encodedImage;
+    private String buyStatus;
 
     public static OzMarketProDTO toDTO(OzMarketPro product) {
         
@@ -35,13 +36,16 @@ public class OzMarketProDTO {
                 .proNum(product.getProNum())
                 .proTitle(product.getProTitle())
 //                .memberNickname(product.getMember().getMemberNickname())
-                .memberNickname(product.getMemberNickname())
-                .proImgPro(product.getImg().getProImgPro())
-                .proPrice(product.getProPrice().getProPrice())
+                .memberNickname(product.getMember().getMemberNickname())
+//                .proImgPro(product.getImg().getProImgPro())
+//                .proPrice(product.getProPrice().getProPrice())
+                .proImgPro(product.getProImgPro())
+                .proPrice(product.getProPrice())
                 .proContent(product.getProContent())
                 .proInDate(product.getProInDate())
                 .proApprovalStatus(product.getProApprovalStatus())
-                .proImageChange(product.getImg().getProImageChange())
+                .proImageChange(product.getProImageChange())
+                .buyStatus(product.getBuyStatus())
                 .build();
     }
     
@@ -56,6 +60,7 @@ public class OzMarketProDTO {
         this.proInDate = LocalDate.now().format(formatter);
         this.proApprovalStatus = req.getParameter("proApprovalStatus");
         this.proImageChange = req.getParameter("proImageChange");
+        this.buyStatus = req.getParameter("buyStatus");
     }
 
 	public void setProImageChange(String proImageChange) {
@@ -73,6 +78,4 @@ public class OzMarketProDTO {
 	public void setMemberNickname(String memberNickname) {
 		this.memberNickname = memberNickname;
 	}
-	
-	
 }
