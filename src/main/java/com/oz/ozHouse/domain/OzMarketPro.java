@@ -34,23 +34,31 @@ public class OzMarketPro {
 
 	private String proTitle;
 	
-//	@ManyToOne(fetch = FetchType.LAZY)
-//	@JoinColumn(name = "memberNickname")
-//	private Member Member;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "memberNickname")
+	private Member Member;
 	
-	private String memberNickname;
+//	private String memberNickname;
 
-	@Embedded
-	private Image img;
+//	@Embedded
+//	private Image img;
 
-	@Embedded
-	private ProPrice proPrice;
+//	@Embedded
+//	private ProPrice proPrice;
+
+	private String proImgPro;
+    
+	private int proPrice;
+    
+    private String proImageChange;
 
 	private String proContent;
 	
 	private String proInDate;
 
 	private String proApprovalStatus;
+	
+	private String buyStatus;
 
 
 	public OzMarketPro(OzMarketProDTO dto) {
@@ -58,12 +66,17 @@ public class OzMarketPro {
 		
 		this.proNum = dto.getProNum();
 		this.proTitle = dto.getProTitle();
+//		this.memberNickname = "서아";
 //		this.Member = dto.getMemberNickname();
 //		this.img = new Image(dto.getProImg(), dto.getProImgPro(), dto.getProImageChange(), dto.getProImageProChange());
 //		this.proPrice = new ProPrice(dto.getProPrice(), dto.getProPoint(), dto.getProAssemblyCost(),
 //				dto.getProDiscountRate(), dto.getProDiscountPrice());
+		this.proImgPro = dto.getProImgPro();
+		this.proPrice = dto.getProPrice();
+		this.proImageChange = dto.getProImageChange();
 		this.proContent = dto.getProContent();
 		this.proInDate = dto.getProInDate().formatted(formatter);
 		this.proApprovalStatus = "판매중";
+		this.buyStatus = dto.getBuyStatus();
 	}
 }
