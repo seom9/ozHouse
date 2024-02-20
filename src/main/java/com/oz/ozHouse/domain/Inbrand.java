@@ -1,8 +1,5 @@
 package com.oz.ozHouse.domain;
 
-import java.time.LocalDate;
-
-import org.springframework.format.annotation.DateTimeFormat;
 
 import com.oz.ozHouse.domain.common.BaseEntity;
 import com.oz.ozHouse.domain.common.CompanyNumber;
@@ -13,27 +10,32 @@ import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
-@AttributeOverride(name = "regDate", column = @Column(name = "inAppliDate"))
-public class Inbrand extends BaseEntity{
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class Inbrand{
 
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int inNum;
 	
-	@OneToOne
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "merNum")
-	private Merchant merNum;
+	private Merchant merchant;
 	
 	private String inCompany;
 	
@@ -53,13 +55,13 @@ public class Inbrand extends BaseEntity{
     	@AttributeOverride(name = "category", column = @Column(name = "inCategory")),
     	@AttributeOverride(name = "otherShop", column = @Column(name = "inOthershop")),
     	@AttributeOverride(name = "brandFile", column = @Column(name = "inSaleFile")),
-		@AttributeOverride(name = "PhoneNumber.phoneNumber1", column = @Column(name = "inManhp1")),
-		@AttributeOverride(name = "PhoneNumber.phoneNumber2", column = @Column(name = "inManhp2")),
-		@AttributeOverride(name = "PhoneNumber.PhoneNumber3", column = @Column(name = "inManhp3"))
+		@AttributeOverride(name = "phoneNum.phoneNumber1", column = @Column(name = "inManhp1")),
+		@AttributeOverride(name = "phoneNum.phoneNumber2", column = @Column(name = "inManhp2")),
+		@AttributeOverride(name = "phoneNum.phoneNumber3", column = @Column(name = "inManhp3"))
     })
 	private InbrandInfo inbrandInfo;
+	private String inAppliDate;
+	private String inCancelDate;
 	
-	@DateTimeFormat(pattern = "yy/MM/dd")
-	private LocalDate inCancelDate;
 	
 }
