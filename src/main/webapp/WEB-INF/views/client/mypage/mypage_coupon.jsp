@@ -42,8 +42,9 @@
 
 <hr>
 <hr>
-<div></div>
-<div></div>
+<br><br>
+<div class="coupon-feed__divider"></div>
+<br><br>
 
 <c:set var="co" value="0" />
 <c:forEach var="dto" items="${merCoupons}">

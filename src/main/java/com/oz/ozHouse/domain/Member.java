@@ -26,6 +26,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Temporal;
@@ -78,9 +79,9 @@ public class Member extends BaseEntity{
     private List<Scrap> scraps = new ArrayList<>();
     
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<MerCoupon> coupons = new ArrayList<>();
+    private List<UserCoupon> coupons = new ArrayList<>();
     
-    public void addCoupon(MerCoupon coupon) {
+    public void addCoupon(UserCoupon coupon) {
         this.getCoupons().add(coupon);
     }
     

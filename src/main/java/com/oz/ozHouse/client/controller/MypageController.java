@@ -37,14 +37,6 @@ public class MypageController {
 	private final MemberService memberService;
 	private final MypageService mypageService;
 	
-	// setMessage 메서드
-    private String setMessage (HttpServletRequest req, String url, String msg) {
-    	req.setAttribute("url", msg);
-    	req.setAttribute("msg", url);
-    	
-    	return "message";
-    }
-	
     @GetMapping("/hi")
     public String index(@AuthenticationPrincipal MemberSecurityDTO member) {
         System.out.println("username : " + member.getUsername());
