@@ -14,9 +14,9 @@
 	var comNumChecked = false;
 
 	function onSubmit() {
-		var comnum1 = document.f.inbrand_comnum1.value;
-		var comnum2 = document.f.inbrand_comnum2.value;
-		var comnum3 = document.f.inbrand_comnum3.value;
+		var comnum1 = document.f.inComnum1.value;
+		var comnum2 = document.f.inComnum2.value;
+		var comnum3 = document.f.inComnum3.value;
 
 		if (comnum1.length == 0 || comnum2.length == 0 || comnum3.length == 0) {
 			alert('사업자 등록번호를 입력해주세요.');
@@ -34,9 +34,9 @@
 		$("#checkMer")
 				.click(
 						function() {
-							var reg1 = document.f.inbrand_comnum1.value;
-							var reg2 = document.f.inbrand_comnum2.value;
-							var reg3 = document.f.inbrand_comnum3.value;
+							var reg1 = document.f.inComnum1.value;
+							var reg2 = document.f.inComnum2.value;
+							var reg3 = document.f.inComnum3.value;
 
 							var bs_num = reg1 + "" + reg2 + "" + reg3;
 							var data = {
@@ -109,19 +109,19 @@
 			</h4>
 			<h3>사업자 인증</h3>
 			<form name="f"
-				action="${pageContext.request.contextPath}/brands/application"
+				action="${pageContext.request.contextPath}/merchant/home/brand/checkbusiness/${merLoginMember.merNum}"
 				method="post" onsubmit="return onSubmit();">
-				<input type="hidden" name="merNum" value="${merNum}" />
+				<%-- <input type="hidden" name="merNum" value="${merNum}" /> --%>
 				<div class="business-num-section">
-					<label for="inbrand_comnum1" class="business-num-label">사업자
+					<label for="inComnum1" class="business-num-label">사업자
 						등록번호</label> <span id="bs_result" class="business-num-result"></span>
 					<div class="business-num-flex-container">
 						<div class="business-num-inputs">
-							<input type="text" id="inbrand_comnum1" name="inbrand_comnum1"
+							<input type="text" id="inComnum1" name="inComnum1"
 								maxlength="3" size="9" /> <span>-</span> <input type="text"
-								id="inbrand_comnum2" name="inbrand_comnum2" maxlength="2"
+								id="inComnum2" name="inComnum2" maxlength="2"
 								size="6" /> <span>-</span> <input type="text"
-								id="inbrand_comnum3" name="inbrand_comnum3" maxlength="5"
+								id="inComnum3" name="inComnum3" maxlength="5"
 								size="15" />
 						</div>
 						<div class="business-num-inquiry">
