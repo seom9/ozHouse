@@ -3,7 +3,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>간단한 채팅 애플리케이션</title>
     <script>
         function sendMessage() {
             var message = document.getElementById("message").value;

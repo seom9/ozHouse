@@ -54,8 +54,14 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-devtools'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	
-	// 웹소켓
+	// WebSocket
 	implementation 'org.springframework.boot:spring-boot-starter-websocket'
+	// STOMP
+	implementation 'org.webjars:stomp-websocket'	
+	// SockJS
+	implementation 'org.webjars:sockjs-client'
+	//redis
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 }
 
 tasks.named('test') {

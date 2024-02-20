@@ -40,9 +40,11 @@ public class Chatt {
 	
 	private String msg;
 	
-	private String readStatus;
+	private int readStatus;
 	
 	private String file;
+	
+	private int roomNum;
 	
 	private String inTime;
 	
@@ -56,6 +58,7 @@ public class Chatt {
         this.msg = dto.getMsg();
         this.readStatus = dto.getReadStatus();
         this.file = dto.getFile();
+        this.roomNum = dto.getRoomNum();
         this.inTime = dto.getInTime().formatted(formatter);
 	}
 }
