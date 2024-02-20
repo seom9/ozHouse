@@ -20,6 +20,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Transactional // 해당 객체를 감싸는 별도의 클래스를 생성
 public class MemberServiceImpl implements MemberService {
+	
 	private final ModelMapper modelMapper;
 	private final MemberRepository memberRepository;
 	private final PasswordEncoder passwordEncoder;

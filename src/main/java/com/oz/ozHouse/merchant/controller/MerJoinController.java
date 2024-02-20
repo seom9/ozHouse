@@ -30,7 +30,7 @@ public class MerJoinController {
 	private final EmailService emailService;
 	
 	static final String BUSINESSFILEPATH = 
-			"C:\\sts4\\ozHouse\\src\\main\\resources\\static\\merchant\\business";
+			"C:\\nam\\SpringBoot\\ozHouse\\src\\main\\resources\\static\\merchant\\business";
 
 	@GetMapping("/join")
 	public String merchantJoin() {
@@ -91,7 +91,7 @@ public class MerJoinController {
         	req = goToMessage(req, "/merchant/login/join", "회원가입 실패 : 사업자등록증 전송 중 오류가 발생하였습니다.");
         	return "message";
         }
-		String checkNum = emailService.sendOauthMessage(email);
+		String checkNum = emailService.sendOauthMessage(email, "회원가입");
 		MerchantDTO dto = new MerchantDTO(req);
 		req.setAttribute("checkNum", checkNum);
 		req.setAttribute("email", email);

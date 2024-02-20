@@ -24,7 +24,7 @@
 	        var zipcode = document.getElementsByName("zipcode")[0].value;
 
 	        fetch('/mypage/' + memberId + "/update", {
-	            method: 'PATCH', // PUT 메소드를 지정합니다.
+	            method: 'PATCH', 
 	            headers: {
 	                'Content-Type': 'application/json'
 	            },
@@ -52,6 +52,7 @@
 	        .then(data => {
 	        	// 상태 알림 return 받아와서 alert 로 출력
 	            alert(data)
+	            location.reload()
 	        })
 	        .catch(error => {
 	        	alert("회원 정보 수정이 실패되었습니다")
@@ -200,9 +201,9 @@
 				<span class="title">닉네임</span>
 					<input type="text" placeholder="닉네임을 입력해 주세요." name="memberNickname" value="${member.memberNickname}" class="box">
 				<span class="title">연락처</span><br>
-					<input type="text" name="phoneNumber1" value="${member.memberHp.PhoneNumber1}" class="member_hp" size="3" maxlength="3"> -
-					<input type="text" name="phoneNumber2" value="${member.memberHp.PhoneNumber2}" class="member_hp" size="4" maxlength="4"> -
-					<input type="text" name="phoneNumber3" value="${member.memberHp.PhoneNumber3}" class="member_hp" size="4" maxlength="4">
+					<input type="text" name="phoneNumber1" value="${member.memberHp.phoneNumber1}" class="member_hp" size="3" maxlength="3"> -
+					<input type="text" name="phoneNumber2" value="${member.memberHp.phoneNumber2}" class="member_hp" size="4" maxlength="4"> -
+					<input type="text" name="phoneNumber3" value="${member.memberHp.phoneNumber3}" class="member_hp" size="4" maxlength="4">
 				<br>
 				<span class="title">집 주소 설정</span>
 					<span class="title">주소 1</span>

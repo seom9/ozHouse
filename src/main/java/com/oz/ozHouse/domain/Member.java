@@ -1,16 +1,13 @@
 package com.oz.ozHouse.domain;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.oz.ozHouse.client.security.MemberSecurityDTO;
 import com.oz.ozHouse.domain.common.Address;
 import com.oz.ozHouse.domain.common.BaseEntity;
 import com.oz.ozHouse.domain.common.Image;
@@ -29,7 +26,9 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import lombok.AllArgsConstructor;
@@ -73,8 +72,18 @@ public class Member extends BaseEntity{
 	@Embedded
 	private PhoneNumber memberHp;
 	
-    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<OrderTb> orderList = new ArrayList<>();
+    
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Scrap> scraps = new ArrayList<>();
+    
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<UserCoupon> coupons = new ArrayList<>();
+    
+    public void addCoupon(UserCoupon coupon) {
+        this.getCoupons().add(coupon);
+    }
     
 	private int memberPoint;
 	
@@ -84,6 +93,8 @@ public class Member extends BaseEntity{
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yy/MM/dd")
 	private LocalDate memberDeletedate;
+	
+
 	
 	public void changeMemberPassword(String memberPasswd) {
 		this.memberPasswd = memberPasswd;
