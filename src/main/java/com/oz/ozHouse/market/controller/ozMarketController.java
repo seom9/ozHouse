@@ -176,18 +176,10 @@ public class ozMarketController {
 		return "client/ozMarket/myProduct_content";
 	}
 	
-	//채팅
-	@GetMapping("/chat")
-	public String ozChat() {
-		return "client/ozMarket/chat";
-	}
-	
 	//내정보
 	@GetMapping("/myInfo")
 	public String ozMarketMyInfo(@AuthenticationPrincipal MemberSecurityDTO member, HttpServletRequest req) {
 		System.out.println("닉네임 : " + member.getMemberNickname());
-//		HttpSession session = req.getSession();
-//		session.setAttribute("nickname1", member.getMemberNickname());
 		req.setAttribute("nickname", member.getMemberNickname());
 		return "client/ozMarket/myInfo";
 	}

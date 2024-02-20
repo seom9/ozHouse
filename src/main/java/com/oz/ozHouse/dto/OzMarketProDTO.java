@@ -49,7 +49,7 @@ public class OzMarketProDTO {
                 .build();
     }
     
-    public OzMarketProDTO(HttpServletRequest  req) {
+    public OzMarketProDTO(HttpServletRequest req) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy/MM/dd");
 
         this.proTitle = req.getParameter("proTitle");
