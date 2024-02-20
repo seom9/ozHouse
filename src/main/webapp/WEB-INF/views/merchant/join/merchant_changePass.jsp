@@ -63,11 +63,8 @@
 		<form name="f" method="post" id="login-form"
 			action="${pageContext.request.contextPath}/merchant/login/putPassword/${memberId}">
 			<!-- <input type="hidden" name="_method" value="PATCH"/> -->
-
 				<span class="title">아이디</span>
 				${memberId}
-
-
 			<br> <br> <span class="title3">비밀번호</span> <input
 				type="password" tabindex="3" name="new_member_passwd"
 				placeholder="비밀번호를 입력해 주세요." class="box" id="password"

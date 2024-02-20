@@ -92,7 +92,7 @@ public class Member extends BaseEntity{
 	
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yy/MM/dd")
-	private LocalDate memberDeletedate;
+	private String memberDeletedate;
 	
 
 	
