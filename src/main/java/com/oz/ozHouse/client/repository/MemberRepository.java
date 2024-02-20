@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.oz.ozHouse.domain.Member;
+import com.oz.ozHouse.domain.UserCoupon;
 
 import jakarta.transaction.Transactional;
 
@@ -35,5 +36,21 @@ public interface MemberRepository extends JpaRepository<Member, Integer> {
     @Modifying
     @Query("UPDATE Member m SET m.social = true WHERE m.memberId = :memberId")
     void updateSocialStatusByMemberId(@Param("memberId") String memberId);
+    
+    // passwd 수정
+    @Transactional
+    @Modifying
+    @Query("UPDATE Member m SET m.memberPasswd = :encodePass WHERE m.memberId = :memberId")
+    void updateMemberPasswdByMemberId(@Param("encodePass") String encodePass, @Param("memberId") String memberId);
 
+    
+    @Transactional
+    @Modifying
+    @Query("UPDATE Member m SET m.memberPasswd = :encodePass WHERE m.memberEmail = :memberEmail")
+    void updateMemberPasswdByMemberEmail(@Param("encodePass") String encodePass, @Param("memberEmail") String memberEmail);
+    
+    @Transactional
+    @EntityGraph(attributePaths = "coupons")
+    Optional<Member> findMemberWithCouponsByMemberId(String memberId);
+    
 }
