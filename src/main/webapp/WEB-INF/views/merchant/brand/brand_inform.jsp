@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>입점신청</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 
 function check(fileData) { 
@@ -39,7 +40,7 @@ function check(fileData) {
       return;
    }
    var isChk = false;
-   var values = document.getElementsByName("inCategory");
+   var values = document.getElementsByName("inCategory");  //배열
    for(var i=0;i<values.length;i++){
       if(values[i].checked){
           isChk = true;
@@ -50,15 +51,15 @@ function check(fileData) {
        alert("카테고리를 선택해주세요.");
        return;
    }else{
-      var arrCate = [];
-      for(var i=0; i<values.length; ++i){
-          if(values[i].checked){  //체크된 박스라면
-              arrCate.push(values[i]);  //arrCate 배열에 추기하기
-          }
-      }
-     /* var cate = arrCate.join(',');  //배열 -> 문자열로 변환*/
-         document.f.inCategory.value = arrCate; 
-    }
+	   var arrCate = [];
+	      for(var i=0; i<values.length; ++i){
+	          if(values[i].checked){  //체크된 박스라면
+	              arrCate.push(values[i].value);  //arrCate 배열에 추기하기
+	          }
+	      }
+	      var cate = arrCate.join(',');  //배열 -> 문자열로 변환
+	         document.f.inCategory.value = cate;
+	       }
    
    if(!fileData.files || fileData.files.length == 0){
        alert("파일을 등록하여 주세요.");
@@ -182,9 +183,10 @@ button {
 		</h4>
 		<h3>상점 정보 입력</h3>
 		<div align="center">
-			<form name="f"
+			<form name="f" id="f"
 				action="${pageContext.request.contextPath}/merchant/home/brand/submit"
 				method="post" enctype="multipart/form-data">
+				<input type="hidden" name="category" value=""/>
 				<div class="flex-container">
 					<div class="flex-row">
 						<div class="flex-header">사업자 등록번호</div>
@@ -235,7 +237,7 @@ button {
 						<div class="flex-content">
 							<c:forEach var="cat" items="${category}">
 								<input type="checkbox" name="inCategory"
-									value="${cat.categoryNum}">
+									value="${cat}">
 						        [${cat.categoryCode}]&nbsp;${cat.categoryName}
 						    </c:forEach>
 						</div>

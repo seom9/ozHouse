@@ -60,7 +60,6 @@ public class InbrandDTO {
                 .inCancelDate(inbrand.getInCancelDate())
                 .build();
     }
-
 	public InbrandDTO (HttpServletRequest req, List<Category> category) {
 		this.merNum = Integer.parseInt(req.getParameter("merNum"));
 		this.inCompany = req.getParameter("inCompany");
@@ -77,9 +76,7 @@ public class InbrandDTO {
 		this.inCategory = category;
 		this.inOthershop = req.getParameter("inOthershop");
 		this.inSaleFile = req.getParameter("inSaleFile");
-		
 	}
-
 	public void setInSaleFile(String inSaleFile) {
 		this.inSaleFile = inSaleFile;
 	}

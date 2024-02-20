@@ -11,6 +11,7 @@ import java.nio.file.Paths;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
@@ -67,9 +68,9 @@ public class MerInbrandController {
 	@GetMapping("/{merNum}/applications")
 	public String applications(HttpServletRequest req,
 			@PathVariable(name = "merNum") int merNum) {
-		InbrandDTO dto = inbrandService.selectMer(merNum);
-		if(dto != null) {	
-			if(!dto.getInCancelDate().equals("0")) {	
+		InbrandDTO dto = inbrandService.selectMer(merNum); //merNum으로 신청내역 조회
+		if(dto != null) {	 //조회내역이 있다면
+			if(!(dto.getInCancelDate()==null)) {	//조회내역이 있고 취소일자가 있다면
 				Calendar calNow = Calendar.getInstance();		
 				Calendar calEnd= Calendar.getInstance();	     
 				SimpleDateFormat df = new SimpleDateFormat("yy/MM/dd");
@@ -78,21 +79,21 @@ public class MerInbrandController {
 					date = df.parse(dto.getInCancelDate());
 					calEnd.setTime(date);
 					calEnd.add(Calendar.MONTH, 3);
-					if(calNow.before(calEnd)) {		
+					if(calNow.before(calEnd)) {	    	//조회내역이 있고 취소일자가 3개월이 지나지 않았다면
 						req = goToMessage(req, 
 								"/merchant/home", 
 								"입점신청 취소, 또는 거절일로부터 3개월이 지나지 않아 신청이 불가합니다.");
 						return "message";
-					}else {								
+					}else {			                   //조회내역이 있고 취소일자가 3개월이 지났다면					
 						req.setAttribute("mer_num", merNum);
 						return "merchant/brand/brand_application";
 					}
 				} catch (ParseException e) {
 					e.printStackTrace();
 				}
-			}else {	
+			}else {	       //조회내역이 있고 취소일자가 없다면
 				req = goToMessage(req,
-						"merchant/home/brand/appliresult/" + merNum, 
+						"/merchant/home/brand/applicationList/" + merNum, 
 						"현재 입점신청 승인중이거나 승인된 상점입니다.");
 				return "message";
 			}
@@ -129,28 +130,29 @@ public class MerInbrandController {
 	}
 
 	@PostMapping(value="/submit")
-	public String brandInformOk(HttpServletRequest req, 
-//			@ModelAttribute InbrandDTO dto, 
-			@RequestParam(value="inCategory", required=true) List<Category> category,
-			BindingResult result) 
+	public String brandInformOk(HttpServletRequest req ,
+			@RequestParam(value="inCategory", required=true) String cate) 
 			throws IllegalStateException, IOException {
-		InbrandDTO dto = new InbrandDTO(req, category);
-		InbrandDTO befor = inbrandService.selectMer(dto.getMerNum());
+		String str[] = cate.split(",");
+		List<Category> category = new ArrayList<Category>();
+		for(String s : str) {
+			category.add(Category.valueOf(s));
+		}
+		InbrandDTO dto = new InbrandDTO(req, category); //save할 객체
+		InbrandDTO befor = inbrandService.selectMer(dto.getMerNum());  //이전에 신청한 객체
 		if(befor != null) {
 			inbrandService.deleteInbrand(befor.getInNum());
 		}
 		MultipartHttpServletRequest mr = (MultipartHttpServletRequest)req;
-        MultipartFile mFile = mr.getFile("inbrand_file"); 
-        String msg = null;
-	    String url = null;
+        MultipartFile mFile = mr.getFile("inSaleFile");
         if (mFile != null && mFile.getSize() > 0) { 
             String saveName = mFile.getOriginalFilename(); 
-            mFile.transferTo(new File(FILEPATH + saveName));             
+            mFile.transferTo(new File(FILEPATH + saveName)); 
             dto.setInSaleFile(saveName);
             int res = inbrandService.application(dto);
     	    if(res>0) {
     	    	req = goToMessage(req, 
-    	    			"merchant/brand/applicationList/" + dto.getMerNum(), 
+    	    			"/merchant/home/brand/applicationList/" + dto.getMerNum(), 
     	    			"입점신청이 완료되었습니다.");
     	    }else {
     	    	req = goToMessage(req, 
@@ -170,8 +172,9 @@ public class MerInbrandController {
 			@PathVariable(name = "merNum") int merNum) {
 		ApplicationDTO dto = inbrandService.applicationList(merNum);
 		if(dto == null) {
-			String msg = "입점신청화면으로 이동합니다.";
-			String url = "merchant/brand/applications";
+			req = goToMessage(req, 
+					"/merchant/home/brand/" + merNum + "/applications",
+					"입점신청화면으로 이동합니다.");
 			return "message";
 		}else {
 //			String cate[] = dto.getInbrand_category().split(",");
@@ -180,6 +183,9 @@ public class MerInbrandController {
 //				category[i] = brandMapper.selectCateName(Integer.valueOf(cate[i]));
 //			}
 //			String resultCate = String.join(",", category);
+			for(Category c : dto.getInCategory()) {
+				System.out.println("Controller ---> category : " + c.getCategoryName());
+			}
 			req.setAttribute("applicationList", dto);
 //			req.setAttribute("resultCate", resultCate);
 			return "merchant/brand/brand_applicationList";
