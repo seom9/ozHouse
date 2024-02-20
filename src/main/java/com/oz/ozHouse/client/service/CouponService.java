@@ -3,6 +3,7 @@ package com.oz.ozHouse.client.service;
 import java.util.List;
 
 import com.oz.ozHouse.dto.MerCouponDTO;
+import com.oz.ozHouse.dto.UserCouponDTO;
 
 public interface CouponService {
 	
@@ -10,5 +11,5 @@ public interface CouponService {
 	
 	List<MerCouponDTO> getUserCoupons(String memberId);
 	
-	void addCoupon(String memberId, int merCouponnum);
+	boolean addCoupon(String memberId, int merCouponnum);
 }

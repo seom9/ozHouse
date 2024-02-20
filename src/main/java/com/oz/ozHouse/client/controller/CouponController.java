@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import com.oz.ozHouse.client.security.MemberSecurityDTO;
 import com.oz.ozHouse.client.service.CouponService;
 import com.oz.ozHouse.dto.MerCouponDTO;
+import com.oz.ozHouse.dto.UserCouponDTO;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +23,14 @@ import lombok.RequiredArgsConstructor;
 public class CouponController {
     
 	private final CouponService couponService;
+	
+	// setMessage 메서드
+    private String setMessage (HttpServletRequest req, String url, String msg) {
+    	req.setAttribute("url", msg);
+    	req.setAttribute("msg", url);
+    	
+    	return "message";
+    }
 	
 	@PreAuthorize("hasAnyRole('ROLE_CLIENT')")
     @GetMapping("/mypage/{memberId}/coupon")
@@ -44,7 +53,9 @@ public class CouponController {
     								@PathVariable("merCouponNum") int merCouponNum,
     								@AuthenticationPrincipal MemberSecurityDTO member) {
 		
-		couponService.addCoupon(member.getUsername(), merCouponNum);
+		boolean isAdd = couponService.addCoupon(member.getUsername(), merCouponNum);
+		
+		if (!isAdd) return setMessage(req, "이미 보유 중인 쿠폰입니다", "/mypage/" + member.getUsername() + "/coupon");
 		
 		return "redirect:/mypage/" + member.getUsername() + "/coupon";
     }

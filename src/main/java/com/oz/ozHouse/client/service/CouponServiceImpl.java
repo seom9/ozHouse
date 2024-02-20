@@ -10,9 +10,12 @@ import org.springframework.stereotype.Service;
 
 import com.oz.ozHouse.client.repository.ClientMerCouponRepository;
 import com.oz.ozHouse.client.repository.MemberRepository;
+import com.oz.ozHouse.client.repository.UserCouponRepository;
 import com.oz.ozHouse.domain.Member;
 import com.oz.ozHouse.domain.MerCoupon;
+import com.oz.ozHouse.domain.UserCoupon;
 import com.oz.ozHouse.dto.MerCouponDTO;
+import com.oz.ozHouse.dto.UserCouponDTO;
 
 import jakarta.persistence.Entity;
 import jakarta.transaction.Transactional;
@@ -26,6 +29,7 @@ public class CouponServiceImpl implements CouponService{
 	private final ModelMapper modelMapper;
 	private final ClientMerCouponRepository clientMerCouponRepository; 
 	private final MemberRepository memberRepository;
+	private final UserCouponRepository userCouponRepository;
 
 
 	@Override
@@ -46,34 +50,37 @@ public class CouponServiceImpl implements CouponService{
 	public List<MerCouponDTO> getUserCoupons(String memberId) {
 		
 		Optional<Member> result = memberRepository.findMemberWithCouponsByMemberId(memberId);
-		
 		if (result.isEmpty()) return null;
-		
 		Member member = result.get();
-		List<MerCouponDTO> userCouponDTOs = member.getCoupons().stream()
-							                .map(data -> modelMapper.map(data, MerCouponDTO.class))
-							                .collect(Collectors.toList());
 		
-		return userCouponDTOs;
+		List<MerCouponDTO> merCouponDTOs = member.getCoupons().stream()
+									        .map(userCoupon -> modelMapper.map(userCoupon.getMerCoupon(), MerCouponDTO.class))
+									        .collect(Collectors.toList());
+		
+		return merCouponDTOs;
 	}
 
 
 	@Transactional
 	@Override
-	public void addCoupon(String memberId, int merCouponnum) {
+	public boolean addCoupon(String memberId, int merCouponnum) {
+	    // 보유한 쿠폰인지 확인
+	    List<UserCoupon> existingCoupons = userCouponRepository.findByMember_MemberId(memberId);
+	    boolean isCouponExist = existingCoupons.stream()
+	            .anyMatch(coupon -> coupon.getMerCoupon().getMerCouponnum() == merCouponnum);
+	    if (isCouponExist) return false;
 
+	    // 새 쿠폰 저장
         Member member = memberRepository.findByMemberId(memberId);
-        
         MerCoupon coupon = clientMerCouponRepository.findByMerCouponnum(merCouponnum);
         
-        member.addCoupon(coupon);
+        UserCoupon userCoupon = UserCoupon.builder()
+						        			.member(member)
+						        			.merCoupon(coupon)
+						        			.build();
         
-		System.out.println("==============================================================");
-		System.out.println("저장합니다다다아아아아아ㅏ");
-
-        memberRepository.save(member);
-		System.out.println("==============================================================");
-
+        userCouponRepository.save(userCoupon);        
+        return true;
 	}
 	
 	
