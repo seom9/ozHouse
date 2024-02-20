@@ -8,6 +8,7 @@
 </head>
 <body>
 <div class="tab-container">
+
 <c:set var="merNum" value="${merLoginMember.merNum}"/>
         <a href="${pageContext.request.contextPath}/merchant/${merNum}/store/product-input" class="tab-link">상품등록</a>
         <a href="${pageContext.request.contextPath}/merchant/${merNum}/store/products" class="tab-link">상품조회</a>

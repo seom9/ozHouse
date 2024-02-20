@@ -51,9 +51,6 @@ public class Merchant extends BaseEntity{
     private CompanyNumber merComnum;
     
     
-    @OneToMany(mappedBy = "merchant", cascade = CascadeType.ALL)
-    private List<UserCoupon> userCoupons = new ArrayList<>();
-    
     @Embedded
     @NotNull
     @AttributeOverrides({
