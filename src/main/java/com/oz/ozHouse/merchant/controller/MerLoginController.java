@@ -105,7 +105,7 @@ public class MerLoginController {
 			return "message";
 		}
 
-		String oauthNum = emailService.sendOauthMessage(merEmail);
+		String oauthNum = emailService.sendOauthMessage(merEmail, "회원가입");
 		req.setAttribute("oauthNum", oauthNum);
 		req.setAttribute("member_email", merEmail);
 		return "merchant/join/merchant_send_find_email";
