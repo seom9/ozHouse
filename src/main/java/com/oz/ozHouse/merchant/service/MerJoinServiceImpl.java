@@ -5,14 +5,14 @@ import org.springframework.stereotype.Service;
 
 import com.oz.ozHouse.domain.Merchant;
 import com.oz.ozHouse.dto.MerchantDTO;
-import com.oz.ozHouse.merchant.repository.joinRepository.MerJoinRepository;
+import com.oz.ozHouse.merchant.repository.merchantRepository.MerchantRepository;
 
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
 public class MerJoinServiceImpl implements MerJoinService{
-	private final MerJoinRepository repository;
+	private final MerchantRepository repository;
 	private final PasswordEncoder bCryptPasswordEncoder;
 	
 	@Override
