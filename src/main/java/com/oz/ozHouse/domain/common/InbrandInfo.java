@@ -1,20 +1,27 @@
 package com.oz.ozHouse.domain.common;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.oz.ozHouse.domain.Category;
-import com.oz.ozHouse.dto.CategoryDTO;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.Embedded;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Embeddable
 @Getter
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
 public class InbrandInfo {
 
 	private String homepage;
@@ -25,21 +32,12 @@ public class InbrandInfo {
 	
 	private String ManagerEmail;
 	
-	@ElementCollection
-	private List<Category> category = new ArrayList<Category>();
+	@Column
+	@ElementCollection(fetch = FetchType.EAGER)
+	@Enumerated(EnumType.STRING)
+	private List<Category> category;
 	 
 	private String otherShop;
 	
 	private String brandFile;
-	
-	//List Collection Entity -> DTO로 변환 메소드
-//	public List<Category> getCategoryDto(){
-//		List<Category> list = new ArrayList<Category>();
-//		for(Category c : this.category) {
-//			CategoryDTO dto = new CategoryDTO();
-//			dto.toDTO(c);
-//			list.add(dto);
-//		}
-//		return list;
-//	}
 }

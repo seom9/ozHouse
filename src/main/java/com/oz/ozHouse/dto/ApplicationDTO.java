@@ -31,7 +31,7 @@ public class ApplicationDTO {
 	private String inManemail;
 	private List<Category> inCategory;
 	private String inOthershop;
-	private String inFile;
+	private String inSaleFile;
 	private String inAppliDate;
 	private String inCancelDate;
 	

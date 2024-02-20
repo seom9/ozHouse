@@ -78,13 +78,10 @@ public class Merchant extends BaseEntity{
 //    })
 //    	private InbrandInfo inbrandInfo;
     
-	@DateTimeFormat(pattern = "yy/MM/dd")
     private String merInbranddate;
     
-	@DateTimeFormat(pattern = "yy/MM/dd")
     private String merDeletedate;
     
-	@DateTimeFormat(pattern = "yy/MM/dd")
     private String merOutDate;
     
     private String merDelete;

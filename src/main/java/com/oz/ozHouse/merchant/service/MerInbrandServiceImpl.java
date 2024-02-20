@@ -15,7 +15,7 @@ import com.oz.ozHouse.dto.ApplicationDTO;
 import com.oz.ozHouse.dto.InbrandDTO;
 import com.oz.ozHouse.dto.MerchantDTO;
 import com.oz.ozHouse.merchant.exception.NotFoundMerNumException;
-import com.oz.ozHouse.merchant.repository.MerInbrandRepository;
+import com.oz.ozHouse.merchant.repository.inbrandRepository.MerInbrandRepository;
 import com.oz.ozHouse.merchant.repository.joinRepository.MerJoinRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -29,15 +29,15 @@ public class MerInbrandServiceImpl implements MerInbrandService {
 	@Override
 	public InbrandDTO selectMer(int merNum) {
 
-		Optional<Inbrand> optionalInbrand = inbrandRepository.findById(merNum);
+		Inbrand inbrand = inbrandRepository.selectMerNum(merNum);
 	    InbrandDTO dto = new InbrandDTO();
-	    
-	    if (optionalInbrand.isPresent()) {
-	        Inbrand inbrand = optionalInbrand.get();
+	    if (inbrand!=null) {
+	        dto = dto.toDto(inbrand);
+	        System.out.println("inbrand가 null이 아니다!");
 	    } else {
 	        dto = null;
+	        System.out.println("inbrand가 null이다!");
 	    }
-	    
 	    return dto;
 	}
 
@@ -105,12 +105,12 @@ public class MerInbrandServiceImpl implements MerInbrandService {
 		}catch(IllegalArgumentException e) {
 			return -1;
 		}
-		return 0;
+		return 1;
 	}
 
 	@Override
 	public ApplicationDTO applicationList(int merNum) {
-		Inbrand inbrand = inbrandRepository.findInbrandByMerNum(merNum);
+		Inbrand inbrand = inbrandRepository.selectMerNum(merNum);
 		ApplicationDTO dto = ApplicationDTO.builder()
 				.inNum(inbrand.getInNum())
 				.merNum(inbrand.getMerchant().getMerNum())
@@ -127,7 +127,7 @@ public class MerInbrandServiceImpl implements MerInbrandService {
 				.inManemail(inbrand.getInbrandInfo().getManagerEmail())
 				.inCategory(inbrand.getInbrandInfo().getCategory())
 				.inOthershop(inbrand.getInbrandInfo().getOtherShop())
-				.inFile(inbrand.getInbrandInfo().getBrandFile())
+				.inSaleFile(inbrand.getInbrandInfo().getBrandFile())
 				.inAppliDate(inbrand.getRegDate())
 				.inCancelDate(inbrand.getInCancelDate())
 				.build();

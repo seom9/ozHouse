@@ -3,6 +3,6 @@
 <!-- message.jsp -->
 <script type="text/javascript">
 	alert("${msg}")
-	alert("message2 : " + "${url}")
+	/* alert("message2 : " + "${url}") */
 	location.href="${url}"
 </script>
