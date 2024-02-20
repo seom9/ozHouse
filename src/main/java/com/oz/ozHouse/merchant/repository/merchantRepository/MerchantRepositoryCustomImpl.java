@@ -1,4 +1,4 @@
-package com.oz.ozHouse.merchant.repository.joinRepository;
+package com.oz.ozHouse.merchant.repository.merchantRepository;
 
 import org.springframework.stereotype.Repository;
 
@@ -13,7 +13,7 @@ import lombok.RequiredArgsConstructor;
 
 @Repository
 @RequiredArgsConstructor
-public class MerJoinRepositoryCustomImpl implements MerJoinRepositoryCustom{
+public class MerchantRepositoryCustomImpl implements MerchantRepositoryCustom{
 	private final EntityManager em;
 
 	@Transactional
@@ -39,6 +39,20 @@ public class MerJoinRepositoryCustomImpl implements MerJoinRepositoryCustom{
 			return dto;
 		}
 		
+	}
+	
+	@Override
+	public Merchant findMerchantEmail(String mer_email) {
+		String query = "SELECT m FROM Merchant m where m.merEmail = :value";
+		TypedQuery<Merchant> jpql = em.createQuery(query, Merchant.class)
+				.setParameter("value", mer_email);
+		Merchant m = null;
+		try {
+			m = jpql.getSingleResult();
+		}catch(NoResultException e) {
+			e.printStackTrace();
+		}
+		return m;
 	}
 
 }
