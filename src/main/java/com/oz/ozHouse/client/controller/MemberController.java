@@ -3,6 +3,7 @@ package com.oz.ozHouse.client.controller;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.oz.ozHouse.client.security.MemberSecurityDTO;
 import com.oz.ozHouse.client.service.EmailService;
 import com.oz.ozHouse.client.service.MemberService;
 import com.oz.ozHouse.dto.client.member.MemberJoinDTO;
@@ -29,6 +31,14 @@ public class MemberController {
 	
 	private final MemberService memberService;
 	private final EmailService emailService;
+	
+	// setMessage 메서드
+    private String setMessage (HttpServletRequest req, String url, String msg) {
+    	req.setAttribute("url", url);
+    	req.setAttribute("msg", msg);
+    	
+    	return "message";
+    }
 	
     @GetMapping("/join")
     public String member_join() {
@@ -100,37 +110,21 @@ public class MemberController {
         return result;
     }
     
-    /*
-    public boolean isValid(String str) {
-        return Pattern.matches("^[a-zA-Z0-9-_]*$", str);
-    }
-    
-    @RequestMapping(value="/member_delete.do", method = RequestMethod.GET)
-    public String memberDelete(HttpServletRequest req) {
+    // 멤버 삭제
+    @GetMapping("/delete")
+    public String memberDelete() {
     	return "client/member/member_delete";
     }
-    
-    @RequestMapping(value="/member_delete.do", method = RequestMethod.POST)
-    public String memberdelete(HttpServletRequest req) {
-    	String con = req.getParameter("confirmed");
-    	MemberDTO dto = getMember(req);
-    	int res = 0;
-    	
-    	if (con.equals("on")) {
-    		res = memberMapper.deleteMember(dto);
-    	}
-    	
-    	if (res >= 1){
-    		HttpSession session = req.getSession();
-    		session.invalidate();
-        	req.setAttribute("msg", "회원 탈퇴 : 완료되었습니다");
-        	req.setAttribute("url", "main.do");
-    	}else {
-        	req.setAttribute("msg", "회원 탈퇴 : 실패하였습니다");
-        	req.setAttribute("url", "main.do");
-    	}
 
-    	return "message";
+    
+    // 멤버 삭제
+    @PostMapping("/delete")
+    public String memberdelete(HttpServletRequest req,
+    								@AuthenticationPrincipal MemberSecurityDTO member) {
+    	
+    	memberService.deleteMember(member.getUsername());
+    	
+    	return setMessage(req, "/main", "탈퇴하셨습니다");
     }
-     */
+
 }

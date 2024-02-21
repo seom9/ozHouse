@@ -232,34 +232,17 @@
                               <div class="today-deal-item__image__item">
                                  <div class="production-item-image">
                                     <img class="image" src="data:image/jpeg;base64,${encodedImages[loop.index]}" alt="상품 대표 이미지">
-                                    <button class="production-item-image__scrap-badge">
-                                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="inactive-icon">
-                                          <defs>
-                                             <path id="scrap-icon-1-b" d="M12.472 6.93l7.056-3.811A1 1 0 0 1 21 4.002v15.496c0 .83-.672 1.502-1.5 1.502h-15c-.828 0-1.5-.673-1.5-1.502V4.002a1 1 0 0 1 1.472-.883l7.056 3.811a.999.999 0 0 0 .944 0z"></path>
-                                             <filter id="scrap-icon-1-a" width="150%" height="150%" x="-25%" y="-25%" filterUnits="objectBoundingBox">
-                                                <feOffset in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
-                                                <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="1.5"></feGaussianBlur>
-                                                <feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out" result="shadowBlurOuter1"></feComposite>
-                                                <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.26 0"></feColorMatrix>
-                                             </filter>
-                                             <filter id="scrap-icon-1-c" width="150%" height="150%" x="-25%" y="-25%" filterUnits="objectBoundingBox">
-                                                <feGaussianBlur in="SourceAlpha" result="shadowBlurInner1" stdDeviation="1.5"></feGaussianBlur>
-                                                <feOffset in="shadowBlurInner1" result="shadowOffsetInner1"></feOffset>
-                                                <feComposite in="shadowOffsetInner1" in2="SourceAlpha" k2="-1" k3="1" operator="arithmetic" result="shadowInnerInner1"></feComposite>
-                                                <feColorMatrix in="shadowInnerInner1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0"></feColorMatrix>
-                                             </filter>
-                                          </defs>
-                                          <g fill="none" fill-rule="nonzero" transform="matrix(1 0 0 -1 0 24)">
-                                             <use fill="#000" filter="url(#scrap-icon-1-a)" href="#scrap-icon-1-b"></use>
-                                             <use fill="#FFF" fill-opacity=".4" href="#scrap-icon-1-b"></use>
-                                             <use fill="#000" filter="url(#scrap-icon-1-c)" href="#scrap-icon-1-b"></use>
-                                             <path stroke="#FFF" d="M12.71 7.37h-.002a1.5 1.5 0 0 1-1.417 0L4.236 3.56a.499.499 0 0 0-.736.442v15.496c0 .553.448 1.002 1 1.002h15c.552 0 1-.449 1-1.002V4.002a.499.499 0 0 0-.734-.443l-7.057 3.81zm-.475-.88h-.001z"></path>
-                                          </g>
-                                       </svg>
-                                       <svg class="active-icon" width="24" height="24" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet">
-                                          <path fill="#35C5F0" fill-rule="nonzero" d="M12.472 17.07a.999.999 0 0 0-.944 0l-7.056 3.811A.999.999 0 0 1 3 19.998V4.502C3 3.672 3.672 3 4.5 3h15c.828 0 1.5.673 1.5 1.502v15.496a1 1 0 0 1-1.472.883l-7.056-3.811z"></path>
-                                       </svg>
-                                    </button>
+			<!-- 스크랩 버튼 -->
+			<sec:authorize access="hasAnyRole('ROLE_CLIENT')">
+				<button class="production-item-image__scrap-badge" onclick="javascript:scrap('${prc.username}', '${dto.proNum}', ${scrapResult eq 'N' ? 0 : 1})">
+		     		<svg class="icon--stroke" aria-label="스크랩" width="24" height="24" fill="${scrapResult eq 'N' ? 'rgba(0, 0, 0, 0)' : '#50E5B4'}" stroke="currentColor" stroke-width="0.5" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"><path d="M11.53 18.54l-8.06 4.31A1 1 0 0 1 2 21.97V3.5A1.5 1.5 0 0 1 3.5 2h17A1.5 1.5 0 0 1 22 3.5v18.47a1 1 0 0 1-1.47.88l-8.06-4.31a1 1 0 0 0-.94 0z"></path></svg>
+				</button>
+			</sec:authorize>
+			<sec:authorize access="!hasAnyRole('ROLE_CLIENT')">
+		      	<button class="production-item-image__scrap-badge" onclick="javascript:cantScrap()">
+		     		<svg class="icon--stroke" aria-label="스크랩" width="24" height="24" fill="rgba(0, 0, 0, 0)" stroke="currentColor" stroke-width="0.5" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"><path d="M11.53 18.54l-8.06 4.31A1 1 0 0 1 2 21.97V3.5A1.5 1.5 0 0 1 3.5 2h17A1.5 1.5 0 0 1 22 3.5v18.47a1 1 0 0 1-1.47.88l-8.06-4.31a1 1 0 0 0-.94 0z"></path></svg>
+				</button>	
+			</sec:authorize>
                                     <div class="production-item-image__dark-overlay"></div>
                                     
                                     <c:if test="${dto.proToday eq currentDate}">
@@ -342,5 +325,42 @@ document.querySelector('.css-h72v4d button').addEventListener('click', showNextP
        // prodView_main.do 실행
        window.location.href = 'shop_main.do';
      }
+</script>
+
+<!-- 스크랩 스크립트 -->
+<script type="text/javascript">
+	function scrap(memberId, productNum, is) {
+		// ** json data 전송 시 jstl 태그 자바스크립트에 안 먹음 ** // 		
+	    fetch('/scrap/' + memberId + '/' + productNum + '/' + is, {
+	        method: 'POST', 
+	        headers: {
+	            'Content-Type': 'application/json'
+	        },
+	        body: JSON.stringify({
+	        	memberId : memberId,
+	        	productNum : productNum
+	        }),
+	    })
+	    .then(response => {
+	        if (!response.ok) {
+	            throw new Error('Network response was not ok');
+	        }
+	        return response.text(); 
+	    })
+	    .then(data => {
+	        alert(data)
+	        location.reload()
+	    })
+	    .catch(error => {
+	    	alert("서버 통신에 실패했습니다 : 관리자에게 문의해 주세요")
+	    });
+	}
+</script>
+
+<script type="text/javascript">
+function cantScrap() {
+	alert("스크랩 : 로그인 해 주세요")
+	window.location.href = "/member/login"
+}
 </script>
 <%@ include file="bottom.jsp" %>
