@@ -1,5 +1,7 @@
 package com.oz.ozHouse.client.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.oz.ozHouse.domain.Member;
@@ -10,4 +12,5 @@ public interface ScrapRepository extends JpaRepository<Scrap, Integer> {
 	
 	boolean existsByMemberAndProduct(Member member, Product product);
 	
+	List<Scrap> findByMember_MemberId(String memberId);
 }

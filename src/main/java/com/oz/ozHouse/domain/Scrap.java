@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
-@Builder
+@Builder 
 @NoArgsConstructor
 @AllArgsConstructor
 @IdClass(ScrapId.class)
@@ -28,6 +28,7 @@ public class Scrap extends BaseEntity {
 	
     @Id
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "productNum")
+    @JoinColumn(name = "proNum")
     private Product product;
+    
 }
