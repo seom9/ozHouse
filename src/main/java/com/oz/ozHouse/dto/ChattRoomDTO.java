@@ -43,4 +43,16 @@ public class ChattRoomDTO {
 		this.createTime = LocalDate.now().format(formatter);
 		this.proNum = Integer.parseInt(req.getParameter("proNum"));
 	}
+	
+	public void setMyId(String myId) {
+        this.myId = myId;
+    }
+    
+    public void setOtherId(String otherId) {
+    	this.otherId = otherId;
+    }
+
+    public void setProNum(Integer proNum) {
+        this.proNum = proNum;
+    }
 }

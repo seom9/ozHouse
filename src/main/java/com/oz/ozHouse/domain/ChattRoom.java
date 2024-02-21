@@ -38,7 +38,7 @@ public class ChattRoom {
     public ChattRoom(ChattRoomDTO dto) {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy/MM/dd");
 
-		this.roomNum = dto.getRoomNum();
+//		this.roomNum = dto.getRoomNum();
 		this.myId = dto.getMyId();
 		this.otherId = dto.getOtherId();
 		this.createTime = dto.getCreateTime().formatted(formatter);

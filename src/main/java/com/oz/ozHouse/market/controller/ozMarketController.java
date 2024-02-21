@@ -90,9 +90,29 @@ public class ozMarketController {
 
 	// 물건 팔기 등록
 	@PostMapping("/my-product")
-	public String ozMarketMyProduct(@RequestParam("proImgPro") List<MultipartFile> proImgPro, HttpServletRequest req,
+	public String ozMarketMyProduct(@AuthenticationPrincipal MemberSecurityDTO member, @RequestParam("proImgPro") List<MultipartFile> proImgPro, HttpServletRequest req,
 			@RequestParam Map<String, String> params) throws Exception {
+		
+		if (member != null) {
+	        System.out.println("Member 객체가 null이 아닙니다. 닉네임: " + member.getMemberNickname());
+	    } else {
+	        System.out.println("Member 객체가 null입니다.");
+	    }
+		
+//		OzMarketProDTO dto = new OzMarketProDTO();
 		OzMarketProDTO dto = new OzMarketProDTO(req);
+		
+		if (member != null && member.getMemberNickname() != null) {
+	        dto.setMemberNickname(member.getMemberNickname());
+	        System.out.println("닉네임 설정: " + member.getMemberNickname()); // 닉네임이 설정되었는지 확인하기 위한 디버깅 라인
+	    } else {
+	        System.out.println("Member 또는 닉네임이 null입니다. DTO에 닉네임을 설정할 수 없습니다.");
+	        // member가 null이거나 닉네임이 사용가능하지 않은 경우를 처리
+	    }
+		
+		String nickName = member.getMemberNickname();
+		dto.setMemberNickname(nickName);
+		System.out.println("판매자 : " + dto.getMemberNickname());
 		// 대표 이미지 폴더 지정
 		String root = PATH + "\\" + "img";
 		File fileCheck = new File(root);
@@ -133,10 +153,13 @@ public class ozMarketController {
 
 		dto.setProImageChange(filepro);
 		dto.setProImgPro(fileproOri);
+		
+	    System.out.println("삽입 전 DTO 닉네임: " + dto.getMemberNickname());
 
-//		dto.setMemberNickname(memberNickname);
-
+		dto.setMemberNickname(member.getMemberNickname());
 		String res = marketProService.insertProduct(dto);
+
+	    System.out.println("삽입 후 DTO 닉네임: " + dto.getMemberNickname());
 
 		if (res != null) {
 			req.setAttribute("msg", "등록 성공했습니다.");
@@ -152,7 +175,7 @@ public class ozMarketController {
 
 	// 상세보기
 	@GetMapping("/my-product/{proNum}")
-	public String ozMarketContent(HttpServletRequest req, @PathVariable(value = "proNum") Integer proNum)
+	public String ozMarketContent(HttpServletRequest req, @PathVariable(value = "proNum") Integer proNum, @AuthenticationPrincipal MemberSecurityDTO member)
 			throws IOException {
 		String root = PATH + "\\" + "img";
 		Optional<OzMarketProDTO> optionalDto = Optional.of(marketProService.getProduct(proNum));
@@ -160,6 +183,9 @@ public class ozMarketController {
 		if (optionalDto.isPresent()) {
 			OzMarketProDTO dto = optionalDto.get();
 			req.setAttribute("getProduct", dto);
+			System.out.println("dto : " + dto.getMemberNickname());
+			
+			System.out.println("num : " + dto.getProNum());
 
 			List<String> encodedImagesPro = new ArrayList<>();
 			String[] imageProFiles = dto.getProImageChange().split(",");
@@ -170,9 +196,13 @@ public class ozMarketController {
 					encodedImagesPro.add(encodedImagePro);
 				}
 			}
+			
 			req.setAttribute("encodedImagesPro", encodedImagesPro);
-		}
 
+		}
+		System.out.println("닉네임 : " + member.getMemberNickname());
+
+		req.setAttribute("nickname", member.getMemberNickname());
 		return "client/ozMarket/myProduct_content";
 	}
 	
