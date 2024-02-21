@@ -9,7 +9,7 @@
 <script type="text/javascript">
 	function check() {
 		if (window.confirm("입점신청을 취소하실시 3개월간 재신청이 불가합니다. 취소하시겠습니까?")) {
-			location.href = "${pageContext.request.contextPath}/brands/applications/${applicationList.inbrand_num}/cancel";
+			document.f.submit();
 		}
 	}
 </script>
@@ -109,7 +109,7 @@ h2 {
 					<div class="flex-cell">
 						<div class="flex-cell-header">사업자 등록번호</div>
 						<div class="flex-cell-content">
-							${applicationList.inbrand_comnum1}-${applicationList.inbrand_comnum2}-${applicationList.inbrand_comnum3}
+							${applicationList.inComnum1}-${applicationList.inComnum2}-${applicationList.inComnum3}
 						</div>
 					</div>
 				</div>
@@ -117,32 +117,36 @@ h2 {
 					<div class="flex-cell">
 						<div class="flex-cell-header">상점명</div>
 						<div class="flex-cell-content">
-							${applicationList.inbrand_company}</div>
+							${applicationList.inCompany}</div>
 					</div>
 				</div>
 				<div class="flex-row">
 					<div class="flex-cell">
 						<div class="flex-cell-header">홈페이지</div>
 						<div class="flex-cell-content">
-							${applicationList.inbrand_homepage}</div>
+							${applicationList.inHomepage}</div>
 					</div>
 				</div>
 				<div class="flex-row">
 					<div class="flex-cell">
 						<div class="flex-cell-header">카테고리</div>
-						<div class="flex-cell-content">${resultCate}</div>
+						<div class="flex-cell-content">
+						<c:forEach var="category" items="${applicationList.inCategory}">
+							${category.categoryName}/
+						</c:forEach>
+						</div>
 					</div>
 				</div>
 				<div class="flex-row">
 					<div class="flex-cell">
 						<div class="flex-cell-header">담당자 이름</div>
 						<div class="flex-cell-content">
-							${applicationList.inbrand_manname}</div>
+							${applicationList.inManname}</div>
 					</div>
 					<div class="flex-cell">
 						<div class="flex-cell-header">담당자 전화번호</div>
 						<div class="flex-cell-content">
-							${applicationList.inbrand_manhp1}-${applicationList.inbrand_manhp2}-${applicationList.inbrand_manhp3}
+							${applicationList.inManhp1}-${applicationList.inManhp2}-${applicationList.inManhp3}
 						</div>
 					</div>
 				</div>
@@ -150,31 +154,32 @@ h2 {
 					<div class="flex-cell">
 						<div class="flex-cell-header">담당자 이메일</div>
 						<div class="flex-cell-content">
-							${applicationList.inbrand_manemail}</div>
+							${applicationList.inManemail}</div>
 					</div>
 				</div>
 				<div class="flex-row">
+				<form name = "f" method = "post" action = "/merchant/home/brand/applicationList/${applicationList.inNum}/cancel">
 					<div class="flex-cell">
 						<div class="flex-cell-header">첨부된 파일</div>
 						<div class="flex-cell-content">
-							<a
-								href="${pageContext.request.contextPath}/brands/applications/files/${applicationList.inbrand_file}/download">
-								${applicationList.inbrand_file} </a>
+							<a href="#">${applicationList.inSaleFile} </a>
+							<input type = "hidden" name = "inSaleFile" value = "${applicationList.inSaleFile}">
 						</div>
 					</div>
+				</form>
 					<div class="flex-cell">
 						<div class="flex-cell-header">심사 상태</div>
 						<div class="flex-cell-content">
-							<c:if test="${applicationList.mer_isbrand eq 't'}">
-				입점 완료
-			</c:if>
-							<c:if test="${applicationList.mer_isbrand eq 'f'}">
-				승인중
-			</c:if>
+							<c:if test="${applicationList.merIsbrand eq 't'}">
+								입점 완료
+							</c:if>
+							<c:if test="${applicationList.merIsbrand eq 'f'}">
+								승인중
+							</c:if>
 						</div>
 					</div>
 				</div>
-				<c:if test="${applicationList.mer_isbrand eq 'f'}">
+				<c:if test="${applicationList.merIsbrand eq 'f'}">
 					<div style="text-align: center;">
 						<button
 							style="background-color: #50E5B4; font-size: 20px; color: white; border: none; padding: 10px 10px; border-radius: 4px;"
