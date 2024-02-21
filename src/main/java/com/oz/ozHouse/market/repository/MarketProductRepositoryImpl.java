@@ -27,7 +27,7 @@ public class MarketProductRepositoryImpl implements MarketProductRepository {
 	@Override
 	public Optional<OzMarketProDTO> findByProNum(Integer proNum) {
 		try {
-			OzMarketPro product = em.createQuery("SELECT oz FROM OzMarketPro oz", OzMarketPro.class)
+			OzMarketPro product = em.createQuery("SELECT oz FROM OzMarketPro oz WHERE oz.proNum = :proNum", OzMarketPro.class)
 					.setParameter("proNum", proNum).getSingleResult();
 			return Optional.of(OzMarketProDTO.toDTO(product));
 		} catch (NoResultException e) {

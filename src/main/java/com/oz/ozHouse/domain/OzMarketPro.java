@@ -1,13 +1,10 @@
 package com.oz.ozHouse.domain;
 
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import com.oz.ozHouse.domain.common.Image;
-import com.oz.ozHouse.domain.common.ProPrice;
 import com.oz.ozHouse.dto.OzMarketProDTO;
-import com.oz.ozHouse.dto.ProductDTO;
 
-import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -34,11 +31,11 @@ public class OzMarketPro {
 
 	private String proTitle;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "memberNickname")
-	private Member Member;
+//	@ManyToOne(fetch = FetchType.EAGER)
+//	@JoinColumn(name = "memberNickname")
+//	private Member Member;
 	
-//	private String memberNickname;
+	private String memberNickname;
 
 //	@Embedded
 //	private Image img;
@@ -66,6 +63,7 @@ public class OzMarketPro {
 		
 		this.proNum = dto.getProNum();
 		this.proTitle = dto.getProTitle();
+		this.memberNickname = dto.getMemberNickname();
 //		this.memberNickname = "서아";
 //		this.Member = dto.getMemberNickname();
 //		this.img = new Image(dto.getProImg(), dto.getProImgPro(), dto.getProImageChange(), dto.getProImageProChange());
@@ -75,7 +73,14 @@ public class OzMarketPro {
 		this.proPrice = dto.getProPrice();
 		this.proImageChange = dto.getProImageChange();
 		this.proContent = dto.getProContent();
-		this.proInDate = dto.getProInDate().formatted(formatter);
+//		this.proInDate = dto.getProInDate().formatted(formatter);
+		
+		if (dto.getProInDate() != null) {
+	        this.proInDate = dto.getProInDate().formatted(formatter);
+	    } else {
+	        this.proInDate = LocalDate.now().format(formatter); // 기본값으로 현재 날짜 설정
+	    }
+		
 		this.proApprovalStatus = "판매중";
 		this.buyStatus = dto.getBuyStatus();
 	}

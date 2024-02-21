@@ -67,6 +67,7 @@
 						</div>
 						<div class="write">
 							<button type="submit" class="write_div">올리기</button>
+							<input type="hidden" name="memberNickname" value="nickName"/>
 						</div>
 					</div>
 				</div>
