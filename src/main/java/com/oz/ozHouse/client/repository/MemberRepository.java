@@ -23,6 +23,8 @@ public interface MemberRepository extends JpaRepository<Member, Integer> {
 	
 	boolean existsByMemberId(String memberId);
 	
+	void deleteByMemberId(String memberId);
+	
 	// Security : member 로그인 시 memberRole 같이 로딩
 	@EntityGraph(attributePaths = "roleSet")
 	@Query("select m from Member m where m.memberId = :memberId and m.social = false")

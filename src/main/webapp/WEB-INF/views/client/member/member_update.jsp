@@ -214,6 +214,8 @@
 					<input type="text" id="sample6_extraAddress" name="zipcode" value="${member.memberAddress.zipcode}" placeholder="참고항목">
 					<input type="button" value="정보 수정" onclick="javascript:update()">
 					<input type="reset" value="reset">
+					<span style="color: red; text-decoration: underline;">
+					<a href="/member/delete">회원 탈퇴하기</a></span>	<br><br><br><br><br><br><br><br>
 		</form>
 	</div>
 </body>
