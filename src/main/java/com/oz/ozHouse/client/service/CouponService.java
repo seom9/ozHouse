@@ -12,4 +12,5 @@ public interface CouponService {
 	List<MerCouponDTO> getUserCoupons(String memberId);
 	
 	boolean addCoupon(String memberId, int merCouponnum);
+	
 }

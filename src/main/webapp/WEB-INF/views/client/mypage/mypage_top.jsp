@@ -107,8 +107,8 @@
             <li class="page-navigation__item" onclick="toggleSubMenu(this)"><a target="_self">나의 쇼핑</a>
            		<span class="page-navigation__sub-menu-items">
                 <ul class="page-navigation__sub-menu">
-                    <li class="page-navigation__sub-menu-item"><a href="mypage_shopping.do" target="_self">주문 배송 내역 조회</a></li>
-                    <li class="page-navigation__sub-menu-item"><a href="mypage_scrapbook.do" target="_self">상품 스크랩북</a></li>
+                    <li class="page-navigation__sub-menu-item"><a href="/mypage/shopping" target="_self">주문 배송 내역 조회</a></li>
+                    <li class="page-navigation__sub-menu-item"><a href="/mypage/scrap" target="_self">상품 스크랩북</a></li>
                     <li class="page-navigation__sub-menu-item"><a href="#" target="_self">나의 문의 내역</a></li>
                     <li class="page-navigation__sub-menu-item"><a href="mypage_point.do" target="_self">포인트</a></li>
                     <li class="page-navigation__sub-menu-item"><a href="#" target="_self">공지사항</a></li>

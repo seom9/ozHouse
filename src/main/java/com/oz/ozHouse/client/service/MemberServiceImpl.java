@@ -92,6 +92,11 @@ public class MemberServiceImpl implements MemberService {
         return member.getMemberId();
 	}
 
+	@Override
+	public int deleteMember(String memberId) {
+		memberRepository.deleteByMemberId(memberId);
+		return 0;
+	}
 	
 }
 

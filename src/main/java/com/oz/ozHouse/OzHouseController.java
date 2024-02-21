@@ -29,11 +29,13 @@ public class OzHouseController {
 	
 	@GetMapping(value = {"/", "/index", "/main"})
 	public String index(Model model) {
+		
 		List<Product> cliProductList = ps.cliProductList();
 		List<Blog> blogList = bs.blogList();
 		
 		model.addAttribute("productList", cliProductList);
 		model.addAttribute("blogList", blogList);
+		
 		return "client/main/Main";
 	}
 	
