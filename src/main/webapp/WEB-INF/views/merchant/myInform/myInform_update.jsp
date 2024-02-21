@@ -10,35 +10,35 @@
 
 function check(business, fileData) { 
 	
-	if(f.mer_name.value==""){
+	if(f.merName.value==""){
        	alert('상점 담당자의 이름을 입력해주세요.');
-       	f.mer_name.focus();
+       	f.merName.focus();
            return;
 	}
 	
-	var hp1 = f.mer_hp1.value;
-	var hp2 = f.mer_hp2.value;
-	var hp3 = f.mer_hp3.value;
+	var hp1 = f.merHp1.value;
+	var hp2 = f.merHp2.value;
+	var hp3 = f.merHp3.value;
 	if(hp1=="" || hp2=="" || hp3=="") {
 	alert('상점 담당자의 전화번호를 입력해주세요.');
-	f.mer_hp1.focus();
+	f.merHp1.focus();
 	    return;
 	}
 	var hpExptext = /^[0-9]+/;
 	if(hpExptext.test(hp1)==false || 
 			hpExptext.test(hp2)==false || hpExptext.test(hp3)==false){
 		alert("전화번호에는 숫자만 입력 가능합니다.");
-		f.mer_hp1.focus();
+		f.merHp1.focus();
 		return;
 	}
 	
-	var email = f.mer_email.value;
+	var email = f.merEmail.value;
 	var exptext = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
 
 	if(exptext.test(email)==false){
 	//이메일 형식이 알파벳+숫자@알파벳+숫자.알파벳+숫자 형식이 아닐경우	
 		alert("이메일형식이 올바르지 않습니다.");
-		f.mer_email.focus();
+		f.merEmail.focus();
 		return;
 	}
 	
@@ -60,15 +60,11 @@ function check(business, fileData) {
 	        return;
 	    }
 	}
-    if(f.mer_)
-    if(f.mer_comintro.value==""){
-		document.f.mer_comintro.value = " ";
+	if(f.inHomepage.value==""){
+		document.f.inHomepage.value = " ";
 	}
-	if(f.mer_homepage.value==""){
-		document.f.mer_homepage.value = " ";
-	}
-	if(f.mer_othershop.value==""){
-		document.f.mer_othershop.value = " ";
+	if(f.inOthershop.value==""){
+		document.f.inOthershop.value = " ";
 	}
     document.f.submit();
 	}
@@ -168,9 +164,6 @@ function check(business, fileData) {
 					<div class="flex-header">사업자등록번호</div>
 					<div class="flex-content">
 						${merchantUpdate.merComnum1}-${merchantUpdate.merComnum2}-${merchantUpdate.merComnum3}
-						<input type="hidden" name="merComnum1" value="${merchantUpdate.merComnum1}"> 
-						<input type="hidden" name="merComnum2" value="${merchantUpdate.merComnum2}"> 
-						<input type="hidden" name="merComnum3" value="${merchantUpdate.merComnum3}">
 					</div>
 				</div>
 				<div class="flex-row">
@@ -207,32 +200,20 @@ function check(business, fileData) {
 				<div class="flex-row">
 					<div class="flex-header">판매관련 파일</div>
 					<div class="flex-content">
-						${merchantUpdate."merFile"}<br>
-						 <input type="file" name="merFile"> 
+						${merchantUpdate.merFile}<br>
+						 <input type="file" name="inSaleFile"> 
 						 <input type="hidden" name="old_mer_file" value="${merchantUpdate.merFile}">
 					</div>
 				</div>
 				<div class="flex-row">
 					<div class="flex-header">회사 홈페이지</div>
 					<div class="flex-content">
-						<input type="text" name="merHomepage" value="${merchantUpdate.merHomepage}">
+						<input type="text" name="inHomepage" value="${merchantUpdate.merHomepage}">
 					</div>
 					<div class="flex-header">타입점 쇼핑몰</div>
 					<div class="flex-content">
-						<input type="text" name="merOthershop" value="${merchantUpdate.merOthershop}">
+						<input type="text" name="inOthershop" value="${merchantUpdate.merOthershop}">
 					</div>
-				</div>
-				<div class="flex-row">
-					<div class="flex-header">영업담당자 이름</div>
-					<div class="flex-content">${merchantUpdate.merManname}</div>
-					<div class="flex-header">영업담당자 핸드폰</div>
-					<div class="flex-content">
-						${merchantUpdate.mer_manhp1}-${merchantUpdate.mer_manhp2}-${merchantUpdate.mer_manhp3}
-					</div>
-				</div>
-				<div class="flex-row">
-					<div class="flex-header">영업담당자 E-mail</div>
-					<div class="flex-content">${merchantUpdate.mer_manemail}</div>
 				</div>
 			</div>
 			<button type="button"
