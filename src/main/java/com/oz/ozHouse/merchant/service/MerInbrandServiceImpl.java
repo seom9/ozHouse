@@ -16,7 +16,7 @@ import com.oz.ozHouse.dto.ApplicationDTO;
 import com.oz.ozHouse.dto.InbrandDTO;
 import com.oz.ozHouse.merchant.exception.NotFoundMerNumException;
 import com.oz.ozHouse.merchant.repository.inbrandRepository.MerInbrandRepository;
-import com.oz.ozHouse.merchant.repository.joinRepository.MerJoinRepository;
+import com.oz.ozHouse.merchant.repository.merchantRepository.MerchantRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -24,7 +24,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class MerInbrandServiceImpl implements MerInbrandService {
 	private final MerInbrandRepository inbrandRepository;
-	private final MerJoinRepository joinRepository;
+	private final MerchantRepository joinRepository;
 
 	@Override
 	public InbrandDTO selectMer(int merNum) {
