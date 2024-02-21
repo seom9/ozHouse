@@ -17,14 +17,14 @@ public class MemberSecurityDTO extends User implements OAuth2User {
 	private String memberPasswd;
     private String memberNickname;
     private String memberEmail;
-    private LocalDate memberDeleteDate;
+    private String memberDeleteDate;
     private boolean social;
     
     private Map<String, Object> props; 	// 소셜 로그인 정보
     
     public MemberSecurityDTO(int memberNum, String username, String password, 
     						String memberNickname, String memberEmail, 
-    						LocalDate memberDeleteDate, boolean social,
+    						String memberDeleteDate, boolean social,
     						Collection<? extends GrantedAuthority> authorities) {
         super(username, password, authorities);
         this.memberNum = memberNum;
