@@ -1,6 +1,9 @@
 package com.oz.ozHouse.domain;
 
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 import com.oz.ozHouse.domain.common.Image;
 import com.oz.ozHouse.domain.common.ProPrice;
@@ -14,6 +17,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -65,6 +69,9 @@ public class Product {
 	private String categoryName;
 
 	private String proToday;
+	
+    @OneToMany(mappedBy = "product")
+    private List<Scrap> scraps;
 
 	public Product(ProductDTO dto) {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy/MM/dd");

@@ -10,7 +10,7 @@
 <body>
 	<header>
 		<div class="header-left">
-			<a href="${pageContext.request.contextPath}/merchant/main"> <img
+			<a href="${pageContext.request.contextPath}/merchant/home"> <img
 				src="/merchant/img/ozlogo2.png" width="60" height="60">
 				<img src="/merchant/img/oz2.png" width="90" height="50">
 				<span class="partner-center"><b>파트너센터</b></span>

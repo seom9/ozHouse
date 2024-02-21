@@ -1,153 +1,108 @@
 package com.oz.ozHouse.client.controller;
 
+import java.net.BindException;
+import java.util.Map;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.oz.ozHouse.client.service.EmailService;
+import com.oz.ozHouse.client.service.MypageService;
+import com.oz.ozHouse.dto.client.member.MemberPasswdUpdateDTO;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j2;
 
 @Controller
 @RequiredArgsConstructor
 public class LoginController {
+	
+	private final MypageService mypageService;
+	private final EmailService emailService;
+	
+	// setMessage 메서드
+    private String setMessage (HttpServletRequest req, String url, String msg) {
+    	req.setAttribute("url", url);
+    	req.setAttribute("msg", msg);
+    	return "message";
+    }
+	
+    
 	@GetMapping("/member/login")
 	public String loginGet() {
 		return "client/member/member_login";
 	}
 	
+	
 	@GetMapping("/login/message")
 	public String loginSuccess(HttpServletRequest req) {
-		req.setAttribute("msg", "오즈 하우스에 오신 것을 환영합니다!");
-		req.setAttribute("url", "/main");
-		return "message";
+		return setMessage(req, "/main", "오즈 하우스에 오신 것을 환영합니다!");
 	}
-
-	/*
-	@RequestMapping(value="/member_find.do", method=RequestMethod.GET)
+	
+	
+	@GetMapping("/member/find")
 	public String searchMember() {
 		return "client/member/member_find";
 	}
-
-	@RequestMapping(value="/member_find.do", method=RequestMethod.POST)
-	public String searchMember(HttpServletRequest req, String member_email) {
-		String member_id = memberMapper.checkMemberIdEmail(member_email);
-		
-		int oauthNum = Integer.parseInt(req.getParameter("oauthNum"));
-		int userSendNum = Integer.parseInt(req.getParameter("userSendNum"));
-		
-		if (oauthNum == userSendNum) {
-			req.setAttribute("msg", "비밀번호를 재설정해 주세요");
-			req.setAttribute("url", "mypage_upadatePasswd.do?mode=find&id=" + member_id);
-		}else {
-			req.setAttribute("msg", "인증 번호가 다릅니다 : 다시 시도해 주세요");
-			req.setAttribute("url", "member_find.do");
-		}
-		return "message";
-	}
 	
-	@RequestMapping("/member_logout.do")
-	public String logout(HttpServletRequest req) {
-		HttpSession session = req.getSession();
-		session.invalidate();
-		req.setAttribute("msg", "로그아웃 되었습니다");
-		req.setAttribute("url", "main.do");
-		return "message";
-	}
 	
-	//카카오 로그인 api
-	@RequestMapping(value="/kakao_login.do", method=RequestMethod.GET)
-	public String kakaoLogin(HttpServletRequest req, @RequestParam(value = "code", required = false) String code) throws Exception {
-		System.out.println("#########" + code);
-		String access_Token = kakaoLogin.getAccessToken(code);
-		MemberDTO dto = kakaoLogin.getUserInfo(access_Token);
-		HttpSession session = req.getSession();
+	@GetMapping("/member/{memberEmail}/find")
+	public String findMember(HttpServletRequest req, 
+								@PathVariable("memberEmail") String memberEmail) 
+								throws Exception {
 		
-		if (dto.getMember_id() == null) {
-			req.setAttribute("member_email", dto.getMember_email());
-			req.setAttribute("member_nickname", dto.getMember_nickname());
-			req.setAttribute("member_image", dto.getMember_image());
-			session.setAttribute("insertMember", dto);
-			return "client/member/member_join";
-		}else {
-			LoginOkBean loginOk = new LoginOkBean();
-			loginOk.setMember_id(dto.getMember_id());
-			
-			if (memberMapper.confirmDelete(loginOk.getMember_id()) != null) {
-				req.setAttribute("msg", "탈퇴한 아이디입니다");
-				req.setAttribute("url", "main.do");
-				return "message";
-			}
-			
-			session.setAttribute("loginMember", loginOk);
-			req.setAttribute("msg", loginOk.getMember_id() + "님, 방문해 주셔서 감사합니다");
-			req.setAttribute("url", "main.do");
-			return "message";
-		}
+		String checkNum = emailService.sendOauthMessage(memberEmail, "회원 정보 변경");
+		req.setAttribute("checkNum", checkNum);
+		return "client/member/send_find_email";
+	}	
+	 
+	
+	@PostMapping("/member/{memberEmail}/find")
+	public String searchMember(HttpServletRequest req, 
+								@PathVariable("memberEmail") String memberEmail,
+								@ModelAttribute MemberPasswdUpdateDTO dto) 
+								throws Exception {
+		
+		return (dto.getCheckNum() == dto.getUserSendNum()) 
+				? setMessage(req, "/member/" + memberEmail + "/updatepass/find", "비밀번호를 재설정해 주세요")
+				: setMessage(req, "/member/find", "인증 번호가 다릅니다 : 다시 시도해 주세요");
 	}
 	
 	
-	// 네이버 로그인 api
-    @RequestMapping(value = "/naverLogin.do", method = { RequestMethod.GET, RequestMethod.POST })
-    public String login(HttpServletRequest req) {
-    	HttpSession session = req.getSession();
-        String naverAuthUrl = naverLogin.getAuthorizationUrl(session);
-        
-        //https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=sE***************&
-        //redirect_uri=http%3A%2F%2F211.63.89.90%3A8090%2Flogin_project%2Fcallback&state=e68c269c-5ba9-4c31-85da-54c16c658125
-        System.out.println(" 꽕 씠踰  : " + naverAuthUrl);
-        
-        return "redirect:"+naverAuthUrl;
+	@GetMapping("/member/{member}/updatepass/find")
+    public String mypage_updatePasswd(HttpServletRequest req, 
+    					@PathVariable("member") String member) {
+		req.setAttribute("mode", "find");
+		req.setAttribute("member", member);
+        return "client/mypage/mypage_updatePasswd";
     }
-
-    // 네이버 로그인 callback
-    @RequestMapping(value = "/callBack.do", method = { RequestMethod.GET, RequestMethod.POST })
-    public String callback(HttpServletRequest req, @RequestParam String code, @RequestParam String state, HttpSession session)
-            throws IOException, ParseException {
-        OAuth2AccessToken oauthToken;
-        oauthToken = naverLogin.getAccessToken(session, code, state);
-
-        String apiResult = naverLogin.getUserProfile(oauthToken);
-        System.out.println(naverLogin.getUserProfile(oauthToken).toString());
-        System.out.println("result"+apiResult);
-        
-		JSONParser parser = new JSONParser();
-		Object obj = parser.parse(apiResult);		
-		JSONObject jsonObj = (JSONObject) obj;
-        
-		JSONObject response_obj = (JSONObject)jsonObj.get("response");
-		String naverId = (String)response_obj.get("id");
-		String naverNickname = (String)response_obj.get("nickname");
-		String naverEmail = (String)response_obj.get("email");
-		String naverProfile_image = (String)response_obj.get("profile_image");
-        
-		MemberDTO dto = memberMapper.checkNaver(naverEmail);
-		
-		if (dto !=null) {
-			LoginOkBean loginOk = new LoginOkBean();
-			loginOk.setMember_id(dto.getMember_id());
-			
-			if (memberMapper.confirmDelete(loginOk.getMember_id()) != null) {
-				req.setAttribute("msg", "탈퇴한 아이디입니다");
-				req.setAttribute("url", "main.do");
-				return "message";
-			}
-			
-			session.setAttribute("loginMember", loginOk);
-			req.setAttribute("msg", loginOk.getMember_id() + "님, 방문해 주셔서 감사합니다");
-			req.setAttribute("url", "main.do");
-			return "message";
-		}
-
-
-        req.setAttribute("member_nickname", naverNickname);
-        req.setAttribute("member_email", naverEmail);
-        
-        
-        if (naverProfile_image != null) {
-        	req.setAttribute("member_image", naverProfile_image);
+	
+	
+    @PatchMapping("/member/{member}/updatepass/{mode}")
+    @ResponseBody
+    public String mypage_updatePasswdPro(HttpServletRequest req,
+				    					@RequestBody @Validated MemberPasswdUpdateDTO dto,
+				    					@PathVariable Map<String, String> pathVariables,
+				    					BindingResult result)
+				    	    			throws BindException{
+    	
+    	boolean pass = false;
+    	
+        if (pathVariables.get("mode").equals("find")) {
+        	pass = mypageService.renewPass(dto);
+        }else if (pathVariables.get("mode").equals("up")){
+        	pass = mypageService.passUpdate(dto);
         }
         
-        return "client/member/member_join";
+        return (pass) ? "회원 정보가 수정되었습니다" : "회원 정보 수정 실패 : 서버에 문의해 주세요";
     }
-	*/
+
 }

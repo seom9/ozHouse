@@ -4,8 +4,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <%@ include file="mypage_top.jsp" %>
-<link rel="stylesheet" href="${path}/resources/client/mypage.css"/>
-<link rel="stylesheet" href="${path}/resources/client/login.css"/>
+<link rel="stylesheet" href="${path}/client/mypage_css/mypage.css"/>
+<link rel="stylesheet" href="${path}/client/member_css/login.css"/>
 <br><br><br>
 
 <h2>쿠폰</h2>
@@ -20,14 +20,14 @@
 <div>
 <c:set var="num" value="0" />
 
-<c:forEach var="cdto" items="${userCouponList}">
+<c:forEach var="cdto" items="${userCoupons}">
 <c:if test="${num % 4 == 0}">
 <div class="mer_coupon">
 </c:if>
 <div class="coupon-item">
-<a href="#(상점 바로 가기)"><div class="coupon-item__title coupon-item__title">${cdto.mer_couponname}</div></a>
-<div class="coupon-item__valuation"><span class="coupon-item__valuation-number">${cdto.mer_coupondiscount}원</span></div>
-<div class="coupon-item__info"><div class="coupon-item__due-date">∙ <span>유효 기간 : ${cdto.mer_couponenddate}</span></div>
+<a href="#(상점 바로 가기)"><div class="coupon-item__title coupon-item__title">${cdto.merCouponname}</div></a>
+<div class="coupon-item__valuation"><span class="coupon-item__valuation-number">${cdto.merCoupondiscount}원</span></div>
+<div class="coupon-item__info"><div class="coupon-item__due-date">∙ <span>유효 기간 : ${cdto.merCouponenddate}</span></div>
 <div class="coupon-item__minimum-payment">∙ <span>#원 이상 구매시</span></div>
 <br><br>
   <button class="button button--color-blue button--size-50 button--shape-4" type="button" disabled>✓ 받았음</button>
@@ -42,21 +42,23 @@
 
 <hr>
 <hr>
-<div></div>
-<div></div>
+<br><br>
+<div class="coupon-feed__divider"></div>
+<br><br>
 
 <c:set var="co" value="0" />
-<c:forEach var="dto" items="${merCouponList}">
+<c:forEach var="dto" items="${merCoupons}">
 <c:if test="${co % 4 == 0}">
 	<div class="mer_coupon">
 </c:if>
 <div class="coupon-item">
-<a href="#(상점 바로 가기)"><div class="coupon-item__title coupon-item__title">${dto.mer_couponname}</div></a>
-<div class="coupon-item__valuation"><span class="coupon-item__valuation-number">${dto.mer_coupondiscount}원</span></div>
-<div class="coupon-item__info"><div class="coupon-item__due-date">∙ <span>유효 기간 : ${dto.mer_couponenddate}</span></div>
+<a href="#(상점 바로 가기)"><div class="coupon-item__title coupon-item__title">${dto.merCouponname}</div></a>
+<div class="coupon-item__valuation"><span class="coupon-item__valuation-number">${dto.merCoupondiscount}원</span></div>
+<div class="coupon-item__info"><div class="coupon-item__due-date">∙ <span>유효 기간 : ${dto.merCouponenddate}</span></div>
 <div class="coupon-item__minimum-payment">∙ <span>#원 이상 구매시</span></div>
 <br><br>
-	<button class="button button--color-blue button--size-50 button--shape-4" type="button" onclick="window.location.href = 'mypage_usercoupon.do?mer_couponnum=${dto.mer_couponnum}&mer_num=${dto.mer_num}&enddate=${dto.mer_couponenddate}'">받기</button>
+	<button class="button button--color-blue button--size-50 button--shape-4" type="button" 
+			onclick="window.location.href = '/mypage/coupon/${dto.merCouponnum}'">받기</button>
 </div></div>
 <c:set var="co" value="${co + 1}" />
 

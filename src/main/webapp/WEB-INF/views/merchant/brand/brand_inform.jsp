@@ -6,40 +6,41 @@
 <head>
 <meta charset="UTF-8">
 <title>입점신청</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 
 function check(fileData) { 
-   if(f.inbrand_manname.value==""){
+   if(f.inManname.value==""){
           alert('담당자 이름을 입력해주세요.');
-          f.inbrand_manname.focus();
+          f.inManname.focus();
            return;
    }
-   var hp1 = f.inbrand_manhp1.value;
-   var hp2 = f.inbrand_manhp2.value;
-   var hp3 = f.inbrand_manhp3.value;
+   var hp1 = f.inManhp1.value;
+   var hp2 = f.inManhp2.value;
+   var hp3 = f.inManhp3.value;
    if(hp1=="" || hp2=="" || hp3=="") {
    alert('담당자 전화번호를 입력해주세요.');
-   f.inbrand_manhp1.focus();
+   f.inManhp1.focus();
        return;
    }
    var hpExptext = /^[0-9]+/;
    if(hpExptext.test(hp1)==false || 
          hpExptext.test(hp2)==false || hpExptext.test(hp3)==false){
       alert("전화번호에는 숫자만 입력 가능합니다.");
-      f.inbrand_manhp1.focus();
+      f.inManhp1.focus();
       return;
    }
-   var email = f.inbrand_manemail.value;
+   var email = f.inManemail.value;
    var exptext = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
 
    if(exptext.test(email)==false){
    //이메일 형식이 알파벳+숫자@알파벳+숫자.알파벳+숫자 형식이 아닐경우   
       alert("이메일형식이 올바르지 않습니다.");
-      f.inbrand_manemail.focus();
+      f.inManemail.focus();
       return;
    }
    var isChk = false;
-   var values = document.getElementsByName("inbrand_category");
+   var values = document.getElementsByName("inCategory");  //배열
    for(var i=0;i<values.length;i++){
       if(values[i].checked){
           isChk = true;
@@ -50,15 +51,15 @@ function check(fileData) {
        alert("카테고리를 선택해주세요.");
        return;
    }else{
-      var arrCate = [];
-      for(var i=0; i<values.length; ++i){
-          if(values[i].checked){  //체크된 박스라면
-              arrCate.push(values[i].value);  //arrCate 배열에 추기하기
-          }
-      }
-      var cate = arrCate.join(',');  //배열 -> 문자열로 변환
-         document.f.inbrand_category.value = cate;
-       }
+	   var arrCate = [];
+	      for(var i=0; i<values.length; ++i){
+	          if(values[i].checked){  //체크된 박스라면
+	              arrCate.push(values[i].value);  //arrCate 배열에 추기하기
+	          }
+	      }
+	      var cate = arrCate.join(',');  //배열 -> 문자열로 변환
+	         document.f.inCategory.value = cate;
+	       }
    
    if(!fileData.files || fileData.files.length == 0){
        alert("파일을 등록하여 주세요.");
@@ -70,28 +71,12 @@ function check(fileData) {
         alert("파일용량을 초과하였습니다. 업로드 가능한 최대크기는 1GB입니다.");
         return;
     }
-   //파일 이름 확인
-    var fileName = fileData.files[0].name; //files[0] : 업로드 된 파일 중 첫번째 파일  name : 파일의 이
-    const regex = /^[a-zA-Z0-9_]/; 
-    if (!regex.test(fileName)) {
-        alert("파일 이름의 형식은 '-'를 제외한 사업자등록번호_상점명 입니다.");
-        return;
-    }
     
-    var cNum1 = fileName.substr(0,3);
-    var cNum2 = fileName.substr(3,2);
-    var cNum3 = fileName.substr(5,5);
-    
-    if(cNum1 != ${inbrand_comnum1} || cNum2 != ${inbrand_comnum2} || cNum3 != ${inbrand_comnum3}){
-       alert("파일명의 사업자등록번호를 확인하여 주세요.");
-       return;
-    }
-    
-   if(f.inbrand_homepage.value==""){
-      document.f.inbrand_homepage.value = " ";
+   if(f.inHomepage.value==""){
+      document.f.inHomepage.value = " ";
    }
-   if(f.inbrand_othershop.value==""){
-      document.f.inbrand_othershop.value = " ";
+   if(f.inOthershop.value==""){
+      document.f.inOthershop.value = " ";
    }
     document.f.submit();
    }
@@ -198,80 +183,81 @@ button {
 		</h4>
 		<h3>상점 정보 입력</h3>
 		<div align="center">
-			<form name="f"
-				action="${pageContext.request.contextPath}/brands/applications"
+			<form name="f" id="f"
+				action="${pageContext.request.contextPath}/merchant/home/brand/submit"
 				method="post" enctype="multipart/form-data">
+				<input type="hidden" name="category" value=""/>
 				<div class="flex-container">
 					<div class="flex-row">
 						<div class="flex-header">사업자 등록번호</div>
 						<div class="business-num-inputs">
-							<input type="text" name="inbrand_comnum1" maxlength="3" size="5"
+							<input type="text" name="inComnum1" maxlength="3" size="5"
 								value="${inbrand_comnum1}" readOnly /> <span>-</span> <input
-								type="text" name="inbrand_comnum2" maxlength="2" size="3"
+								type="text" name="inComnum2" maxlength="2" size="3"
 								value="${inbrand_comnum2}" readOnly /> <span>-</span> <input
-								type="text" name="inbrand_comnum3" maxlength="5" size="5"
+								type="text" name="inComnum3" maxlength="5" size="5"
 								value="${inbrand_comnum3}" readOnly />
 						</div>
 					</div>
 					<div class="flex-row">
 						<div class="flex-header">상점명</div>
 						<div class="flex-content">
-							<input type="text" name="inbrand_company" size="100"
-								value="${merchantLoginMember.mer_company}" readOnly />
+							<input type="text" name="inCompany" size="100"
+								value="${merLoginMember.merCompany}" readOnly />
 						</div>
 					</div>
 					<div class="flex-row">
 						<div class="flex-header">홈페이지</div>
 						<div class="flex-content">
-							<input type="text" name="inbrand_homepage" size="100" />
+							<input type="text" name="inHomepage" size="100" />
 						</div>
 					</div>
 					<div class="flex-row">
 						<div class="flex-header">담당자 이름</div>
 						<div class="flex-content">
-							<input type="text" name="inbrand_manname" size="20" />
+							<input type="text" name="inManname" size="20" />
 						</div>
 					</div>
 					<div class="flex-row">
 						<div class="flex-header">담당자 전화번호</div>
 						<div class="business-num-inputs">
-							<input type="text" name="inbrand_manhp1" size="5" maxlength="3" />
-							<span>-</span> <input type="text" name="inbrand_manhp2" size="5"
-								maxlength="4" /> <span>-</span> <input type="text"
-								name="inbrand_manhp3" size="5" maxlength="4" />
+							<input type="text" name="inManhp1" size="5" maxlength="3" />
+							<span>-</span> <input type="text" name="inManhp2" size="5" maxlength="4" /> 
+							<span>-</span> <input type="text" name="inManhp3" size="5" maxlength="4" />
 						</div>
 					</div>
 					<div class="flex-row">
 						<div class="flex-header">담당자 이메일</div>
 						<div class="flex-content">
-							<input type="text" name="inbrand_manemail" size="100" />
+							<input type="text" name="inManemail" size="100" />
 						</div>
 					</div>
 					<div class="flex-row">
 						<div class="flex-header">카테고리</div>
 						<div class="flex-content">
-							<c:forEach var="dto" items="${category}">
-								<input type="checkbox" name="inbrand_category"
-									value="${dto.category_num}">${dto.category_name}
-               </c:forEach>
+							<c:forEach var="cat" items="${category}">
+								<input type="checkbox" name="inCategory"
+									value="${cat}">
+						        [${cat.categoryCode}]&nbsp;${cat.categoryName}
+						    </c:forEach>
 						</div>
 					</div>
 					<div class="flex-row">
 						<div class="flex-header">타입점 쇼핑몰</div>
 						<div class="flex-content">
-							<input type="text" name="inbrand_othershop" size="100" />
+							<input type="text" name="inOthershop" size="100" />
 						</div>
 					</div>
 					<div class="flex-row">
 						<div class="flex-header">파일 첨부</div>
 						<div class="flex-content">
-							<input type="file" name="inbrand_file" /> <input type="hidden"
-								name="merNum" value="${merNum}">
+							<input type="file" name="inSaleFile" /> <input type="hidden"
+								name="merNum" value="${merLoginMember.merNum}">
 						</div>
 					</div>
 				</div>
 				<div class="button-container">
-					<button type="button" onclick="check(f.inbrand_file)">다음</button>
+					<button type="button" onclick="check(f.inSaleFile)">다음</button>
 				</div>
 			</form>
 		</div>

@@ -1,6 +1,5 @@
 package com.oz.ozHouse.domain;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,9 +51,6 @@ public class Merchant extends BaseEntity{
     private CompanyNumber merComnum;
     
     
-    @OneToMany(mappedBy = "merchant", cascade = CascadeType.ALL)
-    private List<UserCoupon> userCoupons = new ArrayList<>();
-    
     @Embedded
     @NotNull
     @AttributeOverrides({
@@ -64,29 +60,26 @@ public class Merchant extends BaseEntity{
     })
     private PhoneNumber merHp;
     
-    @Embedded
-    @AttributeOverrides({
-    	@AttributeOverride(name = "homepage", column = @Column(name = "merHomepage")),
-    	@AttributeOverride(name = "ManagerName", column = @Column(name = "merManname")),
-    	@AttributeOverride(name = "ManagerEmail", column = @Column(name = "merManemail")),
-    	@AttributeOverride(name = "category", column = @Column(name = "merCategory")),
-    	@AttributeOverride(name = "otherShop", column = @Column(name = "merOthershop")),
-    	@AttributeOverride(name = "brandFile", column = @Column(name = "merFile")),
-		@AttributeOverride(name = "PhoneNumber.phoneNumber1", column = @Column(name = "merManhp1")),
-		@AttributeOverride(name = "PhoneNumber.phoneNumber2", column = @Column(name = "merManhp2")),
-		@AttributeOverride(name = "PhoneNumber.phoneNumber3", column = @Column(name = "merManhp3"))
-
-    })
-    	private InbrandInfo inbrandInfo;
+//    @Embedded
+//    @AttributeOverrides({
+//    	@AttributeOverride(name = "homepage", column = @Column(name = "merHomepage")),
+//    	@AttributeOverride(name = "ManagerName", column = @Column(name = "merManname")),
+//    	@AttributeOverride(name = "ManagerEmail", column = @Column(name = "merManemail")),
+//    	@AttributeOverride(name = "category", column = @Column(name = "merCategory")),
+//    	@AttributeOverride(name = "otherShop", column = @Column(name = "merOthershop")),
+//    	@AttributeOverride(name = "brandFile", column = @Column(name = "merFile")),
+//		@AttributeOverride(name = "PhoneNumber.phoneNumber1", column = @Column(name = "merManhp1")),
+//		@AttributeOverride(name = "PhoneNumber.phoneNumber2", column = @Column(name = "merManhp2")),
+//		@AttributeOverride(name = "PhoneNumber.phoneNumber3", column = @Column(name = "merManhp3"))
+//
+//    })
+//    	private InbrandInfo inbrandInfo;
     
-	@DateTimeFormat(pattern = "yy/MM/dd")
-    private LocalDate merInbranddate;
+    private String merInbranddate;
     
-	@DateTimeFormat(pattern = "yy/MM/dd")
-    private LocalDate merDeletedate;
+    private String merDeletedate;
     
-	@DateTimeFormat(pattern = "yy/MM/dd")
-    private LocalDate merOutDate;
+    private String merOutDate;
     
     private String merDelete;
     

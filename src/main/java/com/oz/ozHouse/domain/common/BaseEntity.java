@@ -1,7 +1,5 @@
 package com.oz.ozHouse.domain.common;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -11,8 +9,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
 import lombok.Getter;
 
 @MappedSuperclass
@@ -22,10 +18,10 @@ public abstract class BaseEntity {
 	@CreatedDate
 	@Column(name = "regdate", updatable = false)
 	@DateTimeFormat(pattern = "yy/MM/dd")
-	private LocalDate regDate;
+	private String regDate;
 	
 	@LastModifiedDate
 	@Column(name = "moddate")
 	@DateTimeFormat(pattern = "yy/MM/dd")
-	private LocalDate modDate;
+	private String modDate;
 }
