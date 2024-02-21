@@ -35,7 +35,6 @@ import lombok.RequiredArgsConstructor;
 public class MypageController {
 	
 	private final MemberService memberService;
-	private final MypageService mypageService;
 	
     @GetMapping("/hi")
     public String index(@AuthenticationPrincipal MemberSecurityDTO member) {
