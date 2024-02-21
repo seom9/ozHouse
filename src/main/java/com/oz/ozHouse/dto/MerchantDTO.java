@@ -5,6 +5,8 @@ import java.util.List;
 
 import com.oz.ozHouse.domain.Category;
 import com.oz.ozHouse.domain.Merchant;
+import com.oz.ozHouse.domain.common.CompanyNumber;
+import com.oz.ozHouse.domain.common.PhoneNumber;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
@@ -24,7 +26,7 @@ public class MerchantDTO {
     private String merIsbrand;
     private String merCompany;
     
-  //CompanyNumber merComnum
+    //CompanyNumber merComnum
     private String merComnum1;
     private String merComnum2;
     private String merComnum3;

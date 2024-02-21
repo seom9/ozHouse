@@ -1,7 +1,5 @@
 package com.oz.ozHouse.domain;
 
-
-import com.oz.ozHouse.domain.common.BaseEntity;
 import com.oz.ozHouse.domain.common.CompanyNumber;
 import com.oz.ozHouse.domain.common.InbrandInfo;
 
