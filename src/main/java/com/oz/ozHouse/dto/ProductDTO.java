@@ -39,7 +39,14 @@ public class ProductDTO {
     private String proImageProChange;
     private String encodedImage;
     private String proToday;
+<<<<<<< HEAD
     
+=======
+    private boolean scrap;
+    
+    
+
+>>>>>>> branch 'main' of https://github.com/gahyunseoul/ozHouse.git
     public static ProductDTO toDTO(Product product) {
         
         return ProductDTO.builder()
@@ -120,5 +127,9 @@ public class ProductDTO {
 	
 	public void setMerNum(int merNum) {
 		this.merNum = merNum;
+	}
+
+	public void setScrap(boolean scrap) {
+		this.scrap = scrap;
 	}
 }
