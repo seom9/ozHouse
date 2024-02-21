@@ -9,7 +9,7 @@
 <script type="text/javascript">
 	function check() {
 		if (window.confirm("입점신청을 취소하실시 3개월간 재신청이 불가합니다. 취소하시겠습니까?")) {
-			location.href = "${pageContext.request.contextPath}/brands/applications/${applicationList.inNum}/cancel";
+			document.f.submit();
 		}
 	}
 </script>
@@ -158,14 +158,15 @@ h2 {
 					</div>
 				</div>
 				<div class="flex-row">
+				<form name = "f" method = "post" action = "/merchant/home/brand/applicationList/${applicationList.inNum}/cancel">
 					<div class="flex-cell">
 						<div class="flex-cell-header">첨부된 파일</div>
 						<div class="flex-cell-content">
-							<a
-								href="${pageContext.request.contextPath}/brands/applications/files/${applicationList.inSaleFile}/download">
-								${applicationList.inSaleFile} </a>
+							<a href="#">${applicationList.inSaleFile} </a>
+							<input type = "hidden" name = "inSaleFile" value = "${applicationList.inSaleFile}">
 						</div>
 					</div>
+				</form>
 					<div class="flex-cell">
 						<div class="flex-cell-header">심사 상태</div>
 						<div class="flex-cell-content">
