@@ -1,15 +1,10 @@
 package com.oz.ozHouse.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.oz.ozHouse.domain.Merchant;
 import com.oz.ozHouse.domain.common.BaseEntity;
 import com.oz.ozHouse.domain.common.CompanyNumber;
-import com.oz.ozHouse.domain.common.InbrandInfo;
 import com.oz.ozHouse.domain.common.PhoneNumber;
 import com.oz.ozHouse.dto.MerchantDTO;
 
@@ -67,7 +62,6 @@ public class Merchant{
     private String merDeletedate;
     
     private String merJoindate;
-
     
     private String merOutDate;
     

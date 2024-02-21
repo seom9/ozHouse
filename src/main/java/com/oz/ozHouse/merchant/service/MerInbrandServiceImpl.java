@@ -24,7 +24,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class MerInbrandServiceImpl implements MerInbrandService {
 	private final MerInbrandRepository inbrandRepository;
-	private final MerchantRepository joinRepository;
+	private final MerchantRepository merRepository;
 
 	@Override
 	public InbrandDTO selectMer(int merNum) {
@@ -41,7 +41,7 @@ public class MerInbrandServiceImpl implements MerInbrandService {
 
 	@Override
 	public boolean searchComNum(int merNum, Map<String, String> map) throws NotFoundMerNumException {
-		Optional<Merchant> optionalMerchant = joinRepository.findById(merNum);
+		Optional<Merchant> optionalMerchant = merRepository.findById(merNum);
 		if(optionalMerchant.isPresent()) {
 			Merchant merchant = optionalMerchant.get();
 			String num1 = merchant.getMerComnum().merComnum1;
