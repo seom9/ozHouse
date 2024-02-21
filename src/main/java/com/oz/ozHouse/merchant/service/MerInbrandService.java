@@ -22,4 +22,7 @@ public interface MerInbrandService {
 	
 	//입점신청내역 조회
 	public ApplicationDTO applicationList(int merNum);
+	
+	//입점신청 취소
+	public int brandCancel(int inNum);
 }

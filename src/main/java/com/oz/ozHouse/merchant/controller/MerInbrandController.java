@@ -31,6 +31,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -65,7 +66,7 @@ public class MerInbrandController {
 		return req;
 	}
 	
-	@GetMapping("/{merNum}/applications")
+	@GetMapping("/applications/{merNum}")
 	public String applications(HttpServletRequest req,
 			@PathVariable(name = "merNum") int merNum) {
 		InbrandDTO dto = inbrandService.selectMer(merNum); //merNum으로 신청내역 조회
@@ -146,7 +147,7 @@ public class MerInbrandController {
 		MultipartHttpServletRequest mr = (MultipartHttpServletRequest)req;
         MultipartFile mFile = mr.getFile("inSaleFile");
         if (mFile != null && mFile.getSize() > 0) { 
-            String saveName = mFile.getOriginalFilename(); 
+            String saveName = dto.getInComnum1()+ dto.getInComnum2()+ dto.getInComnum3() + mFile.getOriginalFilename(); 
             mFile.transferTo(new File(FILEPATH + saveName)); 
             dto.setInSaleFile(saveName);
             int res = inbrandService.application(dto);
@@ -167,7 +168,7 @@ public class MerInbrandController {
 		return "message";
 	}
 	
-	@GetMapping(value="applicationList/{merNum}")
+	@GetMapping(value="/applicationList/{merNum}")
 	public String brandApplicationList(HttpServletRequest req, 
 			@PathVariable(name = "merNum") int merNum) {
 		ApplicationDTO dto = inbrandService.applicationList(merNum);
@@ -177,18 +178,31 @@ public class MerInbrandController {
 					"입점신청화면으로 이동합니다.");
 			return "message";
 		}else {
-//			String cate[] = dto.getInbrand_category().split(",");
-//			String category[] = new String[cate.length];
-//			for(int i=0; i<category.length; ++i) {
-//				category[i] = brandMapper.selectCateName(Integer.valueOf(cate[i]));
-//			}
-//			String resultCate = String.join(",", category);
-			for(Category c : dto.getInCategory()) {
-				System.out.println("Controller ---> category : " + c.getCategoryName());
-			}
 			req.setAttribute("applicationList", dto);
-//			req.setAttribute("resultCate", resultCate);
 			return "merchant/brand/brand_applicationList";
 		}
+	}
+	
+	@PostMapping(value="/applicationList/{inNum}/cancel")
+	public String brandCancel(HttpServletRequest req,
+			@PathVariable("inNum") int inNum, @RequestParam("inSaleFile") String inSaleFile) {
+		int res = inbrandService.brandCancel(inNum);
+		String msg = null;
+		String url = null;
+		
+		if(res>0) {
+			File file = new File(FILEPATH + inSaleFile);
+			if (file.exists()){
+				file.delete();
+			}
+			msg = "입점신청이 취소되었습니다.";
+			url = "/merchant/home";
+		}else {
+			msg = "입점신청 취소가 완료되지 않았습니다.";
+			url = "/merchant/home";
+		}
+		req.setAttribute("msg", msg);
+		req.setAttribute("url", url);
+		return "message";
 	}
 }

@@ -56,7 +56,7 @@ public class InbrandDTO {
                 .inCategory(inbrand.getInbrandInfo().getCategory())
                 .inOthershop(inbrand.getInbrandInfo().getOtherShop())
                 .inSaleFile(inbrand.getInbrandInfo().getBrandFile())
-                .inAppliDate(inbrand.getRegDate())
+                .inAppliDate(inbrand.getInAppliDate())
                 .inCancelDate(inbrand.getInCancelDate())
                 .build();
     }

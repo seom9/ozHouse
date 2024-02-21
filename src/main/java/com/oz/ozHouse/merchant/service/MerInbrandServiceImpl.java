@@ -1,9 +1,10 @@
 package com.oz.ozHouse.merchant.service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 import java.util.Optional;
 
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.oz.ozHouse.domain.Inbrand;
@@ -13,7 +14,6 @@ import com.oz.ozHouse.domain.common.InbrandInfo;
 import com.oz.ozHouse.domain.common.PhoneNumber;
 import com.oz.ozHouse.dto.ApplicationDTO;
 import com.oz.ozHouse.dto.InbrandDTO;
-import com.oz.ozHouse.dto.MerchantDTO;
 import com.oz.ozHouse.merchant.exception.NotFoundMerNumException;
 import com.oz.ozHouse.merchant.repository.inbrandRepository.MerInbrandRepository;
 import com.oz.ozHouse.merchant.repository.joinRepository.MerJoinRepository;
@@ -33,10 +33,8 @@ public class MerInbrandServiceImpl implements MerInbrandService {
 	    InbrandDTO dto = new InbrandDTO();
 	    if (inbrand!=null) {
 	        dto = dto.toDto(inbrand);
-	        System.out.println("inbrand가 null이 아니다!");
 	    } else {
 	        dto = null;
-	        System.out.println("inbrand가 null이다!");
 	    }
 	    return dto;
 	}
@@ -88,11 +86,15 @@ public class MerInbrandServiceImpl implements MerInbrandService {
 				.merComnum2(dto.getInComnum2())
 				.merComnum3(dto.getInComnum3())
 				.build();
+		
+		SimpleDateFormat df = new SimpleDateFormat("yy/MM/dd");
+		Date date = new Date();
 		Inbrand inbrand = Inbrand.builder()
 				.merchant(m)
 				.inCompany(dto.getInCompany())
 				.inComnum(comNum)
 				.inbrandInfo(i)
+				.inAppliDate(df.format(date))
 				.build();
 		return inbrand;
 	}
@@ -128,10 +130,19 @@ public class MerInbrandServiceImpl implements MerInbrandService {
 				.inCategory(inbrand.getInbrandInfo().getCategory())
 				.inOthershop(inbrand.getInbrandInfo().getOtherShop())
 				.inSaleFile(inbrand.getInbrandInfo().getBrandFile())
-				.inAppliDate(inbrand.getRegDate())
+				.inAppliDate(inbrand.getInAppliDate())
 				.inCancelDate(inbrand.getInCancelDate())
 				.build();
 		return dto;
+	}
+
+	@Override
+	public int brandCancel(int inNum) {
+		SimpleDateFormat df = new SimpleDateFormat("yy/MM/dd");
+		Date date = new Date();
+		df.format(date);
+		int result = inbrandRepository.updateCancelDate(df.format(date), inNum);
+		return result;
 	}
 	
 }

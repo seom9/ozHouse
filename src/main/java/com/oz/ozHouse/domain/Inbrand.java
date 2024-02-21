@@ -27,8 +27,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AttributeOverride(name = "regDate", column = @Column(name = "inAppliDate"))
-public class Inbrand extends BaseEntity{
+public class Inbrand{
 
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -61,7 +60,7 @@ public class Inbrand extends BaseEntity{
 		@AttributeOverride(name = "phoneNum.phoneNumber3", column = @Column(name = "inManhp3"))
     })
 	private InbrandInfo inbrandInfo;
-	
+	private String inAppliDate;
 	private String inCancelDate;
 	
 	
