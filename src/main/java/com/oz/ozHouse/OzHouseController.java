@@ -30,12 +30,8 @@ public class OzHouseController {
 	
 	@GetMapping(value = {"/", "/index", "/main"})
 	public String index(Model model) {
-<<<<<<< HEAD
-		List<ProductDTO> cliProductList = ps.cliProductList();
-=======
-		
+
 		List<Product> cliProductList = ps.cliProductList();
->>>>>>> branch 'main' of https://github.com/gahyunseoul/ozHouse.git
 		List<Blog> blogList = bs.blogList();
 		
 		model.addAttribute("productList", cliProductList);

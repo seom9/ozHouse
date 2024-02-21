@@ -39,14 +39,8 @@ public class ProductDTO {
     private String proImageProChange;
     private String encodedImage;
     private String proToday;
-<<<<<<< HEAD
-    
-=======
     private boolean scrap;
-    
-    
 
->>>>>>> branch 'main' of https://github.com/gahyunseoul/ozHouse.git
     public static ProductDTO toDTO(Product product) {
         
         return ProductDTO.builder()
