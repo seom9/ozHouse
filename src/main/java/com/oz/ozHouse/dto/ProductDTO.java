@@ -39,7 +39,7 @@ public class ProductDTO {
     private String proImageProChange;
     private String encodedImage;
     private String proToday;
-
+    
     public static ProductDTO toDTO(Product product) {
         
         return ProductDTO.builder()
