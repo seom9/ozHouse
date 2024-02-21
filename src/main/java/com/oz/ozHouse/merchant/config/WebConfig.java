@@ -19,6 +19,8 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addInterceptor(loginInterceptor)
         		.addPathPatterns("/merchant//store/*") // 인터셉터를 적용할 경로 패턴
                 .addPathPatterns("/merchant//store/*/*") // 인터셉터를 적용할 경로 패턴
+                .addPathPatterns("/merchant/home/brand//*") // 인터셉터를 적용할 경로 패턴(입점신청)
+                .addPathPatterns("/merchant/home/brand//*/*") // 인터셉터를 적용할 경로 패턴(입점신청)
                 .excludePathPatterns("/merchant/login"); // 인터셉터 적용 제외 경로
     }
 }

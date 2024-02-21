@@ -9,7 +9,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import lombok.Builder;
 import lombok.Getter;
 
 @Entity
@@ -20,15 +19,10 @@ public class Scrap extends BaseEntity {
 	private int scrapNum;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="member")
+    @JoinColumn(name = "memberId")
 	private Member member;
-    
-	private int proNum;
-	
-    @Builder
-    public Scrap(int scrapNum, Member member, int proNum) {
-        this.scrapNum = scrapNum;
-        this.member = member;
-        this.proNum = proNum;
-    }
+	    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "productNum")
+    private Product product;
 }

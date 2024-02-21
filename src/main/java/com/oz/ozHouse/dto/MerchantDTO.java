@@ -1,7 +1,6 @@
 package com.oz.ozHouse.dto;
 
 
-import java.time.LocalDate;
 import java.util.List;
 
 import com.oz.ozHouse.domain.Merchant;
@@ -38,10 +37,10 @@ public class MerchantDTO {
     private List<CategoryDTO> merCategory;
     private String merOthershop;
     private String merFile;
-    private LocalDate merJoindate;
-    private LocalDate merInbranddate;
-    private LocalDate merDeletedate;
-    private LocalDate merOutDate;
+    private String merJoindate;
+    private String merInbranddate;
+    private String merDeletedate;
+    private String merOutDate;
     private String merDelete;
     private String merAdress;
     private String merRegistration;
@@ -67,15 +66,15 @@ public class MerchantDTO {
                 .merHp1(merchant.getMerHp().getPhoneNumber1())
                 .merHp2(merchant.getMerHp().getPhoneNumber2())
                 .merHp3(merchant.getMerHp().getPhoneNumber3())
-                .merHomepage(merchant.getInbrandInfo().getHomepage())
-                .merManname(merchant.getInbrandInfo().getManagerName())
-                .merManhp1(merchant.getInbrandInfo().getPhoneNum().getPhoneNumber1())
-                .merManhp2(merchant.getInbrandInfo().getPhoneNum().getPhoneNumber2())
-                .merManhp3(merchant.getInbrandInfo().getPhoneNum().getPhoneNumber3())
-                .merManemail(merchant.getInbrandInfo().getManagerEmail())
-                .merCategory(merchant.getInbrandInfo().getCategoryDto())
-                .merOthershop(merchant.getInbrandInfo().getOtherShop())
-                .merFile(merchant.getInbrandInfo().getBrandFile())
+//                .merHomepage(merchant.getInbrandInfo().getHomepage())
+//                .merManname(merchant.getInbrandInfo().getManagerName())
+//                .merManhp1(merchant.getInbrandInfo().getPhoneNum().getPhoneNumber1())
+//                .merManhp2(merchant.getInbrandInfo().getPhoneNum().getPhoneNumber2())
+//                .merManhp3(merchant.getInbrandInfo().getPhoneNum().getPhoneNumber3())
+//                .merManemail(merchant.getInbrandInfo().getManagerEmail())
+//                .merCategory(merchant.getInbrandInfo().getCategoryDto())
+//                .merOthershop(merchant.getInbrandInfo().getOtherShop())
+//                .merFile(merchant.getInbrandInfo().getBrandFile())
                 .merJoindate(merchant.getRegDate())
                 .merInbranddate(merchant.getMerInbranddate())
                 .merDeletedate(merchant.getMerDeletedate())
