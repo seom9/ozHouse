@@ -3,6 +3,7 @@ package com.oz.ozHouse.dto;
 
 import java.util.List;
 
+import com.oz.ozHouse.domain.Category;
 import com.oz.ozHouse.domain.Merchant;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -22,21 +23,28 @@ public class MerchantDTO {
     private String merPw;
     private String merIsbrand;
     private String merCompany;
+    
+  //CompanyNumber merComnum
     private String merComnum1;
     private String merComnum2;
     private String merComnum3;
+    
+    //PhoneNumber merHp
     private String merHp1;
     private String merHp2;
     private String merHp3;
+    
+    //Inbrand inbrand
     private String merHomepage;
     private String merManname;
     private String merManhp1;
     private String merManhp2;
     private String merManhp3;
     private String merManemail;
-    private List<CategoryDTO> merCategory;
+    private List<Category> merCategory;
     private String merOthershop;
     private String merFile;
+    
     private String merJoindate;
     private String merInbranddate;
     private String merDeletedate;
@@ -66,16 +74,7 @@ public class MerchantDTO {
                 .merHp1(merchant.getMerHp().getPhoneNumber1())
                 .merHp2(merchant.getMerHp().getPhoneNumber2())
                 .merHp3(merchant.getMerHp().getPhoneNumber3())
-//                .merHomepage(merchant.getInbrandInfo().getHomepage())
-//                .merManname(merchant.getInbrandInfo().getManagerName())
-//                .merManhp1(merchant.getInbrandInfo().getPhoneNum().getPhoneNumber1())
-//                .merManhp2(merchant.getInbrandInfo().getPhoneNum().getPhoneNumber2())
-//                .merManhp3(merchant.getInbrandInfo().getPhoneNum().getPhoneNumber3())
-//                .merManemail(merchant.getInbrandInfo().getManagerEmail())
-//                .merCategory(merchant.getInbrandInfo().getCategoryDto())
-//                .merOthershop(merchant.getInbrandInfo().getOtherShop())
-//                .merFile(merchant.getInbrandInfo().getBrandFile())
-                .merJoindate(merchant.getRegDate())
+                .merJoindate(merchant.getMerJoindate())
                 .merInbranddate(merchant.getMerInbranddate())
                 .merDeletedate(merchant.getMerDeletedate())
                 .merOutDate(merchant.getMerOutDate())
