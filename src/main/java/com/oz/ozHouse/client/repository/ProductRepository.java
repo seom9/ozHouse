@@ -1,10 +1,12 @@
 package com.oz.ozHouse.client.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.oz.ozHouse.domain.Product;
+import com.oz.ozHouse.dto.ProductDTO;
 
 public interface ProductRepository extends JpaRepository<Product, Integer> {
 	
@@ -12,5 +14,5 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 	List<Product> findAll();
 	
 	// 상품 상세보기
-	Product findByProNum(int proNum);
+	Optional<ProductDTO> findByProNum(Integer proNum);
 }
