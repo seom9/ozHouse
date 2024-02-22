@@ -32,16 +32,11 @@ public class ProductServiceImpl implements ProductService{
 		
 		return proList;
 	}
-
+	
+	// 상품 상세보기
 	@Override
-	public ProductDTO getProduct(int proNum) {
-		
-		Product product = productRepository.findByProNum(proNum);
-		
-		if(product != null) {
-			return modelMapper.map(product, ProductDTO.class);
-		} else {
-			return null;
-		}
-	}
+	public ProductDTO getProduct(Integer proNum) {
+        return productRepository.findByProNum(proNum)
+                .orElseThrow(() -> new IllegalArgumentException("proNum : " + proNum));
+    }
 }
