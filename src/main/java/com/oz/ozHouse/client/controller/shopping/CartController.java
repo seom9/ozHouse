@@ -31,17 +31,16 @@ public class CartController {
 	
 	@GetMapping("/cart")
 	public String cartlist_main() {
-		return "client/main/CartList_main";
+		return "client/main/cart";
 	}
 	
 	// Cart : session 저장
-	@GetMapping("/cart/{memberId}/{productNum}/{quantity}")
+	@GetMapping("/cart/{productNum}/{quantity}")
 	@ResponseBody
 	public String cartAdd (HttpServletRequest req, HttpSession session,
-											@SessionAttribute("cart") List<ProQuanDTO> cart,
+											@SessionAttribute(value = "cart", required = false) List<ProQuanDTO> cart,
 											@AuthenticationPrincipal MemberSecurityDTO member,
-											@PathVariable("memberId") String memberId,
-											@PathVariable("productNum") Integer productNum,
+											@PathVariable("productNum") int productNum,
 											@PathVariable("quantity") int quantity)
 											throws IOException {
 		
@@ -58,7 +57,7 @@ public class CartController {
 				cart.remove(cartDTO);
 				cart.add(plusCart);
 				session.setAttribute("cart", cart);
-				return "redirect:CartList_main.do";
+				return "success";
 			}
 		}
 		
@@ -66,16 +65,15 @@ public class CartController {
 		cart.add(newCart);
 		session.setAttribute("cart", cart);
 		// session.setAttribute("encodedImages", encodedImages);
-		return "redirect:CartList_main.do";
+		return "success";
 	}
 	
 	
-	@GetMapping("/cart/{memberId}/{productNum}/{quantity}/del")
+	@GetMapping("/cart/{productNum}/{quantity}/del")
 	@ResponseBody
 	public String cartDel (HttpServletRequest req, HttpSession session,
 											@SessionAttribute("cart") List<ProQuanDTO> cart,
 											@AuthenticationPrincipal MemberSecurityDTO member,
-											@PathVariable("memberId") String memberId,
 											@PathVariable("productNum") Integer productNum,
 											@PathVariable("quantity") int quantity)
 											throws IOException {
