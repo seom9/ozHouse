@@ -9,8 +9,8 @@
 <script type="text/javascript">
 	function pressEnter(e) {
 		if (e.keyCode == 13) {
-			check('${merchantLoginMember.merId}',
-					'${merchantLoginMember.merPw}');
+			check('${sessionId}',
+					'${sessionPw}');
 		}
 	}
 
@@ -33,16 +33,14 @@
 			return;
 		}
 		if (mode == 'pass') {
-			location.href = "${pageContext.request.contextPath}/merchants/${merchantLoginMember.merNum}/password";
+			location.href = "${pageContext.request.contextPath}/merchant/home/myinfo/" + ${merLoginMember.merNum} + "/password";
 		} else if (mode == 'inform') {
-			location.href = "${pageContext.request.contextPath}/merchants/${merchantLoginMember.merNum}/info";
+			location.href = "${pageContext.request.contextPath}/merchant/home/myinfo/" + ${merLoginMember.merNum} + "/modfy";
 		} else if (mode == 'out') {
 			if (window.confirm("정말로 회원 탈퇴를 진행하시겠습니까?")) {
-				location.href = "${pageContext.request.contextPath}/merchants/${merchantLoginMember.merNum}/delete";
+				location.href = "${pageContext.request.contextPath}/merchant/home/myinfo/" + ${merLoginMember.merNum} + "/out";
 			}
-
 		}
-
 		return;
 	}
 </script>
@@ -66,7 +64,7 @@
 			type="password" name="merPw" class="box"
 			onkeypress="return pressEnter(event)">
 		<button
-			onclick="check('${merchantLoginMember.merId}', '${merchantLoginMember.merPw}');">인증</button>
+			onclick="check('${sessionId}', '${sessionPw}');">인증</button>
 	</div>
 	</div>
 </body>
