@@ -68,6 +68,31 @@ public class ProductDTO {
                 .build();
     }
     
+    public ProductDTO(Product product) {
+        this.proNum = product.getProNum();
+        this.proName = product.getProName();
+        this.categoryNum = product.getCategoryNum();
+        this.merNum = product.getMerchant().getMerNum();
+        this.proImg = product.getImg().getProImg();
+        this.proImgPro = product.getImg().getProImgPro();
+        this.proQuantity = product.getProQuantity();
+        this.proPrice = product.getMerPrice().getProPrice();
+        this.proModifier = product.getProModifier();
+        this.proPoint = product.getMerPrice().getProPoint();
+        this.proInDate = product.getProInDate();
+        this.proSpec = product.getProSpec();
+        this.proPurchasesCount = product.getProPurchasesCount();
+        this.proApprovalStatus = product.getProApprovalStatus();
+        this.proAssemblyCost = (product.getMerPrice() != null) ? product.getMerPrice().getProAssemblyCost() : 0;
+        this.proDiscountRate = (product.getMerPrice() != null) ? product.getMerPrice().getProDiscountRate() : 0;
+        this.proDiscountPrice = (product.getMerPrice() != null) ? product.getMerPrice().getProDiscountPrice() : 0;
+        this.categoryName = product.getCategoryName();
+        this.proImageChange = product.getImg().getProImageChange();
+        this.proImageProChange = product.getImg().getProImageProChange();
+        this.proToday = product.getProToday();
+    }
+
+    
     public ProductDTO(HttpServletRequest  req) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy/MM/dd");
 
