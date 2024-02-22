@@ -9,5 +9,5 @@ public interface ProductService {
 	
 	List<ProductDTO> cliProductList();
 	
-	int cliProdView(int proNum);
+	ProductDTO getProduct(int proNum);
 }
