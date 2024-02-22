@@ -31,7 +31,7 @@ public class OzHouseController {
 	@GetMapping(value = {"/", "/index", "/main"})
 	public String index(Model model) {
 
-		List<Product> cliProductList = ps.cliProductList();
+		List<ProductDTO> cliProductList = ps.cliProductList();
 		List<Blog> blogList = bs.blogList();
 		
 		model.addAttribute("productList", cliProductList);

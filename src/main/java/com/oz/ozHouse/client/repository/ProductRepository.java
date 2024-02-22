@@ -9,6 +9,6 @@ import com.oz.ozHouse.domain.Product;
 public interface ProductRepository extends JpaRepository<Product, Integer> {
 	
 	// 전체 상품 목록
-	List<Product> findAll(); 
+	List<Product> findAll();
 	
 }
