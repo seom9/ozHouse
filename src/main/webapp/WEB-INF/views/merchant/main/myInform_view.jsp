@@ -7,12 +7,8 @@
 <title>OZ의 집 : 나의 정보</title>
 <script type="text/javascript">
 	function setMode(mode) {
-		if (mode == 'pass') {
-			f.mode.value = 'pass';
-		} else if (mode == 'out') {
-			f.mode.value = 'out';
-		}
-		document.f.submit();
+		document.getElementById('f').action = mode;
+        document.getElementById('f').submit();
 	}
 </script>
 </head>
@@ -21,7 +17,7 @@
 		<h1>나의 정보</h1>
 		<br> <br>
 		<div align="center">
-			<form name="f" action="${pageContext.request.contextPath}/myInform/view" method="post">
+			<form name="f" action="#" method="post">
 				<input type="hidden" name="mode" value="inform">
 				<div class="flex-container">
 					<div class="flex-row">
@@ -146,9 +142,12 @@
 						<div class="flex-content"></div>
 					</div>
 					<div class="button-group">
-						<button type="button" onclick="setMode('inform');">정보수정</button>
-						<button type="button" onclick="setMode('pass');">비밀번호 변경</button>
-						<button type="button" onclick="setMode('out');">회원탈퇴</button>
+						<button type="button" 
+							onclick="setMode('${pageContext.request.contextPath}/merchant/home/myinfo/${merchantUpdate.merNum}/modify')">정보수정</button>
+						<button type="button" 
+							onclick="setMode('${pageContext.request.contextPath}/merchant/home/myinfo/${merchantUpdate.merNum}/passwd')">비밀번호 변경</button>
+						<button type="button" 
+							onclick="setMode('${pageContext.request.contextPath}/merchant/home/myinfo/${merchantUpdate.merNum}/out')">회원탈퇴</button>
 					</div>
 				</div>
 		</div>
