@@ -95,8 +95,8 @@ public class OrderController {
 	/*
 	 *  주문 취소
 	 */
-	@PreAuthorize("hasAnyRole('ROLE_CLIENT')")
-	@PostMapping(value = {"/order/{mode}", "/order/{mode}/{proNum}/{quantity}"}){
-		
-	}
+//	@PreAuthorize("hasAnyRole('ROLE_CLIENT')")
+//	@PostMapping(value = {"/order/{mode}", "/order/{mode}/{proNum}/{quantity}"}){
+//		
+//	}
 }
