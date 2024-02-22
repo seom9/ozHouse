@@ -54,6 +54,15 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-devtools'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	
+	// WebSocket
+	implementation 'org.springframework.boot:spring-boot-starter-websocket'
+	// STOMP
+	implementation 'org.webjars:stomp-websocket'	
+	// SockJS
+	implementation 'org.webjars:sockjs-client'
+	//redis
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+
 	implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
 }
 
