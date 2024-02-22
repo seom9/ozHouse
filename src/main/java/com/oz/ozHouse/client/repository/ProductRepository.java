@@ -14,5 +14,5 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 	List<Product> findAll();
 	
 	// 상품 상세보기
-	Optional<ProductDTO> findByProNum(Integer proNum);
+	Product findByProNum(Integer proNum);
 }
