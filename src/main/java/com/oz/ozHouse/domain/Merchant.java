@@ -39,7 +39,7 @@ public class Merchant{
     @Embedded
     private CompanyNumber merComnum;
     
-    @OneToOne(mappedBy = "merchant", cascade = CascadeType.PERSIST)
+    @OneToOne(mappedBy = "merchant", cascade = CascadeType.MERGE)
     private Inbrand inbrand;
     
     @Embedded

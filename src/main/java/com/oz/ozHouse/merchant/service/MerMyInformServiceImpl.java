@@ -22,6 +22,7 @@ public class MerMyInformServiceImpl implements MerMyInformService {
 	
 	@Override
 	public MerchantDTO myInformView(int merNum) throws NotFoundMerNumException {
+		System.out.println("판매자 정보 조회");
 		Optional<Merchant> merchant = merRepository.findById(merNum);
 		MerchantDTO dto = null;
 		if(merchant.isPresent()) {
@@ -62,6 +63,7 @@ public class MerMyInformServiceImpl implements MerMyInformService {
 	@Override
 	public String updateMerchant(MerchantUpdateDTO dto, Merchant merchant) {
 		Merchant m = setUpdateMerchant(dto, merchant);
+		System.out.println("판매자 정보 업데이트");
 		merRepository.save(m);
 		return m.getMerId();
 	}

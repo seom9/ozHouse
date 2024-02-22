@@ -205,8 +205,8 @@ function check(business, fileData) {
 					<div class="flex-header">판매관련 파일</div>
 					<div class="flex-content">
 						${merchantUpdate.merFile}<br>
-						 <input type="file" name="inSaleFile"> 
-						 <input type="hidden" name="old_mer_file" value="${merchantUpdate.merFile}">
+						 <input type="file" name="inSaleFile">  <!-- 새로 등록되는 파일 -->
+						 <input type="hidden" name="old_mer_file" value="${merchantUpdate.merFile}">  <!-- 이전 파일 -->
 					</div>
 				</div>
 				<div class="flex-row">
