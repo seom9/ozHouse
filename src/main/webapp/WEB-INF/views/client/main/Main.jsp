@@ -207,7 +207,7 @@
          </div>
       </div>
    </div>
-      <div class="css-1obbfpy"><!-- 오늘의 딜 -->
+      <div class="css-1obbfpy"><!-- 모든 상품 -->
       <div class="css-14vj981">
          <div class="css-dlv2hg">
             <div class="css-147wp72">
@@ -227,22 +227,22 @@
                   <li class="css-3kqc0z">
                      <div class="css-g9s5pw">
                         <article class="today-deal-item">
-                           <a class="today-deal-item__overlay" href="prodView_main.do?num=${dto.proNum}"></a>
+                           <a class="today-deal-item__overlay" href="/${dto.proNum}/prodView"></a>
                            <div class="today-deal-item__image">
                               <div class="today-deal-item__image__item">
                                  <div class="production-item-image">
                                     <img class="image" src="data:image/jpeg;base64,${encodedImages[loop.index]}" alt="상품 대표 이미지">
-			<!-- 스크랩 버튼 -->
-			<sec:authorize access="hasAnyRole('ROLE_CLIENT')">
-				<button class="production-item-image__scrap-badge" onclick="javascript:scrap('${prc.username}', '${dto.proNum}', ${scrapResult eq 'N' ? 0 : 1})">
-		     		<svg class="icon--stroke" aria-label="스크랩" width="24" height="24" fill="${scrapResult eq 'N' ? 'rgba(0, 0, 0, 0)' : '#50E5B4'}" stroke="currentColor" stroke-width="0.5" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"><path d="M11.53 18.54l-8.06 4.31A1 1 0 0 1 2 21.97V3.5A1.5 1.5 0 0 1 3.5 2h17A1.5 1.5 0 0 1 22 3.5v18.47a1 1 0 0 1-1.47.88l-8.06-4.31a1 1 0 0 0-.94 0z"></path></svg>
-				</button>
-			</sec:authorize>
-			<sec:authorize access="!hasAnyRole('ROLE_CLIENT')">
-		      	<button class="production-item-image__scrap-badge" onclick="javascript:cantScrap()">
-		     		<svg class="icon--stroke" aria-label="스크랩" width="24" height="24" fill="rgba(0, 0, 0, 0)" stroke="currentColor" stroke-width="0.5" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"><path d="M11.53 18.54l-8.06 4.31A1 1 0 0 1 2 21.97V3.5A1.5 1.5 0 0 1 3.5 2h17A1.5 1.5 0 0 1 22 3.5v18.47a1 1 0 0 1-1.47.88l-8.06-4.31a1 1 0 0 0-.94 0z"></path></svg>
-				</button>	
-			</sec:authorize>
+										<!-- 스크랩 버튼 -->
+										<sec:authorize access="hasAnyRole('ROLE_CLIENT')">
+											<button class="production-item-image__scrap-badge" onclick="javascript:scrap('${prc.username}', '${dto.proNum}', ${scrapResult eq 'N' ? 0 : 1})">
+									     		<svg class="icon--stroke" aria-label="스크랩" width="24" height="24" fill="${scrapResult eq 'N' ? 'rgba(0, 0, 0, 0)' : '#50E5B4'}" stroke="currentColor" stroke-width="0.5" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"><path d="M11.53 18.54l-8.06 4.31A1 1 0 0 1 2 21.97V3.5A1.5 1.5 0 0 1 3.5 2h17A1.5 1.5 0 0 1 22 3.5v18.47a1 1 0 0 1-1.47.88l-8.06-4.31a1 1 0 0 0-.94 0z"></path></svg>
+											</button>
+										</sec:authorize>
+										<sec:authorize access="!hasAnyRole('ROLE_CLIENT')">
+									      	<button class="production-item-image__scrap-badge" onclick="javascript:cantScrap()">
+									     		<svg class="icon--stroke" aria-label="스크랩" width="24" height="24" fill="rgba(0, 0, 0, 0)" stroke="currentColor" stroke-width="0.5" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"><path d="M11.53 18.54l-8.06 4.31A1 1 0 0 1 2 21.97V3.5A1.5 1.5 0 0 1 3.5 2h17A1.5 1.5 0 0 1 22 3.5v18.47a1 1 0 0 1-1.47.88l-8.06-4.31a1 1 0 0 0-.94 0z"></path></svg>
+											</button>	
+										</sec:authorize>
                                     <div class="production-item-image__dark-overlay"></div>
                                     
                                     <c:if test="${dto.proToday eq currentDate}">
@@ -258,11 +258,11 @@
                                        </h1>
                                        <span class="production-item-price">
                                           <span class="production-item-price__rate">
-                                             ${dto.merPrice.proDiscountRate}
+                                             ${dto.proDiscountRate}
                                              <span class="percentage">% </span>
                                           </span>
                                           <span class="production-item-price__price">
-                                             ${dto.merPrice.proPrice}
+                                             ${dto.proPrice}
                                           </span>
                                        </span>
                                        <div class="today-deal-item__stats-pc">
@@ -275,7 +275,7 @@
                                           </p>
                                        </div>
                                     </div>
-                                 </div><!-- today-deal-item__content -->
+                                 </div><!-- 모든 상품 -->
                               </div>
                            </div>
                         </article>
