@@ -124,7 +124,7 @@ function check(business, fileData) {
 <div class="main-notice">
 	<h1>나의 정보 수정하기</h1>
 	<div align="center">
-		<form name="f" action="${pageContext.request.contextPath}/merchants/${merchantLoginMember.merNum}/info"
+		<form name="f" action="${pageContext.request.contextPath}/merchant/home/myinfo/${merchantUpdate.merNum}/modfy/ok"
 			method="post" enctype="multipart/form-data">
 			<input type="hidden" name="merNum" value="${merchantUpdate.merNum}">
 				<div class="flex-container">
@@ -142,6 +142,7 @@ function check(business, fileData) {
 							<span class="title">사업장 주소지</span> 
 							<input type="text" id="postcode1" name="member_postcode1" placeholder="우편번호"
 								readOnly value="${merchantUpdate.merBusinessPost}" class="postcode">
+							
 							<button type="button" onclick="sample6_execDaumPostcode()">
 								우편번호 찾기
 							</button>
@@ -220,7 +221,7 @@ function check(business, fileData) {
 				onclick="check(document.f.mer_business_registration, document.f.mer_file)">
 				완료</button>
 			<button type="button"
-				onclick="location.href='${pageContext.request.contextPath}/merchants/${merNum}/info'">취소</button>
+				onclick="location.href='${pageContext.request.contextPath}/merchant/home/myinfo/${merchantUpdate.merNum}'">취소</button>
 		</form>
 	</div>
 </div>
