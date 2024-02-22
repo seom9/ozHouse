@@ -139,6 +139,7 @@ public class MerMyInformController {
 //			System.out.println("Controller ---> saleName : " + saleName);
 //		}
         
+		System.out.println("판매자 정보 업데이트 전에 기존 정보 불러오기(Inform)");
         Merchant merchant = myService.getMerchant(dto.getMerNum());
 		String res = myService.updateMerchant(dto, merchant);
 		if(res != null) {

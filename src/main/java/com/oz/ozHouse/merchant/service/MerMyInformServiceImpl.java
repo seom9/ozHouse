@@ -40,13 +40,19 @@ public class MerMyInformServiceImpl implements MerMyInformService {
 				.phoneNumber3(dto.getMerHp3())
 				.build();
 		
-		InbrandInfo info = InbrandInfo.builder()
+//		InbrandInfo info = InbrandInfo.builder()
+//				.brandFile(dto.getInSaleFile())
+//				.homepage(dto.getInHomepage())
+//				.otherShop(dto.getInOthershop())
+//				.build();
+		
+		InbrandInfo info = merchant.getInbrand().getInbrandInfo().toBuilder()
 				.brandFile(dto.getInSaleFile())
 				.homepage(dto.getInHomepage())
 				.otherShop(dto.getInOthershop())
 				.build();
 		
-		Inbrand inbrand = Inbrand.builder()
+		Inbrand inbrand = merchant.getInbrand().toBuilder()
 				.inbrandInfo(info).build();
 		
 		return merchant.toBuilder()
