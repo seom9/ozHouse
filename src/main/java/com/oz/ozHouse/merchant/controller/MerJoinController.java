@@ -30,7 +30,7 @@ public class MerJoinController {
 	private final EmailService emailService;
 	
 	static final String BUSINESSFILEPATH = 
-			"/Users/choejiyeong/git/ozHouse/src/main/resources/static/merchant/business";
+			"/Users/choejiyeong/git/ozHouse/src/main/resources/static/merchant/business/";
 
 	@GetMapping("/join")
 	public String merchantJoin() {
@@ -61,9 +61,9 @@ public class MerJoinController {
 		MultipartHttpServletRequest mr = (MultipartHttpServletRequest)req;
         MultipartFile mFile = mr.getFile("merRegistration");
     	if (mFile != null && mFile.getSize() > 0) {
-    		String saveName = mFile.getOriginalFilename() + "_" + req.getParameter("merComnum1") + 
-    				req.getParameter("merComnum2") + req.getParameter("merComnum3");
-    		File file = new File(BUSINESSFILEPATH + "/" + saveName);
+    		String saveName = req.getParameter("merComnum1") + req.getParameter("merComnum2") 
+    		+ req.getParameter("merComnum3") + "_" + mFile.getOriginalFilename();
+    		File file = new File(BUSINESSFILEPATH + saveName);
     		mFile.transferTo(file); //             
 	        session.setAttribute("saveName", saveName);
 	        return true;

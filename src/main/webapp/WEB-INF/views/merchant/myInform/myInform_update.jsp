@@ -140,7 +140,7 @@ function check(business, fileData) {
 						<c:set var="TextValue" value="${merchantUpdate.merAdress}"/>
 						<div class="address-line">
 							<span class="title">사업장 주소지</span> 
-							<input type="text" id="postcode1" name="member_postcode1" placeholder="우편번호"
+							<input type="text" id="postcode1" name="merBusinessPost" placeholder="우편번호"
 								readOnly value="${merchantUpdate.merBusinessPost}" class="postcode">
 							
 							<button type="button" onclick="sample6_execDaumPostcode()">
@@ -165,6 +165,9 @@ function check(business, fileData) {
 					<div class="flex-header">사업자등록번호</div>
 					<div class="flex-content">
 						${merchantUpdate.merComnum1}-${merchantUpdate.merComnum2}-${merchantUpdate.merComnum3}
+						<input type = "hidden" name = "merComnum1" value ="${merchantUpdate.merComnum1}">
+						<input type = "hidden" name = "merComnum2" value ="${merchantUpdate.merComnum2}">
+						<input type = "hidden" name = "merComnum3" value ="${merchantUpdate.merComnum3}">
 					</div>
 				</div>
 				<div class="flex-row">

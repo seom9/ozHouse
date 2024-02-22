@@ -125,7 +125,7 @@ public class MerInbrandController {
 		MultipartHttpServletRequest mr = (MultipartHttpServletRequest)req;
         MultipartFile mFile = mr.getFile("inSaleFile");
         if (mFile != null && mFile.getSize() > 0) { 
-            String saveName = dto.getInComnum1()+ dto.getInComnum2()+ dto.getInComnum3() + mFile.getOriginalFilename(); 
+            String saveName = dto.getInComnum1()+ dto.getInComnum2()+ dto.getInComnum3() + "_" + mFile.getOriginalFilename(); 
             mFile.transferTo(new File(FILEPATH + saveName)); 
             dto.setInSaleFile(saveName);
             int res = inbrandService.application(dto);

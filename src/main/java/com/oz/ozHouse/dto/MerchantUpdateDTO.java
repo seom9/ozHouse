@@ -24,6 +24,12 @@ public class MerchantUpdateDTO {
 	
 	private String merEmail;
 	
+	private String merComnum1;
+	
+	private String merComnum2;
+	
+	private String merComnum3;
+	
 	private String inSaleFile;
 	
 	private String inHomepage;

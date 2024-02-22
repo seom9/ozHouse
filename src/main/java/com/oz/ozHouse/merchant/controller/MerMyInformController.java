@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.oz.ozHouse.domain.Merchant;
 import com.oz.ozHouse.dto.MerchantDTO;
 import com.oz.ozHouse.dto.MerchantUpdateDTO;
 import com.oz.ozHouse.merchant.config.MerchantLoginBean;
@@ -110,7 +111,7 @@ public class MerMyInformController {
 			dto.setMerRegistration(ole_business);
 		}else {
 			String path = MerJoinController.BUSINESSFILEPATH;
-			String businessFileName = business.getOriginalFilename();
+			String businessFileName = dto.getMerComnum1()+ dto.getMerComnum2()+ dto.getMerComnum3() + "_" + business.getOriginalFilename();
 			if(!sendFile(business, path, businessFileName)) {
 				req = goToMessage(req, url, "사업자등록증 수정 중 오류가 발생하였습니다.");
 				return "message";
@@ -124,7 +125,7 @@ public class MerMyInformController {
 			dto.setInSaleFile(ole_file);
 		}else {
 			String path = MerInbrandController.FILEPATH;
-        	String fileName = file.getOriginalFilename();
+        	String fileName = dto.getMerComnum1()+ dto.getMerComnum2()+ dto.getMerComnum3() + "_" + file.getOriginalFilename();
         	if(!sendFile(file,path, fileName)) {
         		req = goToMessage(req, url, "상품판매 파일 수정 중 오류가 발생하였습니다.");
 				return "message";
@@ -132,8 +133,8 @@ public class MerMyInformController {
         	deleteFile(path + ole_file);
 			dto.setMerRegistration(fileName);
 		}
-        
-		String res = myService.updateMerchant(dto);
+        Merchant merchant = myService.getMerchant(dto.getMerNum());
+		String res = myService.updateMerchant(dto, merchant);
 		if(res != null) {
 			req.setAttribute("msg",res + "님의 정보 수정이 완료되었습니다.");
 		}else {
