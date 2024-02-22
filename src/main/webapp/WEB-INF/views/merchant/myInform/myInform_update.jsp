@@ -188,7 +188,6 @@ function check(business, fileData) {
 						<input type="text" name="merEmail" value="${merchantUpdate.merEmail}">
 					</div>
 				</div>
-				<c:set var="isBrand" value="${merLoginMember.merIsbrand}"/>
 				<div class="flex-row">
 					<div class="flex-header">카테고리</div>
 					<div class="flex-content">
