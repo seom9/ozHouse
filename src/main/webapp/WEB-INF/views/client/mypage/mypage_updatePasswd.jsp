@@ -99,10 +99,8 @@
     	// ** json data 전송 시 jstl 태그 자바스크립트에 안 먹음 ** // 
     	var mode = document.getElementById("mode").value
     	var member = document.getElementById("member").value
-    	alert(member)
 		var memberPasswd = document.getElementById("memberPasswd").value
 		var newMemberPasswd = document.getElementById("password").value
-		alert("여긴 와?")
         fetch('/member/' + member + "/updatepass/" + mode, {
             method: 'PATCH', 
             headers: {
