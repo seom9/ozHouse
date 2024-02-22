@@ -5,6 +5,9 @@ import java.util.List;
 import com.oz.ozHouse.domain.Product;
 import com.oz.ozHouse.dto.ProductDTO;
 
-public interface CliProductService {
-	List<Product> cliProductList();
+public interface ProductService {
+	
+	List<ProductDTO> cliProductList();
+	
+	ProductDTO getProduct(int proNum);
 }

@@ -39,8 +39,6 @@ public class ProductDTO {
     private String encodedImage;
     private String proToday;
     private boolean scrap;
-    
-    
 
     public static ProductDTO toDTO(Product product) {
         

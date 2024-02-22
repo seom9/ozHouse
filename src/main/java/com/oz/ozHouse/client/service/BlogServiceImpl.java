@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import com.oz.ozHouse.domain.Blog;
 import com.oz.ozHouse.dto.BlogDTO;
 import com.oz.ozHouse.repository.BlogRepository;
-import com.oz.ozHouse.repository.CliProductRepository;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;

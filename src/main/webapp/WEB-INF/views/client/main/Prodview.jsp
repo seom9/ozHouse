@@ -5,7 +5,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/client/main_css/prodView.css"/>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/client/main_css/prodView.css"/>
 <div class="production-selling">
 	<div class="production-selling-overview container">
 		<nav class="production-selling-overview__category">
@@ -37,11 +37,11 @@
 							<span class="production-selling-header__title__brand">브랜드명</span>
 						</p>
 						<div class="production-selling-header__title__name-wrap">
-							<span class="production-selling-header__title__name">[${productDTO.product_modifier}] ${productDTO.product_name}</span>
+							<span class="production-selling-header__title__name">[${productDTO.proModifier}] ${productDTO.proName}</span>
 							<div class="production-selling-header__action">
 								<button class="production-selling-header__action__button production-selling-header__action__button-scrap" onclick="${scrapResult eq 'Y' ? 'unscrap()' : 'scrap()'}">
-									<svg class="icon--stroke" aria-label="스크랩" width="24" height="24" fill="${scrapResult eq 'N' ? 'rgba(0, 0, 0, 0)' : '#50E5B4'}" stroke="currentColor" stroke-width="0.5" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"><path d="M11.53 18.54l-8.06 4.31A1 1 0 0 1 2 21.97V3.5A1.5 1.5 0 0 1 3.5 2h17A1.5 1.5 0 0 1 22 3.5v18.47a1 1 0 0 1-1.47.88l-8.06-4.31a1 1 0 0 0-.94 0z"></path></svg>
-									<span class="count" id="scrapCount">${scrap_count}</span>
+									<svg class="icon--stroke" aria-label="스크랩" width="24" height="24" fill="#50E5B4<%-- ${scrapResult eq 'N' ? 'rgba(0, 0, 0, 0)' : '#50E5B4'} --%>" stroke="currentColor" stroke-width="0.5" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"><path d="M11.53 18.54l-8.06 4.31A1 1 0 0 1 2 21.97V3.5A1.5 1.5 0 0 1 3.5 2h17A1.5 1.5 0 0 1 22 3.5v18.47a1 1 0 0 1-1.47.88l-8.06-4.31a1 1 0 0 0-.94 0z"></path></svg>
+									<span class="count" id="scrapCount">스크랩수</span>
 								</button>
 							</div>
 						</div>
@@ -57,7 +57,7 @@
 									<svg fill="#50E5B4" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-279" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-279"><rect x="0" y="0" width="18.57687195392114" height="24"></rect></clipPath></defs><use xlink:href="#star-path-279" fill="#DBDBDB"></use><use clip-path="url(#star-clip-279)" xlink:href="#star-path-279"></use></svg>
 								</span>
 								<span class="production-selling-header__review__text">
-									<span class="number">${review_count}</span>
+									<span class="number">리뷰카운트</span>
 									<span class="postfix">개 리뷰</span>
 								</span>
 							</a>
@@ -65,16 +65,16 @@
 						<div class="production-selling-header__price">
 							<span class="production-selling-header__price__price-wrap">
 								<span class="production-selling-header__price__discount">
-									<span class="number">${productDTO.product_discount_rate}</span>
+									<span class="number">${productDTO.proDiscountRate}</span>
 									<span class="percent">%</span>
 								</span>
 								<del class="production-selling-header__price__original">
-									<span class="number">${productDTO.product_price}</span>
+									<span class="number">${productDTO.proPrice}</span>
 									<span class="percent">원</span>
 								</del>
 								<span class="production-selling-header__price__separator"></span>
 								<div class="production-selling-header__price__price-value-wrap">
-									<c:set var="discount" value="${(productDTO.product_price * (100 - productDTO.product_discount_rate))/100}"/>
+									<c:set var="discount" value="${(productDTO.proPrice * (100 - productDTO.proDiscountRate))/100}"/>
 									<div class="production-selling-header__price__price">
 										<span class="number"><fmt:formatNumber value="${discount}" pattern="###,###"/></span>
 										<span class="won">원</span>
@@ -90,7 +90,7 @@
 							<div class="production-selling-header__promotion__title-wrap">혜택</div>
 							<div class="production-selling-header__promotion__content-wrap">
 								<p class="production-selling-header__promotion__entry">
-									<b>${productDTO.product_point}P</b>
+									<b>${productDTO.proPoint}P</b>
 									적립
 								</p>
 							</div>
@@ -102,7 +102,7 @@
 						<ul class="selling-option-form-content__list">
                  			<li>
 					        	<article class="css-m75hpw">               
-					            	<h2 class="css-yakegh">${productDTO.product_name}</h2>
+					            	<h2 class="css-yakegh">${productDTO.proName}</h2>
 					            	<div class="css-1nrstx4">
 					            		<div class="css-i2qw7n">
 					            			<span id="minus" class="css-1k5678y">
@@ -154,7 +154,7 @@
 					<li>
 						<a class="production-selling-navigation__item" href="#production-selling-review">
 							리뷰
-							<span class="production-selling-navigation__item__count">${review_count}</span>
+							<span class="production-selling-navigation__item__count">리뷰 카운트</span>
 						</a>
 					</li>
 				</ol>
@@ -186,7 +186,7 @@
 						<header class="production-selling-section__header">
 							<h1 class="production-selling-section__title">
 								리뷰
-								<span class="count">${review_count}</span>
+								<span class="count">리뷰카운트</span>
 							</h1>
 							<div class="production-selling-section__right">
 								<button type="button" onclick="reviewOpen()">리뷰쓰기</button>
@@ -330,7 +330,7 @@
 <!-- 모달창 -->
 <div id="review_modal" style="display: none;">
 <form name="f" method="POST" action="review_write.do" enctype="multipart/form-data">
-	<input type="hidden" name="product_num" value="${productDTO.product_num}">
+	<input type="hidden" name="product_num" value="${productDTO.proNum}">
 	<div class="_1SpqS review-modal__modal__wrap open open-active" id="reviewModal">
 		<div class="_3OUv-">
 			<div class="_2mP0n review-modal__modal">
@@ -346,7 +346,7 @@
 							<img class="review-modal__form__product__image" src="data:image/jpeg;base64,${encodedImage}">
 							<div class="review-modal__form__product__contents">
 								<div class="review-modal__form__product__contents__brand">브랜드명</div>
-								<div class="review-modal__form__product__contents__name">[${productDTO.product_modifier}] ${productDTO.product_name}</div>
+								<div class="review-modal__form__product__contents__name">[${productDTO.proModifier}] ${productDTO.proName}</div>
 							</div>
 						</div>
 						<div class="review-modal__section">
@@ -460,7 +460,7 @@ function scrap() {
         return;
     }
 	
-    var productNum = ${productDTO.product_num};
+    var productNum = ${productDTO.proNum};
 
     $.ajax({
         url: 'scrap.do',
@@ -554,8 +554,8 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('quantity').innerText = quantity;
 
         // 가격 업데이트
-        const originalPrice = ${productDTO.product_price};
-        const discountRate = ${productDTO.product_discount_rate};
+        const originalPrice = ${productDTO.proPrice};
+        const discountRate = ${productDTO.proDiscountRate};
         const discountedPrice = (originalPrice * (100 - discountRate)) / 100;
         const totalPrice = quantity * discountedPrice;
 
