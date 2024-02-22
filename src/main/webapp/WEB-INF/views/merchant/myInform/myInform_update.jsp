@@ -188,7 +188,6 @@ function check(business, fileData) {
 						<input type="text" name="merEmail" value="${merchantUpdate.merEmail}">
 					</div>
 				</div>
-				<c:set var="isBrand" value="${merLoginMember.merIsbrand}"/>
 				<div class="flex-row">
 					<div class="flex-header">카테고리</div>
 					<div class="flex-content">
@@ -213,10 +212,18 @@ function check(business, fileData) {
 				<div class="flex-row">
 					<div class="flex-header">회사 홈페이지</div>
 					<div class="flex-content">
+					<c:if test="${empty merchantUpdate.merCategory}">
+							미등록
+						</c:if>
+						<c:if test="${not empty merchantUpdate.merCategory}">
 						<input type="text" name="inHomepage" value="${merchantUpdate.merHomepage}">
+						</c:if>
 					</div>
 					<div class="flex-header">타입점 쇼핑몰</div>
 					<div class="flex-content">
+					<c:if test="${empty merchantUpdate.merCategory}">
+							미등록
+						</c:if>
 						<input type="text" name="inOthershop" value="${merchantUpdate.merOthershop}">
 					</div>
 				</div>
