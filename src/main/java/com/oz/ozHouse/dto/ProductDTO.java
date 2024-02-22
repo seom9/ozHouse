@@ -39,6 +39,9 @@ public class ProductDTO {
     private String proImageProChange;
     private String encodedImage;
     private String proToday;
+    private boolean scrap;
+    
+    
 
     public static ProductDTO toDTO(Product product) {
         
@@ -120,5 +123,9 @@ public class ProductDTO {
 	
 	public void setMerNum(int merNum) {
 		this.merNum = merNum;
+	}
+
+	public void setScrap(boolean scrap) {
+		this.scrap = scrap;
 	}
 }

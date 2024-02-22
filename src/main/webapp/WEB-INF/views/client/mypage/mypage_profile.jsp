@@ -57,7 +57,7 @@
 		<div class="css-134c4us ekeuxnk0">
 		<div class="logoProfile1">
 			<div class="logoProfile">
-				<a class="css-1p9dybm e1q26atk3" href="mypage_scrapbook.do">
+				<a class="css-1p9dybm e1q26atk3" href="/mypage/scrap">
 					<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" preserveAspectRatio="xMidYMid meet" data-darkreader-inline-fill="" style="--darkreader-inline-fill: currentColor;">
 						<path fill-rule="evenodd" transform="matrix(1 0 0 -1 0 23.033)" d="M12.943 6.342a2 2 0 0 1-1.886 0L3 2.032V20.5a.5.5 0 0 0 .5.5h17a.5.5 0 0 0 .5-.5V2.033l-8.057 4.309zm-.471-.882l8.056-4.31A1 1 0 0 1 22 2.034V20.5a1.5 1.5 0 0 1-1.5 1.5h-17A1.5 1.5 0 0 1 2 20.5V2.033a1 1 0 0 1 1.472-.882l8.056 4.31a1 1 0 0 0 .944 0z"></path>
 					</svg><br>

@@ -31,4 +31,7 @@ public interface MemberService {
 	static class IdExistException extends Exception {
 		// 만약 id 가 없다면 exception 발생
 	}
+	
+	// 멤버 탈퇴
+	int deleteMember(String memberId);
 }
