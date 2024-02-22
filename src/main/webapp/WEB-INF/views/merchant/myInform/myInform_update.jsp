@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="mainTop.jsp"%>
+<%@ include file="../main/mainTop.jsp"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/merchant/css/update_info_style.css">
@@ -49,24 +49,6 @@ function check(business, fileData) {
 	        alert("사업자등록증이 용량을 초과하였습니다. 업로드 가능한 최대크기는 1GB입니다.");
 	        return;
 	    }
-	  //파일 이름 확인
-	    var businessName = business.files[0].name; //files[0] : 업로드 된 파일 중 첫번째 파일  name : 파일의 이
-	    const regex = /^\d{10}\.[a-zA-Z]{3,4}$/; 
-	    if (!regex.test(businessName)) {
-	        alert("사업자등록증 파일 이름의 형식은 '-'를 제외한 사업자등록번호 입니다.");
-	        return;
-	    }
-	    
-	    var cNum1 = businessName.substr(0,3);
-	    var cNum2 = businessName.substr(3,2);
-	    var cNum3 = businessName.substr(5,5);
-	    
-	    if(cNum1 != ${merchantUpdate.mer_comnum1} || 
-	    		cNum2 != ${merchantUpdate.mer_comnum2} || 
-	    		cNum3 != ${merchantUpdate.mer_comnum3}){
-	    	alert("사업자등록증 파일의 사업자등록번호를 확인하여 주세요.");
-	    	return;
-	    }
 	}
 	
 	if(fileData && fileData.files && fileData.files.length > 0){
@@ -76,24 +58,6 @@ function check(business, fileData) {
 	    if(fileSize > maxSize) { 
 	        alert("판매관련 첨부파일이 용량을 초과하였습니다. 업로드 가능한 최대크기는 1GB입니다.");
 	        return;
-	    }
-		//파일 이름 확인
-	    var fileName = fileData.files[0].name; //files[0] : 업로드 된 파일 중 첫번째 파일  name : 파일의 이
-	    const regex = /^\d{10}_[가-힣a-zA-Z0-9_\-]+\.[a-zA-Z]+$/;
-	    if (!regex.test(fileName)) {
-	        alert("판매관련 파일 이름의 형식은 '-'를 제외한 '사업자등록번호_상점명' 입니다.");
-	        return;
-	    }
-	    
-	    var cNum1 = fileName.substr(0,3);
-	    var cNum2 = fileName.substr(3,2);
-	    var cNum3 = fileName.substr(5,5);
-	    
-	    if(cNum1 != ${merchantUpdate.mer_comnum1} || 
-	    		cNum2 != ${merchantUpdate.mer_comnum2} || 
-	    		cNum3 != ${merchantUpdate.mer_comnum3}){
-	    	alert("판매관련 파일의 사업자등록번호를 확인하여 주세요.");
-	    	return;
 	    }
 	}
     if(f.mer_)
@@ -164,121 +128,103 @@ function check(business, fileData) {
 <div class="main-notice">
 	<h1>나의 정보 수정하기</h1>
 	<div align="center">
-		<form name="f"
-			action="${pageContext.request.contextPath}/merchants/${merchantLoginMember.merNum}/info"
+		<form name="f" action="${pageContext.request.contextPath}/merchants/${merchantLoginMember.merNum}/info"
 			method="post" enctype="multipart/form-data">
 			<input type="hidden" name="merNum" value="${merchantUpdate.merNum}">
-			<div class="flex-container">
-				<div class="flex-row">
-					<div class="flex-header">상점명</div>
-					<div class="flex-content">${merchantUpdate.mer_company}</div>
-					<div class="flex-header">상점ID</div>
-					<div class="flex-content">${merchantUpdate.mer_id}</div>
-				</div>
-				<div class="flex-row">
-					<div class="flex-header">상점소개</div>
-					<div class="flex-content">
-						<textarea rows="5" cols="50" name="mer_comintro"
-							placeholder="회사 소개를 가독성 있게 작성해 주세요." class="box">${merchantUpdate.mer_comintro}</textarea>
-
+				<div class="flex-container">
+					<div class="flex-row">
+						<div class="flex-header">상점명</div>
+						<div class="flex-content">${merchantUpdate.merCompany}</div>
+						<div class="flex-header">상점ID</div>
+						<div class="flex-content">${merchantUpdate.merId}</div>
 					</div>
-				</div>
 				<div class="flex-row">
 					<div class="flex-header">사업장소재지</div>
 					<div class="flex-content">
-						<c:set var="TextValue"
-							value="${merchantUpdate.mer_business_adress}" />
+						<c:set var="TextValue" value="${merchantUpdate.merAdress}"/>
 						<div class="address-line">
-							<span class="title">사업장 주소지</span> <input type="text"
-								id="postcode1" name="member_postcode1" placeholder="우편번호"
-								readOnly value="${merchantUpdate.mer_business_post}"
-								class="postcode">
-							<button type="button" onclick="sample6_execDaumPostcode()">우편번호
-								찾기</button>
+							<span class="title">사업장 주소지</span> 
+							<input type="text" id="postcode1" name="member_postcode1" placeholder="우편번호"
+								readOnly value="${merchantUpdate.merBusinessPost}" class="postcode">
+							<button type="button" onclick="sample6_execDaumPostcode()">
+								우편번호 찾기
+							</button>
 						</div>
-						<input type="text" id="sample6_address" name="sample6_address"
-							placeholder="주소" readOnly
-							value="${fn:split(merchantUpdate.mer_business_adress,'/')[0]}"
-							class="full-width-input"> <input type="text"
-							id="sample6_detailAddress" name="sample6_detailAddress"
-							placeholder="상세주소"
-							value="${fn:split(merchantUpdate.mer_business_adress,'/')[1]}"
-							class="full-width-input"> <input type="text"
-							id="sample6_extraAddress" name="sample6_extraAddress"
-							placeholder="참고항목" readOnly
-							value="${fn:split(merchantUpdate.mer_business_adress,'/')[2]}"
-							class="full-width-input">
+						<input type="text" id="sample6_address" name="sample6_address" placeholder="주소" readOnly
+							value="${fn:split(merchantUpdate.merAdress,'/')[0]}" class="full-width-input"> 
+						<input type="text" id="sample6_detailAddress" name="sample6_detailAddress"
+							placeholder="상세주소" value="${fn:split(merchantUpdate.merAdress,'/')[1]}"class="full-width-input"> 
+						<input type="text" id="sample6_extraAddress" name="sample6_extraAddress" placeholder="참고항목" readOnly
+							value="${fn:split(merchantUpdate.merAdress,'/')[2]}" class="full-width-input">
 					</div>
 				</div>
 				<div class="flex-row">
 					<div class="flex-header">사업자등록증</div>
 					<div class="flex-content">
-						${merchantUpdate.mer_business_registration}<br> <input
-							type="file" name="mer_business_registration"> <input
-							type="hidden" name="old_mer_business_registration"
-							value="${merchantUpdate.mer_business_registration}">
+						${merchantUpdate.merRegistration}<br> 
+						<input type="file" name="merRegistration"> 
+						<input type="hidden" name="old_mer_business_registration" value="${merchantUpdate.merRegistration}">
 					</div>
 					<div class="flex-header">사업자등록번호</div>
 					<div class="flex-content">
-						${merchantUpdate.mer_comnum1}-${merchantUpdate.mer_comnum2}-${merchantUpdate.mer_comnum3}
-						<input type="hidden" name="mer_comnum1"
-							value="${merchantUpdate.mer_comnum1}"> <input
-							type="hidden" name="mer_comnum2"
-							value="${merchantUpdate.mer_comnum2}"> <input
-							type="hidden" name="mer_comnum3"
-							value="${merchantUpdate.mer_comnum3}">
+						${merchantUpdate.merComnum1}-${merchantUpdate.merComnum2}-${merchantUpdate.merComnum3}
+						<input type="hidden" name="merComnum1" value="${merchantUpdate.merComnum1}"> 
+						<input type="hidden" name="merComnum2" value="${merchantUpdate.merComnum2}"> 
+						<input type="hidden" name="merComnum3" value="${merchantUpdate.merComnum3}">
 					</div>
 				</div>
 				<div class="flex-row">
 					<div class="flex-header">상점담당자 이름</div>
 					<div class="flex-content">
-						<input type="text" name="mer_name"
-							value="${merchantUpdate.mer_name}">
+						<input type="text" name="merName" value="${merchantUpdate.merName}">
 					</div>
 					<div class="flex-header">핸드폰</div>
 					<div class="flex-content phone-inputs">
-						<input type="text" name="mer_hp1"
-							value="${merchantUpdate.mer_hp1}" class="phone-number"> <span>-</span>
-						<input type="text" name="mer_hp2"
-							value="${merchantUpdate.mer_hp2}" class="phone-number"> <span>-</span>
-						<input type="text" name="mer_hp3"
-							value="${merchantUpdate.mer_hp3}" class="phone-number">
+						<input type="text" name="merHp1" value="${merchantUpdate.merHp1}" class="phone-number"> <span>-</span>
+						<input type="text" name="merHp2" value="${merchantUpdate.merHp2}" class="phone-number"> <span>-</span>
+						<input type="text" name="merHp3" value="${merchantUpdate.merHp3}" class="phone-number">
 					</div>
 				</div>
 				<div class="flex-row">
 					<div class="flex-header">상점담장자 E-mail</div>
 					<div class="flex-content">
-						<input type="text" name="mer_email"
-							value="${merchantUpdate.mer_email}">
+						<input type="text" name="merEmail" value="${merchantUpdate.merEmail}">
 					</div>
 				</div>
 				<div class="flex-row">
 					<div class="flex-header">카테고리</div>
-					<div class="flex-content">${resultCate}</div>
+					<div class="flex-content">
+						<c:if test="${empty merchantUpdate.merCategory}">
+							미등록
+						</c:if>
+						<c:if test="${not empty merchantUpdate.merCategory}">
+							<c:forEach var="cate" items="${merchantUpdate.merCategory}">
+								${cate.categoryName}/
+							</c:forEach>
+						</c:if>
+					</div>
 				</div>
 				<div class="flex-row">
 					<div class="flex-header">판매관련 파일</div>
 					<div class="flex-content">
-						${merchantUpdate.mer_file}<br> <input type="file"
-							name="mer_file"> <input type="hidden" name="old_mer_file"
-							value="${merchantUpdate.mer_file}">
+						${merchantUpdate."merFile"}<br>
+						 <input type="file" name="merFile"> 
+						 <input type="hidden" name="old_mer_file" value="${merchantUpdate.merFile}">
 					</div>
 				</div>
 				<div class="flex-row">
 					<div class="flex-header">회사 홈페이지</div>
 					<div class="flex-content">
-						<input type="text" name="mer_homepage"
-							value="${merchantUpdate.mer_homepage}">
+						<input type="text" name="merHomepage" value="${merchantUpdate.merHomepage}">
 					</div>
 					<div class="flex-header">타입점 쇼핑몰</div>
 					<div class="flex-content">
-						<input type="text" name="mer_othershop"
-							value="${merchantUpdate.mer_othershop}">
+						<input type="text" name="merOthershop" value="${merchantUpdate.merOthershop}">
 					</div>
 				</div>
 				<div class="flex-row">
 					<div class="flex-header">영업담당자 이름</div>
-					<div class="flex-content">${merchantUpdate.mer_manname}</div>
+					<div class="flex-content">${merchantUpdate.merManname}</div>
 					<div class="flex-header">영업담당자 핸드폰</div>
 					<div class="flex-content">
 						${merchantUpdate.mer_manhp1}-${merchantUpdate.mer_manhp2}-${merchantUpdate.mer_manhp3}
@@ -294,7 +240,6 @@ function check(business, fileData) {
 				완료</button>
 			<button type="button"
 				onclick="location.href='${pageContext.request.contextPath}/merchants/${merNum}/info'">취소</button>
-
 		</form>
 	</div>
 </div>

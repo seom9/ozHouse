@@ -3,7 +3,7 @@
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/merchant/css/change_pass_style.css">
 
-<%@ include file="mainTop.jsp"%>
+<%@ include file="../main/mainTop.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <title>OZ의 집 : 비밀번호 변경</title>
 <script type="text/javascript">
