@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import com.oz.ozHouse.client.security.MemberSecurityDTO;
 import com.oz.ozHouse.client.service.CartService;
 import com.oz.ozHouse.dto.ProductDTO;
-import com.oz.ozHouse.dto.client.member.CartDTO;
+import com.oz.ozHouse.dto.client.member.ProQuanDTO;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -38,7 +38,7 @@ public class CartController {
 	@GetMapping("/cart/{memberId}/{productNum}/{quantity}")
 	@ResponseBody
 	public String cartAdd (HttpServletRequest req, HttpSession session,
-											@SessionAttribute("cart") List<CartDTO> cart,
+											@SessionAttribute("cart") List<ProQuanDTO> cart,
 											@AuthenticationPrincipal MemberSecurityDTO member,
 											@PathVariable("memberId") String memberId,
 											@PathVariable("productNum") Integer productNum,
@@ -47,11 +47,11 @@ public class CartController {
 		
 		ProductDTO dto = cartService.getProduct(productNum);
 		
-		if (cart == null) cart = new ArrayList<CartDTO>();
+		if (cart == null) cart = new ArrayList<ProQuanDTO>();
 		
-		for (CartDTO cartDTO : cart) {
+		for (ProQuanDTO cartDTO : cart) {
 			if (cartDTO.getProductDTO().getProNum() == dto.getProNum()) {
-				CartDTO plusCart = CartDTO.builder()
+				ProQuanDTO plusCart = ProQuanDTO.builder()
 											.productDTO(dto)
 											.quantity(cartDTO.getQuantity() + quantity)
 											.build();
@@ -62,7 +62,7 @@ public class CartController {
 			}
 		}
 		
-		CartDTO newCart = CartDTO.builder().productDTO(dto).quantity(quantity).build();
+		ProQuanDTO newCart = ProQuanDTO.builder().productDTO(dto).quantity(quantity).build();
 		cart.add(newCart);
 		session.setAttribute("cart", cart);
 		// session.setAttribute("encodedImages", encodedImages);
@@ -73,7 +73,7 @@ public class CartController {
 	@GetMapping("/cart/{memberId}/{productNum}/{quantity}/del")
 	@ResponseBody
 	public String cartDel (HttpServletRequest req, HttpSession session,
-											@SessionAttribute("cart") List<CartDTO> cart,
+											@SessionAttribute("cart") List<ProQuanDTO> cart,
 											@AuthenticationPrincipal MemberSecurityDTO member,
 											@PathVariable("memberId") String memberId,
 											@PathVariable("productNum") Integer productNum,
@@ -81,11 +81,11 @@ public class CartController {
 											throws IOException {
 		ProductDTO dto = cartService.getProduct(productNum);
 		
-		if (cart == null) cart = new ArrayList<CartDTO>();
+		if (cart == null) cart = new ArrayList<ProQuanDTO>();
 		
-		for (CartDTO cartDTO : cart) {
+		for (ProQuanDTO cartDTO : cart) {
 			if (cartDTO.getProductDTO().getProNum() == dto.getProNum()) {
-				CartDTO plusCart = CartDTO.builder()
+				ProQuanDTO plusCart = ProQuanDTO.builder()
 											.productDTO(dto)
 											.quantity(cartDTO.getQuantity() - quantity)
 											.build();

@@ -18,6 +18,7 @@ import lombok.Setter;
 public class MerCouponDTO {
 	
 	private int merCouponnum;
+	private int merNum;
 	private String merCouponname;
 	private String merIsok;
 	private int merCoupondiscount;

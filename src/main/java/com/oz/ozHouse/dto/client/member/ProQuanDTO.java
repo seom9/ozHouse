@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class CartDTO {
+public class ProQuanDTO {
     private ProductDTO productDTO;
     private int quantity;
 }

@@ -1,11 +1,26 @@
 package com.oz.ozHouse.client.controller.shopping;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.TreeSet;
+
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
+import com.oz.ozHouse.client.security.MemberSecurityDTO;
+import com.oz.ozHouse.client.service.CartService;
+import com.oz.ozHouse.client.service.CouponService;
+import com.oz.ozHouse.client.service.MemberService;
 import com.oz.ozHouse.client.service.OrderService;
+import com.oz.ozHouse.dto.MemberDTO;
+import com.oz.ozHouse.dto.MerCouponDTO;
+import com.oz.ozHouse.dto.ProductDTO;
+import com.oz.ozHouse.dto.client.member.ProQuanDTO;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -17,52 +32,71 @@ import lombok.RequiredArgsConstructor;
 public class OrderController {
 	
 	private final OrderService orderService;
-
-	@PostMapping("/order/{memberId}/{mode}")
-	public String order_main(HttpServletRequest req,  HttpSession session,
-									@RequestParam(required = false) String mode) {
-
+	private final CartService cartService;
+	private final MemberService memberService;
+	private final CouponService couponService;
+	
+	
+	/*
+	 *  주문하기
+	 */
+	@PreAuthorize("hasAnyRole('ROLE_CLIENT')")
+	@PostMapping(value = {"/order/{mode}", "/order/{mode}/{proNum}/{quantity}"})
+	public String order_main(HttpServletRequest req, HttpSession session,
+									@SessionAttribute("cart") List<ProQuanDTO> cart,
+									@AuthenticationPrincipal MemberSecurityDTO member,
+									@RequestParam(required = false) String mode,
+									@RequestParam(required = false) Integer proNum,
+									@RequestParam(required = false) int quantity) {
 		
-		// userCoupon
-		// orderProduct
-		// point
+		List<ProQuanDTO> orderProducts = new ArrayList<ProQuanDTO>();
+		MemberDTO memDTO = memberService.getMember(member.getUsername());
+		
+		// all, one 일 경우 해당 상품 담을 객체 선언
+		ProductDTO dto;
+		ProQuanDTO plusOrder;
 		
 		switch(mode) {
 			case "cart" :
-				Li
+				orderProducts = cart;
+				break;
 			case "one" :
-			case "plus" :
+				dto = cartService.getProduct(proNum);
+				plusOrder = ProQuanDTO.builder()
+										.productDTO(dto)
+										.quantity(quantity)
+										.build();
+				orderProducts.add(plusOrder);
+				break;
+			case "all" :
+				orderProducts = cart;
+				// if (orderProducts == null) orderProducts = new ArrayList<ProQuanDTO>();
+				dto = cartService.getProduct(proNum);
+				plusOrder = ProQuanDTO.builder()
+										.productDTO(dto)
+										.quantity(quantity)
+										.build();
+				orderProducts.add(plusOrder);
+				break;
 		}
+		
+		// 주문 상품 중 사용할 수 있는 쿠폰 뽑기
+		// treeSet 자료구조 사용 : https://coding-factory.tistory.com/555
+		TreeSet<MerCouponDTO> merCoupons = couponService.getOrderCoupons(member.getUsername(), orderProducts);
+		
+		session.setAttribute("orderProducts", orderProducts);
+		req.setAttribute("coupons", merCoupons);
+		req.setAttribute("member", memDTO);
+		return "client/main/order";
 
-		if (mode.equals("all")) {
-			HashMap<ProductDTO, Integer> orderProducts = (HashMap) session.getAttribute("cart");
-			if (orderProducts == null)
-				orderProducts = new HashMap<ProductDTO, Integer>();
-			for (ProductDTO pdto : orderProducts.keySet()) {
-				if (pdto.getProduct_num() == dto.getProduct_num()) {
-					orderProducts.put(pdto, orderProducts.get(pdto) + order_count1);
-					List<Mer_CouponDTO> can_user_list = can_user_list(memberDTO, orderProducts);
-					req.setAttribute("userCouponList", can_user_list);
-					req.setAttribute("orderProducts", orderProducts);
-					session.setAttribute("orderProducts", orderProducts);
-					return "client/main/Order";
-				}
-			}
-			orderProducts.put(dto, order_count1);
-			List<Mer_CouponDTO> can_user_list = can_user_list(memberDTO, orderProducts);
-			req.setAttribute("userCouponList", can_user_list);
-			req.setAttribute("orderProducts", orderProducts);
-			session.setAttribute("orderProducts", orderProducts);
-			return "client/main/Order";
-		} else {
-			HashMap<ProductDTO, Integer> orderProducts = new HashMap<ProductDTO, Integer>();
-			orderProducts.put(dto, order_count1);
-			List<Mer_CouponDTO> can_user_list = can_user_list(memberDTO, orderProducts);
-			req.setAttribute("userCouponList", can_user_list);
-			req.setAttribute("orderProducts", orderProducts);
-			session.setAttribute("orderProducts", orderProducts);
-			return "client/main/Order";
-		}
 	}
-
+	
+	
+	/*
+	 *  주문 취소
+	 */
+	@PreAuthorize("hasAnyRole('ROLE_CLIENT')")
+	@PostMapping(value = {"/order/{mode}", "/order/{mode}/{proNum}/{quantity}"}){
+		
+	}
 }
