@@ -8,8 +8,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <c:set var="path" value="${pageContext.request.contextPath}"/>
-<link rel="stylesheet" href="${path}/resources/client/main_css/cart.css"/>
-<link rel="stylesheet" href="${path}/resources/Cart.css"/>
+<link rel="stylesheet" href="${path}/client/main_css/cart.css"/>
+<link rel="stylesheet" href="${path}/Cart.css"/>
 </head>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
@@ -213,11 +213,11 @@ document.addEventListener("DOMContentLoaded", function() {
 	<div  align="center" class="login-wrapper" style="text-align: left">
 		<form name="f" method="post" id="login-form" action="order_success">
 		<div class="commerce-cart__header"><span class="commerce-cart__header__left"><label class="_3xqzr _4VN_z"><div class="_3zqA8"><input type="checkbox" class="_3UImz" id="oner" value=""><span class="_2mDYR"><svg width="1em" height="1em" viewBox="0 0 16 16" class="_2UftR"><path fill="currentColor" d="M6.185 10.247l7.079-7.297 1.435 1.393-8.443 8.703L1.3 8.432l1.363-1.464z"></path></svg></span></div><span class="_1aN3J"><span class="commerce-cart__header__caption">모두선택</span></span></label></span><span class="commerce-cart__header__right"><button class="commerce-cart__header__delete" type="button" onclick="deleteCart()">선택삭제</button></span></div>
-			<c:forEach var="dto" items="${sessionScope.cart.keySet()}" varStatus="loop">
+			<c:forEach var="dto" items="${sessionScope.cart}" varStatus="loop">
 				<article class="carted-product">
 					<div class="carted-product__select">
 						<div class="_3zqA8">
-							<input type="checkbox" class="_3UImz" id="_3UImz${dto.proNum}" value="">
+							<input type="checkbox" class="_3UImz" id="_3UImz${dto.productDTO.proNum}" value="">
 							<span class="_2mDYR"><svg width="1em" height="1em" viewBox="0 0 16 16" class="_2UftR">
 							<path fill="currentColor" d="M6.185 10.247l7.079-7.297 1.435 1.393-8.443 8.703L1.3 8.432l1.363-1.464z"></path></svg></span>
 						</div>
@@ -230,17 +230,16 @@ document.addEventListener("DOMContentLoaded", function() {
 							</div>
 							<div class="product-small-item__content">
 								<h1 class="product-small-item__title">
-									${dto.product_name}
+									${dto.productDTO.proName}
 								</h1>
 								<p class="css-w0e4y9 e1xep4wb1">
-									<c:if test="${dto.proAssemblyCost == 0}">
-										<span id="product_assembly_price${dto.proNum}" data-price="${dto.proAssemblyCost}">
+									<c:if test="${dto.productDTO.proAssemblyCost == 0}">
+										<span id="product_assembly_price${dto.productDTO.proNum}" data-price="${dto.productDTO.proAssemblyCost}">
 											무료 조립
 										</span>
 									</c:if>
-									<c:if test="${dto.proAssemblyCost != 0}">
-										<span id="product_assembly_price${dto.proNum}" data-price="${dto.proAssemblyCost}">
-											조립비 ${dto.proAssemblyCost} 원
+									<c:if test="${dto.productDTO.proAssemblyCost != 0}">
+											조립비 ${dto.productDTO.proAssemblyCost} 원
 										</span>
 									</c:if>									
 									&nbsp;|&nbsp;일반택배
@@ -252,21 +251,21 @@ document.addEventListener("DOMContentLoaded", function() {
 						<li class="carted-product__option-list__item"><article
 								class="css-m75hpw e1wjoq3w13">
 								<h2 class="css-yakegh e1wjoq3w10">
-									${dto.proDiscountRate} % 할인!&nbsp;
+									${dto.productDTO.proDiscountRate} % 할인!&nbsp;
 								</h2>
 
 								<div class="css-1nrstx4 e1wjoq3w8">
 									<div class="css-i2qw7n1">
-        <span class="e1fp679o3 _subtract_18 css-1k5678y decrement-button" id="minus${dto.proNum}"></span>
-        <button class="css-1gjftf7 e1fp679o2 quantity" id="order_count${dto.proNum}">${cart[dto]}</button>
-        <span class="e1fp679o3 _add_18 css-1k5678y increment-button" id="plus${dto.proNum}"></span>
+        <span class="e1fp679o3 _subtract_18 css-1k5678y decrement-button" id="minus${dto.productDTO.proNum}"></span>
+        <button class="css-1gjftf7 e1fp679o2 quantity" id="order_count${dto.productDTO.proNum}">${dto.quantity}</button>
+        <span class="e1fp679o3 _add_18 css-1k5678y increment-button" id="plus${dto.productDTO.proNum}"></span>
 									</div>
 									<div class="css-sp8wxv e1wjoq3w6">
-										<span class="css-1xrj6am e1wjoq3w4" style="text-decoration: line-through;" id="product_ori_price${dto.proNum}" data-price="${dto.proPrice}">
-											<fmt:formatNumber value="${dto.proPrice}" pattern="###,###" />
+										<span class="css-1xrj6am e1wjoq3w4" style="text-decoration: line-through;" id="product_ori_price${dto.productDTO.proNum}" data-price="${dto.productDTO.proPrice}">
+											<fmt:formatNumber value="${dto.productDTO.proPrice}" pattern="###,###" />
 										</span>
-										<span class="css-1xrj6am e1wjoq3w4" id="product_price${dto.proNum}" data-price="${dto.proPrice - dto.proDiscountPrice}">
-											 -> <fmt:formatNumber value="${dto.proPrice - dto.proDiscountPrice}" pattern="###,###"/> 원 
+										<span class="css-1xrj6am e1wjoq3w4" id="product_price${dto.productDTO.proNum}" data-price="${dto.productDTO.proPrice - dto.productDTO.proDiscountPrice}">
+											 -> <fmt:formatNumber value="${dto.productDTO.proPrice - dto.productDTO.proDiscountPrice}" pattern="###,###"/> 원 
 										</span>
 									</div>
 								</div>
@@ -277,8 +276,8 @@ document.addEventListener("DOMContentLoaded", function() {
 						<span class="carted-product__footer__left">
 						<button class="carted-product__order-btn" type="button"></button></span>
 						<span class="carted-product__subatotal">
-						<span class="css-1xrj6am e1wjoq3w4" style="font-size: 22px" id="product_total_price${dto.proNum}">
-							<fmt:formatNumber value="${(dto.proPrice - dto.proDiscountPrice)*cart[dto]}" pattern="###,###"/>
+						<span class="css-1xrj6am e1wjoq3w4" style="font-size: 22px" id="product_total_price${dto.productDTO.proNum}">
+							<fmt:formatNumber value="${(dto.productDTO.proPrice - dto.productDTO.proDiscountPrice) * dto.quantity}" pattern="###,###"/>
 						</span>원</span>
 					</div>
 				</article>

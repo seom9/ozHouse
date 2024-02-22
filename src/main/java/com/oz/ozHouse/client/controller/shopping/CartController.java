@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
@@ -24,19 +25,19 @@ import lombok.RequiredArgsConstructor;
 
 @Controller
 @Validated
+@PreAuthorize("hasAnyRole('ROLE_CLIENT')")
 @RequiredArgsConstructor
 public class CartController {
 	
 	private final CartService cartService;
 	
 	@GetMapping("/cart")
-	public String cartlist_main() {
+	public String cart() {
 		return "client/main/cart";
 	}
 	
 	// Cart : session 저장
 	@GetMapping("/cart/{productNum}/{quantity}")
-	@ResponseBody
 	public String cartAdd (HttpServletRequest req, HttpSession session,
 											@SessionAttribute(value = "cart", required = false) List<ProQuanDTO> cart,
 											@AuthenticationPrincipal MemberSecurityDTO member,
@@ -57,7 +58,7 @@ public class CartController {
 				cart.remove(cartDTO);
 				cart.add(plusCart);
 				session.setAttribute("cart", cart);
-				return "success";
+				return "redirect:/cart";
 			}
 		}
 		
@@ -65,7 +66,7 @@ public class CartController {
 		cart.add(newCart);
 		session.setAttribute("cart", cart);
 		// session.setAttribute("encodedImages", encodedImages);
-		return "success";
+		return "redirect:/cart";
 	}
 	
 	

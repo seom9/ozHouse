@@ -423,6 +423,21 @@ function goCart() {
 	   var value = qtyInput.textContent;
 	   window.location.href = "/cart/" + ${param.num} + "/" + value;
 	}
+}
+
+function showChoose() {
+	var result = confirm("진행하시겠습니까?"); // '예'를 선택하면 true, '아니오'를 선택하면 false 반환
+
+	if (result) {
+		// '예'를 선택한 경우
+		console.log("사용자가 '예'를 선택했습니다. login.do로 이동합니다.");
+		window.location.href = 'login.do'; // 사용자를 login.do로 리디렉션
+	} else {
+		// '아니오'를 선택한 경우
+		console.log("사용자가 '아니오'를 선택했습니다.");
+		// '아니오'를 선택했을 때의 동작을 여기에 작성할 수 있습니다.
+	}
+}
 </script>
 
 <!-- 리뷰쓰기 스크립트 -->

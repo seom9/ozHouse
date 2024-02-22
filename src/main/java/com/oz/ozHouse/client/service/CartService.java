@@ -2,6 +2,7 @@ package com.oz.ozHouse.client.service;
 
 import java.util.Optional;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import com.oz.ozHouse.client.repository.ProductRepository;
@@ -16,10 +17,17 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CartService {
 	
-	private final ProductService productService;
+	private final ProductRepository productRepository;
+	private final ModelMapper modelMapper;
 	
 	public ProductDTO getProduct(int productNum) {
-		return productService.getProduct(productNum);
+		ProductDTO productDTO = new ProductDTO();
+		Optional<Product> result = productRepository.findById(productNum);
+		if (result.isPresent()) {
+			Product product = result.get();
+			productDTO = modelMapper.map(product, ProductDTO.class);
+		}
+		return productDTO;
 	}
 	
 }
