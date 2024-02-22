@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -88,5 +89,11 @@ public class SecurityConfig {
         firewall.setAllowUrlEncodedDoubleSlash(true); // 이 부분을 true로 설정하여 URL 인코딩된 이중 슬래시를 허용하도록 변경
         firewall.setAllowUrlEncodedSlash(true); // 필요한 경우 URL 인코딩된 슬래시도 허용하도록 설정
         return firewall;
+    }
+    
+    //웹소켓 연결을 위한 비동기 처리
+    static {
+        // 애플리케이션 시작 시 SecurityContextHolder의 전략을 MODE_INHERITABLETHREADLOCAL로 설정
+        SecurityContextHolder.setStrategyName(SecurityContextHolder.MODE_INHERITABLETHREADLOCAL);
     }
 }

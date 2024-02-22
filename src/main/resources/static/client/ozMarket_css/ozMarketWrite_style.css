@@ -1,0 +1,559 @@
+/*blogWrite_style.css*/
+div {
+	display: block;
+}
+
+.all {
+	position: relative;
+	flex-wrap: wrap;
+}
+
+.head {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin: auto;
+	max-width: 1000px;
+	padding: 7px
+}
+
+.all_sub {
+	border-bottom: 1px solid rgb(219, 219, 219);
+}
+
+.write {
+	flex: 0 0 auto;
+}
+
+.write_div {
+	border: none;
+	background: #50E5B4;
+	font-family: inherit;
+	height: 44px;
+	width: 132px;
+	text-align: center;
+	line-height: 18px;
+	border-radius: 4px;
+}
+
+.write_div:hover {
+	background: none rgb(234, 237, 239);
+}
+
+.banner {
+	text-decoration: none;
+	color: #50E5B4;
+	font-weight: bold;
+	font-size: 20px;
+}
+
+button {
+	appearance: auto;
+	text-rendering: auto;
+	color: buttontext;
+	letter-spacing: normal;
+	word-spacing: normal;
+	line-height: normal;
+	text-transform: none;
+	text-indent: 0px;
+	text-shadow: none;
+	display: inline-block;
+	text-align: center;
+	align-items: flex-start;
+	cursor: default;
+	box-sizing: border-box;
+	background-color: buttonface;
+	margin: 0em;
+	padding-block: 1px;
+	padding-inline: 6px;
+	border-width: 2px;
+	border-style: outset;
+	border-color: buttonborder;
+	border-image: initial;
+}
+
+[role=button], a, button, input[type=button], input[type=reset], input[type=submit]
+	{
+	cursor: pointer;
+	touch-action: manipulation;
+}
+
+.second_div {
+	border-bottom: 1px solid rgb(219, 219, 219);
+}
+
+.select {
+	display: flex;
+	justify-content: center;
+	margin: 0px auto;
+}
+
+ul, ol {
+	list-style: none;
+}
+
+.toggle-button[aria-pressed="true"] {
+	margin: 0px 0px -1px;
+	border-top: none;
+	border-right: none;
+	border-left: none;
+	border-image: initial;
+	background: none;
+	font-style: inherit;
+	font-variant: inherit;
+	font-stretch: inherit;
+	font-family: inherit;
+	font-optical-sizing: inherit;
+	font-kerning: inherit;
+	font-feature-settings: inherit;
+	font-variation-settings: inherit;
+	display: block;
+	width: 100%;
+	text-align: center;
+	line-height: 20px;
+	color: rgb(47, 52, 56);
+	font-weight: 700;
+	padding: 14px 5px 15px;
+	font-size: 15px;
+	text-decoration: none;
+}
+
+.toggle-button[aria-pressed="false"] {
+	margin: 0px 0px -1px;
+	border: none;
+	background: none;
+	font-style: inherit;
+	font-variant: inherit;
+	font-stretch: inherit;
+	font-family: inherit;
+	font-optical-sizing: inherit;
+	font-kerning: inherit;
+	font-feature-settings: inherit;
+	font-variation-settings: inherit;
+	display: block;
+	width: 100%;
+	padding: 12px 5px 13px;
+	text-align: center;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 20px;
+	color: rgb(130, 140, 148);
+	padding: 14px 5px 15px;
+	font-size: 15px;
+	text-decoration: none;
+}
+
+.contents {
+	box-sizing: border-box;
+	margin: 30px auto 0px;
+	padding: 0px 30px;
+	display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.contents_2 {
+	display: flex;
+	padding: 0px 70px;
+	width: 100%;
+}
+
+.contents_box1, .contents_box2 {
+	flex: 1;
+	box-sizing: border-box;
+}
+
+.contents_box1 {
+	display: flex;
+	max-width: 50%;
+	padding: 10px;
+}
+
+.contents_box2 {
+	display: block;
+	max-width: 50%;
+	padding: 8px;
+}
+
+.contents_box_1_1 {
+	position: relative;
+	display: block;
+	flex: 1 0 0px;
+}
+
+.contents_box_1_2 {
+	flex: 1 0 0px;
+	margin: 0px 0px 12px;
+}
+
+.contents_box_1_1 {
+	flex: 1 0 0px;
+	margin: 0px 0px 12px;
+}
+
+.img_box {
+    position: relative;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+.bbb {
+	width: 100%;
+	height: 100%;
+}
+
+.reinput_image,
+.delete_image {
+    padding: 0;
+    border: none;
+    background: none;
+    position: relative;
+    display: inline-block;
+    margin: 0 24px 0 0;
+    color: rgb(255, 255, 255);
+    font-size: 24px;
+    transition: opacity 0.1s ease 0s;
+    z-index: 1;
+    left: 87%;
+    opacity: 0.5;
+}
+
+.abcd {
+	position: fixed;
+    left: 0;
+    top: 21%;
+
+}
+
+.css-kjmyv4 {
+	width: 60px;
+}
+
+.delete_image img {
+    width: 24px; /* 이미지 크기에 따라 조절 */
+    height: 24px;
+}
+
+.overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 40px 16px 16px;
+    border-radius: inherit;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.54));
+    color: rgb(255, 255, 255);
+    font-size: 0;
+    line-height: 0;
+    transition: opacity 0.4s ease 0.2s;
+    opacity: 0; /* 초기 상태에서 숨김 */
+}
+
+.img_box:hover .overlay {
+	opacity: 1;
+}
+
+.test {
+	width: 50px;
+	height: 40px;
+}
+
+.button_box {
+	transition: opacity 0.1s ease 0s;
+	border-radius: 4px;
+	display: inline-block;
+	margin: 0px;
+	padding: 0px 0px 0%;
+	border: none;
+	background: none;
+	font: inherit;
+	position: relative;
+	width: 100%;
+	box-sizing: border-box;
+	padding-bottom: 100%;
+}
+
+.button_div {
+	background-color: rgb(247, 249, 250);
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	border-radius: 4px;
+	text-align: center;
+	box-sizing: border-box;
+}
+
+.button_div_1 {
+	display: inline-block;
+	font-size: 24px;
+	line-height: 1;
+	margin: 0px 0px 12px;
+	color: rgb(130, 140, 148);
+}
+
+.button_div_2 {
+	margin: 0px 0px 4px;
+	font-size: 16px;
+	line-height: 20px;
+	font-weight: 700;
+	color: rgb(130, 140, 148);
+}
+
+.button_div_3 {
+	font-size: 14px;
+	line-height: 18px;
+	font-weight: 500;
+	color: rgb(130, 140, 148);
+}
+
+.button_div_4 {
+	margin: 0px;
+	border: none;
+	background: none #50E5B4;
+	font-style: inherit;
+	font-variant: inherit;
+	font-stretch: inherit;
+	font-family: inherit;
+	font-optical-sizing: inherit;
+	font-kerning: inherit;
+	font-feature-settings: inherit;
+	font-variation-settings: inherit;
+	font-size: 16px;
+	line-height: 18px;
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	height: 50px;
+	font-weight: 400;
+	box-sizing: border-box;
+	text-align: center;
+	color: black;
+	position: absolute;
+	padding: 0px;
+	border-radius: 6px;
+	top: 60%;
+	left: 34%;
+	width: 34.2%;
+}
+
+.contents_box2_1 {
+	width: 100%;
+}
+
+.explain {
+	position: relative;
+	height: 50px;
+	width: 100%;
+	margin: 12px 0px 10px;
+}
+
+.explain2 {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	box-sizing: border-box;
+	padding: 16px;
+	overflow: hidden;
+	display: inline-block;
+	overflow-wrap: break-word;
+	white-space: pre-line;
+	font-size: 14px;
+	line-height: 20px;
+	z-index: 1;
+	caret-color: rgb(47, 52, 56);
+	color: black;
+	border: 1px solid #ddd;
+	border-radius: 6px;
+	background-color: #fff;
+	resize: none;
+}
+
+.explain2::placeholder {
+	position: absolute;
+	top: 0;
+	left: 0;
+	margin: 12px;
+	color: rgb(194, 200, 204);
+}
+
+.explain_box1 {
+	margin: 12px 0px 10px;
+	position: relative;
+	height: 150px;
+	width: 100%;
+}
+
+.explain_box2 {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	box-sizing: border-box;
+	min-height: 152px;
+	padding: 16px;
+	overflow: hidden;
+	display: inline-block;
+	overflow-wrap: break-word;
+	white-space: pre-line;
+	font-size: 14px;
+	line-height: 20px;
+	z-index: 1;
+	caret-color: rgb(47, 52, 56);
+	color: black;
+	border: 1px solid #ddd;
+	border-radius: 6px;
+	background-color: #fff;
+	overflow-y: scroll;
+	resize: none;
+}
+
+
+.explain_box2::placeholder {
+	position: absolute;
+	top: 0;
+	left: 0;
+	margin: 12px;
+	color: rgb(194, 200, 204);
+}
+
+.select_box1 {
+	margin: 12px 0px 10px;
+	position: relative;
+}
+
+.select_box2 {
+	position: relative;
+	letter-spacing: -0.3px;
+	font-size: 14px;
+	line-height: 18px;
+	cursor: pointer;
+	width: 100%;
+	padding-top: 10px;
+	border: 1px solid rgb(218, 221, 224);
+	color: rgb(194, 200, 204);
+	box-sizing: border-box;
+	border-radius: 6px;
+	padding: 10px;
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.select_box2 option[disabled]:checked {
+	display: none;
+}
+
+.b {
+	padding: 0px;
+	border: none;
+	background: none;
+	font-style: inherit;
+	font-variant: inherit;
+	font-weight: inherit;
+	font-stretch: inherit;
+	line-height: inherit;
+	font-family: inherit;
+	font-optical-sizing: inherit;
+	font-kerning: inherit;
+	font-feature-settings: inherit;
+	font-variation-settings: inherit;
+	position: relative;
+	display: inline-block;
+	margin: 0px 24px 0px 0px;
+	color: rgb(255, 255, 255);
+	font-size: 24px;
+	transition: opacity 0.1s ease 0s;
+	z-index: 1;
+}
+
+.css-1sdruza {
+	border: none;
+	background: none;
+	font: inherit;
+	display: block;
+	margin: -10px 0px 0px;
+	padding: 3px 0px;
+	opacity: 0;
+	transition: opacity 0.1s ease 0s;
+	width: 60px;
+}
+
+.css-1b5f9f1 {
+	height: 4px;
+	background-color: rgb(53, 197, 240);
+	border-radius: 4px;
+}
+
+.css-o9d932 {
+	padding: 0px 0px 10px;
+}
+
+.css-s5xdrg {
+	display: flex;
+	-webkit-box-align: center;
+	align-items: center;
+}
+
+.css-1q8d1he {
+	position: relative;
+	width: 60px;
+	height: 60px;
+	border-radius: 4px;
+	overflow: hidden;
+	background-color: rgb(247, 248, 250);
+	cursor: pointer;
+}
+
+.css-1cqverl {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 100%;
+	transform: translate(-50%, -50%);
+}
+
+.css-1sdruza {
+	border: none;
+	background: none;
+	font: inherit;
+	display: block;
+	margin: -10px 0px 0px;
+	padding: 3px 0px;
+	opacity: 0;
+	transition: opacity 0.1s ease 0s;
+	width: 60px;
+}
+
+.css-1b5f9f1 {
+	height: 4px;
+	background-color: rgb(53, 197, 240);
+	border-radius: 4px;
+}
+
+.add_button {
+	display: inline-block;
+	margin: 0px;
+	padding: 0px;
+	background: none rgb(247, 249, 250);
+	font: inherit;
+	text-align: center;
+	border-radius: 4px;
+	width: 60px;
+	height: 60px;
+	border: 1px dashed rgb(218, 221, 224);
+	color: rgb(130, 140, 148);
+}
+
+.add_button2 {
+	display: inline-block;
+	font-size: 18px;
+	line-height: 1;
+}

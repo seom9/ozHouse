@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.Repository;
 
 import com.oz.ozHouse.domain.Product;
 import com.oz.ozHouse.dto.ProductDTO;
@@ -20,3 +19,4 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 	// 상품 상세
 	Optional<Product> findById(Integer proNum);
 }
+
