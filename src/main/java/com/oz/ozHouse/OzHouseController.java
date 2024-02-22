@@ -34,6 +34,11 @@ public class OzHouseController {
 		List<ProductDTO> cliProductList = ps.cliProductList();
 		List<Blog> blogList = bs.blogList();
 		
+		for(ProductDTO dto : cliProductList) {
+			System.out.println("가격2 : " + dto.getProPrice());
+		}
+		
+		
 		model.addAttribute("productList", cliProductList);
 		model.addAttribute("blogList", blogList);
 		
