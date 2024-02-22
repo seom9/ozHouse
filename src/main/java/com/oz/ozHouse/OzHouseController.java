@@ -10,12 +10,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.oz.ozHouse.client.service.BlogServiceImpl;
-import com.oz.ozHouse.client.service.CliProductService;
-import com.oz.ozHouse.client.service.CliProductServiceImpl;
+import com.oz.ozHouse.client.service.ProductService;
+import com.oz.ozHouse.client.service.ProductServiceImpl;
 import com.oz.ozHouse.client.service.EmailService;
 import com.oz.ozHouse.client.service.MemberService;
 import com.oz.ozHouse.domain.Blog;
 import com.oz.ozHouse.domain.Product;
+import com.oz.ozHouse.dto.ProductDTO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -24,13 +25,13 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/")
 public class OzHouseController {
 	
-	private final CliProductServiceImpl ps;
+	private final ProductServiceImpl ps;
 	private final BlogServiceImpl bs;
 	
 	@GetMapping(value = {"/", "/index", "/main"})
 	public String index(Model model) {
-		
-		List<Product> cliProductList = ps.cliProductList();
+
+		List<ProductDTO> cliProductList = ps.cliProductList();
 		List<Blog> blogList = bs.blogList();
 		
 		model.addAttribute("productList", cliProductList);
