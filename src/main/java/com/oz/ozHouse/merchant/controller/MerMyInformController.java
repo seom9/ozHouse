@@ -1,7 +1,5 @@
 package com.oz.ozHouse.merchant.controller;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,10 +7,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.oz.ozHouse.dto.MerchantDTO;
 import com.oz.ozHouse.merchant.exception.NotFoundMerNumException;
-import com.oz.ozHouse.merchant.service.MerInbrandService;
 import com.oz.ozHouse.merchant.service.MerMyInformService;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -23,7 +21,7 @@ public class MerMyInformController {
 
 	@GetMapping("/{merNum}")
 	public String myInform_view(HttpServletRequest req, @PathVariable("merNum") int merNum) {
-		HttpSession session = (HttpSession) req.getSession();
+		HttpSession session = req.getSession();
 		try {
 			MerchantDTO dto = myService.myInformView(merNum);
 			session.setAttribute("merchantUpdate", dto);

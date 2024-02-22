@@ -3,7 +3,6 @@ package com.oz.ozHouse.domain;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.oz.ozHouse.domain.Merchant;
-import com.oz.ozHouse.domain.common.BaseEntity;
 import com.oz.ozHouse.domain.common.CompanyNumber;
 import com.oz.ozHouse.domain.common.PhoneNumber;
 import com.oz.ozHouse.dto.MerchantDTO;
@@ -44,8 +43,7 @@ public class Merchant{
     @NotNull
     private CompanyNumber merComnum;
     
-    @OneToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name = "merNum")
+    @OneToOne(mappedBy = "merchant")
     private Inbrand inbrand;
     
     @Embedded
