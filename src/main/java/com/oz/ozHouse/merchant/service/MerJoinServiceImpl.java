@@ -17,6 +17,7 @@ public class MerJoinServiceImpl implements MerJoinService{
 	
 	@Override
 	public boolean merchant_checkBsNum(String comnum1, String comnum2, String comnum3) {
+		System.out.println("사업자등록번호 중복 검색");
 		Merchant mer = repository.searchMerComnum(comnum1, comnum2, comnum3);
 		if(mer == null) {
 			return false; 
@@ -25,6 +26,7 @@ public class MerJoinServiceImpl implements MerJoinService{
 
 	@Override
 	public boolean merchant_checkEmail(String email) {
+		System.out.println("이메일 중복 검색");
 		Merchant mer = repository.findMerchantByMerEmail(email);
 		if(mer == null) {
 			return false; 

@@ -85,9 +85,15 @@
 					<div class="flex-row">
 						<div class="flex-header">카테고리</div>
 						<div class="flex-content">
-						<c:forEach var="cate" items="merchantUpdate.merCategory">
-						${cate.categoryName}/
-						</c:forEach></div>
+						<c:if test="${empty merchantUpdate.merCategory}">
+							미등록
+						</c:if>
+						<c:if test="${not empty merchantUpdate.merCategory}">
+							<c:forEach var="cate" items="${merchantUpdate.merCategory}">
+								${cate.categoryName}/
+							</c:forEach>
+						</c:if>
+						</div>
 						<div class="flex-header"></div>
 						<div class="flex-content"></div>
 					</div>
@@ -122,9 +128,16 @@
 						<div class="flex-header">영업담당자 이름</div>
 						<div class="flex-content">${merchantUpdate.merManname}</div>
 						<div class="flex-header">영업담당자 핸드폰</div>
-						<div class="flex-content">
-							${merchantUpdate.merManhp1}-${merchantUpdate.merManhp2}-${merchantUpdate.merManhp3}
-						</div>
+						<c:if test="${empty merchantUpdate.merManhp2}">
+							<div class="flex-content">
+								${merchantUpdate.merManhp1}
+							</div>
+						</c:if>
+						<c:if test="${not empty merchantUpdate.merManhp2}">
+							<div class="flex-content">
+								${merchantUpdate.merManhp1}-${merchantUpdate.merManhp2}-${merchantUpdate.merManhp3}
+							</div>
+						</c:if>
 					</div>
 					<div class="flex-row">
 						<div class="flex-header">영업담당자 E-mail</div>
