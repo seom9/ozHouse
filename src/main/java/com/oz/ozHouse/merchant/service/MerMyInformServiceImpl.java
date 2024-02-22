@@ -32,7 +32,7 @@ public class MerMyInformServiceImpl implements MerMyInformService {
 		return dto;
 	}
 	
-	private Merchant setUpdateMerchant(MerchantUpdateDTO dto) {
+	private Merchant setUpdateMerchant(MerchantUpdateDTO dto, Merchant merchant) {
 		PhoneNumber merHp = PhoneNumber.builder()
 				.phoneNumber1(dto.getMerHp1())
 				.phoneNumber2(dto.getMerHp2())
@@ -48,8 +48,7 @@ public class MerMyInformServiceImpl implements MerMyInformService {
 		Inbrand inbrand = Inbrand.builder()
 				.inbrandInfo(info).build();
 		
-		return Merchant.builder()
-				.merNum(dto.getMerNum())
+		return merchant.toBuilder()
 				.merBusinessPost(dto.getMerBusinessPost())
 				.merAdress(dto.getMerAdress())
 				.merRegistration(dto.getMerRegistration())
@@ -61,8 +60,8 @@ public class MerMyInformServiceImpl implements MerMyInformService {
 	}
 
 	@Override
-	public String updateMerchant(MerchantUpdateDTO dto) {
-		Merchant m = setUpdateMerchant(dto);
+	public String updateMerchant(MerchantUpdateDTO dto, Merchant merchant) {
+		Merchant m = setUpdateMerchant(dto, merchant);
 		merRepository.save(m);
 		return m.getMerId();
 	}
@@ -128,5 +127,11 @@ public class MerMyInformServiceImpl implements MerMyInformService {
 					.merBusinessPost(m.getMerBusinessPost())
 					.build();
 		}
+	}
+
+	@Override
+	public Merchant getMerchant(int merNum) {
+		Optional<Merchant> m = merRepository.findById(merNum);
+		return m.get();
 	}
 }
