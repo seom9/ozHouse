@@ -60,12 +60,6 @@ function check(business, fileData) {
 	        return;
 	    }
 	}
-	if(f.inHomepage.value==""){
-		document.f.inHomepage.value = " ";
-	}
-	if(f.inOthershop.value==""){
-		document.f.inOthershop.value = " ";
-	}
     document.f.submit();
 	}
 </script>
@@ -201,22 +195,25 @@ function check(business, fileData) {
 						</c:if>
 					</div>
 				</div>
-				<div class="flex-row">
-					<div class="flex-header">판매관련 파일</div>
-					<div class="flex-content">
-						${merchantUpdate.merFile}<br>
-						 <input type="file" name="inSaleFile">  <!-- 새로 등록되는 파일 -->
-						 <input type="hidden" name="old_mer_file" value="${merchantUpdate.merFile}">  <!-- 이전 파일 -->
-					</div>
-				</div>
+				<c:set var="isbrand" value="${merLoginMember.merIsbrand}"/>
 				<div class="flex-row">
 					<div class="flex-header">회사 홈페이지</div>
 					<div class="flex-content">
+					<c:if test="${merLoginMember.merIsbrand eq 'f'}">
+						${merchantUpdate.merHomepage}
+					</c:if>
+					<c:if test="${merLoginMember.merIsbrand eq 't'}">
 						<input type="text" name="inHomepage" value="${merchantUpdate.merHomepage}">
+					</c:if>
 					</div>
 					<div class="flex-header">타입점 쇼핑몰</div>
 					<div class="flex-content">
+					<c:if test="${merLoginMember.merIsbrand eq 'f'}">
+						${merchantUpdate.merOthershop}
+					</c:if>
+					<c:if test="${merLoginMember.merIsbrand eq 't'}">
 						<input type="text" name="inOthershop" value="${merchantUpdate.merOthershop}">
+					</c:if>
 					</div>
 				</div>
 			</div>

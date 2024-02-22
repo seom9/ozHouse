@@ -31,7 +31,7 @@ public class MerchantRepositoryCustomImpl implements MerchantRepositoryCustom{
 					.merHp1(m.getMerHp().getPhoneNumber1()).merHp2(m.getMerHp().getPhoneNumber2())
 					.merHp3(m.getMerHp().getPhoneNumber3()).merAdress(m.getMerAdress())
 					.merRegistration(m.getMerRegistration()).merName(m.getMerName()).merEmail(m.getMerEmail())
-					.merBusinessPost(m.getMerBusinessPost()).build();
+					.merBusinessPost(m.getMerBusinessPost()).merIsbrand(m.getMerIsbrand()).build();
 			return dto;
 		} catch (NoResultException e) {
 			MerchantDTO dto = new MerchantDTO();
