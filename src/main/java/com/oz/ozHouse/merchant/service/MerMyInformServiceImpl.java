@@ -1,14 +1,15 @@
 package com.oz.ozHouse.merchant.service;
 
-import java.util.ArrayList;
 import java.util.Optional;
-import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.oz.ozHouse.domain.Category;
+import com.oz.ozHouse.domain.Inbrand;
 import com.oz.ozHouse.domain.Merchant;
+import com.oz.ozHouse.domain.common.InbrandInfo;
+import com.oz.ozHouse.domain.common.PhoneNumber;
 import com.oz.ozHouse.dto.MerchantDTO;
+import com.oz.ozHouse.dto.MerchantUpdateDTO;
 import com.oz.ozHouse.merchant.exception.NotFoundMerNumException;
 import com.oz.ozHouse.merchant.repository.merchantRepository.MerchantRepository;
 
@@ -29,6 +30,41 @@ public class MerMyInformServiceImpl implements MerMyInformService {
 			throw new NotFoundMerNumException("등록된 판매자 번호가 존재하지 않습니다.");
 		}
 		return dto;
+	}
+	
+	private Merchant setUpdateMerchant(MerchantUpdateDTO dto) {
+		PhoneNumber merHp = PhoneNumber.builder()
+				.phoneNumber1(dto.getMerHp1())
+				.phoneNumber2(dto.getMerHp2())
+				.phoneNumber3(dto.getMerHp3())
+				.build();
+		
+		InbrandInfo info = InbrandInfo.builder()
+				.brandFile(dto.getInSaleFile())
+				.homepage(dto.getInHomepage())
+				.otherShop(dto.getInOthershop())
+				.build();
+		
+		Inbrand inbrand = Inbrand.builder()
+				.inbrandInfo(info).build();
+		
+		return Merchant.builder()
+				.merNum(dto.getMerNum())
+				.merBusinessPost(dto.getMerBusinessPost())
+				.merAdress(dto.getMerAdress())
+				.merRegistration(dto.getMerRegistration())
+				.merName(dto.getMerName())
+				.merHp(merHp)
+				.merEmail(dto.getMerEmail())
+				.inbrand(inbrand)
+				.build();
+	}
+
+	@Override
+	public String updateMerchant(MerchantUpdateDTO dto) {
+		Merchant m = setUpdateMerchant(dto);
+		merRepository.save(m);
+		return m.getMerId();
 	}
 	
 	private MerchantDTO setMerchantEntity(Merchant m) {

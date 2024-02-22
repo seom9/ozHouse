@@ -1,5 +1,6 @@
 package com.oz.ozHouse.domain;
 
+import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.oz.ozHouse.domain.Merchant;
@@ -18,36 +19,30 @@ import lombok.NoArgsConstructor;
 @Entity
 @Builder
 @AllArgsConstructor
+@DynamicUpdate 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Merchant{
 	
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@NotNull
     private int merNum;
 	
-	@NotNull
     private String merId;
     
-	@NotNull
     private String merPw;
     
-	@NotNull
     private String merIsbrand;
     
-    @NotNull
     private String merCompany;
     
     @Embedded
-    @NotNull
     private CompanyNumber merComnum;
     
-    @OneToOne(mappedBy = "merchant")
+    @OneToOne(mappedBy = "merchant", cascade = CascadeType.PERSIST)
     private Inbrand inbrand;
     
     @Embedded
-    @NotNull
     @AttributeOverrides({
     		@AttributeOverride(name = "phoneNumber1", column = @Column(name = "merHp1")),
     		@AttributeOverride(name = "phoneNumber2", column = @Column(name = "merHp2")),
@@ -65,19 +60,14 @@ public class Merchant{
     
     private String merDelete;
     
-    @NotNull
     private String merAdress;
     
-    @NotNull
     private String merRegistration;
     
-    @NotNull
     private String merName;
     
-    @NotNull
     private String merEmail;
     
-    @NotNull
     private String merBusinessPost;
     
     public Merchant hashPassword(PasswordEncoder passwordEncoder) {
