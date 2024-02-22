@@ -16,12 +16,10 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CartService {
 	
-	private final MerProductRepository productRepository;
+	private final ProductService productService;
 	
-	public ProductDTO getProduct(Integer productNum) {
-		Optional<ProductDTO> result = productRepository.findByProNum(productNum);
-		if (result.isEmpty()) return null;
-		return result.get();
+	public ProductDTO getProduct(int productNum) {
+		return productService.getProduct(productNum);
 	}
 	
 }

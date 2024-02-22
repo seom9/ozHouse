@@ -40,6 +40,7 @@ public class ProductDTO {
     private String proToday;
     private boolean scrap;
 
+    
     public static ProductDTO toDTO(Product product) {
         
         return ProductDTO.builder()
