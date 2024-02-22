@@ -23,6 +23,7 @@ public class ProductServiceImpl implements ProductService{
 	
 	@Override
 	public List<ProductDTO> cliProductList() {
+		
 		List<Product> productList = productRepository.findAll();
 		
 		List<ProductDTO> proList = productList.stream()
@@ -33,8 +34,14 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public int cliProdView(int proNum) {
-		// TODO Auto-generated method stub
-		return 0;
+	public ProductDTO getProduct(int proNum) {
+		
+		Product product = productRepository.findByProNum(proNum);
+		
+		if(product != null) {
+			return modelMapper.map(product, ProductDTO.class);
+		} else {
+			return null;
+		}
 	}
 }
