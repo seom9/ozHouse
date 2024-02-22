@@ -127,17 +127,17 @@ public class MerMyInformController {
 		}else {
 			dto.setMerRegistration(busName);
 		}
-        
-		String ole_file = req.getParameter("old_mer_file");
-        MultipartFile file = mr.getFile("inSaleFile");
-        String saleName = savedFileName(file, dto, ole_file, MerInbrandController.FILEPATH);
-		if(saleName == null) {
-			req = goToMessage(req, url, "상품판매 파일 수정 중 오류가 발생하였습니다.");
-			return "message";
-		}else {
-			dto.setInSaleFile(saleName);
-			System.out.println("Controller ---> saleName : " + saleName);
-		}
+//        
+//		String ole_file = req.getParameter("old_mer_file");
+//        MultipartFile file = mr.getFile("inSaleFile");
+//        String saleName = savedFileName(file, dto, ole_file, MerInbrandController.FILEPATH);
+//		if(saleName == null) {
+//			req = goToMessage(req, url, "상품판매 파일 수정 중 오류가 발생하였습니다.");
+//			return "message";
+//		}else {
+//			dto.setInSaleFile(saleName);
+//			System.out.println("Controller ---> saleName : " + saleName);
+//		}
         
         Merchant merchant = myService.getMerchant(dto.getMerNum());
 		String res = myService.updateMerchant(dto, merchant);
