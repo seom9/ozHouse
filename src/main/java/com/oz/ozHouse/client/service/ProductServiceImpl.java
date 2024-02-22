@@ -1,7 +1,9 @@
 package com.oz.ozHouse.client.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import com.oz.ozHouse.client.repository.ProductRepository;
@@ -16,11 +18,18 @@ import lombok.RequiredArgsConstructor;
 @Transactional
 public class ProductServiceImpl implements ProductService{
 	
+	private final ModelMapper modelMapper;
 	private final ProductRepository productRepository;
 	
 	@Override
 	public List<ProductDTO> cliProductList() {
-		List<ProductDTO> dto = productRepository.findAll();
+		List<Product> productList = productRepository.findAll();
+		
+		List<ProductDTO> proList = productList.stream()
+									.map(data -> modelMapper.map(data, ProductDTO.class))
+									.collect(Collectors.toList());
+		
+		return proList;
 	}
 
 	@Override

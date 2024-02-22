@@ -16,10 +16,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ShoppingController {
 	
-	@GetMapping(value = "${proNum}/prodView")
-	public String prodView(HttpServletRequest req, @ModelAttribute ProductDTO dto) {
-		
-		
-		return "";
-	}
+//	@GetMapping(value = "/${proNum}/prodView")
+//	public String prodView(HttpServletRequest req, @ModelAttribute ProductDTO dto) {
+//		
+//		String proNum = req.getParameter("proNum");
+//		System.out.println(proNum);
+//		return "";
+//	}
 }
