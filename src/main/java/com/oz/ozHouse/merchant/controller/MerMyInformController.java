@@ -96,43 +96,49 @@ public class MerMyInformController {
 		}
 	}
 	
+	private String savedFileName(
+				MultipartFile mf, MerchantUpdateDTO dto, String oldName, String path) {
+		if (mf == null || mf.getSize()<=0) {
+			return oldName;
+		}else {
+			String FileName = dto.getMerComnum1()+ dto.getMerComnum2()+ dto.getMerComnum3() + "_" + mf.getOriginalFilename();
+			if(!sendFile(mf, path, FileName)) {
+				String savedName = null;
+				return savedName;
+			}
+			deleteFile(path + oldName);
+			return FileName;
+		}
+	}
+	
 	@PostMapping("/{merNum}/modfy/ok")
 	public String myInform_updateFormOk(HttpServletRequest req, @ModelAttribute MerchantUpdateDTO dto,
 			BindingResult result) throws IllegalStateException, IOException {
 		String url = "/merchant/home/myinfo/" + dto.getMerNum();
 		dto.setMerAdress(setAdress(req));
-		
-		String ole_business = req.getParameter("old_mer_business_registration");
-		String ole_file = req.getParameter("old_mer_file");
 		MultipartHttpServletRequest mr = (MultipartHttpServletRequest)req;
 		
-        MultipartFile business = mr.getFile("merRegistration");
-        if (business == null || business.getSize()<=0) {
-			dto.setMerRegistration(ole_business);
+		String ole_business = req.getParameter("old_mer_business_registration");
+		MultipartFile business = mr.getFile("merRegistration");
+		String busName = savedFileName(business, dto, ole_business, MerJoinController.BUSINESSFILEPATH);
+		if(busName == null) {
+			req = goToMessage(req, url, "사업자등록증 수정 중 오류가 발생하였습니다.");
+			return "message";
 		}else {
-			String path = MerJoinController.BUSINESSFILEPATH;
-			String businessFileName = dto.getMerComnum1()+ dto.getMerComnum2()+ dto.getMerComnum3() + "_" + business.getOriginalFilename();
-			if(!sendFile(business, path, businessFileName)) {
-				req = goToMessage(req, url, "사업자등록증 수정 중 오류가 발생하였습니다.");
-				return "message";
-			}
-			deleteFile(path + ole_business);
-			dto.setMerRegistration(businessFileName);
+			dto.setMerRegistration(busName);
 		}
         
+		String ole_file = req.getParameter("old_mer_file");
         MultipartFile file = mr.getFile("inSaleFile");
-        if (file == null || file.getSize()<=0) {
-			dto.setInSaleFile(ole_file);
+        String saleName = savedFileName(file, dto, ole_file, MerInbrandController.FILEPATH);
+		if(saleName == null) {
+			req = goToMessage(req, url, "상품판매 파일 수정 중 오류가 발생하였습니다.");
+			return "message";
 		}else {
-			String path = MerInbrandController.FILEPATH;
-        	String fileName = dto.getMerComnum1()+ dto.getMerComnum2()+ dto.getMerComnum3() + "_" + file.getOriginalFilename();
-        	if(!sendFile(file,path, fileName)) {
-        		req = goToMessage(req, url, "상품판매 파일 수정 중 오류가 발생하였습니다.");
-				return "message";
-        	}
-        	deleteFile(path + ole_file);
-			dto.setMerRegistration(fileName);
+			dto.setInSaleFile(saleName);
+			System.out.println("Controller ---> saleName : " + saleName);
 		}
+        
         Merchant merchant = myService.getMerchant(dto.getMerNum());
 		String res = myService.updateMerchant(dto, merchant);
 		if(res != null) {
