@@ -1,38 +1,39 @@
 package com.oz.ozHouse.market.service;
 
+import java.util.List;
+import java.util.UUID;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.oz.ozHouse.domain.ChattRoom;
 import com.oz.ozHouse.dto.ChattRoomDTO;
 import com.oz.ozHouse.market.repository.ChattRoomRepository;
-import com.oz.ozHouse.market.repository.MarketProductRepository;
 
 import lombok.RequiredArgsConstructor;
 
 @Service
-@RequiredArgsConstructor // 의존성 주입
+@RequiredArgsConstructor
 public class ChattRoomServiceImpl implements ChattRoomService {
 
-	private final ChattRoomRepository chattRoomRepository;
+    private final ChattRoomRepository chattRoomRepository;
 
-	private final MarketProductRepository marketProductRepository;
+    @Override
+    @Transactional
+    public ChattRoom createChatRoom(ChattRoomDTO chattRoomDTO) {
+        ChattRoom chattRoom = new ChattRoom(chattRoomDTO);
+        chattRoom = chattRoomRepository.save(chattRoom);
+        return chattRoom;
+    }
 
-	// 채팅방
-	@Override
-	@Transactional
-	public int getOrCreateChatRoom(ChattRoomDTO dto) {
+    @Override
+    public List<ChattRoom> findAllRooms() {
+        return chattRoomRepository.findAll();
+    }
 
-		int existRoom = chattRoomRepository.findByMyIdAndProNum(dto.getMyId(), dto.getProNum());
-		if (existRoom != 0) {
-			return existRoom;
-		}
-
-		ChattRoom newRoom = new ChattRoom(dto);
-//		newRoom.setMyId(myId);
-//		newRoom.setProNum(proNum);
-		ChattRoom savedRoom = chattRoomRepository.save(newRoom);
-		return savedRoom.getRoomNum();
-	}
-
+    @Override
+    public ChattRoom findRoomByNum(Integer roomNum) {
+        return chattRoomRepository.findById(roomNum)
+                                  .orElseThrow(() -> new IllegalArgumentException("Chat room not found"));
+    }
 }

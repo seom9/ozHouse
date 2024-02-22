@@ -28,9 +28,9 @@ public class Chatt {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int msgNum;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "proNum")
-	private OzMarketPro ozMarketPro; 
+//	@ManyToOne(fetch = FetchType.LAZY)
+//	@JoinColumn(name = "proNum")
+//	private OzMarketPro ozMarketPro; 
 	
 //	private int proNum;
 	
@@ -40,13 +40,19 @@ public class Chatt {
 	
 	private String msg;
 	
-	private int readStatus;
+//	private int readStatus;
+//	
+//	private String file;
 	
-	private String file;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "roomNum")
+	private ChattRoom chattRoom;
 	
-	private int roomNum;
+//	private int roomNum;
 	
 	private String inTime;
+	
+//	private String msgType;
 	
 	public Chatt(ChattDTO dto) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy/MM/dd HH:mm:ss");
@@ -56,9 +62,10 @@ public class Chatt {
         this.recipient = dto.getRecipient();
         this.sender = dto.getSender();
         this.msg = dto.getMsg();
-        this.readStatus = dto.getReadStatus();
-        this.file = dto.getFile();
-        this.roomNum = dto.getRoomNum();
+//        this.readStatus = dto.getReadStatus();
+//        this.file = dto.getFile();
+//        this.roomNum = dto.getRoomNum();
         this.inTime = dto.getInTime().formatted(formatter);
 	}
+	
 }

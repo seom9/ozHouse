@@ -5,9 +5,7 @@ import org.springframework.data.repository.NoRepositoryBean;
 
 import com.oz.ozHouse.domain.ChattRoom;
 
-@NoRepositoryBean
+//@NoRepositoryBean
 public interface ChattRoomRepository extends JpaRepository<ChattRoom, Integer> {
-
-	int findByMyIdAndProNum(String myId, int proNum);
-
+	
 }

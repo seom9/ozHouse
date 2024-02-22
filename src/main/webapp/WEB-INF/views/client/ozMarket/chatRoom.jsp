@@ -1,61 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<!DOCTYPE html>
 <html>
 <head>
-<title>채팅</title>
-<style>
-body {
-	font-family: Arial, sans-serif;
-}
-
-.chat-container {
-	display: flex;
-	justify-content: space-between;
-}
-
-.chat-list, .chat-messages {
-	width: 45%;
-	border: 1px solid #ddd;
-	margin: 10px;
-	padding: 10px;
-	height: 400px;
-	overflow-y: auto;
-}
-
-.chat-entry {
-	margin-top: 10px;
-}
-</style>
-
-
+    <meta charset="UTF-8">
+    <title>Title</title>
 </head>
 <body>
-	<h2>채팅1</h2>
-	<div class="chat-container">
-		<div class="chat-list">
-			<h3>채팅방 리스트</h3>
-			<c:forEach var="room" items="${roomList}">
-				<tr>
-					<td><a href="${pageContext.request.contextPath}/ozMarket/chattRoom/${room.roomNum}">${room.roomNum}</a>
-					</td>
-				</tr>
-			</c:forEach>
-		</div>
-		<div>
-			<span>메세지</span>
-			<!-- 메시지 표시 영역: 수신한 메시지가 여기에 출력 -->
-			<div class="msgArea"></div>
-		</div>
-		<input type="text" placeholder="보낼 메세지를 입력하세요." class="content">
-		<button type="button" value="전송" class="sendBtn" onclick="sendMsg()">전송</button>
-		<button type="button" value="방나가기" class="quit" onclick="quit()">방
-			나가기</button>
+<div>
+    <span>메세지</span>
+    <!-- 메시지 표시 영역: 수신한 메시지가 여기에 출력 -->
+    <div class="msgArea"></div>
+</div>
+<input type="text" placeholder="보낼 메세지를 입력하세요." class="content">
+<button type="button" value="전송" class="sendBtn" onclick="sendMsg()">전송</button>
+<button type="button" value="방나가기" class="quit" onclick="quit()">방 나가기 </button>
+
 </body>
+
 <script>
-	var sender = '${memberNickname}';
+	var sender = '${member.getMemberNickname()}';
 	// 채팅방에 입장할 때 서버에 보내는 메시지를 구성하고 전송하는 함수
 	function enterRoom(socket) {
 		var enterMsg = {
@@ -118,4 +84,5 @@ body {
 		location.href = "/ozMarket/chatts"; // 사용자를 채팅 목록 페이지로 리다이렉트
 	}
 </script>
+
 </html>

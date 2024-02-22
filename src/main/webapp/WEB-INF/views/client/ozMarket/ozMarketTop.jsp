@@ -30,10 +30,10 @@
 			<a href="${pageContext.request.contextPath}/ozMarket/myInfo">내 정보</a>
 		</div>
 		<div>
-			<a href="${pageContext.request.contextPath}/ozMarket/ws/chatt">채팅하기</a>
+			<a href="${pageContext.request.contextPath}/ozMarket/chatts">채팅하기</a>
 		</div>
 		<div>
-			<a href="${pageContext.request.contextPath}/chat/createRoom">test</a>
+			<a href="${pageContext.request.contextPath}/chat/chatList">test</a>
 		</div>
 	</div>
 </div>
