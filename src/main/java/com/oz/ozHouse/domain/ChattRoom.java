@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import com.oz.ozHouse.dto.ChattRoomDTO;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -32,6 +33,10 @@ public class ChattRoom {
     private String otherId; //대화상대
     
     private String createTime;
+    
+//    @ManyToOne(fetch = FetchType.LAZY)
+//	@JoinColumn(name = "proNum")
+//    private OzMarketPro ozPro;
     
     private int proNum;
     

@@ -30,6 +30,7 @@ public class ChattRoomDTO {
 		.myId(dto.getMyId())
 		.otherId(dto.getOtherId())
 		.createTime(dto.getCreateTime())
+//		.proNum(dto.getOzPro().getProNum())
 		.proNum(dto.getProNum())
 		.build();
 		
