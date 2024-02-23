@@ -23,6 +23,7 @@ import com.oz.ozHouse.merchant.config.MerchantLoginBean;
 import com.oz.ozHouse.merchant.exception.NotFoundMerNumException;
 import com.oz.ozHouse.merchant.service.MerMyInformService;
 
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -165,24 +166,24 @@ public class MerMyInformController {
 	}
 	
 	@GetMapping("/{merNum}/out")
-	public String memberOut(HttpServletRequest req, HttpServletResponse resp, String mer_num) {
-//		int res = myInformMapper.memberOut(mer_num);
-//		String msg, url = null;
-//		if(res>0) {
-//			msg = "회원탈퇴가 완료되었습니다. 판매자님의 정보는 5년 후 폐기될 예정입니다.";
-//			url = "merchant_main.do";
-//			HttpSession session = req.getSession();
-//	    	session.invalidate();
-//	    	Cookie ck = new Cookie("saveId", null);
-//	    	ck.setMaxAge(0);
-//	    	resp.addCookie(ck);              
-//		}else {
-//			msg = "회원탈퇴 중 오류가 발생하였습니다.";
-//			url = "myInform_view.do?mer_num=" + mer_num;
-//		}
-//		req.setAttribute("msg", msg);
-//		req.setAttribute("url", url);
-//		return "forward:message.jsp";
-		return null;
+	public String memberOut(HttpServletRequest req, HttpServletResponse resp, 
+			@PathVariable("merNum") int merNum) {
+		int res = myService.merchantOut(merNum);
+		String msg, url = null;
+		if(res>0) {
+			msg = "회원탈퇴가 완료되었습니다. 판매자님의 정보는 5년 후 폐기될 예정입니다.";
+			url = "/merchant/home";
+			HttpSession session = req.getSession();
+	    	session.invalidate();
+	    	Cookie ck = new Cookie("saveId", null);
+	    	ck.setMaxAge(0);
+	    	resp.addCookie(ck);              
+		}else {
+			msg = "회원탈퇴 중 오류가 발생하였습니다.";
+			url = "/merchant/home/myinfo/" + merNum;
+		}
+		req.setAttribute("msg", msg);
+		req.setAttribute("url", url);
+		return "message";
 	}
 }

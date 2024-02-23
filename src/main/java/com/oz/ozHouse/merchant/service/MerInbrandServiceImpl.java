@@ -144,7 +144,6 @@ public class MerInbrandServiceImpl implements MerInbrandService {
 	public int brandCancel(int inNum) {
 		SimpleDateFormat df = new SimpleDateFormat("yy/MM/dd");
 		Date date = new Date();
-		df.format(date);
 		System.out.println("입점신청 취소일 업데이트(Inbrand)");
 		int result = inbrandRepository.updateCancelDate(df.format(date), inNum);
 		return result;

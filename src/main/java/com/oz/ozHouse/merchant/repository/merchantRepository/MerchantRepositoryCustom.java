@@ -9,5 +9,5 @@ public interface MerchantRepositoryCustom{
 	public MerchantDTO findMerchantId(String id);
 	
 	public Merchant findMerchantEmail(String mer_email);
-
+	
 }
