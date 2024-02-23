@@ -23,7 +23,7 @@ package com.oz.ozHouse.client.config;
 //@Slf4j
 //@RequiredArgsConstructor
 //@Component
-public class WebsocketHandler {//extends TextWebSocketHandler {
+// public class WebsocketHandler {extends TextWebSocketHandler {
 //
 //	private final ObjectMapper objectMapper;
 //	private final ChattRoomService chattRoomService;

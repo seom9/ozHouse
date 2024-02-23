@@ -7,6 +7,7 @@ import com.amazonaws.services.ec2.model.Address;
 import com.oz.ozHouse.domain.OrderTb;
 import com.oz.ozHouse.domain.common.PhoneNumber;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -16,6 +17,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -31,16 +33,14 @@ public class OrderTb {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long oNum;				//주문 코드 :
 	
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="memberNum")
     private Member member;			//구매자 정보
     
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name="proQuanNum")
-    private List<ProInform> orderItems = new ArrayList<>();		//구매 상품의 상세정보(금액 및 할인가) 및 판매자 확인 여부
+    @OneToMany(mappedBy = "orderTb", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    private List<ProInform> orderItems = new ArrayList<>();		//구매 상품
     
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name="proQuanNum")
+    @OneToMany(mappedBy = "orderTb", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<UserCoupon> useCoupons = new ArrayList<>();
     
     private int oDispoint;			//사용 포인트 금액
