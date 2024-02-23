@@ -1,4 +1,4 @@
-package com.oz.ozHouse.client.controller;
+package com.oz.ozHouse.client.controller.shopping;
 
 import java.net.BindException;
 import java.util.List;
