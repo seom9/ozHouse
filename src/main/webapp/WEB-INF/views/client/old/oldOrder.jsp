@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="top.jsp" %>
+
 
 <head>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -183,7 +183,6 @@ document.addEventListener("DOMContentLoaded", function () {
 		<span class="wairano2">배송지</span><br><br>
 			<input type="text" tabindex="3" id="postcode1" name="member_postcode1" value="${member.member_postcode1}" placeholder="우편번호">
 			<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-			<c:set var="addressArray" value="${fn:split(member.member_address1, '/')}" />
 			<input type="text" id="sample6_address" name="sample6_address" value="${addressArray[0]}" placeholder="주소"><br>
 			<input type="text" id="sample6_detailAddress" name="sample6_detailAddress" value="${addressArray[1]}" placeholder="상세주소">
 			<input type="text" id="sample6_extraAddress" name="sample6_extraAddress" value="${addressArray[2]}" placeholder="참고항목">
