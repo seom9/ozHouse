@@ -1,37 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
+<link rel="stylesheet"
+    href="${pageContext.request.contextPath}/ozMarket/chatting.css" />
 <!DOCTYPE html>
 <html>
 <head>
 <title>채팅</title>
-<style>
-body {
-	font-family: Arial, sans-serif;
-}
-
-.chat-container {
-	display: flex;
-	justify-content: space-between;
-}
-
-.chat-list, .chat-messages {
-	width: 45%;
-	border: 1px solid #ddd;
-	margin: 10px;
-	padding: 10px;
-	height: 400px;
-	overflow-y: auto;
-}
-
-.chat-entry {
-	margin-top: 10px;
-}
-</style>
-
-
-</head>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/ozMarket/chatting.css" />
 <body>
 	<h2>채팅1</h2>
 	<div class="chat-container">

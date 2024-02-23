@@ -2,6 +2,8 @@ package com.oz.ozHouse.market.controller;
 
 import java.util.List;
 
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,9 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.oz.ozHouse.chatt.test.ChatRoom;
 import com.oz.ozHouse.client.security.MemberSecurityDTO;
 import com.oz.ozHouse.domain.ChattRoom;
+import com.oz.ozHouse.dto.ChattDTO;
 import com.oz.ozHouse.dto.ChattRoomDTO;
 import com.oz.ozHouse.market.service.ChattRoomService;
 
@@ -28,7 +30,12 @@ public class ChattController {
     private final ChattRoomService chattRoomService;
     
     @GetMapping("/chatts")
-    public String chatList(Model model){
+    public String chatList(Model model, @AuthenticationPrincipal MemberSecurityDTO member, HttpServletRequest req){
+    	if (member == null) {
+			req.setAttribute("msg", "로그인 후 이용가능합니다.");
+			req.setAttribute("url", "/main");
+			return "message";
+		}
     	List<ChattRoom> roomList = chattRoomService.findAllRooms(); 
         model.addAttribute("roomList", roomList);
         return "client/ozMarket/chatt";

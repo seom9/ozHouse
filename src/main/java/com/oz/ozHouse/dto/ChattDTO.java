@@ -1,9 +1,8 @@
 package com.oz.ozHouse.dto;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import com.oz.ozHouse.chatt.test.ChatMessage.MessageType;
 import com.oz.ozHouse.domain.Chatt;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -60,7 +59,7 @@ public class ChattDTO {
 //		this.readStatus = 2;
 //		this.file = req.getParameter("file");
 		this.roomNum = Integer.parseInt(req.getParameter("roomNum"));
-		this.inTime = LocalDate.now().format(formatter);
+		this.inTime = LocalDateTime.now().format(formatter);
 	}
 	
 //	public void setFile(String file) {
@@ -73,5 +72,13 @@ public class ChattDTO {
 	
 	public void setMsg(String msg) {
 		this.msg = msg;
+	}
+	
+	public void setSender(String sender) {
+		this.sender = sender;
+	}
+	
+	public void setType(MessageType type) {
+		this.type = type;
 	}
 }

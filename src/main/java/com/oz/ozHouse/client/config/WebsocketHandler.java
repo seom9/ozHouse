@@ -26,6 +26,7 @@ import lombok.extern.slf4j.Slf4j;
 public class WebsocketHandler extends TextWebSocketHandler {
 
 	private final ObjectMapper objectMapper;
+	
 	private final ChattRoomService chattRoomService;
 	private Map<String, HashSet<WebSocketSession>> roomSessions = new ConcurrentHashMap<>();
 

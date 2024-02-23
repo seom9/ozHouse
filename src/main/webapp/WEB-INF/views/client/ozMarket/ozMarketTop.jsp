@@ -10,7 +10,7 @@
 			</a>
 		</div>
 		<div>
-			<a href="${pageContext.request.contextPath}/ozMarket">둘러보기</a>
+			<a href="${pageContext.request.contextPath}/ozMarket/products">둘러보기</a>
 		</div>
 		<div>
 			<a href="${pageContext.request.contextPath}/ozMarket/my-product">내 상품 팔기</a>
@@ -31,9 +31,6 @@
 		</div>
 		<div>
 			<a href="${pageContext.request.contextPath}/ozMarket/chatts">채팅하기</a>
-		</div>
-		<div>
-			<a href="${pageContext.request.contextPath}/chat/chatList">test</a>
 		</div>
 	</div>
 </div>
