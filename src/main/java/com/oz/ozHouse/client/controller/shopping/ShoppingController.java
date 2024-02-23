@@ -1,4 +1,4 @@
-package com.oz.ozHouse.client.controller;
+package com.oz.ozHouse.client.controller.shopping;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
