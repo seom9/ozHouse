@@ -61,7 +61,6 @@
 			<div class="button-container">
     <form action="${pageContext.request.contextPath}/ozMarket/chatt" method="post">
         <input type="hidden" name="proNum" value="${getProduct.proNum}" />
-        <input type="hidden" name="memberNickname" value="${getProduct.memberNickname}" />
         <input type="submit" value="채팅하기" class="list-button"/>
     </form>
 </div>

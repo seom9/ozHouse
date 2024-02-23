@@ -31,4 +31,3 @@ public class WebsocketConfig implements WebSocketConfigurer {
         //다른 url에서도 접속할 수있게(CORS방지)
     }
 }
-

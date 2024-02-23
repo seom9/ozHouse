@@ -1,0 +1,35 @@
+@charset "UTF-8";
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin: 0 auto;
+    max-width: 1200px; 
+}
+
+.grid-item {
+    padding: 10px;
+    text-align: center;
+}
+
+.product-image {
+    max-width: 100%;
+    height: auto;
+    border: none;
+}
+
+.product-title {
+    margin-top: 10px;
+}
+
+.product-price {
+    margin-top: 5px;
+}
+
+.clearfix {
+    content: "";
+    clear: both;
+    display: table;
+}
+
