@@ -173,34 +173,35 @@ public class MerProController {
 	// 상품 상세보기
 	@GetMapping("/{merNum}/store/product/{proNum}")
 	public String productContent(HttpServletRequest req, @RequestParam Map<String, Object> map,
-			@PathVariable(value = "merNum") Integer merNum, @PathVariable(value = "proNum") Integer proNum) throws IOException {
+			@PathVariable(value = "merNum") Integer merNum, @PathVariable(value = "proNum") Integer proNum)
+			throws IOException {
 		String root = PATH + "\\" + "img";
 		String root1 = PATH + "\\" + "imgpro";
 
-	    Optional<ProductDTO> optionalDto = Optional.of(proService.getProduct(proNum)); 
+		Optional<ProductDTO> optionalDto = Optional.of(proService.getProduct(proNum));
 
-	    if (optionalDto.isPresent()) {
-	        ProductDTO dto = optionalDto.get();
-	        req.setAttribute("getProduct", dto);
-	        if (dto.getProImageChange() != null) {
-	            File imageFile = new File(root, dto.getProImageChange());
-	            if (imageFile.exists()) {
-	                String encodedImage = encodeImageToBase64(imageFile);
-	                req.setAttribute("encodedImage", encodedImage); 
-	            }
-	        }
-
-		List<String> encodedImagesPro = new ArrayList<>();
-		String[] imageProFiles = dto.getProImageProChange().split(",");
-		for (String imageFileName : imageProFiles) {
-			File imageProFile = new File(root1, imageFileName);
-			if (imageProFile.exists()) {
-				String encodedImagePro = encodeImageToBase64(imageProFile);
-				encodedImagesPro.add(encodedImagePro);
+		if (optionalDto.isPresent()) {
+			ProductDTO dto = optionalDto.get();
+			req.setAttribute("getProduct", dto);
+			if (dto.getProImageChange() != null) {
+				File imageFile = new File(root, dto.getProImageChange());
+				if (imageFile.exists()) {
+					String encodedImage = encodeImageToBase64(imageFile);
+					req.setAttribute("encodedImage", encodedImage);
+				}
 			}
+
+			List<String> encodedImagesPro = new ArrayList<>();
+			String[] imageProFiles = dto.getProImageProChange().split(",");
+			for (String imageFileName : imageProFiles) {
+				File imageProFile = new File(root1, imageFileName);
+				if (imageProFile.exists()) {
+					String encodedImagePro = encodeImageToBase64(imageProFile);
+					encodedImagesPro.add(encodedImagePro);
+				}
+			}
+			req.setAttribute("encodedImagesPro", encodedImagesPro);
 		}
-		req.setAttribute("encodedImagesPro", encodedImagesPro);
-	    }
 //		RequestProductDTO redto = proService.getreProduct(map.get("proNum"));
 //
 //		if (redto != null) {
