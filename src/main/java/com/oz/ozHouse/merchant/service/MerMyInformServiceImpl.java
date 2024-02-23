@@ -1,5 +1,9 @@
 package com.oz.ozHouse.merchant.service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -141,6 +145,26 @@ public class MerMyInformServiceImpl implements MerMyInformService {
 	public int updatePass(String merPw, int merNum) {
 		System.out.println("비밀번호 재설정(MyInform)");
 		int result = merRepository.updateMerchantPw(merPw, merNum);
+		return result;
+	}
+
+	@Override
+	public int merchantOut(int merNum) {
+		SimpleDateFormat df = new SimpleDateFormat("yy/MM/dd");
+		Date date = new Date();
+		String today = df.format(date); //오늘 날짜 구하기
+		
+		Calendar calDel= Calendar.getInstance();  //5년 뒤의 날짜 구하기
+		try {
+			calDel.setTime(df.parse(today));
+			calDel.add(Calendar.YEAR, 5);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println("회원 탈퇴(MyInform)");
+		 System.out.printf("merOutDate : %s   merDeleteDate : %s\n", today, df.format(calDel.getTime()));
+		    int result = merRepository.merchantOut(today, df.format(calDel.getTime()), merNum);
 		return result;
 	}
 }
