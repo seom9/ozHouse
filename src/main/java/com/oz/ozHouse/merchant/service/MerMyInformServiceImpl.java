@@ -40,12 +40,6 @@ public class MerMyInformServiceImpl implements MerMyInformService {
 				.phoneNumber3(dto.getMerHp3())
 				.build();
 		
-//		InbrandInfo info = InbrandInfo.builder()
-//				.brandFile(dto.getInSaleFile())
-//				.homepage(dto.getInHomepage())
-//				.otherShop(dto.getInOthershop())
-//				.build();
-		
 		InbrandInfo info = merchant.getInbrand().getInbrandInfo().toBuilder()
 				.brandFile(dto.getInSaleFile())
 				.homepage(dto.getInHomepage())
@@ -141,5 +135,12 @@ public class MerMyInformServiceImpl implements MerMyInformService {
 	public Merchant getMerchant(int merNum) {
 		Optional<Merchant> m = merRepository.findById(merNum);
 		return m.get();
+	}
+
+	@Override
+	public int updatePass(String merPw, int merNum) {
+		System.out.println("비밀번호 재설정(MyInform)");
+		int result = merRepository.updateMerchantPw(merPw, merNum);
+		return result;
 	}
 }

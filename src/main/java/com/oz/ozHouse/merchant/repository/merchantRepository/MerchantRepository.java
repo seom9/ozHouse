@@ -25,4 +25,9 @@ extends JpaRepository<Merchant, Integer>, MerchantRepositoryCustom{
 	@Query("update Merchant m set m.merPw = :merPw where merId = :merId")
 	int updateMerchantPw(@Param("merPw") String merPw, @Param("merId") String merId);
 	
+	@Transactional
+	@Modifying
+	@Query("update Merchant m set m.merPw = :merPw where merNum = :merNum")
+	int updateMerchantPw(@Param("merPw") String merPw, @Param("merNum") int merNum);
+	
 }
