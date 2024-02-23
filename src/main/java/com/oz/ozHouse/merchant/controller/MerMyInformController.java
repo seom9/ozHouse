@@ -2,7 +2,9 @@ package com.oz.ozHouse.merchant.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Map;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,6 +33,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class MerMyInformController {
 	private final MerMyInformService myService;
+	private final PasswordEncoder passwordEncoder;
 
 	@GetMapping("/{merNum}")
 	public String myInform_view(HttpServletRequest req, @PathVariable("merNum") int merNum) {
@@ -58,6 +61,27 @@ public class MerMyInformController {
 	@GetMapping("/{merNum}/password")
 	public String myInformUpdatePass() {
 		return "merchant/myInform/myInform_updatePass";
+	}
+	
+	@PostMapping("/{merNum}/password/ok")
+	public String myInformUpdatePassOk(HttpServletRequest req, 
+			@RequestParam(name="merPw") String merPw,
+			@PathVariable("merNum") int merNum) {
+		merPw = passwordEncoder.encode(merPw);
+		int res = myService.updatePass(merPw, merNum);
+		String msg = null, url = null;
+		
+		if(res>0) {
+			msg = "비밀번호 변경이 완료되었습니다. 다시 로그인 해주세요.";
+			HttpSession session = req.getSession();
+			session.invalidate();
+			url = "/merchant/home";
+		}else {
+			msg = "비밀번호 변경 중 오류가 발생하였습니다.";
+			url = "/merchant/home/myinfo/" + merNum;
+		}
+		req = goToMessage(req, url, msg);
+		return "message";
 	}
 	
 	@GetMapping("/{merNum}/modfy")
@@ -127,17 +151,6 @@ public class MerMyInformController {
 		}else {
 			dto.setMerRegistration(busName);
 		}
-//        
-//		String ole_file = req.getParameter("old_mer_file");
-//        MultipartFile file = mr.getFile("inSaleFile");
-//        String saleName = savedFileName(file, dto, ole_file, MerInbrandController.FILEPATH);
-//		if(saleName == null) {
-//			req = goToMessage(req, url, "상품판매 파일 수정 중 오류가 발생하였습니다.");
-//			return "message";
-//		}else {
-//			dto.setInSaleFile(saleName);
-//			System.out.println("Controller ---> saleName : " + saleName);
-//		}
         
 		System.out.println("판매자 정보 업데이트 전에 기존 정보 불러오기(Inform)");
         Merchant merchant = myService.getMerchant(dto.getMerNum());

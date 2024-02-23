@@ -15,7 +15,7 @@
 
 	function check(pw) {
 		var nowPw = document.f.now_pw.value;
-		var merPw1 = document.f.mer_pw.value;
+		var merPw1 = document.f.merPw.value;
 		var merPw2 = document.f.mer_pw2.value;
 
 		if (nowPw != pw) {
@@ -42,13 +42,13 @@
 <body>
 	<div align="center">
 		<form name="f"
-			action="${pageContext.request.contextPath}/merchants/${merchantLoginMember.merNum}/password"
+			action="${pageContext.request.contextPath}/merchant/home/myinfo/${merLoginMember.merNum}/password/ok"
 			method="post"
-			onsubmit="return check('<c:out value="${merchantLoginMember.mer_pw}" />');">
+			onsubmit="return check('<c:out value="${merLoginMember.merPw}" />');">
 
 			<input type="hidden" name="merNum"
-				value="${merchantLoginMember.merNum}"> <input type="hidden"
-				name="merId" value="${merchantLoginMember.merId}">
+				value="${merLoginMember.merNum}"> <input type="hidden"
+				name="merId" value="${merLoginMember.merId}">
 			<div class="flex-container">
 				<div class="flex-row">
 					<div class="flex-header">현재 비밀번호</div>
@@ -61,7 +61,7 @@
 				<div class="flex-row">
 					<div class="flex-header">변경할 비밀번호</div>
 					<div class="flex-content">
-						<input type="password" tabindex="3" name="mer_pw"
+						<input type="password" tabindex="3" name="merPw"
 							placeholder="비밀번호를 입력해 주세요." class="box"
 							placeholder="Enter password" id="password">
 					</div>
@@ -76,7 +76,7 @@
 				</div>
 				<input type="submit" value="변경"> <input type="button"
 					value="취소"
-					onclick="location.href='${pageContext.request.contextPath}/merchants/${merNum}/info'">
+					onclick="location.href='${pageContext.request.contextPath}/merchant/home/myinfo/${merNum}'">
 			</div>
 		</form>
 	</div>

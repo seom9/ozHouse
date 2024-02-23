@@ -12,4 +12,6 @@ public interface MerMyInformService {
 	public String updateMerchant(MerchantUpdateDTO dto, Merchant merchant);
 	
 	public Merchant getMerchant(int merNum);
+	
+	public int updatePass(String merPw, int merNum);
 }
