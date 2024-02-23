@@ -1,15 +1,11 @@
 package com.oz.ozHouse.dto;
 
-import java.time.LocalDate;
-
 import com.oz.ozHouse.domain.MerCoupon;
-import com.oz.ozHouse.dto.client.member.MemberPasswdUpdateDTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Getter
 @Builder
@@ -18,10 +14,22 @@ import lombok.Setter;
 public class MerCouponDTO {
 	
 	private int merCouponnum;
+	private int merNum;
 	private String merCouponname;
 	private String merIsok;
 	private int merCoupondiscount;
 	private String merCouponusedate;
 	private String merCouponenddate;
 	
+	
+    public static MerCouponDTO from(MerCoupon merCoupon) {
+    	if (merCoupon == null) return null;
+    	
+        return MerCouponDTO.builder()
+        		.merCouponnum(merCoupon.getMerCouponnum())
+        		.merNum(merCoupon.getMerNum().getMerNum())
+        		.merCouponname(merCoupon.getMerCouponname())
+                .build();
+    }
+
 }

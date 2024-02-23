@@ -7,8 +7,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <c:set var="path" value="${pageContext.request.contextPath}"/>
-<link rel="stylesheet" href="${path}/resources/client/main_css/order.css"/>
-<link rel="stylesheet" href="${path}/resources/Cart.css"/>
+<link rel="stylesheet" href="${path}/client/main_css/order.css"/>
+<link rel="stylesheet" href="${path}/Cart.css"/>
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
@@ -88,21 +88,21 @@ document.addEventListener('DOMContentLoaded', function () {
 	<form name="f" method="post" id="login-form" action="order_success">		
 		<span class="wairano2">주문자</span><br><br>
 			이름 <br><br>
-			<input type="text" value="${member.member_name}" name="member_name" placeholder="이름을 입력해 주세요."><br>
+			<input type="text" value="${member.memberName}" name="member_name" placeholder="이름을 입력해 주세요."><br>
 			연락처<br><br>
-			<input type="text" value="${member.member_hp1}" name="member_hp1" size="3" maxlength="3"> -
-			<input type="text" value="${member.member_hp2}" name="member_hp2" size="4" maxlength="4"> -
-			<input type="text" value="${member.member_hp3}" name="member_hp3" size="4" maxlength="4">				
+			<input type="text" value="${member.memberHp.phoneNumber1}" name="member_hp1" size="3" maxlength="3"> -
+			<input type="text" value="${member.memberHp.phoneNumber2}" name="member_hp2" size="4" maxlength="4"> -
+			<input type="text" value="${member.memberHp.phoneNumber3}" name="member_hp3" size="4" maxlength="4">				
 		<br><br>
 
 
 		<span class="wairano2">배송지</span><br><br>
-			<input type="text" tabindex="3" id="postcode1" name="member_postcode1" value="${member.member_postcode1}" placeholder="우편번호">
+			<input type="text" tabindex="3" id="postcode1" name="member_postcode1" value="${member.memberAddress.postcode}" placeholder="우편번호">
 			<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-			<c:set var="addressArray" value="${fn:split(member.member_address1, '/')}" />
-			<input type="text" id="sample6_address" name="sample6_address" value="${addressArray[0]}" placeholder="주소"><br>
-			<input type="text" id="sample6_detailAddress" name="sample6_detailAddress" value="${addressArray[1]}" placeholder="상세주소">
-			<input type="text" id="sample6_extraAddress" name="sample6_extraAddress" value="${addressArray[2]}" placeholder="참고항목">
+			
+			<input type="text" id="sample6_address" name="sample6_address" value="${member.memberAddress.city}" placeholder="주소"><br>
+			<input type="text" id="sample6_detailAddress" name="sample6_detailAddress" value="${member.memberAddress.street}" placeholder="상세주소">
+			<input type="text" id="sample6_extraAddress" name="sample6_extraAddress" value="${member.memberAddress.zipcode}" placeholder="참고항목">
 			<br><br>
 			
 		<c:set var="order_ori_price" value="0"/>
@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 		 <ul class="commerce-cart__content__group-list">
 		     <li class="commerce-cart__content__group-item">
-		     	<c:forEach var="dto" items="${orderProducts.keySet()}">
+		     	<c:forEach var="dto" items="${orderProducts}">
 		         <article class="commerce-cart__group">
 		             <h1 class="commerce-cart__group__header">$/{브랜드명}</h1>
 		
@@ -136,34 +136,34 @@ document.addEventListener('DOMContentLoaded', function () {
 			<div class="product-small-item product-small-item--clickable">
 			    <div class="product-small-item__image">
 			        <picture>	
-			         	<img src="${upPath}/${dto.product_image}"/>
+			         	<img src="${upPath}/${dto.productDTO.proImg}"/>
 			  	   </picture>
 			    </div>
 			    <div class="product-small-item__content">
-			        <h1 class="product-small-item__title">${dto.product_name}</h1>
+			        <h1 class="product-small-item__title">${dto.productDTO.proName}</h1>
 			
 			<p class="css-w0e4y9 e1xep4wb1">
-				<c:if test="${dto.product_assembly_cost == 0}">
-					<span id="product_assembly_price${dto.product_num}" data-price="${dto.product_assembly_cost}">
+				<c:if test="${dto.productDTO.proAssemblyCost == 0}">
+					<span id="product_assembly_price${dto.productDTO.proNum}" data-price="${dto.productDTO.proAssemblyCost}">
 						무료 조립
 					</span>
 				</c:if>
-				<c:if test="${dto.product_assembly_cost != 0}">
-					<span id="product_assembly_price${dto.product_num}" data-price="${dto.product_assembly_cost}">
-						조립비 ${dto.product_assembly_cost} 원
+				<c:if test="${dto.productDTO.proAssemblyCost != 0}">
+					<span id="product_assembly_price${dto.productDTO.proNum}" data-price="${dto.productDTO.proAssemblyCost}">
+						조립비 ${dto.productDTO.proAssemblyCost} 원
 					</span>
 				</c:if>									
 				&nbsp;|&nbsp;일반택배
 			</p><br>
 			        <span class="carted-product__subtotal" display="flex">
-		            	<p class="css-2kgyr3"><span style="text-decoration: line-through;"><fmt:formatNumber value="${dto.product_price}" pattern="###,###"/></span> &nbsp; 
-		            	<span class="css-1wu05q6">${orderProducts[dto]} 개</span> 
-		            	<span class="css-1wu05q7">할인 적용 금액<span class="discount_price">&nbsp; <fmt:formatNumber value="${dto.product_price - dto.product_discount_price}" pattern="###,###"/>원</span></span></p>
+		            	<p class="css-2kgyr3"><span style="text-decoration: line-through;"><fmt:formatNumber value="${dto.productDTO.proPrice}" pattern="###,###"/></span> &nbsp; 
+		            	<span class="css-1wu05q6">${dto.quantity} 개</span> 
+		            	<span class="css-1wu05q7">할인 적용 금액<span class="discount_price">&nbsp; <fmt:formatNumber value="${dto.productDTO.proPrice - dto.productDTO.proDiscountPrice}" pattern="###,###"/>원</span></span></p>
 		            </span>
 			        <span class="carted-product__subtotal" display="flex">
 		            	<p class="css-2kgyr3"><span style="text-decoration: line-through;"></span> &nbsp; 
 		            	<span class="css-1wu05q6"></span> 
-		            	<span class="css-1wu05q7">상품 합계 금액<span class="discount_price" style="color: black; font-size:20px;">&nbsp; <fmt:formatNumber value="${(dto.product_price - dto.product_discount_price) * orderProducts[dto]}" pattern="###,###"/>원</span></span></p>
+		            	<span class="css-1wu05q7">상품 합계 금액<span class="discount_price" style="color: black; font-size:20px;">&nbsp; <fmt:formatNumber value="${(dto.productDTO.proPrice - dto.productDTO.proDiscountPrice) * dto.quantity}" pattern="###,###"/>원</span></span></p>
 		            </span>		            
 			    </div>
 			</div>
@@ -187,10 +187,10 @@ document.addEventListener('DOMContentLoaded', function () {
 		                     </ul>
 		          
 		                 </article>
-		<c:set var="order_ori_price" value="${order_ori_price + (dto.product_price*orderProducts[dto])}"/>
-		<c:set var="order_dis_discount" value="${order_dis_discount + (dto.product_discount_price*orderProducts[dto])}"/>		                 
-		<c:set var="order_assembly_cost" value="${order_assembly_cost + dto.product_assembly_cost*orderProducts[dto]}"/> 
-		<c:set var="order_qpty" value="${order_qpty + orderProducts[dto]}"/>
+		<c:set var="order_ori_price" value="${order_ori_price + (dto.productDTO.proPrice*dto.quantity)}"/>
+		<c:set var="order_dis_discount" value="${order_dis_discount + (dto.productDTO.proDiscountPrice*dto.quantity)}"/>		                 
+		<c:set var="order_assembly_cost" value="${order_assembly_cost + (dto.productDTO.proAssemblyCost*dto.quantity)}"/> 
+		<c:set var="order_qpty" value="${order_qpty + dto.quantity}"/>
 		                  </c:forEach>
 		             </li>
 		         </ul>
@@ -200,28 +200,28 @@ document.addEventListener('DOMContentLoaded', function () {
 		
 
 		<span class="wairano2"> 쿠폰</span><br><br>	
-		<c:if test="${not empty userCouponList}">	
+		<c:if test="${not empty coupons}">	
 		 
-		   	<c:forEach var="cdto" items="${userCouponList}">
+		   	<c:forEach var="cdto" items="${coupons}">
 		   	<ul>
 		   		<div class="eo0ca796 css-113eoa3">
-				<input title="${cdto.mer_couponname}" type="checkbox" name="selectedCoupons" value="${cdto.mer_couponnum}" class="css-s6rm2m" data-discount="${cdto.mer_coupondiscount}">${cdto.mer_couponname}</div>
-				<div class=" css-1vjp7rs eo0ca790"><div class="selected css-1gjupqf eo0ca795">${cdto.mer_coupondiscount}원 할인</div>
-				<div class="css-1bdbp8h eo0ca794">${cdto.mer_couponenddate}까지</div>
+				<input title="${cdto.mer_couponname}" type="checkbox" name="selectedCoupons" value="${cdto.merCouponnum}" class="css-s6rm2m" data-discount="${cdto.merCoupondiscount}">${cdto.merCouponname}</div>
+				<div class=" css-1vjp7rs eo0ca790"><div class="selected css-1gjupqf eo0ca795">${cdto.merCoupondiscount}원 할인</div>
+				<div class="css-1bdbp8h eo0ca794">${cdto.merCouponenddate}까지</div>
 				</div>
 			 </ul>
 			 
 			</c:forEach>
 		 </c:if>
 
-		 <c:if test="${empty userCouponList}">	
+		 <c:if test="${empty coupons}">	
 		   	사용 가능한 쿠폰이 없어요<br><br>	
 		 </c:if>
 			<br><br>
 		<span class="wairano2">포인트</span><br>
-		<input type="text" value="0" class="memberUsePoint" name="member_use_point" maxlength="${member.member_point}" id="memberUsePoint">
+		<input type="text" value="0" class="memberUsePoint" name="member_use_point" maxlength="${member.memberPoint}" id="memberUsePoint">
 		<input type="button" name="use_all_point" class="memberUsePointAllButton" value="전액 사용"><br>
-		가용 포인트 : ${member.member_point} points
+		가용 포인트 : ${member.memberPoint} points
 		<br><br>
 		<br><br>
 		<span class="wairano2">요청 사항</span><br><br>	
@@ -267,7 +267,7 @@ document.addEventListener('DOMContentLoaded', function () {
 </aside>
 <script>
 	document.addEventListener("DOMContentLoaded", function () {
-	    var memberUsePointValue = ${member.member_point}; // 사용자의 전체 포인트
+	    var memberUsePointValue = ${member.memberPoint}; // 사용자의 전체 포인트
 	    var couponCheckboxes = document.querySelectorAll(".css-s6rm2m"); // 쿠폰 체크박스 선택
 	    var memberUsePointAllButton = document.querySelector(".memberUsePointAllButton");
 	    var memberUsePointButton = document.querySelector(".memberUsePoint"); // 포인트 입력 필드

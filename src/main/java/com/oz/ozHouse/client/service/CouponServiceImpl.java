@@ -2,6 +2,7 @@ package com.oz.ozHouse.client.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
@@ -16,6 +17,7 @@ import com.oz.ozHouse.domain.MerCoupon;
 import com.oz.ozHouse.domain.UserCoupon;
 import com.oz.ozHouse.dto.MerCouponDTO;
 import com.oz.ozHouse.dto.UserCouponDTO;
+import com.oz.ozHouse.dto.client.member.ProQuanDTO;
 
 import jakarta.persistence.Entity;
 import jakarta.transaction.Transactional;
@@ -82,5 +84,26 @@ public class CouponServiceImpl implements CouponService{
         userCouponRepository.save(userCoupon);        
         return true;
 	}
+
+
+	@Override
+	public TreeSet<MerCouponDTO> getOrderCoupons(String memberId, List<ProQuanDTO> products) {
+		Member member = memberRepository.findByMemberId(memberId);
+		TreeSet<Integer> merNums = new TreeSet<>();
+		
+		// 상품에 포함된 판매자 번호 저장
+		for (ProQuanDTO dto : products) {
+			merNums.add(dto.getProductDTO().getMerNum());
+		}
+		
+		// 판매자 번호가 있다면 treeSet에 해당 userCoupon 추가
+		TreeSet<MerCouponDTO> merCouponDTOs = member.getCoupons().stream()
+		        .map(userCoupon -> modelMapper.map(userCoupon.getMerCoupon(), MerCouponDTO.class))
+		        .filter(merCouponDTO -> merNums.contains(merCouponDTO.getMerNum()))
+		        .collect(Collectors.toCollection(TreeSet::new));
+		
+		return merCouponDTOs;
+	}
+	
 	
 }
