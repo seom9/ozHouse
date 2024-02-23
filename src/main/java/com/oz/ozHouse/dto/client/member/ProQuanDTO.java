@@ -1,7 +1,5 @@
 package com.oz.ozHouse.dto.client.member;
 
-import com.oz.ozHouse.dto.ProductDTO;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,6 +10,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProQuanDTO {
-    private ProductDTO productDTO;
+    private ClientProductDTO productDTO;
     private int quantity;
 }

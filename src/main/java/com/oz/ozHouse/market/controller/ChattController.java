@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.oz.ozHouse.chatt.test.ChatRoom;
 import com.oz.ozHouse.client.security.MemberSecurityDTO;
 import com.oz.ozHouse.domain.ChattRoom;
 import com.oz.ozHouse.dto.ChattRoomDTO;

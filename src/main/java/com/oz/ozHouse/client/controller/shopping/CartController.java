@@ -1,22 +1,26 @@
 package com.oz.ozHouse.client.controller.shopping;
 
 import java.io.IOException;
+import java.net.BindException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.modelmapper.internal.Errors;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.oz.ozHouse.client.security.MemberSecurityDTO;
 import com.oz.ozHouse.client.service.CartService;
-import com.oz.ozHouse.dto.ProductDTO;
+import com.oz.ozHouse.dto.client.member.ClientProductDTO;
 import com.oz.ozHouse.dto.client.member.ProQuanDTO;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -45,7 +49,7 @@ public class CartController {
 											@PathVariable("quantity") int quantity)
 											throws IOException {
 		
-		ProductDTO dto = cartService.getProduct(productNum);
+		ClientProductDTO dto = cartService.getProduct(productNum);
 		
 		if (cart == null) cart = new ArrayList<ProQuanDTO>();
 		
@@ -70,15 +74,14 @@ public class CartController {
 	}
 	
 	
-	@GetMapping("/cart/{productNum}/{quantity}/del")
+	@GetMapping("/cart/{productNum}/{quantity}/update")
 	@ResponseBody
-	public String cartDel (HttpServletRequest req, HttpSession session,
+	public String cartUpdate (HttpServletRequest req, HttpSession session,
 											@SessionAttribute("cart") List<ProQuanDTO> cart,
-											@AuthenticationPrincipal MemberSecurityDTO member,
-											@PathVariable("productNum") Integer productNum,
-											@PathVariable("quantity") int quantity)
-											throws IOException {
-		ProductDTO dto = cartService.getProduct(productNum);
+											@PathVariable("productNum") int productNum,
+											@PathVariable("quantity") int quantity) {
+		
+		ClientProductDTO dto = cartService.getProduct(productNum);
 		
 		if (cart == null) cart = new ArrayList<ProQuanDTO>();
 		
@@ -86,16 +89,16 @@ public class CartController {
 			if (cartDTO.getProductDTO().getProNum() == dto.getProNum()) {
 				ProQuanDTO plusCart = ProQuanDTO.builder()
 											.productDTO(dto)
-											.quantity(cartDTO.getQuantity() - quantity)
+											.quantity(quantity)
 											.build();
 				cart.remove(cartDTO);
 				if (plusCart.getQuantity() > 0) cart.add(plusCart);
 				session.setAttribute("cart", cart);
-				return "del";
+				return "hi";
 			}
 		}
 		
-		return "none";
+		return "fail";
 	}
 	
 }

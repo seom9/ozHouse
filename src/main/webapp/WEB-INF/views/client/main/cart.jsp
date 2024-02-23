@@ -12,36 +12,35 @@
 <link rel="stylesheet" href="${path}/Cart.css"/>
 </head>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+<script type="text/javascript">
+function cartUpdate(product_num, order_count) {
+    fetch('/cart/' + product_num + '/' + order_count + '/update', {
+        method: 'GET'
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.text(); 
+    })
+    .then(data => {
+        if(data === "fail") alert("장바구니 업데이트 실패")
+    })
+    .catch(error => {
+    	alert("서버 통신에 실패했습니다 : 관리자에게 문의해 주세요")
+    });
+}
+</script>
+
 <script>
 function goOrder(){
 	    var result = confirm("구매하시겠습니까?");
     if (result) {
-		window.location.href ="Order_main.do";
+		window.location.href ="/order/cart";
     } else {
 		
     }
-}
-
-
-function cartUpdate(product_num, order_count) {
-    $.ajax({
-        type: 'post',
-        url: "cart_update.do",
-        data: {
-            "product_num": product_num,
-            "order_count": order_count
-        },
-        success: function(data) {
-            if (data === "T") {
-                console.log("성공");
-            } else {
-                console.log("실패");
-            }
-        },
-        error: function(error) {
-            alert("오류 발생: " + error);
-        }
-    });
 }
 
 function deleteCart() {

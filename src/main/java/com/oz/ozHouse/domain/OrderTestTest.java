@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.amazonaws.services.ec2.model.Address;
-import com.oz.ozHouse.domain.OrderTb;
 import com.oz.ozHouse.domain.common.PhoneNumber;
 
 import jakarta.persistence.Embedded;
@@ -26,7 +25,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class OrderTb {
+public class OrderTestTest {
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long oNum;				//주문 코드 :
