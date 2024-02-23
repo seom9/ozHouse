@@ -37,7 +37,7 @@ public class OrderTb {
     
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name="proQuanNum")
-    private List<ProInform> orderItems = new ArrayList<>();		//구매 상품
+    private List<ProInform> orderItems = new ArrayList<>();		//구매 상품의 상세정보(금액 및 할인가) 및 판매자 확인 여부
     
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name="proQuanNum")

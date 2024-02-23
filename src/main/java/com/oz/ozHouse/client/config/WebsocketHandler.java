@@ -1,4 +1,4 @@
-//package com.oz.ozHouse.client.config;
+package com.oz.ozHouse.client.config;
 //
 //import java.io.IOException;
 //import java.util.HashSet;
