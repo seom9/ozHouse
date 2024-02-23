@@ -3,7 +3,6 @@ package com.oz.ozHouse.dto;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import com.oz.ozHouse.chatt.test.ChatMessage.MessageType;
 import com.oz.ozHouse.domain.Chatt;
 
 import jakarta.servlet.http.HttpServletRequest;

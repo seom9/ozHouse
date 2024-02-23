@@ -1,11 +1,11 @@
 aside {
-	width: 30%; /* ¿øÇÏ´Â ³Êºñ·Î Á¶ÀýÇÏ¼¼¿ä */
+	width: 30%; /* ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Êºï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½ */
 	position: fixed;
 	float: right;
 	right: 5%;
 	top: 60%;
 	transform: translateY(-50%);
-	border-radius: 10px; /* Ãß°¡µÈ ºÎºÐ */
+	border-radius: 10px; /* ï¿½ß°ï¿½ï¿½ï¿½ ï¿½Îºï¿½ */
 	padding: 10px;
 }
 
@@ -24,7 +24,7 @@ aside {
 	position: sticky;
 	top: 81px;
 	padding-top: 40px;
-	width: inherit;
+	width: 1000;
 }
 
 .order-font {
@@ -66,7 +66,7 @@ aside {
 .order-block {
 	display: flex;
 	justify-content: space-between;
-	align-items: baseline; /* ±âÁØ¼±À» ¸ÂÃß¾î ÅØ½ºÆ®¸¦ ¼öÁ÷ Á¤·ÄÇÕ´Ï´Ù. */
+	align-items: baseline; /* ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ß¾ï¿½ ï¿½Ø½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½. */
 }
 
 .left-fond {
@@ -167,13 +167,13 @@ aside {
 }
 
 #login-form input[type="button"] {
-	width: 10% background-color: #50E5B4; /* ¹öÆ° ¹è°æ»ö */
-	color: white; /* ±ÛÀÚ»ö */
-	padding: 10px 20px; /* ÆÐµù ¼³Á¤ */
-	border: none; /* Å×µÎ¸® ¾øÀ½ */
-	border-radius: 5px; /* Å×µÎ¸® µÕ±Û°Ô ¼³Á¤ */
-	cursor: pointer; /* Æ÷ÀÎÅÍ Ä¿¼­·Î º¯°æ */
-	font-size: 16px; /* ±ÛÀÚ Å©±â */
+	width: 10% background-color: #50E5B4; /* ï¿½ï¿½Æ° ï¿½ï¿½ï¿½ï¿½ */
+	color: white; /* ï¿½ï¿½ï¿½Ú»ï¿½ */
+	padding: 10px 20px; /* ï¿½Ðµï¿½ ï¿½ï¿½ï¿½ï¿½ */
+	border: none; /* ï¿½×µÎ¸ï¿½ ï¿½ï¿½ï¿½ï¿½ */
+	border-radius: 5px; /* ï¿½×µÎ¸ï¿½ ï¿½Õ±Û°ï¿½ ï¿½ï¿½ï¿½ï¿½ */
+	cursor: pointer; /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ä¿ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ */
+	font-size: 16px; /* ï¿½ï¿½ï¿½ï¿½ Å©ï¿½ï¿½ */
 }
 
 .nURjsmqFThhQ8zwabX4L .G7QZ1shWGosDZ1csHsNt .rgXn596odaKr6yWd5rqA .RIoMlTrYhkb4oTjsJRdO
@@ -281,8 +281,8 @@ a {
 
 .title {
 	font-family: 'Roboto', sans-serif;
-	color: black; /* °ËÁ¤»öÀ¸·Î º¯°æ */
-	font-size: 13px; /* ±Û²Ã Å©±â¸¦ 15ÇÈ¼¿·Î ÁöÁ¤ */
+	color: black; /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ */
+	font-size: 13px; /* ï¿½Û²ï¿½ Å©ï¿½â¸¦ 15ï¿½È¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ */
 }
 
 .css-mwa60y {
@@ -363,7 +363,7 @@ style>.css-b8peps {
 body, html {
 	line-height: 1;
 	font-family: Pretendard Variable, Noto Sans KR, Apple SD Gothic Neo,
-		¸¼Àº °íµñ, Malgun Gothic, sans-serif;
+		ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½, Malgun Gothic, sans-serif;
 	font-size: 13px;
 }
 
@@ -503,7 +503,7 @@ style>.css-b8peps {
 body, html {
 	line-height: 1;
 	font-family: Pretendard Variable, Noto Sans KR, Apple SD Gothic Neo,
-		¸¼Àº °íµñ, Malgun Gothic, sans-serif;
+		ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½, Malgun Gothic, sans-serif;
 	font-size: 13px;
 }
 
