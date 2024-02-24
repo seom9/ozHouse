@@ -3,7 +3,7 @@ package com.oz.ozHouse.dto;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import com.oz.ozHouse.domain.Chatt;
+//import com.oz.ozHouse.domain.Chatt;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
@@ -30,22 +30,22 @@ public class ChattDTO {
 	private int roomNum;
 	private String inTime;
 	
-	public ChattDTO toDTO(Chatt chatt) {
-		
-		return ChattDTO.builder()
-				.msgNum(chatt.getMsgNum())
-//				.proNum(chatt.getOzMarketPro().getProNum())
-//				.proNum(chatt.getProNum())
-				.recipient(chatt.getRecipient())
-				.sender(chatt.getSender())
-				.msg(chatt.getMsg())
-//				.readStatus(chatt.getReadStatus())
-//				.file(chatt.getFile())
-				.roomNum(chatt.getChattRoom().getRoomNum())
-//				.roomNum(chatt.getRoomNum())
-				.inTime(chatt.getInTime())
-				.build();
-	}
+//	public ChattDTO toDTO(Chatt chatt) {
+//		
+//		return ChattDTO.builder()
+//				.msgNum(chatt.getMsgNum())
+////				.proNum(chatt.getOzMarketPro().getProNum())
+////				.proNum(chatt.getProNum())
+//				.recipient(chatt.getRecipient())
+//				.sender(chatt.getSender())
+//				.msg(chatt.getMsg())
+////				.readStatus(chatt.getReadStatus())
+////				.file(chatt.getFile())
+//				.roomNum(chatt.getChattRoom().getRoomNum())
+////				.roomNum(chatt.getRoomNum())
+//				.inTime(chatt.getInTime())
+//				.build();
+//	}
 	
 	public ChattDTO(HttpServletRequest req) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy/MM/dd HH:mm:ss");

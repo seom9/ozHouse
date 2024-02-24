@@ -8,6 +8,7 @@ import com.oz.ozHouse.domain.OrderTb;
 import com.oz.ozHouse.domain.common.PhoneNumber;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -29,18 +30,20 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class OrderTb {
+	
 	@Id 
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long oNum;				//주문 코드 :
 	
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="memberNum")
     private Member member;			//구매자 정보
     
-    @OneToMany(mappedBy = "orderTb", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @ElementCollection(fetch = FetchType.LAZY)
     private List<ProInform> orderItems = new ArrayList<>();		//구매 상품
     
-    @OneToMany(mappedBy = "orderTb", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @ElementCollection(fetch = FetchType.LAZY)
     private List<UserCoupon> useCoupons = new ArrayList<>();
     
     private int oDispoint;			//사용 포인트 금액
