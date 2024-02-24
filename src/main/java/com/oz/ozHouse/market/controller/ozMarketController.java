@@ -22,6 +22,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.oz.ozHouse.client.security.MemberSecurityDTO;
+import com.oz.ozHouse.client.service.MemberService;
+import com.oz.ozHouse.domain.OzMarketPro;
 import com.oz.ozHouse.dto.OzMarketProDTO;
 import com.oz.ozHouse.market.service.MarketProService;
 
@@ -35,7 +37,7 @@ import lombok.RequiredArgsConstructor;
 public class ozMarketController {
 
 	private final MarketProService marketProService;
-
+	
 	private static final String PATH = "C:\\ozMarket\\";
 
 	// base64 인코딩
@@ -55,10 +57,29 @@ public class ozMarketController {
 
 	// 상품 검색
 	@GetMapping("/search")
-	public ModelAndView findProduct(@RequestParam("search") String search, HttpServletRequest req) {
-		ModelAndView modelAndView = new ModelAndView("merchant/main/notice");
-		modelAndView.addObject("listProduct", marketProService.findProduct(search));
-		return modelAndView;
+	public String findProduct(@RequestParam("search") String search, HttpServletRequest req) throws IOException {
+		String root = PATH + "\\" + "img";
+	    req.setAttribute("proImg", root);
+	    
+	    Map<String, Object> params = new HashMap<>();
+	    params.put("limit", "search");
+	    List<OzMarketProDTO> list = marketProService.findProduct(search);
+	    for (OzMarketProDTO dto : list) {
+	        // 이미지 처리
+	        String[] imageFiles = dto.getProImageChange().split(",");
+	        if (imageFiles.length > 0) {
+	            File imageFile = new File(root, imageFiles[0]);
+	            if (imageFile.exists()) {
+	                // 이미지를 Base64로 인코딩
+	                String encodedImage = encodeImageToBase64(imageFile);
+	                dto.setEncodedImage(encodedImage);
+	            }
+	        }
+	    }
+	    // 상품 목록을 요청 속성에 추가
+	    req.setAttribute("listProduct", list);
+	    req.setAttribute("limit", 5);
+	    return "client/ozMarket/ozMarket";
 	}
 
 	// 메인 페이지 최신 상품 9개 보기
@@ -138,7 +159,6 @@ public class ozMarketController {
 	        System.out.println("Member 객체가 null입니다.");
 	    }
 		
-//		OzMarketProDTO dto = new OzMarketProDTO();
 		OzMarketProDTO dto = new OzMarketProDTO(req);
 		
 		if (member != null && member.getMemberNickname() != null) {
@@ -214,7 +234,7 @@ public class ozMarketController {
 
 	// 상세보기
 	@GetMapping("/my-product/{proNum}")
-	public String ozMarketContent(HttpServletRequest req, @PathVariable(value = "proNum") Integer proNum)
+	public String ozMarketContent(HttpServletRequest req, @PathVariable(value = "proNum") Integer proNum, @AuthenticationPrincipal MemberSecurityDTO member)
 			throws IOException {
 		String root = PATH + "\\" + "img";
 		Optional<OzMarketProDTO> optionalDto = Optional.of(marketProService.getProduct(proNum));
@@ -232,10 +252,10 @@ public class ozMarketController {
 					encodedImagesPro.add(encodedImagePro);
 				}
 			}
-			
 			req.setAttribute("encodedImagesPro", encodedImagesPro);
 
 		}
+		
 		return "client/ozMarket/myProduct_content";
 	}
 	

@@ -67,9 +67,12 @@ public class MarketProductRepositoryImpl implements MarketProductRepository {
 	
 	// 상품 검색
 	@Override
-	public List<OzMarketPro> findProduct(String proTitle) {
-		return em.createQuery("SELECT oz from OzMarketPro WHERE oz.proTitle Like :proTitle", OzMarketPro.class)
-				.setParameter("proTitle", "%" + proTitle + "%")
-				.getResultList();
+	public List<OzMarketProDTO> findProduct(String search) {
+	    List<OzMarketPro> resultList = em.createQuery("SELECT oz from OzMarketPro oz WHERE oz.proTitle LIKE :proTitle", OzMarketPro.class)
+	            .setParameter("proTitle", "%" + search + "%")
+	            .getResultList();
+
+	    return resultList.stream().map(OzMarketProDTO::toDTO).collect(Collectors.toList());
 	}
+		
 }

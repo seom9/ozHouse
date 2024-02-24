@@ -23,6 +23,6 @@ public interface MarketProductRepository extends Repository<OzMarketPro, Integer
 	List<OzMarketProDTO> listProduct(Map<String, Object> params);
 
 	// 상품 검색
-	List<OzMarketPro> findProduct(String proTitle);
+	List<OzMarketProDTO> findProduct(String proTitle);
 
 }
