@@ -42,7 +42,7 @@ public class MarketProServiceImpl implements MarketProService {
 	
 	// 상품 검색
 	@Override
-	public List<OzMarketPro> findProduct(String proTitle) {
+	public List<OzMarketProDTO> findProduct(String proTitle) {
 		return proRepository.findProduct(proTitle);
 	}
 }

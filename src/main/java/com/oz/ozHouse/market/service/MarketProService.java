@@ -21,5 +21,5 @@ public interface MarketProService {
 	public List<OzMarketProDTO> listProduct(Map<String, Object> params);
 	
 	// 상품 검색
-	public List<OzMarketPro> findProduct(String proTitle);
+	public List<OzMarketProDTO> findProduct(String proTitle);
 }
