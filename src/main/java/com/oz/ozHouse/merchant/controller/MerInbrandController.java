@@ -42,7 +42,7 @@ public class MerInbrandController {
 		req.setAttribute("msg", msg);
 		req.setAttribute("url", url);
 		return req;
-	}
+	}   
 	
 	@GetMapping("/applications/{merNum}")
 	public String applications(HttpServletRequest req,
