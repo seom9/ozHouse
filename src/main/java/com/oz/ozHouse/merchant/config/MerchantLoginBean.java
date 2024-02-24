@@ -31,6 +31,7 @@ public class MerchantLoginBean {
 						&& passwordEncoder.matches(merPw, dto.getMerPw())) {
 					merNum = dto.getMerNum();
 					merIsbrand = dto.getMerIsbrand();
+					System.out.println("MerchantLoginBean---> merIsbrand : " + merIsbrand);
 					merCompany = dto.getMerCompany();
 					return OK;
 				}else if (dto.getMerDelete() != null) { 

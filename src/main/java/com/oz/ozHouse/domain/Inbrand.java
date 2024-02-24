@@ -1,7 +1,5 @@
 package com.oz.ozHouse.domain;
 
-
-import com.oz.ozHouse.domain.common.BaseEntity;
 import com.oz.ozHouse.domain.common.CompanyNumber;
 import com.oz.ozHouse.domain.common.InbrandInfo;
 
@@ -24,16 +22,16 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
-@Builder
+@Builder(toBuilder = true)
 @AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
 public class Inbrand{
 
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int inNum;
 	
-	@OneToOne(fetch = FetchType.EAGER)
+	@OneToOne(fetch = FetchType.EAGER)        
 	@JoinColumn(name = "merNum")
 	private Merchant merchant;
 	
