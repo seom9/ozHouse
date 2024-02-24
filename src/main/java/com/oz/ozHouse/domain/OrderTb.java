@@ -32,7 +32,6 @@ import lombok.NoArgsConstructor;
 public class OrderTb {
 	
 	@Id 
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long oNum;				//주문 코드 :
 	
     @OneToOne(fetch = FetchType.LAZY)
