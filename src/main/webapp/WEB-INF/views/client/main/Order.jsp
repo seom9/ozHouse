@@ -85,24 +85,24 @@ document.addEventListener('DOMContentLoaded', function () {
 
 <body onload="f.member_id.focus()">
 	<div  align="center" class="login-wrapper" style="text-align: left">
-	<form name="f" method="post" id="login-form" action="order_success">		
+	<form name="f" method="post" id="login-form" action="/order">		
 		<span class="wairano2">주문자</span><br><br>
 			이름 <br><br>
 			<input type="text" value="${member.memberName}" name="member_name" placeholder="이름을 입력해 주세요."><br>
 			연락처<br><br>
-			<input type="text" value="${member.memberHp.phoneNumber1}" name="member_hp1" size="3" maxlength="3"> -
-			<input type="text" value="${member.memberHp.phoneNumber2}" name="member_hp2" size="4" maxlength="4"> -
-			<input type="text" value="${member.memberHp.phoneNumber3}" name="member_hp3" size="4" maxlength="4">				
+			<input type="text" value="${member.memberHp.phoneNumber1}" name="phoneNumber1" size="3" maxlength="3"> -
+			<input type="text" value="${member.memberHp.phoneNumber2}" name="phoneNumber2" size="4" maxlength="4"> -
+			<input type="text" value="${member.memberHp.phoneNumber3}" name="phoneNumber3" size="4" maxlength="4">				
 		<br><br>
 
 
 		<span class="wairano2">배송지</span><br><br>
-			<input type="text" tabindex="3" id="postcode1" name="member_postcode1" value="${member.memberAddress.postcode}" placeholder="우편번호">
+			<input type="text" tabindex="3" id="postcode1" name="postcode" value="${member.memberAddress.postcode}" placeholder="우편번호">
 			<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
 			
-			<input type="text" id="sample6_address" name="sample6_address" value="${member.memberAddress.city}" placeholder="주소"><br>
-			<input type="text" id="sample6_detailAddress" name="sample6_detailAddress" value="${member.memberAddress.street}" placeholder="상세주소">
-			<input type="text" id="sample6_extraAddress" name="sample6_extraAddress" value="${member.memberAddress.zipcode}" placeholder="참고항목">
+			<input type="text" id="sample6_address" name="city" value="${member.memberAddress.city}" placeholder="주소"><br>
+			<input type="text" id="sample6_detailAddress" name="street" value="${member.memberAddress.street}" placeholder="상세주소">
+			<input type="text" id="sample6_extraAddress" name="zipcode" value="${member.memberAddress.zipcode}" placeholder="참고항목">
 			<br><br>
 			
 		<c:set var="order_ori_price" value="0"/>
@@ -201,18 +201,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
 		<span class="wairano2"> 쿠폰</span><br><br>	
 		<c:if test="${not empty coupons}">	
-		 
 		   	<c:forEach var="cdto" items="${coupons}">
 		   	<ul>
 		   		<div class="eo0ca796 css-113eoa3">
-				<input title="${cdto.mer_couponname}" type="checkbox" name="selectedCoupons" value="${cdto.merCouponnum}" class="css-s6rm2m" data-discount="${cdto.merCoupondiscount}">${cdto.merCouponname}</div>
+				<input title="${cdto.merCouponname}" type="checkbox" name="selectedCoupons" value="${cdto.merCouponnum}" class="css-s6rm2m" data-discount="${cdto.merCoupondiscount}">${cdto.merCouponname}</div>
 				<div class=" css-1vjp7rs eo0ca790"><div class="selected css-1gjupqf eo0ca795">${cdto.merCoupondiscount}원 할인</div>
 				<div class="css-1bdbp8h eo0ca794">${cdto.merCouponenddate}까지</div>
 				</div>
-			 </ul>
-			 
+			</ul>
 			</c:forEach>
-		 </c:if>
+		</c:if>
 
 		 <c:if test="${empty coupons}">	
 		   	사용 가능한 쿠폰이 없어요<br><br>	
@@ -230,8 +228,8 @@ document.addEventListener('DOMContentLoaded', function () {
 		<br><br>	
 		<span class="wairano2">결제 수단</span><br><br>	
 		# 추후 추가하겠습니다
-		<input type="hidden" name="final_discount_point" id="final_discount_point">
-    	<input type="hidden" name="final_discount_coupon" id="final_discount_coupon">	
+		<input type="hidden" name="oDispoint" id="final_discount_point">
+    	<input type="hidden" name="oDisCoupon" id="final_discount_coupon">	
 		</form></div>
 <aside>
 <div class="sticky-child commerce-cart__side-bar">
@@ -323,8 +321,6 @@ document.addEventListener('DOMContentLoaded', function () {
 	    });
 	
 	    updatePrice(); // 초기 가격 설정
-
-	    
 	});
 
     
@@ -369,7 +365,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			f.sample6_extraAddress.focus()
 			return
 		}
-		document.f.action="order_success.do"
+		document.f.action="/order/success"
 		document.f.submit()
 	}
 

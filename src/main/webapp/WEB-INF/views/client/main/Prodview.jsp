@@ -131,8 +131,8 @@
                   </span>
                </p>
                <div class="production-selling-option-form__footer">
-                  <button class="button button--color-blue-inverted button--size-55 button--shape-4" onclick="goCart()" type="button">장바구니</button>
-                  <button class="button button--color-blue button--size-55 button--shape-4" onclick="goOrder()" type="button">바로구매</button>
+                  <button class="button button--color-blue-inverted button--size-55 button--shape-4" onclick="javascript:goCart()" type="button">장바구니</button>
+                  <button class="button button--color-blue button--size-55 button--shape-4" onclick="javascript:goOrder()" type="button">바로구매</button>
                </div>
             </div>
          </div>
@@ -415,15 +415,24 @@
    </form>
 </div>
 
+<input type="hidden" value="${productDTO.proNum}" id="num"/>
 
 <!-- 장바구니 스크립트 -->
 <script type="text/javascript">
+
 function goCart() {
-	   var qtyInput = document.querySelector("button[id='quantity']");
-	   var value = qtyInput.textContent;
-	   window.location.href = "/cart/" + ${param.num} + "/" + value;
-	}
+	var num = document.getElementById("num").value;
+	var value = document.getElementById("quantity").textContent.trim();
+	window.location.href = "/cart/" + num + '/' + value;
 }
+
+
+function goOrder() {
+	var num = document.getElementById("num").value;
+    var value = document.getElementById("quantity").textContent.trim();
+    window.location.href = "/order/one/" + num + '/' + value;
+}
+
 
 function showChoose() {
 	var result = confirm("진행하시겠습니까?"); // '예'를 선택하면 true, '아니오'를 선택하면 false 반환
