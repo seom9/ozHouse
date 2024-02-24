@@ -102,7 +102,7 @@
                               </button>
                            </div>
                         </div>
-                        <a class="css-11ab5xd" href="blog_get.do?num=${blogDTO.blogNum}"></a>
+                        <a class="css-11ab5xd" href="/${blogDTO.blogNum}/blog_contents"></a>
                      </div>
                   </li>
                   </c:forEach>

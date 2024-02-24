@@ -48,6 +48,7 @@ public class ProductServiceImpl implements ProductService{
 	// 상품 상세보기
 	@Override
 	public ProductDTO getProduct(Integer proNum) {
+		
 	    Product product = productRepository.findByProNum(proNum);
 	    
 	    return new ProductDTO(product);
