@@ -12,7 +12,7 @@ import com.oz.ozHouse.domain.Product;
 import com.oz.ozHouse.dto.ProductDTO;
 import com.oz.ozHouse.dto.RequestProductDTO;
 import com.oz.ozHouse.merchant.repository.MerProductRepository;
-import com.oz.ozHouse.merchant.repository.loginRepository.MerLoginRepository;
+import com.oz.ozHouse.merchant.repository.merchantRepository.MerchantRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -21,7 +21,7 @@ import lombok.RequiredArgsConstructor;
 public class MerProServiceImpl implements MerProService {
 
 	private final MerProductRepository proRepository;
-	private final MerLoginRepository merchantRepository;
+	private final MerchantRepository merchantRepository;
 
 	// 상품 등록
 	@Override
