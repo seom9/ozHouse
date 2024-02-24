@@ -1,12 +1,13 @@
 package com.oz.ozHouse.client.service;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.oz.ozHouse.client.repository.ClientMerCouponRepository;
@@ -16,10 +17,8 @@ import com.oz.ozHouse.domain.Member;
 import com.oz.ozHouse.domain.MerCoupon;
 import com.oz.ozHouse.domain.UserCoupon;
 import com.oz.ozHouse.dto.MerCouponDTO;
-import com.oz.ozHouse.dto.UserCouponDTO;
 import com.oz.ozHouse.dto.client.member.ProQuanDTO;
 
-import jakarta.persistence.Entity;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
@@ -28,7 +27,6 @@ import lombok.RequiredArgsConstructor;
 @Transactional // 해당 객체를 감싸는 별도의 클래스를 생성
 public class CouponServiceImpl implements CouponService{
 	
-	private final ModelMapper modelMapper;
 	private final ClientMerCouponRepository clientMerCouponRepository; 
 	private final MemberRepository memberRepository;
 	private final UserCouponRepository userCouponRepository;
@@ -41,7 +39,7 @@ public class CouponServiceImpl implements CouponService{
 		if (merCoupons == null) return null;
 		
 		List<MerCouponDTO> merCouponDTOs = merCoupons.stream()
-							                .map(data -> modelMapper.map(data, MerCouponDTO.class))
+							                .map(data -> MerCouponDTO.from(data))
 							                .collect(Collectors.toList());
 		
 		return merCouponDTOs;
@@ -56,8 +54,9 @@ public class CouponServiceImpl implements CouponService{
 		Member member = result.get();
 		
 		List<MerCouponDTO> merCouponDTOs = member.getCoupons().stream()
-									        .map(userCoupon -> modelMapper.map(userCoupon.getMerCoupon(), MerCouponDTO.class))
-									        .collect(Collectors.toList());
+										        .map(userCoupon -> MerCouponDTO.from(userCoupon.getMerCoupon()))
+										        .filter(Objects::nonNull)
+										        .collect(Collectors.toList());
 		
 		return merCouponDTOs;
 	}
@@ -87,7 +86,7 @@ public class CouponServiceImpl implements CouponService{
 
 
 	@Override
-	public TreeSet<MerCouponDTO> getOrderCoupons(String memberId, List<ProQuanDTO> products) {
+	public HashSet<MerCouponDTO> getOrderCoupons(String memberId, List<ProQuanDTO> products) {
 		Member member = memberRepository.findByMemberId(memberId);
 		TreeSet<Integer> merNums = new TreeSet<>();
 		
@@ -97,10 +96,10 @@ public class CouponServiceImpl implements CouponService{
 		}
 		
 		// 판매자 번호가 있다면 treeSet에 해당 userCoupon 추가
-		TreeSet<MerCouponDTO> merCouponDTOs = member.getCoupons().stream()
-		        .map(userCoupon -> modelMapper.map(userCoupon.getMerCoupon(), MerCouponDTO.class))
+		HashSet<MerCouponDTO> merCouponDTOs = member.getCoupons().stream()
+		        .map(userCoupon -> MerCouponDTO.from(userCoupon.getMerCoupon()))
 		        .filter(merCouponDTO -> merNums.contains(merCouponDTO.getMerNum()))
-		        .collect(Collectors.toCollection(TreeSet::new));
+		        .collect(Collectors.toCollection(HashSet::new));
 		
 		return merCouponDTOs;
 	}

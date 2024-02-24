@@ -47,8 +47,6 @@ dependencies {
     // springdoc-openapi-ui
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2'
 	
-	// swaggerAPI 어노테이션
-    
     compileOnly 'javax.servlet.jsp:javax.servlet.jsp-api:2.3.1'
     compileOnly 'org.projectlombok:lombok:1.18.30'
     annotationProcessor 'org.projectlombok:lombok:1.18.30'
@@ -59,13 +57,13 @@ dependencies {
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	
 	// WebSocket
-	//implementation 'org.springframework.boot:spring-boot-starter-websocket'
+	implementation 'org.springframework.boot:spring-boot-starter-websocket'
 	// STOMP
-	//implementation 'org.webjars:stomp-websocket'	
+	implementation 'org.webjars:stomp-websocket'	
 	// SockJS
-	//implementation 'org.webjars:sockjs-client'
+	implementation 'org.webjars:sockjs-client'
 	//redis
-	//implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 
 	implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
 }
