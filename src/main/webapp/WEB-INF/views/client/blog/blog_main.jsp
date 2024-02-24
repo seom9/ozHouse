@@ -6,15 +6,15 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/client/blog_css/blogMain_style.css" />
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <body>
-	<c:if test="${empty blog_list}">
+	<c:if test="${empty blogList}">
 		<div class="a">
 			<img src="resources/client/image/notice_image.png">
 		</div>
 	</c:if>
 	<div class="container">
 		<div class="blog-list">
-			<c:forEach var="dto" items="${blog_list}" varStatus="loop">
-			<div class="blog-item-wrap" id="${dto.blog_num}">
+			<c:forEach var="dto" items="${blogList}" varStatus="loop">
+			<div class="blog-item-wrap" id="${dto.blogNum}">
 				<div class="blog-item">
 					<article class="blog-item-collection">
 						<div class="memberInfo">
@@ -22,13 +22,13 @@
 								<div class="memberInfo-content_header">
 									<a class="memberInfo-content_link">
 										<img class="memberInfo-content_image" src="">
-										<span class="memberInfo-content_name">${dto.member_id}</span>
+										<span class="memberInfo-content_name">${dto.memberId}</span>
 									</a>
 								</div>
 							</address>
 						</div>
 						<div class="blogInfo">
-							<a class="content_link" href="blog_get.do?num=${dto.blog_num}"></a>
+							<a class="content_link" href="blog_get.do?num=${dto.blogNum}"></a>
 							<div class="blog_image">
 								<img class="image" src="data:image/jpeg;base64,${encodedImages[loop.index]}">
 								<span class="blog_image_view-count">
@@ -67,7 +67,7 @@
 						</div>
 						<div class="content_description">
 							<div class="content_description_2">
-								<c:set var="blogContents" value="${fn:split(dto.blog_content, ',')}" />
+								<c:set var="blogContents" value="${fn:split(dto.blogContent, ',')}" />
 								<c:if test="${not empty blogContents and fn:length(blogContents) > 0}">
 								<p class="content_description_3">${blogContents[0]}</p>
 								</c:if>
