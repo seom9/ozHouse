@@ -1,4 +1,4 @@
-//package com.oz.ozHouse.client.config;
+package com.oz.ozHouse.client.config;
 //
 //import java.io.IOException;
 //import java.util.HashSet;
@@ -87,4 +87,4 @@
 //	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
 //		// Handle connection closed
 //	}
-}
+//}
