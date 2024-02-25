@@ -59,7 +59,7 @@ dependencies {
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	
 	// WebSocket
-	//implementation 'org.springframework.boot:spring-boot-starter-websocket'
+	implementation 'org.springframework.boot:spring-boot-starter-websocket'
 	// STOMP
 	//implementation 'org.webjars:stomp-websocket'	
 	// SockJS

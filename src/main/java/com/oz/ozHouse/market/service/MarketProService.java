@@ -21,5 +21,17 @@ public interface MarketProService {
 	public List<OzMarketProDTO> listProduct(Map<String, Object> params);
 	
 	// 상품 검색
-	public List<OzMarketPro> findProduct(String proTitle);
+	public List<OzMarketProDTO> findProduct(String proTitle);
+	
+	//내 정보 _ 판매중
+	List<OzMarketProDTO> findSellingProductsByNickname(String nickname);
+	
+	//내 정보 _ 판매내역
+	List<OzMarketProDTO> findSoldProductsByNickname(String nickname);
+	
+	//내 정보 _ 구매내역
+	List<OzMarketProDTO> findBoughtProductsByNickname(String nickname);
+	
+	// 상품 삭제
+	void deleteProduct(Integer proNum);
 }
