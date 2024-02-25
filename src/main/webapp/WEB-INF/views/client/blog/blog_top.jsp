@@ -33,7 +33,8 @@
         <link rel="stylesheet" href="https://assets.ohou.se/web/dist/css/72-975b0143.chunk.css">
         <link rel="stylesheet" href="https://assets.ohou.se/web/dist/css/94-7181da44.chunk.css">
         <link rel="stylesheet" href="https://assets.ohou.se/web/dist/css/91-236397d7.chunk.css">
-       	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/client/main_css/topStyle.css"/>
+       	<link rel="stylesheet" href="${pageContext.request.contextPath}/client/main_css/top.css"/>
+       	<link rel="stylesheet" href="${pageContext.request.contextPath}/topStyle_a.css"/>
        
         <style data-emotion="css-global ala7f8">
 			@import "https://assets.ohou.se/design-system/bbf3fca1e650ee6d.css";
@@ -93,7 +94,7 @@
 			<div class="css-i7a8i3">
 				<div class="css-1mfjm4o">
 					<div class="css-1euxu4r">
-						<a class="css-1qwerc" href="main.do">
+						<a class="css-1qwerc" href="/main">
 							<span class="css-18nk785">OZ의집</span>
 						</a>	     
 						<a class="css-53vhmk" href="shop_main.do">
