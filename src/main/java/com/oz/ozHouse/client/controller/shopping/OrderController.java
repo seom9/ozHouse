@@ -1,5 +1,7 @@
 package com.oz.ozHouse.client.controller.shopping;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -89,16 +91,17 @@ public class OrderController {
 		session.setAttribute("orderProducts", orderProducts);
 		req.setAttribute("coupons", merCoupons);
 		req.setAttribute("member", memDTO);
-		return "client/main/order";
+		
+		return "client/main/Order";
 
 	}
 
 	
 	/*
 	 * 주문 성공
-	*/
+	 */
 	@PreAuthorize("hasAnyRole('ROLE_CLIENT')")
-	@PostMapping("/order/succss")
+	@PostMapping("/order/success")
 	public String order(HttpServletRequest req, HttpSession session,
 									@SessionAttribute("orderProducts") List<ProQuanDTO> orderProducts,
 									@AuthenticationPrincipal MemberSecurityDTO member,
@@ -106,11 +109,15 @@ public class OrderController {
 									@ModelAttribute ClientOrderDTO orderInfo) {
 		
 		// 1. oderProducts 의 List<proQuanDTO> 를 가져와서 하나하나 ProInformDTO 으로 변환
+		LocalDateTime localDateTime = LocalDateTime.now();
+		String localDateTimeFormat1 = Integer.toString(member.getMemberNum()) + localDateTime.format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
+		
+		
 		
 		// 2. 사용한 쿠폰 가져와서 userCoupon 과 대조, orderNum 입혀 줌 / 저장해 줌
 		
-		// 3. memberPoint 가져와서 memberUpdate 수행해 줌
 		
+		// 3. memberPoint 가져와서 memberUpdate 수행해 줌
 		
 		
 		return "client/main/order_confirm";
