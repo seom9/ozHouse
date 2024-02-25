@@ -45,6 +45,7 @@ public class ProductServiceImpl implements ProductService{
 		return proList;
 	}
 	
+<<<<<<< HEAD
    // 상품 상세보기
    @Override
    public ProductDTO getProduct(Integer proNum) {
@@ -52,5 +53,15 @@ public class ProductServiceImpl implements ProductService{
        
        return new ProductDTO(product);
    }
+=======
+	// 상품 상세보기
+	@Override
+	public ProductDTO getProduct(Integer proNum) {
+		
+	    Product product = productRepository.findByProNum(proNum);
+	    
+	    return new ProductDTO(product);
+	}
+>>>>>>> refs/remotes/main/moon
 
 }
