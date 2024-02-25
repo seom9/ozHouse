@@ -64,7 +64,7 @@
 	});
 
 	function check() {
-		if (f.mer_couponname.value == "") {
+		if (f.merCouponname.value == "") {
 			alert("쿠폰명을 입력해주세요");
 			return false;
 		}
@@ -88,46 +88,40 @@
 			</div>
 		</div>
 		<form name="f"
-			action="${pageContext.request.contextPath}/merchants/coupon-input"
+			action="${pageContext.request.contextPath}/merchant/${merLoginMember.merNum}/store/coupons/insert"
 			method="post" class="flex-container" onsubmit="return check();">
-			<!-- 
-			<form name="f" action="${pageContext.request.contextPath}/merchants/${merchantLoginMember.merNum}/coupon-input" method="post"
-			class="flex-container" onsubmit="return check();">
-			 -->
+			
 			<div class="flex-row">
 				<div class="flex-cell header-cell custom-label">쿠폰명&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
 				<div class="flex-cell">
-					<input type="text" name="mer_couponname" size="60">
+					<input type="text" name="merCouponname" size="60">
 				</div>
 			</div>
 			<div class="flex-row custom-row">
 				<div class="flex-cell header-cell custom-label recustom-label">쿠폰
 					할인 가격</div>
 				<div class="flex-cell">
-					<input type="radio" name="mer_coupondiscount" value="3000"
+					<input type="radio" name="merCoupondiscount" value="3000"
 						checked="checked">3,000원 <input type="radio"
-						name="mer_coupondiscount" value="5000">5,000원 <input
-						type="radio" name="mer_coupondiscount" value="10000">10,000원
-					<input type="radio" name="mer_coupondiscount" value="30000">30,000원
+						name="merCoupondiscount" value="5000">5,000원 <input
+						type="radio" name="merCoupondiscount" value="10000">10,000원
+					<input type="radio" name="merCoupondiscount" value="30000">30,000원
 				</div>
 			</div>
 			<div class="flex-row custom-row">
 				<div class="flex-cell header-cell custom-label">쿠폰 사용 기간</div>
 				<div class="flex-cell">
-					<input type="text" id="startDate" name="mer_couponusedate">
-					~ <input type="text" id="endDate" name="mer_couponenddate">
+					<input type="text" id="startDate" name="merCouponusedate">
+					~ <input type="text" id="endDate" name="merCouponenddate">
 				</div>
 			</div>
 			<div class="flex-subrow custom-button-row">
 				<div class="button-container">
-					<input type="submit" value="등록"> <input type="reset"
-						value="초기화">
+					<input type="submit" value="등록"> 
+					<input type="reset" value="초기화">
 				</div>
 			</div>
-	</div>
-	<input type="hidden" name="mer_isapproval" value="f" /> <input
-		type="hidden" name="merNum" value="${merchantLoginMember.merNum }" />
-	<!-- login연결되면 고치기 -->
+	<input type="hidden" name="merNum" value="${merNum}" />
 	</form>
 </div>
 </div>

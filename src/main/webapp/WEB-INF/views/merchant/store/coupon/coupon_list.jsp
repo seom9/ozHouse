@@ -5,7 +5,7 @@
 	href="${pageContext.request.contextPath}/merchant/css/coupon_style.css">
 <%@ include file="../storeMain/storeManagementTop.jsp"%>
 <%@ include file="coupon_top.jsp"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <head>
 <title>OZ의 집 : 쿠폰현황</title>
@@ -73,8 +73,7 @@
 <script type="text/javascript">
 	function checkMore(mer_couponnum, merNum) {
 		if (window.confirm("정말로 삭제하시겠습니까?")) {
-			document.location.href = '${pageContext.request.contextPath}/merchants/${merchantLoginMember.merNum}/coupons/delete?mer_couponnum='
-					+ mer_couponnum;
+			document.location.href = '${pageContext.request.contextPath}/merchant/' + ${merLoginMember.merNum} + '/store/coupons/' + mer_couponnum;
 
 		}
 	}
@@ -116,42 +115,44 @@
 				</p>
 			</div>
 		</div>
-		<form name="f"
-			action="${pageContext.request.contextPath}/merchants/${merchantLoginMember.merNum}/coupons/search"
+		<form name="f" action="${pageContext.request.contextPath}/merchant/${merLoginMember.merNum}/store/coupons/search"
 			method="post" class="flex-container">
-			<!-- 
-		<form name="f"
-			action="${pageContext.request.contextPath}/merchants/${merchantLoginMember.merNum}/coupons/search"
-			method="post" class="flex-container">
-			 -->
-			<input type="hidden" name="merNum"
-				value="${merchantLoginMember.merNum}">
+			<input type="hidden" name="merNum" value="${merLoginMember.merNum}">
 			<div class="flex-row">
 				<div class="flex-cell header-cell">쿠폰 기간</div>
 				<div class="flex-cell input-cell">
 					<select name="date">
-						<option value="mer_couponusedate">시작일</option>
-						<option value="mer_couponenddate">종료일</option>
-					</select> <input type="text" id="startDate" name="startDate"
-						value="${map.startDate}"> ~ <input type="text"
-						id="endDate" name="endDate" value="${map.endDate}">
+						<option value="merCouponusedate" ${dateOptions == 'merCouponusedate' ? 'selected' : ''}>시작일</option>
+						<option value="merCouponenddate" ${dateOptions == 'merCouponenddate' ? 'selected' : ''}>종료일</option>
+					</select> 
+					<input type="text" id="startDate" name="startDate" value="${map.startDate}"> 
+					~ <input type="text" id="endDate" name="endDate" value="${map.endDate}">
 				</div>
 			</div>
 			<div class="flex-row">
 				<div class="flex-cell header-cell">승인여부</div>
-				<div class="flex-cell">${radioOptions}</div>
+				<div class="flex-cell">
+					<input type="radio" name="merIsok" value="all" ${radio == 'all' ? 'checked' : ''}>전체
+					<input type="radio" name="merIsok" value="t" ${radio == 't' ? 'checked' : ''}>승인 완료
+					<input type="radio" name="merIsok" value="f" ${radio == 'f' ? 'checked' : ''}>승인 중
+					<input type="radio" name="merIsok" value="c" ${radio == 'c' ? 'checked' : ''}>승인 거절
+				</div>
 			</div>
 			<div class="flex-row">
 				<div class="flex-cell header-cell">검색&nbsp;&nbsp;&nbsp;</div>
 				<div class="flex-cell">
-					<select name="search"> ${checkOptions}
-					</select> <input type="text" name="searchString" value="${map.searchString}">
+					<select name="search"> 
+						<option value="all" ${check == 'all' ? 'selected' : ''}>전체</option>
+						<option value="merCouponname" ${check == 'merCouponname' ? 'selected' : ''}>쿠폰이름</option>
+						<option value="merCouponnum" ${check == 'merCouponnum' ? 'selected' : ''}>쿠폰번호</option>
+					</select> 
+					<input type="text" name="searchString" value="${map.searchString}">
 				</div>
 			</div>
 			<div class="flex-subrow custom-button-row">
 				<div class="button-container">
-					<input type="submit" value="검색"> <input type="button"
-						value="초기화" onclick="resetForm();">
+					<input type="submit" value="검색"> 
+					<input type="button" value="초기화" onclick="resetForm();">
 				</div>
 			</div>
 		</form>
@@ -176,47 +177,47 @@
 			</c:if>
 			<c:forEach var="dto" items="${couponList}">
 				<div class="flex-row-sub">
-					<div class="flex-cell">${dto.mer_couponnum}</div>
-					<div class="flex-cell">${dto.mer_couponname}</div>
-					<div class="flex-cell">${dto.mer_couponusedate}</div>
-					<div class="flex-cell">${dto.mer_couponenddate}</div>
+					<div class="flex-cell">${dto.merCouponnum}</div>
+					<div class="flex-cell">${dto.merCouponname}</div>
+					<div class="flex-cell">${dto.merCouponusedate}</div>
+					<div class="flex-cell">${dto.merCouponenddate}</div>
 					<div class="flex-cell">
-						<fmt:formatNumber value="${dto.mer_coupondiscount}" type="number"
+						<fmt:formatNumber value="${dto.merCoupondiscount}" type="number"
 							pattern="###,###원" />
 					</div>
 					<c:choose>
-						<c:when test="${dto.mer_isapproval eq 'f'}">
+						<c:when test="${dto.merIsok eq 'f'}">
 							<div class="flex-cell">승인 중</div>
 						</c:when>
-						<c:when test="${dto.mer_isapproval eq 't'}">
+						<c:when test="${dto.merIsok eq 't'}">
 							<div class="flex-cell">승인 완료</div>
 						</c:when>
-						<c:when test="${dto.mer_isapproval eq 'c'}">
+						<c:when test="${dto.merIsok eq 'c'}">
 							<div class="flex-cell">승인 거절</div>
 						</c:when>
 					</c:choose>
 					<div class="flex-cell">
 						<c:choose>
-							<c:when test="${dto.mer_isapproval eq 't'}">
+							<c:when test="${dto.merIsok eq 't'}">
 								<input type="button"
 									style="background-color: #50E5B4; color: white;" value="삭제"
 									disabled="disabled">
 							</c:when>
-							<c:when test="${dto.mer_isapproval eq 'c'}">
+							<c:when test="${dto.merIsok eq 'c'}">
 								<div>
 									<input type="button" value="확인"
-										onclick="fetchAndDisplayMsg('${dto.mer_couponnum}')">
+										onclick="fetchAndDisplayMsg('${dto.merCouponnum}')">
 								</div>
 								<div>
 									<input type="button"
 										style="background-color: #50E5B4; color: white; margin-top: 10px;"
 										value="삭제"
-										onclick="checkMore('${dto.mer_couponnum}', '${dto.merNum}')">
+										onclick="checkMore('${dto.merCouponnum}', '${dto.merNum}')">
 								</div>
 							</c:when>
 							<c:otherwise>
 								<input type="button" value="삭제"
-									onclick="checkMore('${dto.mer_couponnum}', '${dto.merNum}')">
+									onclick="checkMore('${dto.merCouponnum}', '${dto.merNum}')">
 							</c:otherwise>
 						</c:choose>
 					</div>
