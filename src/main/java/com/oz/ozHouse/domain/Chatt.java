@@ -41,7 +41,7 @@ public class Chatt {
 	
 	private String msg;
 	
-	private String readStatus;
+//	private int readStatus;
 //	
 //	private String file;
 	
@@ -63,7 +63,7 @@ public class Chatt {
         this.recipient = dto.getRecipient();
         this.sender = dto.getSender();
         this.msg = dto.getMsg();
-        this.readStatus = dto.getReadStatus();
+//        this.readStatus = dto.getReadStatus();
 //        this.file = dto.getFile();
         this.roomNum = dto.getRoomNum();
         

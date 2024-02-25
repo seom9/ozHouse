@@ -14,10 +14,21 @@
 <script src="https://cdn.jsdelivr.net/npm/stompjs/lib/stomp.min.js"></script>
 </head>
 <body>
-    <h2>채팅</h2>
-    <div class="chat-container">
+	<div class="chat-container">
 		<div class="chat-list">
-			<h3>채팅방 리스트</h3>
+			<div class="user-avatar">
+			<c:choose>
+				<c:when test="${empty member.memberImage}">
+					<img
+						src="https://image.ohou.se/i/bucketplace-v2-development/uploads/default_images/avatar.png?gif=1&w=144&h=144&c=c&webp=1"
+						alt="User Avatar">
+				</c:when>
+				<c:otherwise>
+					<img src="${member.memberImage}" alt="User Avatar">
+				</c:otherwise>
+			</c:choose>
+		</div>
+		<div class="memberNickname">${nickname}</div>
 			<c:forEach var="room" items="${roomList}">
 				<div class="chat-room-entry">
 					<a

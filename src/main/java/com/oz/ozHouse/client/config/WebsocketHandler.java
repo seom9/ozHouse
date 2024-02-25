@@ -76,6 +76,8 @@ public class WebsocketHandler extends TextWebSocketHandler {
 
 	private void saveAndBroadcastMessage(WebSocketSession session, ChattDTO chattDTO, String roomNumStr) throws IOException {
         // 데이터베이스에 메시지 저장
+//		int readStatus = roomSessions.get(roomNumStr).size() == 1 ? 1 : 0;
+//	    chattDTO.setReadStatus(readStatus);
 		chattDTO.setRoomNum(Integer.parseInt(roomNumStr));
 		
         Chatt savedChatt = chattService.saveMessage(chattDTO);
