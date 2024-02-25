@@ -1,51 +1,29 @@
 package com.oz.ozHouse.merchant.controller;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.net.URLEncoder;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.oz.ozHouse.domain.Category;
-import com.oz.ozHouse.dto.ApplicationDTO;
-import com.oz.ozHouse.dto.CategoryDTO;
 import com.oz.ozHouse.dto.InbrandDTO;
-import com.oz.ozHouse.dto.MerchantDTO;
-import com.oz.ozHouse.merchant.config.MerchantLoginBean;
+import com.oz.ozHouse.dto.merchant.ApplicationDTO;
 import com.oz.ozHouse.merchant.exception.NotFoundMerNumException;
 import com.oz.ozHouse.merchant.service.MerInbrandService;
 
@@ -64,7 +42,7 @@ public class MerInbrandController {
 		req.setAttribute("msg", msg);
 		req.setAttribute("url", url);
 		return req;
-	}
+	}   
 	
 	@GetMapping("/applications/{merNum}")
 	public String applications(HttpServletRequest req,
@@ -147,7 +125,7 @@ public class MerInbrandController {
 		MultipartHttpServletRequest mr = (MultipartHttpServletRequest)req;
         MultipartFile mFile = mr.getFile("inSaleFile");
         if (mFile != null && mFile.getSize() > 0) { 
-            String saveName = dto.getInComnum1()+ dto.getInComnum2()+ dto.getInComnum3() + mFile.getOriginalFilename(); 
+            String saveName = dto.getInComnum1()+ dto.getInComnum2()+ dto.getInComnum3() + "_" + mFile.getOriginalFilename(); 
             mFile.transferTo(new File(FILEPATH + saveName)); 
             dto.setInSaleFile(saveName);
             int res = inbrandService.application(dto);

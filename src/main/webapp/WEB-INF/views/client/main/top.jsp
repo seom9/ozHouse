@@ -61,27 +61,11 @@
       </script>
       <script>
          function mypage_scrap(){
-            var isLogin = ${loginMember != null};
-            
-             if (!isLogin) {
-                alert("로그인이 필요합니다. 로그인 페이지로 이동합니다.");
-                 window.location.href = '/member/login';
-                 return;
-             } else {
-                window.location.href = '/mypage/scrapbook';
-             }
+           window.location.href = '/mypage/scrap';
          }
          
          function mypage_cart(){
-            var isLogin = ${loginMember != null};
-            
-             if (!isLogin) {
-                alert("로그인이 필요합니다. 로그인 페이지로 이동합니다.");
-                 window.location.href = '/member/login';
-                 return;
-             } else {
-                window.location.href = '/CartList/main';
-             }
+          	window.location.href = '/cart';
          }
       </script>
     </head>

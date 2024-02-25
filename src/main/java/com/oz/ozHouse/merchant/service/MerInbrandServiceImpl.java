@@ -12,11 +12,11 @@ import com.oz.ozHouse.domain.Merchant;
 import com.oz.ozHouse.domain.common.CompanyNumber;
 import com.oz.ozHouse.domain.common.InbrandInfo;
 import com.oz.ozHouse.domain.common.PhoneNumber;
-import com.oz.ozHouse.dto.ApplicationDTO;
 import com.oz.ozHouse.dto.InbrandDTO;
+import com.oz.ozHouse.dto.merchant.ApplicationDTO;
 import com.oz.ozHouse.merchant.exception.NotFoundMerNumException;
 import com.oz.ozHouse.merchant.repository.inbrandRepository.MerInbrandRepository;
-import com.oz.ozHouse.merchant.repository.joinRepository.MerJoinRepository;
+import com.oz.ozHouse.merchant.repository.merchantRepository.MerchantRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -24,11 +24,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class MerInbrandServiceImpl implements MerInbrandService {
 	private final MerInbrandRepository inbrandRepository;
-	private final MerJoinRepository joinRepository;
+	private final MerchantRepository merRepository;
 
 	@Override
 	public InbrandDTO selectMer(int merNum) {
-
+		System.out.println("이전 입점신청 내역 조회(Inbrand)");
 		Inbrand inbrand = inbrandRepository.selectMerNum(merNum);
 	    InbrandDTO dto = new InbrandDTO();
 	    if (inbrand!=null) {
@@ -41,7 +41,8 @@ public class MerInbrandServiceImpl implements MerInbrandService {
 
 	@Override
 	public boolean searchComNum(int merNum, Map<String, String> map) throws NotFoundMerNumException {
-		Optional<Merchant> optionalMerchant = joinRepository.findById(merNum);
+		System.out.println("가입한 사업자등록번호 조회(Inbrand)");
+		Optional<Merchant> optionalMerchant = merRepository.findById(merNum);
 		if(optionalMerchant.isPresent()) {
 			Merchant merchant = optionalMerchant.get();
 			String num1 = merchant.getMerComnum().merComnum1;
@@ -60,6 +61,7 @@ public class MerInbrandServiceImpl implements MerInbrandService {
 
 	@Override
 	public void deleteInbrand(int inNum) {
+		System.out.println("이전 입점신청 내역 삭제(Inbrand)");
 		inbrandRepository.deleteById(inNum);
 	}
 	
@@ -103,6 +105,7 @@ public class MerInbrandServiceImpl implements MerInbrandService {
 	public int application(InbrandDTO dto) {
 		Inbrand inbrand = setInbrandEntity(dto);
 		try {
+			System.out.println("입점신청 내용 저장(Inbrand)");
 			inbrandRepository.save(inbrand);
 		}catch(IllegalArgumentException e) {
 			return -1;
@@ -112,6 +115,7 @@ public class MerInbrandServiceImpl implements MerInbrandService {
 
 	@Override
 	public ApplicationDTO applicationList(int merNum) {
+		System.out.println("이전 입점신청 상세내역 조회(Inbrand)");
 		Inbrand inbrand = inbrandRepository.selectMerNum(merNum);
 		ApplicationDTO dto = ApplicationDTO.builder()
 				.inNum(inbrand.getInNum())
@@ -140,7 +144,7 @@ public class MerInbrandServiceImpl implements MerInbrandService {
 	public int brandCancel(int inNum) {
 		SimpleDateFormat df = new SimpleDateFormat("yy/MM/dd");
 		Date date = new Date();
-		df.format(date);
+		System.out.println("입점신청 취소일 업데이트(Inbrand)");
 		int result = inbrandRepository.updateCancelDate(df.format(date), inNum);
 		return result;
 	}

@@ -1,15 +1,14 @@
 package com.oz.ozHouse.domain;
 
-import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
+import com.amazonaws.services.ec2.model.Address;
 import com.oz.ozHouse.domain.OrderTb;
 import com.oz.ozHouse.domain.common.PhoneNumber;
 
-import jakarta.persistence.AttributeOverride;
-import jakarta.persistence.AttributeOverrides;
-import jakarta.persistence.Column;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -18,58 +17,55 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Builder(toBuilder = true)
 @Getter
-@AttributeOverride(name = "regDate", column = @Column(name = "oDate"))
+@AllArgsConstructor
+@NoArgsConstructor
 public class OrderTb {
-	@Id 
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long oCode;
 	
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="memberId")
-    private Member member;
+	@Id 
+    private Long oNum;				//주문 코드 :
+	
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="memberNum")
+    private Member member;			//구매자 정보
     
-    private int productNum;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @ElementCollection(fetch = FetchType.LAZY)
+    private List<ProInform> orderItems = new ArrayList<>();		//구매 상품
     
-    private int oPrice;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @ElementCollection(fetch = FetchType.LAZY)
+    private List<UserCoupon> useCoupons = new ArrayList<>();
     
-    private int oDiscoupon;
+    private int oDispoint;			//사용 포인트 금액
     
-    private int oDiscount;
+    private int oPrice;				//최종 상품 주문 금액
     
-    private int oDispoint;
+    private String oName;			// 배송 받을 사람 이름
+    
+    @Embedded						
+    private PhoneNumber oHp;		// 배송 받을 사람 핸드폰
+    
+    @Embedded	
+    private Address oAddress;		// 배송 받을 사람 주소지
     
     private String oComment;
-    
-    private int oCount;
-    
-    private String oPlace;
-    
-    private String oDelnow;
-    
-	@DateTimeFormat(pattern = "yy/MM/dd")
-    private LocalDate oCanceldate;
-	
-    private String oLike;
-    
-    private String oRefund;
-    
-    private int oAssemblycost;
-    
-    private int oNum;
-    
-    private String oName;
-    @Embedded
-    @AttributeOverrides({
-		@AttributeOverride(name = "phoneNumber1", column = @Column(name = "oHp1")),
-		@AttributeOverride(name = "phoneNumber2", column = @Column(name = "oHp2")),
-		@AttributeOverride(name = "PhoneNumber3", column = @Column(name = "oHp3"))
-    })
-    private PhoneNumber oHp;
-    
-    private String oPostcode;
 
+    private String oDelnow;			// 배송 상태
+	
+    private String oLike;			// 주문 상태
+   
+    private String oCanceldate;	// 주문 취소일
+    
+    private String regDate;
+    
 }
