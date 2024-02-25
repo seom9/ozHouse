@@ -13,7 +13,7 @@ import com.oz.ozHouse.domain.Merchant;
 import com.oz.ozHouse.domain.common.InbrandInfo;
 import com.oz.ozHouse.domain.common.PhoneNumber;
 import com.oz.ozHouse.dto.MerchantDTO;
-import com.oz.ozHouse.dto.MerchantUpdateDTO;
+import com.oz.ozHouse.dto.merchant.MerchantUpdateDTO;
 import com.oz.ozHouse.merchant.exception.NotFoundMerNumException;
 import com.oz.ozHouse.merchant.repository.merchantRepository.MerchantRepository;
 
