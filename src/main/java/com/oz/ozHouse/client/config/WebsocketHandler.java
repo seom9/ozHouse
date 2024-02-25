@@ -2,11 +2,11 @@ package com.oz.ozHouse.client.config;
 
 import java.io.IOException;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
@@ -64,10 +64,23 @@ public class WebsocketHandler extends TextWebSocketHandler {
 	}
 
 	private void enterRoom(WebSocketSession session, ChattDTO chatt, String roomNumStr) throws IOException {
-		HashSet<WebSocketSession> sessions = roomSessions.computeIfAbsent(roomNumStr, k -> new HashSet<>());
-		sessions.add(session);
-		chatt.setMsg(chatt.getSender() + "님이 입장했습니다.");
-		broadcast(chatt, roomNumStr);
+	    HashSet<WebSocketSession> sessions = roomSessions.computeIfAbsent(roomNumStr, k -> new HashSet<>());
+	    sessions.add(session);
+
+	    // 새로운 사용자가 입장하면 읽지 않은 메시지를 읽음으로 표시
+	    if (sessions.size() > 1) { // 채팅방에 사용자가 2명 이상인 경우
+	        List<Chatt> unreadMessages = chattService.markMessagesAsRead(roomNumStr); // 읽지 않은 메시지들을 읽음으로 표시하는 로직
+
+	        // 변경된 메시지 상태를 모든 클라이언트에게 방송
+	        for (Chatt updatedMessage : unreadMessages) {
+	            ChattDTO updatedChattDTO = convertToChattDTO(updatedMessage);
+	            broadcast(updatedChattDTO, roomNumStr); // 변경된 메시지 상태를 방송
+	        }
+	    }
+
+	    // 사용자 입장 메시지 방송
+	    chatt.setMsg(chatt.getSender() + "님이 입장했습니다.");
+	    broadcast(chatt, roomNumStr);
 	}
 
 	private void talk(WebSocketSession session, ChattDTO chattDTO, String roomNumStr) throws IOException {
@@ -79,29 +92,24 @@ public class WebsocketHandler extends TextWebSocketHandler {
 	}
 
 	private void saveAndBroadcastMessage(WebSocketSession session, ChattDTO chattDTO, String roomNumStr)
-			throws IOException {
-		// 데이터베이스에 메시지 저장
-//		int readStatus = roomSessions.get(roomNumStr).size() == 1 ? 1 : 0;
-//	    chattDTO.setReadStatus(readStatus);
-		chattDTO.setRoomNum(Integer.parseInt(roomNumStr));
+	        throws IOException {
+	    // Assuming that ChattDTO contains a field for the read status and it's initially set to false
+	    chattDTO.setRoomNum(Integer.parseInt(roomNumStr));
 
-		Chatt savedChatt = chattService.saveMessage(chattDTO);
+	    // Determine the read status based on the number of active sessions in the room
+	    boolean readStatus = roomSessions.get(roomNumStr) != null && roomSessions.get(roomNumStr).size() > 1;
+	    chattDTO.setReadStatus(readStatus); // Set the read status based on the presence of users in the room
 
-		String key = "chat:message:readStatus:" + savedChatt.getMsgNum();
-		ValueOperations<String, String> valueOps = stringRedisTemplate.opsForValue();
-		valueOps.set(key, "false"); // 메시지 저장 시 읽지 않음 상태로 설정
+	    Chatt savedChatt = chattService.saveMessage(chattDTO); // Save the message with the updated read status
 
-		// 저장된 엔티티를 다시 DTO로 변환하거나 직접 chattDTO 사용
-		// 정확히 받은 DTO를 방송할지 또는 저장 과정에서 변경/추가된 내용을 포함할지 여부에 따라 달라짐
-		broadcast(chattDTO, String.valueOf(chattDTO.getRoomNum()));
+	    // Broadcast the message to all users in the room
+	    broadcast(chattDTO, roomNumStr);
 	}
 
-	private Chatt convertToEntity(ChattDTO chattDTO, String roomNumStr) {
-		// ChattDTO에서 Chatt 엔티티로의 변환 로직 구현
-//	    ChattRoom chattRoom = chattRoomService.findRoomByNumber(Integer.parseInt(roomNumStr)); // roomNumStr을 이용하여 채팅방 정보 조회
-		return new Chatt(chattDTO).toBuilder()
-//	                              .chattRoom(chattRoom) // 조회한 채팅방 정보를 설정
-				.build();
+	// Chatt 엔티티를 ChattDTO로 변환하는 메서드 (구현 필요)
+	private ChattDTO convertToChattDTO(Chatt chatt) {
+	    // Chatt 엔티티를 DTO로 변환하는 로직 구현
+	    return new ChattDTO();
 	}
 
 	private void quitRoom(WebSocketSession session, ChattDTO chatt, String roomNumStr) throws IOException {
@@ -147,10 +155,4 @@ public class WebsocketHandler extends TextWebSocketHandler {
 		});
 	}
 
-	// 메시지 읽음 처리 예시 메소드 (구현 필요)
-	public void markMessageAsRead(String messageNum) {
-		String key = "chat:message:readStatus:" + messageNum;
-		ValueOperations<String, String> valueOps = stringRedisTemplate.opsForValue();
-		valueOps.set(key, "true"); // 메시지를 읽음 상태로 업데이트
-	}
 }

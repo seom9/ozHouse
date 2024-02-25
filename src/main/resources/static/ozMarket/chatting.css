@@ -181,3 +181,8 @@ h3 {
     margin: 10px 0;
     color: #888;
 }
+
+.message.read {
+    background-color: #f0f0f0;
+}
+
