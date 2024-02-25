@@ -15,4 +15,6 @@ public interface ChattService {
 	Chatt saveMessage(ChattDTO chattDTO);
 
 	List<Chatt> findMessagesByRoomNum(Integer roomNum);
+	
+	boolean markMessageAsRead(Integer msgNum);
 }

@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.oz.ozHouse.client.config.WebsocketHandler;
 import com.oz.ozHouse.client.security.MemberSecurityDTO;
 import com.oz.ozHouse.domain.Chatt;
 import com.oz.ozHouse.domain.ChattRoom;
@@ -30,6 +32,8 @@ public class ChattController {
 	private final ChattRoomService chattRoomService;
 
 	private final ChattService chattService;
+
+    private final WebsocketHandler websocketHandler; // WebsocketHandler 주입
 
 	// 채팅 리스트
 	@GetMapping("/chatts")
@@ -89,6 +93,19 @@ public class ChattController {
 	public ResponseEntity<List<Chatt>> getMessagesByRoomNum(@PathVariable("roomNum") Integer roomNum) {
 	    List<Chatt> messages = chattService.findMessagesByRoomNum(roomNum);
 	    return ResponseEntity.ok(messages);
+	}
+	
+	// ChattController 내에 메시지 읽음 처리 엔드포인트 추가
+	@PostMapping("/markMessageAsRead/{msgNum}")
+	public @ResponseBody ResponseEntity<?> markMessageAsRead(@PathVariable("msgNum") Integer msgNum) {
+	    // 메시지 읽음 처리 로직 구현
+	    boolean success = chattService.markMessageAsRead(msgNum);
+
+	    if (success) {
+	        return ResponseEntity.ok().build(); // 성공 응답
+	    } else {
+	        return ResponseEntity.notFound().build(); // 실패 응답
+	    }
 	}
 
 }
