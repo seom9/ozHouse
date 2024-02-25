@@ -55,6 +55,8 @@ public class Chatt {
 	
 //	private String msgType;
 	
+    private boolean readStatus = false; // 초기값 false로 설정
+	
 	public Chatt(ChattDTO dto) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy/MM/dd HH:mm:ss");
 

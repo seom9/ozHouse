@@ -1,11 +1,11 @@
 package com.oz.ozHouse.market.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
 import com.oz.ozHouse.domain.Chatt;
-import com.oz.ozHouse.domain.ChattRoom;
 import com.oz.ozHouse.dto.ChattDTO;
 import com.oz.ozHouse.market.repository.ChattRepository;
 
@@ -47,6 +47,19 @@ public class ChattServiceImpl implements ChattService {
         return chattRepository.findByRoomNum(roomNum);
     }
 	
+	@Override
+	public boolean markMessageAsRead(Integer msgNum) {
+	    // 메시지를 찾아 읽음 상태로 업데이트하는 로직 구현
+	    // 예: 메시지 엔티티를 찾고, readStatus를 true로 설정한 다음 저장
+	    Optional<Chatt> message = chattRepository.findById(msgNum);
+	    if (message.isPresent()) {
+	        Chatt chatt = message.get();
+	        chatt.setReadStatus(true);
+	        chattRepository.save(chatt);
+	        return true; // 업데이트 성공
+	    } else {
+	        return false; // 메시지를 찾을 수 없음
+	    }
+	}
 	
-
 }
