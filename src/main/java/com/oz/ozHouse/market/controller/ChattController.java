@@ -96,16 +96,15 @@ public class ChattController {
 	    return ResponseEntity.ok(messages);
 	}
 	
-	// ChattController 내에 메시지 읽음 처리 엔드포인트 추가
-	@PostMapping("/markMessageAsRead/{msgNum}")
-    public @ResponseBody ResponseEntity<?> markMessageAsRead(@PathVariable("msgNum") Integer msgNum) {
-        // 메시지 읽음 처리 로직 구현
-        boolean success = chattService.markMessageAsRead(msgNum);
-        if (success) {
+	@PostMapping("/markAllMessagesAsRead/{roomNum}")
+    public ResponseEntity<?> markAllMessagesAsRead(@PathVariable("roomNum") Integer roomNum) {
+        try {
+            chattService.findMessagesByRoomNum(roomNum);
             return ResponseEntity.ok().build();
-        } else {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error marking messages as read");
         }
     }
+	
 
 }

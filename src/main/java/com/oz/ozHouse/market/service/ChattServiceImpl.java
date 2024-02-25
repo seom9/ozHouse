@@ -1,7 +1,7 @@
 package com.oz.ozHouse.market.service;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -48,18 +48,25 @@ public class ChattServiceImpl implements ChattService {
     }
 	
 	@Override
-	public boolean markMessageAsRead(Integer msgNum) {
-	    // 메시지를 찾아 읽음 상태로 업데이트하는 로직 구현
-	    // 예: 메시지 엔티티를 찾고, readStatus를 true로 설정한 다음 저장
-	    Optional<Chatt> message = chattRepository.findById(msgNum);
-	    if (message.isPresent()) {
-	        Chatt chatt = message.get();
-	        chatt.setReadStatus(true);
-	        chattRepository.save(chatt);
-	        return true; // 업데이트 성공
-	    } else {
-	        return false; // 메시지를 찾을 수 없음
-	    }
-	}
+	public Chatt save(Chatt chatt) {
+        return chattRepository.save(chatt);
+    }
 	
+	@Override
+	public List<Chatt> markMessagesAsRead(String roomNumStr) {
+        int roomNum = Integer.parseInt(roomNumStr);
+        List<Chatt> messages = chattRepository.findByRoomNum(roomNum);
+        List<Chatt> updatedMessages = new ArrayList<>();
+        
+        for (Chatt message : messages) {
+            if(!message.isReadStatus()) { // 이미 '읽음' 상태인 메시지는 건너뜀
+                message.setReadStatus(true);
+                updatedMessages.add(chattRepository.save(message));
+            }
+        }
+        
+        return updatedMessages;
+    }
+	
+
 }
