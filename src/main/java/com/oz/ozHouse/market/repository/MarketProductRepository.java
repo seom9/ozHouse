@@ -24,5 +24,16 @@ public interface MarketProductRepository extends Repository<OzMarketPro, Integer
 
 	// 상품 검색
 	List<OzMarketProDTO> findProduct(String proTitle);
+	
+	//내 정보 _ 판매중
+	List<OzMarketProDTO> findSellingProductsByNickname(String nickname);
+	
+	//내 정보 _ 판매내역
+	List<OzMarketProDTO> findSoldProductsByNickname(String nickname);
+	
+	//내 정보 _ 구매내역
+	List<OzMarketProDTO> findBoughtProductsByNickname(String nickname);
 
+	// 상품 삭제
+	void deleteByProNum(Integer proNum);
 }

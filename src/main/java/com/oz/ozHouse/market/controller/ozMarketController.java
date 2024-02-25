@@ -218,8 +218,6 @@ public class ozMarketController {
 		dto.setMemberNickname(member.getMemberNickname());
 		String res = marketProService.insertProduct(dto);
 
-	    System.out.println("삽입 후 DTO 닉네임: " + dto.getMemberNickname());
-
 		if (res != null) {
 			req.setAttribute("msg", "등록 성공했습니다.");
 			// 경로 상세보기로 수정하기
@@ -261,16 +259,79 @@ public class ozMarketController {
 	
 	//내정보
 	@GetMapping("/myInfo")
-	public String ozMarketMyInfo(@AuthenticationPrincipal MemberSecurityDTO member, HttpServletRequest req) {
+	public String ozMarketMyInfo(@AuthenticationPrincipal MemberSecurityDTO member, HttpServletRequest req) throws IOException {
 		if (member == null) {
 			req.setAttribute("msg", "로그인 후 이용가능합니다.");
 			req.setAttribute("url", "/main");
 			return "message";
 		}
 		
-		System.out.println("닉네임 : " + member.getMemberNickname());
-		req.setAttribute("nickname", member.getMemberNickname());
+		String root = PATH + "\\" + "img";
+	    req.setAttribute("proImg", root);
+
+	    Map<String, Object> params = new HashMap<>();
+	    List<OzMarketProDTO> list = marketProService.listProduct(params);
+	    for (OzMarketProDTO dto : list) {
+	        String[] imageFiles = dto.getProImageChange().split(",");
+	        if (imageFiles.length > 0) {
+	            File imageFile = new File(root, imageFiles[0]);
+	            if (imageFile.exists()) {
+	                String encodedImage = encodeImageToBase64(imageFile);
+	                dto.setEncodedImage(encodedImage);
+	            }
+	        }
+	    }
+		
+		String nickname = member.getMemberNickname();
+		
+	    List<OzMarketProDTO> sellingProducts = marketProService.findSellingProductsByNickname(nickname);
+	    List<OzMarketProDTO> soldProducts = marketProService.findSoldProductsByNickname(nickname);
+	    List<OzMarketProDTO> boughtProducts = marketProService.findBoughtProductsByNickname(nickname);
+	    
+	    System.out.println("Selling Products: " + sellingProducts.size());
+	    System.out.println("Bought Products: " + boughtProducts.size());
+	    System.out.println("Sold Products: " + soldProducts.size());
+
+	    req.setAttribute("sellingProducts", sellingProducts);
+	    req.setAttribute("soldProducts", soldProducts);
+	    req.setAttribute("boughtProducts", boughtProducts);
+	    req.setAttribute("nickname", nickname);
+	    
 		return "client/ozMarket/myInfo";
+	}
+	
+	// 상품 삭제
+	@PostMapping("/delete/{proNum}")
+	public String deleteProduct(@PathVariable("proNum") Integer proNum, HttpServletRequest req) {
+		String root = PATH + "\\" + "img";
+	    try {
+	        // 상품 정보를 가져옵니다.
+	        OzMarketProDTO product = marketProService.getProduct(proNum);
+	        if (product != null) {
+	            System.out.println("경로 : " + root);
+	            String[] imageFiles = product.getProImageChange().split(",");
+	            for (String fileName : imageFiles) {
+	                File file = new File(root + File.separator + fileName);
+	                if (file.exists() && file.delete()) {
+	                    System.out.println(fileName + " 파일이 삭제되었습니다!");
+	                } else {
+	                    System.out.println(fileName + " 파일 삭제에 실패했습니다.");
+	                    throw new IOException("하나 이상의 파일을 삭제하는데 실패했습니다.");
+	                }
+	            }
+	            // 파일이 성공적으로 삭제되면, 상품 레코드를 삭제합니다.
+	            marketProService.deleteProduct(proNum);
+	            req.setAttribute("msg", "게시글이 삭제되었습니다."); 
+	        } else {
+	            // 삭제할 상품을 찾을 수 없습니다.
+	            req.setAttribute("msg", "삭제할 게시글을 찾을 수 없습니다."); 
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        req.setAttribute("msg", "게시글 삭제가 실패했습니다."); 
+	    }
+	    req.setAttribute("url", "/ozMarket");
+	    return "message";
 	}
 
 }

@@ -16,8 +16,8 @@ public class ChattServiceImpl implements ChattService {
 
     @Override
     public Chatt saveMessage(ChattDTO chattDTO) {
-    	Chatt chatt = new Chatt(chattDTO);
-    	chatt = chattRepository.save(chatt);
-    	return chatt;
+        // Chatt로의 변환을 처리하는 생성자나 메소드 가정
+        Chatt chatt = new Chatt(chattDTO); // 이 변환 과정이 올바른지 확인
+        return chattRepository.save(chatt);
     }
 }

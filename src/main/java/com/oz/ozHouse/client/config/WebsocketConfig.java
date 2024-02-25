@@ -26,7 +26,7 @@ public class WebsocketConfig implements WebSocketConfigurer {
 
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        registry.addHandler(webSocketHandler, "/ws/chat").setAllowedOrigins("*").withSockJS();
+        registry.addHandler(webSocketHandler, "/ws/chat").setAllowedOrigins("*");
         // handler 등록,   js에서 new Websocket할 때 경로 지정
         //다른 url에서도 접속할 수있게(CORS방지)
     }
