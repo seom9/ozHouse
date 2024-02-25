@@ -74,5 +74,44 @@ public class MarketProductRepositoryImpl implements MarketProductRepository {
 
 	    return resultList.stream().map(OzMarketProDTO::toDTO).collect(Collectors.toList());
 	}
+	
+	// 내 정보 _ 판매중
+	@Override
+	public List<OzMarketProDTO> findSellingProductsByNickname(String nickname) {
+	    List<OzMarketPro> resultList = em.createQuery("SELECT oz FROM OzMarketPro oz WHERE oz.memberNickname = :nickname AND oz.proApprovalStatus = '판매중'", OzMarketPro.class)
+	            .setParameter("nickname", nickname)
+	            .getResultList();
+
+	    return resultList.stream().map(OzMarketProDTO::toDTO).collect(Collectors.toList());
+	}
+
+	// 내 정보 _ 판매내역
+	@Override
+	public List<OzMarketProDTO> findSoldProductsByNickname(String nickname) {
+	    List<OzMarketPro> resultList = em.createQuery("SELECT oz FROM OzMarketPro oz WHERE oz.memberNickname = :nickname AND oz.proApprovalStatus = '판매완료'", OzMarketPro.class)
+	            .setParameter("nickname", nickname)
+	            .getResultList();
+
+	    return resultList.stream().map(OzMarketProDTO::toDTO).collect(Collectors.toList());
+	}
+
+	// 내 정보 _ 구매내역
+	@Override
+	public List<OzMarketProDTO> findBoughtProductsByNickname(String nickname) {
+	    List<OzMarketPro> resultList = em.createQuery("SELECT oz FROM OzMarketPro oz WHERE oz.buyStatus = :nickname", OzMarketPro.class)
+	            .setParameter("nickname", nickname)
+	            .getResultList();
+
+	    return resultList.stream().map(OzMarketProDTO::toDTO).collect(Collectors.toList());
+	}
+
+	// 상품 삭제
+	@Override
+	public void deleteByProNum(Integer proNum) {
+	    OzMarketPro product = em.find(OzMarketPro.class, proNum);
+	    if (product != null) {
+	        em.remove(product);
+	    }
+	}
 		
 }

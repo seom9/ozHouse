@@ -102,3 +102,4 @@
 	</form>
 </body>
 </html>
+<%@ include file="../main/bottom.jsp"%>

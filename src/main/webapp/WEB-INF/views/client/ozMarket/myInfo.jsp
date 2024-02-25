@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ include file="ozMarketTop.jsp"%>
 
 <!DOCTYPE html>
 <html>
@@ -23,38 +24,68 @@
 		</div>
 		<div class="memberNickname">${nickname}</div>
 		<div>판매중</div>
-		<div class="grid-item">
-			<c:forEach var="myproduct" items="${myProduct}" varStatus="status">
-				<c:if test="${not empty myproduct.encodedImage}">
-					<a
-						href="${pageContext.request.contextPath}/ozMarket/my-product/${myproduct.proNum}">
-						<img src="data:image/jpeg;base64,${product.encodedImage}"
-						alt="${myproduct.proTitle}" class="product-image">
-					</a>
-				</c:if>
-			</c:forEach>
-			<div>구매내역</div>
-			<div class="grid-item">
-				<c:forEach var="buyproduct" items="${buyProduct}" varStatus="status">
-					<c:if test="${not empty buyproduct.encodedImage}">
-						<a
-							href="${pageContext.request.contextPath}/ozMarket/my-product/${buyproduct.proNum}">
-							<img src="data:image/jpeg;base64,${buyproduct.encodedImage}"
-							alt="${buyproduct.proTitle}" class="product-image">
-						</a>
-					</c:if>
-				</c:forEach>
-				<div>판매내역</div>
+		<c:choose>
+			<c:when test="${not empty sellingProducts}">
 				<div class="grid-item">
-					<c:forEach var="sellproduct" items="${sellProduct}"
-						varStatus="status">
-						<c:if test="${not empty sellproduct.encodedImage}">
-							<a
-								href="${pageContext.request.contextPath}/ozMarket/my-product/${sellproduct.proNum}">
-								<img src="data:image/jpeg;base64,${sellproduct.encodedImage}"
-								alt="${sellproduct.proTitle}" class="product-image">
-							</a>
-						</c:if>
+					<c:forEach items="${sellingProducts}" var="product">
+						<div>${product.proTitle }</div>
+						<a
+							href="${pageContext.request.contextPath}/ozMarket/my-product/${product.proNum}">
+							<c:if test="${not empty product.encodedImage}">
+								<img src="data:image/jpeg;base64,${product.encodedImage}"
+									alt="${product.proTitle}" class="product-image">
+							</c:if>
+						</a>
 					</c:forEach>
+				</div>
+			</c:when>
+			<c:otherwise>
+				<div class="center-text">판매중인 상품이 없습니다.</div>
+			</c:otherwise>
+		</c:choose>
+	</div>
+	<div>구매내역</div>
+	<c:choose>
+		<c:when test="${not empty boughtProducts}">
+			<div class="grid-item">
+				<c:forEach items="${boughtProducts}" var="buyproduct">
+					<a
+						href="${pageContext.request.contextPath}/ozMarket/my-product/${buyproduct.proNum}">
+						<c:if test="${not empty buyproduct.encodedImage}">
+							<img src="data:image/jpeg;base64,${buyproduct.encodedImage}"
+								alt="${buyproduct.proTitle}" class="product-image">
+						</c:if>
+					</a>
+				</c:forEach>
+			</div>
+		</c:when>
+		<c:otherwise>
+			<div class="center-text">구매한 상품이 없습니다.</div>
+		</c:otherwise>
+	</c:choose>
+
+	</div>
+	<div>판매내역</div>
+	<c:choose>
+		<c:when test="${not empty soldProducts}">
+			<div class="grid-item">
+				<c:forEach items="${soldProducts}" var="sellproduct">
+					<a
+						href="${pageContext.request.contextPath}/ozMarket/my-product/${sellproduct.proNum}">
+						<c:if test="${not empty sellproduct.encodedImage}">
+							<img src="data:image/jpeg;base64,${sellproduct.encodedImage}"
+								alt="${sellproduct.proTitle}" class="product-image">
+						</c:if>
+					</a>
+				</c:forEach>
+			</div>
+		</c:when>
+		<c:otherwise>
+			<div class="center-text">판매한 상품이 없습니다.</div>
+		</c:otherwise>
+	</c:choose>
+
+	</div>
 </body>
 </html>
+	<%@ include file="../main/bottom.jsp"%>

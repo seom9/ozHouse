@@ -1,5 +1,6 @@
 package com.oz.ozHouse.domain;
 
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import com.oz.ozHouse.dto.ChattDTO;
@@ -65,7 +66,11 @@ public class Chatt {
 //        this.readStatus = dto.getReadStatus();
 //        this.file = dto.getFile();
 //        this.roomNum = dto.getRoomNum();
-        this.inTime = dto.getInTime().formatted(formatter);
+        if (dto.getInTime() != null) {
+	        this.inTime = dto.getInTime().formatted(formatter);
+	    } else {
+	        this.inTime = LocalDateTime.now().format(formatter); // 기본값으로 현재 날짜 설정
+	    }
 	}
 	
 }
