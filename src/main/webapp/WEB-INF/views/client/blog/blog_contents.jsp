@@ -5,13 +5,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/client/blog_css/blogContents_style.css" />
-<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/blogContent.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/client/blog_css/blogContents_style.css" />
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/blogContent.js"></script>
 <body>
-<c:set var="blogImages" value="${fn:split(blogDTO.blog_image, ',')}" />
-<c:set var="blogSubjects" value="${fn:split(blogDTO.blog_subject, ',')}" />
-<c:set var="blogContents" value="${fn:split(blogDTO.blog_content, ',')}" />
-<c:set var="blogRoomTypes" value="${fn:split(blogDTO.blog_room_type, ',')}" />
+<c:set var="blogImages" value="${fn:split(blogDTO.blogImage, ',')}" />
+<c:set var="blogSubjects" value="${fn:split(blogDTO.blogSubject, ',')}" />
+<c:set var="blogContents" value="${fn:split(blogDTO.blogContent, ',')}" />
+<c:set var="blogRoomTypes" value="${fn:split(blogDTO.blogRoomType, ',')}" />
 
 	<div class="contents_box"><!-- 전체를 감싸는 영역 -->
 	<c:if test="${fn:length(blogImages) > 0 || fn:length(blogSubjects) > 0 || fn:length(blogContents) > 0 || fn:length(blogRoomTypes) > 0}">
@@ -51,7 +51,7 @@
 			</c:forEach>
 			</c:if>
 				<div class="a">
-					${blogDTO.blog_date} 조회 ${blogDTO.readcount}
+					${blogDTO.blogDate} 조회 ${blogDTO.readcount}
 				</div>
 				<hr class="hr_style">
 				<div class="b">

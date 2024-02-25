@@ -2,6 +2,9 @@ package com.oz.ozHouse.client.controller;
 
 import java.io.File;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.oz.ozHouse.client.service.AwsS3Service;
+import com.oz.ozHouse.client.service.BlogServiceImpl;
 import com.oz.ozHouse.dto.BlogDTO;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -27,7 +32,8 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/blog")
 public class BlogController {
 	
-	private static final String PATH = "C:\\File\\";
+	private static final String PATH = "D:\\imageFiles";
+	private final BlogServiceImpl bs;
 	private final AwsS3Service aws;
 	
     @GetMapping("/write")
@@ -58,8 +64,7 @@ public class BlogController {
     	
     	// 블로그 이미지
     	MultipartHttpServletRequest mr = (MultipartHttpServletRequest) req;
-    	List<MultipartFile> blogImages = mr.getFiles("blogImage");
-    	List<String> ImageFiles = new ArrayList<>();
+    	List<MultipartFile> blogImages = mr.getFiles("blogImage");    	
     	
     	List<MultipartFile> validFiles = new ArrayList<>();
 
@@ -72,58 +77,59 @@ public class BlogController {
     	        validFiles.add(file);
     	    }
     	}
-    	
-    	System.out.println("값이 있는 애들 사이즈 : " + validFiles.size());
-
-    	// 유효한 파일들만을 업로드
-    	aws.uploadImage(validFiles);
-
-    	
-    	for (MultipartFile file : blogImages) {
-    	    // 파일 이름
-    	    String fileName = file.getOriginalFilename();
-    	    System.out.println("File Name: " + fileName);
-    	    
-    	    // 파일 크기
-    	    long fileSize = file.getSize();
-    	    System.out.println("File Size: " + fileSize + " bytes");
-    	    
-    	    // 파일 내용 타입
-    	    String contentType = file.getContentType();
-    	    System.out.println("Content Type: " + contentType);
-    	}
-
-    	
-    	for(MultipartFile file : blogImages) {
-    		String fileName = file.getOriginalFilename();
-
-    		if(fileName != null && !fileName.isEmpty()) {
-    			ImageFiles.add(fileName);
-    		}
-    	}
+    
+    	// 유효한 파일들만을 업로드 및 DB 저장을 위해 List값으로 받아옴
+    	List<String> fileNameList = aws.uploadImage(validFiles);
     	
 	    String[] blogSubjects = mr.getParameterValues("blogSubject");
 	    String[] blogContents = mr.getParameterValues("blogContent");
 	    String[] blogRoomTypes = mr.getParameterValues("blogRoomType");
 	    
-	    
-	    System.out.println("업로드 성공");
-	    
-//	    String fileName = String.join(",", fileNames);
+	    String imgString = String.join(",", fileNameList);
 	    String subjectString = String.join(",", blogSubjects);
 	    String contentString = String.join(",", blogContents);
 	    String roomTypeString = String.join(",", blogRoomTypes);
 	    
-	    String urrrrl = aws.GetObjectUrl("ozhouse-bucket", "cf0a4af0-cbc9-4324-bf3b-c6169ed4e381");
-	    System.out.println("성공했다 : " + urrrrl);
+	    LocalDate currentDate = LocalDate.now();
+	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy/MM/dd");
+	    String formattedDate = currentDate.format(formatter);
 	    
-	    req.setAttribute("urrl", urrrrl);
+	    dto.setBlogImage(imgString);
+	    dto.setBlogSubject(subjectString);
+	    dto.setBlogContent(contentString);
+	    dto.setBlogRoomType(roomTypeString);
+	    dto.setBlogDate(formattedDate);
+
+	    int res = bs.insertBlog(dto);
+	    if(res > 0) {
+	    	System.out.println("DB저장 성공");
+	    } else {
+	    	System.out.println("DB저장 실패");
+	    }
+	    
+	    req.setAttribute("url", imgString);
 	    
     	return "client/blog/test";
     }
     
     @GetMapping("/main")
-    public String blogMain() {
+    public String blogMain(HttpServletRequest req) {
+    	
+    	List<BlogDTO> blogList = bs.blogList();
+    	
+    	req.setAttribute("blogList", blogList);
+
     	return "client/blog/blog_main";
+    }
+    
+    @GetMapping(value = "{blogNum}/blog_contents")
+    public String blogProdview(@PathVariable("blogNum") int blogNum, Model model) {
+    	System.out.println("상세보기 블로그 넘버 : " + blogNum);
+    	BlogDTO getBlog = bs.getBlog(blogNum);
+    	System.out.println("블로그 제목" + getBlog.getBlogSubject());
+    	
+    	model.addAttribute("blogDTO", getBlog);
+    	
+    	return "client/blog/blog_contents";
     }
 }

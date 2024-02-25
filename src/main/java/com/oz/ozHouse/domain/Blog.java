@@ -29,9 +29,7 @@ public class Blog {
 	private int blogNum;
 	@Lob
 	private String blogContent;
-	@Temporal(TemporalType.DATE)
-	@JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd", timezone="Asia/Seoul")
-	private Date blogDate;
+	private String blogDate;
 	private String blogImage;
 	private String blogRoomType;
 	private String blogSubject;
@@ -39,7 +37,7 @@ public class Blog {
 	private int readcount;
 	
 	@Builder
-	public Blog(int blogNum, String blogContent, Date blogDate, String blogImage, String blogRoomType,
+	public Blog(int blogNum, String blogContent, String blogDate, String blogImage, String blogRoomType,
 			String blogSubject, String memberId, int readcount) {
 		this.blogNum = blogNum;
 		this.blogContent = blogContent;
