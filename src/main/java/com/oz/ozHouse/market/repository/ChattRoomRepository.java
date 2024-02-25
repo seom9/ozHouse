@@ -17,4 +17,8 @@ public interface ChattRoomRepository extends JpaRepository<ChattRoom, Integer> {
 	
 	@Query("SELECT c FROM ChattRoom c WHERE c.myId = :myId OR c.otherId = :myId")
     List<ChattRoom> findBymyId(@Param("myId") String myId);
+	
+	@Query("SELECT c.myId, c.otherId FROM ChattRoom c WHERE c.roomNum = :roomNum")
+	List<Object[]> findParticipantsByRoomNum(@Param("roomNum") Integer roomNum);
+
 }

@@ -14,4 +14,6 @@ public interface ChattRoomService {
     List<ChattRoom> findBymyId(String myId);
     ChattRoom findRoomByNum(Integer roomNum);
     ChattRoom findOrCreateRoom(String buyerNickname, String sellerNickname, Integer proNum);
+    List<Object> findParticipantsByRoomNum(Integer roomNum);
+
 }
