@@ -78,7 +78,8 @@
                   <li class="css-3qi6pg">
                      <div class="css-fyyvpx">
                         <div class="css-v414oq">
-                           <img src="data:image/jpeg;base64,${blog_encodedImages[loop.index]}" alt="블로그 이미지" class="css-gnpvt2"/>
+                       	   <c:set var="blogImages" value="${fn:split(blogDTO.blogImage, ',')}" />
+                           <img src="${blogImages[0]}" alt="블로그 이미지" class="css-gnpvt2"/>
                            <div class="css-bkonhm">
                               <div class="css-s5xdrg">
                                  <div class="css-7nmw3w">
@@ -102,7 +103,7 @@
                               </button>
                            </div>
                         </div>
-                        <a class="css-11ab5xd" href="blog_get.do?num=${blogDTO.blogNum}"></a>
+                        <a class="css-11ab5xd" href="/${blogDTO.blogNum}/blog_contents"></a>
                      </div>
                   </li>
                   </c:forEach>
@@ -313,7 +314,7 @@ document.querySelector('.css-h72v4d button').addEventListener('click', showNextP
   // goProduct 함수 정의
   function blog_main() {
     // prodView_main.do 실행
-    window.location.href = 'blog_main.do';
+    window.location.href = 'blog/main';
   }
   
   function todaysDeal() {

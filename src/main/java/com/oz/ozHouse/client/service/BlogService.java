@@ -7,8 +7,10 @@ import com.oz.ozHouse.dto.BlogDTO;
 
 public interface BlogService {
 	// 블로그 목록
-	List<Blog> blogList();
+	List<BlogDTO> blogList();
 	
 	// 블로그 등록
-	void insertBlog(BlogDTO blogDTO);
+	int insertBlog(BlogDTO blogDTO);
+	
+	BlogDTO getBlog(Integer blogNum);
 }

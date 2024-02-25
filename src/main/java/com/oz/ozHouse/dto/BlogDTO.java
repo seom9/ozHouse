@@ -3,8 +3,11 @@ package com.oz.ozHouse.dto;
 import java.sql.Date;
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.oz.ozHouse.domain.Blog;
 
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,7 +19,7 @@ import lombok.Setter;
 public class BlogDTO {
 	private int blogNum;
 	private String blogContent;
-	private Date blogDate;
+	private String blogDate;
 	private String blogImage;
 	private String blogRoomType;
 	private String blogSubject;
