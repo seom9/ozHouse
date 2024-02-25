@@ -1,17 +1,22 @@
 package com.oz.ozHouse.merchant.controller;
 
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import com.oz.ozHouse.dto.InsertMerCouponDTO;
 import com.oz.ozHouse.dto.MerCouponDTO;
+import com.oz.ozHouse.dto.merchant.CouponSearchDTO;
+import com.oz.ozHouse.dto.merchant.InsertMerCouponDTO;
 import com.oz.ozHouse.merchant.service.MerCouponService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -52,13 +57,54 @@ public class MerCouponController {
 	
 	@GetMapping("/coupons/list")
 	public String couponList(HttpServletRequest req, @PathVariable("merNum") int merNum) {
-		List<MerCouponDTO> list = couponService.searchCouponList(merNum);
+		List<MerCouponDTO> list = couponService.couponList(merNum);
 		int couponCount = list.size();
 		req.setAttribute("check", "all");
 		req.setAttribute("radio", "all");
+		req.setAttribute("dateOptions", "merCouponusedate");
 		req.setAttribute("merNum", merNum);
 		req.setAttribute("couponList", list);
 		req.setAttribute("couponCount", couponCount);
+		return "merchant/store/coupon/coupon_list";
+	}
+	
+	@PostMapping("/coupons/search")
+	public String couponListSearch(HttpServletRequest req,
+			@ModelAttribute CouponSearchDTO dto, BindingResult result) {
+		Map<String, String> map = new HashMap<>();
+		map.put("startDate", dto.getStartDate());
+		map.put("endDate", dto.getEndDate());
+		map.put("merNum", dto.getMerNum());
+		map.put("date", dto.getDate());
+		map.put("merIsok", dto.getMerIsok());
+		map.put("search", dto.getSearch());
+		map.put("searchString", dto.getSearchString());
+		try {
+			map.get("startDate").charAt(0);
+			map.get("endDate").charAt(0);
+		}catch(StringIndexOutOfBoundsException e) {
+			map.put("startDate", null);
+			map.put("endDate", null);
+		}
+		List<MerCouponDTO> list;
+		System.out.println("Controller---> dto.getMerIsok : " + dto.getMerIsok());
+		if(dto.getMerIsok().equals("all") 
+				&&(dto.getSearchString() == null || dto.getSearchString().equals(""))
+				&&(dto.getStartDate() == null || dto.getStartDate().equals(""))
+				&&(dto.getEndDate() == null || dto.getEndDate().equals(""))){
+			System.out.println("Controller--->전체검색");
+			list = couponService.couponList(Integer.valueOf(dto.getMerNum()));
+		}else {
+			System.out.println("Controller--->조건검색");
+			list = couponService.searchCouponList(map);
+		}
+		int couponCount = list.size();
+		req.setAttribute("check", dto.getSearch());
+		req.setAttribute("radio", dto.getMerIsok());
+		req.setAttribute("dateOptions", dto.getDate());
+		req.setAttribute("couponList", list);
+		req.setAttribute("couponCount", couponCount);
+		req.setAttribute("map", map);
 		return "merchant/store/coupon/coupon_list";
 	}
 

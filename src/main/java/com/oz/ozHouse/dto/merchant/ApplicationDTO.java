@@ -1,4 +1,4 @@
-package com.oz.ozHouse.dto;
+package com.oz.ozHouse.dto.merchant;
 
 import java.util.List;
 
