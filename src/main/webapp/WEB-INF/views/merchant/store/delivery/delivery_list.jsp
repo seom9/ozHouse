@@ -105,13 +105,8 @@
 				</p>
 			</div>
 		</div>
-		<!-- 
 		<form name="f"
-			action="${pageContext.request.contextPath}/merchants/${merchantLoginMember.merNum}/deliveries/search"
-			method="post" class="flex-container">
- -->
-		<form name="f"
-			action="${pageContext.request.contextPath}/merchants/deliveries/search"
+			action="${pageContext.request.contextPath}/merchant/${merLoginMember.merNum}/store/orders/search"
 			method="post" class="flex-container">
 			<input type="hidden" name="merNum"
 				value="${merchantLoginMember.merNum}"> <input type="hidden"

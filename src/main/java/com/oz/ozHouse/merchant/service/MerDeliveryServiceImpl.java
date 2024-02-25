@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.oz.ozHouse.domain.OrderTb;
 import com.oz.ozHouse.dto.merchant.DeliveryDTO;
+import com.oz.ozHouse.dto.merchant.DeliverySearchDTO;
 import com.oz.ozHouse.merchant.repository.orderTbRepository.OrderTbRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -28,12 +29,13 @@ public class MerDeliveryServiceImpl implements MerDeliveryService {
 					.oComment(o.getOComment())
 					.oDelnow(o.getODelnow())
 					.build();
+			listDto.add(dto);
 		}
 		return listDto;
 	}
 	@Override
 	public List<DeliveryDTO> deliveryList(int merNum) {
-		System.out.println("전체배송조회");
+		System.out.println("배송전체조회");
 		List<OrderTb> ot = orderRepository.findOrdersByMerNum(merNum);
 		List<DeliveryDTO> listDto = setListDto(ot);
 		return listDto;
@@ -41,8 +43,17 @@ public class MerDeliveryServiceImpl implements MerDeliveryService {
 
 	@Override
 	public List<DeliveryDTO> deliveryLikeList(Map<String, String> map) {
-		// TODO Auto-generated method stub
-		return null;
+		System.out.println("배송상태별조회");
+		List<OrderTb> ot = orderRepository.findOrdersLikeByMerNum(map.get("merNum"), map.get("mode"));
+		List<DeliveryDTO> listDto = setListDto(ot);
+		return listDto;
+	}
+	@Override
+	public List<DeliveryDTO> searchDeliveryList(DeliverySearchDTO dto) {
+		System.out.println("배송상태별조건조회");
+		List<OrderTb> ot = orderRepository.searchDeliveryList(dto);
+		List<DeliveryDTO> listDto = setListDto(ot);
+		return listDto;
 	}
 
 }

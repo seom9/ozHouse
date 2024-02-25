@@ -14,9 +14,17 @@ import jakarta.transaction.Transactional;
 public interface OrderTbRepository extends OrderTbCustomRepository, JpaRepository<OrderTb, Long>{
 	
 	@Transactional
-	@Query(value = "SELECT * FROM OrderTb ot " +
-            "JOIN ProInform pi2 ON ot.oNum = pi2.oNum " +
-            "JOIN Product p ON pi2.proNum = p.proNum " +
-            "WHERE p.merNum = :merNumValue", nativeQuery = true)
+	@Query(value = "SELECT * FROM ozHouse.OrderTb ot " +
+            "JOIN ozHouse.ProInform AS pi2 ON ot.oNum = pi2.oNum " +
+            "JOIN ozHouse.Product AS p ON pi2.proNum = p.proNum " +
+            "WHERE p.merNum = :merNumValue AND ot.oLike = 'ok'", nativeQuery = true)
 	List<OrderTb> findOrdersByMerNum(@Param("merNumValue") int merNumValue);
+	
+	@Transactional
+	@Query(value = "SELECT * FROM ozHouse.OrderTb ot " +
+            "JOIN ozHouse.ProInform AS pi2 ON ot.oNum = pi2.oNum " +
+            "JOIN ozHouse.Product AS p ON pi2.proNum = p.proNum " +
+            "WHERE p.merNum = :merNumValue AND ot.oLike = 'ok' AND ot.oDelnow = :oDelnow", nativeQuery = true)
+	List<OrderTb> findOrdersLikeByMerNum(@Param("merNumValue") String merNumValue, 
+			@Param("oDelnow") String oDelnow);
 }
