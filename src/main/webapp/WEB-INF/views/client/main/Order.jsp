@@ -85,10 +85,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
 <body onload="f.member_id.focus()">
 	<div  align="center" class="login-wrapper" style="text-align: left">
-	<form name="f" method="post" id="login-form" action="/order">		
+	<form name="f" method="post" id="login-form" action="/order/success">		
 		<span class="wairano2">주문자</span><br><br>
 			이름 <br><br>
-			<input type="text" value="${member.memberName}" name="member_name" placeholder="이름을 입력해 주세요."><br>
+			<input type="text" value="${member.memberName}" name="oName" placeholder="이름을 입력해 주세요."><br>
 			연락처<br><br>
 			<input type="text" value="${member.memberHp.phoneNumber1}" name="phoneNumber1" size="3" maxlength="3"> -
 			<input type="text" value="${member.memberHp.phoneNumber2}" name="phoneNumber2" size="4" maxlength="4"> -
@@ -217,20 +217,22 @@ document.addEventListener('DOMContentLoaded', function () {
 		 </c:if>
 		<br><br>
 		<span class="wairano2">포인트</span><br>
-		<input type="text" value="0" class="memberUsePoint" name="member_use_point" maxlength="${member.memberPoint}" id="memberUsePoint">
+		<input type="text" value="0" class="memberUsePoint" name="oDisPoint" maxlength="${member.memberPoint}" id="memberUsePoint">
 		<input type="button" name="use_all_point" class="memberUsePointAllButton" value="전액 사용"><br>
 		가용 포인트 : ${member.memberPoint} points
 		<br><br>
 		<br><br>
 		<span class="wairano2">요청 사항</span><br><br>	
-		<input type="text" placeholder="요청 사항을 입력해 주세요" maxlength="50" name="order_comment">
+		<input type="text" placeholder="요청 사항을 입력해 주세요" maxlength="50" name="oComment">
 
 		<br><br>	
 		<span class="wairano2">결제 수단</span><br><br>	
 		# 추후 추가하겠습니다
 		<input type="hidden" name="oDisPoint" id="final_discount_point">
     	<input type="hidden" name="oDisCoupon" id="final_discount_coupon">	
+    	<input type="hidden" value="${order_ori_price - order_dis_discount}" name="oPrice"/>
 		</form></div>
+		
 <aside>
 <div class="sticky-child commerce-cart__side-bar">
 	            <dl class="commerce-cart__summary commerce-cart__side-bar__summary">
@@ -256,10 +258,11 @@ document.addEventListener('DOMContentLoaded', function () {
                <div class="commerce-cart__summary__row commerce-cart__summary__row--total">
                    <dt>결제금액</dt>
                   <dd id="final_order_price"><span class="totalPrice" id="final_order_price">${(order_ori_price - order_dis_discount)}</span>원</dd>
+                  
                </div>
            </dl>
            <div class="commerce-cart__side-bar__order">
-               <button class="_1eWD8 _3SroY _27do9 commerce-cart__side-bar__order__btn" type="button" onclick="goOrderSuccess()">${order_qpty}개 상품 구매하기</button>
+               <button class="_1eWD8 _3SroY _27do9 commerce-cart__side-bar__order__btn" type="button" onclick="javaScript:goOrderSuccess()">${order_qpty}개 상품 구매하기</button>
            </div>
            </div>
 </aside>
@@ -325,46 +328,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     
 	function goOrderSuccess(){
-		if (f.member_name.value == ""){
-			alert("받는 분 정보를 입력해 주세요")
-			f.member_name.focus()
-			return
-		}
-		if (!f.member_hp1.value){
-			alert("전화번호를 정확하게 입력해 주세요")
-			f.member_hp1.focus()
-			return
-		}
-		if (!f.member_hp2.value){
-			alert("전화번호를 정확하게 입력해 주세요")
-			f.member_hp2.focus()
-			return
-		}
-		if (!f.member_hp3.value){
-			alert("전화번호를 정확하게 입력해 주세요")
-			f.member_hp3.focus()
-			return
-		}
-		if (!f.member_postcode1.value){
-			alert("우편 번호를 입력해 주세요")
-			f.member_postcode1.focus()
-			return
-		}
-		if (!f.sample6_address.value){
-			alert("주소를 정확하게 입력해 주세요")
-			f.sample6_address.focus()
-			return
-		}
-		if (!f.sample6_detailAddress.value){
-			alert("주소를 정확하게 입력해 주세요")
-			f.sample6_detailAddress.focus()
-			return
-		}
-		if (!f.sample6_extraAddress.value){
-			alert("주소를 정확하게 입력해 주세요")
-			f.sample6_extraAddress.focus()
-			return
-		}
+		alert("gk...")
+		alert("어디서 걸림?")
 		document.f.action="/order/success"
 		document.f.submit()
 	}
