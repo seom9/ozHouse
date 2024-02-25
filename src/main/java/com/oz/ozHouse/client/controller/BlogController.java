@@ -32,7 +32,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/blog")
 public class BlogController {
 	
-	private static final String PATH = "C:\\File\\";
+	private static final String PATH = "D:\\imageFiles";
 	private final BlogServiceImpl bs;
 	private final AwsS3Service aws;
 	
@@ -106,12 +106,8 @@ public class BlogController {
 	    } else {
 	    	System.out.println("DB저장 실패");
 	    }
-
 	    
-	    String urrrrl = aws.GetObjectUrl("ozhouse-bucket", "cf0a4af0-cbc9-4324-bf3b-c6169ed4e381");
-	    System.out.println("성공했다 : " + urrrrl);
-	    
-	    req.setAttribute("urrl", urrrrl);
+	    req.setAttribute("url", imgString);
 	    
     	return "client/blog/test";
     }

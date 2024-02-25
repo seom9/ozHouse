@@ -30,7 +30,8 @@
 						<div class="blogInfo">
 							<a class="content_link" href="blog_get.do?num=${dto.blogNum}"></a>
 							<div class="blog_image">
-								<img class="image" src="data:image/jpeg;base64,${encodedImages[loop.index]}">
+								<c:set var="blogImages" value="${fn:split(dto.blogImage, ',')}" />
+								<img class="image" src="${blogImages[0]}">
 								<span class="blog_image_view-count">
 								조회수
 								${dto.readcount}

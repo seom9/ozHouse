@@ -94,7 +94,7 @@
 			<div class="css-i7a8i3">
 				<div class="css-1mfjm4o">
 					<div class="css-1euxu4r">
-						<a class="css-1qwerc" href="main.do">
+						<a class="css-1qwerc" href="/main">
 							<span class="css-18nk785">OZ의집</span>
 						</a>	     
 						<a class="css-53vhmk" href="shop_main.do">
