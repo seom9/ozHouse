@@ -62,4 +62,7 @@ public interface MemberRepository extends JpaRepository<Member, Integer> {
     void updateMemberPointByMemberId(@Param("point") int point, @Param("memberId") String memberId);
 
     
+    @Transactional
+    @EntityGraph(attributePaths = "orderList")
+    Optional<Member> findMemberWithOrdersByMemberId(String memberId);
 }

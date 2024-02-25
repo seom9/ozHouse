@@ -56,7 +56,7 @@
 
        <ul class="commerce-cart__content__group-list">
            <li class="commerce-cart__content__group-item">
-      <c:forEach var="dto" items="${confirmOrderProduct}">
+      <c:forEach var="dto" items="${confirmOrderProducts}">
                <article class="commerce-cart__group">
                    <h1 class="commerce-cart__group__header">$/{브랜드명}</h1>
       
