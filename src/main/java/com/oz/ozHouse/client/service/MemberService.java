@@ -34,4 +34,7 @@ public interface MemberService {
 	
 	// 멤버 탈퇴
 	int deleteMember(String memberId);
+	
+	// 멤버 포인트 업데이트
+	void updatePoint(String memberId, int point);
 }
