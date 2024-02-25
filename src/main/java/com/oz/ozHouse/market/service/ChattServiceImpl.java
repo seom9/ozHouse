@@ -46,5 +46,7 @@ public class ChattServiceImpl implements ChattService {
     public List<Chatt> findMessagesByRoomNum(Integer roomNum) {
         return chattRepository.findByRoomNum(roomNum);
     }
+	
+	
 
 }

@@ -40,7 +40,9 @@ public class ChattController {
 			return "message";
 		}
 		List<ChattRoom> roomList = chattRoomService.findBymyId(member.getMemberNickname());
+		String nickname = member.getMemberNickname();
 		model.addAttribute("roomList", roomList);
+		model.addAttribute("nickname", nickname);
 		return "client/ozMarket/chatRoom";
 	}
 
@@ -58,9 +60,9 @@ public class ChattController {
 			req.setAttribute("url", "/main");
 			return "message";
 		}
-
 		ChattRoom room = chattRoomService.findOrCreateRoom(member.getMemberNickname(), sellerNickname, proNum);
 		model.addAttribute("room", room);
+		
 		return "redirect:/ozMarket/chattRoom/" + room.getRoomNum();
 	}
 
@@ -70,10 +72,14 @@ public class ChattController {
 			@PathVariable("roomNum") Integer roomNum) {
 		ChattRoom room = chattRoomService.findRoomByNum(roomNum);
 		List<ChattRoom> roomList = chattRoomService.findBymyId(member.getMemberNickname());
+		String nickname = member.getMemberNickname();
+
 		model.addAttribute("roomList", roomList);
 		model.addAttribute("memberNickname", member.getMemberNickname());
 		model.addAttribute("roomNum", roomNum);
 		model.addAttribute("room", room);
+		model.addAttribute("nickname", nickname);
+
 		return "client/ozMarket/chatt";
 	}
 	

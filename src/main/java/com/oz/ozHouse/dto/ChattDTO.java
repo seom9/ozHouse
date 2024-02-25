@@ -25,8 +25,7 @@ public class ChattDTO {
 	private String recipient;
 	private String sender;
 	private String msg;
-	private String readStatus;
-//	private String file;
+//	private int readStatus;
 	private int roomNum;
 	private String inTime;
 	
@@ -55,17 +54,13 @@ public class ChattDTO {
 		this.recipient = req.getParameter("recipient");
 		this.sender = req.getParameter("sender");
 		this.msg = req.getParameter("msg");
-		this.readStatus = req.getParameter("readStatus");
+//		this.readStatus = req.getParameter("readStatus");
 //		this.readStatus = Integer.parseInt(req.getParameter("readStatus"));
 //		this.readStatus = 2;
-//		this.file = req.getParameter("file");
 		this.roomNum = Integer.parseInt(req.getParameter("roomNum"));
 		this.inTime = LocalDateTime.now().format(formatter);
 	}
 	
-//	public void setFile(String file) {
-//		this.file = file;
-//	}
 	
 	public void setRoomNum(int roomNum) {
 		this.roomNum = roomNum;
@@ -86,4 +81,8 @@ public class ChattDTO {
 	public void setRecipient(String recipient) {
 		this.recipient = recipient;
 	}
+	
+//	public void setReadStatus(int readStatus) {
+//		this.readStatus = readStatus;
+//	}
 }
