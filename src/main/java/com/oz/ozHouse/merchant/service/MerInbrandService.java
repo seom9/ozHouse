@@ -2,8 +2,8 @@ package com.oz.ozHouse.merchant.service;
 
 import java.util.Map;
 
-import com.oz.ozHouse.dto.ApplicationDTO;
 import com.oz.ozHouse.dto.InbrandDTO;
+import com.oz.ozHouse.dto.merchant.ApplicationDTO;
 import com.oz.ozHouse.merchant.exception.NotFoundMerNumException;
 
 public interface MerInbrandService {

@@ -36,7 +36,7 @@ public class UserCoupon extends BaseEntity {
 	private boolean userCouponActive;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "ocode")
-	private OrderTb order;
+	@JoinColumn(name = "oNum")
+	private OrderTb orderTb;
 	
 }

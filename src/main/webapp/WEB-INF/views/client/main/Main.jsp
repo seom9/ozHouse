@@ -235,7 +235,7 @@
                                     <img class="image" src="data:image/jpeg;base64,${encodedImages[loop.index]}" alt="상품 대표 이미지">
 										<!-- 스크랩 버튼 -->
 										<sec:authorize access="hasAnyRole('ROLE_CLIENT')">
-											<button class="production-item-image__scrap-badge" onclick="javascript:scrap('${prc.username}', '${dto.proNum}', ${scrapResult eq 'N' ? 0 : 1})">
+											<button class="production-item-image__scrap-badge" onclick="javascript:scrap('${prc.username}', '${dto.proNum}', ${scrap ? 0 : 1})">
 									     		<svg class="icon--stroke" aria-label="스크랩" width="24" height="24" fill="${scrapResult eq 'N' ? 'rgba(0, 0, 0, 0)' : '#50E5B4'}" stroke="currentColor" stroke-width="0.5" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"><path d="M11.53 18.54l-8.06 4.31A1 1 0 0 1 2 21.97V3.5A1.5 1.5 0 0 1 3.5 2h17A1.5 1.5 0 0 1 22 3.5v18.47a1 1 0 0 1-1.47.88l-8.06-4.31a1 1 0 0 0-.94 0z"></path></svg>
 											</button>
 										</sec:authorize>

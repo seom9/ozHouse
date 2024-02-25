@@ -1,9 +1,10 @@
 package com.oz.ozHouse.client.service;
 
 import java.util.List;
+import java.util.TreeSet;
 
 import com.oz.ozHouse.dto.MerCouponDTO;
-import com.oz.ozHouse.dto.UserCouponDTO;
+import com.oz.ozHouse.dto.client.member.ProQuanDTO;
 
 public interface CouponService {
 	
@@ -12,5 +13,7 @@ public interface CouponService {
 	List<MerCouponDTO> getUserCoupons(String memberId);
 	
 	boolean addCoupon(String memberId, int merCouponnum);
+	
+	TreeSet<MerCouponDTO> getOrderCoupons(String memberId, List<ProQuanDTO> products);
 	
 }

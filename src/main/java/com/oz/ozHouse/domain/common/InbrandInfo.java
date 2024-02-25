@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 
 @Embeddable
 @Getter
-@Builder
+@Builder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 public class InbrandInfo {
