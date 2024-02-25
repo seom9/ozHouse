@@ -1,7 +1,8 @@
 package com.oz.ozHouse.market.service;
 
+import java.util.Arrays;
 import java.util.List;
-import java.util.UUID;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -53,5 +54,12 @@ public class ChattRoomServiceImpl implements ChattRoomService {
         chattRoomDTO.setProNum(proNum);
         ChattRoom newRoom = new ChattRoom(chattRoomDTO);
         return chattRoomRepository.save(newRoom);
+    }
+
+    @Override
+    public List<Object> findParticipantsByRoomNum(Integer roomNum) {
+        return chattRoomRepository.findParticipantsByRoomNum(roomNum).stream()
+                                  .flatMap(Arrays::stream)
+                                  .collect(Collectors.toList());
     }
 }

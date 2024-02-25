@@ -81,4 +81,8 @@ public class ChattDTO {
 	public void setType(MessageType type) {
 		this.type = type;
 	}
+	
+	public void setRecipient(String recipient) {
+		this.recipient = recipient;
+	}
 }

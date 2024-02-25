@@ -51,7 +51,7 @@ public class WebsocketHandler extends TextWebSocketHandler {
                 break;
             case TALK:
 //                talk(session, chatt, roomNumStr);
-            	saveAndBroadcastMessage(session, chatt);
+            	saveAndBroadcastMessage(session, chatt, roomNumStr);
                 break;
             case QUIT:
                 quitRoom(session, chatt, roomNumStr);
@@ -74,8 +74,10 @@ public class WebsocketHandler extends TextWebSocketHandler {
 	    broadcast(chattDTO, roomNumStr);
 	}
 
-	private void saveAndBroadcastMessage(WebSocketSession session, ChattDTO chattDTO) throws IOException {
+	private void saveAndBroadcastMessage(WebSocketSession session, ChattDTO chattDTO, String roomNumStr) throws IOException {
         // 데이터베이스에 메시지 저장
+		chattDTO.setRoomNum(Integer.parseInt(roomNumStr));
+		
         Chatt savedChatt = chattService.saveMessage(chattDTO);
 
         // 저장된 엔티티를 다시 DTO로 변환하거나 직접 chattDTO 사용
