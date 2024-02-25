@@ -18,7 +18,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.oz.ozHouse.domain.Merchant;
 import com.oz.ozHouse.dto.MerchantDTO;
-import com.oz.ozHouse.dto.MerchantUpdateDTO;
+import com.oz.ozHouse.dto.merchant.MerchantUpdateDTO;
 import com.oz.ozHouse.merchant.config.MerchantLoginBean;
 import com.oz.ozHouse.merchant.exception.NotFoundMerNumException;
 import com.oz.ozHouse.merchant.service.MerMyInformService;

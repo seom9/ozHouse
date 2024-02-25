@@ -22,8 +22,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.oz.ozHouse.domain.Category;
-import com.oz.ozHouse.dto.ApplicationDTO;
 import com.oz.ozHouse.dto.InbrandDTO;
+import com.oz.ozHouse.dto.merchant.ApplicationDTO;
 import com.oz.ozHouse.merchant.exception.NotFoundMerNumException;
 import com.oz.ozHouse.merchant.service.MerInbrandService;
 
