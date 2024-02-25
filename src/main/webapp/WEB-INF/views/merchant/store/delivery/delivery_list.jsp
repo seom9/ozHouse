@@ -127,7 +127,11 @@
 			<div class="flex-row">
 				<div class="flex-cell header-cell custom-label">검색&nbsp;&nbsp;</div>
 				<div class="flex-cell input-cell">
-					<select name="search"> ${options}
+					<select name="search"> 
+						<option value="all" ${options == 'all' ? 'selected' : ''}>전체</option>
+				 		<option value="memberId" ${options == 'memberId' ? 'selected' : ''}>>id</option>
+				 		<option value="prodName" ${options == 'prodName' ? 'selected' : ''}>>상품명</option>
+				 		<option value="oNum" ${options == 'oNum' ? 'selected' : ''}>>주문번호</option>
 					</select> <input type="text" name="searchString" value="${map.searchString}">
 				</div>
 			</div>

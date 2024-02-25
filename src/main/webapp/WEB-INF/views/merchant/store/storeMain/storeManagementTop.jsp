@@ -46,7 +46,7 @@ header img.oz-logo {
 			class="tab-link">관리홈</a> 
 		<a href="${pageContext.request.contextPath}/merchant/${merNum}/store/products"
 			class="tab-link">상품관리</a> 
-		<a href="${pageContext.request.contextPath}/merchant/orders?mode=all"
+		<a href="${pageContext.request.contextPath}/merchant/${merNum}/store/orders?mode=all"
 			class="tab-link">주문배송</a> 
 		<a href="${pageContext.request.contextPath}/merchant/returns"
 			class="tab-link">환불관리</a> 
