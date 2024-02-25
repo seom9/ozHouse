@@ -1,4 +1,4 @@
-package com.oz.ozHouse.client.config;
+//package com.oz.ozHouse.client.config;
 //
 //import java.io.IOException;
 //import java.util.HashSet;
@@ -23,7 +23,7 @@ package com.oz.ozHouse.client.config;
 //@Slf4j
 //@RequiredArgsConstructor
 //@Component
-// public class WebsocketHandler {extends TextWebSocketHandler {
+//public class WebsocketHandler extends TextWebSocketHandler {
 //
 //	private final ObjectMapper objectMapper;
 //	private final ChattRoomService chattRoomService;
