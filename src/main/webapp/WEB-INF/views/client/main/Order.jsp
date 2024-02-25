@@ -215,7 +215,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		 <c:if test="${empty coupons}">	
 		   	사용 가능한 쿠폰이 없어요<br><br>	
 		 </c:if>
-			<br><br>
+		<br><br>
 		<span class="wairano2">포인트</span><br>
 		<input type="text" value="0" class="memberUsePoint" name="member_use_point" maxlength="${member.memberPoint}" id="memberUsePoint">
 		<input type="button" name="use_all_point" class="memberUsePointAllButton" value="전액 사용"><br>
@@ -228,7 +228,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		<br><br>	
 		<span class="wairano2">결제 수단</span><br><br>	
 		# 추후 추가하겠습니다
-		<input type="hidden" name="oDispoint" id="final_discount_point">
+		<input type="hidden" name="oDisPoint" id="final_discount_point">
     	<input type="hidden" name="oDisCoupon" id="final_discount_coupon">	
 		</form></div>
 <aside>
