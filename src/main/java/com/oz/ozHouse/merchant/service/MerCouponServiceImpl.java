@@ -87,12 +87,4 @@ public class MerCouponServiceImpl implements MerCouponService {
 		return listDto;
 	}
 
-//	@Override
-//	public List<MerCouponDTO> searchCouponList(CouponSearchDTO dto) {
-//		System.out.println("쿠폰 검색(coupon)");
-//		List<MerCoupon> list = couponRepository.searchCouponList(dto);
-//		List<MerCouponDTO> listDto = setCouponList(list);
-//		return listDto;
-//	}
-
 }

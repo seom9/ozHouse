@@ -14,7 +14,6 @@ public interface MerCouponService {
 	public List<MerCouponDTO> couponList(int merNum);
 	
 	public List<MerCouponDTO> searchCouponList(Map<String, String> map);
-//	public List<MerCouponDTO> searchCouponList(CouponSearchDTO dto);
 	
 	public int merCouponDelete(int merCouponnum);
 }
