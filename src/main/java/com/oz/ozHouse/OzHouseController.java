@@ -16,6 +16,7 @@ import com.oz.ozHouse.client.service.EmailService;
 import com.oz.ozHouse.client.service.MemberService;
 import com.oz.ozHouse.domain.Blog;
 import com.oz.ozHouse.domain.Product;
+import com.oz.ozHouse.dto.BlogDTO;
 import com.oz.ozHouse.dto.ProductDTO;
 
 import lombok.RequiredArgsConstructor;
@@ -32,10 +33,14 @@ public class OzHouseController {
 	public String index(Model model) {
 
 		List<ProductDTO> cliProductList = ps.cliProductList();
-		List<Blog> blogList = bs.blogList();
+		List<BlogDTO> blogList = bs.blogList();
 		
 		for(ProductDTO dto : cliProductList) {
 			System.out.println("가격2 : " + dto.getProPrice());
+		}
+		
+		for(BlogDTO dto : blogList) {
+			System.out.println("블로그 번호 : " + dto.getBlogNum());
 		}
 		
 		

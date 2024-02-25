@@ -6,16 +6,10 @@
 <html>
 <body>
 	<div class="tab-container">
-		<a href="${pageContext.request.contextPath}/merchants/coupon-input"
+		<a href="${pageContext.request.contextPath}/merchant/${merLoginMember.merNum}/store/coupons"
 			class="tab-link">쿠폰 등록</a> <a
-			href="${pageContext.request.contextPath}/merchants//coupons"
+			href="${pageContext.request.contextPath}/merchant/${merLoginMember.merNum}/store/coupons/list"
 			class="tab-link">쿠폰 현황</a>
 	</div>
-	<!-- 
-<div class="tab-container">
-	<a href="${pageContext.request.contextPath}/merchants/${merchantLoginMember.merNum}/coupon-input" class="tab-link">쿠폰 등록</a> 
-	<a href="${pageContext.request.contextPath}/merchants/${merchantLoginMember.merNum}/coupons">쿠폰 현황</a>
-</div>
- -->
 </body>
 </html>

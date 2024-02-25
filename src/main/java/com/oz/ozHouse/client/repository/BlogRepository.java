@@ -1,4 +1,4 @@
-package com.oz.ozHouse.repository;
+package com.oz.ozHouse.client.repository;
 
 import java.util.List;
 
@@ -9,4 +9,6 @@ import com.oz.ozHouse.domain.Blog;
 public interface BlogRepository extends JpaRepository<Blog, Integer> {
 	// 블로그 목록
 	List<Blog> findAll();
+	
+	Blog findByBlogNum(Integer blogNum);
 }
