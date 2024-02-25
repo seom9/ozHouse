@@ -9,4 +9,4 @@ public interface MerLoginService {
 	public String checkMerchantIdEmail(String mer_email);
 	
 	public int updatePass(String merPw, String merId);
-}
+}  
