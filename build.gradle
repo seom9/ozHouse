@@ -63,7 +63,7 @@ dependencies {
 	// STOMP
 	//implementation 'org.webjars:stomp-websocket'	
 	// SockJS
-	implementation 'org.webjars:sockjs-client'
+	//implementation 'org.webjars:sockjs-client'
 	//redis
 	//implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 
