@@ -13,7 +13,11 @@ public interface OrderRepository extends JpaRepository<OrderTb, Long> {
 	OrderTb findByoNum(long oNum);
 	
     @Transactional
-    @EntityGraph(attributePaths = {"orderItems", "useCoupons"})
-    Optional<OrderTb> findOrderWithItemsAndCouponsByoNum(Long oNum);
+    @EntityGraph(attributePaths = {"useCoupons"})
+    Optional<OrderTb> findOrderWithCouponsByoNum(Long oNum);
+    
+    @Transactional
+    @EntityGraph(attributePaths = {"orderItems"})
+    Optional<OrderTb> findOrderWithItemsByoNum(Long oNum);
 
 }

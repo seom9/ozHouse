@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
+import com.oz.ozHouse.client.repository.MemberRepository;
 import com.oz.ozHouse.client.security.MemberSecurityDTO;
 import com.oz.ozHouse.client.service.CartService;
 import com.oz.ozHouse.client.service.CouponService;
@@ -31,6 +32,7 @@ import com.oz.ozHouse.dto.MemberDTO;
 import com.oz.ozHouse.dto.MerCouponDTO;
 import com.oz.ozHouse.dto.client.member.ClientOrderConfirmDTO;
 import com.oz.ozHouse.dto.client.member.ClientOrderDTO;
+import com.oz.ozHouse.dto.client.member.ClientOrderListDTO;
 import com.oz.ozHouse.dto.client.member.ClientProductDTO;
 import com.oz.ozHouse.dto.client.member.ProQuanDTO;
 
@@ -122,26 +124,33 @@ public class OrderController {
 		// 1-2 memberPoint 업데이트
 		memberService.updatePoint(member.getUsername(), orderInfo.getODisPoint());
 		
-		// 2. DB 호출
-		req.setAttribute("orderinfo", ClientOrderConfirmDTO.fromEntity(order));
+		return "redirect:/order/"+order.getONum()+"/confirm";
+	}
+	
+	@PreAuthorize("hasAnyRole('ROLE_CLIENT')")
+	@GetMapping("/order/{oNum}/confirm")
+	public String confirmOrder(HttpServletRequest req, @PathVariable("oNum") long oNum) {
+		
+		OrderTb order = orderService.getOrder(oNum);
+		
+		req.setAttribute("orderinfo", ClientOrderConfirmDTO.fromEntity(orderService.getOrder(oNum)));		
 		req.setAttribute("confirmOrderProducts", orderService.getProQuanDTO(order.getOrderItems()));
 		req.setAttribute("userCouponList", orderService.getMerCouponDTO(order.getUseCoupons()));
-		req.setAttribute("mode", "first");;
 		
 		return "client/main/order_confirm";
 	}
 	
 	@PreAuthorize("hasAnyRole('ROLE_CLIENT')")
-	@GetMapping("/order/{oNum}/order")
-	public String testOrder(HttpServletRequest req, @PathVariable("oNum") long oNum) {
+	@GetMapping("/mypage/shopping")
+	public String mypageShopping(HttpServletRequest req,
+									@AuthenticationPrincipal MemberSecurityDTO member) {
 		
-		OrderTb order = orderService.getOrder(oNum);
+		List<ClientOrderListDTO> orders = orderService.getMemberWithOrder(member.getUsername());
 		
-		req.setAttribute("orderinfo", ClientOrderConfirmDTO.fromEntity(orderService.getOrder(oNum)));		
-		req.setAttribute("mode", "first");
-		req.setAttribute("confirmOrderProducts", orderService.getProQuanDTO(order.getOrderItems()));
-		req.setAttribute("userCouponList", orderService.getMerCouponDTO(order.getUseCoupons()));
-
-		return "client/main/order_confirm";
+		req.setAttribute("orders", orders);
+		return "client/mypage/mypage_shopping";
 	}
+
+	
+	
 }
