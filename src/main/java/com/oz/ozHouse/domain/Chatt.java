@@ -41,15 +41,15 @@ public class Chatt {
 	
 	private String msg;
 	
-//	private int readStatus;
+	private String readStatus;
 //	
 //	private String file;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "roomNum")
-	private ChattRoom chattRoom;
+//	@ManyToOne(fetch = FetchType.LAZY)
+//	@JoinColumn(name = "roomNum")
+//	private ChattRoom chattRoom;
 	
-//	private int roomNum;
+	private int roomNum;
 	
 	private String inTime;
 	
@@ -63,9 +63,10 @@ public class Chatt {
         this.recipient = dto.getRecipient();
         this.sender = dto.getSender();
         this.msg = dto.getMsg();
-//        this.readStatus = dto.getReadStatus();
+        this.readStatus = dto.getReadStatus();
 //        this.file = dto.getFile();
-//        this.roomNum = dto.getRoomNum();
+        this.roomNum = dto.getRoomNum();
+        
         if (dto.getInTime() != null) {
 	        this.inTime = dto.getInTime().formatted(formatter);
 	    } else {

@@ -25,7 +25,7 @@ public class ChattDTO {
 	private String recipient;
 	private String sender;
 	private String msg;
-//	private int readStatus;
+	private String readStatus;
 //	private String file;
 	private int roomNum;
 	private String inTime;
@@ -55,6 +55,7 @@ public class ChattDTO {
 		this.recipient = req.getParameter("recipient");
 		this.sender = req.getParameter("sender");
 		this.msg = req.getParameter("msg");
+		this.readStatus = req.getParameter("readStatus");
 //		this.readStatus = Integer.parseInt(req.getParameter("readStatus"));
 //		this.readStatus = 2;
 //		this.file = req.getParameter("file");

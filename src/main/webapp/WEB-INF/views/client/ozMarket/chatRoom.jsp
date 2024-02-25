@@ -5,7 +5,7 @@
 <%@ include file="ozMarketTop.jsp"%>
 
 <link rel="stylesheet"
-    href="${pageContext.request.contextPath}/ozMarket/chatting.css" />
+	href="${pageContext.request.contextPath}/ozMarket/chatting.css" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,16 +16,16 @@
 <body>
     <h2>채팅</h2>
     <div class="chat-container">
-        <div class="chat-list">
-            <h3>채팅방 리스트</h3>
-            <c:forEach var="room" items="${roomList}">
-                <tr>
-                    <td><a
-                        href="${pageContext.request.contextPath}/ozMarket/chattRoom/${room.roomNum}">${room.roomNum}</a>
-                    </td>
-                </tr>
-            </c:forEach>
-        </div>
+		<div class="chat-list">
+			<h3>채팅방 리스트</h3>
+			<c:forEach var="room" items="${roomList}">
+				<div class="chat-room-entry">
+					<a
+						href="${pageContext.request.contextPath}/ozMarket/chattRoom/${room.roomNum}">방
+						${room.roomNum}</a>
+				</div>
+			</c:forEach>
+		</div>
     </div>
 </body>
 </html>

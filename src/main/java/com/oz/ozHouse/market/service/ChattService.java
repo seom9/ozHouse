@@ -13,4 +13,6 @@ import com.oz.ozHouse.dto.ChattRoomDTO;
 public interface ChattService {
 	
 	Chatt saveMessage(ChattDTO chattDTO);
+
+	List<Chatt> findMessagesByRoomNum(Integer roomNum);
 }
