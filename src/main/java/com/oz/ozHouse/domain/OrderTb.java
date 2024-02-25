@@ -39,11 +39,9 @@ public class OrderTb {
     private Member member;			//구매자 정보
     
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    @ElementCollection(fetch = FetchType.LAZY)
     private List<ProInform> orderItems = new ArrayList<>();		//구매 상품
     
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    @ElementCollection(fetch = FetchType.LAZY)
     private List<UserCoupon> useCoupons = new ArrayList<>();
     
     private int oDispoint;			//사용 포인트 금액
