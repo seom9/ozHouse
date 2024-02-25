@@ -56,11 +56,14 @@ public class AwsS3Service {
             	// PutObjectRequest를 이용하여 객체 업로드를 요청을 생성하고, 이를 amazonS3.putObject()를 통해 실행.
                 amazonS3.putObject(new PutObjectRequest(bucketName, fileName, inputStream, objectMetadata)
                         .withCannedAcl(CannedAccessControlList.PublicRead));
+                
+                // 업로드한 파일의 URL 생성 및 fileNameList에 추가
+                String fileUrl = GetObjectUrl(bucketName, fileName);
+                System.out.println("리턴하려고 하는 file Url : " + fileUrl);
+                fileNameList.add(fileUrl);
             } catch(IOException e) {
                 throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "이미지 업로드에 실패했습니다.");
             }
-
-            fileNameList.add(fileName);
         });
 
         return fileNameList;

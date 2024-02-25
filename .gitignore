@@ -15,6 +15,7 @@ build/
 .sts4-cache
 /src/main/resources/email.properties
 /src/main/resources/kakao.properties
+/src/main/resources/s3.properties
 bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
