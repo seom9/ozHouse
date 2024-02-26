@@ -38,10 +38,10 @@ public class OrderTb {
     @JoinColumn(name="memberNum")
     private Member member;			//구매자 정보
     
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy="orderTb", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<ProInform> orderItems = new ArrayList<>();		//구매 상품
     
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<UserCoupon> useCoupons = new ArrayList<>();
     
     private int oDispoint;			//사용 포인트 금액

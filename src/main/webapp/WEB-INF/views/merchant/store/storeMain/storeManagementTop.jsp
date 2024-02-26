@@ -47,9 +47,9 @@ header img.oz-logo {
 		<a href="${pageContext.request.contextPath}/merchant/${merNum}/store/products"
 			class="tab-link">상품관리</a> 
 		<a href="${pageContext.request.contextPath}/merchant/${merNum}/store/orders?mode=all"
-			class="tab-link">주문배송</a> 
+			class="tab-link">주문배송</a>
 		<a href="${pageContext.request.contextPath}/merchant/${merNum}/store/returns"
-			class="tab-link">환불관리</a> 
+			class="tab-link">배송환불관리</a> 
 		<a href="${pageContext.request.contextPath}/merchant/proQAs"
 			class="tab-link">문의/후기</a> 
 		<a href="${pageContext.request.contextPath}/merchant/${merNum}/store/coupons"
