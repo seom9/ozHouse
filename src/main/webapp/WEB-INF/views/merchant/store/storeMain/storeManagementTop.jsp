@@ -54,7 +54,7 @@ header img.oz-logo {
 			class="tab-link">문의/후기</a> 
 		<a href="${pageContext.request.contextPath}/merchant/${merNum}/store/coupons"
 			class="tab-link">쿠폰관리</a> 
-		<a href="${pageContext.request.contextPath}/merchant/sales?mode=day"
+		<a href="${pageContext.request.contextPath}/merchant/${merNum}/store/sales?mode=day"
 			class="tab-link">매출관리</a>
 	</div>
 	<!-- 

@@ -6,18 +6,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
 @Setter
+@Getter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class DeliverySearchDTO {
-	private String merNum;
-	private String mode;  //배송상태
+public class SaleConditionDTO {
+
+	private String mode;
 	private String startDate;
 	private String endDate;
-	private String oLike;  //환불여부
-	private String oRefund;
-	private String search;
-	private String searchString;
 }

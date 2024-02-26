@@ -42,6 +42,8 @@ public class MerDeliveryController {
 		int deliveryCount = list.size();
 		req.setAttribute("deliveryCount", deliveryCount);
 		req.setAttribute("options", "all");
+		req.setAttribute("oLike", "all");
+		req.setAttribute("radio", "all");
 		req.setAttribute("deliveryList", list);
 		req.setAttribute("map", map);
 		return "merchant/store/delivery/delivery_list";
@@ -62,6 +64,8 @@ public class MerDeliveryController {
 		int deliveryCount = list.size();
 		req.setAttribute("deliveryCount", deliveryCount);
 		req.setAttribute("options", dto.getSearch());
+		req.setAttribute("oLike", dto.getOLike());
+		req.setAttribute("radio", dto.getORefund());
 		req.setAttribute("deliveryList", list);
 	
 		return "merchant/store/delivery/delivery_list";
