@@ -29,18 +29,17 @@ public class MerDeliveryController {
 	public String returnCancelList(HttpServletRequest req, 
 			@PathVariable("merNum") int merNum,
 			@RequestParam(value="mode", required=false) String mode) {
-		List<DeliveryDTO> list = null;
+		
 		Map<String, String> map = new HashMap<>();
 		map.put("mode", mode);
 		map.put("merNum", String.valueOf(merNum));
-		int deliveryCount;
+		List<DeliveryDTO> list = null;
 		if(mode.equals("all")) {
 			list = deliveryService.deliveryList(merNum);
-			deliveryCount = list.size();
 		}else {
 			list = deliveryService.deliveryLikeList(map);
-			deliveryCount = list.size();
 		}
+		int deliveryCount = list.size();
 		req.setAttribute("deliveryCount", deliveryCount);
 		req.setAttribute("options", "all");
 		req.setAttribute("deliveryList", list);
@@ -52,8 +51,8 @@ public class MerDeliveryController {
 	public String returnCancelListSearch(HttpServletRequest req, 
 			@ModelAttribute DeliverySearchDTO dto) {
 		try {
-			char a = dto.getStartDate().charAt(0);
-			char b = dto.getEndDate().charAt(0);
+			dto.getStartDate().charAt(0);
+			dto.getEndDate().charAt(0);
 		}catch(StringIndexOutOfBoundsException e) {
 			dto.setStartDate(null);
 			dto.setEndDate(null);

@@ -36,6 +36,6 @@ public class ProInform {
     
     private String oRefund;
     
-    private int realPrice;
+    private int realPrice;  //해당 상품의 총 주문금액(수량 * 실판매가격)
     
 }

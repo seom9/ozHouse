@@ -17,14 +17,14 @@ public interface OrderTbRepository extends OrderTbCustomRepository, JpaRepositor
 	@Query(value = "SELECT * FROM ozHouse.OrderTb ot " +
             "JOIN ozHouse.ProInform AS pi2 ON ot.orderNum = pi2.oNum " +
             "JOIN ozHouse.Product AS p ON pi2.proNum = p.proNum " +
-            "WHERE p.merNum = :merNumValue AND ot.oLike = 'ok'", nativeQuery = true)
+            "WHERE p.merNum = :merNumValue", nativeQuery = true)
 	List<OrderTb> findOrdersByMerNum(@Param("merNumValue") int merNumValue);
 	
 	@Transactional
 	@Query(value = "SELECT * FROM ozHouse.OrderTb ot " +
             "JOIN ozHouse.ProInform AS pi2 ON ot.orderNum = pi2.oNum " +
             "JOIN ozHouse.Product AS p ON pi2.proNum = p.proNum " +
-            "WHERE p.merNum = :merNumValue AND ot.oLike = 'ok' AND ot.oDelnow = :oDelnow", nativeQuery = true)
+            "WHERE p.merNum = :merNumValue AND ot.oDelnow = :oDelnow", nativeQuery = true)
 	List<OrderTb> findOrdersLikeByMerNum(@Param("merNumValue") String merNumValue, 
 			@Param("oDelnow") String oDelnow);
 }

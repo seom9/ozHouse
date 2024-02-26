@@ -18,11 +18,14 @@ import lombok.Setter;
 public class DeliveryDTO {
 
 	//private int merNum;			//판매자 번호
-	private Long oNum;			//주문 번호
+	private Long orderNum;			//주문 번호
 	private String memberId;	//회원 아이디
 	private String regDate;		//주문일
-	private List<ProInform> orderItems;		//물품과 수량
-	private int oPrice;			//총 주문액
+	private String oCanceldate;  //취소일
 	private String oComment;	//요청사항
-	private String oDelnow;		//주문상태
+	private String oDelnow;		//배송현황
+	private String oLike;		//주문상태(환불여부)
+	private List<MerProOrderDTO> orderPro; //주문 물품 
+	private String oRefund;		//처리 여부
+	
 }
