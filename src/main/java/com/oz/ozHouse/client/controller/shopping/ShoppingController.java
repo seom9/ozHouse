@@ -30,8 +30,10 @@ public class ShoppingController {
 		ProductDTO productDTO = ps.getProduct(proNum);
 		
 		// 가현 : 스크랩 추가
-		productDTO.setScrap(scrapService.isScrap(member.getUsername(), proNum) 
-				? true : false);
+		if (member != null) {
+			productDTO.setScrap(scrapService.isScrap(member.getUsername(), proNum) 
+					? true : false);
+		}
 
 		model.addAttribute("productDTO", productDTO);
 		

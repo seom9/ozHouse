@@ -49,7 +49,7 @@ public class ClientOrderDTO {
 		return OrderTb.builder()
 				.oNum(oNum)
 				.member(member)
-				.oDispoint(dto.getODisPoint())
+				.oDispoint((dto.getODisPoint() >= 0) ? dto.getODisPoint() : 0)
 				.oPrice(dto.getOPrice())
 				.oName(dto.getOName())
 				.oHp(phoneNumber)
