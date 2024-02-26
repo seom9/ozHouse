@@ -42,7 +42,32 @@ public class MarketProServiceImpl implements MarketProService {
 	
 	// 상품 검색
 	@Override
-	public List<OzMarketPro> findProduct(String proTitle) {
+	public List<OzMarketProDTO> findProduct(String proTitle) {
 		return proRepository.findProduct(proTitle);
+	}
+	
+	//내 정보 _ 판매중
+	@Override
+	public List<OzMarketProDTO> findSellingProductsByNickname(String nickname) {
+		return proRepository.findSellingProductsByNickname(nickname);
+	}
+
+	//내 정보 _ 판매내역
+	@Override
+	public List<OzMarketProDTO> findSoldProductsByNickname(String nickname) {
+		return proRepository.findSoldProductsByNickname(nickname);
+	}
+
+	//내 정보 _ 구매내역
+	@Override
+	public List<OzMarketProDTO> findBoughtProductsByNickname(String nickname) {
+		return proRepository.findBoughtProductsByNickname(nickname);
+	}
+	
+	// 상품 삭제
+	@Override
+	@Transactional
+	public void deleteProduct(Integer proNum) {
+		 proRepository.deleteByProNum(proNum);
 	}
 }

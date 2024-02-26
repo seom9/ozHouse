@@ -11,6 +11,9 @@ import com.oz.ozHouse.dto.ChattRoomDTO;
 public interface ChattRoomService {
 	
 	ChattRoom createChatRoom(ChattRoomDTO chattRoomDTO);
-    List<ChattRoom> findAllRooms();
+    List<ChattRoom> findBymyId(String myId);
     ChattRoom findRoomByNum(Integer roomNum);
+    ChattRoom findOrCreateRoom(String buyerNickname, String sellerNickname, Integer proNum);
+    List<Object> findParticipantsByRoomNum(Integer roomNum);
+
 }
