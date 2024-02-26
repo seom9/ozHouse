@@ -11,13 +11,10 @@ import lombok.Setter;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class DeliverySearchDTO {
-	private String merNum;
-	private String mode;  //배송상태
-	private String startDate;
-	private String endDate;
-	private String oLike;
+public class MerProOrderDTO {
+	private String proName;
+	private int proNum;
+	private int quantity;
+	private int realPrice;
 	private String oRefund;
-	private String search;
-	private String searchString;
 }
