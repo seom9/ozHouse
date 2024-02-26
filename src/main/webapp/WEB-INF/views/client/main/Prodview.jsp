@@ -39,10 +39,17 @@
                   <div class="production-selling-header__title__name-wrap">
                      <span class="production-selling-header__title__name">[${productDTO.proModifier}] ${productDTO.proName}</span>
                      <div class="production-selling-header__action">
-                        <button class="production-selling-header__action__button production-selling-header__action__button-scrap" onclick="${scrapResult eq 'Y' ? 'unscrap()' : 'scrap()'}">
-                           <svg class="icon--stroke" aria-label="스크랩" width="24" height="24" fill="#50E5B4<%-- ${scrapResult eq 'N' ? 'rgba(0, 0, 0, 0)' : '#50E5B4'} --%>" stroke="currentColor" stroke-width="0.5" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"><path d="M11.53 18.54l-8.06 4.31A1 1 0 0 1 2 21.97V3.5A1.5 1.5 0 0 1 3.5 2h17A1.5 1.5 0 0 1 22 3.5v18.47a1 1 0 0 1-1.47.88l-8.06-4.31a1 1 0 0 0-.94 0z"></path></svg>
-                           <span class="count" id="scrapCount">스크랩수</span>
-                        </button>
+		<!-- 스크랩 버튼 : 수정 -->
+		<sec:authorize access="hasAnyRole('ROLE_CLIENT')">
+			<button class="production-item-image__scrap-badge" onclick="javascript:scrap('${prc.username}', '${productDTO.proNum}', ${productDTO.scrap ? 0 : 1})">
+	     		<svg class="icon--stroke" aria-label="스크랩" width="24" height="24" fill="${productDTO.scrap ? '#50E5B4' : 'rgba(0, 0, 0, 0)'}" stroke="currentColor" stroke-width="0.5" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"><path d="M11.53 18.54l-8.06 4.31A1 1 0 0 1 2 21.97V3.5A1.5 1.5 0 0 1 3.5 2h17A1.5 1.5 0 0 1 22 3.5v18.47a1 1 0 0 1-1.47.88l-8.06-4.31a1 1 0 0 0-.94 0z"></path></svg>
+			</button>
+		</sec:authorize>
+		<sec:authorize access="!hasAnyRole('ROLE_CLIENT')">
+	      	<button class="production-item-image__scrap-badge" onclick="javascript:cantScrap()">
+	     		<svg class="icon--stroke" aria-label="스크랩" width="24" height="24" fill="rgba(0, 0, 0, 0)" stroke="currentColor" stroke-width="0.5" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"><path d="M11.53 18.54l-8.06 4.31A1 1 0 0 1 2 21.97V3.5A1.5 1.5 0 0 1 3.5 2h17A1.5 1.5 0 0 1 22 3.5v18.47a1 1 0 0 1-1.47.88l-8.06-4.31a1 1 0 0 0-.94 0z"></path></svg>
+			</button>	
+		</sec:authorize>
                      </div>
                   </div>
                </h1>
@@ -131,8 +138,8 @@
                   </span>
                </p>
                <div class="production-selling-option-form__footer">
-                  <button class="button button--color-blue-inverted button--size-55 button--shape-4" onclick="goCart()" type="button">장바구니</button>
-                  <button class="button button--color-blue button--size-55 button--shape-4" onclick="goOrder()" type="button">바로구매</button>
+                  <button class="button button--color-blue-inverted button--size-55 button--shape-4" onclick="javascript:goCart()" type="button">장바구니</button>
+                  <button class="button button--color-blue button--size-55 button--shape-4" onclick="javascript:goOrder()" type="button">바로구매</button>
                </div>
             </div>
          </div>
@@ -415,15 +422,55 @@
    </form>
 </div>
 
+<input type="hidden" value="${productDTO.proNum}" id="num"/>
+
+<!-- 스크랩 스크립트 -->
+<script type="text/javascript">
+	function scrap(memberId, productNum, is) {
+		// ** json data 전송 시 jstl 태그 자바스크립트에 안 먹음 ** // 		
+	    fetch('/scrap/' + memberId + '/' + productNum + '/' + is, {
+	        method: 'POST', 
+	        headers: {
+	            'Content-Type': 'application/json'
+	        },
+	        body: JSON.stringify({
+	        	memberId : memberId,
+	        	productNum : productNum
+	        }),
+	    })
+	    .then(response => {
+	        if (!response.ok) {
+	            throw new Error('Network response was not ok');
+	        }
+	        return response.text(); 
+	    })
+	    .then(data => {
+	        alert(data)
+	        location.reload()
+	    })
+	    .catch(error => {
+	    	alert("서버 통신에 실패했습니다 : 관리자에게 문의해 주세요")
+	    });
+	}
+</script>
+
 
 <!-- 장바구니 스크립트 -->
 <script type="text/javascript">
+
 function goCart() {
-	   var qtyInput = document.querySelector("button[id='quantity']");
-	   var value = qtyInput.textContent;
-	   window.location.href = "/cart/" + ${param.num} + "/" + value;
-	}
+	var num = document.getElementById("num").value;
+	var value = document.getElementById("quantity").textContent.trim();
+	window.location.href = "/cart/" + num + '/' + value;
 }
+
+
+function goOrder() {
+	var num = document.getElementById("num").value;
+    var value = document.getElementById("quantity").textContent.trim();
+    window.location.href = "/order/one/" + num + '/' + value;
+}
+
 
 function showChoose() {
 	var result = confirm("진행하시겠습니까?"); // '예'를 선택하면 true, '아니오'를 선택하면 false 반환

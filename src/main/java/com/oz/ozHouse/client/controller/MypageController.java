@@ -1,6 +1,7 @@
 package com.oz.ozHouse.client.controller;
 
 import java.net.BindException;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -18,11 +19,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.oz.ozHouse.client.security.MemberSecurityDTO;
 import com.oz.ozHouse.client.service.MemberService;
 import com.oz.ozHouse.client.service.MypageService;
+import com.oz.ozHouse.client.service.OrderService;
 import com.oz.ozHouse.domain.Member;
 import com.oz.ozHouse.domain.common.Address;
 import com.oz.ozHouse.dto.MemberDTO;
+import com.oz.ozHouse.dto.client.member.ClientOrderListDTO;
 import com.oz.ozHouse.dto.client.member.MemberPasswdUpdateDTO;
 import com.oz.ozHouse.dto.client.member.MemberUpdateDTO;
+import com.oz.ozHouse.dto.client.member.MypagePointDTO;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -35,6 +39,7 @@ import lombok.RequiredArgsConstructor;
 public class MypageController {
 	
 	private final MemberService memberService;
+	private final OrderService orderService;
 	
     @GetMapping("/hi")
     public String index(@AuthenticationPrincipal MemberSecurityDTO member) {
@@ -90,5 +95,17 @@ public class MypageController {
 
         return "client/mypage/mypage_updatePasswd";
     }
-
+	
+	@GetMapping("/point")
+    public String mypageMyPoint(HttpServletRequest req, 
+    								@AuthenticationPrincipal MemberSecurityDTO member) {
+    	
+		List<MypagePointDTO> orders = orderService.getMypointDTO(member.getUsername());
+		
+		req.setAttribute("member_p", orders);
+		req.setAttribute("memberPoint", memberService.memberPoint(member.getUsername()));
+		
+		return "client/mypage/mypage_point";
+    }
+		
 }

@@ -29,6 +29,10 @@ public class MerCouponDTO {
         		.merCouponnum(merCoupon.getMerCouponnum())
         		.merNum(merCoupon.getMerNum().getMerNum())
         		.merCouponname(merCoupon.getMerCouponname())
+        		.merIsok(merCoupon.getMerIsok())
+        		.merCoupondiscount(merCoupon.getMerCoupondiscount())
+        		.merCouponusedate(merCoupon.getMerCouponusedate())
+        		.merCouponenddate(merCoupon.getMerCouponenddate())
                 .build();
     }
 
