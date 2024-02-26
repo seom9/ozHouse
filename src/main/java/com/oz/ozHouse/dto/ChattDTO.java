@@ -1,7 +1,9 @@
 package com.oz.ozHouse.dto;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+import com.oz.ozHouse.domain.Chatt;
 
 //import com.oz.ozHouse.domain.Chatt;
 
@@ -26,9 +28,9 @@ public class ChattDTO {
 	private String sender;
 	private String msg;
 //	private int readStatus;
-//	private String file;
 	private int roomNum;
 	private String inTime;
+	private boolean readStatus;
 	
 //	public ChattDTO toDTO(Chatt chatt) {
 //		
@@ -55,17 +57,30 @@ public class ChattDTO {
 		this.recipient = req.getParameter("recipient");
 		this.sender = req.getParameter("sender");
 		this.msg = req.getParameter("msg");
+//		this.readStatus = req.getParameter("readStatus");
 //		this.readStatus = Integer.parseInt(req.getParameter("readStatus"));
 //		this.readStatus = 2;
-//		this.file = req.getParameter("file");
 		this.roomNum = Integer.parseInt(req.getParameter("roomNum"));
-		this.inTime = LocalDate.now().format(formatter);
+		this.inTime = LocalDateTime.now().format(formatter);
 	}
 	
-//	public void setFile(String file) {
-//		this.file = file;
-//	}
+	public ChattDTO convertToDTO(Chatt chatt) {
+	    ChattDTO dto = new ChattDTO();
+//	    dto.setMsgNum(chatt.getMsgNum());
+	    dto.setRecipient(chatt.getRecipient());
+	    dto.setSender(chatt.getSender());
+	    dto.setMsg(chatt.getMsg());
+	    dto.setRoomNum(chatt.getRoomNum());
+	    dto.setReadStatus(chatt.isReadStatus()); // Assuming you have a readStatus field
+	    // Add other fields as necessary
+	    return dto;
+	}
 	
+	
+	public void setReadStatus(boolean readStatus) {
+		this.readStatus = readStatus;		
+	}
+
 	public void setRoomNum(int roomNum) {
 		this.roomNum = roomNum;
 	}
@@ -73,4 +88,20 @@ public class ChattDTO {
 	public void setMsg(String msg) {
 		this.msg = msg;
 	}
+	
+	public void setSender(String sender) {
+		this.sender = sender;
+	}
+	
+	public void setType(MessageType type) {
+		this.type = type;
+	}
+	
+	public void setRecipient(String recipient) {
+		this.recipient = recipient;
+	}
+	
+//	public void setReadStatus(int readStatus) {
+//		this.readStatus = readStatus;
+//	}
 }

@@ -50,20 +50,68 @@ public class MarketProductRepositoryImpl implements MarketProductRepository {
 	// 상품 9개 모아보기
 	@Override
 	public List<OzMarketProDTO> listProduct(Map<String, Object> params) {
-		StringBuilder jpql = new StringBuilder("SELECT oz FROM OzMarketPro oz ORDER BY oz.proNum DESC");
+	    // JPQL 쿼리 구성, 최신 상품부터 정렬
+	    StringBuilder jpql = new StringBuilder("SELECT oz FROM OzMarketPro oz ORDER BY oz.proNum DESC");
+	    TypedQuery<OzMarketPro> query = em.createQuery(jpql.toString(), OzMarketPro.class);
 
-		TypedQuery<OzMarketPro> query = em.createQuery(jpql.toString(), OzMarketPro.class);
+	    // 'params'에 'limit' 파라미터가 있으면 적용하여 결과 수 제한
+	    if (params.containsKey("limit")) {
+	        int limit = (int) params.get("limit");
+	        query.setMaxResults(limit);
+	    }
 
-
-		List<OzMarketPro> productList = query.getResultList();
-		return productList.stream().map(OzMarketProDTO::toDTO).collect(Collectors.toList());
+	    List<OzMarketPro> productList = query.getResultList();
+	    // DTO 리스트로 변환하여 반환
+	    return productList.stream().map(OzMarketProDTO::toDTO).collect(Collectors.toList());
 	}
 	
 	// 상품 검색
 	@Override
-	public List<OzMarketPro> findProduct(String proTitle) {
-		return em.createQuery("SELECT oz from OzMarketPro WHERE oz.proTitle Like :proTitle", OzMarketPro.class)
-				.setParameter("proTitle", "%" + proTitle + "%")
-				.getResultList();
+	public List<OzMarketProDTO> findProduct(String search) {
+	    List<OzMarketPro> resultList = em.createQuery("SELECT oz from OzMarketPro oz WHERE oz.proTitle LIKE :proTitle", OzMarketPro.class)
+	            .setParameter("proTitle", "%" + search + "%")
+	            .getResultList();
+
+	    return resultList.stream().map(OzMarketProDTO::toDTO).collect(Collectors.toList());
 	}
+	
+	// 내 정보 _ 판매중
+	@Override
+	public List<OzMarketProDTO> findSellingProductsByNickname(String nickname) {
+	    List<OzMarketPro> resultList = em.createQuery("SELECT oz FROM OzMarketPro oz WHERE oz.memberNickname = :nickname AND oz.proApprovalStatus = '판매중'", OzMarketPro.class)
+	            .setParameter("nickname", nickname)
+	            .getResultList();
+
+	    return resultList.stream().map(OzMarketProDTO::toDTO).collect(Collectors.toList());
+	}
+
+	// 내 정보 _ 판매내역
+	@Override
+	public List<OzMarketProDTO> findSoldProductsByNickname(String nickname) {
+	    List<OzMarketPro> resultList = em.createQuery("SELECT oz FROM OzMarketPro oz WHERE oz.memberNickname = :nickname AND oz.proApprovalStatus = '판매완료'", OzMarketPro.class)
+	            .setParameter("nickname", nickname)
+	            .getResultList();
+
+	    return resultList.stream().map(OzMarketProDTO::toDTO).collect(Collectors.toList());
+	}
+
+	// 내 정보 _ 구매내역
+	@Override
+	public List<OzMarketProDTO> findBoughtProductsByNickname(String nickname) {
+	    List<OzMarketPro> resultList = em.createQuery("SELECT oz FROM OzMarketPro oz WHERE oz.buyStatus = :nickname", OzMarketPro.class)
+	            .setParameter("nickname", nickname)
+	            .getResultList();
+
+	    return resultList.stream().map(OzMarketProDTO::toDTO).collect(Collectors.toList());
+	}
+
+	// 상품 삭제
+	@Override
+	public void deleteByProNum(Integer proNum) {
+	    OzMarketPro product = em.find(OzMarketPro.class, proNum);
+	    if (product != null) {
+	        em.remove(product);
+	    }
+	}
+		
 }
