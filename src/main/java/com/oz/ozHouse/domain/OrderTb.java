@@ -8,6 +8,7 @@ import com.oz.ozHouse.domain.common.Address;
 import com.oz.ozHouse.domain.common.PhoneNumber;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
@@ -29,9 +30,10 @@ import lombok.NoArgsConstructor;
 public class OrderTb {
 	
 	@Id 
+	@Column(name="orderNum")
     private Long oNum;				//주문 코드 :
 	
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="memberNum")
     private Member member;			//구매자 정보
     
