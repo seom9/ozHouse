@@ -14,7 +14,6 @@ import com.oz.ozHouse.dto.merchant.DeliverySearchDTO;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Repository

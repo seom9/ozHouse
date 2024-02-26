@@ -118,14 +118,12 @@
 		<form name="f"
 			action="${pageContext.request.contextPath}/merchants/${merchantLoginMember.merNum}/return-and-exchange/search"
 			class="flex-container" method="post">
-			<input type="hidden" name="order_orderlike"
-				value="${map.order_orderlike}"> <input type="hidden"
-				name="merNum" value="${merchantLoginMember.merNum}">
+			<input type="hidden" name="oLike"
+				value="${map.oLike}"> 
+			<input type="hidden"
+				name="merNum" value="${merLoginMember.merNum}">
 			<div class="flex-row">
-				<c:if test="${map.order_orderlike eq 'exchange'}">
-					<div class="flex-cell header-cell custom-label">교환 신청일</div>
-				</c:if>
-				<c:if test="${map.order_orderlike eq 'return'}">
+				<c:if test="${map.oLike eq 'return'}">
 					<div class="flex-cell header-cell custom-label">환불 신청일</div>
 				</c:if>
 				<div class="flex-cell input-cell">
@@ -136,12 +134,20 @@
 			</div>
 			<div class="flex-row">
 				<div class="flex-cell header-cell custom-label">처리여부&nbsp;&nbsp;</div>
-				<div class="flex-cell input-cell">${radioOptions}</div>
+				<div class="flex-cell input-cell">
+					<input type="radio" name="oRefund" value="all" ${radio == 'all' ? 'checked' : ''}>전체
+					<input type="radio" name="oRefund" value="t" ${radio == 't' ? 'checked' : ''}>완료 
+					<input type="radio" name="oRefund" value="f" ${radio == 'f' ? 'checked' : ''}>미완료"
+				</div>
 			</div>
 			<div class="flex-row">
 				<div class="flex-cell header-cell custom-label">검색&nbsp;&nbsp;&nbsp;&nbsp;</div>
 				<div class="flex-cell input-cell">
-					<select name="search"> ${searchOptions}
+					<select name="search"> 
+						<option value="all" ${search == 'all'?'selected':''}>전체</option>
+				 		<option value="memberId" ${search == 'memberId'?'selected':''}>id</option>
+				 		<option value="proName" ${search == 'proName'?'selected':''}>상품명</option>
+				 		<option value="oNum" ${search == 'oNum'?'selected':''}>주문번호</option>
 					</select> <input type="text" name="searchString" value="${map.searchString}">
 				</div>
 			</div>
