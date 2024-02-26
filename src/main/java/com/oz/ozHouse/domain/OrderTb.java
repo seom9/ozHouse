@@ -3,8 +3,8 @@ package com.oz.ozHouse.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.amazonaws.services.ec2.model.Address;
 import com.oz.ozHouse.domain.OrderTb;
+import com.oz.ozHouse.domain.common.Address;
 import com.oz.ozHouse.domain.common.PhoneNumber;
 
 import jakarta.persistence.CascadeType;
@@ -12,11 +12,8 @@ import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
@@ -38,10 +35,11 @@ public class OrderTb {
     @JoinColumn(name="memberNum")
     private Member member;			//구매자 정보
     
-    @OneToMany(mappedBy="orderTb", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+
+    @OneToMany(mappedBy = "orderTb", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<ProInform> orderItems = new ArrayList<>();		//구매 상품
     
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "orderTb", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<UserCoupon> useCoupons = new ArrayList<>();
     
     private int oDispoint;			//사용 포인트 금액
@@ -62,8 +60,19 @@ public class OrderTb {
 	
     private String oLike;			// 주문 상태
    
-    private String oCanceldate;	// 주문 취소일
+    private String oCanceldate;		// 주문 취소일
     
-    private String regDate;
+    private String regDate;			// 주문일
+    
+    public void setList(List<ProInform> orderItems, List<UserCoupon> useCoupons) {
+        this.orderItems = new ArrayList<>();
+        this.useCoupons = new ArrayList<>();
+        if (orderItems != null) {
+            this.orderItems.addAll(orderItems);
+        }
+        if (useCoupons != null) {
+            this.useCoupons.addAll(useCoupons);
+        }
+    }
     
 }

@@ -15,18 +15,18 @@
 	<div class="chat-container">
 		<div class="chat-list">
 			<div class="user-avatar">
-			<c:choose>
-				<c:when test="${empty member.memberImage}">
-					<img
-						src="https://image.ohou.se/i/bucketplace-v2-development/uploads/default_images/avatar.png?gif=1&w=144&h=144&c=c&webp=1"
-						alt="User Avatar">
-				</c:when>
-				<c:otherwise>
-					<img src="${member.memberImage}" alt="User Avatar">
-				</c:otherwise>
-			</c:choose>
-		</div>
-		<div class="memberNickname">${nickname}</div>
+				<c:choose>
+					<c:when test="${empty member.memberImage}">
+						<img
+							src="https://image.ohou.se/i/bucketplace-v2-development/uploads/default_images/avatar.png?gif=1&w=144&h=144&c=c&webp=1"
+							alt="User Avatar">
+					</c:when>
+					<c:otherwise>
+						<img src="${member.memberImage}" alt="User Avatar">
+					</c:otherwise>
+				</c:choose>
+			</div>
+			<div class="memberNickname">${nickname}</div>
 			<c:forEach var="room" items="${roomList}">
 				<div class="chat-room-entry">
 					<a
@@ -89,6 +89,7 @@
 		// 채팅방에 들어가는 로직을 처리하는 함수
 		function enterRoom() {
 			loadPreviousMessages(roomNum); // 이전 메시지를 로드하는 함수 호출
+			markAllMessagesAsRead(roomNum);
 			console.log("방 입장: " + roomNum);
 			// 방에 입장하는 로직, 예: 서버에 메시지 보내기
 			var enterMsg = {
@@ -97,10 +98,34 @@
 				sender : sender,
 				msg : ""
 			};
+			
+		    markAllMessagesAsRead(roomNum);
+
 			if (socket.readyState === WebSocket.OPEN) {
 				socket.send(JSON.stringify(enterMsg)); // 서버에 입장 메시지를 보냄
 			}
 			// 여기에서 이전 메시지를 로드하거나 UI를 준비할 수 있습니다.
+		}
+		
+		// 모든 메시지를 '읽음'으로 표시하는 함수
+		function markAllMessagesAsRead(roomNum) {
+		    // 예시: 서버에 AJAX 요청을 보내 현재 채팅방의 모든 메시지를 '읽음'으로 처리합니다.
+		    // 실제 구현은 서버의 API 엔드포인트와 요청 방식에 따라 달라집니다.
+		    fetch(`/ozMarket/markAllMessagesAsRead/${roomNum}`, {
+		        method: 'POST',
+		        headers: {
+		            'Content-Type': 'application/json',
+		        }
+		        // 필요한 경우 인증 토큰 등 추가 헤더를 여기에 포함
+		    })
+		    .then(response => {
+		        if (!response.ok) {
+		            throw new Error('Failed to mark all messages as read');
+		        }
+		    })
+		    .catch(error => {
+		        console.error('Error marking messages as read:', error);
+		    });
 		}
 
 		var httpUrl = "http://localhost:8080/ozMarket/chattRoom/messages/"
@@ -161,51 +186,65 @@
 			var data = JSON.parse(message.data); // 서버로부터 받은 메시지(JSON 문자열)를 객체로 변환
 
 			// 메시지 유형에 따라 다른 동작을 수행
-			if (data.type === "HEARTBEAT") {
-				console.log('하트비트 메시지: ', data.message);
+			if (data.type === "MESSAGE_STATUS_UPDATE") {
+				updateMessageStatusOnUI(data);
 			} else if (data.type === "TALK") {
 				// 채팅 메시지를 화면에 표시하는 로직
 				displayChatMessage(data);
 			}
 			// 기타 메시지 유형에 대한 처리를 여기에 추가
 		}
+		
+		// UI에서 메시지 상태를 업데이트하는 함수
+		function updateMessageStatusOnUI(data) {
+    // data에는 업데이트할 메시지의 ID와 상태가 포함되어 있다고 가정합니다.
+    // 예: data = { msgId: 1, readStatus: true }
+    
+    // 메시지의 HTML 요소를 찾습니다.
+    var messageElement = document.getElementById(`message-${data.msgId}`);
+    
+    if (messageElement && data.readStatus) {
+        // 메시지의 상태가 '읽음'인 경우, 'read' 클래스를 추가합니다.
+        messageElement.classList.add('read');
+    } else if (messageElement) {
+        // 메시지의 상태가 '읽지 않음'인 경우, 'read' 클래스를 제거합니다.
+        messageElement.classList.remove('read');
+    }
+}
 
 		// 채팅 메시지를 화면에 표시하는 함수
 		function displayChatMessage(data) {
-		    var msgArea = document.querySelector('.msgArea');
-		    var msgDiv = document.createElement('div');
-		    var msgContentDiv = document.createElement('div'); // 메시지 내용을 담을 div 생성
-		    var msgTimeSpan = document.createElement('span');
+			var msgArea = document.querySelector('.msgArea');
+			var msgDiv = document.createElement('div');
+			var msgContentDiv = document.createElement('div'); // 메시지 내용을 담을 div 생성
+			var msgTimeSpan = document.createElement('span');
+			var readStatusSpan = document.createElement('span'); // 읽음 상태를 표시할 span 생성
 
-		    msgDiv.classList.add('message');
-		    msgContentDiv.classList.add('msg-content');
-		    msgTimeSpan.classList.add('msg-time');
+			msgDiv.classList.add('message');
+			msgContentDiv.classList.add('msg-content');
+			msgTimeSpan.classList.add('msg-time');
+			readStatusSpan.classList.add('read-status');
 
-		    if (data.sender === sender) {
-		        msgDiv.classList.add('sent');
-		    } else {
-		        msgDiv.classList.add('received');
-		    }
+			// 메시지 내용 설정
+			msgContentDiv.textContent = data.msg;
+			// 메시지 시간 설정
+			msgTimeSpan.textContent = formatTime(data.inTime);
+		    readStatusSpan.textContent = data.readStatus ? '읽음' : '읽지 않음';
 
-		    // 메시지 내용 설정
-		    msgContentDiv.textContent = data.msg;
-		    // 메시지 시간 설정 - 서버에서 'inTime' 필드로 시간을 보내주어야 합니다.
-		    msgTimeSpan.textContent = formatTime(data.inTime);
+			msgContentDiv.appendChild(msgTimeSpan);
+			msgDiv.appendChild(msgContentDiv);
+			msgArea.appendChild(msgDiv);
+			msgDiv.appendChild(readStatusSpan);
 
-		    msgContentDiv.appendChild(msgTimeSpan); // 메시지 내용 div에 시간 span 추가
-		    msgDiv.appendChild(msgContentDiv); // 메시지 div에 메시지 내용 div 추가
-		    msgArea.appendChild(msgDiv);
-
-		    // 스크롤을 맨 아래로 이동
-		    msgArea.scrollTop = msgArea.scrollHeight;
+			msgArea.scrollTop = msgArea.scrollHeight; // 스크롤을 맨 아래로 이동
 		}
 
 		// 시간을 'HH:MM' 형식으로 포맷하는 함수
 		function formatTime(timeString) {
-		    var time = new Date(timeString);
-		    var hours = time.getHours().toString().padStart(2, '0');
-		    var minutes = time.getMinutes().toString().padStart(2, '0');
-		    return hours + ':' + minutes; // 'HH:MM' 형식
+			var time = new Date(timeString);
+			var hours = time.getHours().toString().padStart(2, '0');
+			var minutes = time.getMinutes().toString().padStart(2, '0');
+			return hours + ':' + minutes; // 'HH:MM' 형식
 		}
 
 		// 방 나가기 버튼을 클릭했을 때 호출될 함수

@@ -39,4 +39,8 @@ public class UserCoupon extends BaseEntity {
 	@JoinColumn(name = "oNum")
 	private OrderTb orderTb;
 	
+	
+	public void setOrder(OrderTb orderTb) {
+	    this.orderTb = orderTb;
+	}
 }

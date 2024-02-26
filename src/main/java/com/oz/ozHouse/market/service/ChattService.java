@@ -14,5 +14,10 @@ public interface ChattService {
 	
 	Chatt saveMessage(ChattDTO chattDTO);
 
+	List<Chatt> markMessagesAsRead(String roomNumStr);
+	
+	Chatt save(Chatt chatt);
+
 	List<Chatt> findMessagesByRoomNum(Integer roomNum);
+	
 }

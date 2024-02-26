@@ -3,6 +3,8 @@ package com.oz.ozHouse.dto;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import com.oz.ozHouse.domain.Chatt;
+
 //import com.oz.ozHouse.domain.Chatt;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -28,6 +30,7 @@ public class ChattDTO {
 //	private int readStatus;
 	private int roomNum;
 	private String inTime;
+	private boolean readStatus;
 	
 //	public ChattDTO toDTO(Chatt chatt) {
 //		
@@ -61,7 +64,23 @@ public class ChattDTO {
 		this.inTime = LocalDateTime.now().format(formatter);
 	}
 	
+	public ChattDTO convertToDTO(Chatt chatt) {
+	    ChattDTO dto = new ChattDTO();
+//	    dto.setMsgNum(chatt.getMsgNum());
+	    dto.setRecipient(chatt.getRecipient());
+	    dto.setSender(chatt.getSender());
+	    dto.setMsg(chatt.getMsg());
+	    dto.setRoomNum(chatt.getRoomNum());
+	    dto.setReadStatus(chatt.isReadStatus()); // Assuming you have a readStatus field
+	    // Add other fields as necessary
+	    return dto;
+	}
 	
+	
+	public void setReadStatus(boolean readStatus) {
+		this.readStatus = readStatus;		
+	}
+
 	public void setRoomNum(int roomNum) {
 		this.roomNum = roomNum;
 	}
