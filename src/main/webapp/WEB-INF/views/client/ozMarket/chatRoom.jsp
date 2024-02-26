@@ -6,6 +6,27 @@
 
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/ozMarket/chatting.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+    // Iterate through each chat-room-entry to fetch and display the latest message
+    $('.chat-room-entry').each(function() {
+        var roomNum = $(this).find('a').attr('href').split('/').pop(); // Extract roomNum from the link
+        var latestMessageDiv = $(this).find('.latest-message'); // Find the div where the latest message should be displayed
+
+        $.ajax({
+            url: '${pageContext.request.contextPath}/ozMarket/chattRoom/' + roomNum + '/latestMessage',
+            type: 'GET',
+            success: function(response) {
+                latestMessageDiv.text(response); // Update the div with the latest message
+            },
+            error: function() {
+                latestMessageDiv.text('메시지를 불러올 수 없습니다.'); // Handle errors
+            }
+        });
+    });
+});
+</script>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,12 +51,15 @@
 		</div>
 		<div class="memberNickname">${nickname}</div>
 			<c:forEach var="room" items="${roomList}">
-				<div class="chat-room-entry">
-					<a
-						href="${pageContext.request.contextPath}/ozMarket/chattRoom/${room.roomNum}">방
-						${room.roomNum}</a>
-				</div>
-			</c:forEach>
+    <div class="chat-room-entry">
+        <a href="${pageContext.request.contextPath}/ozMarket/chattRoom/${room.roomNum}">
+            방 ${room.roomNum}
+        </a>
+        <div class="latest-message" id="latestMessage-${room.roomNum}">
+            ${lastMessagesMap[room.roomNum]}
+        </div>
+    </div>
+</c:forEach>
 		</div>
     </div>
 </body>

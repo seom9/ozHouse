@@ -22,6 +22,8 @@ public class ChattRoomDTO {
 	private String otherId;
 	private String createTime;
 	private int proNum;
+	private String myIdCheck; 
+    private String otherIdCheck;
 
 	public static ChattRoomDTO toDTO(ChattRoom dto) {
 		
@@ -32,6 +34,8 @@ public class ChattRoomDTO {
 		.createTime(dto.getCreateTime())
 //		.proNum(dto.getOzPro().getProNum())
 		.proNum(dto.getProNum())
+		.myIdCheck(dto.getMyIdCheck())
+		.otherIdCheck(dto.getOtherIdCheck())
 		.build();
 		
 	}
@@ -43,6 +47,8 @@ public class ChattRoomDTO {
 		this.otherId = req.getParameter("otherId");
 		this.createTime = LocalDate.now().format(formatter);
 		this.proNum = Integer.parseInt(req.getParameter("proNum"));
+		this.myIdCheck = req.getParameter("myIdCheck");
+		this.otherIdCheck = req.getParameter("otherIdCheck");
 	}
 	
 	public void setMyId(String myId) {
