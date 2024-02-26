@@ -36,5 +36,6 @@ public class ProInform {
     
     private String oRefund;
     
+    private int realPrice;
     
 }

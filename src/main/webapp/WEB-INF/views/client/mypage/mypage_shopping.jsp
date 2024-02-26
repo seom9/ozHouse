@@ -14,13 +14,13 @@
 	<div class="css-1jyrqzb">
 		<div class="order-list__info__wrap">
 		<div class="profile-box1">
-		<a class="order-list__info__wrap__content" href="mypage_coupon.do">
+		<a class="order-list__info__wrap__content" href="/mypage/${prc.username}/coupon">
 			<svg class="order-list__info__wrap__content__icon--coupon" width="51" height="29" viewBox="0 0 51 29" preserveAspectRatio="xMidYMid meet"><g fill="none" fill-rule="evenodd"><path d="M46.493 1a3.5 3.5 0 012.48 1.025A3.482 3.482 0 0150 4.497h0v20.006A3.501 3.501 0 0146.493 28h0H4.507a3.5 3.5 0 01-2.48-1.025A3.482 3.482 0 011 24.503h0V4.497A3.501 3.501 0 014.507 1h0z" stroke="#757575" fill="#FFF" data-darkreader-inline-fill="" style="--darkreader-inline-fill: #181a1b; --darkreader-inline-stroke: #9e9689;" data-darkreader-inline-stroke=""></path><path fill="#757575" d="M7.167 1.06h1.111v26.32H7.167z" data-darkreader-inline-fill="" style="--darkreader-inline-fill: #9e9689;"></path><path d="M32.722 12.26c-.926-1.73-2.658-2.8-4.706-2.8h0c-2.895 0-5.294 2.382-5.294 5.6 0 2.658 2.4 5.04 5.294 5.04 2.048 0 3.78-1.07 4.706-2.8" stroke="#757575" stroke-width="3" stroke-linecap="round" data-darkreader-inline-stroke="" style="--darkreader-inline-stroke: #9e9689;"></path></g></svg>
 		
 		<div class="order-list__info__wrap__content__text"><span>쿠폰</span>
 		<span class="order-list__info__wrap__content__value">${coupon} 개</span></div>
 		</a>
-		<a class="order-list__info__wrap__content" href="mypage_point.do">
+		<a class="order-list__info__wrap__content" href="/mypage/point">
 		<svg class="order-list__info__wrap__content__icon--point" width="40" height="29" viewBox="0 0 40 29" preserveAspectRatio="xMidYMid meet">
 		
 		<title>icon/ic_point</title>

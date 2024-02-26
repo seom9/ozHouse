@@ -11,6 +11,7 @@ import com.oz.ozHouse.dto.MerCouponDTO;
 import com.oz.ozHouse.dto.client.member.ClientOrderConfirmDTO;
 import com.oz.ozHouse.dto.client.member.ClientOrderDTO;
 import com.oz.ozHouse.dto.client.member.ClientOrderListDTO;
+import com.oz.ozHouse.dto.client.member.MypagePointDTO;
 import com.oz.ozHouse.dto.client.member.ProQuanDTO;
 
 public interface OrderService {
@@ -32,4 +33,6 @@ public interface OrderService {
 	List<ClientOrderListDTO> getMemberWithOrder(String memberId);
 	
 	void cancelOrder(int memberNum, long oNum);
+	
+	List<MypagePointDTO> getMypointDTO (String memberId);
 }

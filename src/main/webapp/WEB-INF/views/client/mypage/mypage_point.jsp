@@ -7,7 +7,7 @@
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <%@ include file="mypage_top.jsp"%>
 
-<link rel="stylesheet" href="${path}/resources/client/mypage_css/point.css" />
+<link rel="stylesheet" href="${path}/client/mypage_css/point.css" />
 <head>
 
 </head>
@@ -21,7 +21,7 @@
 <div class="css-1h25ori e1t6i3i25">
 	<div class="css-0 e1t6i3i24">
 		<h2 class="css-o538wr">사용 가능한 포인트</h2>
-		<p class="css-of8h0b">${member.member_point}P</p>
+		<p class="css-of8h0b">${memberPoint}P</p>
 	</div>
 	<div class="css-1yu4f1z">
 		<p class="css-12fah4g">
@@ -37,14 +37,15 @@
 		</div>
 		
 		<c:forEach var="point" items="${member_p}">
+		<c:if test="${point.statement != '0'}">
 		<div class="css-18ewygj e1rx7pum9">
 			<div class="css-oc7sge e1rx7pum8">
 				<div class="css-1kwo4sf e1rx7pum7">
-					<div class="css-3eylin e1rx7pum6">${point.order_date}</div>
+					<div class="css-3eylin e1rx7pum6">${point.orderDate}</div>
 					<div class="css-15jzb03 e1rx7pum5">
 						<div class="css-s5xdrg e1rx7pum4">
 							<div class="accumulate css-y3863i e1rx7pum3">${point.statement}</div>
-							<div class="css-1kzfo6n">주문 번호 : <a href="order_confirm.do?order=${point.order_code}">${point.order_code}</a></div>
+							<div class="css-1kzfo6n">주문 번호 : <a href="/order/${point.orderCode}/confirm">${point.orderCode}</a></div>
 						</div>
 						<ul class="css-82ta8s e1rx7pum1">
 							<c:if test="${point.statement == '적립'}">
@@ -63,6 +64,7 @@
 				</div>
 			</div>
 		</div>
+		</c:if>
 		</c:forEach>
 	</div>
 </div>
