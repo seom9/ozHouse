@@ -124,9 +124,9 @@
 			<div class="flex-row">
 				<div class="flex-cell header-cell custom-label">환불신청여부&nbsp;&nbsp;</div>
 				<div class="flex-cell input-cell">
-					<input type="radio" name="oLike" value="all" ${radio == 'all' ? 'checked' : ''}>전체
-					<input type="radio" name="oLike" value="ok" ${radio == 'ok' ? 'checked' : ''}>정상주문
-					<input type="radio" name="oLike" value="return" ${radio == 'return' ? 'checked' : ''}>환불요청주문
+					<input type="radio" name="oLike" value="all" ${oLike == 'all' ? 'checked' : ''}>전체
+					<input type="radio" name="oLike" value="ok" ${oLike == 'ok' ? 'checked' : ''}>정상주문
+					<input type="radio" name="oLike" value="return" ${oLike == 'return' ? 'checked' : ''}>환불요청주문
 				</div>
 			</div>
 			<div class="flex-row">
