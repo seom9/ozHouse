@@ -22,6 +22,7 @@ import com.oz.ozHouse.dto.client.member.ClientOrderConfirmDTO;
 import com.oz.ozHouse.dto.client.member.ClientOrderDTO;
 import com.oz.ozHouse.dto.client.member.ClientOrderListDTO;
 import com.oz.ozHouse.dto.client.member.ClientProductDTO;
+import com.oz.ozHouse.dto.client.member.MypagePointDTO;
 import com.oz.ozHouse.dto.client.member.ProQuanDTO;
 
 import jakarta.transaction.Transactional;
@@ -69,6 +70,7 @@ public class OrderServiceImpl implements OrderService{
 						                        .product(productRepository.findByProNum(orderProduct.getProductDTO().getProNum()))
 						                        .quantity(orderProduct.getQuantity())
 						                        .orderTb(order)
+						                        .realPrice(orderProduct.getQuantity() * (orderProduct.getProductDTO().getProPrice() - orderProduct.getProductDTO().getProDiscountPrice()))
 						                        .build())
                 			.collect(Collectors.toList());
 		
@@ -133,7 +135,7 @@ public class OrderServiceImpl implements OrderService{
 	    Optional<Member> result = memberRepository.findMemberWithOrdersByMemberId(memberId);
 
 	    if (result.isPresent()) {
-	    	List<ClientOrderListDTO> dto = result.get().getOrderList().reversed().stream()
+	    	List<ClientOrderListDTO> dto = result.get().getOrderList().stream()
 	    	        .map(data -> ClientOrderListDTO.fromEntity(data, getProQuanDTO(data.getOrderItems())))
 	    	        .collect(Collectors.toList());
 	    	return dto;
@@ -151,8 +153,22 @@ public class OrderServiceImpl implements OrderService{
         orderRepository.cancelOrderByMemberNumAndONum(memberNum, oNum, regDate);
 		
 	}
-	
-	
 
+	@Override
+	public List<MypagePointDTO> getMypointDTO(String memberId) {
+		
+		List<ClientOrderListDTO> orders = getMemberWithOrder(memberId);
+		
+		List<MypagePointDTO> pointDTOs = orders.stream()
+						.map(data -> MypagePointDTO.builder()
+									.orderCode(data.getOrderNum())
+									.orderDate(data.getRegDate())
+									.statement((data.getODisPoint() > 0) ? "사용" : (data.getODisPoint() == 0) ? "0" : "적립")
+									.point(data.getODisPoint())
+									.build())
+						.collect(Collectors.toList());
+		
+		return pointDTOs;
+	}
 	
 }

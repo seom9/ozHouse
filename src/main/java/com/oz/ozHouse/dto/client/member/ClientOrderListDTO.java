@@ -15,6 +15,7 @@ public class ClientOrderListDTO {
     private String orderDelnow;          // 배송 상태
     private String orderCanceldate;      // 주문 취소일
     private String regDate;          // 주문일
+    private int oDisPoint;
     
     private List<ProQuanDTO> proQuanDTOs;
     
@@ -24,6 +25,7 @@ public class ClientOrderListDTO {
             .orderNum(order.getONum())
             .orderDelnow(order.getODelnow())
             .orderCanceldate(order.getOCanceldate())
+            .oDisPoint(order.getODispoint())
             .regDate(order.getRegDate())
             .proQuanDTOs(proQuanDTOs)
             .build();

@@ -65,4 +65,6 @@ public interface MemberRepository extends JpaRepository<Member, Integer> {
     @Transactional
     @EntityGraph(attributePaths = "orderList")
     Optional<Member> findMemberWithOrdersByMemberId(String memberId);
+    
+    
 }
