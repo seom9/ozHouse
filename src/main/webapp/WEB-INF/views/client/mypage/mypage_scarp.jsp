@@ -64,8 +64,8 @@
         <div class="css-pr93pi e192vfif4">               
           <div class="css-ypqde8 e192vfif3">
       <a class="css-11ab5xd e1fm144d0" href="prodView_main.do?product_num=${tdto.proNum}&select=best">
-        <span class="thumbnail-image e192vfif2 css-1t4i64">
-            <img src="${upPath}/${tdto.proImg}" class="thumbnail-image e192vfif2 css-1l77jhx" alt=" ${tdto.proName}"/>
+        <span class="thumbnail-image e192vfif2 css-1t4i64"><a href="/${tdto.proNum}/prodView">${tdto.proName}</a>
+            <img src="${upPath}/${tdto.proImg}" class="thumbnail-image e192vfif2 css-1l77jhx" alt=" ${tdto.proName}"/></a>
         </span>
      </a>
 </div>
@@ -80,7 +80,7 @@
          
            <div class="product-brand css-11vbb10 e1uchds85">$/{브랜드명}</div>
          
-           <span class="product-name css-11e7usa e1uchds84"><a href="prodView_main.do?product_num=${tdto.proNum}&select=best">${tdto.proName}</a></span>
+           <span class="product-name css-11e7usa e1uchds84"><a href="/${tdto.proNum}/prodView">${tdto.proName}</a></span>
        </div>
       
        <div class="price css-14q3hbk e96bn353">

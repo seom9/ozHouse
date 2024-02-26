@@ -69,5 +69,10 @@ public class ScrapService {
 		
 		return productDTOs;
 	}
+	
+	// 해당 상품 스크랩 boolean
+	public boolean isScrap(String memberId, int proNum) {
+		return scrapRepository. existsByMember_MemberIdAndProduct_ProNum(memberId, proNum);
+	}
 
 }

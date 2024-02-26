@@ -1,11 +1,11 @@
 package com.oz.ozHouse.market.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
 import com.oz.ozHouse.domain.Chatt;
-import com.oz.ozHouse.domain.ChattRoom;
 import com.oz.ozHouse.dto.ChattDTO;
 import com.oz.ozHouse.market.repository.ChattRepository;
 
@@ -47,6 +47,26 @@ public class ChattServiceImpl implements ChattService {
         return chattRepository.findByRoomNum(roomNum);
     }
 	
+	@Override
+	public Chatt save(Chatt chatt) {
+        return chattRepository.save(chatt);
+    }
+	
+	@Override
+	public List<Chatt> markMessagesAsRead(String roomNumStr) {
+        int roomNum = Integer.parseInt(roomNumStr);
+        List<Chatt> messages = chattRepository.findByRoomNum(roomNum);
+        List<Chatt> updatedMessages = new ArrayList<>();
+        
+        for (Chatt message : messages) {
+            if(!message.isReadStatus()) { // 이미 '읽음' 상태인 메시지는 건너뜀
+                message.setReadStatus(true);
+                updatedMessages.add(chattRepository.save(message));
+            }
+        }
+        
+        return updatedMessages;
+    }
 	
 
 }

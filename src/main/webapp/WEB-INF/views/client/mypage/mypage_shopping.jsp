@@ -3,45 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
-<c:set var="path" value="${pageContext.request.contextPath}"/>
 <%@ include file="mypage_top.jsp" %>
-
+<c:set var="path" value="${pageContext.request.contextPath}"/>
 <link rel="stylesheet" href="${path}/resources/main_css/order.css"/>
 
 <!-- css 파일 분리했더니 적용이 안 돼서 우선 여기다 뒀습니다 -->
-<style>
-.order_code234{
-	padding-left: 42px;
-    padding-top: 20px;
-    padding-bottom: 10px;
-}
 
-.order_code123{
-	font-weight: bold;
-	font-size: 16px;
-    line-height: 0;
-    padding-left: 10px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
-
-.order_code123:hover {
-	color: #50E5B4;
-}
-.my-box {
-    width: 91%;
-    border: 1px solid #ddd; /* 테두리 스타일 지정 */
-    border-radius: 10px; /* 네모 칸의 모서리를 둥글게 만듦 */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
-    margin-top: 20px;
-}
-
-.commerce-cart__delivery-group__total1:hover {
-    color: red; /* This will change the text color to red on hover */
-}
-
-</style>
 
 <div>
 	<div class="css-1jyrqzb">
@@ -152,12 +119,12 @@
 		            </div>
 		        </button>
 				
-				<c:if test="${empty order_code_list}">
+				<c:if test="${empty orders}">
 					주문한 상품이 없습니다
 				</c:if>
 				
-				<c:if test="${not empty order_code_list}">
-					<c:forEach var="order_code" items="${order_code_list}">
+				<c:if test="${not empty orders}">
+					<c:forEach var="orders" items="${orders}">
 					<div class="my-box">
 					<c:set var="order_price" value="0"/>
 					<c:set var="product_qpty" value="0"/>
@@ -165,66 +132,62 @@
 							<ul class="commerce-cart__content__group-list">
 								<li class="commerce-cart__content__group-item">
 									<article class="commerce-cart__group">
-									<div class="order_code234"><span class="order_code123" style=""><a href="order_confirm.do?order=${order_code}">주문 코드 : ${order_code}</a></span></div>
+									<div class="order_code234"><span class="order_code123" style=""><a href="/order/${orders.orderNum}/confirm">주문 코드 : ${orders.orderNum}</a></span></div>
 									<hr>
-									<c:forEach var="order_list" items="${user_order_list}">
-									<c:if test="${order_code == order_list.order_code}">
-									<c:set var="date" value="${order_list.order_date}"/>
-										<c:set var="product" value="${order_product[order_list.order_num]}"/>
-											<ul class="commerce-cart__group__item-list">
-												<li class="commerce-cart__group__item">
-														<ul class="commerce-cart__delivery-group__product-list">
-															<li class="commerce-cart__delivery-group__product-item">
-																<a href="prodView_main.do?product_num=${product.product_num}&select=best">
-																<article class="carted-product">
-																	<div class="carted-product__select">
-																		<div class="_3zqA8"></div>
-																	</div>
-		
-																	<div class="product-small-item product-small-item--clickable">
-																		<div class="product-small-item__image">
-																			<picture> <img src="${upPath}/${product.product_image}" /> </picture>
-																		</div>
-																		<div class="product-small-item__content">
-																			<h1 class="product-small-item__title">${product.product_name}</h1>
-		
-																			<p class="css-w0e4y9 e1xep4wb1">무료배송 || 일반택배</p>
-																			<br> <span class="carted-product__subtotal"
-																				display="flex">
-																				<p class="css-2kgyr3">
-																					<span style="text-decoration: line-through;">
-																					<fmt:formatNumber value="${product.product_price}" pattern="###,###" /></span>
-																					&nbsp; <span class="css-1wu05q6">${order_list.order_count}개</span>
-																					 <span class="css-1wu05q7">할인 적용 금액<span
-																						class="discount_price">&nbsp; 
-																					<fmt:formatNumber value="${(product.product_price - product.product_discount_price) * order_list.order_count}" pattern="###,###" />원
-																					<c:set var="order_price" value="${order_price + (product.product_price - product.product_discount_price) * order_list.order_count}" />
-																					<c:set var="product_qpty" value="${product_qpty + order_list.order_count}"/>
-																					<!-- 배송 중 뽑아내는 코드 -->
-																					<c:set var="delivery_now" value="배송 준비"/>
-																					<c:choose>
-																						<c:when test="${order_list.order_delivery_now eq 'delivery'}">
-																							<c:set var="delivery_now" value="배송 중"/>
-																						</c:when>
-																						<c:when test="${order_list.order_delivery_now eq 'complete'}">
-																							<c:set var="delivery_now" value="배송 완료"/>
-																						</c:when>
-																						<c:when test="${order_list.order_canceldate != null}">
-																							<c:set var="delivery_now" value="취소 상품"/>
-																						</c:when>																				
-																					</c:choose>
-																					</span></span>
-																				</p>
-																			</span>
-																		</div>
-																	</div>
-		
-																	
-																</article></a>
-															</li>
-														</ul>
-										</c:if>
-									</c:forEach>
+<c:forEach var="proQuanDTOs" items="${orders.proQuanDTOs}">
+    <c:set var="product" value="${proQuanDTOs.productDTO}"/>
+    <ul class="item-list">
+        <li class="item">
+            <ul class="product-list">
+                <li class="product-item">
+                    <a href="prodView_main.do?product_num=${product.proNum}&select=best">
+                        <article class="product">
+                            <div class="product-select">
+                                <div class="product-select__icon"></div>
+                            </div>
+                            <div class="product-item__image">
+                                <picture><img src="${upPath}/${product.proImg}" /></picture>
+                            </div>
+                            <div class="product-item__content">
+                                <h1 class="product-title">${product.proName}</h1>
+                                <p class="product-description">무료배송 || 일반택배</p>
+                                <br>
+                                <span class="product-price" display="flex">
+                                    <p class="original-price">
+                                        <span style="text-decoration: line-through;">
+                                            <fmt:formatNumber value="${product.proPrice}" pattern="###,###" />
+                                        </span>
+                                        &nbsp;
+                                        <span class="quantity">${proQuanDTOs.quantity}개</span>
+                                        <span class="discounted-price">
+                                            할인 적용 금액&nbsp; 
+                                            <fmt:formatNumber value="${(product.proPrice - product.proDiscountPrice) * proQuanDTOs.quantity}" pattern="###,###" />원
+                                            <c:set var="order_price" value="${order_price + (product.proPrice - product.proDiscountPrice) * proQuanDTOs.quantity}" />
+                                            <c:set var="product_qpty" value="${product_qpty + proQuanDTOs.quantity}"/>
+                                            <!-- 배송 중 뽑아내는 코드 -->
+                                            <c:set var="delivery_now" value="배송 준비"/>
+                                            <c:choose>
+                                                <c:when test="${orders.orderDelnow eq 'delivery'}">
+                                                    <c:set var="delivery_now" value="배송 중"/>
+                                                </c:when>
+                                                <c:when test="${orders.orderDelnow eq 'complete'}">
+                                                    <c:set var="delivery_now" value="배송 완료"/>
+                                                </c:when>
+                                                <c:when test="${orders.orderDelnow != null}">
+                                                    <c:set var="delivery_now" value="취소 상품"/>
+                                                </c:when>                                                                              
+                                            </c:choose>
+                                        </span>
+                                    </p>
+                                </span>
+                            </div>
+                        </article>
+                    </a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</c:forEach>
 									<article class="carted-product"> 
 										<p class="css-2kgyr3">
 											<span>최종 금액 </span> 
@@ -234,9 +197,9 @@
 											</p>
 									</article>
 						<footer class="commerce-cart__delivery-group__footer">
-						<p class="commerce-cart__delivery-group__total">주문 날짜 : ${date}</p><br>
+						<p class="commerce-cart__delivery-group__total">주문 날짜 : ${orders.regDate}</p><br>
 						<c:if test="${delivery_now eq '취소 상품'}">
-							<p class="commerce-cart__delivery-group__total"><a href="order_confirm.do?order=${order_code}" style="color: red">취소된 상품입니다 : 상세보기</a></p>
+							<p class="commerce-cart__delivery-group__total"><a href="/order/${orders.oNum}/confirm" style="color: red">취소된 상품입니다 : 상세보기</a></p>
 						</c:if>
 						<c:if test="${delivery_now != '취소 상품'}">
 							<p class="commerce-cart__delivery-group__total">배송 상태 : ${delivery_now}</p><br>
@@ -262,6 +225,141 @@
 		    </div>
 		</div>
 </div>
+<style>
+    .my-box {
+        border: 1px solid #ccc;
+        margin-bottom: 20px;
+        padding: 10px;
+    }
+
+    .test {
+        margin-bottom: 20px;
+    }
+
+    .commerce-cart__content__group-list {
+        list-style-type: none;
+        padding-left: 0;
+    }
+
+    .commerce-cart__group {
+        margin-bottom: 20px;
+    }
+
+    .order_code234 {
+        font-weight: bold;
+    }
+
+    .carted-product {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    .carted-product__subtotal {
+        display: flex;
+        align-items: center;
+    }
+
+    .css-1wu05q7 {
+        margin-left: 10px;
+    }
+
+    .commerce-cart__delivery-group__footer {
+        margin-top: 20px;
+    }
+
+    .commerce-cart__delivery-group__total1 {
+        margin-top: 10px;
+    }
+    .item-list {
+    list-style: none;
+    padding: 0;
+}
+
+.item {
+    margin-bottom: 20px;
+}
+
+.product-list {
+    list-style: none;
+    padding: 0;
+}
+
+.product-item {
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+.product-item a {
+    text-decoration: none;
+    color: #333;
+}
+
+.product-item a:hover {
+    color: #555;
+}
+
+.product {
+    display: flex;
+    align-items: center;
+}
+
+.product-select {
+    margin-right: 10px;
+}
+
+.product-select__icon {
+    width: 20px;
+    height: 20px;
+    background-color: #ccc;
+    border-radius: 50%;
+}
+
+.product-item__image {
+    flex: 0 0 80px; /* Flex-grow, flex-shrink, flex-basis */
+    margin-right: 10px;
+}
+
+.product-item__image img {
+    max-width: 100%;
+    height: auto;
+}
+
+.product-item__content {
+    flex: 1;
+}
+
+.product-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.product-description {
+    font-size: 14px;
+    color: #666;
+}
+
+.product-price {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+}
+
+.original-price {
+    text-decoration: line-through;
+    margin-right: 10px;
+}
+
+.quantity {
+    margin-right: 10px;
+}
+
+.discounted-price {
+    font-weight: bold;
+}
+</style>
 
 <script type="text/javascript">
     function toggleDropdown1(id) {

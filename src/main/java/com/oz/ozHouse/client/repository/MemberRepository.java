@@ -55,4 +55,14 @@ public interface MemberRepository extends JpaRepository<Member, Integer> {
     @EntityGraph(attributePaths = "coupons")
     Optional<Member> findMemberWithCouponsByMemberId(String memberId);
     
+    // member Point 수정
+    @Transactional
+    @Modifying
+    @Query("UPDATE Member m SET m.memberPoint = m.memberPoint - :point WHERE m.memberId = :memberId")
+    void updateMemberPointByMemberId(@Param("point") int point, @Param("memberId") String memberId);
+
+    
+    @Transactional
+    @EntityGraph(attributePaths = "orderList")
+    Optional<Member> findMemberWithOrdersByMemberId(String memberId);
 }

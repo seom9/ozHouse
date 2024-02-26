@@ -2,6 +2,7 @@ package com.oz.ozHouse.market.controller;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -12,7 +13,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.oz.ozHouse.client.config.WebsocketHandler;
 import com.oz.ozHouse.client.security.MemberSecurityDTO;
 import com.oz.ozHouse.domain.Chatt;
 import com.oz.ozHouse.domain.ChattRoom;
@@ -30,6 +33,8 @@ public class ChattController {
 	private final ChattRoomService chattRoomService;
 
 	private final ChattService chattService;
+
+    private final WebsocketHandler websocketHandler; // WebsocketHandler 주입
 
 	// 채팅 리스트
 	@GetMapping("/chatts")
@@ -90,5 +95,16 @@ public class ChattController {
 	    List<Chatt> messages = chattService.findMessagesByRoomNum(roomNum);
 	    return ResponseEntity.ok(messages);
 	}
+	
+	@PostMapping("/markAllMessagesAsRead/{roomNum}")
+    public ResponseEntity<?> markAllMessagesAsRead(@PathVariable("roomNum") Integer roomNum) {
+        try {
+            chattService.findMessagesByRoomNum(roomNum);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error marking messages as read");
+        }
+    }
+	
 
 }
