@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
 
 import com.oz.ozHouse.client.repository.MemberRepository;
@@ -18,7 +19,6 @@ import com.oz.ozHouse.domain.OrderTb;
 import com.oz.ozHouse.domain.ProInform;
 import com.oz.ozHouse.domain.UserCoupon;
 import com.oz.ozHouse.dto.MerCouponDTO;
-import com.oz.ozHouse.dto.client.member.ClientOrderConfirmDTO;
 import com.oz.ozHouse.dto.client.member.ClientOrderDTO;
 import com.oz.ozHouse.dto.client.member.ClientOrderListDTO;
 import com.oz.ozHouse.dto.client.member.ClientProductDTO;
@@ -30,7 +30,6 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-@Transactional
 public class OrderServiceImpl implements OrderService{
 	
 	private final MemberRepository memberRepository;
@@ -62,7 +61,7 @@ public class OrderServiceImpl implements OrderService{
 	    return order;
 	}
 	
-
+	
 	private List<ProInform> createProInforms(List<ProQuanDTO> orderProducts, OrderTb order) {
 		
         List<ProInform> proInforms = orderProducts.stream()
@@ -77,26 +76,29 @@ public class OrderServiceImpl implements OrderService{
 		return proInforms;
 	}
 	
-
+	
 	private List<UserCoupon> CreateUserCoupons(List<String> useCoupons, OrderTb order) {
 	    List<UserCoupon> useUserCoupons = useCoupons.stream()
-										            .map(couponCode -> Integer.parseInt(couponCode))
-										            .map(intCouponCode -> {
-										                UserCoupon userCoupon = couponRepository.findByMerCoupon_MerCouponnum(intCouponCode);
-										                userCoupon.setOrder(order); 
-										                return userCoupon;
-										            })
-										            .collect(Collectors.toList());
+				            .map(couponCode -> Integer.parseInt(couponCode))
+				            .map(intCouponCode -> {
+				                UserCoupon userCoupon = couponRepository.findByMerCoupon_MerCouponnum(intCouponCode);
+				                userCoupon.setOrder(order); 
+				                userCoupon.setUserCouponActive(true);
+				                return userCoupon;
+				            })
+				            .collect(Collectors.toList());
 
 	    return useUserCoupons;
 	}
 	
 	@Override
+	@Transactional
 	public OrderTb getOrder(long oNum) {
 		return orderRepository.findByoNum(oNum);
 	}
 
 	@Override
+	@Transactional
 	public OrderTb getOrderWithCoupons(long oNum) {
 		Optional<OrderTb> result = orderRepository.findOrderWithCouponsByoNum(oNum);
 		result.get();
@@ -104,6 +106,7 @@ public class OrderServiceImpl implements OrderService{
 	}
 	
 	@Override
+	@Transactional
 	public OrderTb getOrderWithItems(long oNum) {
 		Optional<OrderTb> result = orderRepository.findOrderWithItemsByoNum(oNum);
 		result.get();
@@ -111,6 +114,7 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 	@Override
+	@Transactional
 	public List<ProQuanDTO> getProQuanDTO(List<ProInform> proInforms) {
 		List<ProQuanDTO> proQuanDTOs = proInforms.stream()
 			    .map(proInform -> ProQuanDTO.builder()
@@ -122,8 +126,14 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 	@Override
-	public List<MerCouponDTO> getMerCouponDTO(List<UserCoupon> useCoupons) {
-		List<MerCouponDTO> useMerCoupons = useCoupons.stream()
+	@Transactional
+	public List<MerCouponDTO> getMerCouponDTO(long oNum) {
+		System.out.println("어디까지");
+		Optional<OrderTb> result = orderRepository.findOrderWithCouponsByoNum(oNum);
+		System.out.println("어디까지 실행됐나");
+		OrderTb order = result.get();
+		System.out.println("궁금합니다");	
+		List<MerCouponDTO> useMerCoupons = order.getUseCoupons().stream()
 				.map(useCoupon -> MerCouponDTO.from(useCoupon.getMerCoupon()))
 				.collect(Collectors.toList());
 		return useMerCoupons;
@@ -131,6 +141,7 @@ public class OrderServiceImpl implements OrderService{
 
 
 	@Override
+	@Transactional
 	public List<ClientOrderListDTO> getMemberWithOrder(String memberId) {
 	    Optional<Member> result = memberRepository.findMemberWithOrdersByMemberId(memberId);
 
@@ -145,6 +156,7 @@ public class OrderServiceImpl implements OrderService{
 
 
 	@Override
+	@Transactional
 	public void cancelOrder(int memberNum, long oNum) {
     	LocalDateTime localDateTime = LocalDateTime.now();
     	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy/MM/dd");
@@ -155,6 +167,7 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 	@Override
+	@Transactional
 	public List<MypagePointDTO> getMypointDTO(String memberId) {
 		
 		List<ClientOrderListDTO> orders = getMemberWithOrder(memberId);

@@ -43,4 +43,8 @@ public class UserCoupon extends BaseEntity {
 	public void setOrder(OrderTb orderTb) {
 	    this.orderTb = orderTb;
 	}
+	
+	public void setUserCouponActive(boolean userCouponActive) {
+	    this.userCouponActive = userCouponActive;
+	}
 }

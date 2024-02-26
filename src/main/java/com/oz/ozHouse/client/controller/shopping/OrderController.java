@@ -50,7 +50,7 @@ public class OrderController {
 	@PreAuthorize("hasAnyRole('ROLE_CLIENT')")
 	@GetMapping(value = {"/order/{mode}", "/order/{mode}/{proNum}/{quantity}"})
 	public String order_main(HttpServletRequest req, HttpSession session,
-									@SessionAttribute("cart") List<ProQuanDTO> cart,
+									@SessionAttribute(value="cart", required = false) List<ProQuanDTO> cart,
 									@AuthenticationPrincipal MemberSecurityDTO member,
 									@PathVariable("mode") String mode,
 									@PathVariable(value="proNum", required = false) Integer proNum,
@@ -127,7 +127,7 @@ public class OrderController {
 		
 		req.setAttribute("orderinfo", ClientOrderConfirmDTO.fromEntity(orderService.getOrder(oNum)));		
 		req.setAttribute("confirmOrderProducts", orderService.getProQuanDTO(order.getOrderItems()));
-		req.setAttribute("userCouponList", orderService.getMerCouponDTO(order.getUseCoupons()));
+		req.setAttribute("userCouponList", orderService.getMerCouponDTO(order.getONum())); 
 		
 		return "client/main/order_confirm";
 	}

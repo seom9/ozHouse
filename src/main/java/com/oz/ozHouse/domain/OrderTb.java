@@ -41,7 +41,7 @@ public class OrderTb {
     @OneToMany(mappedBy = "orderTb", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<UserCoupon> useCoupons = new ArrayList<>();
     
-    private int oDispoint;			//사용 포인트 금액
+    private int oDispoint;			//사용 포인트 금액 (양수 : 사용 / 음수 : 가현)
     
     private int oPrice;				//최종 상품 주문 금액
     
