@@ -151,6 +151,14 @@ public class OrderController {
 		return "client/mypage/mypage_shopping";
 	}
 
-	
+	@PreAuthorize("hasAnyRole('ROLE_CLIENT')")
+	@GetMapping("/order/cancel/{oNum}")
+	public String orderCancel(HttpServletRequest req, @PathVariable("oNum") long oNum,
+									@AuthenticationPrincipal MemberSecurityDTO member) {
+		
+		orderService.cancelOrder(member.getMemberNum(), oNum);
+		 
+		return  "redirect:/order/"+oNum+"/confirm";
+	}
 	
 }

@@ -31,4 +31,5 @@ public interface OrderService {
 	
 	List<ClientOrderListDTO> getMemberWithOrder(String memberId);
 	
+	void cancelOrder(int memberNum, long oNum);
 }

@@ -1,5 +1,7 @@
 package com.oz.ozHouse.client.service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -138,6 +140,19 @@ public class OrderServiceImpl implements OrderService{
 	    }
 	    return null;
 	}
+
+
+	@Override
+	public void cancelOrder(int memberNum, long oNum) {
+    	LocalDateTime localDateTime = LocalDateTime.now();
+    	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy/MM/dd");
+        String regDate = localDateTime.format(formatter);
+        
+        orderRepository.cancelOrderByMemberNumAndONum(memberNum, oNum, regDate);
+		
+	}
+	
+	
 
 	
 }
