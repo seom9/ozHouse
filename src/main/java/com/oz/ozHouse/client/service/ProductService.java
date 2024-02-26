@@ -7,7 +7,7 @@ import com.oz.ozHouse.dto.ProductDTO;
 
 public interface ProductService {
 	
-	List<ProductDTO> cliProductList();
+	List<ProductDTO> cliProductList(String memberId);
 	
 	ProductDTO getProduct(Integer proNum);
 }

@@ -24,15 +24,18 @@ public class ProInform {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int proInNum;
     
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "proNum") 
     private Product product;
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "oNum")
-    private OrderTb orderTb;
+    private OrderTb orderTb; 
     
     private int quantity;
     
     private String oRefund;
+    
+    private int realPrice;
+    
 }
