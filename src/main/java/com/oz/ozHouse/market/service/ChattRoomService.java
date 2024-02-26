@@ -15,5 +15,7 @@ public interface ChattRoomService {
     ChattRoom findRoomByNum(Integer roomNum);
     ChattRoom findOrCreateRoom(String buyerNickname, String sellerNickname, Integer proNum);
     List<Object> findParticipantsByRoomNum(Integer roomNum);
+    void updateUserCheckStatus(Integer roomNum, String userId, String status);
+	String findOtherParticipant(Integer roomNum, String sender);
 
 }

@@ -62,4 +62,24 @@ public class ChattRoomServiceImpl implements ChattRoomService {
                                   .flatMap(Arrays::stream)
                                   .collect(Collectors.toList());
     }
+
+    @Override
+    @Transactional
+    public void updateUserCheckStatus(Integer roomNum, String userId, String status) {
+        ChattRoom room = findRoomByNum(roomNum); // Assuming this method fetches the room by its number
+        
+        if (userId.equals(room.getMyId())) {
+            room.setMyIdCheck(status);
+        } else if (userId.equals(room.getOtherId())) {
+            room.setOtherIdCheck(status);
+        } else {
+        }
+
+        chattRoomRepository.save(room); // Save the updated room status
+    }
+
+	@Override
+	public String findOtherParticipant(Integer roomNum, String sender) {
+		return chattRoomRepository.findOtherParticipantId(roomNum, sender);
+	}
 }

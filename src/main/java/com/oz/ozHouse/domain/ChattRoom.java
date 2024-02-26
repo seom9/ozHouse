@@ -41,6 +41,10 @@ public class ChattRoom {
     
     private int proNum;
     
+    private String myIdCheck; 
+
+    private String otherIdCheck;
+    
     public ChattRoom(ChattRoomDTO dto) {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy/MM/dd");
 
@@ -53,5 +57,7 @@ public class ChattRoom {
 	        this.createTime = LocalDate.now().format(formatter); // 기본값으로 현재 날짜 설정
 	    }
 		this.proNum = dto.getProNum();
+		this.myIdCheck = "off";
+		this.otherIdCheck = "off";
     }
 }

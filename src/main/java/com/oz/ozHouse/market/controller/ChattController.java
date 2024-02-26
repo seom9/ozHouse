@@ -34,8 +34,6 @@ public class ChattController {
 
 	private final ChattService chattService;
 
-    private final WebsocketHandler websocketHandler; // WebsocketHandler 주입
-
 	// 채팅 리스트
 	@GetMapping("/chatts")
 	public String chatList(Model model, @AuthenticationPrincipal MemberSecurityDTO member, HttpServletRequest req) {
@@ -67,7 +65,7 @@ public class ChattController {
 		}
 		ChattRoom room = chattRoomService.findOrCreateRoom(member.getMemberNickname(), sellerNickname, proNum);
 		model.addAttribute("room", room);
-		
+
 		return "redirect:/ozMarket/chattRoom/" + room.getRoomNum();
 	}
 
@@ -87,24 +85,17 @@ public class ChattController {
 
 		return "client/ozMarket/chatt";
 	}
-	
+
 	// 채팅방 메시지 로드 엔드포인트
 	@CrossOrigin
 	@GetMapping("/chattRoom/messages/{roomNum}")
 	public ResponseEntity<List<Chatt>> getMessagesByRoomNum(@PathVariable("roomNum") Integer roomNum) {
-	    List<Chatt> messages = chattService.findMessagesByRoomNum(roomNum);
-	    return ResponseEntity.ok(messages);
+		List<Chatt> messages = chattService.findMessagesByRoomNum(roomNum);
+		return ResponseEntity.ok(messages);
 	}
-	
-	@PostMapping("/markAllMessagesAsRead/{roomNum}")
-    public ResponseEntity<?> markAllMessagesAsRead(@PathVariable("roomNum") Integer roomNum) {
-        try {
-            chattService.findMessagesByRoomNum(roomNum);
-            return ResponseEntity.ok().build();
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error marking messages as read");
-        }
-    }
-	
 
+	@PostMapping("/ozMarket/markAllMessagesAsRead/{roomNum}")
+	public ResponseEntity<String> markAllMessagesAsRead(@PathVariable String roomNum) {
+		return ResponseEntity.ok().body("All messages in room " + roomNum + " marked as read.");
+	}
 }
