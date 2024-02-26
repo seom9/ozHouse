@@ -235,14 +235,12 @@
 					<dd id="final_order_price"><span class="totalPrice" id="final_order_price"><fmt:formatNumber value="${order_ori_price + order_assembly_price -(order_dis_discount + 0 + orderinfo.getODispoint())}" pattern="###,###"/></span>원</dd>
 				</c:if>				
                </div>
-            <c:if test="${param.mode == 'cancel'}">
-            	<br><h1 class="product-small-item__title">사용하신 쿠폰은 복구가 불가능합니다</h1>
-				<br><span class="wairano2">주문을 정말 취소하시겠습니까?</span><br><br>
+               <c:if test="${orderinfo.getOCanceldate() == null}">
+				<br><span class="wairano2">주문 취소하기</span><br><br>
 				<div class="commerce-cart__side-bar__order">
-               		<button class="_1eWD8 _3SroY _27do9 commerce-cart__side-bar__order__btn" type="button" onclick="location.href='order_cancel.do?order=${orderinfo.oNum}'">주문 취소하기</button>
+               		<button class="_1eWD8 _3SroY _27do9 commerce-cart__side-bar__order__btn" type="button" onclick="location.href='/order/cancel/${orderinfo.getONum()}'">주문 취소하기</button>
            		</div>
-			</c:if>
-               
+               	</c:if>		
            </dl>
 	</div> 
 </aside>
