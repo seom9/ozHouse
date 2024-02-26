@@ -21,10 +21,11 @@ public class ProductServiceImpl implements ProductService{
 	
 	private final ModelMapper modelMapper;
 	private final ProductRepository productRepository;
+	private final ScrapService scrapService;
 	
 	// 상품 전체 리스트
 	@Override
-	public List<ProductDTO> cliProductList() {
+	public List<ProductDTO> cliProductList(String memberId) {
 		
 		List<Product> productList = productRepository.findAll();
 		
@@ -34,9 +35,16 @@ public class ProductServiceImpl implements ProductService{
 			System.out.println("가격 : " + dto.getMerPrice().getProPrice());
 		}
 		
+		// 가현 수정 : 스크랩 처리 처리 추가
 		List<ProductDTO> proList = productList.stream()
-									.map(data -> modelMapper.map(data, ProductDTO.class))
-									.collect(Collectors.toList());
+								    .map(data -> {
+								        ProductDTO productDTO = modelMapper.map(data, ProductDTO.class);
+								        if (memberId != null) {
+								            productDTO.setScrap(scrapService.isScrap(memberId, data.getProNum()));
+								        }
+								        return productDTO;
+								    })
+								    .collect(Collectors.toList());
 		
 		for(ProductDTO dto2 : proList) {
 			System.out.println("가격33 : " + dto2.getProPrice());
