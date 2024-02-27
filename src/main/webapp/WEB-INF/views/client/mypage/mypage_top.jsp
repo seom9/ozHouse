@@ -110,7 +110,7 @@
                     <li class="page-navigation__sub-menu-item"><a href="/mypage/shopping" target="_self">주문 배송 내역 조회</a></li>
                     <li class="page-navigation__sub-menu-item"><a href="/mypage/scrap" target="_self">상품 스크랩북</a></li>
                     <li class="page-navigation__sub-menu-item"><a href="#" target="_self">나의 문의 내역</a></li>
-                    <li class="page-navigation__sub-menu-item"><a href="mypage_point.do" target="_self">포인트</a></li>
+                    <li class="page-navigation__sub-menu-item"><a href="/mypage/point" target="_self">포인트</a></li>
                     <li class="page-navigation__sub-menu-item"><a href="#" target="_self">공지사항</a></li>
                     <li class="page-navigation__sub-menu-item"><a href="#" target="_self">고객센터</a></li>
                 </ul>
