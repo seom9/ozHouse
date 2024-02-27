@@ -172,7 +172,7 @@
 		<span class="wairano2">결제 수단</span><br><br>	
 		# 추후 추가하겠습니다
 
-		</form></div>
+		</form></div><br><br><br><br><br><br><br><br><br><br><br><br>
 		
 <aside class="custom-aside">
 	<div class="sticky-child commerce-cart__side-bar">

@@ -53,6 +53,8 @@ public class ClientOrderDTO {
 				.oPrice(dto.getOPrice())
 				.oName(dto.getOName())
 				.oHp(phoneNumber)
+				.oLike("ok")
+				.oDelnow("ready")
 				.oAddress(address)
 				.oComment(dto.oComment)
 				.regDate(regDate)

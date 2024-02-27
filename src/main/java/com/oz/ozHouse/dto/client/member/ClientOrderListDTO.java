@@ -19,6 +19,8 @@ public class ClientOrderListDTO {
     
     private List<ProQuanDTO> proQuanDTOs;
     
+    
+    
     // 정적 팩토리 메서드
     public static ClientOrderListDTO fromEntity(OrderTb order, List<ProQuanDTO> proQuanDTOs) {
         return ClientOrderListDTO.builder()
@@ -30,4 +32,5 @@ public class ClientOrderListDTO {
             .proQuanDTOs(proQuanDTOs)
             .build();
     }
+
 }
