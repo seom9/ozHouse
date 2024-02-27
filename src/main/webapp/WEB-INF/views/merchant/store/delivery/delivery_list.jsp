@@ -6,7 +6,7 @@
 <%@ include file="../storeMain/storeManagementTop.jsp"%>
 <%@ include file="delivery_top.jsp"%>
 <head>
-<title>OZ의 집 : 주문내역</title>
+<title>OZ의 집 : 배송관리</title>
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
@@ -74,7 +74,7 @@
 	<div class="content-container">
 		<c:if test="${map.mode == 'all'}">
 			<h1 class="delivery-header">
-				전체 주문 <span class="delivery-subtitle"> 배송과 관련된 전체주문을
+				전체 배송 주문 <span class="delivery-subtitle"> 배송과 관련된 전체주문을
 					조회합니다.</span>
 			</h1>
 		</c:if>
@@ -99,7 +99,7 @@
 		<div class="flex-container">
 			<div class="flex-item">
 				<p class="info-text">
-					• 주문과 관련된 배송상태를 조회합니다.<br> •
+					• 정상주문과 관련된 배송상태를 조회합니다.(환불, 교환의 배송상태는 환불/교환 리스트 확인)<br> •
 					개인정보는 배송 이외의 목적으로 사용이 불가능합니다.<br> • 배송절차 : 배송준비 > 배송중 > 배송완료<br>
 					<br>
 				</p>
@@ -122,6 +122,7 @@
 				</div>
 			</div>
 			<div class="flex-row">
+<<<<<<< HEAD
 				<div class="flex-cell header-cell custom-label">환불신청여부&nbsp;&nbsp;</div>
 				<div class="flex-cell input-cell">
 					<input type="radio" name="oLike" value="all" ${oLike == 'all' ? 'checked' : ''}>전체
@@ -138,13 +139,15 @@
 				</div>
 			</div>
 			<div class="flex-row">
+=======
+>>>>>>> parent of 7e7f687 (complete deliveryList)
 				<div class="flex-cell header-cell custom-label">검색&nbsp;&nbsp;</div>
 				<div class="flex-cell input-cell">
 					<select name="search"> 
 						<option value="all" ${options == 'all' ? 'selected' : ''}>전체</option>
-				 		<option value="memberId" ${options == 'memberId' ? 'selected' : ''}>id</option>
-				 		<option value="prodName" ${options == 'prodName' ? 'selected' : ''}>상품명</option>
-				 		<option value="oNum" ${options == 'oNum' ? 'selected' : ''}>주문번호</option>
+				 		<option value="memberId" ${options == 'memberId' ? 'selected' : ''}>>id</option>
+				 		<option value="prodName" ${options == 'prodName' ? 'selected' : ''}>>상품명</option>
+				 		<option value="oNum" ${options == 'oNum' ? 'selected' : ''}>>주문번호</option>
 					</select> <input type="text" name="searchString" value="${map.searchString}">
 				</div>
 			</div>
@@ -158,17 +161,18 @@
 		<br>
 		<div align="left" class="results-heading">
 			<font size="3">검색 결과</font>
+			<c:if test="${empty deliveryCount}">
+        	&nbsp;&nbsp;총 0 건
+        </c:if>
+			<c:if test="${not empty deliveryCount}">
         	&nbsp;&nbsp;총 ${deliveryCount} 건
+        </c:if>
 		</div>
 		<div class="scroll flex-container content-table">
 			<div class="flex-row header-row">
 				<div class="flex-cell">주문번호</div>
 				<div class="flex-cell">주문자 ID</div>
 				<div class="flex-cell">주문일</div>
-				<div class="flex-cell">취소일</div>
-				<div class="flex-cell">요청사항</div>
-				<div class="flex-cell">배송현황</div>
-				<div class="flex-cell">환불여부</div>
 				<div class="flex-cell">
 					상품명
 				</div>
@@ -178,9 +182,8 @@
 				<div class="flex-cell">
 					주문액
 				</div>
-				<div class="flex-cell">
-					확인
-				</div>
+				<div class="flex-cell">요청사항</div>
+				<div class="flex-cell">배송현황</div>
 			</div>
 			<c:if test="${empty deliveryList}">
 				<div class="flex-row">
@@ -189,43 +192,44 @@
 			</c:if>
 			<c:forEach var="dto" items="${deliveryList}">
 				<div class="flex-row">
-					<div class="flex-cell">${dto.orderNum}</div>
+					<div class="flex-cell">${dto.oNum}</div>
 					<div class="flex-cell">${dto.memberId}</div>
 					<div class="flex-cell">${dto.regDate}</div>
-					<div class="flex-cell">${dto.getOCanceldate()}</div>
-					<div class="flex-cell">${dto.getOComment()}</div>
+					<div class="flex-cell">
+					<c:forEach var="item" items="${dto.orderItems}">
+						<c:if test="${item.product.proNum eq merNum}">
+							${item.product.proName}<br>
+						</c:if>
+					</c:forEach>
+					</div>
+					<div class="flex-cell">
+					<c:forEach var="item" items="${dto.orderItems}">
+						<c:if test="${item.product.proNum eq merNum}">
+							<fmt:formatNumber value="${item.quantity}" type="number"
+								pattern="###,###개" />
+						</c:if>
+					</c:forEach>
+					</div>
+					<div class="flex-cell">
+					<c:forEach var="item" items="${dto.orderItems}">
+						<c:if test="${item.product.proNum eq merNum}">
+							<fmt:formatNumber value="${item.quantity * item.product.}" type="number"
+								pattern="###,###원" />
+						</c:if>
+					</c:forEach>
+					</div>
+					<div class="flex-cell">${dto.order_comment}</div>
 					<c:choose>
-						<c:when test="${dto.getODelnow() eq 'ready'}">
+						<c:when test="${dto.order_delivery_now eq 'ready'}">
 							<div class="flex-cell">배송 준비중</div>
 						</c:when>
-						<c:when test="${dto.getODelnow() eq 'delivery'}">
+						<c:when test="${dto.order_delivery_now eq 'delivery'}">
 							<div class="flex-cell">배송 중</div>
 						</c:when>
 						<c:otherwise>
 							<div class="flex-cell">배송 완료</div>
 						</c:otherwise>
 					</c:choose>
-					<div class="flex-cell">
-					<c:choose>
-						<c:when test="${dto.getOLike() eq 'return'}">
-							<span class="red-text">환불신청</span>
-						</c:when>
-						<c:otherwise>
-							<div class="flex-cell">정상</div>
-						</c:otherwise>
-					</c:choose>
-					</div>
-					<c:forEach var="mpo" items="${dto.orderPro}">
-						<div class="flex-cell">[${mpo.proNum}]<br>${mpo.proName}</div>
-						<div class="flex-cell">${mpo.quantity}</div>
-						<div class="flex-cell">${mpo.realPrice}</div>
-						<div class="flex-cell">
-						<c:if test="${mpo.getORefund() eq 'f'}">
-							<a href="#">[승인]</a>
-						</c:if>
-					</div>
-					</c:forEach>
-					
 				</div>
 			</c:forEach>
 		</div>

@@ -16,8 +16,11 @@ public class DeliverySearchDTO {
 	private String mode;  //배송상태
 	private String startDate;
 	private String endDate;
+<<<<<<< HEAD
 	private String oLike;  //환불여부
 	private String oRefund;
+=======
+>>>>>>> parent of 7e7f687 (complete deliveryList)
 	private String search;
 	private String searchString;
 }
