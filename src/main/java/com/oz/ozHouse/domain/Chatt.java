@@ -51,11 +51,11 @@ public class Chatt {
 	
 	private int roomNum;
 	
-	private String inTime;
+	private LocalDateTime inTime;
 	
 //	private String msgType;
 	
-    private boolean readStatus = false; // 초기값 false로 설정
+    private int readStatus; 
 	
 	public Chatt(ChattDTO dto) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy/MM/dd HH:mm:ss");
@@ -65,15 +65,12 @@ public class Chatt {
         this.recipient = dto.getRecipient();
         this.sender = dto.getSender();
         this.msg = dto.getMsg();
-//        this.readStatus = dto.getReadStatus();
+        this.readStatus = 1;
 //        this.file = dto.getFile();
         this.roomNum = dto.getRoomNum();
         
-        if (dto.getInTime() != null) {
-	        this.inTime = dto.getInTime().formatted(formatter);
-	    } else {
-	        this.inTime = LocalDateTime.now().format(formatter); // 기본값으로 현재 날짜 설정
-	    }
+        this.inTime = dto.getInTime() != null ? dto.getInTime() : LocalDateTime.now(); // Directly set LocalDateTime
+
 	}
 	
 }

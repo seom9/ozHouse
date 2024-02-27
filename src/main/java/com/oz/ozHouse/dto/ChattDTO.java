@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor // 기본생성자 자동으로 생성
 public class ChattDTO {
 	public enum MessageType {
-        ENTER, TALK,QUIT
+        ENTER, TALK,QUIT, STATUS_UPDATE
     }
 	private MessageType type;
 	private int msgNum;
@@ -29,8 +29,8 @@ public class ChattDTO {
 	private String msg;
 //	private int readStatus;
 	private int roomNum;
-	private String inTime;
-	private boolean readStatus;
+	private LocalDateTime inTime;
+	private int readStatus;
 	
 //	public ChattDTO toDTO(Chatt chatt) {
 //		
@@ -59,9 +59,8 @@ public class ChattDTO {
 		this.msg = req.getParameter("msg");
 //		this.readStatus = req.getParameter("readStatus");
 //		this.readStatus = Integer.parseInt(req.getParameter("readStatus"));
-//		this.readStatus = 2;
+		this.readStatus = 1;
 		this.roomNum = Integer.parseInt(req.getParameter("roomNum"));
-		this.inTime = LocalDateTime.now().format(formatter);
 	}
 	
 	public ChattDTO convertToDTO(Chatt chatt) {
@@ -71,14 +70,14 @@ public class ChattDTO {
 	    dto.setSender(chatt.getSender());
 	    dto.setMsg(chatt.getMsg());
 	    dto.setRoomNum(chatt.getRoomNum());
-	    dto.setReadStatus(chatt.isReadStatus()); // Assuming you have a readStatus field
+	    dto.setReadStatus(chatt.getReadStatus()); // Assuming you have a readStatus field
 	    // Add other fields as necessary
 	    return dto;
 	}
 	
 	
-	public void setReadStatus(boolean readStatus) {
-		this.readStatus = readStatus;		
+	public void setReadStatus(int readStatus) {
+		this.readStatus = 1;		
 	}
 
 	public void setRoomNum(int roomNum) {
@@ -93,13 +92,21 @@ public class ChattDTO {
 		this.sender = sender;
 	}
 	
-	public void setType(MessageType type) {
-		this.type = type;
-	}
-	
 	public void setRecipient(String recipient) {
 		this.recipient = recipient;
 	}
+	
+	public void setInTime(LocalDateTime inTime) {
+		this.inTime = inTime;
+	}
+	
+	public void setType(MessageType type) {
+        this.type = type;
+    }
+
+    public MessageType getType() {
+        return this.type;
+    }
 	
 //	public void setReadStatus(int readStatus) {
 //		this.readStatus = readStatus;

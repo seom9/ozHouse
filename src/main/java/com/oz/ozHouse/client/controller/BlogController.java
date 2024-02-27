@@ -107,9 +107,7 @@ public class BlogController {
 	    	System.out.println("DB저장 실패");
 	    }
 	    
-	    req.setAttribute("url", imgString);
-	    
-    	return "client/blog/test";
+    	return "client/blog/blog_main";
     }
     
     @GetMapping("/main")
@@ -123,13 +121,13 @@ public class BlogController {
     }
     
     @GetMapping(value = "{blogNum}/blog_contents")
-    public String blogProdview(@PathVariable("blogNum") int blogNum, Model model) {
-    	System.out.println("상세보기 블로그 넘버 : " + blogNum);
-    	BlogDTO getBlog = bs.getBlog(blogNum);
-    	System.out.println("블로그 제목" + getBlog.getBlogSubject());
+    public String blogProdview(@PathVariable("blogNum") int blogNum, HttpServletRequest req) {
+    	BlogDTO blogDTO = bs.getBlog(blogNum);
+    	bs.updateReadCount(blogNum);
     	
-    	model.addAttribute("blogDTO", getBlog);
+    	req.setAttribute("blogDTO", blogDTO);
     	
     	return "client/blog/blog_contents";
     }
+
 }
