@@ -123,9 +123,11 @@ public class BlogController {
     @GetMapping(value = "{blogNum}/blog_contents")
     public String blogProdview(@PathVariable("blogNum") int blogNum, HttpServletRequest req) {
     	BlogDTO blogDTO = bs.getBlog(blogNum);
+    	bs.updateReadCount(blogNum);
     	
     	req.setAttribute("blogDTO", blogDTO);
     	
     	return "client/blog/blog_contents";
     }
+
 }
