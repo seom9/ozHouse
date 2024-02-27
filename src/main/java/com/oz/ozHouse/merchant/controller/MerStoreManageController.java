@@ -47,13 +47,13 @@ public class MerStoreManageController {
 		}
 		
 		//입점 신청 후 
-//		if(loginOk.getMer_isbrand().equals("f")) {
-//			String msg = "입점 신청 후 이용 바랍니다.";
-//			String url = "/merchant/home";
-//			req.setAttribute("msg", msg);
-//			req.setAttribute("url", url);
-//			return "message";
-//		}
+		if(loginOk.getMerIsbrand().equals("f")) {
+			String msg = "입점 신청 후 이용 바랍니다.";
+			String url = "/merchant/home";
+			req.setAttribute("msg", msg);
+			req.setAttribute("url", url);
+			return "message";
+		}
 		
 		req.setAttribute("allCount", storeManageService.allCount(merNum));
 		req.setAttribute("waitCount", storeManageService.waitCount(merNum));

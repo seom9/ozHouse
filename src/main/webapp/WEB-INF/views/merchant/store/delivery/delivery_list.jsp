@@ -105,16 +105,13 @@
 				</p>
 			</div>
 		</div>
-		<!-- 
+		<c:set var = "merNum" value="${merLoginMember.merNum}"/>
 		<form name="f"
-			action="${pageContext.request.contextPath}/merchants/${merchantLoginMember.merNum}/deliveries/search"
+			action="${pageContext.request.contextPath}/merchant/${merNum}/store/orders/search"
 			method="post" class="flex-container">
- -->
-		<form name="f"
-			action="${pageContext.request.contextPath}/merchants/deliveries/search"
-			method="post" class="flex-container">
+			
 			<input type="hidden" name="merNum"
-				value="${merchantLoginMember.merNum}"> <input type="hidden"
+				value="${merNum}"> <input type="hidden"
 				name="mode" value="${map.mode}">
 			<div class="flex-row">
 				<div class="flex-cell header-cell custom-label">주문일</div>
@@ -125,9 +122,32 @@
 				</div>
 			</div>
 			<div class="flex-row">
+<<<<<<< HEAD
+				<div class="flex-cell header-cell custom-label">환불신청여부&nbsp;&nbsp;</div>
+				<div class="flex-cell input-cell">
+					<input type="radio" name="oLike" value="all" ${oLike == 'all' ? 'checked' : ''}>전체
+					<input type="radio" name="oLike" value="ok" ${oLike == 'ok' ? 'checked' : ''}>정상주문
+					<input type="radio" name="oLike" value="return" ${oLike == 'return' ? 'checked' : ''}>환불요청주문
+				</div>
+			</div>
+			<div class="flex-row">
+				<div class="flex-cell header-cell custom-label">처리여부&nbsp;&nbsp;</div>
+				<div class="flex-cell input-cell">
+					<input type="radio" name="oRefund" value="all" ${radio == 'all' ? 'checked' : ''}>전체
+					<input type="radio" name="oRefund" value="t" ${radio == 't' ? 'checked' : ''}>완료 
+					<input type="radio" name="oRefund" value="f" ${radio == 'f' ? 'checked' : ''}>미완료
+				</div>
+			</div>
+			<div class="flex-row">
+=======
+>>>>>>> parent of 7e7f687 (complete deliveryList)
 				<div class="flex-cell header-cell custom-label">검색&nbsp;&nbsp;</div>
 				<div class="flex-cell input-cell">
-					<select name="search"> ${options}
+					<select name="search"> 
+						<option value="all" ${options == 'all' ? 'selected' : ''}>전체</option>
+				 		<option value="memberId" ${options == 'memberId' ? 'selected' : ''}>>id</option>
+				 		<option value="prodName" ${options == 'prodName' ? 'selected' : ''}>>상품명</option>
+				 		<option value="oNum" ${options == 'oNum' ? 'selected' : ''}>>주문번호</option>
 					</select> <input type="text" name="searchString" value="${map.searchString}">
 				</div>
 			</div>
@@ -154,10 +174,13 @@
 				<div class="flex-cell">주문자 ID</div>
 				<div class="flex-cell">주문일</div>
 				<div class="flex-cell">
-					상품명<br>배송지
+					상품명
 				</div>
 				<div class="flex-cell">
-					총 수량<br>주문액
+					총 수량
+				</div>
+				<div class="flex-cell">
+					주문액
 				</div>
 				<div class="flex-cell">요청사항</div>
 				<div class="flex-cell">배송현황</div>
@@ -169,16 +192,31 @@
 			</c:if>
 			<c:forEach var="dto" items="${deliveryList}">
 				<div class="flex-row">
-					<div class="flex-cell">${dto.order_code}</div>
-					<div class="flex-cell">${dto.member_id}</div>
-					<div class="flex-cell">${dto.order_date}</div>
-					<div class="flex-cell">${dto.product_name}<br>${dto.order_place}</div>
+					<div class="flex-cell">${dto.oNum}</div>
+					<div class="flex-cell">${dto.memberId}</div>
+					<div class="flex-cell">${dto.regDate}</div>
 					<div class="flex-cell">
-						<fmt:formatNumber value="${dto.order_count}" type="number"
-							pattern="###,###개" />
-						<br>
-						<fmt:formatNumber value="${dto.order_price}" type="number"
-							pattern="###,###원" />
+					<c:forEach var="item" items="${dto.orderItems}">
+						<c:if test="${item.product.proNum eq merNum}">
+							${item.product.proName}<br>
+						</c:if>
+					</c:forEach>
+					</div>
+					<div class="flex-cell">
+					<c:forEach var="item" items="${dto.orderItems}">
+						<c:if test="${item.product.proNum eq merNum}">
+							<fmt:formatNumber value="${item.quantity}" type="number"
+								pattern="###,###개" />
+						</c:if>
+					</c:forEach>
+					</div>
+					<div class="flex-cell">
+					<c:forEach var="item" items="${dto.orderItems}">
+						<c:if test="${item.product.proNum eq merNum}">
+							<fmt:formatNumber value="${item.quantity * item.product.}" type="number"
+								pattern="###,###원" />
+						</c:if>
+					</c:forEach>
 					</div>
 					<div class="flex-cell">${dto.order_comment}</div>
 					<c:choose>
