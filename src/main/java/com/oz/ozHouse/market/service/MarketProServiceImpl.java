@@ -64,6 +64,12 @@ public class MarketProServiceImpl implements MarketProService {
 		return proRepository.findBoughtProductsByNickname(nickname);
 	}
 	
+	//내 정보 _ 예약내역
+	@Override
+	public List<OzMarketProDTO> findReservationProductsByNickname(String nickname) {
+		return proRepository.findReservationProductsByNickname(nickname);
+	}
+	
 	// 상품 삭제
 	@Override
 	@Transactional
@@ -72,16 +78,19 @@ public class MarketProServiceImpl implements MarketProService {
 	}
 
 	@Override
+	@Transactional
 	public boolean reserveProduct(Integer proNum, String memberNickname) {
 		return proRepository.reserveProduct(proNum, memberNickname);
 	}
 
 	@Override
+	@Transactional
 	public boolean confirmPurchase(Integer proNum, String memberNickname) {
 		return proRepository.confirmPurchase(proNum, memberNickname);
 	}
 
 	@Override
+	@Transactional
 	public boolean cancelReservation(Integer proNum) {
 		return proRepository.cancelReservation(proNum);
 	}

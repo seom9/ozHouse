@@ -20,5 +20,6 @@ public interface ChattRoomService {
 //    String getUserCheckStatus(Integer roomNum, String userId);
 //	void updateUserCheckStatus(int roomNum, String username, String status);
 	List<ChattRoomDTO> findRoomDetailsByMemberNickname(String memberNickname);
+	void deleteChatRoom(int roomNum);
 
 }
