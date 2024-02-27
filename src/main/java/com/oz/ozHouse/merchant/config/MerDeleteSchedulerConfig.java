@@ -18,6 +18,6 @@ public class MerDeleteSchedulerConfig {
 	@Scheduled( cron = "*/10 * * * * *")
 	public void run() {
 		System.out.println("Scheduler 시작!");
-		schedulerService.deleteMerchant();
+		//schedulerService.deleteMerchant();
 	}
 }
