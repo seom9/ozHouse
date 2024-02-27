@@ -13,74 +13,6 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-<script>
-// 예약 버튼 클릭 시 호출될 함수
-function reserveProduct(proNum) {
-    fetch(`/ozMarket/reserveProduct/${proNum}`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            // 필요한 경우 CSRF 토큰 추가
-        },
-        // body 데이터는 필요한 경우에 따라 추가
-    })
-    .then(response => {
-        if (response.ok) {
-            return response.text();
-        }
-        throw new Error('Network response was not ok.');
-    })
-    .then(data => {
-        alert(data); // 성공 메시지 처리
-    })
-    .catch(error => console.error('Error:', error));
-}
-
-// 구매 확정 버튼 클릭 시 호출될 함수
-function confirmPurchase(proNum) {
-    fetch(`/ozMarket/confirmPurchase/${proNum}`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            // 필요한 경우 CSRF 토큰 추가
-        },
-        // body 데이터는 필요한 경우에 따라 추가
-    })
-    .then(response => {
-        if (response.ok) {
-            return response.text();
-        }
-        throw new Error('Network response was not ok.');
-    })
-    .then(data => {
-        alert(data); // 성공 메시지 처리
-    })
-    .catch(error => console.error('Error:', error));
-}
-
-// 예약 취소 버튼 클릭 시 호출될 함수
-function cancelReservation(proNum) {
-    fetch(`/ozMarket/cancelReservation/${proNum}`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            // 필요한 경우 CSRF 토큰 추가
-        },
-        // body 데이터는 필요한 경우에 따라 추가
-    })
-    .then(response => {
-        if (response.ok) {
-            return response.text();
-        }
-        throw new Error('Network response was not ok.');
-    })
-    .then(data => {
-        alert(data); // 성공 메시지 처리
-    })
-    .catch(error => console.error('Error:', error));
-}
-</script>
-
 </head>
 <body>
 	<div class="chat-container">
@@ -112,17 +44,20 @@ function cancelReservation(proNum) {
 			<div class="product-info">
 				<h3>${getProduct.proTitle}</h3>
 				<h3>${getProduct.proPrice}</h3>
+				<h3>${getProduct.proApprovalStatus }</h3>
 				<h3>
 					<img src="data:image/jpeg;base64,${encodedImages[0]}" width="60"
 						height="60" alt="${getProduct.proTitle}" />
 				</h3>
-				<!-- 예약 -->
-				<form id="reserveForm"
-					action="/ozMarket/reserveProduct/${getProduct.proNum}"
-					method="post">
-					<input type="submit" value="예약" />
-				</form>
-
+				<c:if test="${getProduct.memberNickname == memberNickname}">
+				<c:if test="${getProduct.proApprovalStatus == '판매중'}">
+					<!-- 예약 -->
+					<form id="reserveForm"
+						action="/ozMarket/reserveProduct/${getProduct.proNum}"
+						method="post">
+						<input type="submit" value="예약" />
+					</form>
+				</c:if>
 				<!-- 구매 확정 -->
 				<form id="confirmForm"
 					action="/ozMarket/confirmPurchase/${getProduct.proNum}"
@@ -130,14 +65,17 @@ function cancelReservation(proNum) {
 					<input type="submit" value="확정" />
 				</form>
 
-				<!-- 예약 취소 -->
-				<form id="cancelForm"
-					action="/ozMarket/cancelReservation/${getProduct.proNum}"
-					method="post">
-					<input type="submit" value="취소" />
-				</form>
+				<c:if test="${getProduct.proApprovalStatus == '예약중'}">
+					<!-- 예약 취소 -->
+					<form id="cancelForm"
+						action="/ozMarket/cancelReservation/${getProduct.proNum}"
+						method="post">
+						<input type="submit" value="취소" />
+					</form>
 			</div>
-
+			</c:if>
+			</c:if>
+			
 			<!-- 메시지 표시 영역: 수신한 메시지가 여기에 출력 -->
 			<div class="msgArea"></div>
 			<div class="message-input">
@@ -186,9 +124,30 @@ function cancelReservation(proNum) {
 			socket.onmessage = function(e) {
 				console.log('메시지 수신: ', e.data);
 				processMessage(e); // 수신된 메시지 처리
+				
 			};
 		}
 
+		function updateChatList() {
+		    $.ajax({
+		        url: '/getLatestChats', // 서버에 설정된 채팅 리스트를 가져오는 URL
+		        type: 'GET',
+		        dataType: 'json',
+		        success: function(data) {
+		            // 채팅 리스트 업데이트 로직
+		            // 예: 채팅 리스트를 담고 있는 HTML 요소를 찾아 내용을 갱신
+		            var chatList = $('#chat-list');
+		            chatList.empty(); // 기존 목록을 비움
+		            $.each(data, function(index, chat) {
+		                chatList.append('<li>' + chat.sender + ': ' + chat.message + '</li>');
+		            });
+		        },
+		        error: function(xhr, status, error) {
+		            console.error("채팅 리스트 갱신 중 오류 발생", error);
+		        }
+		    });
+		}
+		
 		// 채팅방에 들어가는 로직을 처리하는 함수
 		function enterRoom() {
 			loadPreviousMessages(roomNum); // 이전 메시지를 로드하는 함수 호출
