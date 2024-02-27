@@ -70,4 +70,19 @@ public class MarketProServiceImpl implements MarketProService {
 	public void deleteProduct(Integer proNum) {
 		 proRepository.deleteByProNum(proNum);
 	}
+
+	@Override
+	public boolean reserveProduct(Integer proNum, String memberNickname) {
+		return proRepository.reserveProduct(proNum, memberNickname);
+	}
+
+	@Override
+	public boolean confirmPurchase(Integer proNum, String memberNickname) {
+		return proRepository.confirmPurchase(proNum, memberNickname);
+	}
+
+	@Override
+	public boolean cancelReservation(Integer proNum) {
+		return proRepository.cancelReservation(proNum);
+	}
 }

@@ -1,9 +1,12 @@
 package com.oz.ozHouse.client.config;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -34,8 +37,6 @@ public class WebsocketHandler extends TextWebSocketHandler {
 
 	private final ChattService chattService;
 
-	private final StringRedisTemplate stringRedisTemplate;
-
 	private Map<String, HashSet<WebSocketSession>> roomSessions = new ConcurrentHashMap<>();
 
 	@Override
@@ -47,14 +48,13 @@ public class WebsocketHandler extends TextWebSocketHandler {
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		String payload = message.getPayload();
 		ChattDTO chatt = objectMapper.readValue(payload, ChattDTO.class);
-		String roomNumStr = String.valueOf(chatt.getRoomNum()); // 방 번호를 문자열로 변환
+		String roomNumStr = String.valueOf(chatt.getRoomNum());
 
 		switch (chatt.getType()) {
 		case ENTER:
 			enterRoom(session, chatt, roomNumStr);
 			break;
 		case TALK:
-//                talk(session, chatt, roomNumStr);
 			saveAndBroadcastMessage(session, chatt, roomNumStr);
 			break;
 		case QUIT:
@@ -67,58 +67,41 @@ public class WebsocketHandler extends TextWebSocketHandler {
 	    HashSet<WebSocketSession> sessions = roomSessions.computeIfAbsent(roomNumStr, k -> new HashSet<>());
 	    sessions.add(session);
 
-	    // 새로운 사용자가 입장하면 읽지 않은 메시지를 읽음으로 표시
-	    if (sessions.size() > 1) { // 채팅방에 사용자가 2명 이상인 경우
-	        List<Chatt> unreadMessages = chattService.markMessagesAsRead(roomNumStr); // 읽지 않은 메시지들을 읽음으로 표시하는 로직
-
-	        // 변경된 메시지 상태를 모든 클라이언트에게 방송
-	        for (Chatt updatedMessage : unreadMessages) {
-	            ChattDTO updatedChattDTO = convertToChattDTO(updatedMessage);
-	            broadcast(updatedChattDTO, roomNumStr); // 변경된 메시지 상태를 방송
-	        }
-	    }
-
+	 // 현재 채팅방에 입장한 사용자 수
+	    int numberOfUsers = sessions.size();
+	    
 	    // 사용자 입장 메시지 방송
 	    chatt.setMsg(chatt.getSender() + "님이 입장했습니다.");
 	    broadcast(chatt, roomNumStr);
 	}
 
-	private void talk(WebSocketSession session, ChattDTO chattDTO, String roomNumStr) throws IOException {
-		// 데이터베이스에 채팅 메시지를 저장
-//	    Chatt messageEntity = convertToEntity(chattDTO, roomNumStr); // DTO를 엔티티로 변환하면서 roomNumStr도 전달
-//	    chattService.saveMessage(messageEntity); // 서비스를 사용하여 메시지 엔티티 저장
-
-		broadcast(chattDTO, roomNumStr);
-	}
 
 	private void saveAndBroadcastMessage(WebSocketSession session, ChattDTO chattDTO, String roomNumStr)
 	        throws IOException {
-	    // Assuming that ChattDTO contains a field for the read status and it's initially set to false
 	    chattDTO.setRoomNum(Integer.parseInt(roomNumStr));
-
-	    // Determine the read status based on the number of active sessions in the room
-	    boolean readStatus = roomSessions.get(roomNumStr) != null && roomSessions.get(roomNumStr).size() > 1;
-	    chattDTO.setReadStatus(readStatus); // Set the read status based on the presence of users in the room
-
-	    Chatt savedChatt = chattService.saveMessage(chattDTO); // Save the message with the updated read status
-
-	    // Broadcast the message to all users in the room
+	    chattDTO.setInTime(LocalDateTime.now());
+	    chattDTO.setReadStatus(1);
+	    String receiver = determineReceiver(chattDTO.getRoomNum(), chattDTO.getSender());
+	    chattDTO.setRecipient(receiver);
+	    
+	    Chatt savedChatt = chattService.save(new Chatt(chattDTO)); // DTO를 엔티티로 변환 후 저장
 	    broadcast(chattDTO, roomNumStr);
 	}
-
-	// Chatt 엔티티를 ChattDTO로 변환하는 메서드 (구현 필요)
-	private ChattDTO convertToChattDTO(Chatt chatt) {
-	    // Chatt 엔티티를 DTO로 변환하는 로직 구현
-	    return new ChattDTO();
+	
+	private String determineReceiver(Integer roomNum, String sender) {
+	    String receiver = chattRoomService.findOtherParticipant(roomNum, sender);
+	    return receiver;
 	}
 
 	private void quitRoom(WebSocketSession session, ChattDTO chatt, String roomNumStr) throws IOException {
-		HashSet<WebSocketSession> sessions = roomSessions.get(roomNumStr);
-		if (sessions != null) {
-			sessions.remove(session);
-			chatt.setMsg(chatt.getSender() + "님이 퇴장했습니다.");
-			broadcast(chatt, roomNumStr);
-		}
+	    log.info("Handling quit for user: {} in room: {}", chatt.getSender(), roomNumStr);
+	    HashSet<WebSocketSession> sessions = roomSessions.get(roomNumStr);
+	    if (sessions != null) {
+	        sessions.remove(session);
+	        log.info("Updated presence status to off for user: {} in room: {}", chatt.getSender(), roomNumStr);
+	        chatt.setMsg(chatt.getSender() + "님이 퇴장했습니다.");
+	        broadcast(chatt, roomNumStr);
+	    }
 	}
 
 	private void broadcast(ChattDTO chatt, String roomNumStr) throws IOException {

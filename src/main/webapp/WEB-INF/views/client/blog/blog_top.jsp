@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -51,31 +52,15 @@
 		        dropdown.style.display = (dropdown.style.display === 'none' || dropdown.style.display === '') ? 'block' : 'none';
 		    }
 		</script>
-		<script>
-			function mypage_scrap(){
-				var isLogin = ${loginMember != null};
-				
-			    if (!isLogin) {
-			    	alert("로그인이 필요합니다. 로그인 페이지로 이동합니다.");
-			        window.location.href = 'member_login.do';
-			        return;
-			    } else {
-			    	window.location.href = 'mypage_scrapbook.do';
-			    }
-			}
-			
-			function mypage_cart(){
-				var isLogin = ${loginMember != null};
-				
-			    if (!isLogin) {
-			    	alert("로그인이 필요합니다. 로그인 페이지로 이동합니다.");
-			        window.location.href = 'member_login.do';
-			        return;
-			    } else {
-			    	window.location.href = 'CartList_main.do';
-			    }
-			}
-		</script>
+	      <script>
+	         function mypage_scrap(){
+	           window.location.href = '/mypage/scrap';
+	         }
+	         
+	         function mypage_cart(){
+	          	window.location.href = '/cart';
+	         }
+	      </script>
 		<script>
         document.addEventListener('DOMContentLoaded', function () {
             // 페이지 로드가 완료된 후 실행됩니다.
@@ -97,18 +82,21 @@
 						<a class="css-1qwerc" href="/main">
 							<span class="css-18nk785">OZ의집</span>
 						</a>	     
-						<a class="css-53vhmk" href="shop_main.do">
+						<a class="css-53vhmk" href="/shop/main">
 						    <span class="css-18nk785">쇼핑</span>
 						</a>
-					    <a class="css-53vhmk" href="best_main.do?spec=best">
+					    <a class="css-53vhmk" href="/shop/best">
 					        <span class="css-18nk785">베스트</span>
 					    </a>
-					    <a class="css-53vhmk" href="blog_main.do">
+					    <a class="css-53vhmk" href="/blog/main">
 					        <span class="css-18nk785">블로그</span>
 					    </a>
-					    <a class="css-53vhmk" href="best_main.do?spec=today">
+					    <a class="css-53vhmk" href="/shop/today">
 					        <span class="css-18nk785">오늘의 딜</span>
 					    </a>
+						<a class="css-53vhmk" href="/ozMarket">
+                       		<span class="css-18nk785">오즈마켓</span>
+                   		</a>
 					</div>
 					<div class="css-1i4309w">
 						<div class="css-10vibjk">
@@ -135,18 +123,25 @@
 								    <span class="_cart_24 css-17vaqfq"></span>
 								</a>
 							<div class="css-1f624s9">
-								<div class="css-1kpxvh4">
-									<c:if test="${empty sessionScope.loginMember}">
-									<a class="css-1g5o6hv" href="member_login.do">로그인</a>
-									<a class="css-1g5o6hv" href="member_join.do">회원가입</a>
-								    <a class="css-1tlac5g" href="merchant_main.do">판매자센터</a>
-								    </c:if>
-								    <c:if test="${not empty sessionScope.loginMember}">
-									<a class="css-1g5o6hv" href="member_logout.do">로그아웃</a>
-									<a class="css-1g5o6hv" href="mypage_profile.do">마이페이지</a>
-								    <a class="css-1tlac5g" href="merchant_main.do">판매자센터</a>
-								    </c:if>
-								</div>
+                        <div class="css-1kpxvh4">
+                           <sec:authorize access="hasAnyRole('ROLE_CLIENT')">
+                              <a class="css-1g5o6hv" href="/logout">로그아웃</a>
+                              <a class="css-1g5o6hv" href="/mypage/profile">마이페이지</a>
+                               <a class="css-1tlac5g" href="${pageContext.request.contextPath}/merchant/main">판매자센터</a>
+                           </sec:authorize>
+                           <sec:authorize access="!hasAnyRole('ROLE_CLIENT')">
+                              <a class="css-1g5o6hv" href="/member/login">로그인</a>
+                              <a class="css-1g5o6hv" href="/member/join">회원가입</a>
+                               <a class="css-1tlac5g" href="${pageContext.request.contextPath}/merchant/home">판매자센터</a>
+                           </sec:authorize>
+                           <c:if test="${empty sessionScope.loginMember}">
+                            </c:if>
+                            <c:if test="${not empty sessionScope.loginMember}">
+                              <a class="css-1g5o6hv" href="/member/logout">로그아웃</a>
+                              <a class="css-1g5o6hv" href="/mypage/profile">마이페이지</a>
+                               <a class="css-1tlac5g" href="${pageContext.request.contextPath}/merchant/home">판매자센터</a>
+                            </c:if>
+                        </div>
 		             			<span class="css-1amee4m">
 		             				<button class="css-qnc3fr" onclick="toggleDropdown()">
 		             					<span class="css-cdruys">글쓰기</span>
