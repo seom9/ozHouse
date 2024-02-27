@@ -61,22 +61,22 @@
 		<g fill="none" fill-rule="evenodd">
 		   <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="12" fill="#757575">배송 준비</text>
 		 </g>
-		<div class="order-list__info__wrap__content__text"><span></span>
-		<span class="order-list__info__wrap__content__value">${ready}</span></div>
+		<div class="order-list__info__wrap__content__text" id="isReady"><span></span>
+		<span class="order-list__info__wrap__content__value"></span></div>
 		</div>
 		<div class="test">
 		<g fill="none" fill-rule="evenodd">
 		   <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="12" fill="#757575">배송 중</text>
 		 </g>
-		<div class="order-list__info__wrap__content__text"><span></span>
-		<span class="order-list__info__wrap__content__value">${delivery}</span></div>
+		<div class="order-list__info__wrap__content__text" id="isDelivery"><span></span>
+		<span class="order-list__info__wrap__content__value"></span></div>
 		</div>
 		<div class="test">
 		<g fill="none" fill-rule="evenodd">
 		   <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="12" fill="#757575">배송 완료</text>
 		 </g>
-		<div class="order-list__info__wrap__content__text"><span></span>
-		<span class="order-list__info__wrap__content__value">${complete}</span></div>
+		<div class="order-list__info__wrap__content__text" id="isComplete"><span></span>
+		<span class="order-list__info__wrap__content__value"></span></div>
 		</div>
 		<div class="test">
 		<g fill="none" fill-rule="evenodd">
@@ -124,7 +124,30 @@
 				</c:if>
 				
 				<c:if test="${not empty orders}">
+				  	<c:set var="delivery_now" value="배송 준비"/>
+				  	
+  					<c:set var="ready" value="0"/>
+  					<c:set var="delivery" value="0"/>
+  					<c:set var="complete" value="0"/>
 					<c:forEach var="orders" items="${orders}">
+
+                    <c:choose>
+                        <c:when test="${orders.orderDelnow eq 'ready'}">
+                            <c:set var="delivery_now" value="준비 중"/>
+                            <c:set var="ready" value="${ready + 1}"/>
+                        </c:when>
+                        <c:when test="${orders.orderDelnow eq 'delivery'}">
+                            <c:set var="delivery_now" value="배송 중"/>
+                            <c:set var="delivery" value="${delivery + 1}"/>
+                        </c:when>
+                        <c:when test="${orders.orderDelnow eq 'complete'}">
+                            <c:set var="delivery_now" value="배송 완료"/>
+                            <c:set var="complete" value="${complete + 1}"/>
+                        </c:when>
+                        <c:when test="${orders.orderDelnow eq 'cancel'}">
+                            <c:set var="delivery_now" value="취소 상품"/>
+                        </c:when>                                                                              
+                    </c:choose>
 					<div class="my-box">
 					<c:set var="order_price" value="0"/>
 					<c:set var="product_qpty" value="0"/>
@@ -132,10 +155,11 @@
 							<ul class="commerce-cart__content__group-list">
 								<li class="commerce-cart__content__group-item">
 									<article class="commerce-cart__group">
-									<div class="order_code234"><span class="order_code123" style=""><a href="/order/${orders.orderNum}/confirm">주문 코드 : ${orders.orderNum}</a></span></div>
+									<div class="order_code234"><span class="order_code123" style=""><a href="/order/${orders.orderNum}/confirm">주문 코드 : ${orders.orderNum}  | ${delivery_now}</a></span></div>
 									<div><br><br><br></div>
 									<hr>
 <c:forEach var="proQuanDTOs" items="${orders.proQuanDTOs}">
+
     <c:set var="product" value="${proQuanDTOs.productDTO}"/>
     <ul class="item-list">
         <li class="item">
@@ -173,18 +197,7 @@
                                             <c:set var="order_price" value="${order_price + (product.proPrice - product.proDiscountPrice) * proQuanDTOs.quantity}" />
                                             <c:set var="product_qpty" value="${product_qpty + proQuanDTOs.quantity}"/>
                                             <!-- 배송 중 뽑아내는 코드 -->
-                                            <c:set var="delivery_now" value="배송 준비"/>
-                                            <c:choose>
-                                                <c:when test="${orders.orderDelnow eq 'delivery'}">
-                                                    <c:set var="delivery_now" value="배송 중"/>
-                                                </c:when>
-                                                <c:when test="${orders.orderDelnow eq 'complete'}">
-                                                    <c:set var="delivery_now" value="배송 완료"/>
-                                                </c:when>
-                                                <c:when test="${orders.orderDelnow != null}">
-                                                    <c:set var="delivery_now" value="취소 상품"/>
-                                                </c:when>                                                                              
-                                            </c:choose>
+
                                         </span>
                                     </p>
                                 </span>                           
@@ -217,7 +230,10 @@
 					</div>
 					</c:forEach>
 				</c:if>
-		
+				<input type="hidden" value="${ready}" id="ready">
+				<input type="hidden" value="${delivery}" id="delivery">
+				<input type="hidden" value="${complete}" id="complete">
+				
 				<br><br><br>
 		    </div>
 		</div>
@@ -235,6 +251,21 @@
             }
         });
     }
+</script>
+
+<script type="text/javascript">
+
+function setDeliveryStatus() {
+    var readyValue = document.getElementById("ready").value;
+    var deliveryValue = document.getElementById("delivery").value;
+    var completeValue = document.getElementById("complete").value;
+    
+    document.getElementById("isReady").innerText = readyValue;
+    document.getElementById("isDelivery").innerText = deliveryValue;
+    document.getElementById("isComplete").innerText = completeValue;
+}
+
+	window.onload = setDeliveryStatus();
 </script>
 
 <!-- css 파일 분리했더니 적용이 안 돼서 우선 여기다 뒀습니다 -->

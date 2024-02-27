@@ -142,6 +142,7 @@ public class OrderController {
 		
 		req.setAttribute("orders", orders);
 		req.setAttribute("info", memberService.memberPointAndLevel(member.getMemberId()));
+		// 쿠폰 사용한 쿠폰은 집계 안 되는 설정 못함
 		req.setAttribute("coupons", couponService.countCouppon(member.getMemberId()));
 		
 		return "client/mypage/mypage_shopping";

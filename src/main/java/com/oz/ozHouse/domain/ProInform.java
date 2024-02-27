@@ -35,5 +35,11 @@ public class ProInform {
     private String oRefund;
     
     private int realPrice;
+
+	public void setOrderTb(OrderTb orderTb) {
+		this.orderTb = orderTb;
+	}
+    
+
     
 }
