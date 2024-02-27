@@ -69,7 +69,7 @@
 						<span class="subtitle">(판매건수는 SUM단위로 수집됩니다.)</span>
 					</div>
 					<hr>
-					<div class="sales-progress-container">
+					<%-- <div class="sales-progress-container">
 						<div class="sales-progress">
 							<div class="progress-item">
 								<span class="stage">배송 준비</span> <a
@@ -95,18 +95,17 @@
 
 							</div>
 						</div>
-					</div> <br>
+					</div> <br> --%>
 					<div class="title no-box-style" align="left">클래임 관리 및 Q&A 관리</div>
 					<hr>
 					<div class="content">
-						<div class="content-box">
+						<%-- <div class="content-box">
 							<span style="font-size: 20px; color: #FFFFFF;">처리해야 할 교환건</span>
 							<hr class="underline-style">
 							<a
 								href="${pageContext.request.contextPath}/merchant/${merNum}/returns/exchange">
 								<span class="number">${exchangeCount }건</span>
 							</a>
-
 						</div>
 						<div class="content-box">
 							<span style="font-size: 20px; color: #FFFFFF;">처리해야 할 환불건</span>
@@ -115,8 +114,7 @@
 								href="${pageContext.request.contextPath}/merchant/${merNum}/returns/refund">
 								<span class="number">${returnCount }건</span>
 							</a>
-
-						</div>
+						</div> --%>
 						<div class="content-box">
 							<span style="font-size: 20px; color: #FFFFFF;">응답해야 할 Q&A</span>
 							<hr class="underline-style">
