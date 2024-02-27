@@ -25,6 +25,14 @@ public class ChattRoomDTO {
 	private String myIdCheck; 
     private String otherIdCheck;
     private String partner;
+    private String lastMessage; 
+
+    
+    public ChattRoomDTO(int roomNum, String partner, String lastMessage) {
+        this.roomNum = roomNum;
+        this.partner = partner;
+        this.lastMessage = lastMessage;
+    }
     
 	public static ChattRoomDTO toDTO(ChattRoom dto) {
 		

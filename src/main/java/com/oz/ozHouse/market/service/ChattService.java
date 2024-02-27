@@ -21,6 +21,4 @@ public interface ChattService {
 
 	void deleteByInTimeBefore(LocalDateTime date);
 
-    void updateReadStatusForUserInRoom(Integer roomNum, String userId);
-
 }

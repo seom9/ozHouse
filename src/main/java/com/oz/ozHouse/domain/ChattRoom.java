@@ -45,6 +45,9 @@ public class ChattRoom {
 	
 	@Transient
 	private String partner;
+	
+	@Transient
+	private String lastMessage; 
 
 	public ChattRoom(ChattRoomDTO dto) {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy/MM/dd");
