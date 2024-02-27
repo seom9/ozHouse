@@ -70,4 +70,20 @@ public class BlogServiceImpl implements BlogService {
 		
 		return new BlogDTO(getBlog);
 	}
+	
+	// 조회수
+	@Override
+	public int updateReadCount(Integer blogNum) {
+		int res = br.updateReadCount(blogNum);
+		
+		if(res > 0) {
+			return 1;
+		} else{
+			return -1;
+		}
+		
+	}
+	
+	
+	
 }
