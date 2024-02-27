@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,4 +25,8 @@ public interface ChattRepository extends JpaRepository<Chatt, Integer> {
 
     @Transactional
     void deleteByInTimeBefore(LocalDateTime threshold);
+    
+    @Modifying
+    @Query("UPDATE Chatt c SET c.readStatus = 0 WHERE c.roomNum = :roomNum AND c.recipient = :userId AND c.readStatus = 1")
+    int updateReadStatusByRoomNumAndRecipient(@Param("roomNum") Integer roomNum, @Param("userId") String userId);
 }

@@ -63,11 +63,14 @@ public class ChattServiceImpl implements ChattService {
     }
 
 	@Override
-	public void deleteChatHistoryBefore(LocalDateTime date) {
+	public void deleteByInTimeBefore(LocalDateTime date) {
 		chattRepository.deleteByInTimeBefore(date);		
 	}
 
-	
+	@Override
+	public void updateReadStatusForUserInRoom(Integer roomNum, String userId) {
+	    int updatedCount = chattRepository.updateReadStatusByRoomNumAndRecipient(roomNum, userId);
+	}
 	
 
 }

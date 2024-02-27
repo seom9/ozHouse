@@ -7,8 +7,6 @@ import org.springframework.stereotype.Component;
 import com.oz.ozHouse.market.service.ChattService;
 
 import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.Date;
 
 @Component
 public class ChatCleanupJob implements Job {
@@ -18,9 +16,8 @@ public class ChatCleanupJob implements Job {
 
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {
-        LocalDateTime sevenDaysAgo = LocalDateTime.now().minusDays(7);
+    	LocalDateTime fourteenDaysAgo = LocalDateTime.now().minusDays(14);
 
-        // 7일 이전의 채팅 내역 삭제
-        chattService.deleteChatHistoryBefore(sevenDaysAgo);
+        chattService.deleteByInTimeBefore(fourteenDaysAgo);
     }
 }

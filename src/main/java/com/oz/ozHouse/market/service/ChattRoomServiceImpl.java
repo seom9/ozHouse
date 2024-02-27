@@ -41,13 +41,11 @@ public class ChattRoomServiceImpl implements ChattRoomService {
     @Override
     @Transactional
     public ChattRoom findOrCreateRoom(String buyerNickname, String sellerNickname, Integer proNum) {
-        // 기존 채팅방 검색 로직 구현 (예시 코드, 실제 구현은 데이터 모델에 따라 달라질 수 있음)
         List<ChattRoom> existingRooms = chattRoomRepository.findByBuyerAndSellerAndProNum(buyerNickname, sellerNickname, proNum);
         if (!existingRooms.isEmpty()) {
-            return existingRooms.get(0); // 기존 채팅방이 있다면 반환
+            return existingRooms.get(0);
         }
         
-        // 새 채팅방 생성 로직
         ChattRoomDTO chattRoomDTO = new ChattRoomDTO();
         chattRoomDTO.setMyId(buyerNickname);
         chattRoomDTO.setOtherId(sellerNickname);
@@ -63,23 +61,25 @@ public class ChattRoomServiceImpl implements ChattRoomService {
                                   .collect(Collectors.toList());
     }
 
-    @Override
-    @Transactional
-    public void updateUserCheckStatus(Integer roomNum, String userId, String status) {
-        ChattRoom room = findRoomByNum(roomNum); // Assuming this method fetches the room by its number
-        
-        if (userId.equals(room.getMyId())) {
-            room.setMyIdCheck(status);
-        } else if (userId.equals(room.getOtherId())) {
-            room.setOtherIdCheck(status);
-        } else {
-        }
+//    @Override
+//    public void updateUserCheckStatus(Integer roomNum, String userId, String status) {
+//        chattRoomRepository.updateUserCheckStatus(roomNum, userId, status);
+//    }
 
-        chattRoomRepository.save(room); // Save the updated room status
+    @Override
+    public String findOtherParticipant(Integer roomNum, String sender) {
+        return chattRoomRepository.findOtherParticipantId(roomNum, sender);
+
     }
 
-	@Override
-	public String findOtherParticipant(Integer roomNum, String sender) {
-		return chattRoomRepository.findOtherParticipantId(roomNum, sender);
-	}
+//    @Override
+//    public String getUserCheckStatus(Integer roomNum, String userId) {
+//        // TODO Auto-generated method stub
+//        return null;
+//    }
+
+//    @Override
+//    public void updateUserCheckStatus(int roomNum, String username, String status) {
+//        chattRoomRepository.updateCheckStatus(roomNum, username, status);
+//    }
 }
