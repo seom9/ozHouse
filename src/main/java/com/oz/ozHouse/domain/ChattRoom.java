@@ -1,5 +1,6 @@
 package com.oz.ozHouse.domain;
 
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import com.oz.ozHouse.dto.ChattRoomDTO;
@@ -46,7 +47,11 @@ public class ChattRoom {
 //		this.roomNum = dto.getRoomNum();
 		this.myId = dto.getMyId();
 		this.otherId = dto.getOtherId();
-		this.createTime = dto.getCreateTime().formatted(formatter);
+		if (dto.getCreateTime() != null) {
+	        this.createTime = dto.getCreateTime().formatted(formatter);
+	    } else {
+	        this.createTime = LocalDate.now().format(formatter); // 기본값으로 현재 날짜 설정
+	    }
 		this.proNum = dto.getProNum();
     }
 }
