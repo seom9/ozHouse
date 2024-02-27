@@ -11,6 +11,7 @@ import com.oz.ozHouse.domain.Member;
 import com.oz.ozHouse.domain.common.MemberLevel;
 import com.oz.ozHouse.domain.common.MemberRole;
 import com.oz.ozHouse.dto.MemberDTO;
+import com.oz.ozHouse.dto.client.member.MemberInfoDTO;
 import com.oz.ozHouse.dto.client.member.MemberJoinDTO;
 
 import jakarta.transaction.Transactional;
@@ -106,6 +107,18 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int memberPoint(String memberId) {
 		return memberRepository.findByMemberId(memberId).getMemberPoint();
+	}
+	
+	@Override
+	public MemberInfoDTO memberPointAndLevel(String memberId) {
+		Member member = memberRepository.findByMemberId(memberId);
+		MemberInfoDTO memInfo = MemberInfoDTO.builder()
+				.memberPoint(member.getMemberPoint())
+				.memberLevel(member.getMemberLevel())
+				.build();
+		
+		return memInfo;
+		
 	}
 }
 

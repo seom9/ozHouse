@@ -104,6 +104,12 @@ public class CouponServiceImpl implements CouponService{
 		
 		return merCouponDTOs;
 	}
+
+
+	@Override
+	public int countCouppon(String memberId) {
+		return userCouponRepository.countByMember_MemberId(memberId);
+	}
 	
 	
 }

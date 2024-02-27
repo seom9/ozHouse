@@ -27,6 +27,7 @@ import com.oz.ozHouse.dto.client.member.ClientOrderConfirmDTO;
 import com.oz.ozHouse.dto.client.member.ClientOrderDTO;
 import com.oz.ozHouse.dto.client.member.ClientOrderListDTO;
 import com.oz.ozHouse.dto.client.member.ClientProductDTO;
+import com.oz.ozHouse.dto.client.member.MemberInfoDTO;
 import com.oz.ozHouse.dto.client.member.ProQuanDTO;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -140,6 +141,9 @@ public class OrderController {
 		List<ClientOrderListDTO> orders = orderService.getMemberWithOrder(member.getUsername());
 		
 		req.setAttribute("orders", orders);
+		req.setAttribute("info", memberService.memberPointAndLevel(member.getMemberId()));
+		req.setAttribute("coupons", couponService.countCouppon(member.getMemberId()));
+		
 		return "client/mypage/mypage_shopping";
 	}
 

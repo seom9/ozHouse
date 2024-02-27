@@ -9,12 +9,14 @@ import java.util.stream.Collectors;
 import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
 
+import com.oz.ozHouse.client.repository.ClientMerCouponRepository;
 import com.oz.ozHouse.client.repository.MemberRepository;
 import com.oz.ozHouse.client.repository.OrderRepository;
 import com.oz.ozHouse.client.repository.ProInformRepository;
 import com.oz.ozHouse.client.repository.ProductRepository;
 import com.oz.ozHouse.client.repository.UserCouponRepository;
 import com.oz.ozHouse.domain.Member;
+import com.oz.ozHouse.domain.MerCoupon;
 import com.oz.ozHouse.domain.OrderTb;
 import com.oz.ozHouse.domain.ProInform;
 import com.oz.ozHouse.domain.UserCoupon;
@@ -36,6 +38,7 @@ public class OrderServiceImpl implements OrderService{
 	private final OrderRepository orderRepository;
 	private final ProductRepository productRepository;
 	private final UserCouponRepository couponRepository;
+	private final ClientMerCouponRepository merCouponRepository; 
 	private final ProInformRepository proInformRepository;
 	
 	@Override
@@ -49,7 +52,7 @@ public class OrderServiceImpl implements OrderService{
 	    // 2. ProInforms, useCoupons 생성
 	    List<ProInform> proInfroms = createProInforms(orderProducts, order);
 	    List<UserCoupon> userCoupons = null;
-	    if (selectedCoupons != null) userCoupons = CreateUserCoupons(selectedCoupons, order);
+	    if (selectedCoupons != null) userCoupons = CreateUserCoupons(selectedCoupons, order, member);
 	    
 	    // 3. OrderTb 저장
 	    order = orderRepository.save(order);
@@ -75,13 +78,14 @@ public class OrderServiceImpl implements OrderService{
 		
 		return proInforms;
 	}
+	 
 	
-	
-	private List<UserCoupon> CreateUserCoupons(List<String> useCoupons, OrderTb order) {
+	private List<UserCoupon> CreateUserCoupons(List<String> useCoupons, OrderTb order, Member member) {
 	    List<UserCoupon> useUserCoupons = useCoupons.stream()
 				            .map(couponCode -> Integer.parseInt(couponCode))
 				            .map(intCouponCode -> {
-				                UserCoupon userCoupon = couponRepository.findByMerCoupon_MerCouponnum(intCouponCode);
+				            	MerCoupon merCoupon = merCouponRepository.getById(intCouponCode);
+				                UserCoupon userCoupon = couponRepository.findByMerCouponAndMember(merCoupon, member);
 				                userCoupon.setOrder(order); 
 				                userCoupon.setUserCouponActive(true);
 				                return userCoupon;
@@ -128,11 +132,8 @@ public class OrderServiceImpl implements OrderService{
 	@Override
 	@Transactional
 	public List<MerCouponDTO> getMerCouponDTO(long oNum) {
-		System.out.println("어디까지");
 		Optional<OrderTb> result = orderRepository.findOrderWithCouponsByoNum(oNum);
-		System.out.println("어디까지 실행됐나");
 		OrderTb order = result.get();
-		System.out.println("궁금합니다");	
 		List<MerCouponDTO> useMerCoupons = order.getUseCoupons().stream()
 				.map(useCoupon -> MerCouponDTO.from(useCoupon.getMerCoupon()))
 				.collect(Collectors.toList());
@@ -159,11 +160,17 @@ public class OrderServiceImpl implements OrderService{
 	@Transactional
 	public void cancelOrder(int memberNum, long oNum) {
     	LocalDateTime localDateTime = LocalDateTime.now();
+    	String to = Integer.toString(memberNum).toString() + localDateTime.format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
+        Long newONum = Long.parseLong(to);
     	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy/MM/dd");
         String regDate = localDateTime.format(formatter);
+        OrderTb newOrderTb = new OrderTb();
+        OrderTb orderTb = orderRepository.findByoNum(oNum);
         
-        orderRepository.cancelOrderByMemberNumAndONum(memberNum, oNum, regDate);
-		
+        newOrderTb = orderTb;
+        newOrderTb.setONum(newONum, "return", regDate);
+        
+        orderRepository.save(newOrderTb);
 	}
 
 	@Override
@@ -182,6 +189,20 @@ public class OrderServiceImpl implements OrderService{
 						.collect(Collectors.toList());
 		
 		return pointDTOs;
+	}
+	
+	@Override
+	@Transactional
+	public List<ClientOrderListDTO> getMemberWithOrderTo(String memberId) {
+	    Optional<Member> result = memberRepository.findMemberWithOrdersByMemberId(memberId);
+
+	    if (result.isPresent()) {
+	    	List<ClientOrderListDTO> dto = result.get().getOrderList().stream()
+	    	        .map(data -> ClientOrderListDTO.fromEntity(data, getProQuanDTO(data.getOrderItems())))
+	    	        .collect(Collectors.toList());
+	    	return dto;
+	    }
+	    return null;
 	}
 	
 }

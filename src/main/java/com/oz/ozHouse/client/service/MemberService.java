@@ -2,6 +2,7 @@ package com.oz.ozHouse.client.service;
 
 import com.oz.ozHouse.domain.Member;
 import com.oz.ozHouse.dto.MemberDTO;
+import com.oz.ozHouse.dto.client.member.MemberInfoDTO;
 import com.oz.ozHouse.dto.client.member.MemberJoinDTO;
 
 public interface MemberService {
@@ -40,4 +41,6 @@ public interface MemberService {
 	
 	// 멤버 포인트 업데이트
 	void updatePoint(String memberId, int point);
+	
+	MemberInfoDTO memberPointAndLevel(String memberId);
 }

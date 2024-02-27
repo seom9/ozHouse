@@ -74,4 +74,10 @@ public class OrderTb {
         }
     }
     
+    public void setONum(long oNum, String oLike, String oCanceldate) {
+    	this.oNum = oNum;
+    	this.oLike = oLike;
+    	this.oCanceldate = oCanceldate;
+    }
+    
 }

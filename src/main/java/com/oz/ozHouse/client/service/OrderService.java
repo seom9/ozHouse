@@ -35,4 +35,6 @@ public interface OrderService {
 	void cancelOrder(int memberNum, long oNum);
 	
 	List<MypagePointDTO> getMypointDTO (String memberId);
+	
+	List<ClientOrderListDTO> getMemberWithOrderTo(String memberId);
 }
