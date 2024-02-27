@@ -14,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 public class MerDeleteSchedulerConfig {
 	private final SchedulerService schedulerService;
 	
+	
 	@Scheduled( cron = "*/10 * * * * *")
 	public void run() {
 		System.out.println("Scheduler 시작!");

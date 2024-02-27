@@ -23,4 +23,11 @@ public class SchedulerServiceImple implements SchedulerService {
 		merchantRepository.deleteByMerDeletedate(today);
 		
 	}
+//
+//	@Override
+//	public String merId(String id) {
+//		Optional<Merchant> om = mapper.findById(id);
+//		String result = om.get().getMerId();
+//		return result;
+//	}
 }
