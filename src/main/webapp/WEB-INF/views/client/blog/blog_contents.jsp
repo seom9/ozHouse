@@ -6,7 +6,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/client/blog_css/blogContents_style.css" />
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/blogContent.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/client/js/blogContent.js"></script>
 <body>
 <c:set var="blogImages" value="${fn:split(blogDTO.blogImage, ',')}" />
 <c:set var="blogSubjects" value="${fn:split(blogDTO.blogSubject, ',')}" />
@@ -23,7 +23,7 @@
 			<div class="room_type">${blogRoomTypes[index]}</div>
 			<div class="left_box"><!-- 왼쪽에 올 애들 -->
 				<div class="photo_box"><!-- 사진 영역 -->
-					<img src="data:image/jpeg;base64,${encodedImages[loop.index]}" alt="이미지 영역" class="img_box">
+					<img src="${blogImages[index]}" alt="이미지 영역" class="img_box">
 <!-- 					<div class="img_button">
 						<ul class="img_button2">
 							<li class="img_button3">
