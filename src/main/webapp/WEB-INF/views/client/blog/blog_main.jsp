@@ -28,7 +28,7 @@
 							</address>
 						</div>
 						<div class="blogInfo">
-							<a class="content_link" href="blog_get.do?num=${dto.blogNum}"></a>
+							<a class="content_link" href="/blog/${dto.blogNum}/blog_contents"></a>
 							<div class="blog_image">
 								<c:set var="blogImages" value="${fn:split(dto.blogImage, ',')}" />
 								<img class="image" src="${blogImages[0]}">
