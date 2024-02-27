@@ -7,8 +7,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -37,5 +35,11 @@ public class ProInform {
     private String oRefund;
     
     private int realPrice;
+
+	public void setOrderTb(OrderTb orderTb) {
+		this.orderTb = orderTb;
+	}
+    
+
     
 }

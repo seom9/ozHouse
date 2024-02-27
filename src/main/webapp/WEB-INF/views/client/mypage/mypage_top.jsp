@@ -128,7 +128,6 @@
             <span class="page-navigation__sub-menu-items">
                 <ul class="page-navigation__sub-menu">
                     <li class="page-navigation__sub-menu-item"><a href="/mypage/${prc.username}/update" target="_self">회원정보수정</a></li>
-                    <li class="page-navigation__sub-menu-item"><a href="#" target="_self">전문가 신청</a></li>
                     <li class="page-navigation__sub-menu-item"><a href="/mypage/${prc.username}/updatepass/up" target="_self">비밀번호 변경</a></li>
                 </ul>
             </span>

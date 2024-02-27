@@ -27,6 +27,7 @@ import com.oz.ozHouse.dto.client.member.ClientOrderConfirmDTO;
 import com.oz.ozHouse.dto.client.member.ClientOrderDTO;
 import com.oz.ozHouse.dto.client.member.ClientOrderListDTO;
 import com.oz.ozHouse.dto.client.member.ClientProductDTO;
+import com.oz.ozHouse.dto.client.member.MemberInfoDTO;
 import com.oz.ozHouse.dto.client.member.ProQuanDTO;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -50,7 +51,7 @@ public class OrderController {
 	@PreAuthorize("hasAnyRole('ROLE_CLIENT')")
 	@GetMapping(value = {"/order/{mode}", "/order/{mode}/{proNum}/{quantity}"})
 	public String order_main(HttpServletRequest req, HttpSession session,
-									@SessionAttribute("cart") List<ProQuanDTO> cart,
+									@SessionAttribute(value="cart", required = false) List<ProQuanDTO> cart,
 									@AuthenticationPrincipal MemberSecurityDTO member,
 									@PathVariable("mode") String mode,
 									@PathVariable(value="proNum", required = false) Integer proNum,
@@ -127,7 +128,7 @@ public class OrderController {
 		
 		req.setAttribute("orderinfo", ClientOrderConfirmDTO.fromEntity(orderService.getOrder(oNum)));		
 		req.setAttribute("confirmOrderProducts", orderService.getProQuanDTO(order.getOrderItems()));
-		req.setAttribute("userCouponList", orderService.getMerCouponDTO(order.getUseCoupons()));
+		req.setAttribute("userCouponList", orderService.getMerCouponDTO(order.getONum())); 
 		
 		return "client/main/order_confirm";
 	}
@@ -140,6 +141,10 @@ public class OrderController {
 		List<ClientOrderListDTO> orders = orderService.getMemberWithOrder(member.getUsername());
 		
 		req.setAttribute("orders", orders);
+		req.setAttribute("info", memberService.memberPointAndLevel(member.getMemberId()));
+		// 쿠폰 사용한 쿠폰은 집계 안 되는 설정 못함
+		req.setAttribute("coupons", couponService.countCouppon(member.getMemberId()));
+		
 		return "client/mypage/mypage_shopping";
 	}
 

@@ -103,7 +103,7 @@
                               </button>
                            </div>
                         </div>
-                        <a class="css-11ab5xd" href="/${blogDTO.blogNum}/blog_contents"></a>
+                        <a class="css-11ab5xd" href="blog/${blogDTO.blogNum}/blog_contents"></a>
                      </div>
                   </li>
                   </c:forEach>

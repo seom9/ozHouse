@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.oz.ozHouse.client.repository.BlogRepository;
@@ -26,7 +27,7 @@ public class BlogServiceImpl implements BlogService {
 	@Override
 	public List<BlogDTO> blogList() {
 		
-		List<Blog> blList = br.findAll();
+		List<Blog> blList = br.findAll(Sort.by(Sort.Direction.DESC, "blogNum"));
 		
 		List<BlogDTO> blogList = blList.stream()
 				.map(data -> modelMapper.map(data, BlogDTO.class))
@@ -61,9 +62,28 @@ public class BlogServiceImpl implements BlogService {
 	// 블로그 상세보기
 	@Override
 	public BlogDTO getBlog(Integer blogNum) {
-		
+		System.out.println("상세보기 진행할 blogNum : " + blogNum);
 		Blog getBlog = br.findByBlogNum(blogNum);
+		
+		int num = getBlog.getBlogNum();
+		System.out.println("상세보기 진행할 블로그번호 : " + num);
 		
 		return new BlogDTO(getBlog);
 	}
+	
+	// 조회수
+	@Override
+	public int updateReadCount(Integer blogNum) {
+		int res = br.updateReadCount(blogNum);
+		
+		if(res > 0) {
+			return 1;
+		} else{
+			return -1;
+		}
+		
+	}
+	
+	
+	
 }

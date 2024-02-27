@@ -131,8 +131,7 @@
       <c:set var="order_assembly_cost" value="${order_assembly_cost + dto.productDTO.proAssemblyCost*dto.quantity}"/> 
       <c:set var="order_qpty" value="${order_qpty + dto.quantity}"/>
 
-      
-      
+
                         </c:forEach>
 		             </li>
 		         </ul>
@@ -140,19 +139,6 @@
           
   		</c:if>        
 		
-		 <c:if test="${not empty userCouponList}">	
-		 
-		   	<c:forEach var="cdto" items="${userCouponList}">
-
-		   		<div class="eo0ca796 css-113eoa3">
-				<input title="${cdto.mer_couponname}" type="checkbox" class="css-s6rm2m" data-discount="${cdto.mer_coupondiscount}">${cdto.mer_couponname}</div>
-				<div class=" css-1vjp7rs eo0ca790"><div class="selected css-1gjupqf eo0ca795">${cdto.mer_coupondiscount}원 할인</div>
-				<div class="css-1bdbp8h eo0ca794">${cdto.mer_couponenddate}까지</div>
-				</div>
-
-			 
-			</c:forEach>
-		 </c:if>
 		<span class="wairano2">사용한 쿠폰</span><br><br>	
   
 		 <c:if test="${empty userCouponList}">	
@@ -162,7 +148,7 @@
 		   	<c:forEach var="cdto" items="${userCouponList}">
 			   	<ul>
 			   		<div class="eo0ca796 css-113eoa3">
-					<input title="${cdto.merCouponname}" type="checkbox" name="selectedCoupons" value="${cdto.merCouponnum}" class="css-s6rm2m" data-discount="${cdto.mer_coupondiscount}">${cdto.mer_couponname}</div>
+					<input title="${cdto.merCouponname}" type="checkbox" name="selectedCoupons" value="${cdto.merCouponnum}" class="css-s6rm2m" data-discount="${cdto.merCoupondiscount}">${cdto.merCouponname}</div>
 					<div class=" css-1vjp7rs eo0ca790"><div class="selected css-1gjupqf eo0ca795">${cdto.merCoupondiscount}원 할인</div>
 					<div class="css-1bdbp8h eo0ca794">${cdto.merCouponenddate}까지</div>
 					</div>
@@ -185,7 +171,7 @@
 		<span class="wairano2">결제 수단</span><br><br>	
 		# 추후 추가하겠습니다
 
-		</form></div>
+		</form></div><br><br><br><br><br><br><br><br><br><br><br><br>
 		
 <aside class="custom-aside">
 	<div class="sticky-child commerce-cart__side-bar">
@@ -226,7 +212,7 @@
                <div class="commerce-cart__summary__row commerce-cart__summary__row--total">
                    <dt>결제금액</dt>
             	<c:if test="${orderinfo.getOCanceldate() != null}">
-					<div class="ordersuccess" style="color: red">취소된 주문입니다</div><br>
+					<div class="ordersuccess" style="color: red">취소 신청된 주문입니다</div><br>
 				    <s><span class="totalPrice" id="final_order_price">
        					<fmt:formatNumber value="${order_ori_price + order_assembly_price -(order_dis_discount + 0 + orderinfo.getODispoint())}" pattern="###,###"/>
    					</span>원</s>
