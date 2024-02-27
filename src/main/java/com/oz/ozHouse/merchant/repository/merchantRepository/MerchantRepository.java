@@ -21,6 +21,9 @@ extends JpaRepository<Merchant, Integer>, MerchantRepositoryCustom{
 	public Merchant findMerchantByMerEmail(String email);
 	
 	@Transactional
+	public void deleteByMerDeletedate(String today);
+	
+	@Transactional
 	@Modifying
 	@Query("update Merchant m set m.merPw = :merPw where merId = :merId")
 	int updateMerchantPw(@Param("merPw") String merPw, @Param("merId") String merId);
