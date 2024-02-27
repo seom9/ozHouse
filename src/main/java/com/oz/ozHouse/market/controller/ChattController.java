@@ -8,6 +8,7 @@ import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -70,6 +71,10 @@ public class ChattController {
 		String nickname = member.getMemberNickname();
 		model.addAttribute("roomList", roomList);
 		model.addAttribute("nickname", nickname);
+		
+//	    List<ChattRoomDTO> roomDetails = chattRoomService.findRoomDetailsByMemberNickname(nickname);
+//	    model.addAttribute("roomDetails", roomDetails);
+	    
 		return "client/ozMarket/chatRoom";
 	}
 
@@ -97,7 +102,7 @@ public class ChattController {
 	@GetMapping("/chattRoom/{roomNum}")
 	public String chatRoom(HttpServletRequest req, @AuthenticationPrincipal MemberSecurityDTO member, Model model,
 	        @PathVariable("roomNum") String roomNum) throws IOException {
-	    ChattRoom room = chattRoomService.findRoomByNum(Integer.parseInt(roomNum)); // Parse roomNum to Integer here
+	    ChattRoom room = chattRoomService.findRoomByNum(Integer.parseInt(roomNum));
 	    List<ChattRoom> roomList = chattRoomService.findBymyId(member.getMemberNickname());
 
 	    String nickname = member.getMemberNickname();
@@ -112,7 +117,7 @@ public class ChattController {
 
 	    model.addAttribute("roomList", roomList);
 	    model.addAttribute("memberNickname", member.getMemberNickname());
-	    model.addAttribute("roomNum", roomNum); // Use roomNum as String here
+	    model.addAttribute("roomNum", roomNum); 
 	    model.addAttribute("room", room);
 	    model.addAttribute("nickname", nickname);
 
@@ -157,4 +162,27 @@ public class ChattController {
 		return ResponseEntity.ok(messages);
 	}
 
+	@PostMapping("/reserveProduct")
+	public ResponseEntity<String> reserveProduct(@RequestParam("proNum") Integer proNum, @AuthenticationPrincipal MemberSecurityDTO member) {
+	    if (member == null) {
+	        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인이 필요합니다.");
+	    }
+	    boolean success = marketProService.reserveProduct(proNum, member.getMemberNickname());
+	    return success ? ResponseEntity.ok("예약 성공") : ResponseEntity.badRequest().body("예약 실패");
+	}
+
+	@PostMapping("/confirmPurchase")
+	public ResponseEntity<String> confirmPurchase(@RequestParam("proNum") Integer proNum, @AuthenticationPrincipal MemberSecurityDTO member) {
+	    if (member == null) {
+	        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인이 필요합니다.");
+	    }
+	    boolean success = marketProService.confirmPurchase(proNum, member.getMemberNickname());
+	    return success ? ResponseEntity.ok("구매 확정") : ResponseEntity.badRequest().body("구매 확정 실패");
+	}
+
+	@PostMapping("/cancelReservation")
+	public ResponseEntity<String> cancelReservation(@RequestParam("proNum") Integer proNum) {
+	    boolean success = marketProService.cancelReservation(proNum);
+	    return success ? ResponseEntity.ok("예약 취소 성공") : ResponseEntity.badRequest().body("예약 취소 실패");
+	}
 }

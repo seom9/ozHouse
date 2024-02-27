@@ -19,7 +19,7 @@ public interface ChattRoomRepository extends JpaRepository<ChattRoom, Integer> {
 	List<ChattRoom> findBymyId(@Param("myId") String myId);
 
 	@Query("SELECT c.myId, c.otherId FROM ChattRoom c WHERE c.roomNum = :roomNum")
-	List<Object[]> findParticipantsByRoomNum(@Param("roomNum") Integer roomNum);
+	List<Object> findParticipantsByRoomNum(@Param("roomNum") Integer roomNum);
 
 	@Query("SELECT CASE WHEN c.myId = :sender THEN c.otherId ELSE c.myId END FROM ChattRoom c WHERE c.roomNum = :roomNum")
 	String findOtherParticipantId(@Param("roomNum") Integer roomNum, @Param("sender") String sender);

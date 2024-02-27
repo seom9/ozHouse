@@ -266,10 +266,30 @@ h3 {
     text-align: left;
 }
 
-.timestamp {
-	position: absolute;
-	bottom: -20px; /* Adjust this value as needed */
-	right: 10px; /* Adjust this value as needed */
-	font-size: 0.75rem;
-	color: #999;
+.their-message > .timestamp {
+    position: relative;
+    bottom: -20px;
+    right: 10px;
+    font-size: 0.75rem;
+    color: #999;
+    left: 90%;
+    top: 0%;
 }
+
+.their-message > span {
+	position: relative;
+    right: -65%;
+}
+
+.timestamp {
+    position: relative;
+    bottom: -20px;
+    right: 10px;
+    font-size: 0.75rem;
+    color: #999;
+    left: -115%;
+    top: 0%;
+}
+
+
+

@@ -7,26 +7,6 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/ozMarket/chatting.css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-$(document).ready(function() {
-    // Iterate through each chat-room-entry to fetch and display the latest message
-    $('.chat-room-entry').each(function() {
-        var roomNum = $(this).find('a').attr('href').split('/').pop(); // Extract roomNum from the link
-        var latestMessageDiv = $(this).find('.latest-message'); // Find the div where the latest message should be displayed
-
-        $.ajax({
-            url: '${pageContext.request.contextPath}/ozMarket/chattRoom/' + roomNum + '/latestMessage',
-            type: 'GET',
-            success: function(response) {
-                latestMessageDiv.text(response); // Update the div with the latest message
-            },
-            error: function() {
-                latestMessageDiv.text('메시지를 불러올 수 없습니다.'); // Handle errors
-            }
-        });
-    });
-});
-</script>
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,28 +18,29 @@ $(document).ready(function() {
 	<div class="chat-container">
 		<div class="chat-list">
 			<div class="user-avatar">
-			<c:choose>
-				<c:when test="${empty member.memberImage}">
-					<img
-						src="https://image.ohou.se/i/bucketplace-v2-development/uploads/default_images/avatar.png?gif=1&w=144&h=144&c=c&webp=1"
-						alt="User Avatar">
-				</c:when>
-				<c:otherwise>
-					<img src="${member.memberImage}" alt="User Avatar">
-				</c:otherwise>
-			</c:choose>
-		</div>
-		<div class="memberNickname">${nickname}</div>
+				<c:choose>
+					<c:when test="${empty member.memberImage}">
+						<img
+							src="https://image.ohou.se/i/bucketplace-v2-development/uploads/default_images/avatar.png?gif=1&w=144&h=144&c=c&webp=1"
+							alt="User Avatar">
+					</c:when>
+					<c:otherwise>
+						<img src="${member.memberImage}" alt="User Avatar">
+					</c:otherwise>
+				</c:choose>
+			</div>
+			<div class="memberNickname">${nickname}</div>
 			<c:forEach var="room" items="${roomList}">
-    <div class="chat-room-entry">
-        <a href="${pageContext.request.contextPath}/ozMarket/chattRoom/${room.roomNum}">
-            방 ${room.roomNum}
-        </a>
-        <div class="latest-message" id="latestMessage-${room.roomNum}">
-            ${lastMessagesMap[room.roomNum]}
-        </div>
-    </div>
-</c:forEach>
+    			<div class="chat-room-entry">
+    			<div>방 ${room.roomNum}번</div>
+        			<a href="${pageContext.request.contextPath}/ozMarket/chattRoom/${room.roomNum}">
+            			대화 상대: ${room.partner}
+        			</a>
+        			<div class="latest-message">
+            			마지막 메시지: ${room.lastMessage}
+        			</div>
+    			</div>
+			</c:forEach>
 		</div>
     </div>
 </body>

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.oz.ozHouse.domain.Chatt;
 import com.oz.ozHouse.dto.ChattDTO;
 import com.oz.ozHouse.market.repository.ChattRepository;
+import com.oz.ozHouse.market.repository.ChattRoomRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -18,13 +19,13 @@ public class ChattServiceImpl implements ChattService {
 
 	private final ChattRepository chattRepository;
 
-	private final ChattRoomService chattRoomService;
+	private final ChattRoomRepository chattRoomRepository;
 
 	@Override
 	public Chatt saveMessage(ChattDTO chattDTO) {
 		
 		// 채팅방의 참여자 목록을 가져옵니다.
-		List<Object> participants = chattRoomService.findParticipantsByRoomNum(chattDTO.getRoomNum());
+		List<Object> participants = chattRoomRepository.findParticipantsByRoomNum(chattDTO.getRoomNum());
 
 		// 발신자가 아닌 다른 참여자를 수신자로 설정합니다.
 		String recipient = (String) participants.stream()
@@ -42,17 +43,14 @@ public class ChattServiceImpl implements ChattService {
 		// Chatt 엔터티를 저장합니다.
 		return chattRepository.save(chatt);
 	}
-	
 	@Override
     public List<Chatt> findMessagesByRoomNum(Integer roomNum) {
         return chattRepository.findByRoomNum(roomNum);
     }
-	
 	@Override
 	public Chatt save(Chatt chatt) {
         return chattRepository.save(chatt);
     }
-	
 
 	@Override
 	public Chatt findLastMessageByRoomNum(int roomNum) {
@@ -61,16 +59,8 @@ public class ChattServiceImpl implements ChattService {
         // 메시지가 존재하면 반환하고, 그렇지 않으면 예외를 발생시킵니다.
         return lastMessage.orElseThrow(() -> new IllegalStateException("이 채팅방에는 메시지가 없습니다."));
     }
-
 	@Override
 	public void deleteByInTimeBefore(LocalDateTime date) {
 		chattRepository.deleteByInTimeBefore(date);		
 	}
-
-	@Override
-	public void updateReadStatusForUserInRoom(Integer roomNum, String userId) {
-	    int updatedCount = chattRepository.updateReadStatusByRoomNumAndRecipient(roomNum, userId);
-	}
-	
-
 }

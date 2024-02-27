@@ -1,14 +1,16 @@
 package com.oz.ozHouse.market.service;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.oz.ozHouse.domain.Chatt;
 import com.oz.ozHouse.domain.ChattRoom;
 import com.oz.ozHouse.dto.ChattRoomDTO;
+import com.oz.ozHouse.market.repository.ChattRepository;
 import com.oz.ozHouse.market.repository.ChattRoomRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -18,6 +20,8 @@ import lombok.RequiredArgsConstructor;
 public class ChattRoomServiceImpl implements ChattRoomService {
 
     private final ChattRoomRepository chattRoomRepository;
+    
+    private final ChattRepository chattRepository;
 
     @Override
     @Transactional
@@ -55,10 +59,8 @@ public class ChattRoomServiceImpl implements ChattRoomService {
     }
 
     @Override
-    public List<Object> findParticipantsByRoomNum(Integer roomNum) {
-        return chattRoomRepository.findParticipantsByRoomNum(roomNum).stream()
-                                  .flatMap(Arrays::stream)
-                                  .collect(Collectors.toList());
+    public List<String> findParticipantsByRoomNum(Integer roomNum) {
+        return chattRepository.findParticipantsByRoomNum(roomNum);
     }
 
 //    @Override
@@ -70,6 +72,20 @@ public class ChattRoomServiceImpl implements ChattRoomService {
     public String findOtherParticipant(Integer roomNum, String sender) {
         return chattRoomRepository.findOtherParticipantId(roomNum, sender);
 
+    }
+    
+    public List<ChattRoomDTO> findRoomDetailsByMemberNickname(String memberNickname) {
+        List<ChattRoom> rooms = findBymyId(memberNickname);
+        List<ChattRoomDTO> roomDetails = new ArrayList<>();
+        
+        for (ChattRoom room : rooms) {
+            Optional<Chatt> lastChattOpt = chattRepository.findLastMessageByRoomNum(room.getRoomNum());
+            String lastMessage = lastChattOpt.map(Chatt::getMsg).orElse("");
+            String partnerNickname = room.getMyId().equals(memberNickname) ? room.getOtherId() : room.getMyId();
+            roomDetails.add(new ChattRoomDTO(room.getRoomNum(), partnerNickname, lastMessage));
+        }
+
+        return roomDetails;
     }
 
 //    @Override

@@ -10,6 +10,63 @@
 <title>채팅</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/ozMarket/chatting.css" />
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('reserveBtn').addEventListener('click', function() {
+        const proNum = this.getAttribute('data-pro-num');
+        reserveProduct(proNum);
+    });
+
+    document.getElementById('confirmBtn').addEventListener('click', function() {
+        const proNum = this.getAttribute('data-pro-num');
+        confirmPurchase(proNum);
+    });
+
+    document.getElementById('cancelBtn').addEventListener('click', function() {
+        const proNum = this.getAttribute('data-pro-num');
+        cancelReservation(proNum);
+    });
+});
+
+function reserveProduct(proNum) {
+    fetch('${pageContext.request.contextPath}/ozMarket/reserveProduct', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `proNum=${proNum}`
+    })
+    .then(response => response.text())
+    .then(data => alert(data))
+    .catch(error => console.error('Error:', error));
+}
+
+function confirmPurchase(proNum) {
+    fetch('${pageContext.request.contextPath}/ozMarket/confirmPurchase', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `proNum=${proNum}`
+    })
+    .then(response => response.text())
+    .then(data => alert(data))
+    .catch(error => console.error('Error:', error));
+}
+
+function cancelReservation(proNum) {
+    fetch('${pageContext.request.contextPath}/ozMarket/cancelReservation', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `proNum=${proNum}`
+    })
+    .then(response => response.text())
+    .then(data => alert(data))
+    .catch(error => console.error('Error:', error));
+}
+</script>
 </head>
 <body>
 	<div class="chat-container">
@@ -29,9 +86,8 @@
 			<div class="memberNickname">${nickname}</div>
 			<c:forEach var="room" items="${roomList}">
 				<div class="chat-room-entry">
-				<img src="data:image/png;base64,${encodedMemberImage}" alt="Member Image"/>
-				
-					<a
+					<img src="data:image/png;base64,${encodedMemberImage}"
+						alt="Member Image" /> <a
 						href="${pageContext.request.contextPath}/ozMarket/chattRoom/${room.roomNum}">방
 						${room.roomNum}</a>
 				</div>
@@ -45,10 +101,11 @@
 					<img src="data:image/jpeg;base64,${encodedImages[0]}" width="60"
 						height="60" alt="${getProduct.proTitle}" />
 				</h3>
-				<button>예약</button>
-				<button>확정</button>
-				<button>취소</button>
+				<button id="reserveBtn" data-pro-num="${getProduct.proNum}">예약</button>
+				<button id="confirmBtn" data-pro-num="${getProduct.proNum}">확정</button>
+				<button id="cancelBtn" data-pro-num="${getProduct.proNum}">취소</button>
 			</div>
+
 			<!-- 메시지 표시 영역: 수신한 메시지가 여기에 출력 -->
 			<div class="msgArea"></div>
 			<div class="message-input">

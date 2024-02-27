@@ -34,4 +34,10 @@ public interface MarketProService {
 	
 	// 상품 삭제
 	void deleteProduct(Integer proNum);
+	
+	boolean reserveProduct(Integer proNum, String memberNickname);
+	
+	boolean confirmPurchase(Integer proNum, String memberNickname);
+	
+	boolean cancelReservation(Integer proNum);
 }

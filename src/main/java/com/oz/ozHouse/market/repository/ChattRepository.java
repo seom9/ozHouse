@@ -26,7 +26,10 @@ public interface ChattRepository extends JpaRepository<Chatt, Integer> {
     @Transactional
     void deleteByInTimeBefore(LocalDateTime threshold);
     
-    @Modifying
-    @Query("UPDATE Chatt c SET c.readStatus = 0 WHERE c.roomNum = :roomNum AND c.recipient = :userId AND c.readStatus = 1")
-    int updateReadStatusByRoomNumAndRecipient(@Param("roomNum") Integer roomNum, @Param("userId") String userId);
+    @Query("SELECT c FROM Chatt c WHERE c.roomNum = :roomNum ORDER BY c.inTime DESC")
+    Optional<Chatt> findLastMessageByRoomNum(@Param("roomNum") Integer roomNum);
+
+    @Query("SELECT DISTINCT c.sender FROM Chatt c WHERE c.roomNum = :roomNum")
+    List<String> findParticipantsByRoomNum(@Param("roomNum") Integer roomNum);
+
 }
