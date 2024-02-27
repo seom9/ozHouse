@@ -10,6 +10,63 @@
 <title>채팅</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/ozMarket/chatting.css" />
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('reserveBtn').addEventListener('click', function() {
+        const proNum = this.getAttribute('data-pro-num');
+        reserveProduct(proNum);
+    });
+
+    document.getElementById('confirmBtn').addEventListener('click', function() {
+        const proNum = this.getAttribute('data-pro-num');
+        confirmPurchase(proNum);
+    });
+
+    document.getElementById('cancelBtn').addEventListener('click', function() {
+        const proNum = this.getAttribute('data-pro-num');
+        cancelReservation(proNum);
+    });
+});
+
+function reserveProduct(proNum) {
+    fetch('${pageContext.request.contextPath}/ozMarket/reserveProduct', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `proNum=${proNum}`
+    })
+    .then(response => response.text())
+    .then(data => alert(data))
+    .catch(error => console.error('Error:', error));
+}
+
+function confirmPurchase(proNum) {
+    fetch('${pageContext.request.contextPath}/ozMarket/confirmPurchase', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `proNum=${proNum}`
+    })
+    .then(response => response.text())
+    .then(data => alert(data))
+    .catch(error => console.error('Error:', error));
+}
+
+function cancelReservation(proNum) {
+    fetch('${pageContext.request.contextPath}/ozMarket/cancelReservation', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `proNum=${proNum}`
+    })
+    .then(response => response.text())
+    .then(data => alert(data))
+    .catch(error => console.error('Error:', error));
+}
+</script>
 </head>
 <body>
 	<div class="chat-container">
@@ -29,21 +86,34 @@
 			<div class="memberNickname">${nickname}</div>
 			<c:forEach var="room" items="${roomList}">
 				<div class="chat-room-entry">
-					<a
+					<img src="data:image/png;base64,${encodedMemberImage}"
+						alt="Member Image" /> <a
 						href="${pageContext.request.contextPath}/ozMarket/chattRoom/${room.roomNum}">방
 						${room.roomNum}</a>
 				</div>
 			</c:forEach>
 		</div>
 		<div class="chat-messages">
-			<h3>메세지</h3>
+			<div class="product-info">
+				<h3>${getProduct.proTitle}</h3>
+				<h3>${getProduct.proPrice}</h3>
+				<h3>
+					<img src="data:image/jpeg;base64,${encodedImages[0]}" width="60"
+						height="60" alt="${getProduct.proTitle}" />
+				</h3>
+				<button id="reserveBtn" data-pro-num="${getProduct.proNum}">예약</button>
+				<button id="confirmBtn" data-pro-num="${getProduct.proNum}">확정</button>
+				<button id="cancelBtn" data-pro-num="${getProduct.proNum}">취소</button>
+			</div>
+
 			<!-- 메시지 표시 영역: 수신한 메시지가 여기에 출력 -->
 			<div class="msgArea"></div>
 			<div class="message-input">
-				<input type="text" placeholder="보낼 메세지를 입력하세요." class="content">
+				<input type="text" placeholder="Enter your message here"
+					class="content">
 				<button type="button" class="sendBtn" onclick="sendMsg()">전송</button>
-				<button type="button" value="방나가기" class="quit" onclick="quit()">방
-					나가기</button>
+				<button type="button" value="Leave Room" class="quit"
+					onclick="quit()">채팅방 나가기</button>
 			</div>
 		</div>
 	</div>
@@ -53,6 +123,7 @@
 		var socket; // 웹소켓 객체를 전역 변수로 선언
 		var sender = '<c:out value="${memberNickname}" />'; // 현재 사용자의 닉네임
 		var roomNum = '<c:out value="${room.roomNum}" />'; // 현재 방 번호
+		var nickname = "<c:out value='${nickname}'/>"; // JSP에서 JavaScript 변수로 값을 전달
 
 		// 웹소켓 연결 함수
 		function connectWebSocket() {
@@ -89,7 +160,6 @@
 		// 채팅방에 들어가는 로직을 처리하는 함수
 		function enterRoom() {
 			loadPreviousMessages(roomNum); // 이전 메시지를 로드하는 함수 호출
-			markAllMessagesAsRead(roomNum);
 			console.log("방 입장: " + roomNum);
 			// 방에 입장하는 로직, 예: 서버에 메시지 보내기
 			var enterMsg = {
@@ -99,7 +169,6 @@
 				msg : ""
 			};
 			
-		    markAllMessagesAsRead(roomNum);
 
 			if (socket.readyState === WebSocket.OPEN) {
 				socket.send(JSON.stringify(enterMsg)); // 서버에 입장 메시지를 보냄
@@ -133,6 +202,22 @@
 
 		// 이전 메시지를 로드하는 함수
 		function loadPreviousMessages(roomNum) {
+			
+			function insertDateDivider(messages) {
+			    let lastDate = null;
+			    messages.forEach((message) => {
+			        const messageDate = new Date(message.inTime).toLocaleDateString();
+			        if (messageDate !== lastDate) {
+			            lastDate = messageDate;
+			            const dateDivider = document.createElement('div');
+			            dateDivider.className = 'date-divider';
+			            dateDivider.textContent = lastDate;
+			            msgArea.appendChild(dateDivider);
+			        }
+			        displayChatMessage(message);
+			    });
+			}
+			
 			// 서버에 AJAX 요청을 보내 이전 메시지를 불러옵니다.
 			var xhr = new XMLHttpRequest();
 			xhr.open('GET', httpUrl, true);
@@ -186,77 +271,98 @@
 			var data = JSON.parse(message.data); // 서버로부터 받은 메시지(JSON 문자열)를 객체로 변환
 
 			// 메시지 유형에 따라 다른 동작을 수행
-			if (data.type === "MESSAGE_STATUS_UPDATE") {
-				updateMessageStatusOnUI(data);
+			if (data.type === "STATUS_UPDATE") {
+				updateMessageStatus(data);
 			} else if (data.type === "TALK") {
 				// 채팅 메시지를 화면에 표시하는 로직
+				const isSentMessage = data.sender === sender;
 				displayChatMessage(data);
 			}
 			// 기타 메시지 유형에 대한 처리를 여기에 추가
 		}
 		
-		// UI에서 메시지 상태를 업데이트하는 함수
 		function updateMessageStatusOnUI(data) {
-    // data에는 업데이트할 메시지의 ID와 상태가 포함되어 있다고 가정합니다.
-    // 예: data = { msgId: 1, readStatus: true }
+			  var messageElement = document.querySelector(`#message-${data.msgId}`);
+			  if (messageElement) {
+			    var statusElement = messageElement.querySelector('.status');
+			    statusElement.textContent = data.readStatus ? 'Read' : 'Unread';
+			  }
+			}
+
+		var lastDisplayedDate = null;
+		
+		// 메시지를 화면에 표시하는 함수
+function displayChatMessage(message) {
+    // 이 부분은 기존의 날짜 구분선 코드입니다.
+    var messageDate = new Date(message.inTime).toDateString();
     
-    // 메시지의 HTML 요소를 찾습니다.
-    var messageElement = document.getElementById(`message-${data.msgId}`);
-    
-    if (messageElement && data.readStatus) {
-        // 메시지의 상태가 '읽음'인 경우, 'read' 클래스를 추가합니다.
-        messageElement.classList.add('read');
-    } else if (messageElement) {
-        // 메시지의 상태가 '읽지 않음'인 경우, 'read' 클래스를 제거합니다.
-        messageElement.classList.remove('read');
+    if (messageDate !== lastDisplayedDate) {
+        lastDisplayedDate = messageDate;
+        var dateDivider = document.createElement('div');
+        dateDivider.className = 'date-divider';
+        dateDivider.textContent = messageDate;
+        document.querySelector('.msgArea').appendChild(dateDivider);
     }
+
+    // 메시지를 생성하고 화면에 추가하는 부분입니다.
+    const msgArea = document.querySelector('.msgArea');
+    const msgDiv = document.createElement('div');
+    const isSentMessage = message.sender === sender;
+
+    // 'my-message' 또는 'their-message' 클래스를 추가하여 메시지가 보내는 사람의 것인지 구분합니다.
+    msgDiv.className = isSentMessage ? 'message my-message' : 'message their-message';
+
+    // 메시지의 보내는 시간을 포맷합니다.
+    const timestamp = new Date(message.inTime).toLocaleTimeString();
+
+    // 메시지 내용을 span 요소에 추가합니다.
+    let messageContent = document.createElement('span');
+    messageContent.textContent = message.msg;
+    msgDiv.appendChild(messageContent);
+
+    // 시간을 표시하는 span 요소를 추가합니다.
+    let timestampSpan = document.createElement('span');
+    timestampSpan.classList.add('timestamp');
+    timestampSpan.textContent = timestamp; // 여기에 보내는 시간을 추가합니다.
+    msgDiv.appendChild(timestampSpan);
+
+    // 생성한 메시지 div를 메시지 영역에 추가합니다.
+    msgArea.appendChild(msgDiv);
+
+    // 새 메시지를 추가할 때마다 스크롤을 가장 아래로 내립니다.
+    msgArea.scrollTop = msgArea.scrollHeight;
 }
-
-		// 채팅 메시지를 화면에 표시하는 함수
-		function displayChatMessage(data) {
-			var msgArea = document.querySelector('.msgArea');
-			var msgDiv = document.createElement('div');
-			var msgContentDiv = document.createElement('div'); // 메시지 내용을 담을 div 생성
-			var msgTimeSpan = document.createElement('span');
-			var readStatusSpan = document.createElement('span'); // 읽음 상태를 표시할 span 생성
-
-			msgDiv.classList.add('message');
-			msgContentDiv.classList.add('msg-content');
-			msgTimeSpan.classList.add('msg-time');
-			readStatusSpan.classList.add('read-status');
-
-			// 메시지 내용 설정
-			msgContentDiv.textContent = data.msg;
-			// 메시지 시간 설정
-			msgTimeSpan.textContent = formatTime(data.inTime);
-		    readStatusSpan.textContent = data.readStatus ? '읽음' : '읽지 않음';
-
-			msgContentDiv.appendChild(msgTimeSpan);
-			msgDiv.appendChild(msgContentDiv);
-			msgArea.appendChild(msgDiv);
-			msgDiv.appendChild(readStatusSpan);
-
-			msgArea.scrollTop = msgArea.scrollHeight; // 스크롤을 맨 아래로 이동
-		}
-
-		// 시간을 'HH:MM' 형식으로 포맷하는 함수
-		function formatTime(timeString) {
-			var time = new Date(timeString);
-			var hours = time.getHours().toString().padStart(2, '0');
-			var minutes = time.getMinutes().toString().padStart(2, '0');
-			return hours + ':' + minutes; // 'HH:MM' 형식
-		}
+		
+	    function formatTimestamp(timestamp) {
+	        var date = new Date(timestamp);
+	        return date.getHours() + ':' + 
+	               ('0'+date.getMinutes()).slice(-2) + ' | ' + 
+	               date.getFullYear() + '/' + 
+	               ('0'+(date.getMonth()+1)).slice(-2) + '/' + 
+	               ('0'+date.getDate()).slice(-2);
+	    }
 
 		// 방 나가기 버튼을 클릭했을 때 호출될 함수
 		function quit() {
-			// WebSocket 연결 종료 또는 채팅방 나가기 로직
-			if (socket && socket.readyState === WebSocket.OPEN) {
-				// 서버에 방 나가기 메시지 전송 등
-				socket.close(); // WebSocket 연결 종료
-			}
-			// 필요한 경우, 사용자를 다른 페이지로 리다이렉션
-			window.location.href = '/ozMarket/chatts'; // 예시 URL
-		}
+    var leaveMsg = {
+        type: "LEAVE",
+        roomNum: roomNum,
+        sender: sender,
+        msg: ""
+    };
+    
+    if (socket.readyState === WebSocket.OPEN) {
+        socket.send(JSON.stringify(leaveMsg)); // 서버에 퇴장 메시지를 보냄
+    }
+
+    // WebSocket 연결 종료
+    if (socket) {
+        socket.close();
+    }
+
+    // 사용자를 다른 페이지로 리다이렉션
+    window.location.href = '/ozMarket/chatts';
+}
 
 		// 페이지 로드 시 웹소켓 연결 시도
 		window.onload = connectWebSocket;

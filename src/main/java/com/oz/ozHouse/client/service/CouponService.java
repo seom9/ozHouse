@@ -16,4 +16,5 @@ public interface CouponService {
 	
 	HashSet<MerCouponDTO> getOrderCoupons(String memberId, List<ProQuanDTO> products);
 	
+	int countCouppon(String memberId);
 }

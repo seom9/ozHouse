@@ -24,7 +24,7 @@ public interface OrderService {
 	List<ProQuanDTO> getProQuanDTO(List<ProInform> proInforms);
 	
 	// userCoupons 를 DTO 로
-	List<MerCouponDTO> getMerCouponDTO(List<UserCoupon> useCoupons);
+	List<MerCouponDTO> getMerCouponDTO(long oNum);
 	
 	OrderTb getOrderWithCoupons(long ONum);
 	
@@ -35,4 +35,8 @@ public interface OrderService {
 	void cancelOrder(int memberNum, long oNum);
 	
 	List<MypagePointDTO> getMypointDTO (String memberId);
+	
+	List<ClientOrderListDTO> getMemberWithOrderTo(String memberId);
+	
+	
 }

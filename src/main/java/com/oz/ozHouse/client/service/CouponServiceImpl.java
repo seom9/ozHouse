@@ -54,9 +54,9 @@ public class CouponServiceImpl implements CouponService{
 		Member member = result.get();
 		
 		List<MerCouponDTO> merCouponDTOs = member.getCoupons().stream()
-										        .map(userCoupon -> MerCouponDTO.from(userCoupon.getMerCoupon()))
-										        .filter(Objects::nonNull)
-										        .collect(Collectors.toList());
+				.filter(userCoupon -> !userCoupon.isUserCouponActive())
+		        .map(userCoupon -> MerCouponDTO.from(userCoupon.getMerCoupon()))
+		        .collect(Collectors.toList());
 		
 		return merCouponDTOs;
 	}
@@ -97,11 +97,18 @@ public class CouponServiceImpl implements CouponService{
 		
 		// 판매자 번호가 있다면 treeSet에 해당 userCoupon 추가
 		HashSet<MerCouponDTO> merCouponDTOs = member.getCoupons().stream()
+				.filter(userCoupon -> !userCoupon.isUserCouponActive())
 		        .map(userCoupon -> MerCouponDTO.from(userCoupon.getMerCoupon()))
 		        .filter(merCouponDTO -> merNums.contains(merCouponDTO.getMerNum()))
 		        .collect(Collectors.toCollection(HashSet::new));
 		
 		return merCouponDTOs;
+	}
+
+
+	@Override
+	public int countCouppon(String memberId) {
+		return userCouponRepository.countByMember_MemberId(memberId);
 	}
 	
 	

@@ -1,14 +1,16 @@
 package com.oz.ozHouse.market.service;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.oz.ozHouse.domain.Chatt;
 import com.oz.ozHouse.domain.ChattRoom;
 import com.oz.ozHouse.dto.ChattRoomDTO;
+import com.oz.ozHouse.market.repository.ChattRepository;
 import com.oz.ozHouse.market.repository.ChattRoomRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -18,6 +20,8 @@ import lombok.RequiredArgsConstructor;
 public class ChattRoomServiceImpl implements ChattRoomService {
 
     private final ChattRoomRepository chattRoomRepository;
+    
+    private final ChattRepository chattRepository;
 
     @Override
     @Transactional
@@ -41,13 +45,11 @@ public class ChattRoomServiceImpl implements ChattRoomService {
     @Override
     @Transactional
     public ChattRoom findOrCreateRoom(String buyerNickname, String sellerNickname, Integer proNum) {
-        // 기존 채팅방 검색 로직 구현 (예시 코드, 실제 구현은 데이터 모델에 따라 달라질 수 있음)
         List<ChattRoom> existingRooms = chattRoomRepository.findByBuyerAndSellerAndProNum(buyerNickname, sellerNickname, proNum);
         if (!existingRooms.isEmpty()) {
-            return existingRooms.get(0); // 기존 채팅방이 있다면 반환
+            return existingRooms.get(0);
         }
         
-        // 새 채팅방 생성 로직
         ChattRoomDTO chattRoomDTO = new ChattRoomDTO();
         chattRoomDTO.setMyId(buyerNickname);
         chattRoomDTO.setOtherId(sellerNickname);
@@ -57,9 +59,43 @@ public class ChattRoomServiceImpl implements ChattRoomService {
     }
 
     @Override
-    public List<Object> findParticipantsByRoomNum(Integer roomNum) {
-        return chattRoomRepository.findParticipantsByRoomNum(roomNum).stream()
-                                  .flatMap(Arrays::stream)
-                                  .collect(Collectors.toList());
+    public List<String> findParticipantsByRoomNum(Integer roomNum) {
+        return chattRepository.findParticipantsByRoomNum(roomNum);
     }
+
+//    @Override
+//    public void updateUserCheckStatus(Integer roomNum, String userId, String status) {
+//        chattRoomRepository.updateUserCheckStatus(roomNum, userId, status);
+//    }
+
+    @Override
+    public String findOtherParticipant(Integer roomNum, String sender) {
+        return chattRoomRepository.findOtherParticipantId(roomNum, sender);
+
+    }
+    
+    public List<ChattRoomDTO> findRoomDetailsByMemberNickname(String memberNickname) {
+        List<ChattRoom> rooms = findBymyId(memberNickname);
+        List<ChattRoomDTO> roomDetails = new ArrayList<>();
+        
+        for (ChattRoom room : rooms) {
+            Optional<Chatt> lastChattOpt = chattRepository.findLastMessageByRoomNum(room.getRoomNum());
+            String lastMessage = lastChattOpt.map(Chatt::getMsg).orElse("");
+            String partnerNickname = room.getMyId().equals(memberNickname) ? room.getOtherId() : room.getMyId();
+            roomDetails.add(new ChattRoomDTO(room.getRoomNum(), partnerNickname, lastMessage));
+        }
+
+        return roomDetails;
+    }
+
+//    @Override
+//    public String getUserCheckStatus(Integer roomNum, String userId) {
+//        // TODO Auto-generated method stub
+//        return null;
+//    }
+
+//    @Override
+//    public void updateUserCheckStatus(int roomNum, String username, String status) {
+//        chattRoomRepository.updateCheckStatus(roomNum, username, status);
+//    }
 }

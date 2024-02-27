@@ -113,5 +113,23 @@ public class MarketProductRepositoryImpl implements MarketProductRepository {
 	        em.remove(product);
 	    }
 	}
+
+	@Override
+	public boolean reserveProduct(Integer proNum, String nickname) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean confirmPurchase(Integer proNum, String nickname) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean cancelReservation(Integer proNum) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 		
 }
