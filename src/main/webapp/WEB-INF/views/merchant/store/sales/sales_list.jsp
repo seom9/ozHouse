@@ -107,7 +107,7 @@
 						포함되는 내역은 귀속월의 배송완료, 배송중인 내역으로, 월이 다른 환불은 각각 발생월에 귀속됩니다.<br> <br>
 					</p>
 				</div>
-				<c:set var="merNum" value="${merchantLoginMember.merNum}" />
+				<c:set var="merNum" value="${merLoginMember.merNum}" />
 				<!-- 
 				<form name="f" action="${pageContext.request.contextPath}/merchants/${merchantLoginMember.mer_num}/sales"
 				 -->
