@@ -29,6 +29,8 @@
 			<div class="memberNickname">${nickname}</div>
 			<c:forEach var="room" items="${roomList}">
 				<div class="chat-room-entry">
+				<img src="data:image/png;base64,${encodedMemberImage}" alt="Member Image"/>
+				
 					<a
 						href="${pageContext.request.contextPath}/ozMarket/chattRoom/${room.roomNum}">방
 						${room.roomNum}</a>
@@ -36,7 +38,17 @@
 			</c:forEach>
 		</div>
 		<div class="chat-messages">
-			<h3>메세지</h3>
+			<div class="product-info">
+				<h3>${getProduct.proTitle}</h3>
+				<h3>${getProduct.proPrice}</h3>
+				<h3>
+					<img src="data:image/jpeg;base64,${encodedImages[0]}" width="60"
+						height="60" alt="${getProduct.proTitle}" />
+				</h3>
+				<button>예약</button>
+				<button>확정</button>
+				<button>취소</button>
+			</div>
 			<!-- 메시지 표시 영역: 수신한 메시지가 여기에 출력 -->
 			<div class="msgArea"></div>
 			<div class="message-input">
@@ -91,7 +103,6 @@
 		// 채팅방에 들어가는 로직을 처리하는 함수
 		function enterRoom() {
 			loadPreviousMessages(roomNum); // 이전 메시지를 로드하는 함수 호출
-			markAllMessagesAsRead(roomNum);
 			console.log("방 입장: " + roomNum);
 			// 방에 입장하는 로직, 예: 서버에 메시지 보내기
 			var enterMsg = {
@@ -101,7 +112,6 @@
 				msg : ""
 			};
 			
-		    markAllMessagesAsRead(roomNum);
 
 			if (socket.readyState === WebSocket.OPEN) {
 				socket.send(JSON.stringify(enterMsg)); // 서버에 입장 메시지를 보냄
@@ -225,39 +235,44 @@
 		var lastDisplayedDate = null;
 		
 		// 메시지를 화면에 표시하는 함수
-	    function displayChatMessage(message) {
-			
-	    	var messageDate = new Date(message.inTime).toDateString();
-	    	  if (messageDate !== lastDisplayedDate) {
-	    	    lastDisplayedDate = messageDate;
-	    	    var dateDivider = document.createElement('div');
-	    	    dateDivider.className = 'date-divider';
-	    	    dateDivider.textContent = messageDate;
-	    	    document.querySelector('.msgArea').appendChild(dateDivider);
-	    	  }
-	    	  
+function displayChatMessage(message) {
+    // 이 부분은 기존의 날짜 구분선 코드입니다.
+    var messageDate = new Date(message.inTime).toDateString();
+    
+    if (messageDate !== lastDisplayedDate) {
+        lastDisplayedDate = messageDate;
+        var dateDivider = document.createElement('div');
+        dateDivider.className = 'date-divider';
+        dateDivider.textContent = messageDate;
+        document.querySelector('.msgArea').appendChild(dateDivider);
+    }
+
+    // 메시지를 생성하고 화면에 추가하는 부분입니다.
     const msgArea = document.querySelector('.msgArea');
     const msgDiv = document.createElement('div');
-    const isSentMessage = message.sender === sender; // Assuming 'sender' is your username
+    const isSentMessage = message.sender === sender;
 
-    // Set class based on sender
+    // 'my-message' 또는 'their-message' 클래스를 추가하여 메시지가 보내는 사람의 것인지 구분합니다.
     msgDiv.className = isSentMessage ? 'message my-message' : 'message their-message';
 
-    // Format the timestamp
-    const timestamp = new Date(message.inTime).toLocaleString(); // Adjust formatting as needed
+    // 메시지의 보내는 시간을 포맷합니다.
+    const timestamp = new Date(message.inTime).toLocaleTimeString();
 
-    // Create and append message content
+    // 메시지 내용을 span 요소에 추가합니다.
     let messageContent = document.createElement('span');
     messageContent.textContent = message.msg;
     msgDiv.appendChild(messageContent);
 
-    // Create and append timestamp
+    // 시간을 표시하는 span 요소를 추가합니다.
     let timestampSpan = document.createElement('span');
     timestampSpan.classList.add('timestamp');
-    timestampSpan.textContent = timestamp; // Use your formatted timestamp
+    timestampSpan.textContent = timestamp; // 여기에 보내는 시간을 추가합니다.
     msgDiv.appendChild(timestampSpan);
 
+    // 생성한 메시지 div를 메시지 영역에 추가합니다.
     msgArea.appendChild(msgDiv);
+
+    // 새 메시지를 추가할 때마다 스크롤을 가장 아래로 내립니다.
     msgArea.scrollTop = msgArea.scrollHeight;
 }
 		
@@ -272,14 +287,25 @@
 
 		// 방 나가기 버튼을 클릭했을 때 호출될 함수
 		function quit() {
-			// WebSocket 연결 종료 또는 채팅방 나가기 로직
-			if (socket && socket.readyState === WebSocket.OPEN) {
-				// 서버에 방 나가기 메시지 전송 등
-				socket.close(); // WebSocket 연결 종료
-			}
-			// 필요한 경우, 사용자를 다른 페이지로 리다이렉션
-			window.location.href = '/ozMarket/chatts'; // 예시 URL
-		}
+    var leaveMsg = {
+        type: "LEAVE",
+        roomNum: roomNum,
+        sender: sender,
+        msg: ""
+    };
+    
+    if (socket.readyState === WebSocket.OPEN) {
+        socket.send(JSON.stringify(leaveMsg)); // 서버에 퇴장 메시지를 보냄
+    }
+
+    // WebSocket 연결 종료
+    if (socket) {
+        socket.close();
+    }
+
+    // 사용자를 다른 페이지로 리다이렉션
+    window.location.href = '/ozMarket/chatts';
+}
 
 		// 페이지 로드 시 웹소켓 연결 시도
 		window.onload = connectWebSocket;

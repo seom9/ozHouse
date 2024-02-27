@@ -77,7 +77,7 @@ public class ChattDTO {
 	
 	
 	public void setReadStatus(int readStatus) {
-		this.readStatus = readStatus;		
+		this.readStatus = 1;		
 	}
 
 	public void setRoomNum(int roomNum) {

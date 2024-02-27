@@ -66,7 +66,6 @@ public class WebsocketHandler extends TextWebSocketHandler {
 	private void enterRoom(WebSocketSession session, ChattDTO chatt, String roomNumStr) throws IOException {
 	    HashSet<WebSocketSession> sessions = roomSessions.computeIfAbsent(roomNumStr, k -> new HashSet<>());
 	    sessions.add(session);
-	    chattRoomService.updateUserCheckStatus(Integer.parseInt(roomNumStr), chatt.getSender(), "on");
 
 	 // 현재 채팅방에 입장한 사용자 수
 	    int numberOfUsers = sessions.size();

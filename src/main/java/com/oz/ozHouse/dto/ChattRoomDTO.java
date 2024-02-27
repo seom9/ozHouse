@@ -24,7 +24,8 @@ public class ChattRoomDTO {
 	private int proNum;
 	private String myIdCheck; 
     private String otherIdCheck;
-
+    private String partner;
+    
 	public static ChattRoomDTO toDTO(ChattRoom dto) {
 		
 		return ChattRoomDTO.builder()
@@ -61,5 +62,9 @@ public class ChattRoomDTO {
 
     public void setProNum(Integer proNum) {
         this.proNum = proNum;
+    }
+    
+    public void setPartner(String partner) {
+    	this.partner = partner;
     }
 }

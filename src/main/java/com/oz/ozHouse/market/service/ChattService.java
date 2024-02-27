@@ -19,6 +19,8 @@ public interface ChattService {
 
 	Chatt findLastMessageByRoomNum(int roomNum);
 
-	void deleteChatHistoryBefore(LocalDateTime date);
+	void deleteByInTimeBefore(LocalDateTime date);
+
+    void updateReadStatusForUserInRoom(Integer roomNum, String userId);
 
 }
