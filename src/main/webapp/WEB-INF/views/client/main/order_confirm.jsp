@@ -131,8 +131,7 @@
       <c:set var="order_assembly_cost" value="${order_assembly_cost + dto.productDTO.proAssemblyCost*dto.quantity}"/> 
       <c:set var="order_qpty" value="${order_qpty + dto.quantity}"/>
 
-      
-      
+
                         </c:forEach>
 		             </li>
 		         </ul>

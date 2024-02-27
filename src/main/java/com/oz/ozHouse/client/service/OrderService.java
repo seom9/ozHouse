@@ -37,4 +37,6 @@ public interface OrderService {
 	List<MypagePointDTO> getMypointDTO (String memberId);
 	
 	List<ClientOrderListDTO> getMemberWithOrderTo(String memberId);
+	
+	
 }

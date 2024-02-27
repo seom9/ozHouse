@@ -89,4 +89,5 @@ public class Product {
 		this.categoryName = dto.getCategoryName();
 		this.proToday = "0";
 	}
+	
 }
