@@ -54,13 +54,18 @@ public class ChattServiceImpl implements ChattService {
 
 	@Override
 	public Chatt findLastMessageByRoomNum(int roomNum) {
-        // 마지막 메시지를 가져오기 위해 Optional을 사용합니다.
-        Optional<Chatt> lastMessage = Optional.ofNullable(chattRepository.findTopByRoomNumOrderByInTimeDesc(roomNum));
-        // 메시지가 존재하면 반환하고, 그렇지 않으면 예외를 발생시킵니다.
-        return lastMessage.orElseThrow(() -> new IllegalStateException("이 채팅방에는 메시지가 없습니다."));
-    }
+	    // 마지막 메시지를 가져오기 위해 Optional을 사용합니다.
+	    Optional<Chatt> lastMessage = Optional.ofNullable(chattRepository.findTopByRoomNumOrderByInTimeDesc(roomNum));
+	    return lastMessage.orElse(null); // 메시지가 없는 경우에는 null을 반환합니다.
+	}
+	
 	@Override
 	public void deleteByInTimeBefore(LocalDateTime date) {
 		chattRepository.deleteByInTimeBefore(date);		
+	}
+	@Override
+	public void deleteMessagesByRoomNum(int roomNum) {
+		chattRepository.deleteMessagesByRoomNum(roomNum);
+		
 	}
 }

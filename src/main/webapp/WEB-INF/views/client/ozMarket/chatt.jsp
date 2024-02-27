@@ -10,63 +10,77 @@
 <title>채팅</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/ozMarket/chatting.css" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('reserveBtn').addEventListener('click', function() {
-        const proNum = this.getAttribute('data-pro-num');
-        reserveProduct(proNum);
-    });
-
-    document.getElementById('confirmBtn').addEventListener('click', function() {
-        const proNum = this.getAttribute('data-pro-num');
-        confirmPurchase(proNum);
-    });
-
-    document.getElementById('cancelBtn').addEventListener('click', function() {
-        const proNum = this.getAttribute('data-pro-num');
-        cancelReservation(proNum);
-    });
-});
-
+// 예약 버튼 클릭 시 호출될 함수
 function reserveProduct(proNum) {
-    fetch('${pageContext.request.contextPath}/ozMarket/reserveProduct', {
+    fetch(`/ozMarket/reserveProduct/${proNum}`, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
+            'Content-Type': 'application/json',
+            // 필요한 경우 CSRF 토큰 추가
         },
-        body: `proNum=${proNum}`
+        // body 데이터는 필요한 경우에 따라 추가
     })
-    .then(response => response.text())
-    .then(data => alert(data))
+    .then(response => {
+        if (response.ok) {
+            return response.text();
+        }
+        throw new Error('Network response was not ok.');
+    })
+    .then(data => {
+        alert(data); // 성공 메시지 처리
+    })
     .catch(error => console.error('Error:', error));
 }
 
+// 구매 확정 버튼 클릭 시 호출될 함수
 function confirmPurchase(proNum) {
-    fetch('${pageContext.request.contextPath}/ozMarket/confirmPurchase', {
+    fetch(`/ozMarket/confirmPurchase/${proNum}`, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
+            'Content-Type': 'application/json',
+            // 필요한 경우 CSRF 토큰 추가
         },
-        body: `proNum=${proNum}`
+        // body 데이터는 필요한 경우에 따라 추가
     })
-    .then(response => response.text())
-    .then(data => alert(data))
+    .then(response => {
+        if (response.ok) {
+            return response.text();
+        }
+        throw new Error('Network response was not ok.');
+    })
+    .then(data => {
+        alert(data); // 성공 메시지 처리
+    })
     .catch(error => console.error('Error:', error));
 }
 
+// 예약 취소 버튼 클릭 시 호출될 함수
 function cancelReservation(proNum) {
-    fetch('${pageContext.request.contextPath}/ozMarket/cancelReservation', {
+    fetch(`/ozMarket/cancelReservation/${proNum}`, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
+            'Content-Type': 'application/json',
+            // 필요한 경우 CSRF 토큰 추가
         },
-        body: `proNum=${proNum}`
+        // body 데이터는 필요한 경우에 따라 추가
     })
-    .then(response => response.text())
-    .then(data => alert(data))
+    .then(response => {
+        if (response.ok) {
+            return response.text();
+        }
+        throw new Error('Network response was not ok.');
+    })
+    .then(data => {
+        alert(data); // 성공 메시지 처리
+    })
     .catch(error => console.error('Error:', error));
 }
 </script>
+
 </head>
 <body>
 	<div class="chat-container">
@@ -86,10 +100,11 @@ function cancelReservation(proNum) {
 			<div class="memberNickname">${nickname}</div>
 			<c:forEach var="room" items="${roomList}">
 				<div class="chat-room-entry">
-					<img src="data:image/png;base64,${encodedMemberImage}"
-						alt="Member Image" /> <a
-						href="${pageContext.request.contextPath}/ozMarket/chattRoom/${room.roomNum}">방
-						${room.roomNum}</a>
+					<div>방 번호: ${room.roomNum}</div>
+					<a
+						href="${pageContext.request.contextPath}/ozMarket/chattRoom/${room.roomNum}">
+						대화 상대: ${room.partner} </a>
+					<div class="latest-message">마지막 메시지: ${room.lastMessage}</div>
 				</div>
 			</c:forEach>
 		</div>
@@ -101,9 +116,26 @@ function cancelReservation(proNum) {
 					<img src="data:image/jpeg;base64,${encodedImages[0]}" width="60"
 						height="60" alt="${getProduct.proTitle}" />
 				</h3>
-				<button id="reserveBtn" data-pro-num="${getProduct.proNum}">예약</button>
-				<button id="confirmBtn" data-pro-num="${getProduct.proNum}">확정</button>
-				<button id="cancelBtn" data-pro-num="${getProduct.proNum}">취소</button>
+				<!-- 예약 -->
+				<form id="reserveForm"
+					action="/ozMarket/reserveProduct/${getProduct.proNum}"
+					method="post">
+					<input type="submit" value="예약" />
+				</form>
+
+				<!-- 구매 확정 -->
+				<form id="confirmForm"
+					action="/ozMarket/confirmPurchase/${getProduct.proNum}"
+					method="post">
+					<input type="submit" value="확정" />
+				</form>
+
+				<!-- 예약 취소 -->
+				<form id="cancelForm"
+					action="/ozMarket/cancelReservation/${getProduct.proNum}"
+					method="post">
+					<input type="submit" value="취소" />
+				</form>
 			</div>
 
 			<!-- 메시지 표시 영역: 수신한 메시지가 여기에 출력 -->

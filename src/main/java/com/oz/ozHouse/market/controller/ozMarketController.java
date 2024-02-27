@@ -236,7 +236,12 @@ public class ozMarketController {
 			throws IOException {
 		String root = PATH + "\\" + "img";
 		Optional<OzMarketProDTO> optionalDto = Optional.of(marketProService.getProduct(proNum));
-
+		
+		String nickName = null; 
+	    if (member != null) {
+	        nickName = member.getMemberNickname();
+	    }
+	    
 		if (optionalDto.isPresent()) {
 			OzMarketProDTO dto = optionalDto.get();
 			req.setAttribute("getProduct", dto);
@@ -251,7 +256,7 @@ public class ozMarketController {
 				}
 			}
 			req.setAttribute("encodedImagesPro", encodedImagesPro);
-
+			req.setAttribute("nickName", nickName);
 		}
 		
 		return "client/ozMarket/myProduct_content";
@@ -260,44 +265,51 @@ public class ozMarketController {
 	//내정보
 	@GetMapping("/myInfo")
 	public String ozMarketMyInfo(@AuthenticationPrincipal MemberSecurityDTO member, HttpServletRequest req) throws IOException {
-		if (member == null) {
-			req.setAttribute("msg", "로그인 후 이용가능합니다.");
-			req.setAttribute("url", "/main");
-			return "message";
-		}
-		
-		String root = PATH + "\\" + "img";
+	    if (member == null) {
+	        req.setAttribute("msg", "로그인 후 이용가능합니다.");
+	        req.setAttribute("url", "/main");
+	        return "message";
+	    }
+	    
+	    String root = PATH + "\\" + "img";
 	    req.setAttribute("proImg", root);
 
-	    Map<String, Object> params = new HashMap<>();
-	    List<OzMarketProDTO> list = marketProService.listProduct(params);
-	    for (OzMarketProDTO dto : list) {
-	        String[] imageFiles = dto.getProImageChange().split(",");
+	    String nickname = member.getMemberNickname();
+	    
+	    // 각 카테고리의 상품 목록을 가져옵니다.
+	    List<OzMarketProDTO> sellingProducts = marketProService.findSellingProductsByNickname(nickname);
+	    List<OzMarketProDTO> soldProducts = marketProService.findSoldProductsByNickname(nickname);
+	    List<OzMarketProDTO> boughtProducts = marketProService.findBoughtProductsByNickname(nickname);
+	    List<OzMarketProDTO> reservationProducts = marketProService.findReservationProductsByNickname(nickname);
+
+	    // 각 상품에 대해 첫 번째 이미지를 인코딩하여 설정합니다.
+	    encodeImagesForProducts(sellingProducts, root);
+	    encodeImagesForProducts(soldProducts, root);
+	    encodeImagesForProducts(boughtProducts, root);
+	    encodeImagesForProducts(reservationProducts, root);
+
+	    // JSP에 데이터를 전달합니다.
+	    req.setAttribute("sellingProducts", sellingProducts); // 판매중
+	    req.setAttribute("soldProducts", soldProducts); // 판매완료
+	    req.setAttribute("boughtProducts", boughtProducts); // 구매내역
+	    req.setAttribute("reservationProducts", reservationProducts); // 예약내역
+	    req.setAttribute("nickname", nickname);
+	    
+	    return "client/ozMarket/myInfo";
+	}
+
+	// 상품 목록에 대해 첫 번째 이미지를 인코딩하는 메서드
+	private void encodeImagesForProducts(List<OzMarketProDTO> products, String root) throws IOException {
+	    for (OzMarketProDTO product : products) {
+	        String[] imageFiles = product.getProImageChange().split(",");
 	        if (imageFiles.length > 0) {
 	            File imageFile = new File(root, imageFiles[0]);
 	            if (imageFile.exists()) {
 	                String encodedImage = encodeImageToBase64(imageFile);
-	                dto.setEncodedImage(encodedImage);
+	                product.setEncodedImage(encodedImage);
 	            }
 	        }
 	    }
-		
-		String nickname = member.getMemberNickname();
-		
-	    List<OzMarketProDTO> sellingProducts = marketProService.findSellingProductsByNickname(nickname);
-	    List<OzMarketProDTO> soldProducts = marketProService.findSoldProductsByNickname(nickname);
-	    List<OzMarketProDTO> boughtProducts = marketProService.findBoughtProductsByNickname(nickname);
-	    
-	    System.out.println("Selling Products: " + sellingProducts.size());
-	    System.out.println("Bought Products: " + boughtProducts.size());
-	    System.out.println("Sold Products: " + soldProducts.size());
-
-	    req.setAttribute("sellingProducts", sellingProducts);
-	    req.setAttribute("soldProducts", soldProducts);
-	    req.setAttribute("boughtProducts", boughtProducts);
-	    req.setAttribute("nickname", nickname);
-	    
-		return "client/ozMarket/myInfo";
 	}
 	
 	// 상품 삭제

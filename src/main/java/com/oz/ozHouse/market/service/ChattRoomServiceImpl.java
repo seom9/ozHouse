@@ -88,6 +88,11 @@ public class ChattRoomServiceImpl implements ChattRoomService {
         return roomDetails;
     }
 
+    @Override
+    public void deleteChatRoom(int roomNum) {
+    	chattRoomRepository.deleteChatRoom(roomNum);
+    }
+
 //    @Override
 //    public String getUserCheckStatus(Integer roomNum, String userId) {
 //        // TODO Auto-generated method stub
