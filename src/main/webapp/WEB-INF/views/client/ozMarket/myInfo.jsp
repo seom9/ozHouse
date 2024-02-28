@@ -3,7 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="ozMarketTop.jsp"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/ozMarket/myInfo.css" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,19 +25,22 @@
 			</c:choose>
 		</div>
 		<div class="memberNickname">${nickname}</div>
-		<h3>판매중</h3>
+	</div>
+	<h3>판매중</h3>
+	<div class="grid-container">
 		<c:choose>
 			<c:when test="${not empty sellingProducts}">
-				<div class="grid-item">
-					<c:forEach items="${sellingProducts}" var="sellingProducts">
-						<div>${sellingProducts.proTitle }</div>
+				<c:forEach items="${sellingProducts}" var="sellingProducts">
+					<div class="product-container">
 						<a
 							href="${pageContext.request.contextPath}/ozMarket/my-product/${sellingProducts.proNum}">
-								<c:set var="proImgPro" value="${fn:split(sellingProducts.proImgPro, ',')}" />
-					<img class="image" src="${proImgPro[0]}" width="60" height="60">
+							<c:set var="proImgPro"
+								value="${fn:split(sellingProducts.proImgPro, ',')}" /> <img
+							class="image" src="${proImgPro[0]}" width="60" height="60">
 						</a>
-					</c:forEach>
-				</div>
+						<div>${sellingProducts.proTitle}</div>
+					</div>
+				</c:forEach>
 			</c:when>
 			<c:otherwise>
 				<div class="center-text">판매중인 상품이 없습니다.</div>
@@ -44,65 +48,71 @@
 		</c:choose>
 	</div>
 	<h3>구매내역</h3>
-	<c:choose>
-		<c:when test="${not empty boughtProducts}">
-			<div class="grid-item">
+	<div class="grid-container">
+		<c:choose>
+			<c:when test="${not empty boughtProducts}">
 				<c:forEach items="${boughtProducts}" var="boughtProducts">
-					<div>${boughtProducts.proTitle }</div>
-					<a
-						href="${pageContext.request.contextPath}/ozMarket/my-product/${boughtProducts.proNum}">
-						<c:set var="proImgPro" value="${fn:split(boughtProducts.proImgPro, ',')}" />
-					<img class="image" src="${proImgPro[0]}" width="60" height="60">
-					</a>
+					<div class="product-container">
+						<a
+							href="${pageContext.request.contextPath}/ozMarket/my-product/${boughtProducts.proNum}">
+							<c:set var="proImgPro"
+								value="${fn:split(boughtProducts.proImgPro, ',')}" /> <img
+							class="image" src="${proImgPro[0]}" width="60" height="60">
+						</a>
+						<div>${boughtProducts.proTitle }</div>
+					</div>
 				</c:forEach>
-			</div>
-		</c:when>
-		<c:otherwise>
-			<div class="center-text">구매한 상품이 없습니다.</div>
-		</c:otherwise>
-	</c:choose>
-
+			</c:when>
+			<c:otherwise>
+				<div class="center-text">구매한 상품이 없습니다.</div>
+			</c:otherwise>
+		</c:choose>
 	</div>
 	<h3>판매내역</h3>
-	<c:choose>
-		<c:when test="${not empty soldProducts}">
-			<div class="grid-item">
+	<div class="grid-container">
+		<c:choose>
+			<c:when test="${not empty soldProducts}">
 				<c:forEach items="${soldProducts}" var="soldProducts">
-					<div>${soldProducts.proTitle }</div>
-
-					<a
-						href="${pageContext.request.contextPath}/ozMarket/my-product/${soldProducts.proNum}">
-						<c:set var="proImgPro" value="${fn:split(soldProducts.proImgPro, ',')}" />
-					<img class="image" src="${proImgPro[0]}" width="60" height="60">
-					</a>
+					<div class="product-container">
+						<a
+							href="${pageContext.request.contextPath}/ozMarket/my-product/${soldProducts.proNum}">
+							<c:set var="proImgPro"
+								value="${fn:split(soldProducts.proImgPro, ',')}" /> <img
+							class="image" src="${proImgPro[0]}" width="60" height="60">
+						</a>
+						<div>${soldProducts.proTitle }</div>
+					</div>
 				</c:forEach>
-			</div>
-		</c:when>
-		<c:otherwise>
-			<div class="center-text">판매한 상품이 없습니다.</div>
-		</c:otherwise>
-	</c:choose>
-	<h3>예약중내역</h3>
-	<c:choose>
-		<c:when test="${not empty reservationProducts}">
-			<div class="grid-item">
-				<c:forEach items="${reservationProducts}" var="reservationProducts">
-					<div>${reservationProducts.proTitle }</div>
+			</c:when>
+			<c:otherwise>
+				<div class="center-text">판매한 상품이 없습니다.</div>
+			</c:otherwise>
+		</c:choose>
+		</div>
+		<h3>예약중내역</h3>
+		<div class="grid-container">
+			<c:choose>
+				<c:when test="${not empty reservationProducts}">
+						<c:forEach items="${reservationProducts}"
+							var="reservationProducts">
+							<div class="product-container">
+								<a
+									href="${pageContext.request.contextPath}/ozMarket/my-product/${reservationProducts.proNum}">
+									<c:set var="proImgPro"
+										value="${fn:split(reservationProducts.proImgPro, ',')}" /> <img
+									class="image" src="${proImgPro[0]}" width="60" height="60">
+								</a>
+								<div>${reservationProducts.proTitle }</div>
+							</div>
+						</c:forEach>
+					</div>
+				</c:when>
+				<c:otherwise>
+					<div class="center-text">예약한 상품이 없습니다.</div>
+				</c:otherwise>
+			</c:choose>
 
-					<a
-						href="${pageContext.request.contextPath}/ozMarket/my-product/${reservationProducts.proNum}">
-						<c:set var="proImgPro" value="${fn:split(reservationProducts.proImgPro, ',')}" />
-					<img class="image" src="${proImgPro[0]}" width="60" height="60">
-					</a>
-				</c:forEach>
-			</div>
-		</c:when>
-		<c:otherwise>
-			<div class="center-text">예약한 상품이 없습니다.</div>
-		</c:otherwise>
-	</c:choose>
-
-	</div>
+		</div>
 </body>
 </html>
 <%@ include file="../main/bottom.jsp"%>
