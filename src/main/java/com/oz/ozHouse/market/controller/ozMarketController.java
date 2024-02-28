@@ -19,9 +19,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.oz.ozHouse.client.security.MemberSecurityDTO;
+import com.oz.ozHouse.client.service.AwsS3Service;
 import com.oz.ozHouse.client.service.MemberService;
 import com.oz.ozHouse.domain.OzMarketPro;
 import com.oz.ozHouse.dto.OzMarketProDTO;
@@ -37,6 +39,8 @@ import lombok.RequiredArgsConstructor;
 public class ozMarketController {
 
 	private final MarketProService marketProService;
+	
+	private final AwsS3Service aws;
 	
 	private static final String PATH = "C:\\ozMarket\\";
 
@@ -66,14 +70,14 @@ public class ozMarketController {
 	    List<OzMarketProDTO> list = marketProService.findProduct(search);
 	    for (OzMarketProDTO dto : list) {
 	        // 이미지 처리
-	        String[] imageFiles = dto.getProImageChange().split(",");
+	        String[] imageFiles = dto.getProImgPro().split(",");
 	        if (imageFiles.length > 0) {
 	            File imageFile = new File(root, imageFiles[0]);
-	            if (imageFile.exists()) {
-	                // 이미지를 Base64로 인코딩
-	                String encodedImage = encodeImageToBase64(imageFile);
-	                dto.setEncodedImage(encodedImage);
-	            }
+//	            if (imageFile.exists()) {
+//	                // 이미지를 Base64로 인코딩
+//	                String encodedImage = encodeImageToBase64(imageFile);
+//	                dto.setEncodedImage(encodedImage);
+//	            }
 	        }
 	    }
 	    // 상품 목록을 요청 속성에 추가
@@ -94,14 +98,14 @@ public class ozMarketController {
 	    List<OzMarketProDTO> list = marketProService.listProduct(params);
 	    for (OzMarketProDTO dto : list) {
 	        // 이미지 처리
-	        String[] imageFiles = dto.getProImageChange().split(",");
+	        String[] imageFiles = dto.getProImgPro().split(",");
 	        if (imageFiles.length > 0) {
 	            File imageFile = new File(root, imageFiles[0]);
-	            if (imageFile.exists()) {
-	                // 이미지를 Base64로 인코딩
-	                String encodedImage = encodeImageToBase64(imageFile);
-	                dto.setEncodedImage(encodedImage);
-	            }
+//	            if (imageFile.exists()) {
+//	                // 이미지를 Base64로 인코딩
+//	                String encodedImage = encodeImageToBase64(imageFile);
+//	                dto.setEncodedImage(encodedImage);
+//	            }
 	        }
 	    }
 	    // 상품 목록을 요청 속성에 추가
@@ -121,14 +125,14 @@ public class ozMarketController {
 	    List<OzMarketProDTO> list = marketProService.listProduct(params);
 	    for (OzMarketProDTO dto : list) {
 	        // 이미지 처리
-	        String[] imageFiles = dto.getProImageChange().split(",");
+	        String[] imageFiles = dto.getProImgPro().split(",");
 	        if (imageFiles.length > 0) {
 	            File imageFile = new File(root, imageFiles[0]);
-	            if (imageFile.exists()) {
-	                // 이미지를 Base64로 인코딩
-	                String encodedImage = encodeImageToBase64(imageFile);
-	                dto.setEncodedImage(encodedImage);
-	            }
+//	            if (imageFile.exists()) {
+//	                // 이미지를 Base64로 인코딩
+//	                String encodedImage = encodeImageToBase64(imageFile);
+//	                dto.setEncodedImage(encodedImage);
+//	            }
 	        }
 	    }
 	    // 상품 목록을 요청 속성에 추가
@@ -178,40 +182,53 @@ public class ozMarketController {
 		if (!fileCheck.exists())
 			fileCheck.mkdir();
 
-		List<Map<String, String>> fileList = new ArrayList<>();
-		String fileproOri = "";
-		for (int i = 0; i < proImgPro.size(); i++) {
-			String originFile = proImgPro.get(i).getOriginalFilename();
-			String ext = originFile.substring(originFile.lastIndexOf("."));
-			String changeFile = UUID.randomUUID().toString() + ext;
-			Map<String, String> map = new HashMap<>();
-			map.put("originFile", originFile);
-			map.put("changeFile", changeFile);
-			fileproOri += originFile;
-			fileList.add(map);
+//		List<Map<String, String>> fileList = new ArrayList<>();
+//		String fileproOri = "";
+//		for (int i = 0; i < proImgPro.size(); i++) {
+//			String originFile = proImgPro.get(i).getOriginalFilename();
+//			String ext = originFile.substring(originFile.lastIndexOf("."));
+//			String changeFile = UUID.randomUUID().toString() + ext;
+//			Map<String, String> map = new HashMap<>();
+//			map.put("originFile", originFile);
+//			map.put("changeFile", changeFile);
+//			fileproOri += originFile;
+//			fileList.add(map);
+//		}
+//		String filepro = "";
+//
+//		try {
+//			for (int i = 0; i < proImgPro.size(); i++) {
+//				File uploadFile = new File(root + "\\" + fileList.get(i).get("changeFile"));
+//				proImgPro.get(i).transferTo(uploadFile);
+//				System.out.println(uploadFile);
+//				filepro += fileList.get(i).get(("changeFile")) + ",";
+//			}
+//
+//			System.out.println("다중 파일 업로드 성공");
+//
+//		} catch (IllegalStateException | IOException e) {
+//			System.out.println("다중 파일 업로드 실패");
+//			for (int i = 0; i < proImgPro.size(); i++) {
+//				new File(root + "\\" + fileList.get(i).get("changeFile")).delete();
+//			}
+//			e.printStackTrace();
+//		}
+    	MultipartHttpServletRequest mr = (MultipartHttpServletRequest) req;
+    	List<MultipartFile> blogImages = mr.getFiles("proImgPro");  
+    	
+		List<MultipartFile> validFiles = new ArrayList<>();
+		
+		for (MultipartFile file : blogImages) {
+    	    String fileName = file.getOriginalFilename();
+    	    long fileSize = file.getSize();
+    	    validFiles.add(file);
 		}
-		String filepro = "";
+		
+		List<String> fileNameList = aws.uploadImage(validFiles);
+		String imgString = String.join(",", fileNameList);
 
-		try {
-			for (int i = 0; i < proImgPro.size(); i++) {
-				File uploadFile = new File(root + "\\" + fileList.get(i).get("changeFile"));
-				proImgPro.get(i).transferTo(uploadFile);
-				System.out.println(uploadFile);
-				filepro += fileList.get(i).get(("changeFile")) + ",";
-			}
-
-			System.out.println("다중 파일 업로드 성공");
-
-		} catch (IllegalStateException | IOException e) {
-			System.out.println("다중 파일 업로드 실패");
-			for (int i = 0; i < proImgPro.size(); i++) {
-				new File(root + "\\" + fileList.get(i).get("changeFile")).delete();
-			}
-			e.printStackTrace();
-		}
-
-		dto.setProImageChange(filepro);
-		dto.setProImgPro(fileproOri);
+//		dto.setProImageChange(filepro);
+		dto.setProImgPro(imgString);
 		
 	    System.out.println("삽입 전 DTO 닉네임: " + dto.getMemberNickname());
 
@@ -247,13 +264,14 @@ public class ozMarketController {
 			req.setAttribute("getProduct", dto);
 
 			List<String> encodedImagesPro = new ArrayList<>();
-			String[] imageProFiles = dto.getProImageChange().split(",");
+			String[] imageProFiles = dto.getProImgPro().split(",");
 			for (String imageFileName : imageProFiles) {
 				File imageProFile = new File(root, imageFileName);
-				if (imageProFile.exists()) {
-					String encodedImagePro = encodeImageToBase64(imageProFile);
-					encodedImagesPro.add(encodedImagePro);
-				}
+				encodedImagesPro.add(imageFileName);
+//				if (imageProFile.exists()) {
+//					String encodedImagePro = encodeImageToBase64(imageProFile);
+//					encodedImagesPro.add(encodedImagePro);
+//				}
 			}
 			req.setAttribute("encodedImagesPro", encodedImagesPro);
 			req.setAttribute("nickName", nickName);
@@ -301,13 +319,13 @@ public class ozMarketController {
 	// 상품 목록에 대해 첫 번째 이미지를 인코딩하는 메서드
 	private void encodeImagesForProducts(List<OzMarketProDTO> products, String root) throws IOException {
 	    for (OzMarketProDTO product : products) {
-	        String[] imageFiles = product.getProImageChange().split(",");
+	        String[] imageFiles = product.getProImgPro().split(",");
 	        if (imageFiles.length > 0) {
 	            File imageFile = new File(root, imageFiles[0]);
-	            if (imageFile.exists()) {
-	                String encodedImage = encodeImageToBase64(imageFile);
-	                product.setEncodedImage(encodedImage);
-	            }
+//	            if (imageFile.exists()) {
+//	                String encodedImage = encodeImageToBase64(imageFile);
+//	                product.setEncodedImage(encodedImage);
+//	            }
 	        }
 	    }
 	}
@@ -321,7 +339,7 @@ public class ozMarketController {
 	        OzMarketProDTO product = marketProService.getProduct(proNum);
 	        if (product != null) {
 	            System.out.println("경로 : " + root);
-	            String[] imageFiles = product.getProImageChange().split(",");
+	            String[] imageFiles = product.getProImgPro().split(",");
 	            for (String fileName : imageFiles) {
 	                File file = new File(root + File.separator + fileName);
 	                if (file.exists() && file.delete()) {

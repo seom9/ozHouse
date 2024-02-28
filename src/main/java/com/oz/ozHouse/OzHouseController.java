@@ -37,6 +37,12 @@ public class OzHouseController {
 		String memberId = (member != null) ? member.getUsername() : null;
 
 		List<ProductDTO> cliProductList = ps.cliProductList(memberId);
+		
+		for(ProductDTO dto : cliProductList) {
+			String img = dto.getProImg();
+			System.out.println(img);
+		}
+		System.out.println();
 		List<BlogDTO> blogList = bs.blogList();
 		
 		model.addAttribute("productList", cliProductList);
