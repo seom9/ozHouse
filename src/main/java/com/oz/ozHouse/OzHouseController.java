@@ -14,6 +14,7 @@ import com.oz.ozHouse.client.security.MemberSecurityDTO;
 import com.oz.ozHouse.client.service.BlogServiceImpl;
 import com.oz.ozHouse.client.service.ProductService;
 import com.oz.ozHouse.client.service.ProductServiceImpl;
+import com.oz.ozHouse.client.service.ReivewServiceImpl;
 import com.oz.ozHouse.client.service.EmailService;
 import com.oz.ozHouse.client.service.MemberService;
 import com.oz.ozHouse.domain.Blog;
@@ -30,6 +31,7 @@ public class OzHouseController {
 	
 	private final ProductServiceImpl ps;
 	private final BlogServiceImpl bs;
+	private final ReivewServiceImpl rs;
 	
 	@GetMapping(value = {"/", "/index", "/main"})
 	public String index(Model model, 
@@ -45,8 +47,11 @@ public class OzHouseController {
 		System.out.println();
 		List<BlogDTO> blogList = bs.blogList();
 		
+		long res = rs.reviewCount();
+		
 		model.addAttribute("productList", cliProductList);
 		model.addAttribute("blogList", blogList);
+		model.addAttribute("reviewCount", res);
 		
 		return "client/main/Main";
 	}

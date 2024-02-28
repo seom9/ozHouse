@@ -103,11 +103,7 @@
 			<div style="width:100%;height:100%;position:absolute;top:0">
 				<div style="box-sizing: border-box; padding-top: 0px; padding-bottom: 1479px; margin-top: 0px;">
 					<div class="css-1bpmso0">
-					 <div class="row">
-						<c:forEach var="tdto" items="${product}" varStatus="loop">
-					<c:if test="${loop.index % 4 == 0}">
-                         <div class="column">
-                    </c:if>
+	                    <c:forEach var="tdto" items="${product}">
 						<article class="css-ylurzg">
 							<a href="/${tdto.proNum}/prodView"></a>
 							<div class="css-bga0xs">
@@ -117,8 +113,8 @@
 									</c:if><!-- 타임나오는 곳 -->
 										<!-- 스크랩 버튼 -->
 										<sec:authorize access="hasAnyRole('ROLE_CLIENT')">
-											<button class="production-item-image__scrap-badge" onclick="javascript:scrap('${prc.username}', '${dto.proNum}', ${dto.scrap ? 0 : 1})">
-									     		<svg class="icon--stroke" aria-label="스크랩" width="24" height="24" fill="${dto.scrap ? '#50E5B4' : 'rgba(0, 0, 0, 0)'}" stroke="currentColor" stroke-width="0.5" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"><path d="M11.53 18.54l-8.06 4.31A1 1 0 0 1 2 21.97V3.5A1.5 1.5 0 0 1 3.5 2h17A1.5 1.5 0 0 1 22 3.5v18.47a1 1 0 0 1-1.47.88l-8.06-4.31a1 1 0 0 0-.94 0z"></path></svg>
+											<button class="production-item-image__scrap-badge" onclick="javascript:scrap('${prc.username}', '${tdto.proNum}', ${tdto.scrap ? 0 : 1})">
+									     		<svg class="icon--stroke" aria-label="스크랩" width="24" height="24" fill="${tdto.scrap ? '#50E5B4' : 'rgba(0, 0, 0, 0)'}" stroke="currentColor" stroke-width="0.5" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"><path d="M11.53 18.54l-8.06 4.31A1 1 0 0 1 2 21.97V3.5A1.5 1.5 0 0 1 3.5 2h17A1.5 1.5 0 0 1 22 3.5v18.47a1 1 0 0 1-1.47.88l-8.06-4.31a1 1 0 0 0-.94 0z"></path></svg>
 											</button>
 										</sec:authorize>
 										<sec:authorize access="!hasAnyRole('ROLE_CLIENT')">
@@ -127,9 +123,10 @@
 											</button>	
 										</sec:authorize>
 									<div class="css-ypqde8">
-										<img class="image" src="${tdto.proImg}" alt="상품 대표 이미지">
-									</div>
-									<div class="css-b2xyg5"></div>   
+										<a href="/${dto.proNum}/prodView">
+											<img class="image" src="${tdto.proImg}" alt="상품 대표 이미지">
+										</a>
+									</div> 
 								</div>
 							</div>
 							<div class="product-info css-17wu10g">
@@ -157,13 +154,7 @@
 							    </div>	
 							</div>
 						</article>
-					<!-- 네 개씩 끊어서 처리하기 위한 조건 -->
-                    <c:if test="${loop.index % 4 == 3 or loop.last}">
-                       
-                    </c:if>
 					</c:forEach>
-					</div>
-				</div>
 			</div>
 		</div>
 	</div>     	
