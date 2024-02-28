@@ -1,5 +1,5 @@
 .a {
-	height: 100vh; /* È­¸é ³ôÀÌÀÇ 100% */
+	height: 100vh; /* È­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 100% */
 	margin: 0;
 	position: relative;
     left: 130px;
@@ -221,4 +221,18 @@
 	height: 1.1em;
 	margin-right: 1px;
 	vertical-align: -2px;
+}
+
+.production-item-image__scrap-badge {
+    bottom: 12px;
+    right: 12px;
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    margin: 0;
+    padding: 0;
+    background: none;
+    border: none;
+    z-index: 2;
+    transition: opacity .1s;
 }

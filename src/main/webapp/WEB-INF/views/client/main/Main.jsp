@@ -1,16 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%@ include file="top.jsp" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.Date" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<link rel="stylesheet" href="${pageContext.request.contextPath}/client/main_css/mainStyle.css"/>
 <script type="text/javascript" src="src/main/resources/static/js/main.js"></script>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
-
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<%@ include file="top.jsp" %>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/client/main_css/mainStyle.css"/>
+
    <script type="text/javascript">
    function getTimeRemaining() {
        var now = new Date();
@@ -113,7 +112,7 @@
          </div>
       </div>
    </div><!-- 블로그 -->
-   <c:set var="currentDate" value='<%= new SimpleDateFormat("yy/MM/dd").format(new Date())%>' />
+<%--    <c:set var="currentDate" value='<%= new SimpleDateFormat("yy/MM/dd").format(new Date())%>' />
    <div class="css-1obbfpy"><!-- 오늘의 딜 -->
       <div class="css-14vj981">
          <div class="css-dlv2hg">
@@ -178,9 +177,9 @@
                                           <span class="today-deal-item__header__name">${product_dto.product_name}</span>
                                        </h1>
                                        <span class="production-item-price">
-                                          <span class="production-item-price__rate">
+                                          <span class="production-item-price__rate" style="color: #50E5B4;">
                                              ${product_dto.product_discount_rate}
-                                             <span class="percentage">% </span>
+                                             <span class="percentage" style="color: #50E5B4;">% </span>
                                           </span>
                                           <span class="production-item-price__price">
                                              ${product_dto.product_price}
@@ -192,7 +191,7 @@
                                                 <path fill="currentColor" fill-rule="evenodd" d="M12 19.72l-5.677 2.405c-.76.322-1.318-.094-1.247-.906l.533-6.142-4.042-4.656c-.54-.624-.317-1.283.477-1.467l6.006-1.39L11.23 2.28c.426-.707 1.122-.699 1.542 0l3.179 5.282 6.006 1.391c.805.187 1.011.851.477 1.467l-4.042 4.656.533 6.142c.072.822-.497 1.224-1.247.906L12 19.72z"></path>
                                              </svg>
                                              <strong class="avg">별점 평균</strong>
-                                             리뷰 num
+                                             리뷰 ${reviewCount}
                                           </p>
                                        </div>
                                     </div>
@@ -207,7 +206,7 @@
             </div>
          </div>
       </div>
-   </div>
+   </div> --%>
       <div class="css-1obbfpy"><!-- 모든 상품 -->
       <div class="css-14vj981">
          <div class="css-dlv2hg">
@@ -269,10 +268,9 @@
                                        <div class="today-deal-item__stats-pc">
                                           <p class="production-item-stats production-item-stats--review">
                                              <svg class="icon" width="24" height="24" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet">
-                                                <path fill="currentColor" fill-rule="evenodd" d="M12 19.72l-5.677 2.405c-.76.322-1.318-.094-1.247-.906l.533-6.142-4.042-4.656c-.54-.624-.317-1.283.477-1.467l6.006-1.39L11.23 2.28c.426-.707 1.122-.699 1.542 0l3.179 5.282 6.006 1.391c.805.187 1.011.851.477 1.467l-4.042 4.656.533 6.142c.072.822-.497 1.224-1.247.906L12 19.72z"></path>
+                                                <path fill="#50E5B4" fill-rule="evenodd" d="M12 19.72l-5.677 2.405c-.76.322-1.318-.094-1.247-.906l.533-6.142-4.042-4.656c-.54-.624-.317-1.283.477-1.467l6.006-1.39L11.23 2.28c.426-.707 1.122-.699 1.542 0l3.179 5.282 6.006 1.391c.805.187 1.011.851.477 1.467l-4.042 4.656.533 6.142c.072.822-.497 1.224-1.247.906L12 19.72z"></path>
                                              </svg>
-                                             <strong class="avg">별점 평균</strong>
-                                             리뷰 num
+                                             리뷰 ${reviewCount}
                                           </p>
                                        </div>
                                     </div>

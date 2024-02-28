@@ -109,7 +109,7 @@
     font-size: 16px;
     line-height: 20px;
     font-weight: 700;
-    color: rgb(53, 197, 240);
+    color:#50E5B4;
     cursor: pointer;
 }
 
@@ -419,7 +419,7 @@
 }
 
 .production-item-price__rate {
-    color: #35c5f0;
+    color: #50E5B4;
     margin-right: 4px;
 }
 
