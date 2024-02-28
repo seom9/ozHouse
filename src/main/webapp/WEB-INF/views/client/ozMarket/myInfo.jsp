@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="ozMarketTop.jsp"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <!DOCTYPE html>
 <html>
@@ -31,12 +32,8 @@
 						<div>${sellingProducts.proTitle }</div>
 						<a
 							href="${pageContext.request.contextPath}/ozMarket/my-product/${sellingProducts.proNum}">
-							<c:if test="${not empty sellingProducts.encodedImage}">
-								<img
-									src="data:image/jpeg;base64,${sellingProducts.encodedImage}"
-									alt="${sellingProducts.proTitle}" width="60" height="60"
-									class="product-image">
-							</c:if>
+								<c:set var="proImgPro" value="${fn:split(sellingProducts.proImgPro, ',')}" />
+					<img class="image" src="${proImgPro[0]}" width="60" height="60">
 						</a>
 					</c:forEach>
 				</div>
@@ -54,11 +51,8 @@
 					<div>${boughtProducts.proTitle }</div>
 					<a
 						href="${pageContext.request.contextPath}/ozMarket/my-product/${boughtProducts.proNum}">
-						<c:if test="${not empty boughtProducts.encodedImage}">
-							<img src="data:image/jpeg;base64,${boughtProducts.encodedImage}"
-								alt="${boughtProducts.proTitle}" width="60" height="60"
-								class="product-image">
-						</c:if>
+						<c:set var="proImgPro" value="${fn:split(boughtProducts.proImgPro, ',')}" />
+					<img class="image" src="${proImgPro[0]}" width="60" height="60">
 					</a>
 				</c:forEach>
 			</div>
@@ -78,11 +72,8 @@
 
 					<a
 						href="${pageContext.request.contextPath}/ozMarket/my-product/${soldProducts.proNum}">
-						<c:if test="${not empty soldProducts.encodedImage}">
-							<img src="data:image/jpeg;base64,${soldProducts.encodedImage}"
-								alt="${soldProducts.proTitle}" width="60" height="60"
-								class="product-image">
-						</c:if>
+						<c:set var="proImgPro" value="${fn:split(soldProducts.proImgPro, ',')}" />
+					<img class="image" src="${proImgPro[0]}" width="60" height="60">
 					</a>
 				</c:forEach>
 			</div>
@@ -100,12 +91,8 @@
 
 					<a
 						href="${pageContext.request.contextPath}/ozMarket/my-product/${reservationProducts.proNum}">
-						<c:if test="${not empty reservationProducts.encodedImage}">
-							<img
-								src="data:image/jpeg;base64,${reservationProducts.encodedImage}"
-								alt="${reservationProducts.proTitle}" width="60" height="60"
-								class="product-image">
-						</c:if>
+						<c:set var="proImgPro" value="${fn:split(reservationProducts.proImgPro, ',')}" />
+					<img class="image" src="${proImgPro[0]}" width="60" height="60">
 					</a>
 				</c:forEach>
 			</div>
