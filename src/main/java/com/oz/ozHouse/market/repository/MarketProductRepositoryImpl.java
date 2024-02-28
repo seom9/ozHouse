@@ -98,7 +98,17 @@ public class MarketProductRepositoryImpl implements MarketProductRepository {
 	// 내 정보 _ 구매내역
 	@Override
 	public List<OzMarketProDTO> findBoughtProductsByNickname(String nickname) {
-	    List<OzMarketPro> resultList = em.createQuery("SELECT oz FROM OzMarketPro oz WHERE oz.buyStatus = :nickname", OzMarketPro.class)
+	    List<OzMarketPro> resultList = em.createQuery("SELECT oz FROM OzMarketPro oz WHERE oz.buyStatus = :nickname AND oz.proApprovalStatus = '판매완료'", OzMarketPro.class)
+	            .setParameter("nickname", nickname)
+	            .getResultList();
+
+	    return resultList.stream().map(OzMarketProDTO::toDTO).collect(Collectors.toList());
+	}
+	
+	// 내 정보 _ 예약내역
+	@Override
+	public List<OzMarketProDTO> findReservationProductsByNickname(String nickname) {
+	    List<OzMarketPro> resultList = em.createQuery("SELECT oz FROM OzMarketPro oz WHERE oz.buyStatus = :nickname AND oz.proApprovalStatus = '예약중'", OzMarketPro.class)
 	            .setParameter("nickname", nickname)
 	            .getResultList();
 
@@ -116,20 +126,38 @@ public class MarketProductRepositoryImpl implements MarketProductRepository {
 
 	@Override
 	public boolean reserveProduct(Integer proNum, String nickname) {
-		// TODO Auto-generated method stub
-		return false;
+	    OzMarketPro product = em.find(OzMarketPro.class, proNum);
+	    if (product != null) {
+	        product.setBuyStatus(nickname); 
+	        product.setProApprovalStatus("예약중"); 
+	        em.merge(product); 
+	        return true;
+	    }
+	    return false;
 	}
 
 	@Override
 	public boolean confirmPurchase(Integer proNum, String nickname) {
-		// TODO Auto-generated method stub
-		return false;
+	    OzMarketPro product = em.find(OzMarketPro.class, proNum);
+	    if (product != null) {
+	        product.setBuyStatus(nickname); 
+	        product.setProApprovalStatus("판매완료"); 
+	        em.merge(product); 
+	        return true;
+	    }
+	    return false;
 	}
 
 	@Override
 	public boolean cancelReservation(Integer proNum) {
-		// TODO Auto-generated method stub
-		return false;
+	    OzMarketPro product = em.find(OzMarketPro.class, proNum);
+	    if (product != null) {
+	        product.setBuyStatus(null); 
+	        product.setProApprovalStatus("판매중"); 
+	        em.merge(product); 
+	        return true;
+	    }
+	    return false;
 	}
 		
 }

@@ -37,6 +37,8 @@ public interface MarketProductRepository extends Repository<OzMarketPro, Integer
 	//내 정보 _ 구매내역
 	List<OzMarketProDTO> findBoughtProductsByNickname(String nickname);
 
+	//내 정보 _ 예약내역
+	List<OzMarketProDTO> findReservationProductsByNickname(String nickname);
 	// 상품 삭제
 	void deleteByProNum(Integer proNum);
 	
@@ -51,4 +53,5 @@ public interface MarketProductRepository extends Repository<OzMarketPro, Integer
 	@Modifying
 	@Query("UPDATE OzMarketPro p SET p.buyStatus = NULL, p.proApprovalStatus = '판매중' WHERE p.proNum = :proNum")
 	boolean cancelReservation(@Param("proNum") Integer proNum);
+
 }

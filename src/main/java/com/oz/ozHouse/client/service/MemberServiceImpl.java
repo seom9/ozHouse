@@ -33,7 +33,7 @@ public class MemberServiceImpl implements MemberService {
                 .memberPasswd(memberDTO.getMemberPasswd())
                 .memberNickname(memberDTO.getMemberNickname())
                 .memberEmail(memberDTO.getMemberEmail())
-                .memberPoint(0)
+                .memberPoint(800)
                 .memberLevel(MemberLevel.NORMAL)
                 .build();
         memberRepository.save(member);

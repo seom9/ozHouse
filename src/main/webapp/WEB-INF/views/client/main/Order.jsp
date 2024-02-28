@@ -328,8 +328,34 @@ document.addEventListener('DOMContentLoaded', function () {
 
     
 	function goOrderSuccess(){
-		alert("gk...")
-		alert("어디서 걸림?")
+		if (f.oName.value.trim() === ""){
+            alert("주문자 이름을 입력해 주세요")
+            f.oName.focus()
+            return
+         }
+         if (f.phoneNumber1.value.trim() === "" || f.phoneNumber2.value.trim() === "" || f.phoneNumber3.value.trim() === "") {
+            alert("연락처를 모두 입력해 주세요");
+            f.phoneNumber1.focus();
+            return;
+         }
+         if (f.postcode.value.trim() === "" || f.city.value.trim() === "" || f.street.value.trim() === "" || f.zipcode.value.trim() === "") {
+            alert("주소지를 모두 입력해 주세요");
+            f.postcode.focus();
+            return;
+         }
+		var pointValue = f.oDisPoint.value;
+		var commentValue = f.oComment.value;
+		
+		// 포인트 값이 null 또는 빈 문자열인 경우 0으로 설정
+		if (pointValue === null || pointValue.trim() === "") {
+		    f.oDisPoint.value = "0";
+		}
+		
+		// comment 값이 null이거나 undefined인 경우 빈 문자열로 설정
+		if (commentValue === null || commentValue.trim() === "") {
+		    f.oComment.value = "";
+		}
+		
 		document.f.action="/order/success"
 		document.f.submit()
 	}
