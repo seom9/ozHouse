@@ -12,9 +12,9 @@
 <title>이메일 인증</title>
 <script type="text/javascript">
 		function check(){
-			if (f.checkNum.value == ""){
+			if (f.checkNumCheck.value == ""){
 				alert("인증 번호를 입력해 주세요")
-				f.checkNum.focus()
+				f.checkNumCheck.focus()
 				return
 			}
 			document.f.submit();

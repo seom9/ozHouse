@@ -12,6 +12,7 @@
 	href="${pageContext.request.contextPath}/ozMarket/chatting.css" />
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 </head>
 <body>
@@ -46,317 +47,211 @@
 				<h3>${getProduct.proPrice}</h3>
 				<h3>${getProduct.proApprovalStatus }</h3>
 				<h3>
-					<img src="data:image/jpeg;base64,${encodedImages[0]}" width="60"
-						height="60" alt="${getProduct.proTitle}" />
+					<c:set var="proImgPro" value="${fn:split(getProduct.proImgPro, ',')}" />
+					<img class="image" src="${proImgPro[0]}" width="60" height="60">
 				</h3>
 				<c:if test="${getProduct.memberNickname == memberNickname}">
-				<c:if test="${getProduct.proApprovalStatus == '판매중'}">
-					<!-- 예약 -->
-					<form id="reserveForm"
-						action="/ozMarket/reserveProduct/${getProduct.proNum}"
+					<c:if test="${getProduct.proApprovalStatus == '판매중'}">
+						<!-- 예약 -->
+						<form id="reserveForm"
+							action="/ozMarket/reserveProduct/${getProduct.proNum}"
+							method="post">
+							<input type="submit" value="예약" />
+						</form>
+					</c:if>
+					<!-- 구매 확정 -->
+					<form id="confirmForm"
+						action="/ozMarket/confirmPurchase/${getProduct.proNum}"
 						method="post">
-						<input type="submit" value="예약" />
+						<input type="submit" value="확정" />
 					</form>
-				</c:if>
-				<!-- 구매 확정 -->
-				<form id="confirmForm"
-					action="/ozMarket/confirmPurchase/${getProduct.proNum}"
-					method="post">
-					<input type="submit" value="확정" />
-				</form>
 
-				<c:if test="${getProduct.proApprovalStatus == '예약중'}">
-					<!-- 예약 취소 -->
-					<form id="cancelForm"
-						action="/ozMarket/cancelReservation/${getProduct.proNum}"
-						method="post">
-						<input type="submit" value="취소" />
-					</form>
+					<c:if test="${getProduct.proApprovalStatus == '예약중'}">
+						<!-- 예약 취소 -->
+						<form id="cancelForm"
+							action="/ozMarket/cancelReservation/${getProduct.proNum}"
+							method="post">
+							<input type="submit" value="취소" />
+						</form>
 			</div>
 			</c:if>
 			</c:if>
-			
-			<!-- 메시지 표시 영역: 수신한 메시지가 여기에 출력 -->
-			<div class="msgArea"></div>
+
+			<!-- 메시지 표시 영역: 수신한 메시지가 여기에 출력됩니다. -->
+			<div class="msgArea">
+				<!-- 여기에 메시지가 동적으로 추가됩니다. -->
+			</div>
+			<!-- 메시지 입력 영역 -->
 			<div class="message-input">
 				<input type="text" placeholder="Enter your message here"
-					class="content">
+					class="content" id="messageInput">
 				<button type="button" class="sendBtn" onclick="sendMsg()">전송</button>
 				<button type="button" value="Leave Room" class="quit"
 					onclick="quit()">채팅방 나가기</button>
 			</div>
 		</div>
 	</div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+
 	<script>
-		var wsUrl = "ws://localhost:8080/ws/chat"; // 웹소켓 서버 URL
+		var wsUrl = "ws://" + location.host + "/ws/chat"; // 웹소켓 서버 URL
 		var socket; // 웹소켓 객체를 전역 변수로 선언
 		var sender = '<c:out value="${memberNickname}" />'; // 현재 사용자의 닉네임
 		var roomNum = '<c:out value="${room.roomNum}" />'; // 현재 방 번호
 		var nickname = "<c:out value='${nickname}'/>"; // JSP에서 JavaScript 변수로 값을 전달
 
-		// 웹소켓 연결 함수
-		function connectWebSocket() {
-			// 웹소켓 연결이 이미 열려있는지 확인
-			if (socket !== undefined && socket.readyState !== WebSocket.CLOSED) {
-				console.log("웹소켓 연결이 이미 열려 있습니다.");
-				return; // 이미 열려있는 소켓이 있다면 새로 연결을 시도하지 않음
-			}
+		function initWebSocket() {
+			socket = new WebSocket(wsUrl); // 방 번호를 URL에 포함하여 웹소켓 연결
 
-			// 새 웹소켓 연결 생성
-			socket = new WebSocket(wsUrl);
-
-			socket.onopen = function(e) {
-				console.log('서버에 연결되었습니다!');
-				enterRoom(); // 채팅방 입장 처리
-				loadPreviousMessages(roomNum); // 이전 메시지 로드
+			socket.onopen = function(event) {
+				console.log("Connected to WebSocket server.");
+				sendEventMessage("ENTER");
+				loadChatHistory(roomNum);
 			};
 
-			socket.onclose = function(e) {
-				console.log('연결이 종료되었습니다. 재연결을 시도합니다.');
-				setTimeout(connectWebSocket, 5000); // 5초 후 재연결 시도
-			};
-
-			socket.onerror = function(e) {
-				console.error('웹소켓 오류 발생: ', e);
-			};
-
-			socket.onmessage = function(e) {
-				console.log('메시지 수신: ', e.data);
-				processMessage(e); // 수신된 메시지 처리
-				
-			};
-		}
-
-		function updateChatList() {
-		    $.ajax({
-		        url: '/getLatestChats', // 서버에 설정된 채팅 리스트를 가져오는 URL
-		        type: 'GET',
-		        dataType: 'json',
-		        success: function(data) {
-		            // 채팅 리스트 업데이트 로직
-		            // 예: 채팅 리스트를 담고 있는 HTML 요소를 찾아 내용을 갱신
-		            var chatList = $('#chat-list');
-		            chatList.empty(); // 기존 목록을 비움
-		            $.each(data, function(index, chat) {
-		                chatList.append('<li>' + chat.sender + ': ' + chat.message + '</li>');
-		            });
-		        },
-		        error: function(xhr, status, error) {
-		            console.error("채팅 리스트 갱신 중 오류 발생", error);
-		        }
-		    });
-		}
-		
-		// 채팅방에 들어가는 로직을 처리하는 함수
-		function enterRoom() {
-			loadPreviousMessages(roomNum); // 이전 메시지를 로드하는 함수 호출
-			console.log("방 입장: " + roomNum);
-			// 방에 입장하는 로직, 예: 서버에 메시지 보내기
-			var enterMsg = {
-				type : "ENTER",
-				roomNum : roomNum,
-				sender : sender,
-				msg : ""
-			};
-			
-
-			if (socket.readyState === WebSocket.OPEN) {
-				socket.send(JSON.stringify(enterMsg)); // 서버에 입장 메시지를 보냄
-			}
-			// 여기에서 이전 메시지를 로드하거나 UI를 준비할 수 있습니다.
-		}
-		
-		// 모든 메시지를 '읽음'으로 표시하는 함수
-		function markAllMessagesAsRead(roomNum) {
-		    // 예시: 서버에 AJAX 요청을 보내 현재 채팅방의 모든 메시지를 '읽음'으로 처리합니다.
-		    // 실제 구현은 서버의 API 엔드포인트와 요청 방식에 따라 달라집니다.
-		    fetch(`/ozMarket/markAllMessagesAsRead/${roomNum}`, {
-		        method: 'POST',
-		        headers: {
-		            'Content-Type': 'application/json',
-		        }
-		        // 필요한 경우 인증 토큰 등 추가 헤더를 여기에 포함
-		    })
-		    .then(response => {
-		        if (!response.ok) {
-		            throw new Error('Failed to mark all messages as read');
-		        }
-		    })
-		    .catch(error => {
-		        console.error('Error marking messages as read:', error);
-		    });
-		}
-
-		var httpUrl = "http://localhost:8080/ozMarket/chattRoom/messages/"
-				+ roomNum;
-
-		// 이전 메시지를 로드하는 함수
-		function loadPreviousMessages(roomNum) {
-			
-			function insertDateDivider(messages) {
-			    let lastDate = null;
-			    messages.forEach((message) => {
-			        const messageDate = new Date(message.inTime).toLocaleDateString();
-			        if (messageDate !== lastDate) {
-			            lastDate = messageDate;
-			            const dateDivider = document.createElement('div');
-			            dateDivider.className = 'date-divider';
-			            dateDivider.textContent = lastDate;
-			            msgArea.appendChild(dateDivider);
-			        }
-			        displayChatMessage(message);
-			    });
-			}
-			
-			// 서버에 AJAX 요청을 보내 이전 메시지를 불러옵니다.
-			var xhr = new XMLHttpRequest();
-			xhr.open('GET', httpUrl, true);
-			xhr.onload = function() {
-				if (this.status == 200) {
-					var messages = JSON.parse(this.responseText);
-					// 메시지를 화면에 표시
-					messages.forEach(function(message) {
-						displayChatMessage(message);
-					});
-					// 스크롤을 맨 아래로 설정
-					var msgArea = document.querySelector('.msgArea');
-					msgArea.scrollTop = msgArea.scrollHeight;
-				} else {
-					console.error('메시지를 불러오는데 실패했습니다.');
+			socket.onmessage = function(event) {
+				var msgData = JSON.parse(event.data); // 서버에서 받은 메시지 데이터
+				if (msgData.type === "TALK") {
+					displayMessage(msgData); // 메시지 표시 함수 호출
 				}
 			};
-			xhr.send();
-		}
 
-		// 메시지 전송 함수
-		function sendMsg() {
-			let contentField = document.querySelector('.content'); // 입력 필드 선택
-			let content = contentField.value.trim(); // 입력 필드에서 메시지 내용을 가져옴
-
-			if (!content) {
-				console.log("메시지를 입력하세요.");
-				return; // 메시지가 비어있으면 함수를 종료
-			}
-
-			var talkMsg = {
-				"type" : "TALK",
-				"roomNum" : roomNum,
-				"sender" : sender,
-				"msg" : content
+			socket.onclose = function(event) {
+				console.log("Disconnected from WebSocket server.");
 			};
 
-			if (socket.readyState === WebSocket.OPEN) {
-				socket.send(JSON.stringify(talkMsg)); // 메시지를 서버에 전송
-			} else {
-				console.error("웹소켓 연결이 닫혀있습니다. 메시지를 전송할 수 없습니다.");
-				connectWebSocket(); // 연결이 닫혀 있을 경우 재연결 시도
-			}
-
-			contentField.value = ''; // 입력 필드 초기화
+			socket.onerror = function(event) {
+				console.error("WebSocket error: ", event);
+			};
 		}
 
-		// 메시지를 수신할 때 호출되는 함수
-		function processMessage(message) {
-			console.log('메시지 처리: ', message);
-			var data = JSON.parse(message.data); // 서버로부터 받은 메시지(JSON 문자열)를 객체로 변환
-
-			// 메시지 유형에 따라 다른 동작을 수행
-			if (data.type === "STATUS_UPDATE") {
-				updateMessageStatus(data);
-			} else if (data.type === "TALK") {
-				// 채팅 메시지를 화면에 표시하는 로직
-				const isSentMessage = data.sender === sender;
-				displayChatMessage(data);
-			}
-			// 기타 메시지 유형에 대한 처리를 여기에 추가
-		}
-		
-		function updateMessageStatusOnUI(data) {
-			  var messageElement = document.querySelector(`#message-${data.msgId}`);
-			  if (messageElement) {
-			    var statusElement = messageElement.querySelector('.status');
-			    statusElement.textContent = data.readStatus ? 'Read' : 'Unread';
-			  }
-			}
-
-		var lastDisplayedDate = null;
-		
 		// 메시지를 화면에 표시하는 함수
-function displayChatMessage(message) {
-    // 이 부분은 기존의 날짜 구분선 코드입니다.
-    var messageDate = new Date(message.inTime).toDateString();
-    
-    if (messageDate !== lastDisplayedDate) {
-        lastDisplayedDate = messageDate;
-        var dateDivider = document.createElement('div');
-        dateDivider.className = 'date-divider';
-        dateDivider.textContent = messageDate;
-        document.querySelector('.msgArea').appendChild(dateDivider);
-    }
+		function displayMessage(messageData) {
+		    var msgArea = document.querySelector('.msgArea');
+		    var msgDiv = document.createElement('div');
+		    var msgBubble = document.createElement('div');
+		    var msgContent = document.createElement('div');
+		    var msgTime = document.createElement('div');
 
-    // 메시지를 생성하고 화면에 추가하는 부분입니다.
-    const msgArea = document.querySelector('.msgArea');
-    const msgDiv = document.createElement('div');
-    const isSentMessage = message.sender === sender;
+		    // 메시지 내용 설정
+		    msgContent.textContent = messageData.msg;
+		    msgContent.className = 'message-content';
 
-    // 'my-message' 또는 'their-message' 클래스를 추가하여 메시지가 보내는 사람의 것인지 구분합니다.
-    msgDiv.className = isSentMessage ? 'message my-message' : 'message their-message';
+		    // 시간 설정
+		    msgTime.textContent = new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
+        msgTime.className = 'message-time';
 
-    // 메시지의 보내는 시간을 포맷합니다.
-    const timestamp = new Date(message.inTime).toLocaleTimeString();
+		    // 메시지 말풍선에 내용과 시간 추가
+		    msgBubble.appendChild(msgContent);
+		    msgBubble.appendChild(msgTime);
 
-    // 메시지 내용을 span 요소에 추가합니다.
-    let messageContent = document.createElement('span');
-    messageContent.textContent = message.msg;
-    msgDiv.appendChild(messageContent);
+		    // 메시지가 현재 사용자에 의해 보내졌는지 판단하여 클래스 할당
+		    if (messageData.sender === sender) {
+		        msgDiv.className = 'chat-message sent';
+		        msgBubble.className = 'message-bubble sent';
+		    } else {
+		        msgDiv.className = 'chat-message received';
+		        msgBubble.className = 'message-bubble received';
+		    }
 
-    // 시간을 표시하는 span 요소를 추가합니다.
-    let timestampSpan = document.createElement('span');
-    timestampSpan.classList.add('timestamp');
-    timestampSpan.textContent = timestamp; // 여기에 보내는 시간을 추가합니다.
-    msgDiv.appendChild(timestampSpan);
+		    // 메시지와 말풍선을 채팅 영역에 추가
+		    msgDiv.appendChild(msgBubble);
+		    msgArea.appendChild(msgDiv);
 
-    // 생성한 메시지 div를 메시지 영역에 추가합니다.
-    msgArea.appendChild(msgDiv);
+		    // 새 메시지로 스크롤
+		    msgArea.scrollTop = msgArea.scrollHeight;
+		}
 
-    // 새 메시지를 추가할 때마다 스크롤을 가장 아래로 내립니다.
-    msgArea.scrollTop = msgArea.scrollHeight;
-}
+		// 시간 데이터를 '오전/오후 시:분' 형식으로 변환하는 함수
+		function formatTime(timestamp) {
+		    var date = new Date(timestamp); // Timestamp를 Date 객체로 변환
+		    return date.toLocaleTimeString('ko-KR', {
+		        hour: '2-digit',
+		        minute: '2-digit',
+		        hour12: true
+		    });
+		}
+
+		function sendMsg() {
+			var messageInput = document.getElementById('messageInput');
+			var message = messageInput.value;
+			if (message === "") {
+				alert("메시지를 입력하세요.");
+				return;
+			}
+			var msgData = {
+				type : "TALK",
+				sender : sender,
+				msg : message,
+				roomNum : roomNum
+			};
+			socket.send(JSON.stringify(msgData));
+			messageInput.value = ''; // 입력 필드 초기화
+		}
+
+		function sendEventMessage(eventType) {
+			var msgData = {
+				type : eventType,
+				sender : sender,
+				roomNum : roomNum
+			};
+			socket.send(JSON.stringify(msgData));
+		}
+
+		window.onload = function() {
+			initWebSocket();
+			document.getElementById('messageInput').addEventListener(
+					'keypress', function(e) {
+						if (e.key === 'Enter' && !e.shiftKey) {
+							e.preventDefault(); // 기본 이벤트 방지
+							sendMsg(); // 메시지 전송 함수 호출
+						}
+					});
+		};
 		
-	    function formatTimestamp(timestamp) {
-	        var date = new Date(timestamp);
-	        return date.getHours() + ':' + 
-	               ('0'+date.getMinutes()).slice(-2) + ' | ' + 
-	               date.getFullYear() + '/' + 
-	               ('0'+(date.getMonth()+1)).slice(-2) + '/' + 
-	               ('0'+date.getDate()).slice(-2);
-	    }
-
-		// 방 나가기 버튼을 클릭했을 때 호출될 함수
+		var httpUrl = "http://localhost:8080/ozMarket/chattRoom/messages/"
+			+ roomNum;
+		// 채팅 기록을 불러오는 함수
+		function loadChatHistory(roomNumber) {
+				function insertDateDivider(messages) {
+				    let lastDate = null;
+				    messages.forEach((message) => {
+				        const messageDate = new Date(message.inTime).toLocaleDateString();
+				        if (messageDate !== lastDate) {
+				            lastDate = messageDate;
+				            const dateDivider = document.createElement('div');
+				            dateDivider.className = 'date-divider';
+				            dateDivider.textContent = lastDate;
+				            msgArea.appendChild(dateDivider);
+				        }
+				        displayMessage(message);
+				    });
+				}
+				
+				// 서버에 AJAX 요청을 보내 이전 메시지를 불러옵니다.
+				var xhr = new XMLHttpRequest();
+				xhr.open('GET', httpUrl, true);
+				xhr.onload = function() {
+					if (this.status == 200) {
+						var messages = JSON.parse(this.responseText);
+						// 메시지를 화면에 표시
+						messages.forEach(function(message) {
+							displayMessage(message);
+						});
+						// 스크롤을 맨 아래로 설정
+						var msgArea = document.querySelector('.msgArea');
+						msgArea.scrollTop = msgArea.scrollHeight;
+					} else {
+						console.error('메시지를 불러오는데 실패했습니다.');
+					}
+				};
+				xhr.send();
+			}
+		
 		function quit() {
-    var leaveMsg = {
-        type: "LEAVE",
-        roomNum: roomNum,
-        sender: sender,
-        msg: ""
-    };
-    
-    if (socket.readyState === WebSocket.OPEN) {
-        socket.send(JSON.stringify(leaveMsg)); // 서버에 퇴장 메시지를 보냄
-    }
-
-    // WebSocket 연결 종료
-    if (socket) {
-        socket.close();
-    }
-
-    // 사용자를 다른 페이지로 리다이렉션
-    window.location.href = '/ozMarket/chatts';
-}
-
-		// 페이지 로드 시 웹소켓 연결 시도
-		window.onload = connectWebSocket;
+			sendEventMessage("QUIT");
+			socket.close();
+			window.location.href = '/ozMarket/chatts'; // 채팅 목록 페이지로 리다이렉션
+		}
 	</script>
 
 </body>

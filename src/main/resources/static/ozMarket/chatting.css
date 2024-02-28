@@ -1,5 +1,121 @@
 @charset "UTF-8";
 
+.msgArea {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+.message {
+    margin: 5px;
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 70%;
+    word-wrap: break-word;
+}
+
+.message .sender {
+    font-weight: bold;
+}
+
+.message .text {
+    display: block;
+}
+
+.message .time {
+    font-size: 0.8em;
+    text-align: right;
+}
+
+.own {
+    align-self: flex-end;
+    background-color: #dcf8c6; /* 자신의 메시지 배경색 */
+}
+
+/* 상대방 메시지 */
+.message:not(.own) {
+    align-self: flex-start;
+    background-color: #e9e9eb; /* 상대방 메시지 배경색 */
+}
+
+/* 메시지 입력 필드 */
+.message-input {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.message-input input {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.message-input button {
+    padding: 5px 10px;
+}
+
+body {
+	font-family: 'Malgun Gothic', '맑은 고딕', Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+	background-color: #f0f0f0;
+}
+
+.chat-container {
+	display: flex;
+	height: 80vh;
+	margin-top: 2rem;
+}
+
+.chat-list {
+	width: 30%;
+	background: #fff;
+	margin: 0 1rem;
+	border-radius: 5px;
+	overflow-y: auto;
+}
+
+.chat-room-entry {
+	padding: 0.5rem 1rem;
+	border-bottom: 1px solid #ddd;
+	cursor: pointer;
+}
+
+.chat-room-entry:hover {
+	background-color: #f7f7f7;
+}
+
+.chat-messages {
+	width: 70%;
+	background: #fff;
+	margin: 0 1rem;
+	border-radius: 5px;
+	overflow-y: auto;
+	display: flex;
+	flex-direction: column;
+}
+
+.chat-messages, .chat-list {
+  flex: 1;
+}
+
+.message {
+  margin: 10px;
+  padding: 5px 10px;
+  border-radius: 10px;
+  display: inline-block;
+  max-width: 70%;
+}
+
+.sent {
+  background-color: #DCF8C6;
+  align-self: flex-end;
+}
+
+.received {
+  background-color: #ECECEC;
+  align-self: flex-start;
+
 body {
 	font-family: 'Malgun Gothic', '맑은 고딕', Arial, sans-serif;
 	margin: 0;
@@ -272,24 +388,69 @@ h3 {
     right: 10px;
     font-size: 0.75rem;
     color: #999;
-    left: 90%;
+    left: 50%;
     top: 0%;
 }
 
 .their-message > span {
 	position: relative;
-    right: -65%;
+    right: -37%;
 }
 
 .timestamp {
     position: relative;
-    bottom: -20px;
     right: 10px;
     font-size: 0.75rem;
     color: #999;
     left: -115%;
-    top: 0%;
 }
 
+.message span {
+  display: block;
+  font-size: 0.8em;
+  margin-top: 5px;
+  text-align: right;
+}
 
+/* 채팅 메시지 스타일링 */
+.chat-message {
+  display: flex;
+  margin-bottom: 10px;
+  align-items: flex-end;
+}
 
+/* 받은 메시지 스타일링 */
+.received .message-content {
+  background-color: #f1f0f0;
+  order: -1; /* 왼쪽에 표시 */
+  border-radius: 15px 15px 15px 0;
+  padding: 5px 10px;
+  max-width: 60%;
+}
+
+/* 보낸 메시지 스타일링 */
+.sent .message-content {
+  background-color: #ffdf7e;
+  border-radius: 15px 15px 0 15px;
+  padding: 5px 10px;
+  max-width: 60%;
+  margin-left: auto; /* 오른쪽에 표시 */
+}
+
+/* 메시지 시간 스타일링 */
+.message-time {
+  font-size: 0.8em;
+  color: #666;
+  padding: 0 5px;
+}
+
+/* 받은 메시지 시간 */
+.received .message-time {
+  order: -2; /* 메시지 왼쪽에 시간 표시 */
+}
+
+/* 보낸 메시지 시간 */
+.sent .message-time {
+  order: 2; /* 메시지 오른쪽에 시간 표시 */
+}
+}

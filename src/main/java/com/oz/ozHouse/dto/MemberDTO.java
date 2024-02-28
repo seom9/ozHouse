@@ -78,7 +78,7 @@ public class MemberDTO{
         this.memberPasswd = req.getParameter("memberPasswd");
         this.memberNickname = req.getParameter("memberNickname");
         this.memberEmail = req.getParameter("memberEmail");
-
+        this.memberImage = new Image(req.getParameter(memberName), req.getParameter("memberImage"));
         this.memberAddress = new Address(req.getParameter("postcode"), req.getParameter("city"), 
         					req.getParameter("street"), req.getParameter("zipcode"));
         this.memberHp = new PhoneNumber(req.getParameter("hp1"), req.getParameter("hp2"), req.getParameter("hp3"));
