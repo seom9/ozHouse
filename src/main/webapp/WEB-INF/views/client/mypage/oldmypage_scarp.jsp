@@ -64,8 +64,8 @@
         <div class="css-pr93pi e192vfif4">               
           <div class="css-ypqde8 e192vfif3">
       <a class="css-11ab5xd e1fm144d0" href="/${tdto.proNum}/prodView">
-        <span class="thumbnail-image e192vfif2 css-1t4i64"><a href="/${tdto.proNum}/prodView">
-            <picture> <img class="image" src="${tdto.proImg}" alt="상품 대표 이미지"></picture>
+        <span class="thumbnail-image e192vfif2 css-1t4i64"><a href="/${tdto.proNum}/prodView">${tdto.proName}</a>
+            <picture> <img class="image" src="${tdto.proImg}" alt="상품 대표 이미지"></picture></a>
         </span>
      </a>
 </div>

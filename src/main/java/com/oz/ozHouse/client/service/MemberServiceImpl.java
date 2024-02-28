@@ -86,7 +86,7 @@ public class MemberServiceImpl implements MemberService {
 		Member member = modelMapper.map(memberJoinDTO, Member.class);
 		member.changeMemberPassword(passwordEncoder.encode(memberJoinDTO.getMemberPasswd()));
 		member.addRole(MemberRole.CLIENT);
-		member.setMemberPoint(0);
+		member.setMemberPoint(800);
         member.setMemberLevel(MemberLevel.NORMAL);
         memberRepository.save(member);
         

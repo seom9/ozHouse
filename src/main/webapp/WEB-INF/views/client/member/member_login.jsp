@@ -8,6 +8,12 @@
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <link rel="stylesheet" href="${path}/client/member_css/login.css"/>
 <script type="text/javascript">
+	function pressEnter(e){
+		if(e.keyCode == 13){
+			loginCheck();
+			}
+	}
+
 	function searchMember(mode){
 		window.open("searchMember.do?mode="+mode, "search", "width=640, height=400")
 	}
