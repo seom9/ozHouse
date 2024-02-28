@@ -64,17 +64,18 @@ public class ShoppingController {
 	
 	@GetMapping(value = "products/today")
 	public String goProductsToday(@AuthenticationPrincipal MemberSecurityDTO member,
-								@PathVariable("proNum") int proNum, Model model) {
+								Model model) {
 		
-		ProductDTO productDTO = ps.getProduct(proNum);
-		
-		// 가현 : 스크랩 추가
-		if (member != null) {
-			productDTO.setScrap(scrapService.isScrap(member.getUsername(), proNum) 
-					? true : false);
-		}
+		String memberId = (member != null) ? member.getUsername() : null;
 
-		model.addAttribute("productDTO", productDTO);
+		List<ProductDTO> cliProductList = ps.todayProductList(memberId);
+		
+		for(ProductDTO dto : cliProductList) {
+			String img = dto.getProImg();
+			System.out.println(img);
+		}
+		
+		model.addAttribute("product", cliProductList);
 		model.addAttribute("spec", "today");
 		
 		return "client/main/products";

@@ -10,4 +10,6 @@ public interface ProductService {
 	List<ProductDTO> cliProductList(String memberId);
 	
 	ProductDTO getProduct(Integer proNum);
+	
+	List<ProductDTO> todayProductList(String memberId);
 }
