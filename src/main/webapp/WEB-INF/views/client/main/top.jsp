@@ -78,16 +78,13 @@
                   <a class="css-1qwerc" href="/main">
                      <span class="css-18nk785">OZ의집</span>
                   </a>        
-                  <a class="css-53vhmk" href="/shop/main">
+                  <a class="css-53vhmk" href="/products">
                       <span class="css-18nk785">쇼핑</span>
                   </a>
-                   <a class="css-53vhmk" href="/shop/best">
-                       <span class="css-18nk785">베스트</span>
-                   </a>
                    <a class="css-53vhmk" href="/blog/main">
                        <span class="css-18nk785">블로그</span>
                    </a>
-                   <a class="css-53vhmk" href="/shop/today">
+                   <a class="css-53vhmk" href="/products/today">
                        <span class="css-18nk785">오늘의 딜</span>
                    </a>
                    <a class="css-53vhmk" href="/ozMarket">
