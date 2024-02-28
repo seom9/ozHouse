@@ -70,14 +70,16 @@ public class ozMarketController {
 	    List<OzMarketProDTO> list = marketProService.findProduct(search);
 	    for (OzMarketProDTO dto : list) {
 	        // 이미지 처리
-	        String[] imageFiles = dto.getProImgPro().split(",");
-	        if (imageFiles.length > 0) {
-	            File imageFile = new File(root, imageFiles[0]);
-//	            if (imageFile.exists()) {
-//	                // 이미지를 Base64로 인코딩
-//	                String encodedImage = encodeImageToBase64(imageFile);
-//	                dto.setEncodedImage(encodedImage);
-//	            }
+	        if (dto.getProImgPro() != null && !dto.getProImgPro().isEmpty()) {
+	            String[] imageFiles = dto.getProImgPro().split(",");
+	            if (imageFiles.length > 0) {
+	                File imageFile = new File(root, imageFiles[0]);
+//	                if (imageFile.exists()) {
+//	                    // 이미지를 Base64로 인코딩
+//	                    String encodedImage = encodeImageToBase64(imageFile);
+//	                    dto.setEncodedImage(encodedImage);
+//	                }
+	            }
 	        }
 	    }
 	    // 상품 목록을 요청 속성에 추가

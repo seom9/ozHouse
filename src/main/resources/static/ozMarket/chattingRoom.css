@@ -1,0 +1,73 @@
+@charset "UTF-8";
+
+body, html {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+}
+
+/* Container for avatar and nickname */
+.user-info {
+	display: flex;
+	align-items: center; /* Aligns items vertically in the center */
+	margin-bottom: 20px; /* Space below the user info section */
+}
+
+.user-avatar img {
+	width: 150px; /* Adjust the width as needed */
+	height: 150px; /* Adjust the height as needed */
+	border-radius: 50%; /* Circular avatar */
+	margin-right: 20px; /* Adds margin to the right of the avatar */
+}
+
+.memberNickname {
+	font-size: 50px;
+}
+
+.chat-container {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+
+.chat-list {
+	overflow-y: auto; /* Enable scrolling */
+	flex-grow: 1; /* Take up available space */
+}
+
+.chat-room-entry {
+	padding: 10px;
+	border-bottom: 1px solid #ccc;
+}
+
+.container-list {
+	margin: 15px 300px;
+}
+
+.chat-room-entry a {
+	color: #007bff;
+	text-decoration: none;
+	font-size: 25px;
+}
+
+.chat-room-entry .latest-message {
+	color: #666;
+	font-size: 20px;
+}
+
+form {
+	margin-top: 10px;
+}
+
+button {
+	background-color: #f44336;
+	color: white;
+	border: none;
+	padding: 5px 10px;
+	text-align: center;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+	cursor: pointer;
+	border-radius: 4px;
+}

@@ -43,11 +43,12 @@
 								</c:choose>
 							</div>
 							<div class="memberNickname">${getProduct.memberNickname}</div>
+							<div class="proApprovalStatus" align="right">${getProduct.proApprovalStatus}</div>
 						</div>
 						<hr>
-						<div class="proTitle">${getProduct.proTitle}</div>
-						<div class="proInDate">${getProduct.proInDate}</div>
-						<div class="proPrice">
+						<div class="proTitle" style="font-size: 35px">${getProduct.proTitle}</div>
+						<div class="proInDate" style="font-size: 15px">${getProduct.proInDate}</div>
+						<div class="proPrice" style="font-size: 20px">
 							<fmt:formatNumber value="${getProduct.proPrice}"
 								pattern="###,###" />
 							원
@@ -60,7 +61,7 @@
 								<c:if test="${nickName eq getProduct.memberNickname}">
 									<form
 										action="${pageContext.request.contextPath}/ozMarket/delete/${getProduct.proNum}"
-										method="post" style="display: inline;">
+										method="post" style="display: inline; margin: 20px;">
 										<input type="submit" value="삭제" class="list-button" />
 									</form>
 								</c:if>
