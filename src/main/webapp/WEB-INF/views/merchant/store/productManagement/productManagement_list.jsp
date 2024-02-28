@@ -232,11 +232,11 @@ function resetForm() {
 						</div>
 						<div class="flex-cell">${dto.categoryName}</div>
 						<div class="flex-cell">
-							<c:if test="${not empty dto.encodedImage}">
-								<img src="data:image/jpeg;base64,${dto.encodedImage}"
+							<c:if test="${not empty dto.proImg}">
+								<img src="${dto.proImg}"
 									width="100" height="100">
 							</c:if>
-							<c:if test="${empty dto.encodedImage}">
+							<c:if test="${empty dto.proImg}">
 								<span>No image</span>
 							</c:if>
 						</div>
