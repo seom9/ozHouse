@@ -153,15 +153,15 @@ public class ChattController {
 			req.setAttribute("getProduct", dto);
 
 			List<String> encodedImagesPro = new ArrayList<>();
-			String[] imageProFiles = dto.getProImageChange().split(",");
+			String[] imageProFiles = dto.getProImgPro().split(",");
 			for (String imageFileName : imageProFiles) {
 				File imageProFile = new File(root, imageFileName);
-				if (imageProFile.exists()) {
-					String encodedImagePro = encodeImageToBase64(imageProFile);
-					encodedImagesPro.add(encodedImagePro);
-				}
+//				if (imageProFile.exists()) {
+//					String encodedImagePro = encodeImageToBase64(imageProFile);
+//					encodedImagesPro.add(encodedImagePro);
+//				}
 			}
-			req.setAttribute("encodedImages", encodedImagesPro);
+//			req.setAttribute("encodedImages", encodedImagesPro);
 		}
 
 		String partnerNickname;

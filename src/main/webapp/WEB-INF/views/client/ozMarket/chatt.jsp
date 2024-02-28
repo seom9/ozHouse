@@ -12,6 +12,7 @@
 	href="${pageContext.request.contextPath}/ozMarket/chatting.css" />
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 </head>
 <body>
@@ -46,8 +47,8 @@
 				<h3>${getProduct.proPrice}</h3>
 				<h3>${getProduct.proApprovalStatus }</h3>
 				<h3>
-					<img src="data:image/jpeg;base64,${encodedImages[0]}" width="60"
-						height="60" alt="${getProduct.proTitle}" />
+					<c:set var="proImgPro" value="${fn:split(getProduct.proImgPro, ',')}" />
+					<img class="image" src="${proImgPro[0]}" width="60" height="60">
 				</h3>
 				<c:if test="${getProduct.memberNickname == memberNickname}">
 					<c:if test="${getProduct.proApprovalStatus == '판매중'}">

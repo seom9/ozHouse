@@ -48,7 +48,7 @@ public class OzMarketPro {
     
 	private int proPrice;
     
-    private String proImageChange;
+//    private String proImageChange;
 
     @Lob
 	private String proContent;
@@ -73,7 +73,7 @@ public class OzMarketPro {
 //				dto.getProDiscountRate(), dto.getProDiscountPrice());
 		this.proImgPro = dto.getProImgPro();
 		this.proPrice = dto.getProPrice();
-		this.proImageChange = dto.getProImageChange();
+//		this.proImageChange = dto.getProImageChange();
 		this.proContent = dto.getProContent();
 //		this.proInDate = dto.getProInDate().formatted(formatter);
 		

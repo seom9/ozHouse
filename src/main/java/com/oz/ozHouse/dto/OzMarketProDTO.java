@@ -26,8 +26,8 @@ public class OzMarketProDTO {
     private String proContent;
     private String proInDate;
     private String proApprovalStatus;
-    private String proImageChange;
-    private String encodedImage;
+//    private String proImageChange;
+//    private String encodedImage;
     private String buyStatus;
 
     public static OzMarketProDTO toDTO(OzMarketPro product) {
@@ -44,7 +44,7 @@ public class OzMarketProDTO {
                 .proContent(product.getProContent())
                 .proInDate(product.getProInDate())
                 .proApprovalStatus(product.getProApprovalStatus())
-                .proImageChange(product.getProImageChange())
+//                .proImageChange(product.getProImageChange())
                 .buyStatus(product.getBuyStatus())
                 .build();
     }
@@ -59,21 +59,21 @@ public class OzMarketProDTO {
         this.proContent = req.getParameter("proContent");
         this.proInDate = LocalDate.now().format(formatter);
         this.proApprovalStatus = req.getParameter("proApprovalStatus");
-        this.proImageChange = req.getParameter("proImageChange");
+//        this.proImageChange = req.getParameter("proImageChange");
         this.buyStatus = req.getParameter("buyStatus");
     }
 
-	public void setProImageChange(String proImageChange) {
-		this.proImageChange = proImageChange;
-	}
+//	public void setProImageChange(String proImageChange) {
+//		this.proImageChange = proImageChange;
+//	}
 
 	public void setProImgPro(String proImgPro) {
 		this.proImgPro = proImgPro;
 	}
 	
-	public void setEncodedImage(String encodedImage) {
-		this.encodedImage = encodedImage;
-	}
+//	public void setEncodedImage(String encodedImage) {
+//		this.encodedImage = encodedImage;
+//	}
 	
 	public void setMemberNickname(String memberNickname) {
 		this.memberNickname = memberNickname;
