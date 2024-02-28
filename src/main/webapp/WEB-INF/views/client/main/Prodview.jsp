@@ -329,7 +329,9 @@
                      <div class="review-modal__section__title">리뷰 작성</div>
                      <textarea name="review_content" placeholder="자세하고 솔직한 리뷰는 다른 고객에게 큰 도움이 됩니다. (최소 20자 이상)" class="form-control text-area-input review-modal__form__review-input" style="height: 55.6px;"></textarea>
                   </div>
+                  <sec:authorize access="hasAnyRole('ROLE_CLIENT')">
                   <button class="button button--color-blue button--size-50 button--shape-4 review-modal__form__submit" type="button" onclick="writeReview('${prc.username}', '${productDTO.proNum}')">완료</button>
+               	  </sec:authorize>
                </div>
             </div>
          </div>
@@ -364,6 +366,11 @@
 	    .catch(error => {
 	    	alert("서버 통신에 실패했습니다 : 관리자에게 문의해 주세요")
 	    });
+	}
+	
+	function cantScrap() {
+		alert("스크랩 : 로그인 해 주세요")
+		window.location.href = "/member/login"
 	}
 </script>
 
@@ -417,6 +424,7 @@ function showChoose() {
    function reviewClose() {
       document.getElementById('review_modal').style.display = 'none';
    }
+   
 </script>
 
 <script type="text/javascript">
