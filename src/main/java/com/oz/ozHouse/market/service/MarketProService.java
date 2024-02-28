@@ -19,25 +19,28 @@ public interface MarketProService {
 
 	// 조회리스트
 	public List<OzMarketProDTO> listProduct(Map<String, Object> params);
-	
+
 	// 상품 검색
 	public List<OzMarketProDTO> findProduct(String proTitle);
-	
-	//내 정보 _ 판매중
+
+	// 내 정보 _ 판매중
 	List<OzMarketProDTO> findSellingProductsByNickname(String nickname);
-	
-	//내 정보 _ 판매내역
+
+	// 내 정보 _ 판매내역
 	List<OzMarketProDTO> findSoldProductsByNickname(String nickname);
-	
-	//내 정보 _ 구매내역
+
+	// 내 정보 _ 구매내역
 	List<OzMarketProDTO> findBoughtProductsByNickname(String nickname);
-	
+
+	// 내 정보 _ 예약내역
+	List<OzMarketProDTO> findReservationProductsByNickname(String nickname);
+
 	// 상품 삭제
 	void deleteProduct(Integer proNum);
-	
+
 	boolean reserveProduct(Integer proNum, String memberNickname);
-	
+
 	boolean confirmPurchase(Integer proNum, String memberNickname);
-	
+
 	boolean cancelReservation(Integer proNum);
 }

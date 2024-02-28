@@ -23,17 +23,19 @@
 			</c:choose>
 		</div>
 		<div class="memberNickname">${nickname}</div>
-		<div>판매중</div>
+		<h3>판매중</h3>
 		<c:choose>
 			<c:when test="${not empty sellingProducts}">
 				<div class="grid-item">
-					<c:forEach items="${sellingProducts}" var="product">
-						<div>${product.proTitle }</div>
+					<c:forEach items="${sellingProducts}" var="sellingProducts">
+						<div>${sellingProducts.proTitle }</div>
 						<a
-							href="${pageContext.request.contextPath}/ozMarket/my-product/${product.proNum}">
-							<c:if test="${not empty product.encodedImage}">
-								<img src="data:image/jpeg;base64,${product.encodedImage}"
-									alt="${product.proTitle}" class="product-image">
+							href="${pageContext.request.contextPath}/ozMarket/my-product/${sellingProducts.proNum}">
+							<c:if test="${not empty sellingProducts.encodedImage}">
+								<img
+									src="data:image/jpeg;base64,${sellingProducts.encodedImage}"
+									alt="${sellingProducts.proTitle}" width="60" height="60"
+									class="product-image">
 							</c:if>
 						</a>
 					</c:forEach>
@@ -44,16 +46,18 @@
 			</c:otherwise>
 		</c:choose>
 	</div>
-	<div>구매내역</div>
+	<h3>구매내역</h3>
 	<c:choose>
 		<c:when test="${not empty boughtProducts}">
 			<div class="grid-item">
-				<c:forEach items="${boughtProducts}" var="buyproduct">
+				<c:forEach items="${boughtProducts}" var="boughtProducts">
+					<div>${boughtProducts.proTitle }</div>
 					<a
-						href="${pageContext.request.contextPath}/ozMarket/my-product/${buyproduct.proNum}">
-						<c:if test="${not empty buyproduct.encodedImage}">
-							<img src="data:image/jpeg;base64,${buyproduct.encodedImage}"
-								alt="${buyproduct.proTitle}" class="product-image">
+						href="${pageContext.request.contextPath}/ozMarket/my-product/${boughtProducts.proNum}">
+						<c:if test="${not empty boughtProducts.encodedImage}">
+							<img src="data:image/jpeg;base64,${boughtProducts.encodedImage}"
+								alt="${boughtProducts.proTitle}" width="60" height="60"
+								class="product-image">
 						</c:if>
 					</a>
 				</c:forEach>
@@ -65,16 +69,19 @@
 	</c:choose>
 
 	</div>
-	<div>판매내역</div>
+	<h3>판매내역</h3>
 	<c:choose>
 		<c:when test="${not empty soldProducts}">
 			<div class="grid-item">
-				<c:forEach items="${soldProducts}" var="sellproduct">
+				<c:forEach items="${soldProducts}" var="soldProducts">
+					<div>${soldProducts.proTitle }</div>
+
 					<a
-						href="${pageContext.request.contextPath}/ozMarket/my-product/${sellproduct.proNum}">
-						<c:if test="${not empty sellproduct.encodedImage}">
-							<img src="data:image/jpeg;base64,${sellproduct.encodedImage}"
-								alt="${sellproduct.proTitle}" class="product-image">
+						href="${pageContext.request.contextPath}/ozMarket/my-product/${soldProducts.proNum}">
+						<c:if test="${not empty soldProducts.encodedImage}">
+							<img src="data:image/jpeg;base64,${soldProducts.encodedImage}"
+								alt="${soldProducts.proTitle}" width="60" height="60"
+								class="product-image">
 						</c:if>
 					</a>
 				</c:forEach>
@@ -84,8 +91,31 @@
 			<div class="center-text">판매한 상품이 없습니다.</div>
 		</c:otherwise>
 	</c:choose>
+	<h3>예약중내역</h3>
+	<c:choose>
+		<c:when test="${not empty reservationProducts}">
+			<div class="grid-item">
+				<c:forEach items="${reservationProducts}" var="reservationProducts">
+					<div>${reservationProducts.proTitle }</div>
+
+					<a
+						href="${pageContext.request.contextPath}/ozMarket/my-product/${reservationProducts.proNum}">
+						<c:if test="${not empty reservationProducts.encodedImage}">
+							<img
+								src="data:image/jpeg;base64,${reservationProducts.encodedImage}"
+								alt="${reservationProducts.proTitle}" width="60" height="60"
+								class="product-image">
+						</c:if>
+					</a>
+				</c:forEach>
+			</div>
+		</c:when>
+		<c:otherwise>
+			<div class="center-text">예약한 상품이 없습니다.</div>
+		</c:otherwise>
+	</c:choose>
 
 	</div>
 </body>
 </html>
-	<%@ include file="../main/bottom.jsp"%>
+<%@ include file="../main/bottom.jsp"%>

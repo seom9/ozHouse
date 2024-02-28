@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
@@ -69,12 +70,33 @@ public class ChattController {
 		}
 		List<ChattRoom> roomList = chattRoomService.findBymyId(member.getMemberNickname());
 		String nickname = member.getMemberNickname();
+
+		roomList.forEach(room -> {
+	        Optional<Chatt> lastMessage = Optional.ofNullable(chattService.findLastMessageByRoomNum(room.getRoomNum()));
+	        if (lastMessage.isPresent()) {
+	            room.setLastMessage(lastMessage.get().getMsg());
+	        } else {
+	            room.setLastMessage("주고 받은 메시지가 없습니다.");
+	        }
+	        
+//	        if (room.getMyId() == nickname) {
+//	            room.setPartner(room.getOtherId());
+//	        } else {
+//	            room.setPartner(room.getMyId());
+//	        }
+	    });
+		
+		for (ChattRoom r : roomList) {
+			if (r.getMyId().equals(nickname)) {
+				r.setPartner(r.getOtherId());
+			} else {
+				r.setPartner(r.getMyId());
+			}
+		}
+
 		model.addAttribute("roomList", roomList);
 		model.addAttribute("nickname", nickname);
-		
-//	    List<ChattRoomDTO> roomDetails = chattRoomService.findRoomDetailsByMemberNickname(nickname);
-//	    model.addAttribute("roomDetails", roomDetails);
-	    
+
 		return "client/ozMarket/chatRoom";
 	}
 
@@ -101,58 +123,69 @@ public class ChattController {
 	// 채팅방 입장
 	@GetMapping("/chattRoom/{roomNum}")
 	public String chatRoom(HttpServletRequest req, @AuthenticationPrincipal MemberSecurityDTO member, Model model,
-	        @PathVariable("roomNum") String roomNum) throws IOException {
-	    ChattRoom room = chattRoomService.findRoomByNum(Integer.parseInt(roomNum));
-	    List<ChattRoom> roomList = chattRoomService.findBymyId(member.getMemberNickname());
+			@PathVariable("roomNum") String roomNum) throws IOException {
+		ChattRoom room = chattRoomService.findRoomByNum(Integer.parseInt(roomNum));
+		List<ChattRoom> roomList = chattRoomService.findBymyId(member.getMemberNickname());
 
-	    String nickname = member.getMemberNickname();
-//
-//	    for (ChattRoom r : roomList) {
-//	        if (r.getMyId().equals(nickname)) {
-//	            r.setPartner(r.getOtherId());
-//	        } else {
-//	            r.setPartner(r.getMyId());
-//	        }
-//	    }
+		String nickname = member.getMemberNickname();
 
-	    model.addAttribute("roomList", roomList);
-	    model.addAttribute("memberNickname", member.getMemberNickname());
-	    model.addAttribute("roomNum", roomNum); 
-	    model.addAttribute("room", room);
-	    model.addAttribute("nickname", nickname);
+		for (ChattRoom r : roomList) {
+			if (r.getMyId().equals(nickname)) {
+				r.setPartner(r.getOtherId());
+			} else {
+				r.setPartner(r.getMyId());
+			}
+		}
 
-	    Integer proNum = room.getProNum();
+		model.addAttribute("roomList", roomList);
+		model.addAttribute("memberNickname", member.getMemberNickname());
+		model.addAttribute("roomNum", roomNum);
+		model.addAttribute("room", room);
+		model.addAttribute("nickname", nickname);
 
-	    String root = PATH + "\\" + "img";
-	    Optional<OzMarketProDTO> optionalDto = Optional.of(marketProService.getProduct(proNum));
+		Integer proNum = room.getProNum();
 
-	    if (optionalDto.isPresent()) {
-	        OzMarketProDTO dto = optionalDto.get();
-	        req.setAttribute("getProduct", dto);
+		String root = PATH + "\\" + "img";
+		Optional<OzMarketProDTO> optionalDto = Optional.of(marketProService.getProduct(proNum));
 
-	        List<String> encodedImagesPro = new ArrayList<>();
-	        String[] imageProFiles = dto.getProImageChange().split(",");
-	        for (String imageFileName : imageProFiles) {
-	            File imageProFile = new File(root, imageFileName);
-	            if (imageProFile.exists()) {
-	                String encodedImagePro = encodeImageToBase64(imageProFile);
-	                encodedImagesPro.add(encodedImagePro);
-	            }
+		if (optionalDto.isPresent()) {
+			OzMarketProDTO dto = optionalDto.get();
+			req.setAttribute("getProduct", dto);
+
+			List<String> encodedImagesPro = new ArrayList<>();
+			String[] imageProFiles = dto.getProImageChange().split(",");
+			for (String imageFileName : imageProFiles) {
+				File imageProFile = new File(root, imageFileName);
+				if (imageProFile.exists()) {
+					String encodedImagePro = encodeImageToBase64(imageProFile);
+					encodedImagesPro.add(encodedImagePro);
+				}
+			}
+			req.setAttribute("encodedImages", encodedImagesPro);
+		}
+
+		String partnerNickname;
+		if (room.getMyId().equals(nickname)) {
+			partnerNickname = room.getOtherId();
+		} else {
+			partnerNickname = room.getMyId();
+		}
+		
+		roomList.forEach(room1 -> {
+	        Optional<Chatt> lastMessage = Optional.ofNullable(chattService.findLastMessageByRoomNum(room1.getRoomNum()));
+	        if (lastMessage.isPresent()) {
+	            room1.setLastMessage(lastMessage.get().getMsg());
+	        } else {
+	            room1.setLastMessage("주고 받은 메시지가 없습니다.");
 	        }
-	        req.setAttribute("encodedImages", encodedImagesPro);
-	    }
+	    });
+		model.addAttribute("partnerNickname", partnerNickname);
 
-	    String partnerNickname;
-	    if (room.getMyId().equals(nickname)) {
-	        partnerNickname = room.getOtherId();
-	    } else {
-	        partnerNickname = room.getMyId();
-	    }
-	    model.addAttribute("partnerNickname", partnerNickname);
+		model.addAttribute("roomList", roomList);
+		model.addAttribute("nickname", nickname);
 
-	    return "client/ozMarket/chatt";
+		return "client/ozMarket/chatt";
 	}
-
 
 	// 채팅방 메시지 로드 엔드포인트
 	@CrossOrigin
@@ -162,27 +195,55 @@ public class ChattController {
 		return ResponseEntity.ok(messages);
 	}
 
-	@PostMapping("/reserveProduct")
-	public ResponseEntity<String> reserveProduct(@RequestParam("proNum") Integer proNum, @AuthenticationPrincipal MemberSecurityDTO member) {
-	    if (member == null) {
-	        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인이 필요합니다.");
-	    }
-	    boolean success = marketProService.reserveProduct(proNum, member.getMemberNickname());
-	    return success ? ResponseEntity.ok("예약 성공") : ResponseEntity.badRequest().body("예약 실패");
+	@PostMapping("/reserveProduct/{proNum}")
+	public String reserveProduct(HttpServletRequest req, @PathVariable("proNum") Integer proNum,
+			@AuthenticationPrincipal MemberSecurityDTO member) {
+		boolean res = marketProService.reserveProduct(proNum, member.getMemberNickname());
+		if (res) {
+			req.setAttribute("msg", "성공했습니다.");
+		} else {
+			req.setAttribute("msg", "실패했습니다. 다시 시도하세요.");
+		}
+		req.setAttribute("url", "/ozMarket/myInfo");
+		return "message";
 	}
 
-	@PostMapping("/confirmPurchase")
-	public ResponseEntity<String> confirmPurchase(@RequestParam("proNum") Integer proNum, @AuthenticationPrincipal MemberSecurityDTO member) {
-	    if (member == null) {
-	        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인이 필요합니다.");
-	    }
-	    boolean success = marketProService.confirmPurchase(proNum, member.getMemberNickname());
-	    return success ? ResponseEntity.ok("구매 확정") : ResponseEntity.badRequest().body("구매 확정 실패");
+	@PostMapping("/confirmPurchase/{proNum}")
+	public String confirmPurchase(HttpServletRequest req, @PathVariable("proNum") Integer proNum,
+			@AuthenticationPrincipal MemberSecurityDTO member) {
+		boolean res = marketProService.confirmPurchase(proNum, member.getMemberNickname());
+		if (res) {
+			req.setAttribute("msg", "성공했습니다.");
+		} else {
+			req.setAttribute("msg", "실패했습니다. 다시 시도하세요.");
+		}
+		req.setAttribute("url", "/ozMarket/myInfo");
+		return "message";
 	}
 
-	@PostMapping("/cancelReservation")
-	public ResponseEntity<String> cancelReservation(@RequestParam("proNum") Integer proNum) {
-	    boolean success = marketProService.cancelReservation(proNum);
-	    return success ? ResponseEntity.ok("예약 취소 성공") : ResponseEntity.badRequest().body("예약 취소 실패");
+	@PostMapping("/cancelReservation/{proNum}")
+	public String cancelReservation(HttpServletRequest req, @PathVariable("proNum") Integer proNum) {
+		boolean res = marketProService.cancelReservation(proNum);
+		if (res) {
+			req.setAttribute("msg", "성공했습니다.");
+		} else {
+			req.setAttribute("msg", "실패했습니다. 다시 시도하세요.");
+		}
+		req.setAttribute("url", "/ozMarket/myInfo");
+		return "message";
 	}
+
+	@PostMapping("/deleteChatRoom/{roomNum}")
+	public String deleteChatRoom(@PathVariable("roomNum") int roomNum, Model model) {
+	    
+		chattService.deleteMessagesByRoomNum(roomNum);
+
+		// 채팅방 삭제 기능을 호출하고 결과를 받아옵니다.
+	    chattRoomService.deleteChatRoom(roomNum);
+	    
+	    // 채팅방 목록 페이지로 리다이렉트합니다.
+	    return "redirect:/ozMarket/chatts";
+	}
+
+
 }

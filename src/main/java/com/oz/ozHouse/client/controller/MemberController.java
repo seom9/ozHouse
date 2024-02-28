@@ -78,8 +78,8 @@ public class MemberController {
     			return "redirect:/member/join";
     		}
     		
-    		req.setAttribute("msg", dto.getMemberId() + "님, 환영합니다!");
-			req.setAttribute("url", "/main");
+    		req.setAttribute("msg", dto.getMemberId() + "님, 환영합니다! 로그인해 주세요");
+			req.setAttribute("url", "/member/login");
     		
     		if (res.equals("")) {
     			req.setAttribute("msg", "회원 가입 실패 : 다시 시도해 주세요");
