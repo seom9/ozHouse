@@ -92,11 +92,10 @@
 	<span class="css-hpu1zu3">최고의 상품, 모든 것을 오즈의 집에서</span>
 	</c:if>
 	
-	<c:set var="rank" value="1"/>
 	<c:set var="currentDate" value='<%= new SimpleDateFormat("yy/MM/dd").format(new Date())%>' />
 	<c:if test="${empty product}">
 		<div class="a">
-			<img src="client/image/notice_image.png">
+			상품이 없습니다!
 		</div>
 	</c:if>
 	<div>
