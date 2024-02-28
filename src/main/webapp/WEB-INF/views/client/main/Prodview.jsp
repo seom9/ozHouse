@@ -22,7 +22,7 @@
                   <div class="production-selling-cover-image__carousel-wrap">
                      <div class="carousel__list">
                         <div class="production-selling-cover-image__entry">
-                           <img class="production-selling-cover-image__entry__image" alt="상품 대표이미지" src="data:image/jpeg;base64,${encodedImage}">
+                           <img class="production-selling-cover-image__entry__image" alt="상품 대표이미지" src="${productDTO.proImg}">
                         </div>
                         <div class="production-selling-cover-image__entry"></div>
                      </div>
@@ -180,9 +180,9 @@
                   <div class="production-selling-description">
                      <div class="production-selling-description__content">
                         <p>&nbsp;</p>
-                        <c:forEach var="encodedImagePro" items="${encodedImagesPro}">
+                        <c:forEach var="ImagePro" items="${productDTO.proImgPro}">
                         <div align="center">
-                           <img src="data:image/png;base64,${encodedImagePro}" alt="상품 상세 이미지">
+                           <img src="${ImagePro}" alt="상품 상세 이미지">
                         </div>
                         </c:forEach>
                      </div>

@@ -5,6 +5,8 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
+import org.modelmapper.PropertyMap;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.oz.ozHouse.client.repository.ProductRepository;
@@ -27,27 +29,37 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public List<ProductDTO> cliProductList(String memberId) {
 		
-		List<Product> productList = productRepository.findAll();
+		List<Product> productList = productRepository.findAll(Sort.by(Sort.Direction.DESC, "proNum"));
 		
 		System.out.println("크기" + productList.size());
 		
 		for(Product dto : productList) {
 			System.out.println("가격 : " + dto.getMerPrice().getProPrice());
+			System.out.println("이미지 : " + dto.getImg().getProImg());
 		}
 		
 		// 가현 수정 : 스크랩 처리 처리 추가
 		List<ProductDTO> proList = productList.stream()
 								    .map(data -> {
 								        ProductDTO productDTO = modelMapper.map(data, ProductDTO.class);
+								        productDTO.setProImg(data.getImg().getProImg());
+								        productDTO.setProImgPro(data.getImg().getProImgPro());
+								        productDTO.setProPrice(data.getMerPrice().getProPrice());
+								        productDTO.setProPoint(data.getMerPrice().getProPoint());
+								        productDTO.setProAssemblyCost(data.getMerPrice().getProAssemblyCost());
+								        productDTO.setProDiscountRate(data.getMerPrice().getProDiscountRate());
+								        productDTO.setProDiscountPrice(data.getMerPrice().getProDiscountPrice());
 								        if (memberId != null) {
 								            productDTO.setScrap(scrapService.isScrap(memberId, data.getProNum()));
 								        }
 								        return productDTO;
+								        
 								    })
 								    .collect(Collectors.toList());
 		
 		for(ProductDTO dto2 : proList) {
 			System.out.println("가격33 : " + dto2.getProPrice());
+			System.out.println("이미지 : " + dto2.getProImg());
 		}
 		
 		return proList;
