@@ -55,18 +55,27 @@
 						<div class="button-group">
 							<input type="button" class="list-button" value="목록보기"
 								onclick="window.location='${pageContext.request.contextPath}/ozMarket'">
-							<form action="${pageContext.request.contextPath}/ozMarket/chatt"
-								method="post" style="display: inline;">
-								<input type="hidden" name="proNum" value="${getProduct.proNum}" />
-								<input type="hidden" name="sellerNickname"
-									value="${getProduct.memberNickname}" /> <input type="submit"
-									value="채팅하기" class="list-button" />
-							</form>
-							<form
-								action="${pageContext.request.contextPath}/ozMarket/delete/${getProduct.proNum}"
-								method="post" style="display: inline;">
-								<input type="submit" value="삭제" class="list-button" />
-							</form>
+							<div class="button-group">
+								<c:if
+									test="${nickName eq getProduct.memberNickname}">
+									<form
+										action="${pageContext.request.contextPath}/ozMarket/delete/${getProduct.proNum}"
+										method="post" style="display: inline;">
+										<input type="submit" value="삭제" class="list-button" />
+									</form>
+								</c:if>
+								<c:if
+									test="${nickName ne getProduct.memberNickname}">
+									<form
+										action="${pageContext.request.contextPath}/ozMarket/chatt"
+										method="post" style="display: inline;">
+										<input type="hidden" name="proNum"
+											value="${getProduct.proNum}" /> <input type="hidden"
+											name="sellerNickname" value="${getProduct.memberNickname}" />
+										<input type="submit" value="채팅하기" class="list-button" />
+									</form>
+								</c:if>
+							</div>
 						</div>
 					</div>
 				</div>
