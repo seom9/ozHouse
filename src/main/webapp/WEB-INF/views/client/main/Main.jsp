@@ -224,7 +224,7 @@
             <div class="css-3q4ecs">
                <ul class="css-5n3mug">
                   <c:set var="currentDate" value='<%= new SimpleDateFormat("yy/MM/dd").format(new Date())%>' />
-                  <c:forEach var="dto" items="${productList}" varStatus="loop">
+                  <c:forEach var="dto" items="${productList}">
                   <li class="css-3kqc0z">
                      <div class="css-g9s5pw">
                         <article class="today-deal-item">
@@ -232,7 +232,7 @@
                            <div class="today-deal-item__image">
                               <div class="today-deal-item__image__item">
                                  <div class="production-item-image">
-                                    <img class="image" src="data:image/jpeg;base64,${encodedImages[loop.index]}" alt="상품 대표 이미지">
+                                    <img class="image" src="${dto.proImg}" alt="상품 대표 이미지">
 										<!-- 스크랩 버튼 -->
 										<sec:authorize access="hasAnyRole('ROLE_CLIENT')">
 											<button class="production-item-image__scrap-badge" onclick="javascript:scrap('${prc.username}', '${dto.proNum}', ${dto.scrap ? 0 : 1})">

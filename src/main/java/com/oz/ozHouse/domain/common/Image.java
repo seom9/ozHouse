@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class Image {
     private String proImg;
     private String proImgPro;
-    private String proImageChange;
-    private String proImageProChange;
+//    private String proImageChange;
+//    private String proImageProChange;
 //    private String encodedImage;
 }

@@ -32,6 +32,26 @@ public class AwsS3Service {
 	
 	private final AmazonS3 amazonS3;
 	
+	public String uploadImg(MultipartFile multipartFile) {
+		String fileName = createFileName(multipartFile.getOriginalFilename());
+		ObjectMetadata objectMetadata = new ObjectMetadata();
+		objectMetadata.setContentLength(multipartFile.getSize());
+		objectMetadata.setContentType(multipartFile.getContentType());
+		objectMetadata.setContentType(multipartFile.getContentType());
+        try(InputStream inputStream = multipartFile.getInputStream()) {
+        	// Amazon S3에 객체를 업로드
+        	// PutObjectRequest를 이용하여 객체 업로드를 요청을 생성하고, 이를 amazonS3.putObject()를 통해 실행.
+            amazonS3.putObject(new PutObjectRequest(bucketName, fileName, inputStream, objectMetadata)
+                    .withCannedAcl(CannedAccessControlList.PublicRead));
+            
+            // 업로드한 파일의 URL 생성 및 fileNameList에 추가
+            String fileUrl = GetObjectUrl(bucketName, fileName);
+            return fileUrl;  
+        } catch(IOException e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "이미지 업로드에 실패했습니다.");
+        }
+	}
+	
 	// 여러장의 이미지를 사용하기 때문에 List를 사용
     public List<String> uploadImage(List<MultipartFile> multipartFile) {
     	System.out.println("AWS에 upload실행");
