@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class ImageDTO {
     private String proImg;
     private String proImgPro;
-    private String proImageChange;
-    private String proImageProChange;
-    private String encodeImage;
+//    private String proImageChange;
+//    private String proImageProChange;
+//    private String encodeImage;
 }
