@@ -3,7 +3,7 @@
 <%@ include file="ozMarketTop.jsp"%>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/ozMarket/ozMarketPro.css" />
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
@@ -35,11 +35,11 @@
 	<div class="grid-container">
 		<c:forEach var="product" items="${listProduct}" varStatus="status">
 			<div class="grid-item">
-				<c:if test="${not empty product.encodedImage}">
+				<c:if test="${not empty product.proImgPro}">
 					<a
 						href="${pageContext.request.contextPath}/ozMarket/my-product/${product.proNum}">
-						<img src="data:image/jpeg;base64,${product.encodedImage}"
-						alt="${product.proTitle}" class="product-image">
+						<c:set var="proImgPro" value="${fn:split(product.proImgPro, ',')}" />
+								<img class="image" src="${proImgPro[0]}" width="300" height="300">
 					</a>
 				</c:if>
 				<div class="product-title">

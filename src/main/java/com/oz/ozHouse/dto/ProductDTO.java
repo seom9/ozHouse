@@ -151,4 +151,24 @@ public class ProductDTO {
 	public void setScrap(boolean scrap) {
 		this.scrap = scrap;
 	}
+
+	public void setProPrice(int proPrice) {
+		this.proPrice = proPrice;
+	}
+
+	public void setProPoint(int proPoint) {
+		this.proPoint = proPoint;
+	}
+
+	public void setProAssemblyCost(int proAssemblyCost) {
+		this.proAssemblyCost = proAssemblyCost;
+	}
+
+	public void setProDiscountRate(int proDiscountRate) {
+		this.proDiscountRate = proDiscountRate;
+	}
+
+	public void setProDiscountPrice(int proDiscountPrice) {
+		this.proDiscountPrice = proDiscountPrice;
+	}
 }
