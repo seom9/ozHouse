@@ -30,7 +30,7 @@ public class MerJoinController {
 	private final EmailService emailService;
 	
 	static final String BUSINESSFILEPATH = 
-			"D:\\project\\ozHouse\\src\\main\\resources\\static\\merchant\\business";
+			"C:\\nam\\SpringBoot\\ozHouse\\src\\main\\resources\\static\\merchant\\business";
 
 	@GetMapping("/join")
 	public String merchantJoin() {

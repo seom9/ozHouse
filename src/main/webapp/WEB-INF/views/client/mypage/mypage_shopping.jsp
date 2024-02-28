@@ -178,7 +178,7 @@
                                 <div class="product-select__icon"></div>
                             </div>
                             <div class="product-item__image">
-                                <picture><img src="${upPath}/${product.proImg}" /></picture>
+                                <picture><img class="image" src="${product.proImg}" alt="상품 대표 이미지"></picture>
                             </div>
                             <div class="product-item__content">
                                 <div><h1 class="product-title">${product.proName}</h1><br></div> &nbsp; &nbsp;
