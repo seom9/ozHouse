@@ -75,7 +75,7 @@
          <div class="product-small-item product-small-item--clickable">
              <div class="product-small-item__image">
                  <picture>   
-                     <img class="image" src="${dto.productDTO.proImg}" alt="상품 대표 이미지">
+                     <img src="${upPath}/${dto.productDTO.proImg}"/>
                  </picture>
              </div>
              <div class="product-small-item__content">
