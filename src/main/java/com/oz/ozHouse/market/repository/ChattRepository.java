@@ -13,23 +13,28 @@ import org.springframework.transaction.annotation.Transactional;
 import com.oz.ozHouse.domain.Chatt;
 
 public interface ChattRepository extends JpaRepository<Chatt, Integer> {
-	
+
 	List<Chatt> findByRoomNum(Integer roomNum);
-	
+
 	List<Chatt> findByRoomNum(int roomNum);
-	
-    Chatt findTopByRoomNumOrderByInTimeDesc(int roomNum);
-    
-    @Query("SELECT c FROM Chatt c WHERE c.roomNum = :roomNum ORDER BY c.inTime DESC")
-    Optional<Chatt> findTopByRoomNumOrderByCreatedDateDesc(@Param("roomNum") Integer roomNum);
 
-    @Transactional
-    void deleteByInTimeBefore(LocalDateTime threshold);
-    
-    @Query("SELECT c FROM Chatt c WHERE c.roomNum = :roomNum ORDER BY c.inTime DESC")
-    Optional<Chatt> findLastMessageByRoomNum(@Param("roomNum") Integer roomNum);
+	Chatt findTopByRoomNumOrderByInTimeDesc(int roomNum);
 
-    @Query("SELECT DISTINCT c.sender FROM Chatt c WHERE c.roomNum = :roomNum")
-    List<String> findParticipantsByRoomNum(@Param("roomNum") Integer roomNum);
+	@Query("SELECT c FROM Chatt c WHERE c.roomNum = :roomNum ORDER BY c.inTime DESC")
+	Optional<Chatt> findTopByRoomNumOrderByCreatedDateDesc(@Param("roomNum") Integer roomNum);
 
+	@Transactional
+	void deleteByInTimeBefore(LocalDateTime threshold);
+
+	@Query("SELECT c FROM Chatt c WHERE c.roomNum = :roomNum ORDER BY c.inTime DESC")
+	Optional<Chatt> findLastMessageByRoomNum(@Param("roomNum") Integer roomNum);
+
+	@Query("SELECT DISTINCT c.sender FROM Chatt c WHERE c.roomNum = :roomNum")
+	List<String> findParticipantsByRoomNum(@Param("roomNum") Integer roomNum);
+
+	// roomNum이 일치하는 모든 메시지 삭제
+	@Transactional
+	@Modifying
+	@Query("DELETE FROM Chatt m WHERE m.roomNum = :roomNum")
+	void deleteMessagesByRoomNum(@Param("roomNum") Integer roomNum);
 }

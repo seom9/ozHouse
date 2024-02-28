@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.oz.ozHouse.domain.ChattRoom;
 
@@ -23,6 +24,11 @@ public interface ChattRoomRepository extends JpaRepository<ChattRoom, Integer> {
 
 	@Query("SELECT CASE WHEN c.myId = :sender THEN c.otherId ELSE c.myId END FROM ChattRoom c WHERE c.roomNum = :roomNum")
 	String findOtherParticipantId(@Param("roomNum") Integer roomNum, @Param("sender") String sender);
+
+	@Transactional
+	@Modifying
+	@Query("DELETE FROM ChattRoom c WHERE c.roomNum = :roomNum")
+	void deleteChatRoom(@Param("roomNum") Integer roomNum);
 
 //	@Modifying
 //    @Query("update ChattRoom c set c.check = :status where c.roomNum = :roomNum and c.username = :username")
