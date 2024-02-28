@@ -61,21 +61,21 @@
 		<g fill="none" fill-rule="evenodd">
 		   <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="12" fill="#757575">배송 준비</text>
 		 </g>
-		<div class="order-list__info__wrap__content__text" id="isReady"><span></span>
+		<div class="order-list__info__wrap__content__text" id="isReady"><span>0</span>
 		<span class="order-list__info__wrap__content__value"></span></div>
 		</div>
 		<div class="test">
 		<g fill="none" fill-rule="evenodd">
 		   <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="12" fill="#757575">배송 중</text>
 		 </g>
-		<div class="order-list__info__wrap__content__text" id="isDelivery"><span></span>
+		<div class="order-list__info__wrap__content__text" id="isDelivery"><span>0</span>
 		<span class="order-list__info__wrap__content__value"></span></div>
 		</div>
 		<div class="test">
 		<g fill="none" fill-rule="evenodd">
 		   <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="12" fill="#757575">배송 완료</text>
 		 </g>
-		<div class="order-list__info__wrap__content__text" id="isComplete"><span></span>
+		<div class="order-list__info__wrap__content__text" id="isComplete"><span>0</span>
 		<span class="order-list__info__wrap__content__value"></span></div>
 		</div>
 		<div class="test">
@@ -148,6 +148,7 @@
                             <c:set var="delivery_now" value="취소 상품"/>
                         </c:when>                                                                              
                     </c:choose>
+
 					<div class="my-box">
 					<c:set var="order_price" value="0"/>
 					<c:set var="product_qpty" value="0"/>
@@ -155,7 +156,13 @@
 							<ul class="commerce-cart__content__group-list">
 								<li class="commerce-cart__content__group-item">
 									<article class="commerce-cart__group">
-									<div class="order_code234"><span class="order_code123" style=""><a href="/order/${orders.orderNum}/confirm">주문 코드 : ${orders.orderNum}  | ${delivery_now}</a></span></div>
+									<c:if test="${orders.orderCanceldate == null}">
+										<div class="order_code234"><span class="order_code123" style=""><a href="/order/${orders.orderNum}/confirm">주문 코드 : ${orders.orderNum}  | ${delivery_now}</a></span></div>
+									</c:if>
+									<c:if test="${orders.orderCanceldate != null}">
+										<div class="order_code234"><span class="order_code123" style=""><a href="/order/${orders.orderNum}/confirm">주문 코드 : ${orders.orderNum}  | <span style="color: red">취소 신청된 주문입니다</span><br></a></span></div>
+									</c:if>
+									
 									<div><br><br><br></div>
 									<hr>
 <c:forEach var="proQuanDTOs" items="${orders.proQuanDTOs}">
@@ -171,7 +178,7 @@
                                 <div class="product-select__icon"></div>
                             </div>
                             <div class="product-item__image">
-                                <picture><img src="${upPath}/${product.proImg}" /></picture>
+                                <picture><img class="image" src="${product.proImg}" alt="상품 대표 이미지"></picture>
                             </div>
                             <div class="product-item__content">
                                 <div><h1 class="product-title">${product.proName}</h1><br></div> &nbsp; &nbsp;

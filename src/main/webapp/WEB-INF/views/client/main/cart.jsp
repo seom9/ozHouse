@@ -224,7 +224,7 @@ document.addEventListener("DOMContentLoaded", function() {
 						<a class="product-small-item product-small-item--clickable" href="/productions/1095943/selling">
 							<div class="product-small-item__image">
 								<picture>	
-	         						<img src="data:image/jpeg;base64,${encodedImages[loop.index]}"/>
+	         						 <img class="image" src="${dto.productDTO.proImg}" alt="상품 대표 이미지">
 	  	 						</picture>
 							</div>
 							<div class="product-small-item__content">

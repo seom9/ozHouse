@@ -12,9 +12,9 @@
 <title>이메일 인증</title>
 <script type="text/javascript">
 		function check(){
-			if (f.checkNum.value == ""){
+			if (f.checkNumCheck.value == ""){
 				alert("인증 번호를 입력해 주세요")
-				f.checkNum.focus()
+				f.checkNumCheck.focus()
 				return
 			}
 			document.f.submit();
@@ -45,10 +45,9 @@
 				<span class="title">이메일 인증 번호를 입력하세요</span>
 			</div>
 			<span class="title">이메일 주소 : </span> <span class="title">${email}</span>
-			<input type="text" id="member_id" placeholder="받으신 인증번호 8자리를 입력해 주세요"
-				name="checkNumCheck" class="box"> <input type="hidden"
-				name="checkNum" value="${checkNum}"> <input type="button"
-				value="인증번호 확인" onclick="check()">
+			<input type="text" id="member_id" placeholder="받으신 인증번호 8자리를 입력해 주세요" name="checkNumCheck" class="box"> 
+				<input type="hidden" name="checkNum" value="${checkNum}"> 
+				<input type="button" value="인증번호 확인" onclick="check()">
 		</form>
 	</div>
 </body>

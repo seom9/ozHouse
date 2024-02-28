@@ -78,16 +78,13 @@
                   <a class="css-1qwerc" href="/main">
                      <span class="css-18nk785">OZ의집</span>
                   </a>        
-                  <a class="css-53vhmk" href="/shop/main">
+                  <a class="css-53vhmk" href="/products">
                       <span class="css-18nk785">쇼핑</span>
                   </a>
-                   <a class="css-53vhmk" href="/shop/best">
-                       <span class="css-18nk785">베스트</span>
-                   </a>
                    <a class="css-53vhmk" href="/blog/main">
                        <span class="css-18nk785">블로그</span>
                    </a>
-                   <a class="css-53vhmk" href="/shop/today">
+                   <a class="css-53vhmk" href="/products/today">
                        <span class="css-18nk785">오늘의 딜</span>
                    </a>
                    <a class="css-53vhmk" href="/ozMarket">
@@ -123,7 +120,7 @@
                            <sec:authorize access="hasAnyRole('ROLE_CLIENT')">
                               <a class="css-1g5o6hv" href="/logout">로그아웃</a>
                               <a class="css-1g5o6hv" href="/mypage/profile">마이페이지</a>
-                               <a class="css-1tlac5g" href="${pageContext.request.contextPath}/merchant/main">판매자센터</a>
+                               <a class="css-1tlac5g" href="${pageContext.request.contextPath}/merchant/home">판매자센터</a>
                            </sec:authorize>
                            <sec:authorize access="!hasAnyRole('ROLE_CLIENT')">
                               <a class="css-1g5o6hv" href="/member/login">로그인</a>

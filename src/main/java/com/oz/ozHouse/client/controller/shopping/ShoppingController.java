@@ -1,5 +1,7 @@
 package com.oz.ozHouse.client.controller.shopping;
 
+import java.util.List;
+
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import com.oz.ozHouse.client.security.MemberSecurityDTO;
 import com.oz.ozHouse.client.service.ProductServiceImpl;
 import com.oz.ozHouse.client.service.ScrapService;
+import com.oz.ozHouse.dto.BlogDTO;
 import com.oz.ozHouse.dto.ProductDTO;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -38,5 +41,43 @@ public class ShoppingController {
 		model.addAttribute("productDTO", productDTO);
 		
 		return "client/main/Prodview";
+	}
+	
+	@GetMapping(value = "products")
+	public String goProducts(@AuthenticationPrincipal MemberSecurityDTO member, Model model) {
+		
+		String memberId = (member != null) ? member.getUsername() : null;
+
+		List<ProductDTO> cliProductList = ps.cliProductList(memberId);
+		
+		for(ProductDTO dto : cliProductList) {
+			String img = dto.getProImg();
+			System.out.println(img);
+		}
+
+		
+		model.addAttribute("product", cliProductList);
+		model.addAttribute("spec", "products");
+		
+		return "client/main/products";
+	}
+	
+	@GetMapping(value = "products/today")
+	public String goProductsToday(@AuthenticationPrincipal MemberSecurityDTO member,
+								Model model) {
+		
+		String memberId = (member != null) ? member.getUsername() : null;
+
+		List<ProductDTO> cliProductList = ps.todayProductList(memberId);
+		
+		for(ProductDTO dto : cliProductList) {
+			String img = dto.getProImg();
+			System.out.println(img);
+		}
+		
+		model.addAttribute("product", cliProductList);
+		model.addAttribute("spec", "today");
+		
+		return "client/main/products";
 	}
 }
