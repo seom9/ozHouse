@@ -3,6 +3,7 @@ package com.oz.ozHouse.merchant.controller;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Base64;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.oz.ozHouse.client.service.AwsS3Service;
 import com.oz.ozHouse.domain.Category;
 import com.oz.ozHouse.dto.ProductDTO;
 import com.oz.ozHouse.dto.RequestProductDTO;
@@ -39,10 +41,11 @@ import lombok.RequiredArgsConstructor;
 public class MerProController {
 
 	private final MerProService proService;
+	private final AwsS3Service aws;
 	static final String BUSINESSFILEPATH = 
 			"C:\\nam\\SpringBoot\\ozHouse\\src\\main\\resources\\static\\merchant\\business";
 
-	private static final String PATH = "C:\\proImgs\\"; 
+	private static final String PATH = "D:\\imageFiles"; 
 
 	// base64 인코딩
 	private String encodeImageToBase64(File file) throws IOException {
@@ -77,14 +80,14 @@ public class MerProController {
 		ProductDTO dto = new ProductDTO(req);
 
 		// 대표 이미지 폴더 지정
-		String root = PATH + "\\" + "img";
+		String root = PATH + "\\" + "productImges";
 
 		File fileCheck = new File(root);
 		if (!fileCheck.exists())
 			fileCheck.mkdir();
 
 		// 상세 이미지 폴더 지정
-		String root1 = PATH + "\\" + "imgpro";
+		String root1 = PATH + "\\" + "productImgespro";
 
 		File fileCheck1 = new File(root1);
 		if (!fileCheck1.exists())
@@ -93,14 +96,18 @@ public class MerProController {
 		// 대표 이미지
 		MultipartHttpServletRequest mr = (MultipartHttpServletRequest) req;
 		MultipartFile mf = mr.getFile("proImg");
-		String filename = mf.getOriginalFilename();
-		String ext1 = filename.substring(filename.lastIndexOf("."));
-		String changeFile1 = UUID.randomUUID().toString() + ext1;
-
-		File file = new File(root, changeFile1);
+		String filename = aws.uploadImg(mf);
+		
+		System.out.println("대표 이미지 url : " + filename);
+		
+		String[] parts = filename.split("/");
+		String extractedFilename = parts[parts.length - 1];
+		System.out.println("추출된 파일 이름: " + extractedFilename);
+		
+		File file = new File(root, extractedFilename);
 
 		dto.setProImg(filename);
-		dto.setProImageChange(changeFile1);
+//		dto.setProImageChange(filename);
 
 		try {
 			mf.transferTo(file);
@@ -109,46 +116,65 @@ public class MerProController {
 			req.setAttribute("url", "/merchant/store/product-input");
 			return "message";
 		}
+		
+		proImgPro = mr.getFiles("proImgPro");
+		System.out.println("proImgPro" + proImgPro);
+		List<MultipartFile> validFiles = new ArrayList<>();
+		
+		for(MultipartFile file2 : proImgPro) {
+			String fileName = file2.getOriginalFilename();
+			long fileSize = file2.getSize();
+			
+    	    // 파일 이름이 비어 있지 않고 파일 크기가 0보다 큰 경우에만 유효한 파일로 간주
+    	    if (!fileName.isEmpty() && fileSize > 0) {
+    	        validFiles.add(file2);
+    	    }
+		}
+		
+		List<String> fileNameList = aws.uploadImage(validFiles);
+		System.out.println("상세이미지 사이즈" + fileNameList.size());
+		String imgString = String.join(",", fileNameList);
+		dto.setProImgPro(imgString);
 
 		// 상세 이미지
-		List<Map<String, String>> fileList = new ArrayList<>();
-		String fileproOri = "";
-		for (int i = 0; i < proImgPro.size(); i++) {
-			String originFile = proImgPro.get(i).getOriginalFilename();
-			String ext = originFile.substring(originFile.lastIndexOf("."));
-			String changeFile = UUID.randomUUID().toString() + ext;
-			Map<String, String> map = new HashMap<>();
-			map.put("originFile", originFile);
-			map.put("changeFile", changeFile);
-			fileproOri += originFile;
-			fileList.add(map);
-		}
-		String filepro = "";
-
-		try {
-			for (int i = 0; i < proImgPro.size(); i++) {
-				File uploadFile = new File(root1 + "\\" + fileList.get(i).get("changeFile"));
-				proImgPro.get(i).transferTo(uploadFile);
-				System.out.println(uploadFile);
-				filepro += fileList.get(i).get(("changeFile")) + ",";
-			}
-
-			System.out.println("다중 파일 업로드 성공");
-
-		} catch (IllegalStateException | IOException e) {
-			System.out.println("다중 파일 업로드 실패");
-			for (int i = 0; i < proImgPro.size(); i++) {
-				new File(root1 + "\\" + fileList.get(i).get("changeFile")).delete();
-			}
-			e.printStackTrace();
-		}
-
-		dto.setProImageProChange(filepro);
-		dto.setProImgPro(fileproOri);
-
+//		List<Map<String, String>> fileList = new ArrayList<>();
+//		String fileproOri = "";
+//		for (int i = 0; i < proImgPro.size(); i++) {
+//			String originFile = proImgPro.get(i).getOriginalFilename();
+//			String ext = originFile.substring(originFile.lastIndexOf("."));
+//			String changeFile = UUID.randomUUID().toString() + ext;
+//			Map<String, String> map = new HashMap<>();
+//			map.put("originFile", originFile);
+//			map.put("changeFile", changeFile);
+//			fileproOri += originFile;
+//			fileList.add(map);
+//		}
+//		String filepro = "";
+//
+//		try {
+//			for (int i = 0; i < proImgPro.size(); i++) {
+//				File uploadFile = new File(root1 + "\\" + fileList.get(i).get("changeFile"));
+//				proImgPro.get(i).transferTo(uploadFile);
+//				System.out.println(uploadFile);
+//				filepro += fileList.get(i).get(("changeFile")) + ",";
+//			}
+//
+//			System.out.println("다중 파일 업로드 성공");
+//
+//		} catch (IllegalStateException | IOException e) {
+//			System.out.println("다중 파일 업로드 실패");
+//			for (int i = 0; i < proImgPro.size(); i++) {
+//				new File(root1 + "\\" + fileList.get(i).get("changeFile")).delete();
+//			}
+//			e.printStackTrace();
+//		}
+//
+//		dto.setProImageProChange(filepro);
+//		dto.setProImgPro(fileproOri);
+//
 		dto.setMerNum(merNum);
-		System.out.println("merNum : " + merNum);
-		System.out.println(dto.getProName());
+//		System.out.println("merNum : " + merNum);
+//		System.out.println(dto.getProName());
 
 		// 카테고리명 가져오기
 		int categoryNum = Integer.parseInt(req.getParameter("categoryNum"));
@@ -180,28 +206,28 @@ public class MerProController {
 
 		Optional<ProductDTO> optionalDto = Optional.of(proService.getProduct(proNum));
 
-		if (optionalDto.isPresent()) {
-			ProductDTO dto = optionalDto.get();
-			req.setAttribute("getProduct", dto);
-			if (dto.getProImageChange() != null) {
-				File imageFile = new File(root, dto.getProImageChange());
-				if (imageFile.exists()) {
-					String encodedImage = encodeImageToBase64(imageFile);
-					req.setAttribute("encodedImage", encodedImage);
-				}
-			}
-
-			List<String> encodedImagesPro = new ArrayList<>();
-			String[] imageProFiles = dto.getProImageProChange().split(",");
-			for (String imageFileName : imageProFiles) {
-				File imageProFile = new File(root1, imageFileName);
-				if (imageProFile.exists()) {
-					String encodedImagePro = encodeImageToBase64(imageProFile);
-					encodedImagesPro.add(encodedImagePro);
-				}
-			}
-			req.setAttribute("encodedImagesPro", encodedImagesPro);
-		}
+//		if (optionalDto.isPresent()) {
+//			ProductDTO dto = optionalDto.get();
+//			req.setAttribute("getProduct", dto);
+//			if (dto.getProImageChange() != null) {
+//				File imageFile = new File(root, dto.getProImageChange());
+//				if (imageFile.exists()) {
+//					String encodedImage = encodeImageToBase64(imageFile);
+//					req.setAttribute("encodedImage", encodedImage);
+//				}
+//			}
+//
+//			List<String> encodedImagesPro = new ArrayList<>();
+//			String[] imageProFiles = dto.getProImageProChange().split(",");
+//			for (String imageFileName : imageProFiles) {
+//				File imageProFile = new File(root1, imageFileName);
+//				if (imageProFile.exists()) {
+//					String encodedImagePro = encodeImageToBase64(imageProFile);
+//					encodedImagesPro.add(encodedImagePro);
+//				}
+//			}
+//			req.setAttribute("encodedImagesPro", encodedImagesPro);
+//		}
 //		RequestProductDTO redto = proService.getreProduct(map.get("proNum"));
 //
 //		if (redto != null) {
@@ -237,13 +263,13 @@ public class MerProController {
 
 		// 재고 관리 리스트
 		List<ProductDTO> list = proService.listProduct(params);
-		for (ProductDTO dto : list) {
-			File imageFile = new File(root, dto.getProImageChange());
-			if (imageFile.exists()) {
-				String encodedImage = encodeImageToBase64(imageFile);
-				dto.setEncodedImage(encodedImage);
-			}
-		}
+//		for (ProductDTO dto : list) {
+//			File imageFile = new File(root, dto.getProImageChange());
+//			if (imageFile.exists()) {
+//				String encodedImage = encodeImageToBase64(imageFile);
+//				dto.setEncodedImage(encodedImage);
+//			}
+//		}
 
 		req.setAttribute("listProduct", list);
 		req.setAttribute("listCount", proService.listCount(params));
@@ -259,13 +285,13 @@ public class MerProController {
 		req.setAttribute("proImg", root);
 		// 요청 리스트
 		List<ProductDTO> list = proService.requestList(params);
-		for (ProductDTO dto : list) {
-			File imageFile = new File(root, dto.getProImageChange());
-			if (imageFile.exists()) {
-				String encodedImage = encodeImageToBase64(imageFile);
-				dto.setEncodedImage(encodedImage);
-			}
-		}
+//		for (ProductDTO dto : list) {
+//			File imageFile = new File(root, dto.getProImageChange());
+//			if (imageFile.exists()) {
+//				String encodedImage = encodeImageToBase64(imageFile);
+//				dto.setEncodedImage(encodedImage);
+//			}
+//		}
 		req.setAttribute("requestListProduct", list);
 		req.setAttribute("requestListCount", proService.requestListCount(params));
 		return "merchant/store/productManagement/productManagement_request_list";
@@ -286,13 +312,13 @@ public class MerProController {
 
 		// 재고 관리 리스트
 		List<ProductDTO> list = proService.stockList(params);
-		for (ProductDTO dto : list) {
-			File imageFile = new File(root, dto.getProImageChange());
-			if (imageFile.exists()) {
-				String encodedImage = encodeImageToBase64(imageFile);
-				dto.setEncodedImage(encodedImage);
-			}
-		}
+//		for (ProductDTO dto : list) {
+//			File imageFile = new File(root, dto.getProImageChange());
+//			if (imageFile.exists()) {
+//				String encodedImage = encodeImageToBase64(imageFile);
+//				dto.setEncodedImage(encodedImage);
+//			}
+//		}
 
 		req.setAttribute("stockListProduct", list);
 		req.setAttribute("stockListCount", proService.stockListCount(params));

@@ -152,11 +152,11 @@ function resetForm() {	// 폼 초기화
 					</div>
 					<div class="flex-cell">${dto.categoryName}</div>
 					<div class="flex-cell">
-						<c:if test="${not empty dto.encodedImage}">
-							<img src="data:image/jpeg;base64,${dto.encodedImage}" width="40"
+						<c:if test="${not empty dto.proImg}">
+							<img src="${dto.proImg}" width="40"
 								height="40">
 						</c:if>
-						<c:if test="${empty dto.encodedImage}">
+						<c:if test="${empty dto.proImg}">
 							<span>이미지 준비중</span>
 						</c:if>
 					</div>

@@ -36,7 +36,7 @@ public class MerInbrandController {
 	private final MerInbrandService inbrandService;
 	
 	static final String FILEPATH = 
-			"C:\\Users\\Kim seo ah\\Desktop\\a";
+			"D:\\project\\ozHouse\\src\\main\\resources\\static\\merchant\\inbrandInfo\\";
 	
 	private HttpServletRequest goToMessage(HttpServletRequest req, String url, String msg) {
 		req.setAttribute("msg", msg);
