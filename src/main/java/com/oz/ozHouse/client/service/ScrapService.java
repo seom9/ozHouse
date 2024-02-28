@@ -63,10 +63,24 @@ public class ScrapService {
 		List<Scrap> scraps = scrapRepository.findByMember_MemberId(memberId);
 		
 		List<ProductDTO> productDTOs = scraps.stream()
-		        						.map(scrap -> modelMapper.map(scrap.getProduct(), ProductDTO.class))
-		        						.peek(productDTO -> productDTO.setScrap(true))
-		        						.collect(Collectors.toList());
-		
+		        					    .map(data -> {
+		        					        ProductDTO productDTO = modelMapper.map(data.getProduct(), ProductDTO.class);
+		        					        productDTO.setProImg(data.getProduct().getImg().getProImg());
+		        					        productDTO.setProImgPro(data.getProduct().getImg().getProImgPro());
+		        					        productDTO.setProPrice(data.getProduct().getMerPrice().getProPrice());
+		        					        productDTO.setProPoint(data.getProduct().getMerPrice().getProPoint());
+		        					        productDTO.setProAssemblyCost(data.getProduct().getMerPrice().getProAssemblyCost());
+		        					        productDTO.setProDiscountRate(data.getProduct().getMerPrice().getProDiscountRate());
+		        					        productDTO.setProDiscountPrice(data.getProduct().getMerPrice().getProDiscountPrice());
+		        					        if (memberId != null) {
+		        					            productDTO.setScrap(true);
+		        					        }
+		        					        return productDTO;
+		        					        
+		        					    })
+		        					    .collect(Collectors.toList());
+
+
 		return productDTOs;
 	}
 	
