@@ -7,36 +7,44 @@
 <%@ page import="java.util.Date" %>
 
 <head>
-   <link rel="stylesheet" href="${path}/resources/client/main_css/best.css"/>
+   <link rel="stylesheet" href="${path}/client/main_css/best.css"/>
    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-   <script type="text/javascript">
-       $(function () {
-           function executeScrap(product_num) {
-               $.ajax({
-                   type: 'post',
-                   url: 'scrap_product.do',
-                   data: { 'product_num': product_num },
-                   success: function (data) {
-                       if (data === 'Y') {
-                           alert('상품이 스크랩 되었습니다');
-                           location.reload(true);
-                       } else if (data === 'N') {
-                           alert('이미 스크랩한 상품입니다');
-                       }
-                   },
-                   error: function (error) {
-                       alert(error);
-                   }
-               });
-           }
-   
-           // doScrap 버튼 클릭 이벤트 핸들러 등록
-           $(".doScrap").click(function () {
-               var product_num = $(this).find(".product_num").val();
-               executeScrap(product_num);
-           });
-       });
-   </script>
+	<!-- 스크랩 스크립트 -->
+	<script type="text/javascript">
+		function scrap(memberId, productNum, is) {
+			// ** json data 전송 시 jstl 태그 자바스크립트에 안 먹음 ** // 		
+		    fetch('/scrap/' + memberId + '/' + productNum + '/' + is, {
+		        method: 'POST', 
+		        headers: {
+		            'Content-Type': 'application/json'
+		        },
+		        body: JSON.stringify({
+		        	memberId : memberId,
+		        	productNum : productNum
+		        }),
+		    })
+		    .then(response => {
+		        if (!response.ok) {
+		            throw new Error('Network response was not ok');
+		        }
+		        return response.text(); 
+		    })
+		    .then(data => {
+		        alert(data)
+		        location.reload()
+		    })
+		    .catch(error => {
+		    	alert("서버 통신에 실패했습니다 : 관리자에게 문의해 주세요")
+		    });
+		}
+	</script>
+	
+	<script type="text/javascript">
+	function cantScrap() {
+		alert("스크랩 : 로그인 해 주세요")
+		window.location.href = "/member/login"
+	}
+	</script>
    <script>
 	document.addEventListener('DOMContentLoaded', function () {
 	    // 페이지 로드가 완료된 후 실행됩니다.
@@ -123,7 +131,7 @@
 	<c:set var="currentDate" value='<%= new SimpleDateFormat("yy/MM/dd").format(new Date())%>' />
 	<c:if test="${empty product}">
 		<div class="a">
-			<img src="resources/client/image/notice_image.png">
+			<img src="client/image/notice_image.png">
 		</div>
 	</c:if>
 	<div>
