@@ -24,7 +24,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @Builder(toBuilder = true)
 @AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PUBLIC)
+@NoArgsConstructor(access = AccessLevel.PUBLIC) 
 public class Inbrand{
 
 	@Id 
