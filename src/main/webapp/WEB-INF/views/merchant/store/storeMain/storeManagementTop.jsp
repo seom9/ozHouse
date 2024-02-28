@@ -36,7 +36,7 @@ header img.oz-logo {
 		</a> <a href="#"> <span class="partner-center">스토어관리</span>
 		</a>
 		<div class="logout-container">
-			<a href="${pageContext.request.contextPath}/merchant/login/logout" class="main-button">OZ의집
+			<a href="${pageContext.request.contextPath}/main" class="main-button">OZ의집
 				가기</a> <a href="javascript:logout()" class="logout-button">로그아웃</a>
 		</div>
 	</header>
@@ -57,25 +57,7 @@ header img.oz-logo {
 		<%-- <a href="${pageContext.request.contextPath}/merchant/${merNum}/store/sales?mode=day"
 			class="tab-link">매출관리</a> --%>
 	</div>
-	<!-- 
-	<div class="tab-navigation">
-		<a
-			href="${pageContext.request.contextPath}/stores/${merchantLoginMember.merNum}"
-			class="tab-link">관리홈</a> <a
-			href="${pageContext.request.contextPath}/merchant/${merchantLoginMember.merNum}/products"
-			class="tab-link">상품관리</a> <a
-			href="${pageContext.request.contextPath}/merchant/${merchantLoginMember.merNum}/orders?mode=all"
-			class="tab-link">주문배송</a> <a
-			href="${pageContext.request.contextPath}/merchant/${merchantLoginMember.merNum}/returns"
-			class="tab-link">환불/교환</a> <a
-			href="${pageContext.request.contextPath}/merchant/${merchantLoginMember.merNum}/proQAs"
-			class="tab-link">문의/후기</a> <a
-			href="${pageContext.request.contextPath}/merchant/${merchantLoginMember.merNum}/coupons"
-			class="tab-link">쿠폰관리</a> <a
-			href="${pageContext.request.contextPath}/merchant/${merchantLoginMember.merNum}/sales?mode=day"
-			class="tab-link">매출관리</a>
-	</div>
-	 -->
+	
 	<script>
 document.addEventListener('DOMContentLoaded', function () {
     const tabs = document.querySelectorAll('.tab-link');
