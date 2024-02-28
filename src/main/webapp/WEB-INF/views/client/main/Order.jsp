@@ -347,8 +347,14 @@ document.addEventListener('DOMContentLoaded', function () {
 		var commentValue = f.oComment.value;
 		
 		// 포인트 값이 null 또는 빈 문자열인 경우 0으로 설정
-		if (pointValue === null || pointValue.trim() === "") {
-		    f.oDisPoint.value = "0";
+		if (commentValue === null) {
+			alert("포인트를 정확히 입력해 주세요");
+			f.oDisPoint.focus();
+		}
+		
+		if (commentValue.trim() === "") {
+			alert("다시 시도하세요");
+			window.location.reload();
 		}
 		
 		// comment 값이 null이거나 undefined인 경우 빈 문자열로 설정
