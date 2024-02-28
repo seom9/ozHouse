@@ -22,9 +22,9 @@ public class ClientProductDTO {
     
     private String proImg;
     private String proImgPro;
-    private String proImageChange;
-    private String proImageProChange;
-    private String encodeImage;
+//    private String proImageChange;
+//    private String proImageProChange;
+//    private String encodeImage;
     
 	private int proPrice;
 	private int proPoint;	
@@ -65,8 +65,8 @@ public class ClientProductDTO {
                 .merNum(product.getMerchant().getMerNum())
 	            .proImg(product.getImg().getProImg())
 	            .proImgPro(product.getImg().getProImgPro())
-	            .proImageChange(product.getImg().getProImageChange())
-	            .proImageProChange(product.getImg().getProImageProChange())
+//	            .proImageChange(product.getImg().getProImageChange())
+//	            .proImageProChange(product.getImg().getProImageProChange())
                 .proPrice(product.getMerPrice().getProPrice())
                 .proPoint(product.getMerPrice().getProPoint())
                 .proAssemblyCost(product.getMerPrice().getProAssemblyCost())
