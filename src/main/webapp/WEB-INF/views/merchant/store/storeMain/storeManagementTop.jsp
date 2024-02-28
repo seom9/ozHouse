@@ -36,7 +36,7 @@ header img.oz-logo {
 		</a> <a href="#"> <span class="partner-center">스토어관리</span>
 		</a>
 		<div class="logout-container">
-			<a href="${pageContext.request.contextPath}/merchant/login/logout" class="main-button">OZ의집
+			<a href="${pageContext.request.contextPath}/main" class="main-button">OZ의집
 				가기</a> <a href="javascript:logout()" class="logout-button">로그아웃</a>
 		</div>
 	</header>
