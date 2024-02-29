@@ -114,7 +114,7 @@
 								href="${pageContext.request.contextPath}/merchant/${merNum}/returns/refund">
 								<span class="number">${returnCount }건</span>
 							</a>
-						</div> --%>
+						</div> 
 						<div class="content-box">
 							<span style="font-size: 20px; color: #FFFFFF;">응답해야 할 Q&A</span>
 							<hr class="underline-style">
@@ -124,7 +124,7 @@
 									${boardCount}건</span>
 							</a>
 						</div>
-					</div></td>
+					</div></td>--%>
 				<td colspan="2" width="25%"><br>
 					<div class="notice-section">
 						<div class="notice-header">

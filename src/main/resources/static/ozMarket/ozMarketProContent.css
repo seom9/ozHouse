@@ -15,29 +15,29 @@ body {
 }
 
 .list-button {
-    padding: 10px 20px; 
-    font-size: 16px; 
-    background-color: #50E5B4; 
-    color: white; 
-    border: none; 
-    cursor: pointer; 
-    text-decoration: none; 
-    display: inline-block; 
-    border-radius: 5px; 
-    margin: 0 5px; 
+	padding: 10px 20px;
+	font-size: 16px;
+	background-color: #50E5B4;
+	color: white;
+	border: none;
+	cursor: pointer;
+	text-decoration: none;
+	display: inline-block;
+	border-radius: 5px;
+	margin: 0 5px;
 }
 
 .submit-button {
-    padding: 10px 20px; 
-    font-size: 16px; 
-    background-color: #50E5B4; 
-    color: white;
-    border: none; 
-    cursor: pointer; 
-    text-decoration: none; 
-    display: inline-block; 
-    border-radius: 5px; 
-    margin: 0 5px; 
+	padding: 10px 20px;
+	font-size: 16px;
+	background-color: #50E5B4;
+	color: white;
+	border: none;
+	cursor: pointer;
+	text-decoration: none;
+	display: inline-block;
+	border-radius: 5px;
+	margin: 0 5px;
 }
 
 .form-container {
@@ -55,6 +55,32 @@ body {
 	margin-bottom: 20px;
 }
 
+.user-info {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	/* This will push the .proApprovalStatus to the right */
+	padding: 10px;
+	background: #ffffff;
+	border-bottom: 1px solid #ddd;
+}
+
+.user-avatar img {
+	border-radius: 50%;
+	width: 40px; /* Adjust size as necessary */
+	height: 40px; /* Adjust size as necessary */
+}
+
+.memberNickname {
+	font-weight: bold;
+	/* If you need to adjust the width to give more space to .proApprovalStatus, you can do so */
+}
+
+.proApprovalStatus {
+	margin-left: auto; /* This will push the element to the right */
+	/* No need for 'align="right"', as the CSS will handle the alignment */
+}
+
 .form-group img {
 	width: 100%;
 	height: auto;
@@ -62,7 +88,7 @@ body {
 
 .form-group div {
 	margin-bottom: 10px;
-	font-size: 20px;
+	font-size: 25px;
 	color: #333;
 }
 
@@ -78,6 +104,13 @@ body {
 	margin: 15px 0;
 }
 
+hr {
+	border: 0;
+	height: 1px;
+	background-image: linear-gradient(to right, rgba(0, 0, 0, 0),
+		rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+
 .button-container {
 	display: flex;
 	justify-content: center;
@@ -90,21 +123,12 @@ body {
 	margin: 25px 0;
 }
 
-.list-button {
-	padding: 10px 35px; 
-	font-size: 18px;
-	background-color: #50E5B4;
-	color: white;
-	border: none;
-	cursor: pointer;
-	margin: 0 10px; 
-	text-decoration: none;
-	display: inline-block;
-	border-radius: 5px;
-}
-
 html, body {
 	height: 100%;
+}
+
+input[type="button"] {
+	margin: 25px 0;
 }
 
 .image-slider {
@@ -162,25 +186,45 @@ html, body {
 }
 
 .user-avatar img {
-	width: 50px; 
-	height: 50px; 
-	border-radius: 50%; 
-	object-fit: cover; 
-	display: block; 
-	margin: 20px auto; 
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	object-fit: cover;
+	display: block;
+	margin: 20px auto;
 }
 
 .button-group {
 	display: flex;
-	justify-content: space-around;
-	margin-top: 20px;
 }
 
 .user-info {
 	display: flex;
 	align-items: center;
 	gap: 5px;
-	margin-bottom: 15px; 
+	margin-bottom: 15px;
+	background-color: #f4f4f4;
+}
+
+.proTitle {
+	font-size: 24px;
+	font-weight: bold;
+}
+
+.proInDate {
+	font-size: 14px;
+	color: #888;
+}
+
+.proPrice {
+	font-size: 20px;
+	color: #333;
+	font-weight: bold;
+}
+
+.proContent {
+	font-size: 16px;
+	color: #666;
 }
 
 .user-avatar img, .user-info img {
@@ -189,5 +233,5 @@ html, body {
 	border-radius: 50%;
 	object-fit: cover;
 	display: block;
-	margin-right: 10px; 
+	margin-right: 10px;
 }

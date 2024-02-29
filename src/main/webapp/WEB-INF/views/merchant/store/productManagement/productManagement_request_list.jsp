@@ -114,7 +114,8 @@ function resetForm() {
 				</p>
 			</div>
 		</div>
-		<form name="f1" action="${pageContext.request.contextPath}/merchant/${merNum}/store/product/request"
+		<form name="f1"
+			action="${pageContext.request.contextPath}/merchant/${merNum}/store/product/request"
 			class="flex-container" method="get">
 			<c:set var="merNum" value="${merLoginMember.merNum}" />
 			<div class="flex-row">
@@ -198,11 +199,11 @@ function resetForm() {
 						</div>
 						<div class="flex-cell">${dto.categoryName}</div>
 						<div class="flex-cell">
-							<c:if test="${not empty dto.encodedImage}">
-								<img src="data:image/jpeg;base64,${dto.encodedImage}" width="40"
+							<c:if test="${not empty dto.proImg}">
+								<img src="data:image/jpeg;base64,${dto.proImg}" width="40"
 									height="40">
 							</c:if>
-							<c:if test="${empty dto.encodedImage}">
+							<c:if test="${empty dto.proImg}">
 								<span>No image</span>
 							</c:if>
 						</div>
@@ -228,35 +229,35 @@ function resetForm() {
 									<div>
 										<input type="button"
 											style="background-color: #F4F4F4; color: black;" value="취소"
-											onclick="window.location='product_delete.do?proNum=${dto.proNum}&merNum=${merLoginMember.merNum}'">
+											onclick="window.location='#'">
 									</div>
 								</c:when>
 								<c:when test="${dto.proApprovalStatus=='dr'}">
 									<div>
 										<input type="button" class="update-button" value="취소"
-											onclick="window.location='product_ucancle.do?proNum=${dto.proNum}&merNum=${merLoginMember.merNum}'">
+											onclick="window.location='#'">
 									</div>
 								</c:when>
 								<c:when test="${dto.proApprovalStatus=='ur'}">
 									<div>
 										<input type="button" class="update-button" value="취소"
-											onclick="window.location='product_dcancle.do?proNum=${dto.proNum}&merNum=${merLoginMember.merNum}'">
+											onclick="window.location='#'">
 									</div>
 								</c:when>
 								<c:when test="${dto.proApprovalStatus=='re'}">
 									<div>
 										<input type="button" value="확인"
-											onclick="fetchAndDisplayMsg('${dto.proNum}')">
+											onclick="window.location='#'">
 									</div>
 									<div>
 										<input type="button" class="update-button"
 											style="background-color: #50E5B4; color: white; margin-bottom: 10px; margin-top: 10px;"
 											value="수정"
-											onclick="window.location='product_update.do?proNum=${dto.proNum}&merNum=${merLoginMember.merNum}'">
+											onclick="window.location='#'">
 									</div>
 									<div>
 										<input type="button" class="update-button" value="삭제"
-											onclick="window.location='product_delete.do?proNum=${dto.proNum}&merNum=${merLoginMember.merNum}'">
+											onclick="window.location='#'">
 									</div>
 
 								</c:when>
@@ -265,7 +266,7 @@ function resetForm() {
 								<c:when test="${dto.proApprovalStatus=='ca'}">
 									<div>
 										<input type="button" value="확인"
-											onclick="fetchAndDisplayMsg('${dto.proNum}')">
+											onclick="window.location='#'">
 									</div>
 								</c:when>
 								<c:when test="${dto.proApprovalStatus=='ok'}">
@@ -273,11 +274,11 @@ function resetForm() {
 										<input type="button"
 											style="background-color: #50E5B4; color: white; margin-bottom: 10px;"
 											value="수정"
-											onclick="window.location='product_update.do?proNum=${dto.proNum}&merNum=${merLoginMember.merNum}'">
+											onclick="window.location='#'">
 									</div>
 									<div>
 										<input type="button" class="update-button" value="삭제"
-											onclick="window.location='product_cancle.do?proNum=${dto.proNum}&merNum=${merLoginMember.merNum}'">
+											onclick="window.location='#'">
 									</div>
 								</c:when>
 								<c:otherwise>
