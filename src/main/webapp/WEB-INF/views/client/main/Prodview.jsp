@@ -23,6 +23,7 @@
                      <div class="carousel__list">
                         <div class="production-selling-cover-image__entry">
                            <img class="production-selling-cover-image__entry__image" alt="상품 대표이미지" src="${productDTO.proImg}">
+                        	<input type="hidden" id="num" value="${productDTO.proNum}">
                         </div>
                         <div class="production-selling-cover-image__entry"></div>
                      </div>
@@ -332,6 +333,7 @@
                   <sec:authorize access="hasAnyRole('ROLE_CLIENT')">
                   <button class="button button--color-blue button--size-50 button--shape-4 review-modal__form__submit" type="button" onclick="writeReview('${prc.username}', '${productDTO.proNum}')">완료</button>
                	  </sec:authorize>
+               	  
                </div>
             </div>
          </div>
