@@ -43,6 +43,7 @@
 .css-1bpmso0 {
 	width: 100%;
 	display: flex;
+    flex-wrap: wrap;
 }
 
 .css-ylurzg {
@@ -54,6 +55,7 @@
 
 .css-1bpmso0>* {
 	width: 25%;
+
 }
 
 .css-bga0xs {
@@ -123,6 +125,15 @@
 	height: 100%;
 	border-radius: 4px;
 	overflow: hidden;
+}
+
+.css-ypqde8 > image {
+	position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    transform: translate(-50%, -50%);
+	
 }
 
 .css-7bfh27 {

@@ -193,8 +193,8 @@
 					});
 		};
 		
-		var httpUrl = "http://localhost:8080/ozMarket/chattRoom/messages/"
-			+ roomNum;
+		var httpUrl = "http://" + location.host + "/ozMarket/chattRoom/messages/" + roomNum;
+
 		// 채팅 기록을 불러오는 함수
 		function loadChatHistory(roomNumber) {
 				
