@@ -43,6 +43,8 @@ public class ShoppingController {
 		return "client/main/Prodview";
 	}
 	
+	// DB 만지는 중이라 화면 안 움직임
+	
 	@GetMapping(value = "products")
 	public String goProducts(@AuthenticationPrincipal MemberSecurityDTO member, Model model) {
 		
@@ -64,6 +66,25 @@ public class ShoppingController {
 	
 	@GetMapping(value = "products/today")
 	public String goProductsToday(@AuthenticationPrincipal MemberSecurityDTO member,
+								Model model) {
+		
+		String memberId = (member != null) ? member.getUsername() : null;
+
+		List<ProductDTO> cliProductList = ps.todayProductList(memberId);
+		
+		for(ProductDTO dto : cliProductList) {
+			String img = dto.getProImg();
+			System.out.println(img);
+		}
+		
+		model.addAttribute("product", cliProductList);
+		model.addAttribute("spec", "today");
+		
+		return "client/main/products";
+	}
+	
+	@GetMapping(value = "products/best")
+	public String goProductsBest(@AuthenticationPrincipal MemberSecurityDTO member,
 								Model model) {
 		
 		String memberId = (member != null) ? member.getUsername() : null;

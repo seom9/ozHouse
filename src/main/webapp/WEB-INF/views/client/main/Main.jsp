@@ -41,7 +41,7 @@
             <div class="css-d3v9zr e1tym1gd3" style="/* touch-action: pan-y; *//* user-select: none; *//* -webkit-user-drag: none; *//* -webkit-tap-highlight-color: rgba(0, 0, 0, 0); */">
                <ul style="transform: translateX(0%);" aria-live="off" class="css-154jlx0 e1tym1gd2">
                   <li role="group" aria-roledescription="slide" aria-label="14 of 15" class="css-l4nyle e1tym1gd1">
-                     <a href="resources/merchant/img/오늘 입점하세요.png">
+                     <a href="#">
                         <div class="css-19xf83k e1gf1fv81">
                            <div class="css-1brvou9 e1gf1fv80">
                               <div class="css-1qd6flo epd1vhg3">
@@ -314,17 +314,17 @@ document.querySelector('.css-h72v4d button').addEventListener('click', showNextP
   // goProduct 함수 정의
   function blog_main() {
     // prodView_main.do 실행
-    window.location.href = 'blog/main';
+    window.location.href = '/blog/main';
   }
   
   function todaysDeal() {
        // prodView_main.do 실행
-     window.location.href = 'best_main.do?spec=today';
+     window.location.href = '/products/today';
      }
   
   function goProduct() {
        // prodView_main.do 실행
-       window.location.href = 'shop_main.do';
+       window.location.href = '/products';
      }
 </script>
 
