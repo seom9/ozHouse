@@ -124,7 +124,7 @@
 										</sec:authorize>
 									<div class="css-ypqde8">
 										<a href="/${dto.proNum}/prodView">
-											<img class="image" src="${tdto.proImg}" alt="상품 대표 이미지">
+											<img class="image" src="${tdto.proImg}" alt="상품 대표 이미지" style=" position: absolute; top: 50%; left: 50%; width: 100%; transform: translate(-50%, -50%);">
 										</a>
 									</div> 
 								</div>
