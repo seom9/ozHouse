@@ -17,7 +17,27 @@ public class ReviewDTO {
     private String reviewContent;
     private String reviewImage;
     private int productNum;
-    private int reviewLike;
     private String reviewDate;
-
+    
+    // entity를 DTO로 변환
+    public ReviewDTO(Review review) {
+    	this.reviewNum = review.getReviewNum();
+    	this.memberId = review.getMemberId();
+    	this.reviewStar = review.getReviewStar();
+    	this.reviewImage = review.getReviewImage();
+    	this.productNum = review.getProductNum();
+    	this.reviewDate = review.getReviewDate();
+    }
+    
+    // DTO를 Entity로 변환
+    public Review toEntity() {
+    	return Review.builder()
+    			.reviewNum(this.reviewNum)
+    			.memberId(this.memberId)
+    			.reviewStar(this.reviewStar)
+    			.reviewImage(this.reviewImage)
+    			.productNum(this.productNum)
+    			.reviewDate(this.reviewDate)
+    			.build();
+    }
 }

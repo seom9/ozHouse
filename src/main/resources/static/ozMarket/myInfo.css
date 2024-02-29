@@ -1,0 +1,107 @@
+@charset "UTF-8";
+
+body {
+	font-family: 'Arial', sans-serif;
+	margin: 0;
+	padding: 0;
+	background-color: #f4f4f4;
+}
+
+.user-info {
+	display: flex;
+	margin: 24px 14px;
+	align-items: center;
+	background-color: #fff;
+	padding: 20px;
+	margin-bottom: 20px;
+	border-bottom: 2px solid #eee;
+}
+
+.user-avatar img {
+	border-radius: 50%;
+	width: 100px;
+	height: 100px;
+	object-fit: cover;
+	margin-right: 20px;
+}
+
+.memberNickname {
+	font-size: 24px;
+	font-weight: bold;
+}
+
+.grid-container {
+	background-color: #fff;
+	padding: 20px;
+	margin-bottom: 20px;
+}
+
+.grid-item {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 10px;
+	border: 1px solid #eee;
+	border-radius: 8px;
+	background-color: #f9f9f9;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	margin: 10px;
+}
+
+h3 {
+	color: #333;
+	padding: 6px 35px;
+	font-size: 30px;
+	margin-top: 20px;
+}
+
+.grid-item div {
+	text-align: center;
+	color: #333;
+}
+
+.center-text {
+	text-align: center;
+	padding: 20px;
+	font-size: 18px;
+	color: #666;
+	margin: 20px 0;
+}
+
+.section-title {
+	padding: 0 20px;
+	color: #333;
+	margin-top: 20px;
+}
+
+.grid-container {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: start;
+	/* This will align the items to the start of the container */
+	gap: 10px; /* This adds some space between the items */
+	background-color: #fff;
+	padding: 20px;
+	margin-bottom: 20px;
+}
+
+.product-container {
+	border: 1px solid #eee;
+	border-radius: 8px;
+	background-color: #f9f9f9;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	padding: 10px;
+	text-align: center; /* Center the text */
+	width: 150px; /* Set a fixed width for each product container */
+}
+
+.product-container img {
+	width: 100%; /* Make the image take the full width of the container */
+	height: auto;
+	margin-bottom: 8px; /* Space between image and title */
+}
+
+.product-container div {
+	font-size: 14px; /* Adjust the font size as needed */
+	color: #333;
+}

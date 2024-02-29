@@ -64,7 +64,7 @@
                            <svg fill="#50E5B4" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-279" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-279"><rect x="0" y="0" width="18.57687195392114" height="24"></rect></clipPath></defs><use xlink:href="#star-path-279" fill="#DBDBDB"></use><use clip-path="url(#star-clip-279)" xlink:href="#star-path-279"></use></svg>
                         </span>
                         <span class="production-selling-header__review__text">
-                           <span class="number">리뷰카운트</span>
+                           <span class="number">${reviewCount}</span>
                            <span class="postfix">개 리뷰</span>
                         </span>
                      </a>
@@ -115,7 +115,7 @@
                                     <span id="minus" class="css-1k5678y">
                                        <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M432 256c0 17.7-14.3 32-32 32L48 288c-17.7 0-32-14.3-32-32s14.3-32 32-32l352 0c17.7 0 32 14.3 32 32z"/></svg>
                                     </span>
-                                    <button id="quantity" class="css-1gjftf7">1</button>
+                                    <button id="quantity" class="css-1gjftf7" onclick="initializePage()">1</button>
                                     <span id="plus" class="e1fp679o3">
                                        <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/></svg>
                                     </span>
@@ -153,15 +153,9 @@
                   <a class="production-selling-navigation__item production-selling-navigation__item--active" href="#production-selling-information">상품정보</a>
                </li>
                <li>
-                  <a class="production-selling-navigation__item" href="#production-selling-question">
-                     문의
-                     <span class="production-selling-navigation__item__count">문의숫자</span>
-                  </a>
-               </li>
-               <li>
                   <a class="production-selling-navigation__item" href="#production-selling-review">
                      리뷰
-                     <span class="production-selling-navigation__item__count">리뷰 카운트</span>
+                     <span class="production-selling-navigation__item__count">${reviewCount}</span>
                   </a>
                </li>
             </ol>
@@ -193,97 +187,21 @@
                   <header class="production-selling-section__header">
                      <h1 class="production-selling-section__title">
                         리뷰
-                        <span class="count">리뷰카운트</span>
+                        <span class="count">${reviewCount}</span>
                      </h1>
                      <div class="production-selling-section__right">
                         <button type="button" onclick="reviewOpen()">리뷰쓰기</button>
                      </div>
                   </header>
                   <div class="production-review-feed">
-                     <div class="production-review-feed__header-v2">
-                        <div class="production-review-feed__header-v2__stars">
-                           <div class="production-review-feed__header-v2__stars__badge">
-                              <span class="icon" aria-label="별점 ">
-                                 <svg fill="#50E5B4" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-165" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-165"><rect x="0" y="0" width="24" height="24"></rect></clipPath></defs><use xlink:href="#star-path-165" fill="#DBDBDB"></use><use clip-path="url(#star-clip-165)" xlink:href="#star-path-165"></use></svg>
-                                 <svg fill="#50E5B4" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-166" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-166"><rect x="0" y="0" width="24" height="24"></rect></clipPath></defs><use xlink:href="#star-path-166" fill="#DBDBDB"></use><use clip-path="url(#star-clip-166)" xlink:href="#star-path-166"></use></svg>
-                                 <svg fill="#50E5B4" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-167" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-167"><rect x="0" y="0" width="24" height="24"></rect></clipPath></defs><use xlink:href="#star-path-167" fill="#DBDBDB"></use><use clip-path="url(#star-clip-167)" xlink:href="#star-path-167"></use></svg>
-                                 <svg fill="#50E5B4" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-168" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-168"><rect x="0" y="0" width="24" height="24"></rect></clipPath></defs><use xlink:href="#star-path-168" fill="#DBDBDB"></use><use clip-path="url(#star-clip-168)" xlink:href="#star-path-168"></use></svg>
-                                 <svg fill="#50E5B4" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-169" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-169"><rect x="0" y="0" width="24" height="24"></rect></clipPath></defs><use xlink:href="#star-path-169" fill="#DBDBDB"></use><use clip-path="url(#star-clip-169)" xlink:href="#star-path-169"></use></svg>
-                              </span>
-                              <span class="badge__pc"></span>
-                           </div>
-                           <div class="production-review-feed__header-v2__stars__avg">
-                              <div class="production-review-feed__header-v2__stars__avg-warp">
-                                 <!-- 별점 5점 개수 -->
-                                 <div class="production-review-feed__header-v2__stars__avg__container">
-                                    <div class="production-review-feed__header-v2__stars__avg__label label_selected">5점</div>
-                                    <div class="production-review-feed__header-v2__stars__avg__bar">
-                                       <div class="production-review-feed__header-v2__stars__avg__bar__bg"></div>
-                                       <div class="production-review-feed__header-v2__stars__avg__bar__color" style="길이가 별점 수에 따라서 달라짐."></div>
-                                    </div>
-                                    <div class="production-review-feed__header-v2__stars__avg__number label_selected">별점 개수</div>
-                                 </div>
-                                 <!-- 별점 5점 개수 -->
-                                 <!-- 별점 4점 개수 -->
-                                 <div class="production-review-feed__header-v2__stars__avg__container">
-                                    <div class="production-review-feed__header-v2__stars__avg__label label_selected">4점</div>
-                                    <div class="production-review-feed__header-v2__stars__avg__bar">
-                                       <div class="production-review-feed__header-v2__stars__avg__bar__bg"></div>
-                                       <div class="production-review-feed__header-v2__stars__avg__bar__color" style="길이가 별점 수에 따라서 달라짐."></div>
-                                    </div>
-                                    <div class="production-review-feed__header-v2__stars__avg__number label_selected">별점 개수</div>
-                                 </div>
-                                 <!-- 별점 4점 개수 -->
-                                 <!-- 별점 3점 개수 -->
-                                 <div class="production-review-feed__header-v2__stars__avg__container">
-                                    <div class="production-review-feed__header-v2__stars__avg__label label_selected">3점</div>
-                                    <div class="production-review-feed__header-v2__stars__avg__bar">
-                                       <div class="production-review-feed__header-v2__stars__avg__bar__bg"></div>
-                                       <div class="production-review-feed__header-v2__stars__avg__bar__color" style="길이가 별점 수에 따라서 달라짐."></div>
-                                    </div>
-                                    <div class="production-review-feed__header-v2__stars__avg__number label_selected">별점 개수</div>
-                                 </div>
-                                 <!-- 별점 3점 개수 -->
-                                 <!-- 별점 2점 개수 -->
-                                 <div class="production-review-feed__header-v2__stars__avg__container">
-                                    <div class="production-review-feed__header-v2__stars__avg__label label_selected">2점</div>
-                                    <div class="production-review-feed__header-v2__stars__avg__bar">
-                                       <div class="production-review-feed__header-v2__stars__avg__bar__bg"></div>
-                                       <div class="production-review-feed__header-v2__stars__avg__bar__color" style="길이가 별점 수에 따라서 달라짐."></div>
-                                    </div>
-                                    <div class="production-review-feed__header-v2__stars__avg__number label_selected">별점 개수</div>
-                                 </div>      
-                                 <!-- 별점 2점 개수 -->
-                                 <!-- 별점 1점 개수 -->                              
-                                 <div class="production-review-feed__header-v2__stars__avg__container">
-                                    <div class="production-review-feed__header-v2__stars__avg__label label_selected">1점</div>
-                                    <div class="production-review-feed__header-v2__stars__avg__bar">
-                                       <div class="production-review-feed__header-v2__stars__avg__bar__bg"></div>
-                                       <div class="production-review-feed__header-v2__stars__avg__bar__color" style="길이가 별점 수에 따라서 달라짐."></div>
-                                    </div>
-                                    <div class="production-review-feed__header-v2__stars__avg__number label_selected">별점 개수</div>
-                                 </div>
-                                 <!-- 별점 1점 개수 -->                                                               
-                              </div>
-                           </div>
-                        </div>
-                     </div><!-- production-review-feed__header-v2 -->
-                     <div class="filter">
-                        <div class="production-review-feed__filter-wrap">
-                           <div class="production-review-feed__filter">
-                              <div class="production-review-feed__filter__order-list">
-                                 <button class="production-review-feed__filter__order production-review-feed__filter__order--active" aria-pressed="true" type="button">베스트순</button>
-                                 <button class="production-review-feed__filter__order" aria-pressed="false" type="button">최신순</button>
-                                 <button class="production-review-feed__filter__order production-review-feed__filter__order--photo" aria-pressed="false" type="button"><svg class="icon" width="18" height="18" viewBox="0 0 18 18" preserveAspectRatio="xMidYMid meet"><path fill="currentColor" d="M15.821 3a.67.67 0 0 1 .679.672v10.656a.67.67 0 0 1-.679.672H2.18a.67.67 0 0 1-.679-.672V3.672c0-.375.3-.672.679-.672H15.82zm-.679 1.344H2.858v8.14L7.01 7.781c.094-.125.284-.125.394 0l2.321 2.657c.048.046.063.109.048.156l-.3 1.375c-.016.11.11.172.173.094l2.369-2.579a.202.202 0 0 1 .284 0l2.842 3.094V4.344zm-2.526 3.61a1.1 1.1 0 0 1-1.105-1.095 1.1 1.1 0 0 1 1.105-1.093 1.1 1.1 0 0 1 1.105 1.093 1.1 1.1 0 0 1-1.105 1.094z"></path></svg>
-                                 사진리뷰
-                                 </button>
-                              </div>
-                           </div>
-                        </div>
-                     </div><!-- filter -->
                      <div class="production-review-feed__list">
-                        <c:forEach var="Review" items="${main_listReview}" varStatus="loop">
-                        <div class="production-review-item__container" id="review_${loop.index}">
+                     	<c:if test="${empty reviewList}">
+						<div class="a">
+							<span>댓글이 없습니다.</span>
+						</div>
+						</c:if>
+                        <c:forEach var="Review" items="${reviewList}" varStatus="loop">
+                        <div class="production-review-item__container" id="${Review.reviewNum}">
                            <article class="production-review-item">
                               <div class="production-review-item__writer">
                                   <c:choose>
@@ -297,7 +215,7 @@
                                       </c:otherwise>
                                   </c:choose>
                                  <div class="production-review-item__writer__info">
-                                    <p class="production-review-item__writer__info__name">${Review.member_id}</p>
+                                    <p class="production-review-item__writer__info__name">${Review.memberId}</p>
                                     <span class="production-review-item__writer__info__total-star">
                                        <svg name="star1" fill="lightgray" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path id="star-path-5" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path></svg>
                                        <svg name="star2" fill="lightgray" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path id="star-path-6" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path></svg>
@@ -314,8 +232,8 @@
                                  <p class="production-review-item__name__explain__text hidden-overflow">
                               </div>
                                  <c:choose>
-                                      <c:when test="${not empty review_encodedImages[loop.index]}">
-                                         <img src="data:image/jpeg;base64,${review_encodedImages[loop.index]}" alt="리뷰 이미지" class="production-review-item__img"><!-- 회원 이미지 -->
+                                      <c:when test="${not empty Review.reviewImage}">
+                                         <img src="${Review.reviewImage}" alt="리뷰 이미지" class="production-review-item__img"><!-- 회원 이미지 -->
                                       </c:when>
                                       <c:otherwise>
                                           <img src="https://image.ohou.se/i/bucketplace-v2-development/uploads/default_images/avatar.png?gif=1&amp;w=144&amp;h=144&amp;c=c&amp;webp=1" class="css-1auwp8u" alt="User Avatar">
@@ -336,8 +254,6 @@
 
 <!-- 모달창 -->
 <div id="review_modal" style="display: none;">
-<form name="f" method="POST" action="review_write.do" enctype="multipart/form-data">
-   <input type="hidden" name="product_num" value="${productDTO.proNum}">
    <div class="_1SpqS review-modal__modal__wrap open open-active" id="reviewModal">
       <div class="_3OUv-">
          <div class="_2mP0n review-modal__modal">
@@ -348,9 +264,9 @@
                      <svg class="review-modal__close__icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor" preserveAspectRatio="xMidYMid meet"><path fill-rule="nonzero" d="M11.6 10l7.1 7.1-1.6 1.6-7.1-7.1-7.1 7.1-1.6-1.6L8.4 10 1.3 2.9l1.6-1.6L10 8.4l7.1-7.1 1.6 1.6z"></path></svg>
                   </button>
                </div>
-               <form class="review-modal__form">
+               <div class="review-modal__form">
                   <div class="review-modal__form__product">
-                     <img class="review-modal__form__product__image" src="data:image/jpeg;base64,${encodedImage}">
+                     <img class="review-modal__form__product__image" src="${productDTO.proImg}">
                      <div class="review-modal__form__product__contents">
                         <div class="review-modal__form__product__contents__brand">브랜드명</div>
                         <div class="review-modal__form__product__contents__name">[${productDTO.proModifier}] ${productDTO.proName}</div>
@@ -413,16 +329,15 @@
                      <div class="review-modal__section__title">리뷰 작성</div>
                      <textarea name="review_content" placeholder="자세하고 솔직한 리뷰는 다른 고객에게 큰 도움이 됩니다. (최소 20자 이상)" class="form-control text-area-input review-modal__form__review-input" style="height: 55.6px;"></textarea>
                   </div>
-                  <button class="button button--color-blue button--size-50 button--shape-4 review-modal__form__submit" type="submit">완료</button>
-               </form>
+                  <sec:authorize access="hasAnyRole('ROLE_CLIENT')">
+                  <button class="button button--color-blue button--size-50 button--shape-4 review-modal__form__submit" type="button" onclick="writeReview('${prc.username}', '${productDTO.proNum}')">완료</button>
+               	  </sec:authorize>
+               </div>
             </div>
          </div>
       </div>
    </div>
-   </form>
 </div>
-
-<input type="hidden" value="${productDTO.proNum}" id="num"/>
 
 <!-- 스크랩 스크립트 -->
 <script type="text/javascript">
@@ -452,6 +367,11 @@
 	    	alert("서버 통신에 실패했습니다 : 관리자에게 문의해 주세요")
 	    });
 	}
+	
+	function cantScrap() {
+		alert("스크랩 : 로그인 해 주세요")
+		window.location.href = "/member/login"
+	}
 </script>
 
 
@@ -478,7 +398,7 @@ function showChoose() {
 	if (result) {
 		// '예'를 선택한 경우
 		console.log("사용자가 '예'를 선택했습니다. login.do로 이동합니다.");
-		window.location.href = 'login.do'; // 사용자를 login.do로 리디렉션
+		window.location.href = '/member/login'; // 사용자를 login.do로 리디렉션
 	} else {
 		// '아니오'를 선택한 경우
 		console.log("사용자가 '아니오'를 선택했습니다.");
@@ -488,15 +408,15 @@ function showChoose() {
 </script>
 
 <!-- 리뷰쓰기 스크립트 -->
-<script>
+<script type="text/javascript">
    function reviewOpen() {
-      var isLogin = ${loginMember != null && loginMember.member_id != null};
+      var isLogin = ${loginMember != null};
       
       if(isLogin){
          document.getElementById('review_modal').style.display = 'block';
       } else {
          alert("로그인 후 이용가능 합니다.")
-         window.location.href = "member_login.do";
+         window.location.href = "/member/login";
       }
 
    }
@@ -504,112 +424,150 @@ function showChoose() {
    function reviewClose() {
       document.getElementById('review_modal').style.display = 'none';
    }
+   
 </script>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-   let quantity = 1;
-   
-    // 수량 업데이트 함수
-    function updateQuantity(newQuantity) {
-        // 수량이 1 미만이 되지 않도록 보장
-        quantity = Math.max(1, newQuantity);
+<script type="text/javascript">
+    function writeReview(memberId, productNum) {
+        // 리뷰 작성에 필요한 데이터를 FormData 객체에 추가합니다.
+        var formData = new FormData();
+        formData.append('memberId', memberId);
+        formData.append('productNum', productNum);
+        formData.append('reviewContent', document.getElementsByName('review_content')[0].value);
+        formData.append('reviewStar', document.querySelector('input[name="review_star"]:checked').value);
+        var reviewImage = document.querySelector('input[name="review_image"]').files[0];
+        formData.append('reviewImage', reviewImage);
 
-        // 화면에 수량 업데이트
-        document.getElementById('quantity').innerText = quantity;
-
-        // 가격 업데이트
-        const originalPrice = ${productDTO.proPrice};
-        const discountRate = ${productDTO.proDiscountRate};
-        const discountedPrice = (originalPrice * (100 - discountRate)) / 100;
-        const totalPrice = quantity * discountedPrice;
-
-     // 화면에 가격 업데이트 (한글로 원 표시, 소수점 제거)
-        document.getElementById('productPrice').innerText = Math.floor(totalPrice).toLocaleString('ko-KR') + '원';
-        document.getElementById('productPrice2').innerText = Math.floor(totalPrice).toLocaleString('ko-KR') + '원';
+        // 리뷰 작성을 위한 fetch 요청을 보냅니다.
+        fetch('/' + productNum + '/review', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.text();
+        })
+        .then(data => {
+            alert(data);
+            // 페이지를 다시 로드합니다.
+            location.reload();
+        })
+        .catch(error => {
+            alert("리뷰 작성 중 오류가 발생했습니다. 관리자에게 문의해 주세요.");
+        });
     }
+</script>
 
-    // 플러스 버튼 클릭 이벤트
-    document.getElementById('plus').addEventListener('click', function () {
-        updateQuantity(quantity + 1);
-    });
 
-    // 마이너스 버튼 클릭 이벤트
-    document.getElementById('minus').addEventListener('click', function () {
-        updateQuantity(quantity - 1);
-    });
-    
-    
-    var header = document.querySelector('.production-selling-navigation__wrap');
-    window.addEventListener('scroll', function() {
-       console.log('Scrolling');
-        if (window.scrollY > 131.5) {
-          header.style.top = '79.75px';
-        } else {
-          header.style.top = '131.5px';
-        }
-      });
-});
+<script type="text/javascript">
+function initializePage() {
+	   let quantity = 1;
+	   
+	    // 수량 업데이트 함수
+	    function updateQuantity(newQuantity) {
+	        // 수량이 1 미만이 되지 않도록 보장
+	        quantity = Math.max(1, newQuantity);
+
+	        // 화면에 수량 업데이트
+	        document.getElementById('quantity').innerText = quantity;
+
+	        // 가격 업데이트
+	        const originalPrice = ${productDTO.proPrice};
+	        const discountRate = ${productDTO.proDiscountRate};
+	        const discountedPrice = (originalPrice * (100 - discountRate)) / 100;
+	        const totalPrice = quantity * discountedPrice;
+
+	     // 화면에 가격 업데이트 (한글로 원 표시, 소수점 제거)
+	        document.getElementById('productPrice').innerText = Math.floor(totalPrice).toLocaleString('ko-KR') + '원';
+	        document.getElementById('productPrice2').innerText = Math.floor(totalPrice).toLocaleString('ko-KR') + '원';
+	    }
+
+	    // 플러스 버튼 클릭 이벤트
+	    document.getElementById('plus').addEventListener('click', function () {
+	        updateQuantity(quantity + 1);
+	    });
+
+	    // 마이너스 버튼 클릭 이벤트
+	    document.getElementById('minus').addEventListener('click', function () {
+	        updateQuantity(quantity - 1);
+	    });
+	    
+	    
+	    var header = document.querySelector('.production-selling-navigation__wrap');
+	    window.addEventListener('scroll', function() {
+	       console.log('Scrolling');
+	        if (window.scrollY > 131.5) {
+	          header.style.top = '79.75px';
+	        } else {
+	          header.style.top = '131.5px';
+	        }
+	      });
+	}
+
+	document.addEventListener('DOMContentLoaded', initializePage);
+
 </script>
 
 <!-- 별점 스크립트 -->
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
     var ratingStars = document.querySelectorAll('.rating-input__star');
 
     ratingStars.forEach(function(star, index) {
-      star.addEventListener('mouseover', function() {
-    
-        resetRatingStars();
-        this.classList.add('hover');
-        fillStarsUptoThis(index);
-      });
-      
-      star.addEventListener('click', function() {
-      
-        resetRatingStars();
-        this.classList.add('selected');
-        fillStarsUptoThis(index);
-      });
+        star.addEventListener('mouseover', function() {
+            resetRatingStars();
+            fillStarsUptoThis(index);
+        });
+
+        star.addEventListener('click', function() {
+            resetRatingStars();
+            fillStarsUptoThis(index);
+            this.classList.add('selected'); // 선택된 별표에 selected 클래스 추가
+        });
     });
 
     function fillStarsUptoThis(index) {
-      for (var i = 0; i <= index; i++) {
-        ratingStars[i].classList.add('selected');
-      }
+        for (var i = 0; i <= index; i++) {
+            ratingStars[i].classList.add('hover'); // 마우스를 가져다 놓은 별표에 hover 클래스 추가
+            ratingStars[i].classList.add('selected'); // 선택된 별표에 selected 클래스 추가
+        }
     }
 
     function resetRatingStars() {
-      ratingStars.forEach(function {
-        star.classList.remove('selected', 'hover');
-      });
+        ratingStars.forEach(function(star) {
+            star.classList.remove('hover'); // hover 클래스 제거
+            star.classList.remove('selected'); // selected 클래스 제거
+        });
     }
 
     function getSelectedStarIndex() {
-      var selectedStarIndex = -1;
-      ratingStars.forEach(function(star, index) {
-        if (star.classList.contains('selected')) {
-          selectedStarIndex = index;
-        }
-      });
-      return selectedStarIndex;
+        var selectedStarIndex = -1;
+        ratingStars.forEach(function(star, index) {
+            if (star.classList.contains('selected')) {
+                selectedStarIndex = index;
+            }
+        });
+        return selectedStarIndex;
     }
-      });
+});
+
  </script>
  
-<script>
+<script type="text/javascript">
 document.addEventListener('DOMContentLoaded', function() {
-    var stars = document.querySelectorAll('.production-review-item__writer__info__total-star svg');
+    var stars = document.querySelectorAll('.production-review-item__writer__info__total-star>svg');
 
     // 별점 초기화 (모든 별의 fill을 lightgray로 설정)
-    stars.forEach(function {
+    stars.forEach(function(star) {
         star.setAttribute('fill', 'lightgray');
         console.log("초기화 완료");
     });
     
-    <c:forEach var="Review" items="${main_listReview}" varStatus="loop">
-    var starValue = ${Review.review_star};
-    var reviewContainer = document.getElementById('review_${loop.index}'); // 리뷰 컨테이너에 고유한 ID를 설정
+    <c:forEach var="Review" items="${reviewList}">
+    var starValue = ${Review.reviewStar};
+    var reviewContainer = document.getElementById('${Review.reviewNum}'); // 리뷰 컨테이너에 고유한 ID를 설정
     var starContainer = reviewContainer.querySelector('.production-review-item__writer__info__total-star');
     var starElements = starContainer.querySelectorAll('svg');
 
@@ -625,9 +583,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-
- 
- 
  <!-- 리뷰 스크립트 -->
  <script>
  document.querySelector('.upload-button').addEventListener('click', function(event) {
@@ -640,12 +595,12 @@ document.addEventListener('DOMContentLoaded', function() {
    });
  </script>
   
- <script>
+ <script type="text/javascript">
   document.addEventListener('DOMContentLoaded', function(event) {
      const stars = document.querySelectorAll('.rating-input__star');
      
      function updateStars(target) {
-       stars.forEach(function {
+       stars.forEach(function(star){
          star.classList.remove('filled');
        });
 
@@ -665,4 +620,5 @@ document.addEventListener('DOMContentLoaded', function() {
      });
    });
  </script>
+ 
 <%-- <%@ include file="bottom.jsp" %> --%>

@@ -82,16 +82,13 @@
 						<a class="css-1qwerc" href="/main">
 							<span class="css-18nk785">OZ의집</span>
 						</a>	     
-						<a class="css-53vhmk" href="/shop/main">
+						<a class="css-53vhmk" href="/products">
 						    <span class="css-18nk785">쇼핑</span>
 						</a>
-					    <a class="css-53vhmk" href="/shop/best">
-					        <span class="css-18nk785">베스트</span>
-					    </a>
 					    <a class="css-53vhmk" href="/blog/main">
 					        <span class="css-18nk785">블로그</span>
 					    </a>
-					    <a class="css-53vhmk" href="/shop/today">
+					    <a class="css-53vhmk" href="/products/today">
 					        <span class="css-18nk785">오늘의 딜</span>
 					    </a>
 						<a class="css-53vhmk" href="/ozMarket">
@@ -147,7 +144,7 @@
 		             					<span class="css-cdruys">글쓰기</span>
  		             					<div class="placement-bottom css-kqp0ar open open-active" style="display: none; position: absolute; inset: 0px auto auto 0px; transform: translate3d(986.4px, 70.4px, 0px);">
 		             						<div class="popper-item css-y2j1wi">
-		             							<a class="css-1abjig3" href="blog_write.do?mode=photo">
+		             							<a class="css-1abjig3" href="/blog/write?mode=photo">
 		             								<div class="css-bjn8wh">
 		             									<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="none">
 		             										<rect width="27" height="29" x="6.54" y="3.59" fill="#DBDBDB" stroke="#000" stroke-linejoin="round" rx="2.5" transform="rotate(4 6.54 3.6)"></rect>

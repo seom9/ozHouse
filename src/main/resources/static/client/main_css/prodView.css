@@ -143,6 +143,20 @@
     margin: 0 -6px;
 }
 
+.production-item-image__scrap-badge {
+    bottom: 12px;
+    right: 12px;
+    position: absolute;
+    width: 24px;
+    height: 15px;
+    margin: 0;
+    padding: 0;
+    background: none;
+    border: none;
+    z-index: 2;
+    transition: opacity .1s;
+}
+
 .production-selling-header__action__button-scrap {
     display: inline-block;
     margin: 0 3px;
@@ -976,7 +990,7 @@
 
 .review-modal {
     position: relative;
-    width: 680px;
+    width: 760px;
     border-radius: 4px;
     background-color: #fff;
     color: #292929;
@@ -1088,11 +1102,11 @@
     display: inline-block;
 }
 
-.rating-input__star.selected {
+.rating-input__star .selected {
     color: #50E5B4
 }
 
-.review-modal__form__star__value>.rating-input>li>.rating-input__star {
+.review-modal__form__star__value > .rating-input > li > .rating-input__star {
     font-size: 36px;
     padding-right: 4px;
 }

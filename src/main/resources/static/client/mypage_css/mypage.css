@@ -276,14 +276,27 @@ blockquote, body, code, dd, div, dl, dt, fieldset, form, h1, h2, h3, h4,
 }
 
 -webkit-tap-highlight-color
+
+
 :
+
  
+
 rgba
-(232
+
+
+(
+232
 ,
-230,
-227,
-0);
+230
+,
+227
+,
+0
+)
+;
+
+
 }
 * {
 	-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
@@ -342,30 +355,50 @@ page-navigation__item:active {
 
 @media ( min-width : 768px) <style> .css-1x6h9tu {
 	padding
-	:
-	 
-	0
-	px
-	 
-	40
-	px
-	;
 	
-
+	
+	:
+	
+	 
+	
+	0
+	
+	
+	px
+	
+	 
+	
+	40
+	
+	
+	px
+	
+	
+	;
 }
 
 @media ( min-width : 375px) <style> .css-1x6h9tu {
 	padding
-	:
-	 
-	0
-	px
-	 
-	15
-	px
-	;
 	
-
+	
+	:
+	
+	 
+	
+	0
+	
+	
+	px
+	
+	 
+	
+	15
+	
+	
+	px
+	
+	
+	;
 }
 
 <
@@ -419,13 +452,19 @@ div {
 
 @media ( min-width : 768px) body , html {
 	font-size
-	:
-	 
-	15
-	px
-	;
 	
-
+	
+	:
+	
+	 
+	
+	15
+	
+	
+	px
+	
+	
+	;
 }
 
 <
@@ -800,53 +839,90 @@ style>::selection {
 
 @media ( min-width : 1024px) .coupon-item {
 	margin
+	
+	
 	:
+	
 	 
+	
 	30
-	px
-	 
-	10
-	10
-	px
-	;
 	
-    
+	
+	px
+	
+	 
+	
+	10
+	
+	
+	10
+	
+	
+	px
+	
+	
+	;
 	padding
+	
+	
 	:
+	
 	 
+	
 	60
-	px
-	 
-	20
-	px
-	 
-	20
-	px
-	;
 	
-    
-    
+	
+	px
+	
+	 
+	
+	20
+	
+	
+	px
+	
+	 
+	
+	20
+	
+	
+	px
+	
+	
+	;
 	align-items
-	:
-	 
-	center
-	;
 	
-    
+	
+	:
+	
+	 
+	
+	center
+	
+	
+	;
 	justify-content
+	
+	
 	:
+	
 	 
+	
 	center
+	
+	
 	;
-	
-    
 	flex-direction
-	:
-	 
-	column
-	; /*    빰                    ĵǵ     մϴ . */
 	
-
+	
+	:
+	
+	 
+	
+	column
+	
+	
+	; /*    빰                    ĵǵ     մϴ . */
 }
 
 .coupon-item {
@@ -895,13 +971,19 @@ div {
 
 @media ( min-width : 768px) body , html {
 	font-size
-	:
-	 
-	15
-	px
-	;
 	
-
+	
+	:
+	
+	 
+	
+	15
+	
+	
+	px
+	
+	
+	;
 }
 
 <
@@ -997,56 +1079,92 @@ html {
 
 @media ( min-width : 1024px) .coupon-item__title {
 	font-size
+	
+	
 	:
+	
 	 
+	
 	24
-	px
-	;
 	
-    
+	
+	px
+	
+	
+	;
 	height
+	
+	
 	:
+	
 	 
+	
 	56
-	px
-	;
 	
-    
+	
+	px
+	
+	
+	;
 	line-height
-	:
-	 
-	28
-	px
-	;
 	
-
+	
+	:
+	
+	 
+	
+	28
+	
+	
+	px
+	
+	
+	;
 }
 
 @media ( min-width : 375px) .coupon-item__title {
 	font-size
+	
+	
 	:
+	
 	 
+	
 	15
-	px
-	;
 	
-    
+	
+	px
+	
+	
+	;
 	height
+	
+	
 	:
+	
 	 
+	
 	36
-	px
-	;
 	
-    
+	
+	px
+	
+	
+	;
 	line-height
-	:
-	 
-	18
-	px
-	;
 	
-
+	
+	:
+	
+	 
+	
+	18
+	
+	
+	px
+	
+	
+	;
 }
 
 .coupon-item__title {
@@ -1069,12 +1187,23 @@ a * {
 
 @media ( min-width : 1024px) .coupon-item__valuation {
 	margin
+	
+	
 	:
+	
 	 
+	
 	16
+	
+	
 	px
+	
 	 
-	0;
+	
+	0
+	;
+	
+
 }
 
 .coupon-item__valuation {
@@ -1134,9 +1263,10 @@ a * {
 .hidden {
 	display: none;
 }
+
 .coupon-feed__divider {
-    display: inline-block;
-    width: 100%;
-    height: 1px;
-    background-color: rgba(0,0,0,.07);
+	display: inline-block;
+	width: 100%;
+	height: 1px;
+	background-color: rgba(0, 0, 0, .07);
 }
