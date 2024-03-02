@@ -3,8 +3,11 @@ package com.oz.ozHouse.merchant.service;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Service;
 
+import com.oz.ozHouse.dto.MerchantDTO;
+import com.oz.ozHouse.merchant.repository.mapper.MerchantMapper;
 import com.oz.ozHouse.merchant.repository.merchantRepository.MerchantRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -13,6 +16,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class SchedulerServiceImple implements SchedulerService {
 	private final MerchantRepository merchantRepository;
+	//private final SqlSession sqlSession;
+	private final MerchantMapper mapper;
 
 	@Override
 	public void deleteMerchant() {
@@ -23,11 +28,10 @@ public class SchedulerServiceImple implements SchedulerService {
 		merchantRepository.deleteByMerDeletedate(today);
 		
 	}
-//
-//	@Override
-//	public String merId(String id) {
-//		Optional<Merchant> om = mapper.findById(id);
-//		String result = om.get().getMerId();
-//		return result;
-//	}
+
+	@Override
+	public String merId(int merNum) {
+		String result = mapper.mybatisMerId(merNum);
+		return result;
+	}
 }
