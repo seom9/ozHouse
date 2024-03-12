@@ -16,6 +16,8 @@ JavaScript, JSP, html, css, Ajax
 ### 프로젝트 소개
 '오늘의 집'과 같은 **종합 쇼핑몰**을 모티브로 하여 사용자로 하여금 효율적인 가구 쇼핑을 할 수 있도록 설계하였습니다. 뿐만 아니라 **블로그, 중고 거래 플랫폼**을 추가하여 사용자가 사이트에 흥미를 느낄 수 있도록 하였습니다.
 
+### 프로잭트 설계
+
 <img width="446" alt="image" src="https://github.com/gahyunseoul/ozHouse/assets/123463416/1509b880-7676-47e6-b917-669f0529c747">
 
 **설계의 주안점**
@@ -26,6 +28,7 @@ JavaScript, JSP, html, css, Ajax
 - Setter 메서드 및 @Data 지양, builder 패턴과 생성자로 Entity 와 DTO 객체 생성
 
 **프로젝트 메인 페이지**
+
 <img width="420" alt="image" src="https://github.com/gahyunseoul/ozHouse/assets/123463416/077d280c-adef-4ba1-91e4-b5aee9223298">
 
 **개발 & 협업 방식**
