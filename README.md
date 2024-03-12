@@ -26,7 +26,7 @@ JavaScript, JSP, html, css, Ajax
 - Setter 메서드 및 @Data 지양, builder 패턴과 생성자로 Entity 와 DTO 객체 생성
 
 **프로젝트 메인 페이지**
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/2bfe28c5-3a11-4d14-aea4-e316521f1b48/df10dd5e-b48c-4e33-8b54-57770aaebc84/Untitled.png)
+<img width="420" alt="image" src="https://github.com/gahyunseoul/ozHouse/assets/123463416/077d280c-adef-4ba1-91e4-b5aee9223298">
 
 **개발 & 협업 방식**
 - 40일만에 프로젝트의 유지보수를 빠르게 구현해야 하였기 때문에 **애자일 방식**을 채택하였습니다.
@@ -34,4 +34,5 @@ JavaScript, JSP, html, css, Ajax
 - 노션을 통한 협업 및 [전사 목표 관리](https://www.notion.so/Oz-883d1cad929a48a0b5ff7fe9b0ee18dd?pvs=21)를 진행하였습니다.
 
 **주요 ERD**
+
 <img width="365" alt="image" src="https://github.com/gahyunseoul/ozHouse/assets/123463416/5a794811-65f7-4cec-99f2-d68b169fa765">
