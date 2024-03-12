@@ -9,7 +9,7 @@ Java 21, STS4, Gradle, GitHub, MySQL 8.0, AWS
 
 ### 기술 스택
 **[Back-end]**
-**Spring Data JPA**, **Spring Security**, JPQL, MyBatis, QueryDSL, WebSocket, Spring qaurtz, OAuth2.0, JavaMail API, AWS S3
+**Spring Data JPA**, **Spring Security**, JPQL, MyBatis, QueryDSL, WebSocket, Spring qaurtz, OAuth2.0, JavaMail API, AWS S3 <br>
 **[Front-end]**
 JavaScript, JSP, html, css, Ajax
 
