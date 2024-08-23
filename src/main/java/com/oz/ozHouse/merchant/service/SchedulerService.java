@@ -4,5 +4,5 @@ public interface SchedulerService {
 
 	public void deleteMerchant();
 	
-//	public String merId(String id);
+	public String merId(int merNun);
 }
