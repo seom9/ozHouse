@@ -34,15 +34,15 @@ public class OrderTb {
 	@Column(name="orderNum")
     private Long oNum;				//주문 코드 :
 	
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="memberNum")
     private Member member;			//구매자 정보
     
 
-    @OneToMany(mappedBy = "orderTb", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "orderTb", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<ProInform> orderItems = new ArrayList<>();		//구매 상품
     
-    @OneToMany(mappedBy = "orderTb", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "orderTb", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<UserCoupon> useCoupons = new ArrayList<>();
     
     private int oDispoint;			//사용 포인트 금액 (양수 : 사용 / 음수 : 가현)

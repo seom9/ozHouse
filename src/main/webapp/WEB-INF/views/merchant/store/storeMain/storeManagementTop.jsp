@@ -46,16 +46,16 @@ header img.oz-logo {
 			class="tab-link">관리홈</a> 
 		<a href="${pageContext.request.contextPath}/merchant/${merNum}/store/products"
 			class="tab-link">상품관리</a> 
-		<%-- <a href="${pageContext.request.contextPath}/merchant/${merNum}/store/orders?mode=all"
+		<a href="${pageContext.request.contextPath}/merchant/${merNum}/store/orders?mode=all"
 			class="tab-link">정상주문관리</a>
 		<a href="${pageContext.request.contextPath}/merchant/${merNum}/store/returns"
 			class="tab-link">환불주문관리</a>  
 		<a href="${pageContext.request.contextPath}/merchant/proQAs"
-			class="tab-link">문의/후기</a> --%>
+			class="tab-link">문의/후기</a>
 		<a href="${pageContext.request.contextPath}/merchant/${merNum}/store/coupons"
 			class="tab-link">쿠폰관리</a> 
-		<%-- <a href="${pageContext.request.contextPath}/merchant/${merNum}/store/sales?mode=day"
-			class="tab-link">매출관리</a> --%>
+		<a href="${pageContext.request.contextPath}/merchant/${merNum}/store/sales?mode=day"
+			class="tab-link">매출관리</a>
 	</div>
 	
 	<script>

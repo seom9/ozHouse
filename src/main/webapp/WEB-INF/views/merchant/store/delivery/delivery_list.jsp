@@ -192,19 +192,19 @@
 			</c:if>
 			<c:forEach var="dto" items="${deliveryList}">
 				<div class="flex-row">
-					<div class="flex-cell">${dto.oNum}</div>
+					<div class="flex-cell">${dto.oderNum}</div>
 					<div class="flex-cell">${dto.memberId}</div>
 					<div class="flex-cell">${dto.regDate}</div>
 					<div class="flex-cell">
 					<c:forEach var="item" items="${dto.orderItems}">
-						<c:if test="${item.product.proNum eq merNum}">
-							${item.product.proName}<br>
+						<c:if test="${item.proNum eq merNum}">
+							${item.proName}<br>
 						</c:if>
 					</c:forEach>
 					</div>
 					<div class="flex-cell">
 					<c:forEach var="item" items="${dto.orderItems}">
-						<c:if test="${item.product.proNum eq merNum}">
+						<c:if test="${item.proNum eq merNum}">
 							<fmt:formatNumber value="${item.quantity}" type="number"
 								pattern="###,###개" />
 						</c:if>
@@ -212,8 +212,8 @@
 					</div>
 					<div class="flex-cell">
 					<c:forEach var="item" items="${dto.orderItems}">
-						<c:if test="${item.product.proNum eq merNum}">
-							<fmt:formatNumber value="${item.quantity * item.product.}" type="number"
+						<c:if test="${item.proNum eq merNum}">
+							<fmt:formatNumber value="${item.quantity * item.realPrice}" type="number"
 								pattern="###,###원" />
 						</c:if>
 					</c:forEach>
