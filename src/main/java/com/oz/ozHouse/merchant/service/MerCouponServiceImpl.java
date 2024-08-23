@@ -22,6 +22,7 @@ public class MerCouponServiceImpl implements MerCouponService {
 	private final MerCouponRepository couponRepository;
 	
 	public static MerCoupon setEntity(InsertMerCouponDTO dto) {
+		System.out.println("coupon DTO -> entity 변환");
 		Merchant m = Merchant.builder()
 				.merNum(dto.getMerNum()).build();
 		return MerCoupon.builder()
@@ -39,6 +40,7 @@ public class MerCouponServiceImpl implements MerCouponService {
 		MerCoupon mc = setEntity(dto);
 		try {
 			couponRepository.save(mc);
+			System.out.println("coupon 저장 완료,mc : " + mc.getMerCouponname());
 		}catch(IllegalArgumentException e) {
 			return -1;
 		}catch(OptimisticLockingFailureException e) {
