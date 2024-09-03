@@ -14,6 +14,7 @@ import com.oz.ozHouse.dto.merchant.CouponSearchDTO;
 import com.oz.ozHouse.dto.merchant.InsertMerCouponDTO;
 import com.oz.ozHouse.merchant.repository.merCouponRepository.MerCouponRepository;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -75,6 +76,7 @@ public class MerCouponServiceImpl implements MerCouponService {
 		return listDto;
 	}
 
+	@Transactional
 	@Override
 	public int merCouponDelete(int merCouponnum) {
 		System.out.println("쿠폰 삭제(coupon)");

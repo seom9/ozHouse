@@ -34,11 +34,11 @@ public class MerCoupon {
 	private String merIsok;
 	private int merCoupondiscount;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "merNum")
 	private Merchant merNum;
 	
-    @OneToMany(mappedBy = "merCoupon", cascade = CascadeType.ALL)  //단방향인거 같은데...?
+    @OneToMany(mappedBy = "merCoupon", cascade = CascadeType.ALL, fetch = FetchType.LAZY)  //단방향인거 같은데...?
     private List<UserCoupon> userCoupons = new ArrayList<>();
     
     @ManyToOne(fetch = FetchType.LAZY)

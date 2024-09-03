@@ -61,7 +61,7 @@ public class OrderTb {
 
     private String oDelnow;			// 배송 상태
 	
-    private String oLike;			// 주문 상태
+    private String ostatus;			// 주문 상태
    
     private String oCanceldate;		// 주문 취소일
     
@@ -80,7 +80,7 @@ public class OrderTb {
     
     public void setONum(long oNum, String oLike, String oCanceldate) {
     	this.oNum = oNum;
-    	this.oLike = oLike;
+    	this.ostatus = oLike;
     	this.oCanceldate = oCanceldate;
     }
     

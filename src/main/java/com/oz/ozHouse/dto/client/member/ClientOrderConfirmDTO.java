@@ -49,7 +49,7 @@ public class ClientOrderConfirmDTO {
             .zipcode(order.getOAddress().getZipcode())
             .oComment(order.getOComment())
             .oDelnow(order.getODelnow())
-            .oLike(order.getOLike())
+            .oLike(order.getOstatus())
             .oCanceldate(order.getOCanceldate())
             .regDate(order.getRegDate())
             .build();

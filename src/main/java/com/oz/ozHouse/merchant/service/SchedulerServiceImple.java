@@ -3,10 +3,8 @@ package com.oz.ozHouse.merchant.service;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Service;
 
-import com.oz.ozHouse.dto.MerchantDTO;
 import com.oz.ozHouse.merchant.repository.mapper.MerchantMapper;
 import com.oz.ozHouse.merchant.repository.merchantRepository.MerchantRepository;
 

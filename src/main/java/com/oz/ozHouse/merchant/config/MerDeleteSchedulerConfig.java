@@ -15,12 +15,8 @@ public class MerDeleteSchedulerConfig {
 	private final SchedulerService schedulerService;
 	
 	
-	@Scheduled( cron = "*/10 * * * * ?")
+	@Scheduled( cron = "0 0 0 * * ?")
 	public void run() {
-		System.out.println("Scheduler 시작!");
-		String test = schedulerService.merId(1);
-		System.out.println("mybatisTest : " + test);
-		if(test == null || test == "")
-			System.out.println("mybatisTest : not result");
+		schedulerService.deleteMerchant();
 	}
 }

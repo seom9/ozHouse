@@ -188,16 +188,16 @@
 					<div class="flex-cell">${dto.order_code}</div>
 					<div class="flex-cell">${dto.member_id}</div>
 					<div class="flex-cell">${dto.order_canceldate}</div>
-					<div class="flex-cell">${dto.product_name}<br>${dto.order_place}</div>
+					<div class="flex-cell">${dto.orderItems.proName}<br>${dto.place}</div>
 					<div class="flex-cell">
-						<fmt:formatNumber value="${dto.order_count}" type="number"
+						<fmt:formatNumber value="${dto.orderItems.quantity}" type="number"
 							pattern="###,###개" />
 						<br>
-						<fmt:formatNumber value="${dto.order_price}" type="number"
+						<fmt:formatNumber value="${dto.orderItems.realPrice}" type="number"
 							pattern="###,###원" />
 					</div>
 					<c:choose>
-						<c:when test="${dto.order_refund eq 't'}">
+						<c:when test="${dto.orderRefund eq 't'}">
 							<div class="flex-cell">완료</div>
 						</c:when>
 						<c:otherwise>
@@ -217,7 +217,7 @@
 					</c:choose>
 					<div class="flex-cell">
 						<c:choose>
-							<c:when test="${dto.order_refund eq 't'}">
+							<c:when test="${dto.orderRefund eq 't'}">
 								<input type="button" value="완료" disabled="disabled">
 							</c:when>
 							<c:otherwise>

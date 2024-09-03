@@ -21,6 +21,7 @@ import com.oz.ozHouse.merchant.service.MerCouponService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -108,6 +109,7 @@ public class MerCouponController {
 		return "merchant/store/coupon/coupon_list";
 	}
 
+	@Transactional
 	@GetMapping("/coupons/{merCouponnum}")
 	public String couponDelete(HttpServletRequest req, @PathVariable("merCouponnum") int merCouponnum, 
 			@PathVariable("merNum")int merNum) {
