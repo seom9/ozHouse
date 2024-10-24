@@ -65,14 +65,14 @@ public class SecurityConfig {
     @Bean
     public WebSecurityCustomizer webSecurity() {
     	
-    	// 정적 리소스 (css) 등 로그인 권한 필요 X
+    	//  정적 리소스 (css) 등 로그인 권한 필요 X
     	return (web) -> web.ignoring().requestMatchers(PathRequest.toStaticResources().atCommonLocations());
     }
     
     @Bean
     public PasswordEncoder passwordEncoder() {
         //return new BCryptPasswordEncoder();
-    	return new BCryptPasswordEncoder(12);
+    	return new BCryptPasswordEncoder(17);
     }
     
 	/*
